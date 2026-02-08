@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Marketer | AI Automation for Marketing Teams</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- PostHog Analytics (US endpoint + assets host to avoid blockers) -->
+    <script>
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);var n=t;if(void 0!==e){n=t[e]=function(){n.push([e].concat(Array.prototype.slice.call(arguments,0)))}}else n.push([e].concat(Array.prototype.slice.call(arguments,0)))}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.crossOrigin="anonymous",p.src=(s.api_host||"").replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init('phc_rvIhRhYYPjDDzjWcnVa2eU2MHk2vfksuU1aBaNlun6m', {
+            api_host: 'https://us.i.posthog.com',
+            capture_pageview: false,
+            capture_pageleave: true
+        })
+    </script>
+    
+    <!-- UTM capture: persist and attach to every event, then send initial $pageview -->
+    <script>
+        (function () {
+            function parseUtmParams() {
+                var url = new URL(window.location.href);
+                var p = {};
+                var keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'];
+                for (var i = 0; i < keys.length; i++) {
+                    var v = url.searchParams.get(keys[i]);
+                    if (v) p[keys[i]] = v;
+                }
+                return p;
+            }
+
+            function getInitialReferrerProps() {
+                var ref = document.referrer || '';
+                var domain = null;
+                try { if (ref) domain = new URL(ref).hostname; } catch (e) {}
+                return {
+                    initial_referrer: ref || 'direct',
+                    initial_referring_domain: domain || 'direct'
+                };
+            }
+
+            try {
+                var stored = null;
+                try { stored = JSON.parse(localStorage.getItem('utm_params') || 'null'); } catch (e) {}
+                var utm = stored || parseUtmParams();
+                if (utm && Object.keys(utm).length > 0 && !stored) {
+                    try { localStorage.setItem('utm_params', JSON.stringify(utm)); } catch (e) {}
+                }
+
+                var props = Object.assign({}, utm || {}, getInitialReferrerProps());
+                if (Object.keys(props).length > 0) {
+                    posthog.register(props);
+                }
+            } catch (e) {}
+
+            // Now send the initial pageview with UTM props registered
+            try { posthog.capture('$pageview'); } catch (e) {}
+        })();
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function getNearestSectionId(element) {
+                var node = element;
+                while (node && node !== document.body) {
+                    if (node.id) return node.id;
+                    node = node.parentElement;
+                }
+                return null;
+            }
+
+            function getElementLabel(element) {
+                var label = element.getAttribute('aria-label') || element.innerText || '';
+                return label.trim().slice(0, 100);
+            }
+
+            // Track clicks on primary CTAs (buttons and links)
+            document.body.addEventListener('click', function (event) {
+                var target = event.target.closest('a.btn-primary, button.btn-primary');
+                if (!target) return;
+
+                var properties = {
+                    text: getElementLabel(target),
+                    href: target.getAttribute('href') || null,
+                    section: getNearestSectionId(target),
+                    path: window.location.pathname
+                };
+
+                try { posthog.capture('cta_clicked', properties); } catch (e) {}
+            });
+
+            // Track contact form submit success/error
+            var contactForm = document.querySelector('section#contact form');
+            if (contactForm) {
+                // Invalid field error during submission attempt
+                contactForm.addEventListener('invalid', function (ev) {
+                    var field = ev.target;
+                    var props = {
+                        field: field.name || field.id || 'unknown',
+                        reason: 'invalid',
+                        section: 'contact',
+                        path: window.location.pathname
+                    };
+                    try { posthog.capture('form_submit_error', props); } catch (e) {}
+                }, true);
+
+                // Successful submit (HTML5 validation passed). Formspree handles the POST + redirect
+                contactForm.addEventListener('submit', function () {
+                    try { posthog.capture('form_submit_success', { section: 'contact', path: window.location.pathname }); } catch (e) {}
+                });
+            }
+        });
+    </script>
+    
+    <!-- Scroll-depth and outbound link tracking -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Scroll depth tracking at 25/50/75/100%
+            var thresholds = [25, 50, 75, 100];
+            var fired = { 25: false, 50: false, 75: false, 100: false };
+            function computeScrollPercent() {
+                var doc = document.documentElement;
+                var body = document.body;
+                var scrollTop = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+                var viewport = window.innerHeight || doc.clientHeight;
+                var fullHeight = Math.max(
+                    body.scrollHeight, doc.scrollHeight,
+                    body.offsetHeight, doc.offsetHeight,
+                    body.clientHeight, doc.clientHeight
+                );
+                var pct = Math.round(((scrollTop + viewport) / fullHeight) * 100);
+                if (pct < 0) pct = 0;
+                if (pct > 100) pct = 100;
+                return pct;
+            }
+            function checkThresholds() {
+                var pct = computeScrollPercent();
+                for (var i = 0; i < thresholds.length; i++) {
+                    var t = thresholds[i];
+                    if (!fired[t] && pct >= t) {
+                        fired[t] = true;
+                        try { posthog.capture('scroll_depth', { percent: t, path: window.location.pathname }); } catch (e) {}
+                    }
+                }
+            }
+            var ticking = false;
+            window.addEventListener('scroll', function () {
+                if (!ticking) {
+                    window.requestAnimationFrame(function () {
+                        checkThresholds();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+            // Run once in case page is short
+            checkThresholds();
+
+            // Outbound link tracking (includes mailto/tel)
+            document.body.addEventListener('click', function (event) {
+                var link = event.target && event.target.closest ? event.target.closest('a[href]') : null;
+                if (!link) return;
+                var rawHref = link.getAttribute('href') || '';
+                try {
+                    var url = new URL(rawHref, window.location.href);
+                    var isExternal = url.origin !== window.location.origin || url.protocol === 'mailto:' || url.protocol === 'tel:';
+                    if (!isExternal) return;
+                    var props = {
+                        href: url.href,
+                        text: (link.getAttribute('aria-label') || link.innerText || '').trim().slice(0, 100),
+                        target: link.getAttribute('target') || '',
+                        rel: link.getAttribute('rel') || '',
+                        protocol: url.protocol.replace(':', ''),
+                        host: url.host,
+                        path: window.location.pathname
+                    };
+                    try { posthog.capture('outbound_click', props); } catch (e) {}
+                } catch (err) {
+                    // Fallback for malformed hrefs
+                    try { posthog.capture('outbound_click', { href: rawHref, text: (link.innerText || '').trim().slice(0, 100), path: window.location.pathname }); } catch (e) {}
+                }
+            });
+        });
+    </script>
+    
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --secondary: #0EA5E9;
+            --accent: #06B6D4;
+            --dark: #0F172A;
+            --light: #F8FAFC;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #0F172A;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1E3A8A 0%, #0EA5E9 100%);
+        }
+        
+        .accent-gradient {
+            background: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 100%);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(6, 182, 212, 0.2);
+        }
+        
+        .btn-secondary {
+            border: 2px solid #0EA5E9;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(14, 165, 233, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #06B6D4;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .dashboard-item {
+            transition: all 0.3s ease;
+        }
+        
+        .dashboard-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15);
+        }
+        
+        .solution-card {
+            transition: all 0.3s ease;
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.1);
+        }
+        
+        .approach-step {
+            transition: all 0.3s ease;
+        }
+        
+        .approach-step:hover {
+            transform: translateX(5px);
+        }
+        
+        .hidden-section {
+            display: none;
+        }
+        
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-toggle i {
+            transform: rotate(180deg);
+        }
+
+        @media print {
+            .hidden-section {
+                display: none !important;
+            }
+            
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header/Navigation -->
+    <header class="py-4 px-4 md:px-8 lg:px-16 fixed w-full z-50 bg-white shadow-sm">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="./images/intelligent-marketer-logo.png" alt="Intelligent Marketer Logo" class="h-12">
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#solutions" class="nav-link font-medium text-gray-800 hover:text-blue-500">Solutions</a>
+                    <a href="#approach" class="nav-link font-medium text-gray-800 hover:text-blue-500">Our Approach</a>
+                    <a href="resource-download.html" class="nav-link font-medium text-gray-800 hover:text-blue-500">Free Template</a>
+                    <a href="#contact" class="nav-link font-medium text-gray-800 hover:text-blue-500">Contact</a>
+                </nav>
+                <a href="resource-download.html" class="btn-primary hidden md:block px-6 py-2 rounded-full text-white font-bold shadow-lg">Free Template</a>
+                <button class="md:hidden text-gray-800 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 md:px-8 lg:px-16 hero-gradient text-white">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-3/5 mb-12 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight">Nail Your Messaging & GTM Strategy Faster</h1>
+                    <p class="text-xl mb-8 opacity-90 max-w-2xl">Stop the GTM chaos. We use AI automation to help growth-stage startups align teams, build winning strategies, and launch products that resonate.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="resource-download.html" class="btn-primary px-8 py-3 rounded-full text-white font-bold text-center">Get Free GTM Template</a>
+                        <a href="#contact" class="btn-secondary px-8 py-3 rounded-full text-white font-bold text-center">Schedule Consultation</a>
+                    </div>
+                </div>
+                <div class="md:w-2/5">
+                    <div class="grid grid-cols-2 gap-6">
+    <a href="#market-intelligence" class="dashboard-item bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-xl">
+        <div class="text-accent text-3xl mb-3"><i class="fas fa-binoculars"></i></div>
+        <h3 class="text-xl font-bold mb-1">Know Your Competitors Instantly</h3>
+    </a>
+    <a href="#messaging-automation" class="dashboard-item bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-xl">
+        <div class="text-accent text-3xl mb-3"><i class="fas fa-bullseye"></i></div>
+        <h3 class="text-xl font-bold mb-1">Craft Messaging That Converts</h3>
+    </a>
+    <a href="#gtm-strategy" class="dashboard-item bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-xl">
+        <div class="text-accent text-3xl mb-3"><i class="fas fa-users"></i></div>
+        <h3 class="text-xl font-bold mb-1">Align Teams & Launch Faster</h3>
+    </a>
+    <a href="#customer-insight" class="dashboard-item bg-white bg-opacity-10 backdrop-blur-lg p-6 rounded-xl">
+        <div class="text-accent text-3xl mb-3"><i class="fas fa-lightbulb"></i></div>
+        <h3 class="text-xl font-bold mb-1">Unlock What Customers Really Want</h3>
+    </a>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Clients Section -->
+<section class="py-16 px-4 md:px-8 lg:px-16 bg-gray-50">
+    <div class="container mx-auto text-center">
+        <p class="text-lg text-gray-600 mb-12">Designed for growth-stage startups in SaaS, Martech, and E-commerce</p>
+        <div class="flex flex-wrap justify-center items-center gap-12">
+            <!-- Client logos with adjusted heights for consistent text size -->
+            <div class="flex items-center h-16">
+                <img src="images/clay-feature.png" alt="Clay" class="h-full object-contain">
+            </div>
+            <div class="flex items-center h-16">
+                <img src="images/Hightouch.jpg" alt="Hightouch" class="h-full object-contain">
+            </div>
+            <div class="flex items-center h-10">
+                <img src="images/670d10c48ed0cb0f03b2c5ac_Glean Wordmark Blue.webp" alt="Glean" class="h-full object-contain">
+            </div>
+            <div class="flex items-center h-9">
+                <img src="images/Klaviyo_primary_logo.svg.png" alt="Klaviyo" class="h-full object-contain">
+            </div>
+            <div class="flex items-center h-9">
+                <img src="images/png-clipart-logo-braze-marketing-brand-customer-relationship-management-applying-false-eyelashes.png" alt="Braze" class="h-full object-contain mix-blend-darken">
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Value Proposition Section -->
+    <section class="py-20 px-4 md:px-8 lg:px-16 bg-white">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Build Your Winning GTM strategy with AI</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Cut through the AI hype. Our solutions help marketing teams at growth-stage startups scale strategic operations, automate research and analysis, reduce manual work, and drive measurable ROI through better strategy.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Feature 1 -->
+                <div class="rounded-xl p-8 bg-gray-50 hover:shadow-xl transition-all duration-300">
+                    <div class="text-4xl text-blue-500 mb-4"><i class="fas fa-rocket"></i></div>
+                    <h3 class="text-2xl font-bold mb-3">Boost Efficiency</h3>
+                    <p class="text-gray-600 mb-6">Ditch the endless competitor tracking and interview analysis. Free your team from repetitive research and data gathering to focus on strategic work and decision-making.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Automated competitive tracking & analysis</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Automated customer interview analysis</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Market data consolidation & reporting</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="rounded-xl p-8 bg-gray-50 hover:shadow-xl transition-all duration-300">
+                    <div class="text-4xl text-blue-500 mb-4"><i class="fas fa-bullhorn"></i></div>
+                    <h3 class="text-2xl font-bold mb-3">Sharpen Messaging & Positioning</h3>
+                    <p class="text-gray-600 mb-6">Stop guessing what resonates. Turn customer feedback and market data into positioning that clicks and messaging that converts your target segments.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Audience segmentation insights</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Draft messaging frameworks instantly</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Automated positioning map development</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="rounded-xl p-8 bg-gray-50 hover:shadow-xl transition-all duration-300">
+                    <div class="text-4xl text-blue-500 mb-4"><i class="fas fa-route"></i></div>
+                    <h3 class="text-2xl font-bold mb-3">Enhance Go-to-Market Strategy</h3>
+                    <p class="text-gray-600 mb-6">End launch day scrambles. Streamline planning, align your teams, and execute GTM strategies with confidence, informed by automated insights.</p>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>GTM strategy validation & refinement</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Align campaigns with positioning</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Customer-informed value proposition development</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+   <section id="solutions" class="py-20 px-4 md:px-8 lg:px-16 bg-gray-50">
+    <div class="container mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Our AI Marketing Process Automation Solutions</h2>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">Practical AI automations designed to streamline strategic processes for growth-stage startup marketing teams.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-10">
+            <div id="market-intelligence" class="solution-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-8">
+                    <div class="text-4xl text-blue-500 mb-4"><i class="fas fa-search"></i></div>
+                    <h3 class="text-2xl font-bold mb-3">Market & Competitive Intelligence Automation</h3>
+                    <p class="text-gray-600 mb-6">Get real-time alerts on competitor moves and market shifts so you're never caught off guard.</p>
+
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2 text-gray-800">Features:</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Automated competitor monitoring (websites, content, ads)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Market trend analysis & reporting</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Feature & messaging gap analysis</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Centralized intelligence dashboard</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2 text-gray-800">Expected Outcomes:</h4>
+                        <p>Insights in Hours, Not Weeks; Proactive strategy adjustments; Know Exactly Where You Stand.</p>
+                    </div>
+
+                    <a href="#contact" class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div id="messaging-automation" class="solution-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-8">
+                    <div class="text-4xl text-blue-500 mb-4"><i class="fas fa-bullhorn"></i></div>
+                    <h3 class="text-2xl font-bold mb-3">Messaging & Positioning Automation</h3>
+                    <p class="text-gray-600 mb-6">Instantly turn interview transcripts and survey data into value props and messaging angles that work.</p>
+
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2 text-gray-800">Features:</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>AI analyzes customer Interviews</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Value proposition generation & testing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Messaging hierarchy development</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Persona-specific message tailoring</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2 text-gray-800">Expected Outcomes:</h4>
+                        <p>Know Your Message Will Land; More resonant messaging; Clearer differentiation.</p>
+                    </div>
+
+                    <a href="#contact" class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div id="gtm-strategy" class="solution-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-8">
+                    <div class="text-4xl text-blue-500 mb-4"><i class="fas fa-rocket"></i></div>
+                    <h3 class="text-2xl font-bold mb-3">GTM Strategy & Planning Automation</h3>
+                    <p class="text-gray-600 mb-6">Build GTM plans that stick. Get buy-in and keep Sales, Marketing, and Product in sync automatically.</p>
+
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2 text-gray-800">Features:</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>AI-assisted GTM plan generation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Cross-functional workflow templates (Product, Sales, Marketing)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Launch readiness checks & risk assessment</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Channel strategy optimization support</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2 text-gray-800">Expected Outcomes:</h4>
+                        <p>Get Everyone Singing the Same Song; Cut GTM Planning Time & Launch Sooner; Launch with Fewer Roadblocks.</p>
+                    </div>
+
+                    <a href="#contact" class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div id="customer-insight" class="solution-card bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-8">
+                    <div class="text-4xl text-blue-500 mb-4"><i class="fas fa-comments"></i></div>
+                    <h3 class="text-2xl font-bold mb-3">Customer Insight & Feedback Automation</h3>
+                    <p class="text-gray-600 mb-6">Hear the real 'voice of the customer' without spending weeks on analysis.</p>
+
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2 text-gray-800">Features:</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Automated transcription & analysis of interviews</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Sentiment analysis & topic extraction from feedback</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Customer journey mapping insights</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Integration with feedback collection tools</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2 text-gray-800">Expected Outcomes:</h4>
+                        <p>Deeper customer understanding; Faster feedback loops; Data-informed roadmap decisions.</p>
+                    </div>
+
+                    <a href="#contact" class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700">
+                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="#contact" class="btn-primary inline-block px-8 py-3 rounded-full text-white font-bold shadow-lg">Schedule a Solutions Demo</a>
+        </div>
+    </div>
+</section>
+
+    <!-- Our Approach Section -->
+    <section id="approach" class="py-20 px-4 md:px-8 lg:px-16 bg-white">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our AI Partnership Approach</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">We don't just build automations—we partner with your marketing team to drive continuous improvement and long-term success.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="approach-step relative">
+                    <div class="absolute -left-4 top-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                    <div class="pl-8">
+                        <h3 class="text-2xl font-bold mb-4">Discovery & Strategy</h3>
+                        <p class="text-gray-600 mb-6">First, we work with you to map your specific GTM challenges and goals, identifying the practical AI automations that will help your team most.</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Comprehensive marketing process audit</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>ROI-focused opportunity mapping (efficiency, insights, GTM impact)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Technical assessment & integration planning</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="approach-step relative">
+                    <div class="absolute -left-4 top-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                    <div class="pl-8">
+                        <h3 class="text-2xl font-bold mb-4">Quick-Win Implementation</h3>
+                        <p class="text-gray-600 mb-6">Get quick wins. We build practical automations focused on your core pains first, delivering measurable value and easing workloads within weeks.</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>2-4 week implementation timeline</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Seamless integration with existing tools (CRM, data sources)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Team training & adoption support</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="approach-step relative">
+                    <div class="absolute -left-4 top-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                    <div class="pl-8">
+                        <h3 class="text-2xl font-bold mb-4">Expansion & Optimization</h3>
+                        <p class="text-gray-600 mb-6">Build on your success. We then expand automation to streamline more of your key marketing processes and integrate insights across your workflows.</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Advanced automation implementation (e.g., predictive insights)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Performance monitoring & enhancement</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Cross-functional workflow integration & optimization</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="approach-step relative">
+                    <div class="absolute -left-4 top-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">4</div>
+                    <div class="pl-8">
+                        <h3 class="text-2xl font-bold mb-4">Strategic Partnership</h3>
+                        <p class="text-gray-600 mb-6">Your ongoing AI partner. We provide continuous support and strategic advice, adapting your automations as your needs and the market evolve.</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Regular strategy & roadmap reviews</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Ongoing innovation & capability expansion</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Team enablement & knowledge transfer</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section (Hidden) -->
+    <section id="results" class="hidden-section py-20 px-4 md:px-8 lg:px-16 bg-gray-50">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Real Results for Growth-Stage Startups</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">See how our AI automation solutions have helped marketing teams drive measurable growth.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Case Study 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-8">
+                        <div class="text-3xl font-bold text-blue-500 mb-2">156%</div>
+                        <h3 class="text-xl font-bold mb-3">Lead Generation Increase</h3>
+                        <p class="text-gray-700 mb-2">SaaS Marketing Platform</p>
+                        <p class="text-gray-600 mb-2">Series B</p>
+                        <p class="text-gray-600 mb-4">Implemented an AI-powered lead generation system that automated prospect research, qualification, and personalized outreach, resulting in 156% more qualified leads with 40% less team effort.</p>
+                        <p class="text-gray-600 mb-4">Timeline: 3 months</p>
+                        <a href="#" class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700">
+                            Read Case Study <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Case Study 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-8">
+                        <div class="text-3xl font-bold text-blue-500 mb-2">42%</div>
+                        <h3 class="text-xl font-bold mb-3">Conversion Rate Improvement</h3>
+                        <p class="text-gray-700 mb-2">E-commerce Platform</p>
+                        <p class="text-gray-600 mb-2">Series C</p>
+                        <p class="text-gray-600 mb-4">Developed a personalized customer journey automation that dynamically adjusted content, offers, and timing based on behavior patterns, increasing conversion rates by 42% and customer LTV by 27%.</p>
+                        <p class="text-gray-600 mb-4">Timeline: 4 months</p>
+                        <a href="#" class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700">
+                            Read Case Study <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Case Study 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-8">
+                        <div class="text-3xl font-bold text-blue-500 mb-2">63%</div>
+                        <h3 class="text-xl font-bold mb-3">Content Production Increase</h3>
+                        <p class="text-gray-700 mb-2">MarTech Provider</p>
+                        <p class="text-gray-600 mb-2">Series B</p>
+                        <p class="text-gray-600 mb-4">Created an AI content intelligence system that streamlined creation, optimization, and distribution workflows, enabling the marketing team to increase content output by 63% while reducing production time by 55%.</p>
+                        <p class="text-gray-600 mb-4">Timeline: 2 months</p>
+                        <a href="#" class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700">
+                            Read Case Study <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700">
+                    View more case studies <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section (Hidden) -->
+    <section class="hidden-section py-20 px-4 md:px-8 lg:px-16 bg-white">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">What Our Clients Say</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Hear from marketing leaders who have transformed their operations with our AI solutions.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <div class="text-blue-500 text-4xl mb-4">"</div>
+                    <p class="text-gray-700 mb-6 text-lg">Intelligent Marketer helped us move beyond the AI hype to implement practical solutions that actually work. Their AI lead generation system increased our qualified leads by 156% while reducing our team's manual effort by 40%. The ROI has been incredible.</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <p class="font-bold">Sarah Johnson</p>
+                            <p class="text-gray-600">CMO, TechScale Solutions</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <div class="text-blue-500 text-4xl mb-4">"</div>
+                    <p class="text-gray-700 mb-6 text-lg">Working with Intelligent Marketer has transformed our marketing operations. Their approach isn't just about implementing AI tools—it's about creating a strategic automation roadmap that delivers real business results. We've seen a 42% increase in our conversion rates.</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <p class="font-bold">Michael Chen</p>
+                            <p class="text-gray-600">Marketing Director, GrowFast Commerce</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <div class="text-blue-500 text-4xl mb-4">"</div>
+                    <p class="text-gray-700 mb-6 text-lg">What sets Intelligent Marketer apart is their focus on practical implementation and measurable results. They helped us automate our content production, increasing output by 63% while maintaining our brand voice and quality standards. Their ongoing support has been invaluable.</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <p class="font-bold">Alex Rodriguez</p>
+                            <p class="text-gray-600">Growth Lead, MarketPulse Technologies</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 4 -->
+                <div class="bg-gray-50 rounded-xl p-8">
+                    <div class="text-blue-500 text-4xl mb-4">"</div>
+                    <p class="text-gray-700 mb-6 text-lg">As a Series B startup, we needed to scale our marketing operations without ballooning our team size. Intelligent Marketer's AI solutions have been game-changing, allowing us to do more with less while driving better results. Their partnership approach ensures we're always pushing forward.</p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+                        <div>
+                            <p class="font-bold">Emily Watson</p>
+                            <p class="text-gray-600">VP Marketing, SaaSFlow</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expert Section -->
+<section class="py-20 px-4 md:px-8 lg:px-16 bg-gray-50">
+    <div class="container mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">AI Marketing Strategy & Process Automation Experts</h2>
+        </div>
+        
+        <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/3 mb-8 md:mb-0">
+                <img src="images/Presentation shot.png" alt="Will Mulholland" class="h-98 mx-auto">
+            </div>
+            <div class="md:w-2/3 md:pl-12">
+                <h3 class="text-xl font-bold mb-4">Will Mulholland, Founder</h3>
+                <p class="text-lg text-gray-700 mb-4">I built Intelligent Marketer after seeing marketing teams waste time on tasks that don't drive growth.</p>
+                <p class="text-lg text-gray-700 mb-4">At eBay and KFC, I helped launch 50+ products worth $700M+ in revenue by cutting through confusion, aligning teams, and setting clear priorities.</p>
+                <p class="text-lg text-gray-700 mb-4">Now my team builds AI systems that handle the repetitive tasks: tracking competitors, analyzing customer calls, and creating sales assets. This frees you to focus on what actually grows revenue.</p>
+                <p class="text-lg text-gray-700 mb-8">Our systems help growth-stage startups scale marketing impact without scaling headcount.</p>
+                
+                <div class="flex space-x-4 mb-8">
+                    <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" class="btn-secondary px-6 py-2 rounded-full text-blue-500 font-bold">Connect on LinkedIn</a>
+                    <a href="https://intelligent-marketer.beehiiv.com/subscribe" target="_blank" class="btn-secondary px-6 py-2 rounded-full text-blue-500 font-bold">Subscribe to Newsletter</a>
+                </div>
+                
+                <div class="flex flex-wrap gap-3 mb-8">
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">AI Marketing Strategy</span>
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Growth Marketing Process Automation</span>
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Product Marketing Strategy & Automation</span>
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Go-to-Market Strategy</span>
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Competitive Intelligence</span>
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Messaging & Positioning</span>
+                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">SaaS Marketing</span>
+                </div>
+                
+                <div class="flex flex-wrap gap-12">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-blue-500">$700M+</div>
+                        <p class="text-gray-600">Revenue Generated</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-blue-500">50+</div>
+                        <p class="text-gray-600">Product Launches</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Newsletter Section -->
+    <section class="py-20 px-4 md:px-8 lg:px-16 bg-white">
+        <div class="container mx-auto max-w-3xl">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Stay Ahead of the AI Marketing Curve</h2>
+                <p class="text-xl text-gray-600">Subscribe to our newsletter for practical AI marketing insights, case studies, and implementation guides delivered straight to your inbox.</p>
+            </div>
+            
+            <div class="bg-gray-50 rounded-xl p-8 shadow-md">
+                <form class="flex flex-col md:flex-row gap-4">
+                    <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button type="submit" class="btn-primary px-6 py-3 rounded-lg text-white font-bold shadow-md whitespace-nowrap">Subscribe Now</button>
+                </form>
+                <p class="text-gray-500 mt-4 text-center">Join 101+ marketing leaders receiving our weekly insights. No spam, just actionable AI marketing advice.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-20 px-4 md:px-8 lg:px-16 bg-gray-50">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Tailored Partnership Plans</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Our pricing model combines an initial project fee with ongoing monthly partnership to ensure continuous improvement and long-term success.</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-10 max-w-5xl mx-auto">
+                <!-- Initial Project -->
+                <div class="md:w-1/2 bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3">Initial Project</h3>
+                        <p class="text-gray-600 mb-6">Kickstart your AI marketing automation with a high-impact project focused on your core strategic processes to deliver immediate value and establish the foundation for long-term success.</p>
+                        
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Comprehensive marketing operations & process audit</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Strategic automation roadmap</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>First high-impact automation implementation (e.g., competitive intelligence, messaging insights)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Team training and knowledge transfer</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Integration with existing marketing stack & data sources</span>
+                            </li>
+                        </ul>
+                        
+                        <a href="#contact" class="btn-primary block text-center px-6 py-3 rounded-full text-white font-bold shadow-lg">Get Started</a>
+                    </div>
+                </div>
+                
+                <!-- Ongoing Partnership -->
+                <div class="md:w-1/2 bg-white rounded-xl shadow-md overflow-hidden relative">
+                    <div class="absolute top-5 right-5 bg-blue-500 text-white text-xs font-bold uppercase py-1 px-3 rounded-full">RECOMMENDED</div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-3">Ongoing Partnership</h3>
+                        <p class="text-gray-600 mb-6">Continuous implementation, optimization, and expansion of AI marketing process automations to drive long-term strategic advantage and growth.</p>
+                        
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Continuous implementation of new automations</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Bi-weekly strategy and optimization sessions</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Performance monitoring and enhancement</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>New tool evaluation and integration</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Unlimited email and Slack support</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                                <span>Monthly performance and ROI reporting</span>
+                            </li>
+                        </ul>
+                        
+                        <a href="#contact" class="btn-primary block text-center px-6 py-3 rounded-full text-white font-bold shadow-lg">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-lg text-gray-700 mb-4">Need a custom solution for your marketing team?</p>
+                <a href="#contact" class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700">
+                    Contact us for custom pricing <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 px-4 md:px-8 lg:px-16 bg-white">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p class="text-xl text-gray-600">Find answers to common questions about our AI marketing automation solutions.</p>
+            </div>
+            
+            <div class="space-y-6">
+                <!-- FAQ 1 -->
+                <div class="faq-item bg-gray-50 rounded-xl p-6">
+                    <div class="flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-bold">How quickly can we see results from AI marketing automation?</h3>
+                        <div class="faq-toggle text-blue-500">
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer mt-4">
+                        <p class="text-gray-600">Most clients see initial results—like a clearer view of competitors or faster interview analysis—within 2-4 weeks. Our approach focuses on practical quick wins. The full strategic impact on messaging resonance and GTM effectiveness typically becomes clear within 2-3 months.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 2 -->
+                <div class="faq-item bg-gray-50 rounded-xl p-6">
+                    <div class="flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-bold">Do we need technical expertise to use these AI solutions?</h3>
+                        <div class="faq-toggle text-blue-500">
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer mt-4">
+                        <p class="text-gray-600">No technical expertise is required from your team. We handle all technical implementation, integration, and optimization. We provide user-friendly interfaces or deliver insights directly, along with training for your marketing team to leverage the capabilities without needing deep technical knowledge.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 3 -->
+                <div class="faq-item bg-gray-50 rounded-xl p-6">
+                    <div class="flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-bold">How do you ensure AI-generated insights for messaging maintain our brand voice?</h3>
+                        <div class="faq-toggle text-blue-500">
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer mt-4">
+                        <p class="text-gray-600">We combine AI analysis with your strategic input. 1) Deep brand analysis understands your voice/guidelines. 2) AI identifies patterns and generates draft frameworks or insights based on your data. 3) We facilitate human review and refinement to ensure the final messaging aligns perfectly with your brand.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 4 -->
+                <div class="faq-item bg-gray-50 rounded-xl p-6">
+                    <div class="flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-bold">What marketing tools and data sources do your solutions integrate with?</h3>
+                        <div class="faq-toggle text-blue-500">
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer mt-4">
+                        <p class="text-gray-600">Our solutions integrate with common data sources and platforms like CRM systems (HubSpot, Salesforce), survey tools (SurveyMonkey, Typeform), analytics (Google Analytics), ad platforms (for competitive insights), and potentially project management tools. We can also build custom integrations.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 5 -->
+                <div class="faq-item bg-gray-50 rounded-xl p-6">
+                    <div class="flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-bold">How do you handle data privacy and security, especially with customer feedback?</h3>
+                        <div class="faq-toggle text-blue-500">
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer mt-4">
+                        <p class="text-gray-600">We prioritize data security. Our solutions comply with GDPR, CCPA, etc. We use encryption, secure access controls, conduct regular audits, and can sign NDAs. We are transparent about data usage, often processing anonymized or aggregated data for insights, and work with your IT team to meet security requirements.</p>
+                    </div>
+                </div>
+                
+                <!-- More FAQs -->
+                <div class="faq-item bg-gray-50 rounded-xl p-6">
+                    <div class="flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-bold">Why do you use a partnership model rather than project-based work?</h3>
+                        <div class="faq-toggle text-blue-500">
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer mt-4">
+                        <p class="text-gray-600">Automating strategic marketing processes isn't a one-time fix. Markets shift, customers change. The partnership model allows us to continuously optimize your automations, adapt to new challenges, and ensure you get long-term strategic value, not just a temporary tool.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-gray-50 rounded-xl p-6">
+                    <div class="flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-bold">How does this help align Sales, Marketing, and Product teams?</h3>
+                        <div class="faq-toggle text-blue-500">
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer mt-4">
+                        <p class="text-gray-600">By creating a single source of truth from shared data. Our automations generate consistent insights (like customer pains or competitive positioning) and messaging frameworks accessible to all teams. This reduces conflicting narratives and ensures everyone is working from the same playbook.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-gray-50 rounded-xl p-6">
+                    <div class="flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-bold">Can this help us build our core product messaging?</h3>
+                        <div class="faq-toggle text-blue-500">
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer mt-4">
+                        <p class="text-gray-600">Absolutely. A key function is analyzing customer interviews, surveys, and market data to identify core value propositions and messaging themes. Our AI workflows and automations help draft these elements, providing a data-driven foundation for a clear, effective marketing process.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item bg-gray-50 rounded-xl p-6">
+                    <div class="flex justify-between items-center cursor-pointer">
+                        <h3 class="text-xl font-bold">How is this different from just using general AI tools like ChatGPT?</h3>
+                        <div class="faq-toggle text-blue-500">
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </div>
+                    </div>
+                    <div class="faq-answer mt-4">
+                        <p class="text-gray-600">While general AI tools are powerful, our solution involves setting up specific workflows and using your relevant marketing data to guide these models. Our process is configured specifically for marketing and GTM tasks like competitive analysis, positioning, and customer insight generation, ensuring more relevant and actionable outputs than generic prompts. Plus, it's integrated into a strategic partnership focused on your specific business outcomes, not just a standalone tool.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <p class="text-lg text-gray-700 mb-4">Have more questions?</p>
+                <a href="#contact" class="inline-flex items-center font-bold text-blue-500 hover:text-blue-700">
+                    Contact us for answers <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 md:px-8 lg:px-16 bg-gray-50">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to see how AI & Automation Can Sharpen Your Marketing?</h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">Schedule a free consultation to see how our tailored AI automations can sharpen your strategy, messaging, and GTM execution.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="#contact" class="btn-primary px-8 py-3 rounded-full text-white font-bold shadow-lg">Schedule Consultation</a>
+                <a href="https://intelligent-marketer.beehiiv.com/subscribe" target="_blank" class="btn-secondary px-8 py-3 rounded-full text-blue-500 font-bold">Subscribe to Newsletter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+<section id="contact" class="py-20 px-4 md:px-8 lg:px-16 bg-white">
+    <div class="container mx-auto max-w-4xl">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Schedule Your Free AI Strategy Consultation</h2>
+            <p class="text-xl text-gray-600">Book a call to see how our AI solutions can align your teams and accelerate your GTM strategy.</p>
+        </div>
+        
+        <div class="flex flex-col md:flex-row gap-10">
+            <div class="md:w-1/3">
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <h3 class="text-xl font-bold mb-6">Contact Info</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="text-blue-500 mr-3"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <p class="font-bold">Email</p>
+                                <a href="mailto:will@intelligentmarketer.xyz" class="text-blue-500 hover:underline">will@intelligentmarketer.xyz</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8">
+                        <h4 class="font-bold mb-3">Connect With Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" class="text-blue-500 hover:text-blue-700 text-xl">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://twitter.com/" target="_blank" class="text-blue-500 hover:text-blue-700 text-xl">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://intelligent-marketer.beehiiv.com/subscribe" target="_blank" class="text-blue-500 hover:text-blue-700 text-xl">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="md:w-2/3">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4 text-center text-gray-900">Book Your Strategy Consultation</h3>
+                    <p class="text-gray-600 text-center mb-6">Select a time that works for you. We'll discuss your GTM challenges and how AI automation can help.</p>
+                    
+                    <!-- Google Calendar Appointment Scheduling -->
+                    <div class="rounded-lg overflow-hidden border border-gray-200">
+                        <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ17OQb9p-0IRjqEwYrrDXJjnCy2zFPjrA25Q-pAKlZ9lyyPraQG1kQaDwFyud4Mgn8_B66qVo-m?gv=true" 
+                                style="border: 0;" 
+                                width="100%" 
+                                height="600" 
+                                frameborder="0"
+                                title="Schedule consultation with Will Mulholland">
+                        </iframe>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <p class="text-gray-500 text-sm">
+                            <i class="fas fa-clock mr-1"></i>
+                            30-minute strategy session • Free consultation • No commitment required
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-4 md:px-8 lg:px-16 bg-gray-900 text-white">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row mb-12">
+                <div class="md:w-1/3 mb-10 md:mb-0">
+                    <img src="./images/intelligent-marketer-logo.png" alt="Intelligent Marketer Logo" class="h-16 mb-6">
+                    <p class="text-gray-300 mb-6">Clearer Messaging, Faster GTM with AI Automation for Startups.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" class="text-gray-300 hover:text-white text-xl">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" class="text-gray-300 hover:text-white text-xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://intelligent-marketer.beehiiv.com/subscribe" target="_blank" class="text-gray-300 hover:text-white text-xl">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3 grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Solutions</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white">Market Intelligence Automation</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Messaging & Positioning Automation</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">GTM Strategy Automation</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Customer Insight Automation</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Custom Solutions</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Company</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white">About Us</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Case Studies</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Blog</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Careers</a></li>
+                            <li><a href="#contact" class="text-gray-300 hover:text-white">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Resources</h4>
+                        <ul class="space-y-2">
+                            <li><a href="resource-download.html" class="text-gray-300 hover:text-white">AI-Native GTM Template</a></li>
+                            <li><a href="https://intelligent-marketer.beehiiv.com/subscribe" class="text-gray-300 hover:text-white">Newsletter</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">AI Marketing Guide</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Webinars</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Templates</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Legal</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center md:text-left">
+                <p class="text-gray-400">© 2025 Intelligent Marketer. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Accordion
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const toggle = item.querySelector('.flex');
+                const answer = item.querySelector('.faq-answer');
+                
+                toggle.addEventListener('click', () => {
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Activate first FAQ item by default
+            if (faqItems.length > 0) {
+                faqItems[0].classList.add('active');
+            }
+            
+            // Mobile menu toggle
+            const menuButton = document.querySelector('button.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out';
+            mobileMenu.innerHTML = `
+                <div class="flex justify-between items-center p-4 border-b">
+                    <img src="./images/intelligent-marketer-logo.png" alt="Intelligent Marketer Logo" class="h-12">
+                    <button class="text-gray-800 focus:outline-none close-menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <nav class="flex flex-col space-y-4">
+                        <a href="#solutions" class="text-xl font-medium text-gray-800 hover:text-blue-500 py-2">Solutions</a>
+                        <a href="#approach" class="text-xl font-medium text-gray-800 hover:text-blue-500 py-2">Our Approach</a>
+                        <a href="#results" class="text-xl font-medium text-gray-800 hover:text-blue-500 py-2">Results</a>
+                        <a href="#contact" class="text-xl font-medium text-gray-800 hover:text-blue-500 py-2">Contact</a>
+                    </nav>
+                    <div class="mt-8">
+                        <a href="#contact" class="btn-primary block text-center px-6 py-3 rounded-full text-white font-bold shadow-lg">Get Started</a>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+            
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+            });
+            
+            mobileMenu.querySelector('.close-menu').addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+            
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('translate-x-full');
+                });
+            });
+            
+            // Scroll animations
+            const animateOnScroll = (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in');
+                    }
+                });
+            };
+            
+            const observer = new IntersectionObserver(animateOnScroll, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.dashboard-item, .solution-card, .approach-step').forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Sticky header color change on scroll
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    header.classList.add('shadow-md');
+                } else {
+                    header.classList.remove('shadow-md');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

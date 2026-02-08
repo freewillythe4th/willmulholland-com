@@ -1,0 +1,11 @@
+{
+    "routes": [
+      { "handle": "filesystem" },
+      { "src": "/resource-download", "dest": "/resource-download.html" },
+      { "src": "/check-inbox", "dest": "/check-inbox.html" },
+      { "src": "/welcome-survey", "dest": "/welcome-survey.html" },
+      { "src": "/resource-delivery", "dest": "/resource-delivery.html" },
+      { "src": "/podcast-charlotte-norman", "dest": "/podcast-charlotte-norman.html" },
+      { "src": "/(.*)", "dest": "/index.html" }
+    ]
+  }

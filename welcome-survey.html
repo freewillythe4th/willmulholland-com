@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Survey | Intelligent Marketer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- PostHog Analytics -->
+    <script>
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);var n=t;if(void 0!==e){n=t[e]=function(){n.push([e].concat(Array.prototype.slice.call(arguments,0)))}}else n.push([e].concat(Array.prototype.slice.call(arguments,0)))}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.crossOrigin="anonymous",p.src=(s.api_host||"").replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init('phc_rvIhRhYYPjDDzjWcnVa2eU2MHk2vfksuU1aBaNlun6m', {
+            api_host: 'https://us.i.posthog.com',
+            capture_pageview: true
+        })
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Load user data from previous step
+            var userData = JSON.parse(localStorage.getItem('user_data') || '{}');
+            
+            // Track survey submission
+            var surveyForm = document.querySelector('#welcome-survey-form');
+            if (surveyForm) {
+                surveyForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    
+                    var submitButton = surveyForm.querySelector('button[type="submit"]');
+                    var originalText = submitButton.innerHTML;
+                    
+                    // Show loading state
+                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Saving...';
+                    submitButton.disabled = true;
+                    
+                    var formData = new FormData(surveyForm);
+                    var challenges = formData.getAll('challenges');
+                    var companyStage = formData.get('companyStage');
+                    
+                    // Create tags for Beehiiv based on responses
+                    var tags = ['lead-magnet-gtm'];
+                    challenges.forEach(function(challenge) {
+                        tags.push('challenge-' + challenge.toLowerCase().replace(/[^a-z0-9]/g, '-'));
+                    });
+                    if (companyStage) {
+                        tags.push('stage-' + companyStage.toLowerCase().replace(/[^a-z0-9]/g, '-'));
+                    }
+                    
+                    // Update subscriber with tags and custom fields in Beehiiv
+                    if (userData.email) {
+                        fetch('https://api.beehiiv.com/v2/publications/493c9454-ead1-40c6-b28b-81d4d81a63aa/subscriptions', {
+                            method: 'PATCH',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': 'Bearer gt0DqwQ5HXAnsIwcAWSsYdgCWTCEWULKnRvpF6D09y2U7ISpsBQcZ6KkqhFOJQQ9'
+                            },
+                            body: JSON.stringify({
+                                email: userData.email,
+                                custom_fields: [
+                                    {
+                                        name: 'challenges',
+                                        value: challenges.join(', ')
+                                    },
+                                    {
+                                        name: 'company_stage',
+                                        value: companyStage
+                                    },
+                                    {
+                                        name: 'survey_completed',
+                                        value: 'true'
+                                    }
+                                ],
+                                tags: tags
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Track successful submission
+                            try { 
+                                posthog.capture('welcome_survey_submit', { 
+                                    challenges: challenges,
+                                    company_stage: companyStage,
+                                    path: window.location.pathname,
+                                    beehiiv_status: 'success'
+                                }); 
+                            } catch (e) {}
+                            
+                            // Redirect to resource delivery
+                            window.location.href = 'resource-delivery.html';
+                        })
+                        .catch(error => {
+                            console.error('Error updating subscriber:', error);
+                            
+                            // Still redirect even if tagging fails
+                            try { 
+                                posthog.capture('welcome_survey_submit', { 
+                                    challenges: challenges,
+                                    company_stage: companyStage,
+                                    path: window.location.pathname,
+                                    beehiiv_status: 'error'
+                                }); 
+                            } catch (e) {}
+                            
+                            window.location.href = 'resource-delivery.html';
+                        });
+                    } else {
+                        // No user data, just redirect
+                        window.location.href = 'resource-delivery.html';
+                    }
+                });
+            }
+            
+            // Track skip action
+            var skipButton = document.querySelector('#skip-survey');
+            if (skipButton) {
+                skipButton.addEventListener('click', function () {
+                    try { 
+                        posthog.capture('welcome_survey_skipped', { 
+                            path: window.location.pathname 
+                        }); 
+                    } catch (e) {}
+                });
+            }
+        });
+    </script>
+    
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --secondary: #0EA5E9;
+            --accent: #06B6D4;
+            --dark: #0F172A;
+            --light: #F8FAFC;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #0F172A;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1E3A8A 0%, #0EA5E9 100%);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(6, 182, 212, 0.2);
+        }
+        
+        .btn-secondary {
+            border: 2px solid #0EA5E9;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(14, 165, 233, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .checkbox-container {
+            position: relative;
+        }
+        
+        .checkbox-container input[type="checkbox"] {
+            opacity: 0;
+            position: absolute;
+        }
+        
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .checkbox-label:hover {
+            border-color: #0ea5e9;
+            background-color: rgba(14, 165, 233, 0.05);
+        }
+        
+        .checkbox-container input[type="checkbox"]:checked + .checkbox-label {
+            border-color: #0ea5e9;
+            background-color: rgba(14, 165, 233, 0.1);
+        }
+        
+        .custom-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            margin-right: 12px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .checkbox-container input[type="checkbox"]:checked + .checkbox-label .custom-checkbox {
+            background-color: #0ea5e9;
+            border-color: #0ea5e9;
+        }
+        
+        .custom-checkbox::after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 2px;
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .checkbox-container input[type="checkbox"]:checked + .checkbox-label .custom-checkbox::after {
+            opacity: 1;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 100%);
+            transition: width 0.3s ease;
+            width: 75%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header/Navigation -->
+    <header class="py-4 px-4 md:px-8 lg:px-16 fixed w-full z-50 bg-white shadow-sm">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="./images/intelligent-marketer-logo.png" alt="Intelligent Marketer Logo" class="h-12">
+                    </a>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html#solutions" class="nav-link font-medium text-gray-800 hover:text-blue-500">Solutions</a>
+                    <a href="index.html#approach" class="nav-link font-medium text-gray-800 hover:text-blue-500">Our Approach</a>
+                    <a href="index.html#contact" class="nav-link font-medium text-gray-800 hover:text-blue-500">Contact</a>
+                </nav>
+                <a href="index.html#contact" class="btn-primary hidden md:block px-6 py-2 rounded-full text-white font-bold shadow-lg">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="pt-32 pb-20 px-4 md:px-8 lg:px-16 min-h-screen">
+        <div class="container mx-auto max-w-4xl">
+            <!-- Progress Bar -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm font-medium text-gray-600">Almost done!</span>
+                    <span class="text-sm font-medium text-gray-600">75% complete</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+            
+            <!-- Success Message -->
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-green-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                    <i class="fas fa-check text-white text-2xl"></i>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-black mb-4 text-gray-900">
+                    You're in!
+                </h1>
+                <p class="text-xl text-gray-600 mb-6 max-w-2xl mx-auto">
+                    Just a couple of quick questions so I can send you the most relevant content.
+                </p>
+                <a href="resource-delivery.html" id="skip-survey" class="text-blue-600 hover:underline font-medium">
+                    Skip and go to download →
+                </a>
+            </div>
+            
+            <!-- Survey Form -->
+            <div class="bg-white rounded-xl shadow-lg p-8 max-w-3xl mx-auto">
+                <form id="welcome-survey-form" class="space-y-8">
+                    
+                    <!-- Question 1: Challenges -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-gray-900">
+                            What's your biggest marketing challenge? 
+                            <span class="text-gray-500 font-normal">(Select all that apply)</span>
+                        </h3>
+                        
+                        <div class="space-y-3">
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="challenge1" name="challenges" value="Inefficient Go-to-Market process">
+                                <label for="challenge1" class="checkbox-label">
+                                    <div class="custom-checkbox"></div>
+                                    <div>
+                                        <div class="font-medium">Inefficient Go-to-Market process</div>
+                                        <div class="text-gray-600 text-sm">Launches take too long, teams aren't aligned</div>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="challenge2" name="challenges" value="Weak or inconsistent messaging">
+                                <label for="challenge2" class="checkbox-label">
+                                    <div class="custom-checkbox"></div>
+                                    <div>
+                                        <div class="font-medium">Weak or inconsistent messaging</div>
+                                        <div class="text-gray-600 text-sm">Messaging doesn't resonate or convert</div>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="challenge3" name="challenges" value="Manual research is slowing us down">
+                                <label for="challenge3" class="checkbox-label">
+                                    <div class="custom-checkbox"></div>
+                                    <div>
+                                        <div class="font-medium">Manual research is slowing us down</div>
+                                        <div class="text-gray-600 text-sm">Competitive analysis and customer research takes forever</div>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="challenge4" name="challenges" value="Scaling our marketing processes">
+                                <label for="challenge4" class="checkbox-label">
+                                    <div class="custom-checkbox"></div>
+                                    <div>
+                                        <div class="font-medium">Scaling our marketing processes</div>
+                                        <div class="text-gray-600 text-sm">Need to do more with the same team size</div>
+                                    </div>
+                                </label>
+                            </div>
+                            
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="challenge5" name="challenges" value="Cutting through the AI hype">
+                                <label for="challenge5" class="checkbox-label">
+                                    <div class="custom-checkbox"></div>
+                                    <div>
+                                        <div class="font-medium">Cutting through the AI hype</div>
+                                        <div class="text-gray-600 text-sm">Finding practical AI tools that actually work</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 2: Company Stage -->
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-gray-900">
+                            What best describes your company stage?
+                        </h3>
+                        
+                        <select name="companyStage" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Select your company stage</option>
+                            <option value="Early Stage (Pre-Seed/Seed)">Early Stage (Pre-Seed/Seed)</option>
+                            <option value="Growth Stage (Series A/B)">Growth Stage (Series A/B)</option>
+                            <option value="Scale-Up (Series C+)">Scale-Up (Series C+)</option>
+                            <option value="Established Company">Established Company</option>
+                            <option value="Solo / Consultant">Solo / Consultant</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-6">
+                        <button type="submit" class="btn-primary flex-1 px-6 py-4 rounded-lg text-white font-bold text-lg shadow-lg">
+                            Complete Survey & Get My Template
+                        </button>
+                        <a href="resource-delivery.html" class="btn-secondary flex-1 px-6 py-4 rounded-lg text-blue-500 font-bold text-lg text-center">
+                            Skip Survey
+                        </a>
+                    </div>
+                    
+                    <p class="text-gray-500 text-sm text-center">
+                        This helps me send you more relevant content. Takes 30 seconds.
+                    </p>
+                </form>
+            </div>
+            
+            <!-- Benefits -->
+            <div class="mt-12 text-center max-w-2xl mx-auto">
+                <h3 class="text-lg font-bold mb-4 text-gray-900">Why these questions?</h3>
+                <p class="text-gray-600 mb-6">
+                    Your answers help me tailor future content to your specific challenges and company stage. 
+                    I'll send you case studies, templates, and strategies that are most relevant to your situation.
+                </p>
+                
+                <div class="flex justify-center items-center space-x-6 text-sm text-gray-500">
+                    <div class="flex items-center">
+                        <i class="fas fa-lock mr-2"></i>
+                        Your data is secure
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-envelope mr-2"></i>
+                        No spam, ever
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-times mr-2"></i>
+                        Unsubscribe anytime
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 md:px-8 lg:px-16 bg-gray-900 text-white">
+        <div class="container mx-auto text-center">
+            <img src="./images/intelligent-marketer-logo.png" alt="Intelligent Marketer Logo" class="h-12 mx-auto mb-6">
+            <p class="text-gray-300 mb-6">Clearer Messaging, Faster GTM with AI Automation for Startups.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" class="text-gray-300 hover:text-white text-xl">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://intelligent-marketer.beehiiv.com/subscribe" target="_blank" class="text-gray-300 hover:text-white text-xl">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            <p class="text-gray-400 mt-8">© 2025 Intelligent Marketer. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

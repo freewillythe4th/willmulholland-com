@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Native GTM Strategy Template | Intelligent Marketer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- PostHog Analytics (US endpoint + assets host to avoid blockers) -->
+    <script>
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);var n=t;if(void 0!==e){n=t[e]=function(){n.push([e].concat(Array.prototype.slice.call(arguments,0)))}}else n.push([e].concat(Array.prototype.slice.call(arguments,0)))}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.crossOrigin="anonymous",p.src=(s.api_host||"").replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init('phc_rvIhRhYYPjDDzjWcnVa2eU2MHk2vfksuU1aBaNlun6m', {
+            api_host: 'https://us.i.posthog.com',
+            capture_pageview: false,
+            capture_pageleave: true
+        })
+    </script>
+    
+    <!-- UTM capture: persist and attach to every event, then send initial $pageview -->
+    <script>
+        (function () {
+            function parseUtmParams() {
+                var url = new URL(window.location.href);
+                var p = {};
+                var keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'];
+                for (var i = 0; i < keys.length; i++) {
+                    var v = url.searchParams.get(keys[i]);
+                    if (v) p[keys[i]] = v;
+                }
+                return p;
+            }
+
+            function getInitialReferrerProps() {
+                var ref = document.referrer || '';
+                var domain = null;
+                try { if (ref) domain = new URL(ref).hostname; } catch (e) {}
+                return {
+                    initial_referrer: ref || 'direct',
+                    initial_referring_domain: domain || 'direct'
+                };
+            }
+
+            try {
+                var stored = null;
+                try { stored = JSON.parse(localStorage.getItem('utm_params') || 'null'); } catch (e) {}
+                var utm = stored || parseUtmParams();
+                if (utm && Object.keys(utm).length > 0 && !stored) {
+                    try { localStorage.setItem('utm_params', JSON.stringify(utm)); } catch (e) {}
+                }
+
+                var props = Object.assign({}, utm || {}, getInitialReferrerProps());
+                if (Object.keys(props).length > 0) {
+                    posthog.register(props);
+                }
+            } catch (e) {}
+
+            // Now send the initial pageview with UTM props registered
+            try { posthog.capture('$pageview'); } catch (e) {}
+        })();
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Track form submissions to Beehiiv
+            var downloadForm = document.querySelector('form[action*="beehiiv.com"]');
+            if (downloadForm) {
+                downloadForm.addEventListener('submit', function () {
+                    try { 
+                        posthog.capture('resource_download_form_submit', { 
+                            resource: 'ai-native-gtm-strategy-template',
+                            path: window.location.pathname,
+                            method: 'beehiiv_native'
+                        }); 
+                    } catch (e) {}
+                });
+            }
+            
+            // Set referring site for tracking
+            var referringInput = document.querySelector('input[name="referring_site"]');
+            if (referringInput) {
+                referringInput.value = document.referrer || window.location.hostname;
+            }
+        });
+    </script>
+    
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --secondary: #0EA5E9;
+            --accent: #06B6D4;
+            --dark: #0F172A;
+            --light: #F8FAFC;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #0F172A;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1E3A8A 0%, #0EA5E9 100%);
+        }
+        
+        .accent-gradient {
+            background: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 100%);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(6, 182, 212, 0.2);
+        }
+        
+        .resource-mockup {
+            transform: perspective(800px) rotateY(-10deg) rotateX(5deg);
+            transition: all 0.3s ease;
+        }
+        
+        .resource-mockup:hover {
+            transform: perspective(800px) rotateY(-5deg) rotateX(2deg);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header/Navigation -->
+    <header class="py-4 px-4 md:px-8 lg:px-16 fixed w-full z-50 bg-white shadow-sm">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="./images/intelligent-marketer-logo.png" alt="Intelligent Marketer Logo" class="h-12">
+                    </a>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html#solutions" class="nav-link font-medium text-gray-800 hover:text-blue-500">Solutions</a>
+                    <a href="index.html#approach" class="nav-link font-medium text-gray-800 hover:text-blue-500">Our Approach</a>
+                    <a href="index.html#contact" class="nav-link font-medium text-gray-800 hover:text-blue-500">Contact</a>
+                </nav>
+                <a href="index.html#contact" class="btn-primary hidden md:block px-6 py-2 rounded-full text-white font-bold shadow-lg">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <section class="pt-32 pb-20 px-4 md:px-8 lg:px-16 bg-gray-50 min-h-screen">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- Left Side - Content -->
+                <div class="lg:w-1/2">
+                    <div class="mb-6">
+                        <span class="inline-block bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                            Free Strategy Template
+                        </span>
+                        <h1 class="text-4xl md:text-5xl font-black mb-6 leading-tight text-gray-900">
+                            The AI-Native GTM Strategy Template
+                        </h1>
+                        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                            The exact framework I use to help Series B SaaS companies launch with fewer roadblocks and aligned teams.
+                        </p>
+                    </div>
+
+                    <!-- Benefits List -->
+                    <div class="mb-8">
+                        <h3 class="text-lg font-bold mb-4 text-gray-900">What you'll get:</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span class="text-gray-700">Complete GTM strategy template with AI automation checkpoints</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span class="text-gray-700">Cross-functional alignment framework for Sales, Marketing & Product teams</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span class="text-gray-700">Launch readiness checklist with risk assessment criteria</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check text-green-500 mt-1 mr-3"></i>
+                                <span class="text-gray-700">AI-powered messaging validation tools and prompts</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Download Form - Beehiiv Embed -->
+                    <div class="bg-white rounded-xl shadow-lg p-6">
+                        <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+                        <iframe src="https://subscribe-forms.beehiiv.com/d946ff58-e98b-4ce9-8e62-73a698514f47" 
+                                class="beehiiv-embed" 
+                                data-test-id="beehiiv-embed" 
+                                frameborder="0" 
+                                scrolling="no" 
+                                style="width: 100%; height: 400px; margin: 0; border-radius: 8px !important; background-color: transparent; box-shadow: none; max-width: 100%;">
+                        </iframe>
+                        <script type="text/javascript" async src="https://subscribe-forms.beehiiv.com/attribution.js"></script>
+                        
+                        <!-- Trust Signal -->
+                        <p class="text-gray-500 text-sm text-center mt-4">
+                            No spam. We respect your inbox. Unsubscribe anytime.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Side - Resource Mockup -->
+                <div class="lg:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <!-- Resource Mockup -->
+                        <div class="resource-mockup bg-white rounded-lg shadow-2xl p-8 max-w-md">
+                            <div class="text-center mb-6">
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                    <i class="fas fa-rocket text-white text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">AI-Native GTM Strategy</h3>
+                                <p class="text-gray-600 text-sm">Complete Framework & Template</p>
+                            </div>
+                            
+                            <!-- Mockup Content Preview -->
+                            <div class="space-y-4">
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <div class="text-sm font-medium text-gray-700 mb-2">1. Market Analysis & Positioning</div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-500 h-2 rounded-full w-3/4"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <div class="text-sm font-medium text-gray-700 mb-2">2. Messaging Framework</div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-500 h-2 rounded-full w-5/6"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <div class="text-sm font-medium text-gray-700 mb-2">3. Launch Strategy</div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-500 h-2 rounded-full w-2/3"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <div class="text-sm font-medium text-gray-700 mb-2">4. AI Automation Points</div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-blue-500 h-2 rounded-full w-4/5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 text-center">
+                                <span class="text-xs text-gray-500">25+ Pages • Implementation Ready</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Floating Elements -->
+                        <div class="absolute -top-4 -right-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+                            FREE
+                        </div>
+                        
+                        <div class="absolute -bottom-4 -left-4 bg-blue-500 text-white text-xs font-medium px-3 py-2 rounded-lg shadow-lg">
+                            <i class="fas fa-download mr-1"></i>
+                            Instant Download
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust/Social Proof Section -->
+    <section class="py-16 px-4 md:px-8 lg:px-16 bg-white">
+        <div class="container mx-auto text-center">
+            <p class="text-lg text-gray-600 mb-8">Trusted by marketing teams at growth-stage startups</p>
+            <div class="flex flex-wrap justify-center items-center gap-12 opacity-60">
+                <div class="flex items-center h-12">
+                    <img src="images/clay-feature.png" alt="Clay" class="h-full object-contain">
+                </div>
+                <div class="flex items-center h-12">
+                    <img src="images/Hightouch.jpg" alt="Hightouch" class="h-full object-contain">
+                </div>
+                <div class="flex items-center h-8">
+                    <img src="images/670d10c48ed0cb0f03b2c5ac_Glean Wordmark Blue.webp" alt="Glean" class="h-full object-contain">
+                </div>
+                <div class="flex items-center h-8">
+                    <img src="images/Klaviyo_primary_logo.svg.png" alt="Klaviyo" class="h-full object-contain">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 md:px-8 lg:px-16 bg-gray-900 text-white">
+        <div class="container mx-auto text-center">
+            <img src="./images/intelligent-marketer-logo.png" alt="Intelligent Marketer Logo" class="h-12 mx-auto mb-6">
+            <p class="text-gray-300 mb-6">Clearer Messaging, Faster GTM with AI Automation for Startups.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" class="text-gray-300 hover:text-white text-xl">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://intelligent-marketer.beehiiv.com/subscribe" target="_blank" class="text-gray-300 hover:text-white text-xl">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+            <p class="text-gray-400 mt-8">© 2025 Intelligent Marketer. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

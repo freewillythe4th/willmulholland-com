@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will Mulholland | PLG to Team Revenue</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- PostHog Analytics (US endpoint + assets host to avoid blockers) -->
+    <script>
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);var n=t;if(void 0!==e){n=t[e]=function(){n.push([e].concat(Array.prototype.slice.call(arguments,0)))}}else n.push([e].concat(Array.prototype.slice.call(arguments,0)))}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.crossOrigin="anonymous",p.src=(s.api_host||"").replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init('phc_rvIhRhYYPjDDzjWcnVa2eU2MHk2vfksuU1aBaNlun6m', {
+            api_host: 'https://us.i.posthog.com',
+            capture_pageview: false,
+            capture_pageleave: true
+        })
+    </script>
+    
+    <!-- UTM capture: persist and attach to every event, then send initial $pageview -->
+    <script>
+        (function () {
+            function parseUtmParams() {
+                var url = new URL(window.location.href);
+                var p = {};
+                var keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'];
+                for (var i = 0; i < keys.length; i++) {
+                    var v = url.searchParams.get(keys[i]);
+                    if (v) p[keys[i]] = v;
+                }
+                return p;
+            }
+
+            function getInitialReferrerProps() {
+                var ref = document.referrer || '';
+                var domain = null;
+                try { if (ref) domain = new URL(ref).hostname; } catch (e) {}
+                return {
+                    initial_referrer: ref || 'direct',
+                    initial_referring_domain: domain || 'direct'
+                };
+            }
+
+            try {
+                var stored = null;
+                try { stored = JSON.parse(localStorage.getItem('utm_params') || 'null'); } catch (e) {}
+                var utm = stored || parseUtmParams();
+                if (utm && Object.keys(utm).length > 0 && !stored) {
+                    try { localStorage.setItem('utm_params', JSON.stringify(utm)); } catch (e) {}
+                }
+
+                var props = Object.assign({}, utm || {}, getInitialReferrerProps());
+                if (Object.keys(props).length > 0) {
+                    posthog.register(props);
+                }
+            } catch (e) {}
+
+            // Now send the initial pageview with UTM props registered
+            try { posthog.capture('$pageview'); } catch (e) {}
+        })();
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function getNearestSectionId(element) {
+                var node = element;
+                while (node && node !== document.body) {
+                    if (node.id) return node.id;
+                    node = node.parentElement;
+                }
+                return null;
+            }
+
+            function getElementLabel(element) {
+                var label = element.getAttribute('aria-label') || element.innerText || '';
+                return label.trim().slice(0, 100);
+            }
+
+            // Track clicks on primary CTAs (buttons and links)
+            document.body.addEventListener('click', function (event) {
+                var target = event.target.closest('a.btn-primary, button.btn-primary');
+                if (!target) return;
+
+                var properties = {
+                    text: getElementLabel(target),
+                    href: target.getAttribute('href') || null,
+                    section: getNearestSectionId(target),
+                    path: window.location.pathname
+                };
+
+                try { posthog.capture('cta_clicked', properties); } catch (e) {}
+            });
+
+            // Track contact form submit success/error
+            var contactForm = document.querySelector('section#contact form');
+            if (contactForm) {
+                // Invalid field error during submission attempt
+                contactForm.addEventListener('invalid', function (ev) {
+                    var field = ev.target;
+                    var props = {
+                        field: field.name || field.id || 'unknown',
+                        reason: 'invalid',
+                        section: 'contact',
+                        path: window.location.pathname
+                    };
+                    try { posthog.capture('form_submit_error', props); } catch (e) {}
+                }, true);
+
+                // Successful submit (HTML5 validation passed). Formspree handles the POST + redirect
+                contactForm.addEventListener('submit', function () {
+                    try { posthog.capture('form_submit_success', { section: 'contact', path: window.location.pathname }); } catch (e) {}
+                });
+            }
+        });
+    </script>
+    
+    <!-- Scroll-depth and outbound link tracking -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Scroll depth tracking at 25/50/75/100%
+            var thresholds = [25, 50, 75, 100];
+            var fired = { 25: false, 50: false, 75: false, 100: false };
+            function computeScrollPercent() {
+                var doc = document.documentElement;
+                var body = document.body;
+                var scrollTop = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+                var viewport = window.innerHeight || doc.clientHeight;
+                var fullHeight = Math.max(
+                    body.scrollHeight, doc.scrollHeight,
+                    body.offsetHeight, doc.offsetHeight,
+                    body.clientHeight, doc.clientHeight
+                );
+                var pct = Math.round(((scrollTop + viewport) / fullHeight) * 100);
+                if (pct < 0) pct = 0;
+                if (pct > 100) pct = 100;
+                return pct;
+            }
+            function checkThresholds() {
+                var pct = computeScrollPercent();
+                for (var i = 0; i < thresholds.length; i++) {
+                    var t = thresholds[i];
+                    if (!fired[t] && pct >= t) {
+                        fired[t] = true;
+                        try { posthog.capture('scroll_depth', { percent: t, path: window.location.pathname }); } catch (e) {}
+                    }
+                }
+            }
+            var ticking = false;
+            window.addEventListener('scroll', function () {
+                if (!ticking) {
+                    window.requestAnimationFrame(function () {
+                        checkThresholds();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
+            // Run once in case page is short
+            checkThresholds();
+
+            // Outbound link tracking (includes mailto/tel)
+            document.body.addEventListener('click', function (event) {
+                var link = event.target && event.target.closest ? event.target.closest('a[href]') : null;
+                if (!link) return;
+                var rawHref = link.getAttribute('href') || '';
+                try {
+                    var url = new URL(rawHref, window.location.href);
+                    var isExternal = url.origin !== window.location.origin || url.protocol === 'mailto:' || url.protocol === 'tel:';
+                    if (!isExternal) return;
+                    var props = {
+                        href: url.href,
+                        text: (link.getAttribute('aria-label') || link.innerText || '').trim().slice(0, 100),
+                        target: link.getAttribute('target') || '',
+                        rel: link.getAttribute('rel') || '',
+                        protocol: url.protocol.replace(':', ''),
+                        host: url.host,
+                        path: window.location.pathname
+                    };
+                    try { posthog.capture('outbound_click', props); } catch (e) {}
+                } catch (err) {
+                    // Fallback for malformed hrefs
+                    try { posthog.capture('outbound_click', { href: rawHref, text: (link.innerText || '').trim().slice(0, 100), path: window.location.pathname }); } catch (e) {}
+                }
+            });
+        });
+    </script>
+    
+    <style>
+        :root {
+            --primary: #1E3A8A;
+            --secondary: #0EA5E9;
+            --accent: #06B6D4;
+            --dark: #0F172A;
+            --light: #F8FAFC;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #0F172A;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1E3A8A 0%, #0EA5E9 100%);
+        }
+        
+        .accent-gradient {
+            background: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 100%);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(6, 182, 212, 0.2);
+        }
+        
+        .btn-secondary {
+            border: 2px solid #0EA5E9;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(14, 165, 233, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #06B6D4;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .dashboard-item {
+            transition: all 0.3s ease;
+        }
+        
+        .dashboard-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(14, 165, 233, 0.15);
+        }
+        
+        .solution-card {
+            transition: all 0.3s ease;
+        }
+        
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(15, 23, 42, 0.1);
+        }
+        
+        .approach-step {
+            transition: all 0.3s ease;
+        }
+        
+        .approach-step:hover {
+            transform: translateX(5px);
+        }
+        
+        .hidden-section {
+            display: none;
+        }
+        
+        .faq-item {
+            transition: all 0.3s ease;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-toggle i {
+            transform: rotate(180deg);
+        }
+
+        @media print {
+            .hidden-section {
+                display: none !important;
+            }
+            
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Header/Navigation -->
+    <header class="py-4 px-4 md:px-8 lg:px-16 fixed w-full z-50 bg-white shadow-sm">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-gray-900">Will Mulholland</h1>
+                </div>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#insight" class="nav-link font-medium text-gray-800 hover:text-blue-500">The Insight</a>
+                    <a href="#proof" class="nav-link font-medium text-gray-800 hover:text-blue-500">Proof</a>
+                    <a href="#who-this-is-for" class="nav-link font-medium text-gray-800 hover:text-blue-500">Who This Is For</a>
+                    <a href="#intelligent-growth" class="nav-link font-medium text-gray-800 hover:text-blue-500">Intelligent Growth</a>
+                    <a href="#about" class="nav-link font-medium text-gray-800 hover:text-blue-500">About</a>
+                    <a href="#contact" class="nav-link font-medium text-gray-800 hover:text-blue-500">Contact</a>
+                </nav>
+                <a href="podcast-charlotte-norman.html" class="btn-primary hidden md:block px-6 py-2 rounded-full text-white font-bold shadow-lg">Free Template</a>
+                <button class="md:hidden text-gray-800 focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 md:px-8 lg:px-16 hero-gradient text-white">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-3/5 mb-12 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-8 leading-tight">
+                        <span class="block mb-2">Your Product Went Viral</span>
+                        <span class="block mb-2">With Individuals.</span>
+                        <span class="block text-blue-200">Now You Need Team Revenue.</span>
+                    </h1>
+                    <div class="space-y-3 mb-8 max-w-2xl">
+                        <p class="text-xl opacity-90">Users share with friends, not colleagues.</p>
+                        <p class="text-xl opacity-90">When colleagues sign up, they use it individually too.</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#insight" class="btn-primary px-8 py-3 rounded-full text-white font-bold text-center">See How It Works</a>
+                        <a href="#contact" class="btn-secondary px-8 py-3 rounded-full text-white font-bold text-center">Schedule Call</a>
+                    </div>
+                </div>
+                <div class="md:w-2/5">
+                    <div class="bg-white bg-opacity-10 backdrop-blur-lg p-12 rounded-xl text-center">
+                        <div class="flex items-center justify-center gap-8 mb-6">
+                            <div class="text-6xl"><i class="fas fa-user"></i></div>
+                            <div class="text-4xl"><i class="fas fa-arrow-right"></i></div>
+                            <div class="text-6xl"><i class="fas fa-users"></i></div>
+                        </div>
+                        <h3 class="text-3xl font-bold mb-2">Individuals → Teams</h3>
+                        <p class="text-xl opacity-90">Same Product.<br>Different Messages.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE INSIGHT Section -->
+    <section id="insight" class="py-20 px-4 md:px-8 lg:px-16 bg-white">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">The Insight</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Card 1: Why Most Fail -->
+                <div class="rounded-xl p-8 bg-gray-50 hover:shadow-xl transition-all duration-300">
+                    <div class="text-4xl text-red-500 mb-4"><i class="fas fa-exclamation-triangle"></i></div>
+                    <h3 class="text-2xl font-bold mb-3">Why Most Fail</h3>
+                    <p class="text-gray-600">Companies add admin controls and approval workflows.</p>
+                    <p class="text-gray-600 font-semibold mt-2">Then activation drops and sharing dies.</p>
+                </div>
+                
+                <!-- Card 2: What Works -->
+                <div class="rounded-xl p-8 bg-gray-50 hover:shadow-xl transition-all duration-300">
+                    <div class="text-4xl text-blue-500 mb-4"><i class="fas fa-arrows-alt-h"></i></div>
+                    <h3 class="text-2xl font-bold mb-3">What Works</h3>
+                    <p class="text-gray-600 mb-3">It's a messaging problem, not a product problem.</p>
+                    <p class="text-gray-600 mb-2">Keep individuals getting instant value.</p>
+                    <p class="text-gray-600 mb-2">Show team buyers collaboration ROI.</p>
+                    <p class="text-gray-600 font-semibold">Same product. Different messages.</p>
+                </div>
+                
+                <!-- Card 3: How I Know -->
+                <div class="rounded-xl p-8 bg-gray-50 hover:shadow-xl transition-all duration-300">
+                    <div class="text-4xl text-green-500 mb-4"><i class="fas fa-check-circle"></i></div>
+                    <h3 class="text-2xl font-bold mb-3">How I Know</h3>
+                    <p class="text-gray-600">I've helped companies scale from individual users to team revenue</p>
+                    <p class="text-gray-600 font-semibold mt-2">while keeping their growth engine intact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROOF Section -->
+    <section id="proof" class="py-20 px-4 md:px-8 lg:px-16 bg-gray-50">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Proof</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Case Study 1: eBay -->
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4">eBay: $180M While Keeping 83% Activation</h3>
+                    <div class="border-t border-gray-200 my-4"></div>
+                    <p class="text-gray-600 mb-3">Built separate positioning for team buyers.</p>
+                    <p class="text-gray-600 mb-3">Individuals kept fast self-serve.</p>
+                    <p class="text-gray-600">Teams got dedicated support.</p>
+                </div>
+
+                <!-- Case Study 2: NextDocs -->
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4">NextDocs: 15k Users → Team Sales</h3>
+                    <div class="border-t border-gray-200 my-4"></div>
+                    <p class="text-gray-600 mb-3">Analyzed which companies had multiple users.</p>
+                    <p class="text-gray-600 mb-3">Built messaging showing team value.</p>
+                    <p class="text-gray-600">First quarter: $30K from team sales.</p>
+                </div>
+
+                <!-- Case Study 3: Prompt Cowboy -->
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold mb-4">Prompt Cowboy: 2k → 55k Users</h3>
+                    <div class="border-t border-gray-200 my-4"></div>
+                    <p class="text-gray-600 mb-3">Found users were leaving after creating prompts.</p>
+                    <p class="text-gray-600 mb-3">Built features keeping work in-platform.</p>
+                    <p class="text-gray-600">Tested team features without gating individual use.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHO THIS IS FOR Section -->
+    <section id="who-this-is-for" class="py-20 px-4 md:px-8 lg:px-16 bg-white">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Who This Is For</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Card 1 -->
+                <div class="bg-gray-50 rounded-xl p-8 shadow-lg">
+                    <div class="text-4xl text-blue-500 mb-4"><i class="fas fa-building"></i></div>
+                    <h3 class="text-2xl font-bold mb-4">Series A or Series B</h3>
+                    <p class="text-gray-600 mb-3">$10M-$50M ARR</p>
+                    <p class="text-gray-600 mb-3">PLG motion that's proven</p>
+                    <p class="text-gray-600 font-semibold">Board wants team revenue</p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="bg-gray-50 rounded-xl p-8 shadow-lg">
+                    <div class="text-4xl text-blue-500 mb-4"><i class="fas fa-chart-line"></i></div>
+                    <h3 class="text-2xl font-bold mb-4">You're Seeing This</h3>
+                    <p class="text-gray-600 mb-3">Multiple people from same companies</p>
+                    <p class="text-gray-600 mb-3">Power users who'd pay for teams</p>
+                    <p class="text-gray-600 font-semibold">No clear conversion path</p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="bg-gray-50 rounded-xl p-8 shadow-lg">
+                    <div class="text-4xl text-blue-500 mb-4"><i class="fas fa-lightbulb"></i></div>
+                    <h3 class="text-2xl font-bold mb-4">You Need</h3>
+                    <p class="text-gray-600 mb-3">Someone who understands your growth engine</p>
+                    <p class="text-gray-600 font-semibold">Not another growth hack</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#contact" class="btn-primary inline-block px-8 py-3 rounded-full text-white font-bold shadow-lg">Schedule Strategy Call</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intelligent Growth Podcast Section -->
+    <section id="intelligent-growth" class="py-20 px-4 md:px-8 lg:px-16 bg-gradient-to-br from-blue-50 to-cyan-50">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Intelligent Growth: See How It Works</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    I show you how PLG companies convert individuals to team revenue - using real examples, on screen, step by step.
+                    <br><br>
+                    No theory. Just workflows from marketers at companies like Canva and Adora who've done this.
+                </p>
+            </div>
+
+            <!-- Featured Episode -->
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+                <div class="md:flex">
+                    <!-- Video Embed -->
+                    <div class="md:w-1/2 bg-gray-900 flex items-center justify-center">
+                        <div class="w-full" style="position: relative; padding-bottom: 56.25%; height: 0;">
+                            <iframe src="https://www.youtube.com/embed/5LHzjQbBptE" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen
+                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
+                            </iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Episode Details -->
+                    <div class="md:w-1/2 p-8 md:p-12">
+                        <div class="mb-4">
+                            <span class="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
+                                LATEST EPISODE
+                            </span>
+                        </div>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4">
+                            Stop Your Team Going Off-Brand
+                        </h3>
+                        <p class="text-gray-700 mb-3">
+                            Charlotte Norman (ex-Canva PMM) runs marketing solo at Adora.
+                        </p>
+                        <p class="text-gray-700 mb-4">
+                            She built an AI system that keeps her entire team on-brand without hiring anyone.
+                        </p>
+                        <p class="text-gray-600 mb-6">
+                            Watch her build it live on screen in 38 minutes.
+                        </p>
+                        
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="podcast-charlotte-norman.html" class="btn-primary inline-block px-6 py-3 rounded-full text-white font-bold text-center shadow-lg">
+                                Watch Episode
+                            </a>
+                            <a href="podcast-charlotte-norman.html" class="btn-primary inline-block px-6 py-3 rounded-full text-white font-bold text-center shadow-lg">
+                                Get Free Template
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subscribe Section -->
+            <div class="text-center mt-12">
+                <p class="text-gray-600 mb-2 text-lg">New episodes every week showing exactly how to use AI to scale your marketing.</p>
+                <div class="flex justify-center space-x-6 mt-6">
+                    <a href="https://www.youtube.com/@WillMulholland" target="_blank" class="text-red-600 hover:text-red-700 transition-colors">
+                        <i class="fab fa-youtube text-4xl"></i>
+                    </a>
+                    <a href="#newsletter" class="text-blue-600 hover:text-blue-700 transition-colors">
+                        <i class="fas fa-envelope text-4xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section id="newsletter" class="py-20 px-4 md:px-8 lg:px-16 bg-gray-50">
+        <div class="container mx-auto max-w-2xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Subscribe to Intelligent Growth</h2>
+                <p class="text-xl text-gray-700 mb-2">My weekly newsletter and podcast.</p>
+                <p class="text-xl text-gray-700 mb-2">Real workflows from PLG companies converting individuals to teams.</p>
+                <p class="text-xl text-gray-700">Real tools they're using to move faster.</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+                <iframe src="https://subscribe-forms.beehiiv.com/d946ff58-e98b-4ce9-8e62-73a698514f47" 
+                        class="beehiiv-embed" 
+                        data-test-id="beehiiv-embed" 
+                        frameborder="0" 
+                        scrolling="no" 
+                        style="width: 560px; height: 297px; margin: 0; border-radius: 0px 0px 0px 0px !important; background-color: transparent; box-shadow: 0 0 #0000; max-width: 100%;">
+                </iframe>
+            </div>
+            
+            <p class="text-center text-gray-500 mt-6 text-sm">Join 101+ marketing leaders. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 md:px-8 lg:px-16 bg-white">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">About</h2>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center md:items-start gap-8 max-w-4xl mx-auto">
+                <div class="w-48 h-48 flex-shrink-0">
+                    <img src="images/KeyyWillMulholland-1543 copy 2.jpg" alt="Will Mulholland" class="w-full h-full object-cover rounded-xl shadow-lg">
+                </div>
+                <div class="flex-1">
+                    <h3 class="text-2xl font-bold mb-4">Will Mulholland</h3>
+                    <p class="text-lg text-gray-700 mb-4">I help Series A/B companies find the moment when users recognize team value—then build positioning that converts them.</p>
+                    <p class="text-lg text-gray-700 mb-6">Previously scaled products at eBay, NextDocs, and Prompt Cowboy.</p>
+                    
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" class="text-blue-500 hover:text-blue-700 text-2xl">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" class="text-blue-500 hover:text-blue-700 text-2xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="mailto:wcmulholland@gmail.com" class="text-blue-500 hover:text-blue-700 text-2xl">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+<section id="contact" class="py-20 px-4 md:px-8 lg:px-16 bg-gray-50">
+    <div class="container mx-auto max-w-6xl">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
+            <p class="text-xl text-gray-600">Ready to scale from individual users to team revenue? Let's talk.</p>
+        </div>
+        
+        <div class="flex flex-col md:flex-row gap-8">
+            <!-- Contact Info Sidebar -->
+            <div class="md:w-1/3">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold mb-6">Contact Info</h3>
+                    
+                    <div class="mb-8">
+                        <div class="flex items-start mb-3">
+                            <div class="text-blue-500 text-2xl mr-3"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <p class="font-bold text-gray-900 mb-1">Email</p>
+                                <a href="mailto:will@intelligentmarketer.xyz" class="text-blue-500 hover:text-blue-700">will@intelligentmarketer.xyz</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold mb-4">Connect With Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" class="text-blue-500 hover:text-blue-700 text-2xl">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="https://twitter.com/" target="_blank" class="text-blue-500 hover:text-blue-700 text-2xl">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="mailto:will@intelligentmarketer.xyz" class="text-blue-500 hover:text-blue-700 text-2xl">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Calendar Booking -->
+            <div class="md:w-2/3">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+            <h3 class="text-xl font-bold mb-4 text-center">Book Your Strategy Call</h3>
+            <p class="text-gray-600 text-center mb-6">Select a time that works for you. We'll discuss your transition from individual users to team revenue.</p>
+            
+            <div class="rounded-lg overflow-hidden border border-gray-200">
+                <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ17OQb9p-0IRjqEwYrrDXJjnCy2zFPjrA25Q-pAKlZ9lyyPraQG1kQaDwFyud4Mgn8_B66qVo-m?gv=true" 
+                        style="border: 0;" 
+                        width="100%" 
+                        height="600" 
+                        frameborder="0"
+                        title="Schedule consultation with Will Mulholland">
+                </iframe>
+            </div>
+            
+                    <div class="mt-4 text-center">
+                        <p class="text-gray-500 text-sm">
+                            <i class="fas fa-clock mr-1"></i>
+                            30-minute strategy session • Free consultation • No commitment required
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-4 md:px-8 lg:px-16 bg-gray-900 text-white">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row mb-12">
+                <div class="md:w-1/3 mb-10 md:mb-0">
+                    <h3 class="text-2xl font-bold text-white mb-4">Will Mulholland</h3>
+                    <p class="text-gray-300 mb-6">PLG to Team Revenue</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" class="text-gray-300 hover:text-white text-xl">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/" target="_blank" class="text-gray-300 hover:text-white text-xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="mailto:wcmulholland@gmail.com" class="text-gray-300 hover:text-white text-xl">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Company</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#about" class="text-gray-300 hover:text-white">About Us</a></li>
+                            <li><a href="#proof" class="text-gray-300 hover:text-white">Case Studies</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Blog</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Careers</a></li>
+                            <li><a href="#contact" class="text-gray-300 hover:text-white">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Resources</h4>
+                        <ul class="space-y-2">
+                            <li><a href="https://intelligent-marketer.beehiiv.com/subscribe" target="_blank" class="text-gray-300 hover:text-white">Newsletter</a></li>
+                            <li><a href="#intelligent-growth" class="text-gray-300 hover:text-white">Intelligent Growth Podcast</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">AI Marketing Guide</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Webinars</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Templates</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-bold text-lg mb-4">Legal</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-white">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-800 text-center md:text-left">
+                <p class="text-gray-400">© 2025 Will Mulholland. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuButton = document.querySelector('button.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out';
+            mobileMenu.innerHTML = `
+                <div class="flex justify-between items-center p-4 border-b">
+                    <h1 class="text-2xl font-bold text-gray-900">Will Mulholland</h1>
+                    <button class="text-gray-800 focus:outline-none close-menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="p-4">
+                    <nav class="flex flex-col space-y-4">
+                        <a href="#insight" class="text-xl font-medium text-gray-800 hover:text-blue-500 py-2">The Insight</a>
+                        <a href="#proof" class="text-xl font-medium text-gray-800 hover:text-blue-500 py-2">Proof</a>
+                        <a href="#who-this-is-for" class="text-xl font-medium text-gray-800 hover:text-blue-500 py-2">Who This Is For</a>
+                        <a href="#intelligent-growth" class="text-xl font-medium text-gray-800 hover:text-blue-500 py-2">Intelligent Growth</a>
+                        <a href="#about" class="text-xl font-medium text-gray-800 hover:text-blue-500 py-2">About</a>
+                        <a href="#contact" class="text-xl font-medium text-gray-800 hover:text-blue-500 py-2">Contact</a>
+                    </nav>
+                    <div class="mt-8">
+                        <a href="#contact" class="btn-primary block text-center px-6 py-3 rounded-full text-white font-bold shadow-lg">Schedule Call</a>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+            
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+            });
+            
+            mobileMenu.querySelector('.close-menu').addEventListener('click', () => {
+                mobileMenu.classList.add('translate-x-full');
+            });
+            
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('translate-x-full');
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Sticky header color change on scroll
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    header.classList.add('shadow-md');
+                } else {
+                    header.classList.remove('shadow-md');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
