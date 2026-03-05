@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Samples | Will Mulholland</title>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-dark: #0A0A0A;
+            --gray-mid: #525252;
+            --gray-light: #737373;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(1200px 500px at 20% -10%, rgba(37,99,235,0.08), transparent 60%), var(--white);
+            color: var(--black);
+            overflow-x: hidden;
+            line-height: 1.5;
+            letter-spacing: -0.02em;
+        }
+
+        ::selection { background: var(--accent); color: var(--white); }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 24px 48px;
+            display: flex; justify-content: space-between; align-items: center;
+            mix-blend-mode: difference;
+        }
+
+        .nav-logo { font-size: 24px; font-weight: 700; letter-spacing: -0.05em; color: var(--white); text-decoration: none; text-transform: lowercase; }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a { font-size: 14px; font-weight: 500; color: var(--white); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: opacity 0.5s var(--ease-smooth); }
+        .nav-links a:hover { opacity: 0.6; }
+
+        .btn-primary { padding: 16px 32px; background: var(--black); color: var(--white); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; border: none; text-decoration: none; transition: all 0.5s var(--ease-smooth); display: inline-block; }
+        .btn-primary:hover { background: var(--accent); }
+
+        .section-tag { font-family: monospace; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-mid); margin-bottom: 48px; display: flex; align-items: center; gap: 12px; }
+        .section-tag::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+
+        /* Hero */
+        .work-hero { padding: 160px 48px 80px; max-width: 1400px; margin: 0 auto; position: relative; }
+        .work-hero::before { content: ''; position: absolute; width: 520px; height: 520px; border-radius: 999px; background: radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.06) 45%, transparent 70%); top: -260px; left: -120px; filter: blur(2px); pointer-events: none; }
+        .work-hero h1 { font-size: clamp(48px, 8vw, 120px); font-weight: 700; letter-spacing: -0.05em; line-height: 0.9; margin-bottom: 24px; }
+        .work-hero h1 .accent { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 70%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .work-hero p { font-size: clamp(18px, 2vw, 24px); color: var(--gray-mid); max-width: 700px; }
+
+        .work-stats { display: flex; gap: 48px; margin-top: 48px; padding-top: 48px; border-top: 1px solid rgba(0,0,0,0.1); flex-wrap: wrap; }
+        .work-stat-number { font-size: 48px; font-weight: 900; letter-spacing: -0.05em; color: var(--accent); }
+        .work-stat-label { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-light); margin-top: 4px; }
+
+        /* Projects container */
+        .projects-section { padding: 80px 48px; max-width: 1400px; margin: 0 auto; }
+
+        .company-pill { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 999px; font-weight: 600; display: inline-block; margin-bottom: 12px; }
+        .company-pill.blinq { background: #E0F2FE; color: #0369A1; }
+        .company-pill.ebay { background: #FEF3C7; color: #92400E; }
+        .company-pill.ogilvy { background: #FEE2E2; color: #991B1B; }
+        .company-pill.ig { background: #E0E7FF; color: #3730A3; }
+
+        /* Project cards */
+        .project-card { border: 1px solid rgba(0,0,0,0.1); border-radius: 16px; margin-bottom: 24px; overflow: hidden; transition: border-color 0.5s var(--ease-smooth); cursor: pointer; }
+        .project-card:hover { border-color: rgba(37,99,235,0.3); }
+
+        .project-header { padding: 32px; display: flex; justify-content: space-between; align-items: flex-start; }
+        .project-header-content { flex: 1; }
+
+        .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+        .project-tag { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 999px; font-weight: 600; }
+        .project-tag.blue { background: var(--accent-soft); color: var(--accent-deep); }
+        .project-tag.dark { background: var(--gray-dark); color: var(--white); }
+        .project-tag.outline { border: 1px solid rgba(0,0,0,0.15); color: var(--gray-mid); }
+
+        .project-title { font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 8px; }
+        .project-summary { font-size: 16px; color: var(--gray-mid); line-height: 1.6; max-width: 700px; }
+
+        .project-toggle { width: 48px; height: 48px; border: 1px solid rgba(0,0,0,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-left: 24px; transition: all 0.5s var(--ease-smooth); font-size: 18px; }
+        .project-card:hover .project-toggle { border-color: var(--accent); color: var(--accent); }
+        .project-card.active .project-toggle { background: var(--accent); border-color: var(--accent); color: var(--white); transform: rotate(180deg); }
+
+        .project-details { max-height: 0; overflow: hidden; transition: max-height 0.6s var(--ease-smooth); }
+        .project-card.active .project-details { max-height: 6000px; }
+
+        .project-body { padding: 0 32px 32px; border-top: 1px solid rgba(0,0,0,0.06); }
+        .project-body h4 { font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 32px; margin-bottom: 16px; }
+        .project-body ul { list-style: none; padding: 0; }
+        .project-body ul li { display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; font-size: 15px; color: var(--gray-mid); line-height: 1.6; }
+        .project-body ul li::before { content: '\2192'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+        .project-body p { font-size: 15px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 8px; }
+        .project-body p strong { color: var(--black); }
+
+        .metrics-row { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 16px; }
+        .metric-card { background: var(--gray-dark); color: var(--white); padding: 24px; border-radius: 12px; min-width: 140px; flex: 1; text-align: center; }
+        .metric-value { font-size: 28px; font-weight: 900; letter-spacing: -0.03em; color: var(--accent); }
+        .metric-label { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); margin-top: 4px; }
+
+        .project-quote { border-left: 3px solid var(--accent); padding: 16px 24px; margin-top: 24px; background: rgba(37,99,235,0.04); border-radius: 0 12px 12px 0; }
+        .project-quote p { font-style: italic; color: var(--gray-mid); font-size: 15px; line-height: 1.6; }
+        .project-quote .quote-source { font-style: normal; font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); margin-top: 8px; margin-bottom: 0; }
+
+        .evidence-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+        .evidence-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--gray-mid); text-decoration: none; transition: all 0.3s var(--ease-smooth); }
+        .evidence-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+        .deliverables { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+        .deliverable { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; padding: 6px 14px; background: rgba(0,0,0,0.04); border-radius: 999px; color: var(--gray-mid); }
+
+        .section-divider { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+        .section-divider hr { border: none; border-top: 1px solid rgba(0,0,0,0.1); }
+
+        /* Video thumbnail */
+        .video-thumbnail { margin-top: 24px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08); position: relative; cursor: pointer; }
+        .video-thumbnail img { width: 100%; height: auto; display: block; }
+        .video-thumbnail .play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.25); transition: background 0.3s var(--ease-smooth); }
+        .video-thumbnail:hover .play-overlay { background: rgba(0,0,0,0.4); }
+        .video-thumbnail .play-btn { width: 72px; height: 72px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.3s var(--ease-smooth); box-shadow: 0 4px 24px rgba(37,99,235,0.4); }
+        .video-thumbnail:hover .play-btn { transform: scale(1.1); }
+        .video-thumbnail .play-btn::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent var(--white); margin-left: 4px; }
+        .video-thumbnail-label { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); padding: 10px 16px; background: rgba(0,0,0,0.03); }
+        .video-embed { margin-top: 24px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08); }
+        .video-embed iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
+
+        /* How I Work */
+        .how-section { padding: 80px 48px; max-width: 1400px; margin: 0 auto; }
+        .how-card { background: linear-gradient(135deg, var(--gray-dark) 0%, #1a1a2e 100%); color: var(--white); padding: 64px; border-radius: 24px; }
+        .how-card h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 700; letter-spacing: -0.04em; margin-bottom: 24px; }
+        .how-card p { font-size: 18px; line-height: 1.7; opacity: 0.8; margin-bottom: 16px; max-width: 800px; }
+
+        .cta-strip { padding: 80px 48px; max-width: 1400px; margin: 0 auto; text-align: center; }
+        .cta-strip h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 700; letter-spacing: -0.04em; margin-bottom: 24px; }
+        .cta-assets { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 32px; }
+        .cta-asset { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; padding: 8px 16px; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px; color: var(--gray-mid); }
+
+        footer { background: var(--gray-dark); color: var(--white); padding: 120px 48px 48px; }
+        .footer-main { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 64px; flex-wrap: wrap; }
+        .footer-cta h2 { font-size: clamp(64px, 15vw, 200px); font-weight: 900; letter-spacing: -0.05em; line-height: 0.85; margin-bottom: 48px; }
+        .footer-cta a { font-size: 32px; font-weight: 600; color: var(--white); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
+        .footer-cta a:hover { color: var(--accent); }
+        .footer-cta p { font-size: 16px; color: var(--gray-light); margin-top: 16px; }
+        .footer-cta .btn-primary { margin-top: 32px; }
+        .footer-social { display: flex; gap: 16px; }
+        .footer-social a { width: 56px; height: 56px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--white); text-decoration: none; transition: all 0.5s var(--ease-smooth); }
+        .footer-social a:hover { background: var(--white); color: var(--black); transform: translateY(-8px); }
+        .footer-bottom { max-width: 1400px; margin: 120px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-light); }
+        .footer-links { display: flex; gap: 32px; }
+        .footer-links a { color: var(--gray-light); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
+        .footer-links a:hover { color: var(--white); }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .work-hero { padding: 120px 24px 60px; }
+            .projects-section { padding: 60px 24px; }
+            .how-section { padding: 60px 24px; }
+            .cta-strip { padding: 60px 24px; }
+            .section-divider { padding: 0 24px; }
+            .project-header { padding: 24px; flex-direction: column; }
+            .project-body { padding: 0 24px 24px; }
+            .how-card { padding: 40px 24px; }
+            footer { padding: 80px 24px 32px; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+            .footer-links { justify-content: center; }
+            .work-stats { gap: 24px; }
+            .project-toggle { width: 40px; height: 40px; margin-left: 0; margin-top: 16px; }
+            .metrics-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="nav-logo">wm</a>
+        <div class="nav-links">
+            <a href="index.html#insight">Insight</a>
+            <a href="index.html#proof">Proof</a>
+            <a href="podcast-charlotte-norman.html">Intelligent Growth</a>
+            <a href="work.html" style="opacity:0.6;">Work</a>
+            <a href="index.html#newsletter">Newsletter</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="work-hero">
+        <div class="section-tag"><span>Portfolio</span></div>
+        <h1>Work <span class="accent">Samples</span></h1>
+        <p>GTM strategy, product launches, campaign development, and sales enablement across B2B and B2C. Ordered by impact.</p>
+        <div class="work-stats">
+            <div><div class="work-stat-number">$180M+</div><div class="work-stat-label">Revenue Impact</div></div>
+            <div><div class="work-stat-number">460M</div><div class="work-stat-label">Campaign Impressions</div></div>
+            <div><div class="work-stat-number">8</div><div class="work-stat-label">Years PMM</div></div>
+            <div><div class="work-stat-number">5</div><div class="work-stat-label">Companies</div></div>
+        </div>
+    </section>
+
+    <div class="section-divider"><hr></div>
+
+    <!-- All projects ordered by impact -->
+    <div class="projects-section">
+
+        <!-- 1. eBay PLA Launch -->
+        <div class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <span class="company-pill ebay">eBay Ads &middot; PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag blue">GTM Strategy</span>
+                        <span class="project-tag dark">Product Launch</span>
+                    </div>
+                    <h3 class="project-title">GTM Strategy &amp; Launch: From Beta to $180M in Annual Revenue</h3>
+                    <p class="project-summary">How do you launch unproven ad tech to skeptical enterprise buyers and drive global adoption? I led the launch of eBay's Promoted Listings Advanced from beta to core revenue driver, attracting 2,500+ brands and contributing to eBay's $1B ads milestone.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <div class="video-thumbnail" onclick="event.stopPropagation(); playVideo(this, 'https://share.descript.com/embed/cMfYBwmlNGo')">
+                        <img src="images/ebay-pla-presentation.png" alt="eBay PLA Differentiation slide showing product positioning">
+                        <div class="play-overlay"><div class="play-btn"></div></div>
+                        <div class="video-thumbnail-label">Watch presentation recording</div>
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>I led the launch of Promoted Listings Advanced, a new advertising product targeting larger eBay sellers and brands. Five products, 2,500+ active brands, $300M+ collective revenue across the ads portfolio.</p>
+
+                    <h4>Process</h4>
+                    <ul>
+                        <li><strong>Research:</strong> Conducted 20+ in-depth seller interviews and analysed competitor offerings to understand the market landscape</li>
+                        <li><strong>Positioning:</strong> Developed "Get more sales" messaging, resulting in an 87% increase in click-through rates</li>
+                        <li><strong>Product Collaboration:</strong> Worked with the product team to prioritise features based on seller feedback</li>
+                        <li><strong>Beta Testing:</strong> Recruited key brands like Dyson and Nespresso, incorporating their feedback into the final product</li>
+                        <li><strong>Sales Enablement:</strong> Created an education platform, webinars, and sales materials for the GTM team</li>
+                        <li><strong>Global Rollout:</strong> Supported teams worldwide in adapting the launch strategy to local markets across APAC, US, and EU</li>
+                    </ul>
+
+                    <h4>Challenges and Solutions</h4>
+                    <ul>
+                        <li><strong>Complex product features:</strong> Developed a tiered education approach, from basic to advanced, to onboard sellers at their own level</li>
+                        <li><strong>Seller skepticism:</strong> Leveraged early adopter success stories and data-driven ROI projections to build trust</li>
+                        <li><strong>Global coordination:</strong> Established regular cross-regional syncs and a shared resource hub so every market could launch with local relevance</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <div class="metrics-row">
+                        <div class="metric-card"><div class="metric-value">$180M</div><div class="metric-label">Annual Revenue</div></div>
+                        <div class="metric-card"><div class="metric-value">2,500+</div><div class="metric-label">Brands Year One</div></div>
+                        <div class="metric-card"><div class="metric-value">286%</div><div class="metric-label">YoY Growth</div></div>
+                    </div>
+
+                    <div class="project-quote">
+                        <p>"That launch exemplified our ability to work without global support, communicating new tools to the market and reeducating sellers on complex concepts. The product evolved rapidly, expanding from just the top spot of search to the whole first page and in-listing pages. This constant evolution required ongoing education of our seller base, adapting our messaging and support as the product grew and changed."</p>
+                        <p class="quote-source">Senior Product Marketing Manager, eBay</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. KFC Secret Menu -->
+        <div class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <span class="company-pill ogilvy">Ogilvy &middot; KFC Australia</span>
+                    <div class="project-tags">
+                        <span class="project-tag dark">Viral Campaign</span>
+                        <span class="project-tag blue">Product Discovery</span>
+                    </div>
+                    <h3 class="project-title">Viral Product Discovery: 460M Impressions With Zero Marketing Spend</h3>
+                    <p class="project-summary">KFC's mobile app had 20% retention with zero marketing budget to fix it. I turned staff menu hacks into a hidden discovery feature that required holding the app logo for 11 seconds to unlock. Users created 1,000+ tutorials teaching each other how to find it.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <div class="video-thumbnail" onclick="event.stopPropagation(); playVideo(this, 'https://www.youtube.com/embed/WWdE8BOw8L0')">
+                        <img src="images/kfc-secret-menu-presentation.png" alt="KFC Secret Menu campaign case study">
+                        <div class="play-overlay"><div class="play-btn"></div></div>
+                        <div class="video-thumbnail-label">Watch campaign case study</div>
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>At Ogilvy for KFC Australia, the mobile app had 20% retention. Users downloaded for discounts then deleted immediately. Zero marketing budget to fix it. I discovered frontline staff creating unofficial menu items internally (like "Beese Churger," "Nug-a-Lot"). The creative team proposed hiding these behind an 11-second logo hold tied to "11 herbs and spices."</p>
+
+                    <h4>What I Did</h4>
+                    <ul>
+                        <li>Coordinated the campaign execution and wrote the discovery seeding strategy</li>
+                        <li>Wrote cryptic hints buried in app T&Cs: "Secret Menu available for those who know where to look"</li>
+                        <li>Created the breadcrumb trail across channels: edited 6-month-old YouTube comments with vague clues, coordinated hiding hints in email footers and split-second digital billboard frames</li>
+                        <li>Worked with product team on the unlock flow and interface copy</li>
+                        <li>Briefed photographers on menu item styling to look exclusive and shareworthy</li>
+                        <li>Designed the measurement approach tracking social mentions and app session patterns</li>
+                    </ul>
+
+                    <h4>Challenges and Solutions</h4>
+                    <ul>
+                        <li><strong>Staff weren't app advocates:</strong> Made them co-creators by featuring their menu hacks. Staff became natural promoters showing customers their creations</li>
+                        <li><strong>Zero budget for paid discovery:</strong> Treasure hunt mechanics made early users feel like insiders who wanted to teach friends, creating organic tutorial content</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <div class="metrics-row">
+                        <div class="metric-card"><div class="metric-value">61%</div><div class="metric-label">Retention (9+ months)</div></div>
+                        <div class="metric-card"><div class="metric-value">$1.1M</div><div class="metric-label">Revenue, 6 Weeks</div></div>
+                        <div class="metric-card"><div class="metric-value">460M+</div><div class="metric-label">Organic Impressions</div></div>
+                        <div class="metric-card"><div class="metric-value">111%</div><div class="metric-label">Download Increase</div></div>
+                    </div>
+                    <p style="margin-top:12px;"><strong>67% of Secret Menu orders</strong> included additional full-price items. <strong>$0 media spend.</strong></p>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. eBay ChannelAdvisor -->
+        <div class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <span class="company-pill ebay">eBay Ads &middot; PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag blue">Partnerships</span>
+                        <span class="project-tag outline">Campaign</span>
+                    </div>
+                    <h3 class="project-title">Strategic Partnership Adoption: 132x Budget Increase and $250K Revenue From One Webinar</h3>
+                    <p class="project-summary">How do you rescue a struggling enterprise integration and drive adoption among 2,000+ potential users? One strategic webinar with ChannelAdvisor drove 50% adoption and $250K in attributed revenue.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <div class="video-thumbnail" onclick="event.stopPropagation(); playVideo(this, 'https://share.descript.com/embed/xCl12F8biX6?t=331')">
+                        <img src="images/channeladvisor-webinar-presentation.png" alt="ChannelAdvisor webinar: Reach More Buyers with eBay Promoted Listings Advanced">
+                        <div class="play-overlay"><div class="play-btn"></div></div>
+                        <div class="video-thumbnail-label">Watch webinar recording</div>
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>I led a collaborative webinar with ChannelAdvisor to drive adoption of our Promoted Listings product through their new API integration. Despite having a robust API integration, adoption and revenue among sellers was unexpectedly low.</p>
+
+                    <h4>Key Challenges</h4>
+                    <ul>
+                        <li>Low awareness of the API integration among 2,000+ sellers on ChannelAdvisor's platform</li>
+                        <li>Complexity and early stages of the Promoted Listings Advanced product</li>
+                        <li>Engaging a diverse audience across various industries</li>
+                        <li>Balancing technical details with practical insights</li>
+                    </ul>
+
+                    <h4>Development Process</h4>
+                    <ul>
+                        <li>Collaborated with ChannelAdvisor to understand their platform and user base</li>
+                        <li>Worked with product managers to ensure accurate feature representation</li>
+                        <li>Spoke to sales team to ensure content addressed common seller objections</li>
+                        <li>Analysed API usage data with SQL queries and seller pain points to inform content</li>
+                        <li>Worked with global legal and Investor Relations to get script and content approved</li>
+                        <li>Set clear goals for API adoption, budget increases, and revenue growth</li>
+                    </ul>
+
+                    <h4>Webinar Content</h4>
+                    <ul>
+                        <li>Introduced Promoted Listings using real seller success stories</li>
+                        <li>Explained the API integration, breaking down technical concepts for a non-technical audience</li>
+                        <li>Performed a live demonstration of campaign setup within ChannelAdvisor</li>
+                        <li>Presented performance metrics and reporting capabilities</li>
+                        <li>Shared industry-specific use cases and best practices</li>
+                        <li>Conducted a Q&A session addressing seller concerns (30+ questions)</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <div class="metrics-row">
+                        <div class="metric-card"><div class="metric-value">132x</div><div class="metric-label">Budget Increase</div></div>
+                        <div class="metric-card"><div class="metric-value">$250K</div><div class="metric-label">Attributed Revenue</div></div>
+                        <div class="metric-card"><div class="metric-value">50%</div><div class="metric-label">Adoption in 1 Year</div></div>
+                        <div class="metric-card"><div class="metric-value">133</div><div class="metric-label">Attendees</div></div>
+                    </div>
+                    <p style="margin-top:12px;">Strengthened partnership leading to more joint initiatives including a newsletter.</p>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Blinq GTM Diagnostic -->
+        <div class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <span class="company-pill blinq">Blinq &middot; Senior PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag blue">GTM Strategy</span>
+                        <span class="project-tag outline">Research</span>
+                        <span class="project-tag outline">Sales Enablement</span>
+                    </div>
+                    <h3 class="project-title">GTM From Scratch: Diagnosing an 81% Activation Gap and Rebuilding the Go-to-Market</h3>
+                    <p class="project-summary">Blinq's event lead capture product had 1,715 workspaces but 81% had zero credit usage. No onboarding, no documentation, no structured handoff from sales. I ran a full diagnostic and built the GTM plan that became the company's #1 priority.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <h4>Overview</h4>
+                    <p>Blinq had shipped a full event lead capture product (scanner + AI enrichment + CRM sync + campaigns) but had no go-to-market motion behind it. I pulled the usage spreadsheet (2,238 rows, 1,715 workspaces) and mapped the actual distribution. Then ran 10+ stakeholder interviews across sales, customer success, and growth.</p>
+
+                    <h4>My Role</h4>
+                    <p>Before writing a single asset, I ran the diagnostic:</p>
+                    <ul>
+                        <li>Pulled and analysed full usage data: 81% of workspaces had zero credit activity, zero workspaces hit the paid tier</li>
+                        <li>Interviewed 10+ stakeholders across sales, CS, and growth to validate what the data showed</li>
+                        <li>Discovered the real competitor wasn't Popl or Mobly (SaaS tools). It was the badge scanner included with every conference. 95% of event floors use them</li>
+                        <li>Identified that every closed deal was a tac-on to an existing account. No standalone demand existed</li>
+                        <li>Reframed the ICP from "event managers" to teams running 10+ events/year without a dedicated solution</li>
+                    </ul>
+
+                    <p style="margin-top:16px;">Built an 8-initiative GTM plan sequenced by what would unblock the most downstream:</p>
+                    <ul>
+                        <li>Structured onboarding flow to close the sale-to-activation gap</li>
+                        <li>"One consistent tool" value prop to counter the "we already have Cvent" objection</li>
+                        <li>Training materials so sales could actually demo the product (they couldn't before)</li>
+                        <li>New competitive battlecard with talk tracks built from Gong transcripts, G2, Capterra, and Reddit reviews</li>
+                    </ul>
+
+                    <h4>Challenges and Solutions</h4>
+                    <ul>
+                        <li><strong>The "Event" framing was limiting.</strong> Customers connected it to conferences only. Repositioned around the 100-200 person regional event as the entry wedge (no badge provider, no hardware, Blinq wins on simplicity)</li>
+                        <li><strong>Zero standalone demand.</strong> Shifted entire GTM from demand gen to activation-first. If solved, 1,715 workspaces become 1,715 trials with 10% conversion = 140+ pipeline deals</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <div class="metrics-row">
+                        <div class="metric-card"><div class="metric-value">P0</div><div class="metric-label">Company Priority</div></div>
+                        <div class="metric-card"><div class="metric-value">8</div><div class="metric-label">Initiatives in Sprint</div></div>
+                        <div class="metric-card"><div class="metric-value">v3</div><div class="metric-label">Battlecard Shipped</div></div>
+                    </div>
+
+                    <h4>Delivered</h4>
+                    <div class="deliverables">
+                        <span class="deliverable">GTM strategy doc</span>
+                        <span class="deliverable">Webpage copy (live)</span>
+                        <span class="deliverable">4-variant email series</span>
+                        <span class="deliverable">Sales 2-pager (4 versions)</span>
+                        <span class="deliverable">Competitive battlecard</span>
+                        <span class="deliverable">Onboarding flow copy</span>
+                        <span class="deliverable">8 LinkedIn hooks</span>
+                    </div>
+
+                    <h4>Evidence</h4>
+                    <div class="evidence-row">
+                        <a href="https://www.linkedin.com/posts/blinq-me_today-were-launching-event-lead-capture-activity-7426746740030119936-D6HO" target="_blank" class="evidence-link" onclick="event.stopPropagation()">Li ELC Launch Post</a>
+                        <a href="https://www.linkedin.com/posts/jasonkhood_eventmarketing-leadgeneration-b2bmarketing-ugcPost-7432537523127668736-wniF" target="_blank" class="evidence-link" onclick="event.stopPropagation()">Li Customer Advocacy</a>
+                        <a href="campaigns/elc/engaged-va.html" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Launch Email (Engaged)</a>
+                        <a href="campaigns/elc/free-users-va.html" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Launch Email (Free Users)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. Blinq AI Notetaker Launch -->
+        <div class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <span class="company-pill blinq">Blinq &middot; Senior PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag dark">Product Launch</span>
+                        <span class="project-tag blue">Content</span>
+                        <span class="project-tag outline">Email</span>
+                    </div>
+                    <h3 class="project-title">AI Notetaker Launch: End-to-End Product Launch With a Consent Challenge</h3>
+                    <p class="project-summary">Blinq's AI Notetaker records in-person conversations and saves notes to contacts. Useful for sales reps and networkers, but immediately triggers legal concerns. I ran the full launch: CEO briefing, blog, segmented email campaigns, and paid content strategy.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <h4>Overview</h4>
+                    <p>The AI Notetaker needed a launch that was honest about what it does and who it's for, without killing the message. The story needed to come from the person who built it. The consent narrative wasn't part of the initial plan, but it needed to be front and centre.</p>
+
+                    <h4>What I Did</h4>
+                    <ul>
+                        <li>Ran a briefing session with the CEO to capture his real perspectives: why we built it, the problem with networking today, the relationship context gap</li>
+                        <li>Distilled those into talking points he could own (not a script he'd read) for all launch comms</li>
+                        <li>Wrote the launch blog post independently: long-form, explains the product in plain language, addresses consent head-on, frames it as relationship intelligence rather than a recording tool</li>
+                        <li>Wrote and shipped segmented email campaigns across free users and premium users with A/B variants</li>
+                        <li>Identified that AI product ads deliver 2x the return of core product on Meta, initiating a 100-video UGC content program with an external agency</li>
+                    </ul>
+
+                    <h4>Challenges and Solutions</h4>
+                    <ul>
+                        <li><strong>Consent/legal narrative wasn't part of the initial launch plan:</strong> Addressed it head-on in the blog post and briefed the CEO to acknowledge it directly in all comms. Made it part of the product story, not an afterthought</li>
+                        <li><strong>Single launch wouldn't scale for paid channels:</strong> Procured UGC agency and initiated 100-video content program after identifying AI product ads deliver 2x the return of core product on Meta</li>
+                    </ul>
+
+                    <h4>Delivered</h4>
+                    <div class="deliverables">
+                        <span class="deliverable">Blog post (live)</span>
+                        <span class="deliverable">CEO briefing doc</span>
+                        <span class="deliverable">Segmented email campaigns</span>
+                        <span class="deliverable">UGC agency brief</span>
+                        <span class="deliverable">Paid content strategy</span>
+                    </div>
+
+                    <h4>Evidence</h4>
+                    <div class="evidence-row">
+                        <a href="https://blinq.me/blog/meet-blinq-ai-notetaker" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Blog Post (Live)</a>
+                        <a href="campaigns/notetaker/free-users-v1a1.html" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Launch Email (Free Users)</a>
+                        <a href="campaigns/notetaker/premium-engaged-va.html" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Launch Email (Premium)</a>
+                        <a href="campaigns/notetaker/survey-021225.html" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Survey Email</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. Blinq Campaigns Launch -->
+        <div class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <span class="company-pill blinq">Blinq &middot; Senior PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag blue">Product Launch</span>
+                        <span class="project-tag outline">Messaging</span>
+                    </div>
+                    <h3 class="project-title">Campaigns Feature Launch: Solving a Category Clarity Problem Before Writing a Single Asset</h3>
+                    <p class="project-summary">Nobody could explain what "Campaigns" did. Not sales, not product, not even a B2B SaaS competitor who tested it. I built the messaging house first, then launched with video, EDM, LinkedIn, and a sales one-pager off one messaging spine.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <h4>Overview</h4>
+                    <p>Campaigns shipped to public beta but the content team was blocked on the video script and sales needed a one-pager. The real problem: no one could clearly explain what the product did. Feedback from a competitor: "I never understood what campaigns is." This was a messaging problem before it was a content problem.</p>
+
+                    <h4>What I Did</h4>
+                    <ul>
+                        <li>Built the messaging house before touching any asset: WHO (champion + company type), WHAT (product category + use case), WHY (problem with current way), HOW (capability + feature), SO THAT (benefit)</li>
+                        <li>Created three value prop canvases for three distinct use cases</li>
+                        <li>Wrote punch-up copy for headlines and CTAs</li>
+                        <li>Briefed the video editor with a 5-beat structure matching the app's actual flow</li>
+                        <li>Wrote EDM and LinkedIn copy off the same messaging spine</li>
+                        <li>Built the sales one-pager for the enterprise team</li>
+                    </ul>
+
+                    <h4>Challenges and Solutions</h4>
+                    <ul>
+                        <li><strong>Internal confusion about what the product even does:</strong> Started with messaging discipline (WHO/WHAT/WHY/HOW/SO THAT) before any creative work</li>
+                        <li><strong>Key objection: "We already have campaigns in Salesforce":</strong> Developed response frame: "Blinq does the data cleanup upfront so your Salesforce campaigns actually work"</li>
+                    </ul>
+
+                    <h4>Delivered</h4>
+                    <div class="deliverables">
+                        <span class="deliverable">Messaging house</span>
+                        <span class="deliverable">Value prop canvases (x3)</span>
+                        <span class="deliverable">Video brief (5 beats)</span>
+                        <span class="deliverable">EDM copy</span>
+                        <span class="deliverable">LinkedIn post</span>
+                        <span class="deliverable">Sales one-pager</span>
+                    </div>
+
+                    <h4>Evidence</h4>
+                    <div class="evidence-row">
+                        <a href="https://www.linkedin.com/posts/blinq-me_you-capture-leads-at-a-conference-weeks-activity-7427833886757339136-1Fc5" target="_blank" class="evidence-link" onclick="event.stopPropagation()">Li Campaigns Video Post</a>
+                        <a href="https://www.linkedin.com/feed/update/urn:li:activity:7427502791428022272/" target="_blank" class="evidence-link" onclick="event.stopPropagation()">Li CEO Repost</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. Rephonic -->
+        <div class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <span class="company-pill ig">Intelligent Growth &middot; Consultant</span>
+                    <div class="project-tags">
+                        <span class="project-tag blue">PLG Growth</span>
+                        <span class="project-tag outline">Positioning</span>
+                    </div>
+                    <h3 class="project-title">PLG Growth &amp; Conversion: From 500 Users to $1.2M ARR</h3>
+                    <p class="project-summary">You're the first marketing hire at a SaaS startup with a complex product, unclear positioning, and 500 users. How do you find product-market fit and drive 300%+ growth?</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <h4>Overview</h4>
+                    <p>Tasked with figuring out positioning and driving growth for Rephonic, a podcast analytics platform. Complex product with numerous features, diverse target audience, unclear messaging, limited budget, and a 5% trial-to-paid conversion rate.</p>
+
+                    <h4>Development Process</h4>
+                    <ul>
+                        <li><strong>Research &amp; Positioning:</strong> Conducted 30 user interviews to understand workflows, pain points, and value perception. Identified that technical, feature-focused messaging wasn't resonating</li>
+                        <li><strong>Messaging Pivot:</strong> Simplified the core message to: "Find the right podcasts to be featured on." A/B tested messaging, achieving a 37% lift in landing page CTR</li>
+                        <li><strong>Activation (PLG Tactics):</strong> Shifted from limited freemium to free trial. Implemented 7-email onboarding sequence with 45% open rates. Created in-app tooltips reducing time-to-first-value from 12 days to 18 hours</li>
+                        <li><strong>Retention &amp; Engagement:</strong> Launched weekly email digest with personalised podcast recommendations (increased WAU 40%). Built knowledge base to reduce support load</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <div class="metrics-row">
+                        <div class="metric-card"><div class="metric-value">300%+</div><div class="metric-label">User Growth</div></div>
+                        <div class="metric-card"><div class="metric-value">$1.2M</div><div class="metric-label">ARR</div></div>
+                        <div class="metric-card"><div class="metric-value">5%&rarr;12%</div><div class="metric-label">Trial Conversion</div></div>
+                        <div class="metric-card"><div class="metric-value">49%</div><div class="metric-label">CAC Reduction</div></div>
+                    </div>
+                    <p style="margin-top:12px;">Improved 3-month retention from 60% to 75%. Grew from 500 to 2,000 active users.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. eBay Sales Enablement -->
+        <div class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <span class="company-pill ebay">eBay Ads &middot; PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag blue">Sales Enablement</span>
+                        <span class="project-tag outline">Cross-Functional</span>
+                    </div>
+                    <h3 class="project-title">B2B Sales Enablement: Enabling a 67% Smaller Team to Sell Complex Ad Tech</h3>
+                    <p class="project-summary">How do you enable a 67% smaller sales team to effectively communicate evolving ad tech to sceptical enterprise buyers? Built systematic enablement that drove deeper customer conversations.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <h4>Overview</h4>
+                    <p>I developed a modular deck to help our GTM team communicate our advertising products to diverse sellers. This was crucial after our sales team was reduced from 18 to 6 members, including 4 new hires unfamiliar with our products.</p>
+
+                    <h4>Development Process</h4>
+                    <ul>
+                        <li>Collaborated with product team on weekly syncs to track 15+ feature updates per quarter</li>
+                        <li>Worked with marketing to craft messaging, A/B testing key phrases with 200+ sellers before finalising positioning</li>
+                        <li>Shadowed 25+ sales calls to identify top 5 objection patterns and co-create response strategies</li>
+                        <li>Partnered with analytics to develop key stats and performance benchmarks</li>
+                        <li>Engaged customer success to identify and develop industry-specific case studies</li>
+                    </ul>
+
+                    <h4>Deck Structure</h4>
+                    <ul>
+                        <li>100 slides with modular design for easy customisation</li>
+                        <li>Sections: Full Ads Proposition, Product Details, Customer Journey Modules, Industry Use Cases, Competitive Positioning, Optimisation Guidance</li>
+                        <li>Tailored content for 4 key industries: electronics, fashion, home &amp; garden, and parts &amp; accessories</li>
+                    </ul>
+
+                    <h4>Challenges and Solutions</h4>
+                    <ul>
+                        <li><strong>Rapidly evolving products:</strong> Implemented monthly review cycle with product team</li>
+                        <li><strong>Diverse seller needs:</strong> Created industry-specific modules, case studies, and benchmarks</li>
+                        <li><strong>New team members:</strong> Developed onboarding section with key product information</li>
+                        <li><strong>Explaining tool usage:</strong> Included guidance on when to use different advertising products</li>
+                        <li><strong>Addressing margin concerns:</strong> Incorporated industry-specific benchmarks and key stats</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <ul>
+                        <li>Sparked more in-depth conversations with sellers at events like RetailFest</li>
+                        <li>Enabled sales team to quickly prepare for client meetings and presentations</li>
+                        <li>Supported new team members in understanding and communicating product value</li>
+                        <li>Served as the foundation for a global sales enablement program</li>
+                    </ul>
+                    <p style="margin-top:8px;font-size:13px;color:var(--gray-light);font-style:italic;">(Slides unavailable due to eBay's privacy restrictions)</p>
+
+                    <div class="project-quote">
+                        <p>"Having all the information in one place made my job easier. I still go back and use those documents from time to time. The content we created for RetailFest led to more one-on-one sessions with sellers. It sparked their interest and gave them a reason to ask more in-depth questions."</p>
+                        <p class="quote-source">Sales Team Member, eBay</p>
+                    </div>
+                    <div class="project-quote" style="margin-top:12px;">
+                        <p>"Will was responsible for all sales enablement content for the local team, which was critical to their success. The case studies were particularly impressive, involving a complex process of data collection, seller participation, testimonial gathering, and legal approval. Since new product features were often tested and launched in Australia first, Will had to manage creating the first iterations of that content globally."</p>
+                        <p class="quote-source">Senior Product Marketing Manager, eBay</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. eBay Product Feedback -->
+        <div class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <span class="company-pill ebay">eBay Ads &middot; PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag outline">Product Collaboration</span>
+                        <span class="project-tag outline">Cross-Functional</span>
+                    </div>
+                    <h3 class="project-title">Product Collaboration: Feedback System That Influenced 20+ Product Features</h3>
+                    <p class="project-summary">How do you ensure customer insights reach global product teams and drive roadmap decisions? I created the APAC Ads Feedback Newsletter bridging local sellers and global product teams.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <h4>Overview</h4>
+                    <p>I created and managed a monthly APAC Ads Feedback Newsletter to bridge the gap between APAC sellers and global product teams, ensuring valuable insights were effectively communicated and acted upon.</p>
+
+                    <h4>Process</h4>
+                    <ul>
+                        <li>Collaborated with the Senior Director and GM of Ads to define feedback collection topics</li>
+                        <li>Gathered feedback from seller conversations, community forums, seller advisory panels, sales team interactions, and surveys</li>
+                        <li>Worked with regional sales leaders to identify key trends and priorities</li>
+                        <li>Partnered with product team managers to ensure feedback aligned with development cycles</li>
+                        <li>Partnered with data analysts to present performance metrics in actionable formats</li>
+                    </ul>
+
+                    <h4>Impact</h4>
+                    <ul>
+                        <li>Directly influenced the product roadmap, leading to <strong>20+ new features</strong> including Quick Setup for automating campaign creation and a Campaign Details Page Dashboard</li>
+                        <li>Received comments from product and senior leadership including the <strong>VP Global Advertising at eBay</strong></li>
+                        <li>Increased APAC's involvement in global product meetings and decision-making</li>
+                        <li>Improved cross-regional collaboration between product marketing and product development</li>
+                    </ul>
+
+                    <div class="project-quote">
+                        <p>"The feedback process Will set up through the newsletter helped us get alignment on what we were working on. It was helpful from a product standpoint to get a pulse on user feedback because it gave us a more comprehensive view of what was going on with users. It was valuable because it confirmed hypotheses we had, particularly around features like Quick Setup."</p>
+                        <p class="quote-source">Senior Product Manager, David Lyons, eBay</p>
+                    </div>
+                    <div class="project-quote" style="margin-top:12px;">
+                        <p>"The newsletter Will built was valuable for building relationships with leadership and product globally, putting our team on the map, and creating a structured feedback loop. It set the foundation for future product improvements."</p>
+                        <p class="quote-source">Senior Product Marketing Manager, eBay</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. NextDocs -->
+        <div class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <span class="company-pill ig">Intelligent Growth &middot; Co-Founder</span>
+                    <div class="project-tags">
+                        <span class="project-tag dark">Enterprise B2B</span>
+                        <span class="project-tag outline">Sales</span>
+                    </div>
+                    <h3 class="project-title">High-Friction Enterprise B2B: $30K Contract Through a 6-Month Compliance Sales Cycle</h3>
+                    <p class="project-summary">What does it take to secure enterprise contracts in conservative compliance environments? Built NextDocs for Malaysian ESG reporting and navigated procurement across 20+ public companies.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <h4>My Role &amp; Approach</h4>
+                    <p>Co-founder driving enterprise sales strategy and regulatory partnerships.</p>
+                    <ul>
+                        <li><strong>Market Discovery:</strong> Identified pain point through direct consulting with Malaysian enterprises struggling with new ESG reporting mandates</li>
+                        <li><strong>High-Friction Sales Environment:</strong> Navigated multi-stakeholder approval processes across finance teams (data ownership concerns), legal departments (AI liability questions), and sustainability officers (regulatory accuracy requirements)</li>
+                        <li><strong>Partnership Strategy:</strong> Built consultancy partnership model to access corporate decision-makers</li>
+                        <li><strong>Enterprise Contract Negotiation:</strong> Secured $30K development contract with Alliance Bank through 6-month sales cycle involving multiple stakeholder committees, legal reviews, and proof-of-concept demonstrations</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <div class="metrics-row">
+                        <div class="metric-card"><div class="metric-value">$30K</div><div class="metric-label">Enterprise Contract</div></div>
+                        <div class="metric-card"><div class="metric-value">20+</div><div class="metric-label">Public Companies</div></div>
+                        <div class="metric-card"><div class="metric-value">3</div><div class="metric-label">Partner Consultancies</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- How I Work -->
+    <div class="section-divider"><hr></div>
+
+    <div class="how-section">
+        <div class="how-card">
+            <h2>How I Work: AI-Augmented PMM</h2>
+            <p>I joined Blinq as a one-person PMM function. The only way to operate at the level the role requires was to build leverage into the system itself.</p>
+            <p>I built a custom AI assistant wired into my actual work context: calendar, Slack, email, meeting transcripts, and a semantic search index over 361,000 chunks across 2,600+ documents. Every morning I get a briefing with what shipped overnight, what meetings need prep, and what to focus on.</p>
+            <p>The enterprise page competitive research (15+ companies benchmarked), the ELC diagnostic (2,238-row usage analysis), the CEO video briefing: these didn't take as long as they look. One-person marketing function operating with team-level context.</p>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-strip">
+        <h2>Other Assets on Request</h2>
+        <div class="cta-assets">
+            <span class="cta-asset">Enterprise deck</span>
+            <span class="cta-asset">HubSpot marketplace listing</span>
+            <span class="cta-asset">Welcome email series</span>
+            <span class="cta-asset">Competitive battlecard</span>
+            <span class="cta-asset">AI Notetaker messaging house</span>
+            <span class="cta-asset">ELC launch email series</span>
+        </div>
+        <a href="mailto:wcmulholland@gmail.com" class="btn-primary">wcmulholland@gmail.com</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-main">
+            <div class="footer-cta">
+                <h2>LET'S TALK.</h2>
+                <a href="mailto:wcmulholland@gmail.com">wcmulholland@gmail.com</a>
+                <p>30-minute strategy session &bull; Free consultation &bull; No commitment required</p>
+                <a href="https://www.linkedin.com/in/willmulholland/" class="btn-primary">Book Your Strategy Call</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/willmulholland/" title="LinkedIn">Li</a>
+                <a href="https://www.youtube.com/@WillMulholland" title="YouTube">Yt</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Will Mulholland. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleProject(card) {
+            card.classList.toggle('active');
+        }
+
+        function playVideo(thumbnail, embedUrl) {
+            var container = document.createElement('div');
+            container.className = 'video-embed';
+            var iframe = document.createElement('iframe');
+            iframe.src = embedUrl + (embedUrl.includes('?') ? '&' : '?') + 'autoplay=1';
+            iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+            iframe.allowFullscreen = true;
+            container.appendChild(iframe);
+            thumbnail.parentNode.replaceChild(container, thumbnail);
+        }
+    </script>
+</body>
+</html>
