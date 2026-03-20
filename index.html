@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Will Mulholland | PLG to Team Revenue</title>
+    <meta name="description" content="I help B2B teams turn product-led growth into team-level revenue with sharper positioning, better GTM execution, and practical systems.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://willmulholland.com/">
+    <meta property="og:title" content="Will Mulholland | PLG to Team Revenue">
+    <meta property="og:description" content="Product marketing, positioning, and GTM systems for teams that want measurable growth.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://willmulholland.com/">
+    <meta property="og:image" content="https://willmulholland.com/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Will Mulholland | PLG to Team Revenue">
+    <meta name="twitter:description" content="Product marketing, positioning, and GTM systems for teams that want measurable growth.">
+    <meta name="twitter:image" content="https://willmulholland.com/og-image.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -41,11 +54,32 @@
             display: none !important;
         }
 
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--black);
+            border-radius: 50%;
+            background: var(--white);
+            mix-blend-mode: difference;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.15s var(--ease-smooth);
+        }
+
+        .cursor.hover {
+            transform: translate(-50%, -50%) scale(2.5);
+        }
+
+        /* Selection */
         ::selection {
             background: var(--accent);
             color: var(--white);
         }
 
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -87,6 +121,7 @@
             opacity: 0.6;
         }
 
+        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -197,6 +232,8 @@
             z-index: 2;
         }
 
+        /* hero-proof removed for cleaner layout */
+
         .hero-cta > * {
             animation: slideUp 1s var(--ease-smooth) forwards;
             animation-delay: 0.9s;
@@ -216,7 +253,9 @@
             transition: all 0.5s var(--ease-smooth);
         }
 
-        .btn-primary:hover { background: var(--accent); }
+        .btn-primary:hover {
+            background: var(--accent);
+        }
 
         .btn-secondary {
             padding: 16px 32px;
@@ -236,6 +275,7 @@
             color: var(--white);
         }
 
+        /* Marquee */
         .marquee-container {
             overflow: hidden;
             padding: 32px 0;
@@ -248,7 +288,9 @@
             animation: marquee 30s linear infinite;
         }
 
-        .marquee:hover { animation-play-state: paused; }
+        .marquee:hover {
+            animation-play-state: paused;
+        }
 
         .marquee-item {
             flex-shrink: 0;
@@ -266,6 +308,7 @@
             to { transform: translateX(-50%); }
         }
 
+        /* Sections */
         section {
             padding: 120px 48px;
             max-width: 1400px;
@@ -300,12 +343,19 @@
             margin-bottom: 64px;
         }
 
-        .section-title .muted { color: var(--gray-light); }
+        .section-title .muted {
+            color: var(--gray-light);
+        }
 
+        /* Insight Cards */
         .insight-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .insight-grid { grid-template-columns: 1fr; }
         }
 
         .insight-card {
@@ -321,10 +371,22 @@
             transition: transform 0.7s var(--ease-smooth);
         }
 
-        .insight-card:hover { transform: scale(1.02); }
-        .insight-card:nth-child(1) { border-radius: 100px 24px 24px 24px; }
-        .insight-card:nth-child(2) { background: var(--accent); border-radius: 24px 100px 24px 100px; }
-        .insight-card:nth-child(3) { border-radius: 24px 24px 100px 24px; }
+        .insight-card:hover {
+            transform: scale(1.02);
+        }
+
+        .insight-card:nth-child(1) {
+            border-radius: 100px 24px 24px 24px;
+        }
+
+        .insight-card:nth-child(2) {
+            background: var(--accent);
+            border-radius: 24px 100px 24px 100px;
+        }
+
+        .insight-card:nth-child(3) {
+            border-radius: 24px 24px 100px 24px;
+        }
 
         .insight-card-tag {
             font-family: monospace;
@@ -341,16 +403,34 @@
             margin-bottom: 16px;
         }
 
-        .insight-card p { font-size: 16px; line-height: 1.6; opacity: 0.8; }
+        .insight-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
 
+        /* Case Studies */
         .cases-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 64px 48px;
         }
 
-        .case-card { position: relative; }
-        .case-card:nth-child(even) { margin-top: 80px; }
+        @media (max-width: 800px) {
+            .cases-grid { grid-template-columns: 1fr; }
+        }
+
+        .case-card {
+            position: relative;
+        }
+
+        .case-card:nth-child(even) {
+            margin-top: 80px;
+        }
+
+        @media (max-width: 800px) {
+            .case-card:nth-child(even) { margin-top: 0; }
+        }
 
         .case-image {
             aspect-ratio: 4/3;
@@ -364,7 +444,9 @@
             transition: transform 0.7s var(--ease-smooth);
         }
 
-        .case-card:hover .case-image { transform: scale(1.02); }
+        .case-card:hover .case-image {
+            transform: scale(1.02);
+        }
 
         .case-number {
             font-size: clamp(48px, 10vw, 120px);
@@ -391,7 +473,12 @@
             align-items: flex-start;
         }
 
-        .case-title { font-size: 24px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 8px; }
+        .case-title {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
 
         .case-subtitle {
             font-family: monospace;
@@ -402,7 +489,12 @@
             margin-bottom: 16px;
         }
 
-        .case-desc { color: var(--gray-mid); font-size: 15px; line-height: 1.6; max-width: 400px; }
+        .case-desc {
+            color: var(--gray-mid);
+            font-size: 15px;
+            line-height: 1.6;
+            max-width: 400px;
+        }
 
         .case-arrow {
             width: 48px;
@@ -422,15 +514,27 @@
             color: var(--white);
         }
 
+        /* For You Section */
         .foryou-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 64px;
         }
 
-        .foryou-col h3 { font-size: 32px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 32px; }
+        @media (max-width: 800px) {
+            .foryou-grid { grid-template-columns: 1fr; }
+        }
 
-        .foryou-list { list-style: none; }
+        .foryou-col h3 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 32px;
+        }
+
+        .foryou-list {
+            list-style: none;
+        }
 
         .foryou-list li {
             display: flex;
@@ -442,7 +546,11 @@
             color: var(--gray-mid);
         }
 
-        .foryou-list li::before { content: '\2192'; color: var(--accent); font-weight: 700; }
+        .foryou-list li::before {
+            content: '→';
+            color: var(--accent);
+            font-weight: 700;
+        }
 
         .foryou-cta {
             margin-top: 64px;
@@ -452,9 +560,18 @@
             border-radius: 24px;
         }
 
-        .foryou-cta h3 { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
-        .foryou-cta p { font-size: 18px; opacity: 0.8; }
+        .foryou-cta h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
 
+        .foryou-cta p {
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        /* Newsletter */
         .newsletter {
             background: linear-gradient(180deg, #f8fbff 0%, #f3f7ff 100%);
             color: var(--black);
@@ -466,13 +583,37 @@
             box-shadow: 0 10px 24px rgba(37,99,235,0.08);
         }
 
-        .newsletter .section-tag::before { background: var(--accent); }
-        .newsletter .section-title { color: var(--black); font-size: clamp(34px, 5.2vw, 52px); margin-bottom: 16px; }
-        .newsletter .section-title .muted { color: var(--gray-mid); }
+        .newsletter .section-tag::before {
+            background: var(--accent);
+        }
 
-        .newsletter-desc { font-size: 16px; color: var(--gray-mid); max-width: 620px; margin: 0 auto 14px; }
+        .newsletter .section-title {
+            color: var(--black);
+            font-size: clamp(34px, 5.2vw, 52px);
+            margin-bottom: 16px;
+        }
 
-        .newsletter-form { display: flex; gap: 16px; max-width: 480px; margin: 0 auto; }
+        .newsletter .section-title .muted {
+            color: var(--gray-mid);
+        }
+
+        .newsletter-desc {
+            font-size: 16px;
+            color: var(--gray-mid);
+            max-width: 620px;
+            margin: 0 auto 14px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 16px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 600px) {
+            .newsletter-form { flex-direction: column; }
+        }
 
         .newsletter-form input {
             flex: 1;
@@ -485,8 +626,13 @@
             transition: border-color 0.3s var(--ease-smooth);
         }
 
-        .newsletter-form input::placeholder { color: var(--gray-light); }
-        .newsletter-form input:focus { border-color: var(--accent); }
+        .newsletter-form input::placeholder {
+            color: var(--gray-light);
+        }
+
+        .newsletter-form input:focus {
+            border-color: var(--accent);
+        }
 
         .newsletter-form button {
             padding: 14px 24px;
@@ -501,7 +647,9 @@
             transition: all 0.3s var(--ease-smooth);
         }
 
-        .newsletter-form button:hover { background: var(--accent-deep); }
+        .newsletter-form button:hover {
+            background: var(--accent-deep);
+        }
 
         .newsletter-meta {
             font-family: monospace;
@@ -526,47 +674,28 @@
 
         .ig-media { position: relative; background: #000; min-height: 260px; }
         .ig-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
         .ig-play {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
             background: linear-gradient(0deg, rgba(0,0,0,0.35), rgba(0,0,0,0.1));
         }
-
         .ig-play-dot {
-            width: 62px;
-            height: 62px;
-            border-radius: 14px;
-            background: rgba(37,99,235,0.94);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 62px; height: 62px; border-radius: 14px; background: rgba(37,99,235,0.94);
+            display: flex; align-items: center; justify-content: center;
         }
-
         .ig-copy { padding: 20px 22px; }
-
-        .ig-badge {
-            display: inline-block;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            padding: 5px 9px;
-            border-radius: 999px;
-            font-weight: 700;
-            margin-right: 6px;
-        }
-
+        .ig-badge { display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; padding: 5px 9px; border-radius: 999px; font-weight: 700; margin-right: 6px; }
         .ig-badge.primary { background: var(--accent-soft); color: var(--accent-deep); }
         .ig-badge.ghost { border: 1px solid rgba(0,0,0,0.2); color: var(--gray-mid); }
-
         .ig-copy h3 { font-size: clamp(32px, 3vw, 44px); line-height: 1.04; letter-spacing: -0.03em; margin: 10px 0; }
         .ig-copy p { color: var(--gray-mid); margin-bottom: 8px; }
-
         .ig-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
 
+        @media (max-width: 900px) {
+            .ig-feature { grid-template-columns: 1fr; }
+            .ig-copy h3 { font-size: 34px; }
+        }
+
+        /* About */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -574,8 +703,23 @@
             align-items: center;
         }
 
-        .about-content h3 { font-size: 48px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 24px; }
-        .about-content p { font-size: 18px; color: var(--gray-mid); line-height: 1.7; margin-bottom: 16px; }
+        @media (max-width: 800px) {
+            .about-grid { grid-template-columns: 1fr; }
+        }
+
+        .about-content h3 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .about-content p {
+            font-size: 18px;
+            color: var(--gray-mid);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
 
         .about-image {
             aspect-ratio: 1;
@@ -584,15 +728,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
         }
 
-        .about-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .about-initials {
+            font-size: 120px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.1);
+            letter-spacing: -0.05em;
         }
 
+        /* Footer */
         footer {
             background: var(--gray-dark);
             color: var(--white);
@@ -617,12 +762,33 @@
             margin-bottom: 48px;
         }
 
-        .footer-cta a { font-size: 32px; font-weight: 600; color: var(--white); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
-        .footer-cta a:hover { color: var(--accent); }
-        .footer-cta p { font-size: 16px; color: var(--gray-light); margin-top: 16px; }
-        .footer-cta .btn-primary { margin-top: 32px; display: inline-block; }
+        .footer-cta a {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.5s var(--ease-smooth);
+        }
 
-        .footer-social { display: flex; gap: 16px; }
+        .footer-cta a:hover {
+            color: var(--accent);
+        }
+
+        .footer-cta p {
+            font-size: 16px;
+            color: var(--gray-light);
+            margin-top: 16px;
+        }
+
+        .footer-cta .btn-primary {
+            margin-top: 32px;
+            display: inline-block;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
 
         .footer-social a {
             width: 56px;
@@ -657,41 +823,45 @@
             color: var(--gray-light);
         }
 
-        .footer-links { display: flex; gap: 32px; }
-        .footer-links a { color: var(--gray-light); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
-        .footer-links a:hover { color: var(--white); }
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
 
+        .footer-links a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: color 0.5s var(--ease-smooth);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        /* Animations */
         @keyframes slideUp {
             from { transform: translateY(100%); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
-        @media (max-width: 900px) {
-            .insight-grid { grid-template-columns: 1fr; }
-            .cases-grid { grid-template-columns: 1fr; }
-            .case-card:nth-child(even) { margin-top: 0; }
-            .foryou-grid { grid-template-columns: 1fr; }
-            .about-grid { grid-template-columns: 1fr; }
-            .ig-feature { grid-template-columns: 1fr; }
-            .ig-copy h3 { font-size: 34px; }
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
             nav { padding: 16px 24px; }
             .nav-links { display: none; }
             section { padding: 80px 24px; }
             .hero { padding: 120px 24px; }
+            .newsletter { padding: 80px 24px; }
             footer { padding: 80px 24px 32px; }
             .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
             .footer-links { justify-content: center; }
         }
-
-        @media (max-width: 600px) {
-            .newsletter-form { flex-direction: column; }
-        }
     </style>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- Navigation -->
     <nav>
         <a href="index.html" class="nav-logo">wm</a>
         <div class="nav-links">
@@ -704,54 +874,53 @@
         </div>
     </nav>
 
-    <section class="hero">
-        <div class="hero-tag"><span>PLG &rarr; Team Revenue</span></div>
-        <h1>
+    <!-- Hero - Compact to keep subheader above fold -->
+    <section class="hero" style="min-height: auto; padding: 140px 48px 80px;">
+        <div class="hero-tag"><span>PLG → Team Revenue</span></div>
+        <h1 style="font-size: clamp(36px, 8vw, 100px); position: relative; z-index: 2;">
             <span class="line"><span>Your Product Went Viral</span></span>
             <span class="line"><span>With Individuals.</span></span>
             <span class="line"><span>Now You Need Team Revenue.</span></span>
         </h1>
-        <div class="hero-sub"><span>Users share with friends, not colleagues. When colleagues sign up, they use it individually too.</span></div>
-        <p style="font-weight:600; color:var(--gray-mid); margin-top:16px; font-size:18px;">Same Product. Different Messages.</p>
-        <div class="hero-cta">
-            <a href="#contact" class="btn-primary">Book Strategy Call</a>
-            <a href="#insight" class="btn-secondary">See How It Works</a>
+        <p class="hero-sub" style="margin-top: 24px; position: relative; z-index: 2;">
+            <span>Users share with friends, not colleagues. When colleagues sign up, they use it individually too.</span>
+        </p>
+        <p style="font-size: 20px; font-weight: 700; margin-top: 16px; color: var(--accent-deep); position: relative; z-index: 2;">Same Product. Different Messages.</p>
+        <div class="hero-cta" style="margin-top: 28px;">
+            <a href="#contact" class="btn-primary" style="background: var(--accent);">Book Strategy Call</a>
+            <a href="#insight" class="btn-secondary" style="border-color: var(--accent); color: var(--accent-deep);">See How It Works</a>
         </div>
     </section>
 
-    <div class="marquee-container">
-        <div class="marquee">
-            <div class="marquee-item">Users share with friends, not colleagues.</div>
-            <div class="marquee-item">When colleagues sign up, they use it individually too.</div>
-            <div class="marquee-item">Same Product. Different Messages.</div>
-            <div class="marquee-item">Users share with friends, not colleagues.</div>
-            <div class="marquee-item">When colleagues sign up, they use it individually too.</div>
-            <div class="marquee-item">Same Product. Different Messages.</div>
-        </div>
-    </div>
+    <!-- Marquee removed for cleaner first fold -->
 
+    <!-- Insight Section -->
     <section id="insight">
-        <div class="section-tag"><span>The Insight</span></div>
-        <h2 class="section-title">It's a messaging problem, <span class="muted">not a product problem.</span></h2>
-
+        <div class="section-tag">The Insight</div>
+        <h2 class="section-title">
+            It's a messaging problem,<br><span class="muted">not a product problem.</span>
+        </h2>
+        
         <div class="insight-grid">
             <div class="insight-card">
+                <span class="insight-card-tag">The Problem</span>
                 <div>
-                    <div class="insight-card-tag">The Problem</div>
                     <h3>Why Most Fail</h3>
                     <p>Companies add admin controls and approval workflows. Then activation drops and sharing dies.</p>
                 </div>
             </div>
+            
             <div class="insight-card">
+                <span class="insight-card-tag">The Solution</span>
                 <div>
-                    <div class="insight-card-tag">The Solution</div>
                     <h3>What Works</h3>
                     <p>Keep individuals getting instant value. Show team buyers collaboration ROI. Same product. Different messages.</p>
                 </div>
             </div>
+            
             <div class="insight-card">
+                <span class="insight-card-tag">The Proof</span>
                 <div>
-                    <div class="insight-card-tag">The Proof</div>
                     <h3>How I Know</h3>
                     <p>I've helped companies scale from individual users to team revenue while keeping their growth engine intact.</p>
                 </div>
@@ -759,62 +928,71 @@
         </div>
     </section>
 
+    <!-- Case Studies -->
     <section id="proof">
-        <div class="section-tag"><span>Proof</span></div>
-        <h2 class="section-title">Results that <span class="muted">speak for themselves.</span></h2>
-
+        <div class="section-tag">Proof</div>
+        <h2 class="section-title">
+            Results that<br><span class="muted">speak for themselves.</span>
+        </h2>
+        
         <div class="cases-grid">
             <div class="case-card">
                 <div class="case-image">
-                    <div class="case-number">1</div>
+                    <div>
+                        <div class="case-number" style="font-size: clamp(40px, 5vw, 72px); line-height: 1.02;">Flagship GTM</div>
+                        <div class="case-metric">Narrative Built</div>
+                    </div>
                 </div>
                 <div class="case-content">
                     <div>
-                        <h3 class="case-title">Blinq</h3>
-                        <p class="case-subtitle">Flagship GTM</p>
-                        <p class="case-desc">Converting 4M+ individual users into team revenue. Building the GTM narrative for the shift from digital business card adoption to the future of personal CRM for teams, and aligning product, design, content, and sales around one market story.</p>
+                        <h4 class="case-title">Blinq</h4>
+                        <p class="case-subtitle">Converting 4M+ individual users into team revenue</p>
+                        <p class="case-desc">Building the GTM narrative for the shift from digital business card adoption to the future of personal CRM for teams, and aligning product, design, content, and sales around one market story.</p>
                     </div>
-                    <div class="case-arrow">&rarr;</div>
+                    <div class="case-arrow">→</div>
                 </div>
-                <div class="case-metric">$180M Revenue Generated</div>
             </div>
-
+            
             <div class="case-card">
                 <div class="case-image">
-                    <div class="case-number">2</div>
+                    <div>
+                        <div class="case-number">$180M</div>
+                        <div class="case-metric">Revenue Generated</div>
+                    </div>
                 </div>
                 <div class="case-content">
                     <div>
-                        <h3 class="case-title">eBay</h3>
-                        <p class="case-subtitle">Narrative Built</p>
-                        <p class="case-desc">While Keeping 83% Activation. Built separate positioning for team buyers. Individuals kept fast self-serve. Teams got dedicated support.</p>
+                        <h4 class="case-title">eBay</h4>
+                        <p class="case-subtitle">While Keeping 83% Activation</p>
+                        <p class="case-desc">Built separate positioning for team buyers. Individuals kept fast self-serve. Teams got dedicated support.</p>
                     </div>
-                    <div class="case-arrow">&rarr;</div>
+                    <div class="case-arrow">→</div>
                 </div>
-                <div class="case-metric">27x User Growth</div>
             </div>
-
+            
             <div class="case-card">
                 <div class="case-image">
-                    <div class="case-number">3</div>
+                    <div>
+                        <div class="case-number">27×</div>
+                        <div class="case-metric">User Growth</div>
+                    </div>
                 </div>
                 <div class="case-content">
                     <div>
-                        <h3 class="case-title">Prompt Cowboy</h3>
-                        <p class="case-subtitle">Product Led Growth</p>
-                        <p class="case-desc">2k to 55k Users. Found users leaving after creating prompts. Built features keeping work in-platform.</p>
+                        <h4 class="case-title">Prompt Cowboy</h4>
+                        <p class="case-subtitle">2k → 55k Users</p>
+                        <p class="case-desc">Found users leaving after creating prompts. Built features keeping work in-platform.</p>
                     </div>
-                    <div class="case-arrow">&rarr;</div>
+                    <div class="case-arrow">→</div>
                 </div>
-                <div class="case-metric">2k &rarr; 55k Users</div>
             </div>
         </div>
     </section>
 
-    <section>
-        <div class="section-tag"><span>Who This Is For</span></div>
-        <h2 class="section-title">Right-fit clients</h2>
-
+    <!-- Who This Is For -->
+    <section id="foryou">
+        <div class="section-tag">Who This Is For</div>
+        
         <div class="foryou-grid">
             <div class="foryou-col">
                 <h3>Series A or Series B</h3>
@@ -824,6 +1002,7 @@
                     <li>Board wants team revenue</li>
                 </ul>
             </div>
+            
             <div class="foryou-col">
                 <h3>You're Seeing This</h3>
                 <ul class="foryou-list">
@@ -833,110 +1012,128 @@
                 </ul>
             </div>
         </div>
-
+        
         <div class="foryou-cta">
             <h3>You Need</h3>
             <p>Someone who understands your growth engine. Not another growth hack.</p>
         </div>
     </section>
 
-    <section id="podcast">
-        <div class="section-tag"><span>Intelligent Growth</span></div>
-        <h2 class="section-title">See How <span class="muted">It Works</span></h2>
-
-        <p style="font-size: 18px; color: var(--gray-mid); margin-bottom: 32px;">I show you how PLG companies convert individuals to team revenue, using real examples on screen, step by step.</p>
-        <p style="font-size: 18px; color: var(--gray-mid); margin-bottom: 64px;">No theory, just workflows from marketers at companies like Canva and Adora who've done this.</p>
+    <!-- Newsletter / Intelligent Growth -->
+    <section class="newsletter" id="newsletter">
+        <div class="section-tag">Intelligent Growth</div>
+        <h2 class="section-title">
+            See How<br><span class="muted">It Works</span>
+        </h2>
+        <p class="newsletter-desc">I show you how PLG companies convert individuals to team revenue, using real examples on screen, step by step.</p>
+        <p class="newsletter-desc">No theory, just workflows from marketers at companies like Canva and Adora who've done this.</p>
 
         <div class="ig-feature">
-            <div class="ig-media">
-                <img src="https://img.youtube.com/vi/5LHzjQbBptE/hqdefault.jpg" alt="Stop Your Team Going Off-Brand">
-                <a href="https://www.youtube.com/watch?v=5LHzjQbBptE" class="ig-play">
-                    <div class="ig-play-dot">&#9654;</div>
-                </a>
-            </div>
+            <a href="https://www.youtube.com/watch?v=5LHzjQbBptE" target="_blank" class="ig-media">
+                <img src="https://img.youtube.com/vi/5LHzjQbBptE/hqdefault.jpg" alt="Stop Your Team Going Off-Brand" loading="lazy" decoding="async">
+                <div class="ig-play">
+                    <div class="ig-play-dot">
+                        <div style="width:0;height:0;border-left:20px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div>
+                    </div>
+                </div>
+            </a>
             <div class="ig-copy">
-                <div>
-                    <span class="ig-badge primary">Latest Episode</span>
-                    <span class="ig-badge ghost">38 min walkthrough</span>
-                    <h3>Stop Your Team Going Off-Brand</h3>
-                    <p>Charlotte Norman (ex-Canva PMM) runs marketing solo at Adora and built an AI system that keeps her whole team aligned.</p>
-                    <p>Watch her build it live on screen in 38 minutes.</p>
-                </div>
+                <span class="ig-badge primary">Latest Episode</span>
+                <span class="ig-badge ghost">38 min walkthrough</span>
+                <h3>Stop Your Team Going Off-Brand</h3>
+                <p>Charlotte Norman (ex-Canva PMM) runs marketing solo at Adora and built an AI system that keeps her whole team aligned.</p>
+                <p>Watch her build it live on screen in 38 minutes.</p>
                 <div class="ig-actions">
-                    <a href="https://www.youtube.com/watch?v=5LHzjQbBptE" class="btn-primary">Watch Episode</a>
-                    <a href="podcast-charlotte-norman.html" class="btn-secondary">Get Free Template</a>
+                    <a href="https://www.youtube.com/watch?v=5LHzjQbBptE" target="_blank" class="btn-primary" style="background: var(--accent);">Watch Episode</a>
+                    <a href="podcast-charlotte-norman.html" class="btn-secondary" style="border-color: rgba(0,0,0,0.25); color: var(--black);">Get Free Template</a>
                 </div>
             </div>
         </div>
+
+        <h3 style="font-size: 24px; font-weight: 700; margin: 18px 0 8px;">Subscribe to Intelligent Growth</h3>
+        <p class="newsletter-desc" style="margin-bottom: 18px;">My weekly newsletter and podcast, real workflows from PLG companies converting individuals to teams.</p>
+        <form class="newsletter-form" action="https://intelligent-marketer.beehiiv.com/subscribe" method="POST" target="_blank">
+            <input type="email" name="email" placeholder="Your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+        <p class="newsletter-meta">Join 101+ marketing leaders • Unsubscribe anytime</p>
     </section>
 
-    <section id="newsletter">
-        <div class="newsletter">
-            <div class="section-tag" style="justify-content:center;"><span>Subscribe to Intelligent Growth</span></div>
-            <h2 class="section-title">My weekly <span class="muted">newsletter and podcast</span></h2>
-            <p class="newsletter-desc">Real workflows from PLG companies converting individuals to teams.</p>
-
-            <form class="newsletter-form">
-                <input type="email" placeholder="Your email" required>
-                <button type="submit">Subscribe</button>
-            </form>
-
-            <p class="newsletter-meta">Join 101+ marketing leaders &bull; Unsubscribe anytime</p>
-        </div>
-    </section>
-
+    <!-- About -->
     <section id="about">
-        <div class="section-tag"><span>About</span></div>
-
+        <div class="section-tag">About</div>
+        
         <div class="about-grid">
             <div class="about-content">
                 <h3>Will Mulholland</h3>
                 <p>I help Series A/B companies find the moment when users recognize team value, then build positioning that converts them.</p>
                 <p>Previously scaled products at eBay, NextDocs, and Prompt Cowboy.</p>
             </div>
-            <div class="about-image">
-                <img src="images/KeyyWillMulholland-1543 copy 2.jpg" alt="Will Mulholland" style="width:100%;height:100%;object-fit:cover;">
+            <div class="about-image" style="background: none; overflow: hidden;">
+                <img src="images/KeyyWillMulholland-1543 copy 2.jpg" alt="Will Mulholland" style="width: 100%; height: 100%; object-fit: cover; border-radius: 100px 24px 100px 24px;">
             </div>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer id="contact">
-        <div class="footer-main">
-            <div class="footer-cta">
-                <h2>LET'S TALK.</h2>
-                <a href="mailto:wcmulholland@gmail.com">wcmulholland@gmail.com</a>
-                <p>30-minute strategy session &bull; Free consultation &bull; No commitment required</p>
-                <a href="https://www.linkedin.com/in/willmulholland/" class="btn-primary">Book Your Strategy Call</a>
-            </div>
-            <div class="footer-social">
-                <a href="https://www.linkedin.com/in/willmulholland/" title="LinkedIn">Li</a>
-                <a href="https://www.youtube.com/@WillMulholland" title="YouTube">Yt</a>
+        <div class="footer-main" style="flex-direction: column; align-items: stretch;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;" class="footer-grid">
+                <div class="footer-cta">
+                    <h2>LET'S<br>TALK.</h2>
+                    <a href="mailto:wcmulholland@gmail.com">wcmulholland@gmail.com</a>
+                    <p>30-minute strategy session • Free consultation • No commitment required</p>
+                    <div class="footer-social" style="margin-top: 32px;">
+                        <a href="https://www.linkedin.com/in/willmulholland/" title="LinkedIn">Li</a>
+                        <a href="https://www.youtube.com/@WillMulholland" title="YouTube">Yt</a>
+                    </div>
+                </div>
+                <!-- Google Calendar Booking -->
+                <div style="background: #FFFFFF; border-radius: 16px; padding: 24px;">
+                    <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 16px; text-align: center; color: #000;">Book Your Strategy Call</h3>
+                    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ17OQb9p-0IRjqEwYrrDXJjnCy2zFPjrA25Q-pAKlZ9lyyPraQG1kQaDwFyud4Mgn8_B66qVo-m?gv=true" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="Book a call with Will" style="border: 0; width: 100%; height: 400px; border-radius: 8px; background: #fff;" frameborder="0"></iframe>
+                </div>
             </div>
         </div>
-
         <div class="footer-bottom">
-            <p>&copy; 2024 Will Mulholland. All rights reserved.</p>
+            <span>© 2024 Will Mulholland. All rights reserved.</span>
             <div class="footer-links">
                 <a href="#">Privacy</a>
                 <a href="#">Terms</a>
             </div>
         </div>
     </footer>
+    
+    <style>
+        @media (max-width: 900px) {
+            .footer-grid { grid-template-columns: 1fr !important; }
+        }
+    </style>
 
+    <!-- Cursor Script -->
     <script>
         const cursor = document.querySelector('.cursor');
-        if (cursor) {
-            let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
-            document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
-            function animateCursor() {
-                cursorX += (mouseX - cursorX) * 0.15;
-                cursorY += (mouseY - cursorY) * 0.15;
-                cursor.style.left = cursorX + 'px';
-                cursor.style.top = cursorY + 'px';
-                requestAnimationFrame(animateCursor);
-            }
-            animateCursor();
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
         }
+        animateCursor();
+
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
     </script>
 </body>
 </html>
