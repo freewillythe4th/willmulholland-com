@@ -874,8 +874,11 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            nav { padding: 16px 24px; }
-            .nav-toggle { display: block; }
+            nav { padding: 16px 24px; mix-blend-mode: normal; }
+            .nav-logo { color: var(--black); }
+            .nav-toggle { display: block; color: var(--black); }
+            .nav-toggle.is-open { color: var(--white); }
+            body.nav-open .nav-logo { color: var(--white); }
             .nav-links {
                 position: fixed;
                 inset: 0;
