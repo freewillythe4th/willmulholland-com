@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
-  const password = process.env.WORK_PASSWORD || 'willworks2026';
+  const password = process.env.WORK_PASSWORD || 'Access';
 
   if (!token || !chatId) {
     console.error('Missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID env vars');
