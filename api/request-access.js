@@ -31,15 +31,15 @@ export default async function handler(req, res) {
   const emailBody = encodeURIComponent(
     `Hey,\n\nThanks for requesting access. The password is:\n\n${password}\n\nGo to https://www.willmulholland.com/work.html and pop it in.\n\nWill`
   );
-  const mailtoLink = `mailto:${email}?subject=${subject}&body=${emailBody}`;
+  const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${subject}&body=${emailBody}`;
 
   const text = [
-    '🔐 *Work samples access request*',
+    '<b>🔐 Work samples access request</b>',
     '',
-    `From: \`${email}\``,
+    `From: <code>${email.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code>`,
     `Time: ${new Date().toISOString()}`,
     '',
-    `[Tap to send password](${mailtoLink})`,
+    `Password: <code>${password}</code>`,
   ].join('\n');
 
   try {
@@ -49,8 +49,13 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         chat_id: chatId,
         text,
-        parse_mode: 'Markdown',
+        parse_mode: 'HTML',
         disable_web_page_preview: true,
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: '📧 Send password via Gmail', url: gmailComposeUrl }],
+          ],
+        },
       }),
     });
 
