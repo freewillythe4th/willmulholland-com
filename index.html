@@ -121,6 +121,34 @@
             opacity: 0.6;
         }
 
+        /* Burger menu (mobile) */
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: 0;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--white);
+            z-index: 1100;
+        }
+        .nav-toggle-bar {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: currentColor;
+            margin: 5px 0;
+            transition: transform 0.3s var(--ease-smooth), opacity 0.3s var(--ease-smooth);
+        }
+        .nav-toggle.is-open .nav-toggle-bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .nav-toggle.is-open .nav-toggle-bar:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-toggle.is-open .nav-toggle-bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -846,8 +874,32 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            nav { padding: 16px 24px; }
-            .nav-links { display: none; }
+            nav { padding: 16px 24px; mix-blend-mode: normal; }
+            .nav-toggle { display: block; }
+            .nav-links {
+                position: fixed;
+                inset: 0;
+                background: var(--black);
+                color: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 28px;
+                padding: 80px 24px 40px;
+                transform: translateX(100%);
+                transition: transform 0.4s var(--ease-smooth);
+                z-index: 1050;
+            }
+            .nav-links a {
+                font-size: 22px;
+                color: var(--white);
+            }
+            .nav-links.is-open {
+                transform: translateX(0);
+            }
+            body.nav-open {
+                overflow: hidden;
+            }
             section { padding: 80px 24px; }
             .hero { padding: 120px 24px; }
             .newsletter { padding: 80px 24px; }
@@ -864,7 +916,7 @@
     <!-- Navigation -->
     <nav>
         <a href="index.html" class="nav-logo">wm</a>
-        <div class="nav-links">
+        <div class="nav-links" id="navLinks">
             <a href="#insight">Insight</a>
             <a href="#proof">Proof</a>
             <a href="podcast-charlotte-norman.html">Intelligent Growth</a>
@@ -872,6 +924,11 @@
             <a href="#newsletter">Newsletter</a>
             <a href="#contact">Contact</a>
         </div>
+        <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+        </button>
     </nav>
 
     <!-- Hero - Compact to keep subheader above fold -->
@@ -1134,6 +1191,36 @@
             el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
         });
+
+        // Mobile burger menu
+        (function() {
+            var toggle = document.getElementById('navToggle');
+            var links = document.getElementById('navLinks');
+            if (!toggle || !links) return;
+
+            function setOpen(open) {
+                toggle.classList.toggle('is-open', open);
+                links.classList.toggle('is-open', open);
+                document.body.classList.toggle('nav-open', open);
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            }
+
+            toggle.addEventListener('click', function() {
+                setOpen(!links.classList.contains('is-open'));
+            });
+
+            // Close menu after tapping any link
+            links.querySelectorAll('a').forEach(function(a) {
+                a.addEventListener('click', function() { setOpen(false); });
+            });
+
+            // Close on Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && links.classList.contains('is-open')) {
+                    setOpen(false);
+                }
+            });
+        })();
     </script>
 </body>
 </html>
