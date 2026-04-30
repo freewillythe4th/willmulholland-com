@@ -1112,11 +1112,46 @@
 
         <h3 style="font-size: 24px; font-weight: 700; margin: 18px 0 8px;">Subscribe to Intelligent Growth</h3>
         <p class="newsletter-desc" style="margin-bottom: 18px;">My weekly newsletter and podcast, real workflows from PLG companies converting individuals to teams.</p>
-        <form class="newsletter-form" onsubmit="event.preventDefault(); window.open('https://intelligent-growth.beehiiv.com/subscribe', '_blank');">
+        <form class="newsletter-form" id="ig-subscribe-form">
             <input type="email" name="email" placeholder="Your email" required>
             <button type="submit">Subscribe</button>
         </form>
-        <p class="newsletter-meta">Join 101+ marketing leaders • Unsubscribe anytime</p>
+        <p class="newsletter-meta" id="ig-subscribe-meta">Join 101+ marketing leaders • Unsubscribe anytime</p>
+        <script>
+            (function () {
+                var form = document.getElementById('ig-subscribe-form');
+                var meta = document.getElementById('ig-subscribe-meta');
+                if (!form) return;
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var btn = form.querySelector('button[type="submit"]');
+                    var input = form.querySelector('input[name="email"]');
+                    var email = (input.value || '').trim();
+                    if (!email) return;
+                    var originalLabel = btn.textContent;
+                    btn.disabled = true;
+                    btn.textContent = 'Subscribing...';
+                    fetch('/api/subscribe', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: email })
+                    }).then(function (r) {
+                        if (r.ok) {
+                            form.style.display = 'none';
+                            meta.textContent = 'Subscribed. Check your inbox to confirm.';
+                        } else {
+                            btn.disabled = false;
+                            btn.textContent = originalLabel;
+                            meta.textContent = 'Something went wrong. Try again or email will@willmulholland.com.';
+                        }
+                    }).catch(function () {
+                        btn.disabled = false;
+                        btn.textContent = originalLabel;
+                        meta.textContent = 'Network error. Try again in a moment.';
+                    });
+                });
+            })();
+        </script>
     </section>
 
     <!-- About -->
