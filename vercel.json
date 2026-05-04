@@ -1,5 +1,6 @@
 {
     "routes": [
+      { "src": "/work(\\.html)?", "status": 302, "headers": { "Location": "/" } },
       { "handle": "filesystem" },
       { "src": "/resource-download", "dest": "/resource-download.html" },
       { "src": "/check-inbox", "dest": "/check-inbox.html" },
