@@ -94,12 +94,26 @@
         }
 
         .nav-logo {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: -0.05em;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             color: var(--white);
             text-decoration: none;
+        }
+
+        .nav-logo-mark {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -0.06em;
+            line-height: 1;
             text-transform: lowercase;
+        }
+
+        .nav-logo-name {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1;
         }
 
         .nav-links {
@@ -922,7 +936,7 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="index.html" class="nav-logo">wm</a>
+        <a href="index.html" class="nav-logo"><span class="nav-logo-mark">wm</span><span class="nav-logo-name">Will Mulholland</span></a>
         <div class="nav-links" id="navLinks">
             <a href="#insight">Insight</a>
             <a href="#proof">Proof</a>
@@ -940,7 +954,6 @@
 
     <!-- Hero - Compact to keep subheader above fold -->
     <section class="hero" style="min-height: auto; padding: 140px 48px 80px;">
-        <div class="hero-tag"><span>PLG → Enterprise Revenue</span></div>
         <h1 style="font-size: clamp(32px, 5.2vw, 72px); line-height: 1.05; position: relative; z-index: 2;">
             <span class="line"><span>Your Product Went Viral.</span></span>
             <span class="line"><span>Now You Need Enterprise Revenue.</span></span>
