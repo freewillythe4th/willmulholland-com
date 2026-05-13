@@ -1069,13 +1069,9 @@
 
         function unlockGate() {
             document.getElementById('gate-overlay').style.display = 'none';
-            sessionStorage.setItem(SESSION_KEY, '1');
         }
 
-        // Auto-unlock if already unlocked this session
-        if (sessionStorage.getItem(SESSION_KEY) === '1') {
-            document.getElementById('gate-overlay').style.display = 'none';
-        }
+        // Password gate always shows on page load (no session persistence)
 
         // Password unlock
         document.getElementById('password-form').addEventListener('submit', function(e) {
