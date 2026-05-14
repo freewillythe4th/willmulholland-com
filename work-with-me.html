@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work with me | Will Mulholland</title>
+    <meta name="description" content="1:1 coaching, systems setup, launch sprints, workshops, or sponsorship for product marketers and SaaS founders using AI in their day-to-day PMM work.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://willmulholland.com/work-with-me">
+    <meta property="og:title" content="Work with me | Will Mulholland">
+    <meta property="og:description" content="1:1 coaching, systems setup, launch sprints, workshops, or sponsorship for product marketers and SaaS founders.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://willmulholland.com/work-with-me">
+    <meta property="og:image" content="https://willmulholland.com/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Work with me | Will Mulholland">
+    <meta name="twitter:description" content="1:1 coaching, systems setup, launch sprints, workshops, or sponsorship.">
+    <meta name="twitter:image" content="https://willmulholland.com/og-image.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-dark: #0A0A0A;
+            --gray-mid: #525252;
+            --gray-light: #737373;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(1200px 500px at 20% -10%, rgba(37,99,235,0.08), transparent 60%), var(--white);
+            color: var(--black);
+            cursor: auto;
+            overflow-x: hidden;
+            line-height: 1.5;
+            letter-spacing: -0.02em;
+        }
+
+        .cursor {
+            display: none !important;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--white);
+        }
+
+        /* Navigation */
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--black);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--black);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: opacity 0.5s var(--ease-smooth);
+        }
+
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: 0;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--white);
+            z-index: 1100;
+        }
+        .nav-toggle-bar {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: currentColor;
+            margin: 5px 0;
+            transition: transform 0.3s var(--ease-smooth), opacity 0.3s var(--ease-smooth);
+        }
+        .nav-toggle.is-open .nav-toggle-bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .nav-toggle.is-open .nav-toggle-bar:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-toggle.is-open .nav-toggle-bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* Hero */
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 160px 48px 64px;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.06) 45%, transparent 70%);
+            top: -260px;
+            left: -120px;
+            filter: blur(2px);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 9vw, 120px);
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            line-height: 0.95;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-sub {
+            font-size: clamp(18px, 2.2vw, 24px);
+            color: var(--gray-mid);
+            max-width: 720px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Sections */
+        section {
+            padding: 64px 48px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-tag {
+            font-family: monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-mid);
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-tag::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin-bottom: 48px;
+        }
+
+        /* Steps */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .steps-grid { grid-template-columns: 1fr; }
+        }
+
+        .step-card {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 16px;
+            padding: 32px;
+            transition: transform 0.5s var(--ease-smooth), border-color 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
+        }
+
+        .step-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(37,99,235,0.4);
+            box-shadow: 0 12px 28px rgba(37,99,235,0.1);
+        }
+
+        .step-number {
+            font-family: monospace;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .step-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .step-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--gray-mid);
+        }
+
+        /* Form section */
+        .form-section {
+            padding-top: 32px;
+        }
+
+        .form-wrap {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--gray-dark);
+            color: var(--white);
+            padding: 96px 48px 40px;
+            margin-top: 64px;
+        }
+
+        .footer-main {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 64px;
+            flex-wrap: wrap;
+        }
+
+        .footer-cta h2 {
+            font-size: clamp(64px, 12vw, 160px);
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            line-height: 0.85;
+            margin-bottom: 32px;
+        }
+
+        .footer-cta a {
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.5s var(--ease-smooth);
+        }
+
+        .footer-cta a:hover {
+            color: var(--accent);
+        }
+
+        .footer-cta p {
+            font-size: 16px;
+            color: var(--gray-light);
+            margin-top: 16px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-social a {
+            width: 56px;
+            height: 56px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.5s var(--ease-smooth);
+            font-size: 14px;
+        }
+
+        .footer-social a:hover {
+            background: var(--white);
+            color: var(--black);
+            transform: translateY(-8px);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 96px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            font-family: monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-light);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .footer-links a {
+            color: var(--gray-light);
+            text-decoration: none;
+            transition: color 0.5s var(--ease-smooth);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; mix-blend-mode: normal; }
+            .nav-logo { color: var(--black); }
+            .nav-toggle { display: block; color: var(--black); }
+            .nav-toggle.is-open { color: var(--white); }
+            body.nav-open .nav-logo { color: var(--white); }
+            .nav-links {
+                position: fixed;
+                inset: 0;
+                background: var(--black);
+                color: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 28px;
+                padding: 80px 24px 40px;
+                transform: translateX(100%);
+                transition: transform 0.4s var(--ease-smooth);
+                z-index: 1050;
+            }
+            .nav-links a {
+                font-size: 22px;
+                color: var(--white);
+            }
+            .nav-links.is-open {
+                transform: translateX(0);
+            }
+            body.nav-open {
+                overflow: hidden;
+            }
+            section { padding: 56px 24px; }
+            .hero { padding: 120px 24px 48px; }
+            footer { padding: 64px 24px 32px; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+            .footer-links { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="nav-logo" style="mix-blend-mode: normal; isolation: isolate; position: relative; z-index: 2000;"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland" style="height: 32px; width: auto; display: block; mix-blend-mode: normal; position: relative; z-index: 2000;"></a>
+        <div class="nav-links" id="navLinks">
+            <a href="index.html#insight">Insight</a>
+            <a href="index.html#proof">Proof</a>
+            <a href="podcast-charlotte-norman.html">Intelligent Growth</a>
+            <a href="work.html">Work</a>
+            <a href="index.html#newsletter">Newsletter</a>
+            <a href="work-with-me.html">Work with me</a>
+        </div>
+        <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+        </button>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Work with me</h1>
+        <p class="hero-sub">I help SaaS marketing teams use AI to make the numbers go up. Fractional work, AI-native marketing coaching & systems setup, speaking, and sponsorship. Pick what fits.</p>
+    </section>
+
+    <!-- How this works -->
+    <section id="how">
+        <div class="section-tag">How this works</div>
+        <h2 class="section-title">Three steps to get started.</h2>
+
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">Step 01</div>
+                <h3>Fill out the inquiry form below</h3>
+                <p>Takes 1 to 2 minutes. Helps me understand your situation and goals.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">Step 02</div>
+                <h3>I prepare tailored options and a quote</h3>
+                <p>Within 24 hours after you submit the form.</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">Step 03</div>
+                <h3>Book a kickoff or clarity call</h3>
+                <p>I'll send you a link to book a quick call where I'll walk you through the options and we'll align on timeline, deliverables, and next steps.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tally form -->
+    <section id="inquiry" class="form-section">
+        <div class="section-tag">Inquiry form</div>
+        <div class="form-wrap">
+            <iframe data-tally-src="https://tally.so/embed/PdvVeb?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" title="Work with me"></iframe>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-main" style="flex-direction: column; align-items: stretch;">
+            <div class="footer-cta">
+                <h2>LET'S<br>TALK.</h2>
+                <a href="mailto:wcmulholland@gmail.com">wcmulholland@gmail.com</a>
+                <p>Prefer email? Drop me a line and I'll get back within 24 hours.</p>
+                <div class="footer-social" style="margin-top: 32px;">
+                    <a href="https://www.linkedin.com/in/willmulholland/" title="LinkedIn">Li</a>
+                    <a href="https://www.youtube.com/@WillMulholland" title="YouTube">Yt</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2024 Will Mulholland. All rights reserved.</span>
+            <div class="footer-links">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Tally embed loader -->
+    <script src="https://tally.so/widgets/embed.js"></script>
+
+    <!-- Mobile nav -->
+    <script>
+        (function() {
+            var toggle = document.getElementById('navToggle');
+            var links = document.getElementById('navLinks');
+            if (!toggle || !links) return;
+
+            function setOpen(open) {
+                toggle.classList.toggle('is-open', open);
+                links.classList.toggle('is-open', open);
+                document.body.classList.toggle('nav-open', open);
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            }
+
+            toggle.addEventListener('click', function() {
+                setOpen(!links.classList.contains('is-open'));
+            });
+
+            links.querySelectorAll('a').forEach(function(a) {
+                a.addEventListener('click', function() { setOpen(false); });
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && links.classList.contains('is-open')) {
+                    setOpen(false);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

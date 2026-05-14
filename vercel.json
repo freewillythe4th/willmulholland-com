@@ -5,6 +5,7 @@
       { "src": "/check-inbox", "dest": "/check-inbox.html" },
       { "src": "/welcome-survey", "dest": "/welcome-survey.html" },
       { "src": "/resource-delivery", "dest": "/resource-delivery.html" },
+      { "src": "/work-with-me", "dest": "/work-with-me.html" },
       { "src": "/(.*)", "dest": "/index.html" }
     ]
   }
