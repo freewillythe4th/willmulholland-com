@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Intelligent Growth | Will Mulholland</title>
+    <meta name="description" content="Quick 2-minute survey to help me write what you actually need.">
+
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
+            background: #fafafa;
+            color: #111;
+            line-height: 1.6;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-logo img {
+            height: 32px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: #111;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: #2563EB;
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+        }
+
+        .hero {
+            padding: 96px 24px 48px;
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin: 0 0 24px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #444;
+            margin: 0 auto 16px;
+            max-width: 560px;
+        }
+
+        .hero p.signature {
+            font-weight: 600;
+            color: #111;
+            margin-top: 24px;
+        }
+
+        .form-wrap {
+            max-width: 720px;
+            margin: 0 auto 96px;
+            padding: 0 24px;
+        }
+
+        footer {
+            padding: 48px 24px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+        }
+
+        footer a {
+            color: #2563EB;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland"></a>
+        <div class="nav-links">
+            <a href="/#insight">Insight</a>
+            <a href="/#proof">Proof</a>
+            <a href="podcast-charlotte-norman.html">Intelligent Growth</a>
+            <a href="work.html">Case Studies</a>
+            <a href="/work-with-me">Work with me</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>You're in. Quick favour.</h1>
+        <p>Welcome to Intelligent Growth.</p>
+        <p>Before you get the first email, take 2 minutes to tell me what you're actually working on. Your answers shape every piece I write.</p>
+        <p class="signature">Will</p>
+    </section>
+
+    <section class="form-wrap">
+        <iframe data-tally-src="https://tally.so/embed/xX4OW9?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" title="Quick survey"></iframe>
+    </section>
+
+    <footer>
+        <p><a href="/">Back to willmulholland.com</a></p>
+    </footer>
+
+    <script src="https://tally.so/widgets/embed.js"></script>
+</body>
+</html>
