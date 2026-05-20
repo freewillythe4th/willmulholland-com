@@ -7,6 +7,8 @@
       { "src": "/resource-delivery", "dest": "/resource-delivery.html" },
       { "src": "/work-with-me", "dest": "/work-with-me.html" },
       { "src": "/survey", "dest": "/survey.html" },
+      { "src": "/privacy", "dest": "/privacy.html" },
+      { "src": "/terms", "dest": "/terms.html" },
       { "src": "/(.*)", "dest": "/index.html" }
     ]
   }
