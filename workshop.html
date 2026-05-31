@@ -33,7 +33,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: radial-gradient(1200px 500px at 20% -10%, rgba(37,99,235,0.08), transparent 60%), var(--white);
+            background: radial-gradient(1100px 620px at 50% -22%, rgba(37,99,235,0.10), transparent 62%), var(--white);
             color: var(--black);
             overflow-x: hidden;
             line-height: 1.5;
@@ -65,11 +65,6 @@
         .hero {
             min-height: auto; display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; padding: 150px 48px 80px; position: relative; overflow: hidden;
-        }
-        .hero::before {
-            content: ''; position: absolute; width: 520px; height: 520px; border-radius: 999px;
-            background: radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.06) 45%, transparent 70%);
-            top: -260px; left: -120px; filter: blur(2px); pointer-events: none;
         }
         .hero-tag {
             font-family: monospace; font-size: 14px; text-transform: uppercase; letter-spacing: 0.12em;
