@@ -1,6 +1,8 @@
 {
     "routes": [
       { "handle": "filesystem" },
+      { "src": "/blog", "dest": "/blog.html" },
+      { "src": "/blog/marketing-is-the-bottleneck", "dest": "/blog/marketing-is-the-bottleneck.html" },
       { "src": "/workshop", "dest": "/workshop.html" },
       { "src": "/workshop-confirmed", "dest": "/workshop-confirmed.html" },
       { "src": "/resource-download", "dest": "/resource-download.html" },

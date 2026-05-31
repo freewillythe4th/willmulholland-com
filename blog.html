@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing | Will Mulholland</title>
+    <meta name="description" content="Essays on AI-native marketing, systems, and building things that compound.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://willmulholland.com/blog">
+    <meta property="og:title" content="Writing | Will Mulholland">
+    <meta property="og:description" content="Essays on AI-native marketing, systems, and building things that compound.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://willmulholland.com/blog">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #000000; --white: #FFFFFF; --gray-dark: #0A0A0A;
+            --gray-mid: #525252; --gray-light: #737373;
+            --accent: #2563EB; --accent-soft: #DBEAFE; --accent-deep: #1E3A8A;
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif; color: var(--black); line-height: 1.5; letter-spacing: -0.02em;
+            background: radial-gradient(1100px 620px at 50% -22%, rgba(37,99,235,0.10), transparent 62%), var(--white);
+            -webkit-font-smoothing: antialiased; min-height: 100vh;
+        }
+        ::selection { background: var(--accent); color: var(--white); }
+
+        nav {
+            position: sticky; top: 0; z-index: 100; padding: 20px 48px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.8); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .nav-logo img { height: 30px; width: auto; display: block; }
+        .nav-back {
+            font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-mid); text-decoration: none; transition: color 0.4s var(--ease-smooth);
+        }
+        .nav-back:hover { color: var(--black); }
+
+        .wrap { max-width: 760px; margin: 0 auto; padding: 80px 24px 64px; }
+        .kicker {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--accent); font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+        }
+        .kicker::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+        h1 { font-size: clamp(40px, 7vw, 72px); font-weight: 800; letter-spacing: -0.05em; line-height: 0.95; margin-bottom: 20px; }
+        .intro { font-size: clamp(18px, 2.4vw, 22px); color: var(--gray-mid); max-width: 560px; margin-bottom: 56px; }
+
+        .posts { display: flex; flex-direction: column; gap: 24px; }
+        .post-card {
+            display: block; text-decoration: none; color: inherit; border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 20px; padding: 32px; background: var(--white);
+            transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth), border-color 0.5s var(--ease-smooth);
+        }
+        .post-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(37,99,235,0.1); border-color: rgba(37,99,235,0.3); }
+        .post-meta {
+            font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--accent); margin-bottom: 14px;
+        }
+        .post-card h2 { font-size: clamp(24px, 3.4vw, 32px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 12px; }
+        .post-card p { font-size: 16px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 18px; }
+        .post-arrow {
+            display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em; color: var(--black);
+        }
+        .post-arrow .arr { transition: transform 0.4s var(--ease-smooth); }
+        .post-card:hover .post-arrow .arr { transform: translateX(6px); }
+
+        .subscribe {
+            margin-top: 56px; padding: 40px 32px; border-radius: 20px; text-align: center;
+            background: linear-gradient(180deg, #f8fbff 0%, #f3f7ff 100%); border: 1px solid rgba(37,99,235,0.16);
+        }
+        .subscribe h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+        .subscribe p { font-size: 15px; color: var(--gray-mid); margin-bottom: 20px; }
+        .sub-form { display: flex; gap: 12px; max-width: 440px; margin: 0 auto; }
+        @media (max-width: 520px) { .sub-form { flex-direction: column; } }
+        .sub-form input {
+            flex: 1; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.15); border-radius: 12px;
+            font-size: 15px; font-family: inherit; outline: none;
+        }
+        .sub-form input:focus { border-color: var(--accent); }
+        .sub-form button {
+            padding: 14px 24px; background: var(--accent); color: var(--white); border: none; border-radius: 12px;
+            font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer;
+            font-family: inherit; transition: background 0.3s var(--ease-smooth);
+        }
+        .sub-form button:hover { background: var(--accent-deep); }
+        .sub-meta { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); margin-top: 14px; }
+
+        footer {
+            max-width: 760px; margin: 48px auto 0; padding: 32px 24px 48px;
+            border-top: 1px solid rgba(0,0,0,0.1); display: flex; justify-content: space-between;
+            font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-light); flex-wrap: wrap; gap: 12px;
+        }
+        footer a { color: var(--gray-light); text-decoration: none; }
+        footer a:hover { color: var(--black); }
+
+        @media (max-width: 600px) { nav { padding: 16px 24px; } .wrap { padding: 56px 24px 48px; } .post-card { padding: 24px; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="/images/wm-logo/full-logo-transparent.png" alt="Will Mulholland"></a>
+        <a href="/" class="nav-back">&larr; Home</a>
+    </nav>
+
+    <div class="wrap">
+        <div class="kicker">Writing</div>
+        <h1>Essays</h1>
+        <p class="intro">On AI-native marketing, building systems that compound, and turning your work into assets instead of hours.</p>
+
+        <div class="posts">
+            <a class="post-card" href="/blog/marketing-is-the-bottleneck">
+                <div class="post-meta">Thesis &middot; 6 min read</div>
+                <h2>Marketing is the bottleneck now</h2>
+                <p>Product ships faster than marketing can tell anyone it exists. The constraint moved, and you don't fix it by buying more tools. You build a system. A thesis on AI-native marketing, the Signal-Structure-Scale frame, and capability over dependency.</p>
+                <span class="post-arrow">Read the thesis <span class="arr">&rarr;</span></span>
+            </a>
+        </div>
+
+        <div class="subscribe">
+            <h3>Get the next one</h3>
+            <p>Intelligent Growth. Real AI marketing workflows, in your inbox each week.</p>
+            <form class="sub-form" id="ig-subscribe-form">
+                <input type="email" name="email" placeholder="Your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <p class="sub-meta" id="ig-subscribe-meta">Join 101+ marketing leaders &middot; Unsubscribe anytime</p>
+        </div>
+    </div>
+
+    <footer>
+        <span>&copy; 2026 Will Mulholland</span>
+        <span><a href="/">Home</a> &middot; <a href="/work.html">Case studies</a> &middot; <a href="/workshop">Workshop</a></span>
+    </footer>
+
+    <script>
+        (function () {
+            var form = document.getElementById('ig-subscribe-form');
+            var meta = document.getElementById('ig-subscribe-meta');
+            if (!form) return;
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var btn = form.querySelector('button[type="submit"]');
+                var input = form.querySelector('input[name="email"]');
+                var email = (input.value || '').trim();
+                if (!email) return;
+                var original = btn.textContent;
+                btn.disabled = true; btn.textContent = 'Subscribing...';
+                fetch('/api/subscribe', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                }).then(function (r) {
+                    if (r.ok) { form.style.display = 'none'; meta.textContent = 'Subscribed. Check your inbox to confirm.'; }
+                    else { btn.disabled = false; btn.textContent = original; meta.textContent = 'Something went wrong. Try again.'; }
+                }).catch(function () { btn.disabled = false; btn.textContent = original; meta.textContent = 'Network error. Try again.'; });
+            });
+        })();
+    </script>
+</body>
+</html>
