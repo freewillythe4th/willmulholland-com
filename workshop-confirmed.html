@@ -6,20 +6,38 @@
     <title>You're in | Run your marketing with AI</title>
     <meta name="description" content="You're registered for Run your marketing with AI. Wed 24 June 7pm AEST or Fri 26 June 7pm PT.">
     <meta name="robots" content="noindex">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --black: #000000; --white: #FFFFFF; --gray-dark: #0A0A0A;
-            --gray-mid: #525252; --gray-light: #737373;
-            --accent: #2563EB; --accent-soft: #DBEAFE; --accent-deep: #1E3A8A;
+            --cream: #F2EDE3;
+            --cream-soft: #EBE5D8;
+            --ink: #1F1511;
+            --black: #1F1511;
+            --white: #FFFFFF;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
             --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
         }
         body {
-            font-family: 'Inter', sans-serif; color: var(--black); line-height: 1.5; letter-spacing: -0.02em;
-            background: radial-gradient(1200px 600px at 50% -10%, rgba(37,99,235,0.12), transparent 60%), var(--white);
-            min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 48px 24px; text-align: center;
+            font-family: 'Inter', sans-serif;
+            color: var(--ink);
+            line-height: 1.5;
+            letter-spacing: -0.02em;
+            background: var(--cream);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 24px;
+            text-align: center;
         }
         ::selection { background: var(--accent); color: var(--white); }
         .logo { margin-bottom: 40px; }
@@ -29,7 +47,14 @@
             display: flex; align-items: center; justify-content: center; margin: 0 auto 28px;
             color: var(--white); font-size: 36px; font-weight: 700;
         }
-        h1 { font-size: clamp(36px, 7vw, 64px); font-weight: 700; letter-spacing: -0.04em; line-height: 1.0; margin-bottom: 20px; }
+        h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(36px, 7vw, 64px);
+            letter-spacing: -0.02em;
+            line-height: 1.0;
+            margin-bottom: 20px;
+        }
         .lead { font-size: 18px; color: var(--gray-mid); max-width: 540px; margin: 0 auto 8px; line-height: 1.6; }
         .when {
             display: inline-block; font-family: monospace; font-size: 14px; font-weight: 700;
@@ -39,39 +64,46 @@
         .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 720px; width: 100%; margin: 48px auto 0; text-align: left; }
         @media (max-width: 720px) { .cards { grid-template-columns: 1fr; } }
         .card {
-            border: 1px solid rgba(0,0,0,0.1); border-radius: 20px; padding: 28px; background: var(--white);
-            display: flex; flex-direction: column; transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
+            border: 1px solid rgba(31,21,17,0.10);
+            border-radius: 20px;
+            padding: 28px;
+            background: var(--cream-soft);
+            box-shadow: var(--warm-shadow);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
         }
-        .card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(37,99,235,0.1); }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(31,21,17,0.14), 0 4px 12px rgba(31,21,17,0.08); }
         .card-tag { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 12px; }
-        .card h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+        .card h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; color: var(--ink); }
         .card p { font-size: 14px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 20px; flex: 1; }
         .card a {
             align-self: flex-start; padding: 12px 22px; border-radius: 999px; font-size: 13px; font-weight: 600;
             text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; transition: all 0.5s var(--ease-smooth);
         }
-        .card a.primary { background: var(--accent); color: var(--white); }
-        .card a.primary:hover { background: var(--accent-deep); border-radius: 12px; }
-        .card a.ghost { border: 1px solid var(--black); color: var(--black); }
+        .card a.primary { background: var(--ink); color: var(--white); }
+        .card a.primary:hover { background: var(--accent); border-radius: 12px; }
+        .card a.ghost { border: 1px solid var(--ink); color: var(--ink); }
         .card a.ghost:hover { border-radius: 12px; }
         .home-link { margin-top: 40px; font-size: 14px; color: var(--gray-light); text-decoration: none; font-family: monospace; text-transform: uppercase; letter-spacing: 0.08em; }
-        .home-link:hover { color: var(--black); }
+        .home-link:hover { color: var(--ink); }
 
         /* Newsletter inline */
         .nl { max-width: 480px; width: 100%; margin: 24px auto 0; }
         .nl-form { display: flex; gap: 12px; }
         @media (max-width: 520px) { .nl-form { flex-direction: column; } }
         .nl-form input {
-            flex: 1; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.15); border-radius: 12px;
-            font-size: 15px; font-family: inherit; outline: none;
+            flex: 1; padding: 14px 16px; border: 1px solid rgba(31,21,17,0.18); border-radius: 12px;
+            font-size: 15px; font-family: inherit; outline: none; background: var(--cream); color: var(--ink);
         }
+        .nl-form input::placeholder { color: var(--gray-light); }
         .nl-form input:focus { border-color: var(--accent); }
         .nl-form button {
-            padding: 14px 24px; background: var(--accent); color: var(--white); border: none; border-radius: 12px;
+            padding: 14px 24px; background: var(--ink); color: var(--white); border: none; border-radius: 12px;
             font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer;
             font-family: inherit; transition: background 0.3s var(--ease-smooth);
         }
-        .nl-form button:hover { background: var(--accent-deep); }
+        .nl-form button:hover { background: var(--accent); }
         .nl-meta { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); margin-top: 12px; }
     </style>
 </head>
