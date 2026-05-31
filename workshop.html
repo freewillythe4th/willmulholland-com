@@ -386,6 +386,27 @@
         .modal-fine { font-size: 12px; color: var(--gray-light); text-align: center; margin-top: 16px; line-height: 1.5; }
         .modal-error { color: #dc2626; font-size: 14px; margin-top: 12px; text-align: center; display: none; }
 
+        /* Live build sequence */
+        .build-steps { display: flex; flex-direction: column; max-width: 880px; }
+        .build-step { display: grid; grid-template-columns: 60px 1fr; gap: 24px; padding: 28px 0; border-bottom: 1px solid rgba(31,21,17,0.1); align-items: start; }
+        .build-step:last-child { border-bottom: none; }
+        .build-step-num { font-family: 'Instrument Serif', Georgia, serif; font-size: 46px; line-height: 0.9; color: var(--accent); }
+        .build-step h3 { font-size: 22px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.01em; }
+        .build-step p { font-size: 16px; color: var(--gray-mid); line-height: 1.6; }
+        .build-note { margin-top: 40px; font-size: 18px; color: var(--gray-mid); max-width: 660px; line-height: 1.6; }
+        .build-note strong { color: var(--ink); font-weight: 700; }
+        /* Takeaways */
+        .takeaways { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        @media (max-width: 720px){ .takeaways { grid-template-columns: 1fr; } }
+        .takeaway { background: var(--cream-soft); border-radius: 18px; padding: 28px; box-shadow: var(--warm-shadow); }
+        .takeaway h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; letter-spacing: -0.01em; }
+        .takeaway p { font-size: 15px; color: var(--gray-mid); line-height: 1.6; }
+        /* Taster */
+        .taster { text-align: center; max-width: 720px; margin: 0 auto; }
+        .taster p { font-size: clamp(18px, 2.4vw, 22px); color: var(--gray-mid); line-height: 1.55; }
+        .taster a { color: var(--accent); text-decoration: none; font-weight: 600; }
+        .taster a:hover { text-decoration: underline; }
+
         /* Mobile responsive */
         @media (max-width: 768px) {
             nav { padding: 16px 24px; }
@@ -443,7 +464,7 @@
     <section class="hero">
         <span class="hero-tag">Free &middot; Live on Google Meet &middot; Two sessions</span>
         <h1>Run your marketing<br><span class="accent">with AI.</span></h1>
-        <p class="hero-sub">60 minutes, live. I build a real marketing workflow on screen, start to finish. No slides, no theory, just the work.</p>
+        <p class="hero-sub">60 minutes, live. I take a real product and run it through the whole system on screen: research, positioning, content, follow-up. No slides. Just the build.</p>
         <div class="hero-cta">
             <button type="button" class="btn-primary" data-open-modal>Reserve my spot, free</button>
         </div>
@@ -490,6 +511,32 @@
         </div>
     </section>
 
+    <!-- The live build -->
+    <section>
+        <div class="section-tag">The live build</div>
+        <h2 class="section-title">One marketing job,<br><span class="muted">built end to end.</span></h2>
+        <div class="build-steps">
+            <div class="build-step"><div class="build-step-num">1</div><div><h3>Research the buyer</h3><p>Pull real signal on who they are, what they do, and why now. The part AI can't fake, and the part most people skip.</p></div></div>
+            <div class="build-step"><div class="build-step-num">2</div><div><h3>Build the positioning</h3><p>Run the five lines of the positioning house live: alternatives, attributes, value, who cares most, category.</p></div></div>
+            <div class="build-step"><div class="build-step-num">3</div><div><h3>Turn it into messaging</h3><p>Shape it into copy that leads with the buyer, not the product. The bit AI gets wrong by default.</p></div></div>
+            <div class="build-step"><div class="build-step-num">4</div><div><h3>Spin up a week of content</h3><p>One piece of signal, structured once, becomes a week of posts, an email, a launch note. In minutes.</p></div></div>
+            <div class="build-step"><div class="build-step-num">5</div><div><h3>Wire the follow-up</h3><p>Set the system that catches every lead and keeps the thread, so nothing you build goes cold.</p></div></div>
+        </div>
+        <p class="build-note">That is the whole frame: <strong>Signal, Structure, Scale.</strong> Your judgment and taste first, then AI does the volume. Not a prompt pack. A system you own.</p>
+    </section>
+
+    <!-- Walk away with -->
+    <section>
+        <div class="section-tag">What you'll walk away with</div>
+        <h2 class="section-title">Not notes.<br><span class="muted">A system you can copy.</span></h2>
+        <div class="takeaways">
+            <div class="takeaway"><h3>The exact workflow</h3><p>The end-to-end build you watched on screen, the same one I run in real launches. Yours to rebuild.</p></div>
+            <div class="takeaway"><h3>Signal, Structure, Scale</h3><p>How to use AI without producing slop: the human part first, the volume part last.</p></div>
+            <div class="takeaway"><h3>System over prompt pack</h3><p>Why a setup you own compounds, and why the tool lists you have been sold go stale in a month.</p></div>
+            <div class="takeaway"><h3>Your problem, solved live</h3><p>Bring a real marketing problem. If we get to it in Q&amp;A, we work it on the spot.</p></div>
+        </div>
+    </section>
+
     <!-- Who shows up -->
     <section>
         <div class="section-tag">Who shows up</div>
@@ -519,6 +566,10 @@
             <p>Yes. No card, no catch. Drop your email and I'll send the Google Meet link and a calendar invite.</p>
         </div>
         <div class="faq-item">
+            <h3>Is this the whole course?</h3>
+            <p>No, it's a free taster. You'll see the full system run end to end in 60 minutes. The deeper build, the skills and the operating setup, is the cohort.</p>
+        </div>
+        <div class="faq-item">
             <h3>Is it recorded?</h3>
             <p>No. This one is live only. The whole point is building with you in real time and answering your questions on the spot, so block out the hour and show up. Bring a marketing problem you want solved.</p>
         </div>
@@ -529,6 +580,13 @@
         <div class="faq-item">
             <h3>Who's running it?</h3>
             <p>Me, Will Mulholland. I've done product marketing at eBay, NextDocs and Prompt Cowboy, and I build marketing systems with AI every day.</p>
+        </div>
+    </section>
+
+    <!-- Taster -->
+    <section>
+        <div class="taster">
+            <p>This is the 60-minute version. The full system, the operating setup, the skills, the positioning house, is what I teach in the cohort and build with teams. <a href="/work-with-me">See how that works.</a></p>
         </div>
     </section>
 
