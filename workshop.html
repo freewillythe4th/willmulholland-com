@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run your marketing with AI | Free live workshop with Will Mulholland</title>
+    <meta name="description" content="A free 60-minute live workshop. I build a real marketing workflow on screen with AI, start to finish. Monday 22 June, 7pm AEST.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://willmulholland.com/workshop">
+    <meta property="og:title" content="Run your marketing with AI | Free live workshop">
+    <meta property="og:description" content="60 minutes, live. I build a real marketing workflow on screen with AI. No slides, just the work. Monday 22 June, 7pm AEST.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://willmulholland.com/workshop">
+    <meta property="og:image" content="https://willmulholland.com/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-dark: #0A0A0A;
+            --gray-mid: #525252;
+            --gray-light: #737373;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(1200px 500px at 20% -10%, rgba(37,99,235,0.08), transparent 60%), var(--white);
+            color: var(--black);
+            overflow-x: hidden;
+            line-height: 1.5;
+            letter-spacing: -0.02em;
+        }
+
+        ::selection { background: var(--accent); color: var(--white); }
+
+        /* Nav */
+        nav {
+            position: absolute; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 24px 48px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .nav-logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+
+        .btn-primary {
+            padding: 16px 32px; background: var(--black); color: var(--white);
+            font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            border: none; border-radius: 999px; text-decoration: none; cursor: pointer;
+            transition: all 0.5s var(--ease-smooth); display: inline-block; font-family: inherit;
+        }
+        .btn-primary:hover { background: var(--accent); border-radius: 16px; }
+
+        .btn-nav {
+            padding: 12px 22px; font-size: 12px; background: var(--accent);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: auto; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 150px 48px 80px; position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; width: 520px; height: 520px; border-radius: 999px;
+            background: radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.06) 45%, transparent 70%);
+            top: -260px; left: -120px; filter: blur(2px); pointer-events: none;
+        }
+        .hero-tag {
+            font-family: monospace; font-size: 14px; text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--accent-deep); margin-bottom: 28px; font-weight: 700;
+            background: var(--accent-soft); padding: 8px 16px; border-radius: 999px; position: relative; z-index: 2;
+        }
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 96px); font-weight: 700; letter-spacing: -0.05em;
+            line-height: 0.95; margin-bottom: 24px; position: relative; z-index: 2;
+        }
+        .hero h1 .accent {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 70%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        .hero-sub {
+            font-size: clamp(18px, 2.5vw, 24px); color: var(--gray-mid); max-width: 640px;
+            margin-top: 16px; position: relative; z-index: 2;
+        }
+        .hero-cta { margin-top: 40px; position: relative; z-index: 2; }
+        .hero-meta {
+            margin-top: 20px; font-family: monospace; font-size: 13px; text-transform: uppercase;
+            letter-spacing: 0.08em; color: var(--gray-light); position: relative; z-index: 2;
+        }
+
+        .trust-strip {
+            margin-top: 56px; max-width: 900px; display: flex; align-items: center; justify-content: center;
+            gap: 28px 36px; flex-wrap: wrap; opacity: 0.7; position: relative; z-index: 2;
+        }
+        .trust-strip img { height: 20px; width: auto; filter: grayscale(100%); }
+        .trust-strip .txt { font-size: 14px; font-weight: 700; color: #1a1a1a; }
+
+        /* Sections */
+        section { padding: 72px 48px; max-width: 1100px; margin: 0 auto; }
+        .section-tag {
+            font-family: monospace; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-mid); margin-bottom: 24px; display: flex; align-items: center; gap: 12px;
+        }
+        .section-tag::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+        .section-title {
+            font-size: clamp(32px, 5vw, 56px); font-weight: 700; letter-spacing: -0.04em;
+            line-height: 1.0; margin-bottom: 48px;
+        }
+        .section-title .muted { color: var(--gray-light); }
+
+        /* Agenda blocks */
+        .agenda { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        @media (max-width: 860px) { .agenda { grid-template-columns: 1fr; } }
+        .agenda-card {
+            background: var(--gray-dark); color: var(--white); padding: 32px; min-height: 240px;
+            display: flex; flex-direction: column; justify-content: space-between;
+            transition: transform 0.7s var(--ease-smooth);
+        }
+        .agenda-card:hover { transform: scale(1.02); }
+        .agenda-card:nth-child(1) { border-radius: 100px 24px 24px 24px; }
+        .agenda-card:nth-child(2) { background: var(--accent); border-radius: 24px 100px 24px 100px; }
+        .agenda-card:nth-child(3) { border-radius: 24px 24px 100px 24px; }
+        .agenda-time { font-family: monospace; font-size: 13px; letter-spacing: 0.08em; opacity: 0.7; }
+        .agenda-card h3 { font-size: 24px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 12px; }
+        .agenda-card p { font-size: 15px; line-height: 1.6; opacity: 0.85; }
+
+        /* Who shows up */
+        .who-list { list-style: none; max-width: 820px; }
+        .who-list li {
+            display: flex; align-items: flex-start; gap: 16px; padding: 18px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1); font-size: 18px; color: var(--gray-mid);
+        }
+        .who-list li::before { content: '\2192'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+        /* Proof band */
+        .proof-band {
+            background: var(--gray-dark); color: var(--white); border-radius: 24px;
+            padding: 48px; text-align: center;
+        }
+        .proof-band p { font-size: clamp(20px, 3vw, 28px); font-weight: 600; line-height: 1.4; letter-spacing: -0.02em; }
+        .proof-band .who { margin-top: 20px; font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.7; }
+
+        /* FAQ */
+        .faq-item { padding: 24px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
+        .faq-item h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+        .faq-item p { font-size: 16px; color: var(--gray-mid); line-height: 1.6; }
+
+        /* Reserve band */
+        .reserve-band {
+            text-align: center; background: linear-gradient(180deg, #f8fbff 0%, #f3f7ff 100%);
+            border: 1px solid rgba(37,99,235,0.16); border-radius: 24px; padding: 64px 32px;
+            box-shadow: 0 10px 24px rgba(37,99,235,0.08);
+        }
+        .reserve-band h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -0.04em; margin-bottom: 12px; }
+        .reserve-band p { font-size: 17px; color: var(--gray-mid); margin-bottom: 28px; }
+
+        /* Footer */
+        footer { background: var(--gray-dark); color: var(--white); padding: 80px 48px 40px; }
+        .footer-main { max-width: 1100px; margin: 0 auto; }
+        .footer-cta h2 { font-size: clamp(48px, 12vw, 120px); font-weight: 900; letter-spacing: -0.05em; line-height: 0.85; margin-bottom: 32px; }
+        .footer-cta a { font-size: 24px; font-weight: 600; color: var(--white); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
+        .footer-cta a:hover { color: var(--accent); }
+        .footer-social { display: flex; gap: 16px; margin-top: 28px; }
+        .footer-social a {
+            width: 52px; height: 52px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--white);
+            text-decoration: none; transition: all 0.5s var(--ease-smooth);
+        }
+        .footer-social a:hover { background: var(--white); color: var(--black); transform: translateY(-6px); }
+        .footer-bottom {
+            max-width: 1100px; margin: 64px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: space-between; font-family: monospace; font-size: 12px;
+            text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-light); flex-wrap: wrap; gap: 12px;
+        }
+        .footer-links { display: flex; gap: 28px; }
+        .footer-links a { color: var(--gray-light); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
+        .footer-links a:hover { color: var(--white); }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
+            display: none; align-items: center; justify-content: center; z-index: 1000; padding: 24px;
+        }
+        .modal-overlay.is-open { display: flex; }
+        .modal {
+            background: var(--white); border-radius: 24px; max-width: 480px; width: 100%;
+            padding: 40px; position: relative; max-height: 92vh; overflow-y: auto;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.3);
+        }
+        .modal-close {
+            position: absolute; top: 20px; right: 20px; width: 36px; height: 36px;
+            border: 1px solid rgba(0,0,0,0.15); border-radius: 50%; background: var(--white); cursor: pointer;
+            font-size: 18px; line-height: 1; display: flex; align-items: center; justify-content: center;
+            color: var(--gray-mid); transition: all 0.3s var(--ease-smooth);
+        }
+        .modal-close:hover { border-color: var(--black); color: var(--black); }
+        .modal-badge {
+            display: inline-block; font-family: monospace; font-size: 12px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-deep);
+            background: var(--accent-soft); padding: 7px 14px; border-radius: 999px; margin-bottom: 20px;
+        }
+        .modal h2 { font-size: 30px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 10px; }
+        .modal-sub { font-size: 15px; color: var(--gray-mid); margin-bottom: 24px; line-height: 1.5; }
+        .field { margin-bottom: 18px; }
+        .field label {
+            display: block; font-size: 12px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.08em; color: var(--gray-mid); margin-bottom: 8px;
+        }
+        .field input, .field select {
+            width: 100%; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.18); border-radius: 12px;
+            font-size: 16px; font-family: inherit; color: var(--black); outline: none; background: var(--white);
+            transition: border-color 0.3s var(--ease-smooth);
+        }
+        .field input:focus, .field select:focus { border-color: var(--accent); }
+        .modal .btn-primary { width: 100%; padding: 18px; text-align: center; margin-top: 6px; }
+        .modal-fine { font-size: 12px; color: var(--gray-light); text-align: center; margin-top: 16px; line-height: 1.5; }
+        .modal-error { color: #dc2626; font-size: 14px; margin-top: 12px; text-align: center; display: none; }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+            section { padding: 64px 24px; }
+            .hero { padding: 120px 24px 64px; }
+            footer { padding: 64px 24px 32px; }
+            .modal { padding: 32px 24px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland" style="height: 32px; width: auto; display: block;"></a>
+        <button type="button" class="btn-primary btn-nav" data-open-modal>Reserve, free</button>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <span class="hero-tag">Free &middot; Live &middot; Mon 22 June &middot; 7pm AEST</span>
+        <h1>Run your marketing<br><span class="accent">with AI.</span></h1>
+        <p class="hero-sub">60 minutes, live. I build a real marketing workflow on screen, start to finish. No slides, no theory, just the work.</p>
+        <div class="hero-cta">
+            <button type="button" class="btn-primary" data-open-modal>Reserve my spot, free</button>
+        </div>
+        <p class="hero-meta">60 minutes &middot; Live on Google Meet &middot; Replay sent to everyone</p>
+
+        <div class="trust-strip">
+            <img src="images/ebay/logo.svg" alt="eBay">
+            <span class="txt">Prompt Cowboy</span>
+            <span class="txt">NextDocs</span>
+            <img src="images/ogilvy/logo.svg" alt="Ogilvy">
+            <img src="images/startmate/logo.svg" alt="Startmate">
+        </div>
+    </section>
+
+    <!-- The 60 minutes -->
+    <section>
+        <div class="section-tag">The 60 minutes</div>
+        <h2 class="section-title">Three blocks.<br><span class="muted">No slides. Just the screen.</span></h2>
+        <div class="agenda">
+            <div class="agenda-card">
+                <span class="agenda-time">0-10 min</span>
+                <div>
+                    <h3>What we're building</h3>
+                    <p>The setup. How research, positioning, content and distribution run from one AI workflow instead of ten disconnected tools.</p>
+                </div>
+            </div>
+            <div class="agenda-card">
+                <span class="agenda-time">10-45 min</span>
+                <div>
+                    <h3>Live build on screen</h3>
+                    <p>I take a real marketing job and build it in front of you. Research a buyer, write the positioning, turn it into a week of content, set up the follow-up. Live, on camera.</p>
+                </div>
+            </div>
+            <div class="agenda-card">
+                <span class="agenda-time">45-60 min</span>
+                <div>
+                    <h3>Your questions</h3>
+                    <p>Bring any marketing or AI question. Positioning, launches, content, what to automate. I answer live.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who shows up -->
+    <section>
+        <div class="section-tag">Who shows up</div>
+        <h2 class="section-title">Built for you if&hellip;</h2>
+        <ul class="who-list">
+            <li>You're a marketer or product marketer who keeps hearing about AI but hasn't seen it actually run real marketing work.</li>
+            <li>You've got a launch or a content engine to build and you're sick of tool lists and prompt packs that fall apart on a real deadline.</li>
+            <li>You want AI to compound your craft, not replace it.</li>
+            <li>You'd rather copy a working system than figure it out from scratch.</li>
+        </ul>
+    </section>
+
+    <!-- Proof -->
+    <section>
+        <div class="proof-band">
+            <p>I've launched products from zero to $180M, scaled a tool from 2,000 to 350,000 users, and spent the last year building marketing systems with AI in real launches. This is the setup I actually use.</p>
+            <div class="who">Will Mulholland &middot; eBay, NextDocs, Prompt Cowboy</div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section>
+        <div class="section-tag">Quick answers</div>
+        <h2 class="section-title">Before you sign up</h2>
+        <div class="faq-item">
+            <h3>Is it really free?</h3>
+            <p>Yes. No card, no catch. Drop your email and I'll send the Google Meet link and a calendar invite.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Can't make it live, is there a replay?</h3>
+            <p>Yes. Everyone who registers gets the replay by email within 24 hours.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Do I need to know how to code?</h3>
+            <p>No. You describe what you want, the AI builds it. You'll watch it happen on screen.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Who's running it?</h3>
+            <p>Me, Will Mulholland. I've done product marketing at eBay, NextDocs and Prompt Cowboy, and I build marketing systems with AI every day.</p>
+        </div>
+    </section>
+
+    <!-- Reserve band -->
+    <section>
+        <div class="reserve-band">
+            <h2>The 60 minutes that change how you do marketing.</h2>
+            <p>Monday 22 June, 7pm AEST. Live on Google Meet. Free.</p>
+            <button type="button" class="btn-primary" data-open-modal>Reserve my spot, free</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-main">
+            <div class="footer-cta">
+                <h2>SEE YOU<br>THERE.</h2>
+                <a href="mailto:wcmulholland@gmail.com">wcmulholland@gmail.com</a>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/willmulholland/" title="LinkedIn">Li</a>
+                    <a href="https://www.youtube.com/@WillMulholland" title="YouTube">Yt</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Will Mulholland. All rights reserved.</span>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Reserve modal -->
+    <div class="modal-overlay" id="reserveModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal">
+            <button type="button" class="modal-close" data-close-modal aria-label="Close">&times;</button>
+            <span class="modal-badge">Free &middot; Mon 22 June &middot; 7pm AEST</span>
+            <h2 id="modalTitle">Reserve your spot</h2>
+            <p class="modal-sub">Drop your details and I'll send the Google Meet link and calendar invite straight to your inbox.</p>
+            <form id="reserveForm">
+                <div class="field">
+                    <label for="firstName">First name</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
+                </div>
+                <div class="field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="jane@yourbusiness.com" required>
+                </div>
+                <div class="field">
+                    <label for="segment">What best describes you?</label>
+                    <select id="segment" name="segment" required>
+                        <option value="" disabled selected>Pick one...</option>
+                        <option>I'm a product marketer</option>
+                        <option>I'm a marketer, want to use AI better</option>
+                        <option>I'm a founder doing my own marketing</option>
+                        <option>I run an agency / studio</option>
+                        <option>I want to AI-proof my marketing career</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary" id="reserveSubmit">Reserve my spot, free</button>
+                <p class="modal-error" id="reserveError"></p>
+                <p class="modal-fine">I'll email the Meet link and calendar invite. Unsubscribe anytime. I never sell or share your details.</p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var overlay = document.getElementById('reserveModal');
+            var form = document.getElementById('reserveForm');
+            var errEl = document.getElementById('reserveError');
+            var submitBtn = document.getElementById('reserveSubmit');
+
+            function openModal() {
+                overlay.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
+                setTimeout(function () { document.getElementById('firstName').focus(); }, 50);
+            }
+            function closeModal() {
+                overlay.classList.remove('is-open');
+                document.body.style.overflow = '';
+            }
+
+            document.querySelectorAll('[data-open-modal]').forEach(function (b) {
+                b.addEventListener('click', openModal);
+            });
+            document.querySelectorAll('[data-close-modal]').forEach(function (b) {
+                b.addEventListener('click', closeModal);
+            });
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay) closeModal();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
+            });
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                errEl.style.display = 'none';
+                var firstName = document.getElementById('firstName').value.trim();
+                var email = document.getElementById('email').value.trim();
+                var segment = document.getElementById('segment').value;
+                if (!firstName || !email) return;
+
+                var original = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Reserving...';
+
+                fetch('/api/workshop-register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ firstName: firstName, email: email, segment: segment })
+                }).then(function (r) {
+                    if (r.ok) {
+                        window.location.href = '/workshop-confirmed';
+                    } else {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = original;
+                        errEl.textContent = 'Something went wrong. Try again or email wcmulholland@gmail.com.';
+                        errEl.style.display = 'block';
+                    }
+                }).catch(function () {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = original;
+                    errEl.textContent = 'Network error. Try again in a moment.';
+                    errEl.style.display = 'block';
+                });
+            });
+
+            // Auto-open if URL has #reserve
+            if (window.location.hash === '#reserve') openModal();
+        })();
+    </script>
+</body>
+</html>

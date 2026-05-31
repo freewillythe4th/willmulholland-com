@@ -1,6 +1,8 @@
 {
     "routes": [
       { "handle": "filesystem" },
+      { "src": "/workshop", "dest": "/workshop.html" },
+      { "src": "/workshop-confirmed", "dest": "/workshop-confirmed.html" },
       { "src": "/resource-download", "dest": "/resource-download.html" },
       { "src": "/check-inbox", "dest": "/check-inbox.html" },
       { "src": "/welcome-survey", "dest": "/welcome-survey.html" },
