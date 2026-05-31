@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work with me | Will Mulholland</title>
-    <meta name="description" content="1:1 coaching, systems setup, launch sprints, workshops, or sponsorship for product marketers and SaaS founders using AI in their day-to-day PMM work.">
+    <title>Will Mulholland | AI marketing systems installer</title>
+    <meta name="description" content="I'm the senior marketer who installs working AI systems for B2B SaaS marketing teams. You get a working system in your stack in weeks, and your team knows how to use it after I leave. Past clients: Blinq, eBay, Prompt Cowboy.">
     <meta name="robots" content="index,follow">
-    <link rel="canonical" href="https://willmulholland.com/work-with-me">
-    <meta property="og:title" content="Work with me | Will Mulholland">
-    <meta property="og:description" content="1:1 coaching, systems setup, launch sprints, workshops, or sponsorship for product marketers and SaaS founders.">
+    <link rel="canonical" href="https://willmulholland.com/">
+    <meta property="og:title" content="Will Mulholland | AI marketing systems installer">
+    <meta property="og:description" content="I'm the senior marketer who installs working AI systems for B2B SaaS marketing teams. You get a working system in your stack in weeks, and your team knows how to use it after I leave. Past clients: Blinq, eBay, Prompt Cowboy.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://willmulholland.com/work-with-me">
+    <meta property="og:url" content="https://willmulholland.com/">
     <meta property="og:image" content="https://willmulholland.com/og-image.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Work with me | Will Mulholland">
-    <meta name="twitter:description" content="1:1 coaching, systems setup, launch sprints, workshops, or sponsorship.">
+    <meta name="twitter:title" content="Will Mulholland | AI marketing systems installer">
+    <meta name="twitter:description" content="I'm the senior marketer who installs working AI systems for B2B SaaS marketing teams. You get a working system in your stack in weeks, and your team knows how to use it after I leave. Past clients: Blinq, eBay, Prompt Cowboy.">
     <meta name="twitter:image" content="https://willmulholland.com/og-image.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -25,14 +27,19 @@
         }
 
         :root {
-            --black: #000000;
+            --black: #1F1511;
+            --ink: #1F1511;
+            --cream: #F2EDE3;
+            --cream-soft: #EBE5D8;
             --white: #FFFFFF;
-            --gray-dark: #0A0A0A;
-            --gray-mid: #525252;
-            --gray-light: #737373;
+            --gray-dark: #1F1511;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
             --accent: #2563EB;
             --accent-soft: #DBEAFE;
             --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --warm-shadow-hover: 0 20px 48px rgba(31,21,17,0.16), 0 4px 12px rgba(31,21,17,0.08);
             --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -42,18 +49,80 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: radial-gradient(1200px 500px at 20% -10%, rgba(37,99,235,0.08), transparent 60%), var(--white);
-            color: var(--black);
+            background: var(--cream);
+            color: var(--ink);
             cursor: auto;
             overflow-x: hidden;
             line-height: 1.5;
             letter-spacing: -0.02em;
         }
 
+        /* Display typography */
+        .hero h1,
+        .section-title,
+        .footer-cta h2,
+        .ig-copy h3,
+        .about-content h3,
+        .foryou-col h3,
+        .foryou-cta h3 {
+            font-family: 'Instrument Serif', 'Cooper Hewitt', Georgia, serif;
+            font-weight: 400;
+            letter-spacing: 0;
+            font-feature-settings: "kern" 1, "liga" 1;
+        }
+
+        .hero h1 {
+            line-height: 1.05;
+            letter-spacing: -0.005em;
+        }
+
+        .section-title {
+            line-height: 1.05;
+            letter-spacing: -0.005em;
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.9s var(--ease-smooth), transform 0.9s var(--ease-smooth);
+            will-change: opacity, transform;
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal[data-delay="1"] { transition-delay: 0.08s; }
+        .reveal[data-delay="2"] { transition-delay: 0.16s; }
+        .reveal[data-delay="3"] { transition-delay: 0.24s; }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+        }
+
         .cursor {
             display: none !important;
         }
 
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--black);
+            border-radius: 50%;
+            background: var(--white);
+            mix-blend-mode: difference;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.15s var(--ease-smooth);
+        }
+
+        .cursor.hover {
+            transform: translate(-50%, -50%) scale(2.5);
+        }
+
+        /* Selection */
         ::selection {
             background: var(--accent);
             color: var(--white);
@@ -80,8 +149,24 @@
             text-decoration: none;
         }
 
+        .nav-logo-mark {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -0.06em;
+            line-height: 1;
+            text-transform: lowercase;
+        }
+
+        .nav-logo-name {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1;
+        }
+
         .nav-links {
             display: flex;
+            align-items: center;
             gap: 32px;
         }
 
@@ -99,6 +184,7 @@
             opacity: 0.6;
         }
 
+        /* Burger menu (mobile) */
         .nav-toggle {
             display: none;
             background: transparent;
@@ -126,54 +212,198 @@
             transform: translateY(-7px) rotate(-45deg);
         }
 
-        /* Hero */
+        /* Hero Section */
         .hero {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 160px 48px 64px;
+            padding: 120px 48px;
             position: relative;
             overflow: hidden;
             width: 100%;
+            max-width: none;
+            margin: 0;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            width: 520px;
-            height: 520px;
+            width: 620px;
+            height: 620px;
             border-radius: 999px;
-            background: radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.06) 45%, transparent 70%);
-            top: -260px;
-            left: -120px;
-            filter: blur(2px);
+            background: radial-gradient(circle, rgba(31,21,17,0.05) 0%, transparent 65%);
+            top: -320px;
+            left: -180px;
             pointer-events: none;
         }
 
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 480px;
+            height: 480px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%);
+            right: -260px;
+            bottom: -340px;
+            pointer-events: none;
+        }
+
+        .hero-tag {
+            font-family: monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-mid);
+            margin-bottom: 32px;
+            overflow: hidden;
+        }
+
+        .hero-tag span {
+            display: inline-block;
+            animation: slideUp 1s var(--ease-smooth) forwards;
+            animation-delay: 0.2s;
+            transform: translateY(100%);
+        }
+
         .hero h1 {
-            font-size: clamp(48px, 9vw, 120px);
+            font-size: clamp(48px, 12vw, 160px);
             font-weight: 700;
             letter-spacing: -0.05em;
-            line-height: 0.95;
-            margin-bottom: 28px;
+            line-height: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero h1 .line span {
+            display: inline-block;
+            animation: slideUp 1s var(--ease-smooth) forwards;
+            transform: translateY(100%);
+        }
+
+        .hero h1 .line:nth-child(1) span { animation-delay: 0.3s; }
+        .hero h1 .line:nth-child(2) span { animation-delay: 0.4s; }
+        .hero h1 .line:nth-child(3) span {
+            animation-delay: 0.5s;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 70%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: clamp(18px, 2.5vw, 28px);
+            color: var(--gray-mid);
+            max-width: 600px;
+            margin-top: 32px;
+            overflow: hidden;
+        }
+
+        .hero-sub span {
+            display: inline-block;
+            animation: slideUp 1s var(--ease-smooth) forwards;
+            animation-delay: 0.7s;
+            transform: translateY(100%);
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            margin-top: 48px;
+            overflow: hidden;
             position: relative;
             z-index: 2;
         }
 
-        .hero-sub {
-            font-size: clamp(18px, 2.2vw, 24px);
+        /* hero-proof removed for cleaner layout */
+
+        .hero-cta > * {
+            animation: slideUp 1s var(--ease-smooth) forwards;
+            animation-delay: 0.9s;
+            transform: translateY(100%);
+        }
+
+        .btn-primary {
+            padding: 16px 32px;
+            background: var(--black);
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: none;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: all 0.5s var(--ease-smooth);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent);
+            border-radius: 16px;
+        }
+
+        .btn-secondary {
+            padding: 16px 32px;
+            background: transparent;
+            color: var(--black);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 1px solid var(--black);
+            border-radius: 999px;
+            text-decoration: none;
+            transition: all 0.5s var(--ease-smooth);
+        }
+
+        .btn-secondary:hover {
+            border-radius: 16px;
+        }
+
+        /* Marquee */
+        .marquee-container {
+            overflow: hidden;
+            padding: 32px 0;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .marquee {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        .marquee:hover {
+            animation-play-state: paused;
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            padding: 0 48px;
+            font-family: monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
             color: var(--gray-mid);
-            max-width: 720px;
-            position: relative;
-            z-index: 2;
+            white-space: nowrap;
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
         }
 
         /* Sections */
         section {
-            padding: 64px 48px;
-            max-width: 1100px;
+            padding: 80px 48px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -198,80 +428,431 @@
         }
 
         .section-title {
-            font-size: clamp(32px, 5vw, 56px);
+            font-size: clamp(36px, 6vw, 72px);
             font-weight: 700;
-            letter-spacing: -0.04em;
-            line-height: 1;
-            margin-bottom: 48px;
+            letter-spacing: -0.05em;
+            line-height: 0.95;
+            margin-bottom: 64px;
         }
 
-        /* Steps */
-        .steps-grid {
+        .section-title .muted {
+            color: var(--gray-light);
+        }
+
+        /* Insight Cards */
+        .insight-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 24px;
         }
 
         @media (max-width: 900px) {
-            .steps-grid { grid-template-columns: 1fr; }
+            .insight-grid { grid-template-columns: 1fr; }
         }
 
-        .step-card {
-            background: var(--white);
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 16px;
-            padding: 32px;
-            transition: transform 0.5s var(--ease-smooth), border-color 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
+        .insight-card {
+            background: var(--ink);
+            color: var(--white);
+            padding: 36px;
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--warm-shadow);
+            transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
         }
 
-        .step-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(37,99,235,0.4);
-            box-shadow: 0 12px 28px rgba(37,99,235,0.1);
+        .insight-card:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: var(--warm-shadow-hover);
         }
 
-        .step-number {
+        .insight-card:nth-child(1) {
+            border-radius: 100px 24px 24px 24px;
+        }
+
+        .insight-card:nth-child(2) {
+            background: var(--accent);
+            border-radius: 24px 100px 24px 100px;
+        }
+
+        .insight-card:nth-child(3) {
+            border-radius: 24px 24px 100px 24px;
+        }
+
+        .insight-card-tag {
             font-family: monospace;
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--accent);
+            opacity: 0.6;
+        }
+
+        .insight-card h3 {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
             margin-bottom: 16px;
         }
 
-        .step-card h3 {
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-            margin-bottom: 12px;
-        }
-
-        .step-card p {
+        .insight-card p {
             font-size: 16px;
             line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        /* Case Studies */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 64px 48px;
+        }
+
+        @media (max-width: 800px) {
+            .cases-grid { grid-template-columns: 1fr; }
+        }
+
+        .case-card {
+            position: relative;
+        }
+
+        .case-card:nth-child(even) {
+            margin-top: 80px;
+        }
+
+        @media (max-width: 800px) {
+            .case-card:nth-child(even) { margin-top: 0; }
+        }
+
+        .case-card {
+            transition: transform 0.5s var(--ease-smooth);
+        }
+
+        .case-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .case-image {
+            aspect-ratio: 16/9;
+            background: var(--ink);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            box-shadow: var(--warm-shadow);
+            transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
+        }
+
+        .case-card:hover .case-image {
+            transform: scale(1.015);
+            box-shadow: var(--warm-shadow-hover);
+        }
+
+        .case-number {
+            font-size: clamp(48px, 10vw, 120px);
+            font-weight: 900;
+            color: var(--accent);
+            letter-spacing: -0.05em;
+        }
+
+        .case-metric {
+            font-family: monospace;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-light);
+            margin-top: 8px;
+        }
+
+        .case-content {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .case-title {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+
+        .case-subtitle {
+            font-family: monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-mid);
+            margin-bottom: 16px;
+        }
+
+        .case-desc {
+            color: var(--gray-mid);
+            font-size: 15px;
+            line-height: 1.6;
+            max-width: 400px;
+        }
+
+        .case-arrow {
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s var(--ease-smooth);
+            flex-shrink: 0;
+        }
+
+        .case-card:hover .case-arrow {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--white);
+        }
+
+        /* For You Section */
+        .foryou-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 64px;
+        }
+
+        @media (max-width: 800px) {
+            .foryou-grid { grid-template-columns: 1fr; }
+        }
+
+        .foryou-col h3 {
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 32px;
+        }
+
+        .foryou-list {
+            list-style: none;
+        }
+
+        .foryou-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            font-size: 18px;
             color: var(--gray-mid);
         }
 
-        /* Form section */
-        .form-section {
-            padding-top: 32px;
+        .foryou-list li::before {
+            content: '→';
+            color: var(--accent);
+            font-weight: 700;
         }
 
-        .form-wrap {
-            background: var(--white);
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 16px;
-            padding: 16px;
+        .foryou-cta {
+            margin-top: 64px;
+            padding: 48px;
+            background: var(--gray-dark);
+            color: var(--white);
+            border-radius: 24px;
+        }
+
+        .foryou-cta h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .foryou-cta p {
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(180deg, #f8fbff 0%, #f3f7ff 100%);
+            color: var(--black);
+            padding: 56px 28px;
+            text-align: center;
+            border-radius: 18px;
+            margin-top: 20px;
+            border: 1px solid rgba(37,99,235,0.16);
+            box-shadow: 0 10px 24px rgba(37,99,235,0.08);
+        }
+
+        .newsletter .section-tag::before {
+            background: var(--accent);
+        }
+
+        .newsletter .section-title {
+            color: var(--black);
+            font-size: clamp(34px, 5.2vw, 52px);
+            margin-bottom: 16px;
+        }
+
+        .newsletter .section-title .muted {
+            color: var(--gray-mid);
+        }
+
+        .newsletter-desc {
+            font-size: 16px;
+            color: var(--gray-mid);
+            max-width: 620px;
+            margin: 0 auto 14px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 16px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 600px) {
+            .newsletter-form { flex-direction: column; }
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 14px 18px;
+            background: #fff;
+            border: 1px solid rgba(0,0,0,0.15);
+            color: var(--black);
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s var(--ease-smooth);
+        }
+
+        .newsletter-form input::placeholder {
+            color: var(--gray-light);
+        }
+
+        .newsletter-form input:focus {
+            border-color: var(--accent);
+        }
+
+        .newsletter-form button {
+            padding: 14px 24px;
+            background: var(--accent);
+            color: var(--white);
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s var(--ease-smooth);
+        }
+
+        .newsletter-form button:hover {
+            background: var(--accent-deep);
+        }
+
+        .newsletter-meta {
+            font-family: monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--gray-light);
+            margin-top: 16px;
+        }
+
+        .ig-feature {
+            margin: 20px auto 18px;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            border: 1px solid rgba(31,21,17,0.08);
+            border-radius: 18px;
+            overflow: hidden;
+            background: #fff;
+            text-align: left;
+            box-shadow: var(--warm-shadow);
+            transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
+        }
+
+        .ig-feature:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--warm-shadow-hover);
+        }
+
+        .ig-media { position: relative; background: #000; min-height: 260px; }
+        .ig-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .ig-play {
+            position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+            background: linear-gradient(0deg, rgba(0,0,0,0.35), rgba(0,0,0,0.1));
+        }
+        .ig-play-dot {
+            width: 62px; height: 62px; border-radius: 14px; background: rgba(37,99,235,0.94);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .ig-copy { padding: 20px 22px; }
+        .ig-badge { display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; padding: 5px 9px; border-radius: 999px; font-weight: 700; margin-right: 6px; }
+        .ig-badge.primary { background: var(--accent-soft); color: var(--accent-deep); }
+        .ig-badge.ghost { border: 1px solid rgba(0,0,0,0.2); color: var(--gray-mid); }
+        .ig-copy h3 { font-size: clamp(32px, 3vw, 44px); line-height: 1.04; letter-spacing: -0.03em; margin: 10px 0; }
+        .ig-copy p { color: var(--gray-mid); margin-bottom: 8px; }
+        .ig-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+
+        @media (max-width: 900px) {
+            .ig-feature { grid-template-columns: 1fr; }
+            .ig-copy h3 { font-size: 34px; }
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        @media (max-width: 800px) {
+            .about-grid { grid-template-columns: 1fr; }
+        }
+
+        .about-content h3 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+        }
+
+        .about-content p {
+            font-size: 18px;
+            color: var(--gray-mid);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .about-image {
+            aspect-ratio: 1;
+            background: var(--gray-dark);
+            border-radius: 100px 24px 100px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-initials {
+            font-size: 120px;
+            font-weight: 900;
+            color: rgba(255,255,255,0.1);
+            letter-spacing: -0.05em;
         }
 
         /* Footer */
         footer {
             background: var(--gray-dark);
             color: var(--white);
-            padding: 96px 48px 40px;
-            margin-top: 64px;
+            padding: 120px 48px 48px;
         }
 
         .footer-main {
@@ -285,15 +866,15 @@
         }
 
         .footer-cta h2 {
-            font-size: clamp(64px, 12vw, 160px);
+            font-size: clamp(64px, 15vw, 200px);
             font-weight: 900;
             letter-spacing: -0.05em;
             line-height: 0.85;
-            margin-bottom: 32px;
+            margin-bottom: 48px;
         }
 
         .footer-cta a {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 600;
             color: var(--white);
             text-decoration: none;
@@ -308,6 +889,11 @@
             font-size: 16px;
             color: var(--gray-light);
             margin-top: 16px;
+        }
+
+        .footer-cta .btn-primary {
+            margin-top: 32px;
+            display: inline-block;
         }
 
         .footer-social {
@@ -326,7 +912,6 @@
             color: var(--white);
             text-decoration: none;
             transition: all 0.5s var(--ease-smooth);
-            font-size: 14px;
         }
 
         .footer-social a:hover {
@@ -337,7 +922,7 @@
 
         .footer-bottom {
             max-width: 1400px;
-            margin: 96px auto 0;
+            margin: 120px auto 0;
             padding-top: 24px;
             border-top: 1px solid rgba(255,255,255,0.1);
             display: flex;
@@ -363,6 +948,279 @@
         .footer-links a:hover {
             color: var(--white);
         }
+
+        /* Animations */
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Nav CTA */
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: var(--ink);
+            color: var(--white) !important;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: none !important;
+            letter-spacing: 0 !important;
+            text-decoration: none;
+            transition: background 0.4s var(--ease-smooth), transform 0.3s var(--ease-smooth);
+        }
+        .nav-cta:hover {
+            background: var(--accent);
+            transform: translateY(-1px);
+            opacity: 1 !important;
+        }
+        .nav-cta-scarcity {
+            font-size: 11px;
+            opacity: 0.7;
+            font-weight: 400;
+        }
+
+        /* Offer package section */
+        .package-section {
+            background: var(--cream-soft);
+            margin: 0;
+            padding: 100px 48px;
+            max-width: none;
+        }
+        .package-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .package-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 48px;
+            align-items: start;
+            padding: 64px 0;
+            border-bottom: 1px solid rgba(31,21,17,0.08);
+        }
+        .package-row:last-child { border-bottom: none; }
+        .package-content {
+            max-width: 720px;
+        }
+        .package-counter {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(80px, 11vw, 180px);
+            font-weight: 400;
+            line-height: 0.85;
+            color: var(--ink);
+            opacity: 0.18;
+            user-select: none;
+        }
+        @media (max-width: 800px) {
+            .package-row { grid-template-columns: 1fr; gap: 16px; padding: 48px 0; }
+            .package-counter { font-size: 72px; order: -1; opacity: 0.25; }
+            .package-section { padding: 60px 24px; }
+        }
+        .package-eyebrow {
+            font-family: monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--gray-mid);
+            margin-bottom: 14px;
+        }
+        .package-row h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 18px;
+            color: var(--ink);
+        }
+        .package-row p {
+            font-size: 17px;
+            color: var(--gray-mid);
+            line-height: 1.6;
+            margin-bottom: 12px;
+            max-width: 460px;
+        }
+        .package-preview {
+            background: var(--ink);
+            border-radius: 14px;
+            aspect-ratio: 16/10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.5);
+            font-family: monospace;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            box-shadow: var(--warm-shadow);
+            border: 1px dashed rgba(255,255,255,0.15);
+        }
+
+        /* Timeline */
+        .timeline-section {
+            padding: 100px 48px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        @media (max-width: 800px) {
+            .timeline-section { padding: 60px 24px; }
+        }
+        .timeline-block {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(31,21,17,0.12);
+        }
+        .timeline-pill {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--accent-soft);
+            color: var(--accent-deep);
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        .timeline-pill.warm { background: rgba(31,21,17,0.08); color: var(--ink); }
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+        }
+        @media (max-width: 900px) { .timeline-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 500px) { .timeline-grid { grid-template-columns: 1fr; } }
+        .timeline-day {
+            padding: 20px;
+            background: #fff;
+            border: 1px solid rgba(31,21,17,0.08);
+            border-radius: 12px;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+        }
+        .timeline-day-label {
+            font-family: monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-light);
+            margin-bottom: 8px;
+        }
+        .timeline-day h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--ink);
+            line-height: 1.2;
+        }
+        .timeline-day h4.workshop { color: var(--accent); }
+        .timeline-day-meta {
+            font-size: 12px;
+            color: var(--gray-light);
+            margin-bottom: 6px;
+        }
+        .timeline-day p {
+            font-size: 13px;
+            color: var(--gray-mid);
+            line-height: 1.45;
+            margin-top: auto;
+        }
+        .timeline-prework {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 16px;
+        }
+        @media (max-width: 700px) { .timeline-prework { grid-template-columns: 1fr; } }
+        .timeline-prework h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .timeline-prework p { font-size: 14px; color: var(--gray-mid); line-height: 1.55; }
+
+        /* FAQ */
+        .faq-section {
+            padding: 100px 48px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        @media (max-width: 800px) { .faq-section { padding: 60px 24px; } }
+        .faq-item {
+            border-bottom: 1px solid rgba(31,21,17,0.12);
+        }
+        .faq-q {
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            border: 0;
+            padding: 24px 0;
+            font-family: inherit;
+            font-size: 19px;
+            font-weight: 600;
+            color: var(--ink);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+        .faq-q::after {
+            content: '+';
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--gray-mid);
+            transition: transform 0.3s var(--ease-smooth);
+        }
+        .faq-item.is-open .faq-q::after {
+            transform: rotate(45deg);
+        }
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s var(--ease-smooth);
+            color: var(--gray-mid);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .faq-a-inner { padding: 0 0 24px; max-width: 720px; }
+        .faq-item.is-open .faq-a { max-height: 400px; }
+
+        /* Footer sitemap */
+        .footer-sitemap {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin: 80px auto 0;
+            max-width: 1400px;
+            padding-top: 48px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        @media (max-width: 800px) {
+            .footer-sitemap { grid-template-columns: 1fr 1fr; }
+        }
+        .footer-col h5 {
+            font-family: monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--gray-light);
+            margin-bottom: 16px;
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 10px; }
+        .footer-col a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s var(--ease-smooth);
+        }
+        .footer-col a:hover { color: var(--accent); }
+        .footer-col p { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.55; }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -395,26 +1253,141 @@
             body.nav-open {
                 overflow: hidden;
             }
-            section { padding: 56px 24px; }
-            .hero { padding: 120px 24px 48px; }
-            footer { padding: 64px 24px 32px; }
+            section { padding: 80px 24px; }
+            .hero { padding: 120px 24px; }
+            .newsletter { padding: 80px 24px; }
+            footer { padding: 80px 24px 32px; }
             .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
             .footer-links { justify-content: center; }
+        }
+
+        /* AI Install Sprint deep dive */
+        .install-deep-section {
+            background: var(--cream);
+            padding: 80px 48px;
+        }
+        .install-card {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--cream-soft);
+            border: 1.5px solid var(--ink);
+            border-radius: 24px;
+            padding: 64px 56px;
+        }
+        .install-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr 1fr;
+            gap: 56px;
+            align-items: start;
+        }
+        .install-title {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(36px, 4.5vw, 52px);
+            font-weight: 400;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            color: var(--ink);
+            letter-spacing: -0.005em;
+        }
+        .install-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--gray-mid);
+        }
+        .install-deliverables-label,
+        .install-pricing-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 24px;
+        }
+        .install-pricing-sub {
+            font-size: 13px;
+            color: var(--gray-light);
+            margin-top: -16px;
+            margin-bottom: 28px;
+        }
+        .install-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .install-list li {
+            margin-bottom: 28px;
+            padding-left: 28px;
+            position: relative;
+        }
+        .install-list li:last-child { margin-bottom: 0; }
+        .install-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 1px;
+            color: var(--ink);
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .install-list h5 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .install-list p {
+            font-size: 14px;
+            color: var(--gray-mid);
+            line-height: 1.55;
+        }
+        .pricing-tier {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 28px;
+            align-items: stretch;
+        }
+        .pricing-tier:last-child { margin-bottom: 0; }
+        .pricing-tier-bar {
+            width: 4px;
+            flex-shrink: 0;
+            border-radius: 2px;
+        }
+        .pricing-tier-content {
+            flex: 1;
+        }
+        .pricing-tier-label {
+            font-size: 14px;
+            color: var(--ink);
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+        .pricing-tier-price {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(32px, 4vw, 44px);
+            font-weight: 400;
+            color: var(--ink);
+            line-height: 1;
+        }
+        @media (max-width: 900px) {
+            .install-card { padding: 40px 24px; }
+            .install-grid { grid-template-columns: 1fr; gap: 40px; }
+            .install-deep-section { padding: 60px 24px; }
         }
     </style>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
     <!-- Navigation -->
     <nav>
-        <a href="index.html" class="nav-logo" style="mix-blend-mode: normal; isolation: isolate; position: relative; z-index: 2000;"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland" style="height: 32px; width: auto; display: block; mix-blend-mode: normal; position: relative; z-index: 2000;"></a>
+        <a href="/" class="nav-logo" style="mix-blend-mode: normal; isolation: isolate; position: relative; z-index: 2000;"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland" style="height: 32px; width: auto; display: block; mix-blend-mode: normal; position: relative; z-index: 2000;"></a>
         <div class="nav-links" id="navLinks">
-            <a href="index.html#insight">Insight</a>
-            <a href="index.html#proof">Proof</a>
+            <a href="#insight">Insight</a>
+            <a href="#packages">Services</a>
+            <a href="#proof">Work</a>
             <a href="podcast-charlotte-norman.html">Intelligent Growth</a>
-            <a href="work.html">Case Studies</a>
-            <a href="/work-with-me">Work with me</a>
-            <a href="index.html#newsletter">Newsletter</a>
-            <a href="index.html#contact">Contact</a>
+            <a href="#faq">FAQ</a>
+            <a href="/work-with-me" class="nav-cta">Build it with me</a>
         </div>
         <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
             <span class="nav-toggle-bar"></span>
@@ -423,73 +1396,586 @@
         </button>
     </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <h1>Work with me</h1>
-        <p class="hero-sub">I help SaaS marketing teams use AI to make the numbers go up. Fractional work, AI-native marketing coaching & systems setup, speaking, and sponsorship. Pick what fits.</p>
+    <!-- Hero - Compact to keep subheader above fold -->
+    <section class="hero" style="min-height: auto; padding: 140px 48px 80px;">
+        <h1 style="font-size: clamp(40px, 6vw, 80px); line-height: 1.05; position: relative; z-index: 2; max-width: 1100px;">
+            <span class="line"><span>Let's turn your AI dabbling</span></span>
+            <span class="line"><span>into a working marketing system.</span></span>
+        </h1>
+        <p class="hero-sub" style="margin-top: 28px; position: relative; z-index: 2; max-width: 760px; font-size: clamp(18px, 1.7vw, 22px); line-height: 1.5;">
+            <span>I install AI marketing systems for B2B SaaS teams. Live in your stack in 2 weeks, with your team trained to run it.</span>
+        </p>
+        <div class="hero-cta" style="margin-top: 36px;">
+            <a href="/work-with-me" class="btn-primary" style="background: var(--accent);">Build it with me</a>
+            <a href="#proof" class="btn-secondary" style="border-color: var(--ink); color: var(--ink);">See the work</a>
+        </div>
+
+        <div class="trust-strip" style="margin-top: 56px; max-width: 1080px; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; gap: 28px 36px; flex-wrap: wrap; opacity: 0.75; position: relative; z-index: 2;">
+            <img src="images/blinq/logo.svg" alt="Blinq" style="height: 22px; width: auto; filter: grayscale(100%);">
+            <img src="images/ebay/logo.svg" alt="eBay" style="height: 22px; width: auto; filter: grayscale(100%);">
+            <span style="display: inline-flex; align-items: center; gap: 8px;"><img src="images/prompt-cowboy/logo.png" alt="Prompt Cowboy" style="height: 22px; width: 22px; filter: grayscale(100%);"><span style="font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: #1a1a1a;">Prompt Cowboy</span></span>
+            <img src="images/kfc/logo.svg" alt="KFC" style="height: 22px; width: auto; filter: grayscale(100%);">
+            <img src="images/velocity/logo.svg" alt="Velocity Frequent Flyer" style="height: 28px; width: auto; filter: grayscale(100%);">
+            <span style="display: inline-flex; align-items: center; gap: 8px;"><img src="images/nextdocs/logo.png" alt="NextDocs" style="height: 22px; width: 22px; filter: grayscale(100%);"><span style="font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: #1a1a1a;">NextDocs</span></span>
+            <img src="images/startmate/logo.svg" alt="Startmate" style="height: 18px; width: auto; color: #1a1a1a;">
+            <img src="images/ogilvy/logo.svg" alt="Ogilvy" style="height: 22px; width: auto; color: #1a1a1a; filter: grayscale(100%);">
+            <img src="images/clemenger-bbdo/bbdo.svg" alt="BBDO" style="height: 22px; width: auto; filter: grayscale(100%);">
+        </div>
     </section>
 
-    <!-- How this works -->
-    <section id="how">
-        <div class="section-tag">How this works</div>
-        <h2 class="section-title">Three steps to get started.</h2>
+    <!-- Marquee removed for cleaner first fold -->
 
-        <div class="steps-grid">
-            <div class="step-card">
-                <div class="step-number">Step 01</div>
-                <h3>Fill out the inquiry form below</h3>
-                <p>Takes 1 to 2 minutes. Helps me understand your situation and goals.</p>
+    <!-- Services / Package -->
+    <section class="package-section" id="packages">
+        <div class="package-inner">
+            <div class="section-tag">Services</div>
+            <h2 class="section-title">Three ways we can work together.</h2>
+
+            <div class="package-row">
+                <div class="package-content">
+                    <div class="package-eyebrow">Install</div>
+                    <h3>Install your team's AI marketing systems.</h3>
+                    <p>I design and build the workflows your team needs and ship them straight into your stack, from positioning and launch automation through to comparison pages, sales enablement, and content engines. You get a working system in 2 weeks instead of a strategy deck that goes nowhere.</p>
+                    <p style="font-size: 14px; color: var(--gray-light); margin-top: 18px;">2-week sprint, fixed scope.</p>
+                </div>
+                <div class="package-counter">01</div>
             </div>
 
-            <div class="step-card">
-                <div class="step-number">Step 02</div>
-                <h3>I prepare tailored options and a quote</h3>
-                <p>Within 24 hours after you submit the form.</p>
+            <div class="package-row">
+                <div class="package-content">
+                    <div class="package-eyebrow">Train</div>
+                    <h3>Train your team to use AI like an operator.</h3>
+                    <p>Workshops and coaching for marketing teams who've bought the tools but never built the habits. Your team walks out shipping with AI properly, not just experimenting with it.</p>
+                    <p style="font-size: 14px; color: var(--gray-light); margin-top: 18px;">8-week cohort or rolling 1:1.</p>
+                </div>
+                <div class="package-counter">02</div>
             </div>
 
-            <div class="step-card">
-                <div class="step-number">Step 03</div>
-                <h3>Book a kickoff or clarity call</h3>
-                <p>I'll send you a link to book a quick call where I'll walk you through the options and we'll align on timeline, deliverables, and next steps.</p>
+            <div class="package-row">
+                <div class="package-content">
+                    <div class="package-eyebrow">Embed</div>
+                    <h3>Embed me as your fractional AI marketing lead.</h3>
+                    <p>Fractional and hands-on. I run the AI marketing function alongside your team for 3 to 6 months, build the systems, train your people, and hand the whole playbook back when I leave.</p>
+                    <p style="font-size: 14px; color: var(--gray-light); margin-top: 18px;">3 to 6 months, ongoing engagement.</p>
+                </div>
+                <div class="package-counter">03</div>
+            </div>
+
+            <div style="text-align: center; margin-top: 56px;">
+                <a href="/work-with-me" class="btn-primary" style="background: var(--ink); display: inline-block;">Build it with me</a>
             </div>
         </div>
     </section>
 
-    <!-- Tally form -->
-    <section id="inquiry" class="form-section">
-        <div class="section-tag">Inquiry form</div>
-        <div class="form-wrap">
-            <iframe data-tally-src="https://tally.so/embed/PdvVeb?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="500" frameborder="0" marginheight="0" marginwidth="0" title="Work with me"></iframe>
+    <!-- AI Install Sprint deep dive -->
+    <section class="install-deep-section" id="install-sprint">
+        <div class="install-card">
+            <div class="install-grid">
+                <div class="install-brief">
+                    <h2 class="install-title">AI Install Sprint</h2>
+                    <p class="install-description">A focused two-week sprint to install AI marketing systems into your stack, from workflow design through to team training and handover.</p>
+                </div>
+
+                <div class="install-deliverables">
+                    <h4 class="install-deliverables-label">What you get:</h4>
+                    <ul class="install-list">
+                        <li>
+                            <h5>2 weeks of live and async work with you and your team</h5>
+                            <p>Workshops to scope the AI workflows that actually move your numbers, with daily async progress in your Slack so you see the build happen in real time.</p>
+                        </li>
+                        <li>
+                            <h5>Internal AI workflow strategy doc</h5>
+                            <p>A documented map of every workflow installed, the prompts that power them, and the SOPs your team needs to keep running them after I leave.</p>
+                        </li>
+                        <li>
+                            <h5>Production-ready AI workflows installed in your stack</h5>
+                            <p>1 to 3 live AI marketing workflows running in your tools (Claude, Notion, HubSpot, Slack), trained into your team and ready to ship from.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="install-pricing">
+                    <h4 class="install-pricing-label">Pricing tiers based on your size:</h4>
+                    <p class="install-pricing-sub">(and the resulting complexity &amp; impact)</p>
+
+                    <div class="pricing-tier">
+                        <div class="pricing-tier-bar" style="background: #60A5FA;"></div>
+                        <div class="pricing-tier-content">
+                            <p class="pricing-tier-label"><strong>Early Stage</strong>, less than $2m annual revenue</p>
+                            <p class="pricing-tier-price">$5,000</p>
+                        </div>
+                    </div>
+
+                    <div class="pricing-tier">
+                        <div class="pricing-tier-bar" style="background: #FB923C;"></div>
+                        <div class="pricing-tier-content">
+                            <p class="pricing-tier-label"><strong>Growth Stage</strong>, $2m to $20m annual revenue</p>
+                            <p class="pricing-tier-price">$10,000</p>
+                        </div>
+                    </div>
+
+                    <div class="pricing-tier">
+                        <div class="pricing-tier-bar" style="background: #C084FC;"></div>
+                        <div class="pricing-tier-content">
+                            <p class="pricing-tier-label"><strong>Mature</strong>, $20m+ annual revenue</p>
+                            <p class="pricing-tier-price">$15,000</p>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 28px; font-size: 13px; color: var(--gray-mid); line-height: 1.5; padding-top: 20px; border-top: 1px solid rgba(31,21,17,0.1);">Early access pricing for the first 5 customers. <a href="/work-with-me" style="color: var(--accent); text-decoration: underline;">Let's talk</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Engagement Timeline -->
+    <section class="timeline-section" id="how">
+        <div class="section-tag">How it works</div>
+        <h2 class="section-title">What working with me looks like.</h2>
+
+        <div class="timeline-block" style="border-top: none; padding-top: 0; margin-top: 0;">
+            <div class="timeline-prework">
+                <div>
+                    <h4 style="color: var(--ink);">Pre-work, your team</h4>
+                    <p>Fill out a short intake form (~15 minutes) and share recent demos, sales calls, or campaign assets so I can understand the surface area before we start.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--ink);">Pre-work, my side</h4>
+                    <p>I review everything you send, audit your current positioning + AI maturity, and come to Workshop 1 with a draft plan ready to challenge together.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-block">
+            <div class="timeline-pill">Week 01 / Diagnose & align</div>
+            <div class="timeline-grid">
+                <div class="timeline-day">
+                    <div class="timeline-day-label">Monday</div>
+                    <h4 class="workshop">Kickoff workshop</h4>
+                    <div class="timeline-day-meta">75 minutes</div>
+                    <p>I present the audit + draft plan. Your team pressure-tests it.</p>
+                </div>
+                <div class="timeline-day">
+                    <div class="timeline-day-label">Tuesday</div>
+                    <h4>Internal alignment</h4>
+                    <p>Your team meets without me to confirm direction.</p>
+                </div>
+                <div class="timeline-day">
+                    <div class="timeline-day-label">Wednesday</div>
+                    <h4 class="workshop">Strategy workshop</h4>
+                    <div class="timeline-day-meta">75 minutes</div>
+                    <p>Refine positioning + AI workflow priorities.</p>
+                </div>
+                <div class="timeline-day">
+                    <div class="timeline-day-label">Thursday</div>
+                    <h4 class="workshop">Build session</h4>
+                    <div class="timeline-day-meta">75 minutes</div>
+                    <p>Map the systems we're installing + sequence the work.</p>
+                </div>
+                <div class="timeline-day">
+                    <div class="timeline-day-label">Friday</div>
+                    <h4>Async build</h4>
+                    <p>I begin building. You see early outputs end-of-day.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline-block">
+            <div class="timeline-pill warm">Week 02 / Ship & install</div>
+            <div class="timeline-grid">
+                <div class="timeline-day">
+                    <div class="timeline-day-label">Monday</div>
+                    <h4>Async build</h4>
+                    <p>Continued build with daily progress notes in your Slack.</p>
+                </div>
+                <div class="timeline-day">
+                    <div class="timeline-day-label">Tuesday</div>
+                    <h4 class="workshop">V1 review</h4>
+                    <div class="timeline-day-meta">60 minutes</div>
+                    <p>Walk through the V1 outputs. Capture feedback live.</p>
+                </div>
+                <div class="timeline-day">
+                    <div class="timeline-day-label">Wednesday</div>
+                    <h4>Revisions</h4>
+                    <p>Async revisions based on review feedback.</p>
+                </div>
+                <div class="timeline-day">
+                    <div class="timeline-day-label">Thursday</div>
+                    <h4>Final polish</h4>
+                    <p>Last edits, training docs, and handover prep.</p>
+                </div>
+                <div class="timeline-day">
+                    <div class="timeline-day-label">Friday</div>
+                    <h4 class="workshop">Handover + training</h4>
+                    <div class="timeline-day-meta">60 minutes</div>
+                    <p>Walk your team through the systems. They own it from here.</p>
+                </div>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 48px; color: var(--gray-mid); font-size: 14px;">For ongoing fractional engagements, this 2-week sprint is the kickoff. Then we shift to a weekly cadence.</p>
+    </section>
+
+    <!-- Case Studies -->
+    <section id="proof">
+        <div class="section-tag">Proof</div>
+        <h2 class="section-title">Results that speak for themselves.</h2>
+        
+        <div class="cases-grid">
+            <a href="work.html#blinq-elc" class="case-card" style="text-decoration:none; color:inherit; display:block;">
+                <div class="case-image" style="background: var(--ink); padding: 0;">
+                    <img src="images/case-studies/blinq-hero.png" alt="Blinq website hero" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
+                </div>
+                <div class="case-content">
+                    <div>
+                        <h4 class="case-title" style="display:flex; align-items:center;"><img src="images/blinq/logo.svg" alt="Blinq" style="height:28px; width:auto;"></h4>
+                        <p class="case-subtitle">GTM narrative · 4M+ users</p>
+                        <p class="case-desc">Built the AI-native GTM narrative and the AI marketing systems behind it, then aligned product, design, content, and sales around one story.</p>
+                    </div>
+                    <div class="case-arrow">→</div>
+                </div>
+            </a>
+
+            <a href="work.html#ebay-pla" class="case-card" style="text-decoration:none; color:inherit; display:block;">
+                <div class="case-image" style="background: #fff; padding: 32px; display:flex; align-items:center; justify-content:center;">
+                    <img src="images/case-studies/ebay-pla.jpg" alt="eBay Promoted Listings Advanced" loading="lazy" style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block;">
+                </div>
+                <div class="case-content">
+                    <div>
+                        <h4 class="case-title" style="display:flex; align-items:center;"><img src="images/ebay/logo.svg" alt="eBay" style="height:28px; width:auto;"></h4>
+                        <p class="case-subtitle">$180M Revenue · 83% Activation</p>
+                        <p class="case-desc">Built separate positioning for team buyers. Individuals kept fast self-serve. Teams got dedicated support.</p>
+                    </div>
+                    <div class="case-arrow">→</div>
+                </div>
+            </a>
+
+            <a href="work.html#prompt-cowboy" class="case-card" style="text-decoration:none; color:inherit; display:block;">
+                <div class="case-image" style="background: var(--ink); padding: 0;">
+                    <img src="images/case-studies/promptcowboy-hero.png" alt="Prompt Cowboy product hero" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
+                </div>
+                <div class="case-content">
+                    <div>
+                        <h4 class="case-title" style="display:flex; align-items:center; gap:10px;"><img src="images/prompt-cowboy/logo.png" alt="Prompt Cowboy" style="height:28px; width:28px;"> <span>Prompt Cowboy</span></h4>
+                        <p class="case-subtitle">2k → 350k Users</p>
+                        <p class="case-desc">Built the "Context Engineering" positioning that defined the Pro tier. The frame from 2025 is the frame the product is sold on today.</p>
+                    </div>
+                    <div class="case-arrow">→</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Who This Is For -->
+    <section id="foryou">
+        <div class="section-tag">Who This Is For</div>
+
+        <div class="foryou-grid">
+            <div class="foryou-col">
+                <h3>You look like this</h3>
+                <ul class="foryou-list">
+                    <li>Series A or B B2B software, $5M-$50M ARR</li>
+                    <li>Marketing team of 1 to 10</li>
+                    <li>AI is on the roadmap, you don't know where to start</li>
+                </ul>
+            </div>
+
+            <div class="foryou-col">
+                <h3>You're seeing this</h3>
+                <ul class="foryou-list">
+                    <li>Marketers using ChatGPT in side tabs, no shared system</li>
+                    <li>Tools but no workflow</li>
+                    <li>AI feels like noise, not leverage</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="foryou-cta">
+            <h3>That's what I install.</h3>
+            <p>Pick the engagement shape that fits below.</p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section" id="faq">
+        <div class="section-tag">FAQ</div>
+        <h2 class="section-title">Things people always ask.</h2>
+
+        <div class="faq-item">
+            <button class="faq-q" type="button">What stage of company do you work with?</button>
+            <div class="faq-a"><div class="faq-a-inner">Mostly Series A and B B2B SaaS, $5M to $50M ARR, with a working PLG motion or strong product-led signal. Outside that range I'll usually refer you to someone better suited.</div></div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q" type="button">What does "AI-native" actually mean?</button>
+            <div class="faq-a"><div class="faq-a-inner">It means AI does 80% of the work the marketing team used to do by hand. Research, drafting, testing, reporting. I install the agents and workflows that make that real, then coach your team to run on top of them. Same strategic thinking as a normal team. Way more throughput.</div></div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q" type="button">How is this different from a marketing agency?</button>
+            <div class="faq-a"><div class="faq-a-inner">Agencies hand you finished work. I install systems your team owns. Everything I build belongs to you when I leave: prompt libraries, agent workflows, content engines, internal docs. You keep the capability, not just the output.</div></div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q" type="button">What does it cost?</button>
+            <div class="faq-a"><div class="faq-a-inner">Depends on scope. The 2-week install is a fixed fee. Training is per-cohort or rolling 1:1. The fractional embed runs as a monthly retainer over 3 to 6 months. Best path: tell me what you're trying to fix in the form, and I'll come back with the right format and price within 24 hours.</div></div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q" type="button">Do you do one-off projects?</button>
+            <div class="faq-a"><div class="faq-a-inner">Yes, the 2-week install is fixed-scope and one-off. The fractional embed needs a 3-month minimum to actually move the numbers.</div></div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q" type="button">Can you start this month?</button>
+            <div class="faq-a"><div class="faq-a-inner">Capacity changes month to month. Current state is in the navbar CTA above. If we're full, we can usually start the following month.</div></div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-q" type="button">What if it's not a fit?</button>
+            <div class="faq-a"><div class="faq-a-inner">No charge for the discovery call. If I don't think I'm the right person, I'll tell you and usually point you to someone who is. My network of senior marketers is probably more useful than my services in the wrong context.</div></div>
+        </div>
+    </section>
+
+    <!-- Newsletter / Intelligent Growth -->
+    <section class="newsletter" id="newsletter">
+        <div class="section-tag">Intelligent Growth</div>
+        <h2 class="section-title">See how it works.</h2>
+        <p class="newsletter-desc">I show you the AI workflows that clear the busywork, so the part only you can do, your judgment and taste, is what ships. Real examples on screen, step by step.</p>
+        <p class="newsletter-desc">No theory, just systems from marketers at companies like Canva and Adora who've actually built them.</p>
+
+        <div class="ig-feature">
+            <a href="https://www.youtube.com/watch?v=5LHzjQbBptE" target="_blank" class="ig-media">
+                <img src="https://img.youtube.com/vi/5LHzjQbBptE/hqdefault.jpg" alt="Stop Your Team Going Off-Brand" loading="lazy" decoding="async">
+                <div class="ig-play">
+                    <div class="ig-play-dot">
+                        <div style="width:0;height:0;border-left:20px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px;"></div>
+                    </div>
+                </div>
+            </a>
+            <div class="ig-copy">
+                <span class="ig-badge primary">Latest Episode</span>
+                <span class="ig-badge ghost">38 min walkthrough</span>
+                <h3>Stop Your Team Going Off-Brand</h3>
+                <p>Charlotte Norman (ex-Canva) runs marketing solo at Adora and built an AI system that keeps her whole team aligned.</p>
+                <p>Watch her build it live on screen in 38 minutes.</p>
+                <div class="ig-actions">
+                    <a href="https://www.youtube.com/watch?v=5LHzjQbBptE" target="_blank" class="btn-primary" style="background: var(--accent);">Watch Episode</a>
+                    <a href="podcast-charlotte-norman.html" class="btn-secondary" style="border-color: rgba(0,0,0,0.25); color: var(--black);">Get Free Template</a>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="font-size: 24px; font-weight: 700; margin: 18px 0 8px;">Subscribe to Intelligent Growth</h3>
+        <p class="newsletter-desc" style="margin-bottom: 18px;">My weekly newsletter and podcast on the AI workflows real marketing teams use to offload the grunt work and put their taste back at the centre, with the actual prompts and systems behind them.</p>
+        <form class="newsletter-form" id="ig-subscribe-form">
+            <input type="email" name="email" placeholder="Your email" required>
+            <button type="submit">Subscribe</button>
+        </form>
+        <p class="newsletter-meta" id="ig-subscribe-meta">Join 101+ marketing leaders • Unsubscribe anytime</p>
+        <script>
+            (function () {
+                var form = document.getElementById('ig-subscribe-form');
+                var meta = document.getElementById('ig-subscribe-meta');
+                if (!form) return;
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var btn = form.querySelector('button[type="submit"]');
+                    var input = form.querySelector('input[name="email"]');
+                    var email = (input.value || '').trim();
+                    if (!email) return;
+                    var originalLabel = btn.textContent;
+                    btn.disabled = true;
+                    btn.textContent = 'Subscribing...';
+                    fetch('/api/subscribe', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: email })
+                    }).then(function (r) {
+                        if (r.ok) {
+                            form.style.display = 'none';
+                            meta.textContent = 'Subscribed. Check your inbox to confirm.';
+                        } else {
+                            btn.disabled = false;
+                            btn.textContent = originalLabel;
+                            meta.textContent = 'Something went wrong. Try again or email will@willmulholland.com.';
+                        }
+                    }).catch(function () {
+                        btn.disabled = false;
+                        btn.textContent = originalLabel;
+                        meta.textContent = 'Network error. Try again in a moment.';
+                    });
+                });
+            })();
+        </script>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <div class="section-tag">About</div>
+        
+        <div class="about-grid">
+            <div class="about-content">
+                <h3>A marketer who actually builds.</h3>
+                <p>I'm Will. Ten years in marketing, from big-brand work at Ogilvy, KFC and eBay to scaling B2B SaaS at NextDocs, Prompt Cowboy, and most recently Blinq, where I led GTM for 4M+ users. Then I stopped talking about AI and started building with it.</p>
+                <p>Everything I teach, I run on my own work first. The systems doing my research, content and follow-up every day are the proof. Every output is the demo.</p>
+            </div>
+            <div class="about-image" style="background: none; overflow: hidden;">
+                <img src="images/headshot.jpg" alt="Will Mulholland" style="width: 100%; height: 100%; object-fit: cover; border-radius: 100px 24px 100px 24px;">
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer id="contact">
         <div class="footer-main" style="flex-direction: column; align-items: stretch;">
-            <div class="footer-cta">
-                <h2>LET'S<br>TALK.</h2>
-                <a href="mailto:wcmulholland@gmail.com">wcmulholland@gmail.com</a>
-                <p>Prefer email? Drop me a line and I'll get back within 24 hours.</p>
-                <div class="footer-social" style="margin-top: 32px;">
-                    <a href="https://www.linkedin.com/in/willmulholland/" title="LinkedIn">Li</a>
-                    <a href="https://www.youtube.com/@WillMulholland" title="YouTube">Yt</a>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;" class="footer-grid">
+                <div class="footer-cta">
+                    <h2>STOP<br>DABBLING.</h2>
+                    <a href="mailto:wcmulholland@gmail.com">wcmulholland@gmail.com</a>
+                    <p>Or just email me. I read everything.</p>
+                    <div class="footer-social" style="margin-top: 32px;">
+                        <a href="https://www.linkedin.com/in/willmulholland/" title="LinkedIn">Li</a>
+                        <a href="https://www.youtube.com/@WillMulholland" title="YouTube">Yt</a>
+                    </div>
+                </div>
+                <div class="footer-cta-card" style="background: var(--cream); border-radius: 18px; padding: 40px 32px; display: flex; flex-direction: column; justify-content: center; min-height: 280px; transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth); box-shadow: var(--warm-shadow);">
+                    <h3 style="font-family: 'Instrument Serif', Georgia, serif; font-size: 36px; font-weight: 400; margin-bottom: 14px; color: var(--ink); line-height: 1.05; letter-spacing: -0.02em;">Want it built with you?</h3>
+                    <p style="font-size: 16px; color: var(--gray-mid); margin-bottom: 24px; line-height: 1.5;">Tell me what you're working on. I'll come back within 24 hours with the right next step.</p>
+                    <a href="/work-with-me" style="display: inline-block; background: var(--ink); color: #fff; padding: 14px 28px; border-radius: 999px; font-weight: 600; text-decoration: none; text-align: center; align-self: flex-start; transition: background 0.4s var(--ease-smooth);">Build it with me</a>
                 </div>
             </div>
         </div>
+
+        <div class="footer-sitemap">
+            <div class="footer-col">
+                <h5>Will Mulholland</h5>
+                <p>I install working AI systems for B2B SaaS marketing teams. Sydney, working globally.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Work with me</h5>
+                <ul>
+                    <li><a href="#packages">2-week install</a></li>
+                    <li><a href="#packages">Team training</a></li>
+                    <li><a href="#packages">Fractional embed</a></li>
+                    <li><a href="/work-with-me">Speaking</a></li>
+                    <li><a href="/work-with-me">Sponsorship</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Work</h5>
+                <ul>
+                    <li><a href="work.html">All case studies</a></li>
+                    <li><a href="work.html#blinq-elc">Blinq</a></li>
+                    <li><a href="work.html#ebay-pla">eBay</a></li>
+                    <li><a href="work.html#prompt-cowboy">Prompt Cowboy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Writing</h5>
+                <ul>
+                    <li><a href="#newsletter">Intelligent Growth newsletter</a></li>
+                    <li><a href="podcast-charlotte-norman.html">Latest episode</a></li>
+                    <li><a href="https://www.youtube.com/@WillMulholland" target="_blank">YouTube</a></li>
+                    <li><a href="https://www.linkedin.com/in/willmulholland/" target="_blank">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+
         <div class="footer-bottom">
-            <span>© 2024 Will Mulholland. All rights reserved.</span>
+            <span>&copy; 2026 Will Mulholland. All rights reserved.</span>
             <div class="footer-links">
                 <a href="#">Privacy</a>
                 <a href="#">Terms</a>
             </div>
         </div>
     </footer>
+    
+    <style>
+        @media (max-width: 900px) {
+            .footer-grid { grid-template-columns: 1fr !important; }
+        }
+    </style>
 
-    <!-- Tally embed loader -->
-    <script src="https://tally.so/widgets/embed.js"></script>
-
-    <!-- Mobile nav -->
+    <!-- Cursor Script -->
     <script>
+        const cursor = document.querySelector('.cursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.15;
+            cursorY += (mouseY - cursorY) * 0.15;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Scroll reveal: auto-tag content blocks and observe
+        (function () {
+            var selectors = [
+                '.section-tag',
+                '.section-title',
+                '.insight-card',
+                '.case-card',
+                '.foryou-col',
+                '.foryou-cta',
+                '.ig-feature',
+                '.about-content',
+                '.about-image',
+                '.footer-cta',
+                '.footer-cta-card',
+                '.trust-strip',
+                '.package-row',
+                '.timeline-block',
+                '.faq-item'
+            ];
+            var nodes = document.querySelectorAll(selectors.join(','));
+            nodes.forEach(function (el, i) {
+                el.classList.add('reveal');
+                // stagger siblings inside grids
+                var idx = Array.prototype.indexOf.call(el.parentNode.children, el);
+                if (idx > 0 && idx <= 3) el.setAttribute('data-delay', String(idx));
+            });
+
+            if (!('IntersectionObserver' in window)) {
+                nodes.forEach(function (el) { el.classList.add('is-visible'); });
+                return;
+            }
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+            nodes.forEach(function (el) { io.observe(el); });
+        })();
+
+        // FAQ accordion
+        (function () {
+            document.querySelectorAll('.faq-item').forEach(function (item) {
+                var btn = item.querySelector('.faq-q');
+                if (!btn) return;
+                btn.addEventListener('click', function () {
+                    item.classList.toggle('is-open');
+                });
+            });
+        })();
+
+        // Mobile burger menu
         (function() {
             var toggle = document.getElementById('navToggle');
             var links = document.getElementById('navLinks');
@@ -506,10 +1992,12 @@
                 setOpen(!links.classList.contains('is-open'));
             });
 
+            // Close menu after tapping any link
             links.querySelectorAll('a').forEach(function(a) {
                 a.addEventListener('click', function() { setOpen(false); });
             });
 
+            // Close on Escape
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape' && links.classList.contains('is-open')) {
                     setOpen(false);

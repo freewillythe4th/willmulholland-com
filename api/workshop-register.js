@@ -15,6 +15,7 @@ export default async function handler(req, res) {
   const email = (body.email || '').trim();
   const firstName = (body.firstName || '').trim().slice(0, 80);
   const segment = (body.segment || '').trim().slice(0, 120);
+  const session = (body.session || '').trim().slice(0, 120);
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: 'Valid email required' });
@@ -65,7 +66,7 @@ export default async function handler(req, res) {
 
   const subject = encodeURIComponent('Your Google Meet link, Run your marketing with AI');
   const emailBody = encodeURIComponent(
-    `Hey ${firstName},\n\nThanks for reserving your spot for Run your marketing with AI.\n\nMonday 22 June, 7pm AEST (Sydney), live on Google Meet.\n\nGoogle Meet link: [paste link]\n\nAdd it to your calendar so you don't miss it. See you there.\n\nWill`
+    `Hey ${firstName},\n\nThanks for reserving your spot for Run your marketing with AI.\n\nWed 24 June 7pm AEST, or Fri 26 June 7pm PT. Live on Google Meet.\n\nGoogle Meet link: [paste link]\n\nAdd it to your calendar so you don't miss it. See you there.\n\nWill`
   );
   const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${subject}&body=${emailBody}`;
 
@@ -75,9 +76,10 @@ export default async function handler(req, res) {
     `Name: <b>${esc(firstName)}</b>`,
     `Email: <code>${esc(email)}</code>`,
     `Segment: ${esc(segment || 'not given')}`,
+    `Session: ${esc(session || 'not given')}`,
     `Time: ${new Date().toISOString()}`,
     '',
-    'Workshop: Run your marketing with AI, Mon 22 June 7pm AEST',
+    'Workshop: Run your marketing with AI (Wed 24 Jun 7pm AEST / Fri 26 Jun 7pm PT)',
   ].join('\n');
 
   try {

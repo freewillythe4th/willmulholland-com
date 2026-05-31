@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will Mulholland | PLG to Enterprise Revenue</title>
-    <meta name="description" content="I help B2B teams turn product-led growth into team-level revenue with sharper positioning, better GTM execution, and practical systems.">
+    <title>Will Mulholland | AI marketing systems installer</title>
+    <meta name="description" content="I'm the senior marketer who installs working AI systems for B2B SaaS marketing teams. You get a working system in your stack in weeks, and your team knows how to use it after I leave. Past clients: Blinq, eBay, Prompt Cowboy.">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://willmulholland.com/">
-    <meta property="og:title" content="Will Mulholland | PLG to Enterprise Revenue">
-    <meta property="og:description" content="Product marketing, positioning, and GTM systems for teams that want measurable growth.">
+    <meta property="og:title" content="Will Mulholland | AI marketing systems installer">
+    <meta property="og:description" content="I'm the senior marketer who installs working AI systems for B2B SaaS marketing teams. You get a working system in your stack in weeks, and your team knows how to use it after I leave. Past clients: Blinq, eBay, Prompt Cowboy.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://willmulholland.com/">
     <meta property="og:image" content="https://willmulholland.com/og-image.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Will Mulholland | PLG to Enterprise Revenue">
-    <meta name="twitter:description" content="Product marketing, positioning, and GTM systems for teams that want measurable growth.">
+    <meta name="twitter:title" content="Will Mulholland | AI marketing systems installer">
+    <meta name="twitter:description" content="I'm the senior marketer who installs working AI systems for B2B SaaS marketing teams. You get a working system in your stack in weeks, and your team knows how to use it after I leave. Past clients: Blinq, eBay, Prompt Cowboy.">
     <meta name="twitter:image" content="https://willmulholland.com/og-image.jpg">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after {
             margin: 0;
@@ -25,14 +27,19 @@
         }
 
         :root {
-            --black: #000000;
+            --black: #1F1511;
+            --ink: #1F1511;
+            --cream: #F2EDE3;
+            --cream-soft: #EBE5D8;
             --white: #FFFFFF;
-            --gray-dark: #0A0A0A;
-            --gray-mid: #525252;
-            --gray-light: #737373;
+            --gray-dark: #1F1511;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
             --accent: #2563EB;
             --accent-soft: #DBEAFE;
             --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --warm-shadow-hover: 0 20px 48px rgba(31,21,17,0.16), 0 4px 12px rgba(31,21,17,0.08);
             --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -42,12 +49,54 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: radial-gradient(1200px 500px at 20% -10%, rgba(37,99,235,0.08), transparent 60%), var(--white);
-            color: var(--black);
+            background: var(--cream);
+            color: var(--ink);
             cursor: auto;
             overflow-x: hidden;
             line-height: 1.5;
             letter-spacing: -0.02em;
+        }
+
+        /* Display typography */
+        .hero h1,
+        .section-title,
+        .footer-cta h2,
+        .ig-copy h3,
+        .about-content h3,
+        .foryou-col h3,
+        .foryou-cta h3 {
+            font-family: 'Instrument Serif', 'Cooper Hewitt', Georgia, serif;
+            font-weight: 400;
+            letter-spacing: 0;
+            font-feature-settings: "kern" 1, "liga" 1;
+        }
+
+        .hero h1 {
+            line-height: 1.05;
+            letter-spacing: -0.005em;
+        }
+
+        .section-title {
+            line-height: 1.05;
+            letter-spacing: -0.005em;
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.9s var(--ease-smooth), transform 0.9s var(--ease-smooth);
+            will-change: opacity, transform;
+        }
+        .reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal[data-delay="1"] { transition-delay: 0.08s; }
+        .reveal[data-delay="2"] { transition-delay: 0.16s; }
+        .reveal[data-delay="3"] { transition-delay: 0.24s; }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
         }
 
         .cursor {
@@ -81,16 +130,22 @@
 
         /* Navigation */
         nav {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 100;
-            padding: 24px 48px;
+            z-index: 1000;
+            padding: 20px 48px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: rgba(242, 237, 227, 0.82);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(31, 21, 17, 0.06);
+            transition: transform 0.4s var(--ease-smooth);
         }
+        nav.nav--hidden { transform: translateY(-100%); }
 
         .nav-logo {
             display: inline-flex;
@@ -117,6 +172,7 @@
 
         .nav-links {
             display: flex;
+            align-items: center;
             gap: 32px;
         }
 
@@ -181,25 +237,24 @@
         .hero::before {
             content: '';
             position: absolute;
-            width: 520px;
-            height: 520px;
+            width: 620px;
+            height: 620px;
             border-radius: 999px;
-            background: radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.06) 45%, transparent 70%);
-            top: -260px;
-            left: -120px;
-            filter: blur(2px);
+            background: radial-gradient(circle, rgba(31,21,17,0.05) 0%, transparent 65%);
+            top: -320px;
+            left: -180px;
             pointer-events: none;
         }
 
         .hero::after {
             content: '';
             position: absolute;
-            width: 420px;
-            height: 420px;
+            width: 480px;
+            height: 480px;
             border-radius: 999px;
-            background: radial-gradient(circle, rgba(37,99,235,0.16) 0%, rgba(37,99,235,0.04) 48%, transparent 72%);
+            background: radial-gradient(circle, rgba(37,99,235,0.06) 0%, transparent 70%);
             right: -260px;
-            bottom: -380px;
+            bottom: -340px;
             pointer-events: none;
         }
 
@@ -402,7 +457,7 @@
         }
 
         .insight-card {
-            background: var(--gray-dark);
+            background: var(--ink);
             color: var(--white);
             padding: 36px;
             min-height: 260px;
@@ -411,11 +466,13 @@
             justify-content: space-between;
             position: relative;
             overflow: hidden;
-            transition: transform 0.7s var(--ease-smooth);
+            box-shadow: var(--warm-shadow);
+            transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
         }
 
         .insight-card:hover {
-            transform: scale(1.02);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: var(--warm-shadow-hover);
         }
 
         .insight-card:nth-child(1) {
@@ -475,20 +532,30 @@
             .case-card:nth-child(even) { margin-top: 0; }
         }
 
+        .case-card {
+            transition: transform 0.5s var(--ease-smooth);
+        }
+
+        .case-card:hover {
+            transform: translateY(-6px);
+        }
+
         .case-image {
             aspect-ratio: 16/9;
-            background: var(--gray-dark);
+            background: var(--ink);
             overflow: hidden;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
-            transition: transform 0.7s var(--ease-smooth);
+            border-radius: 14px;
+            box-shadow: var(--warm-shadow);
+            transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
         }
 
         .case-card:hover .case-image {
-            transform: scale(1.02);
+            transform: scale(1.015);
+            box-shadow: var(--warm-shadow-hover);
         }
 
         .case-number {
@@ -708,11 +775,18 @@
             max-width: 1000px;
             display: grid;
             grid-template-columns: 1.05fr 1fr;
-            border: 1px solid rgba(0,0,0,0.1);
-            border-radius: 16px;
+            border: 1px solid rgba(31,21,17,0.08);
+            border-radius: 18px;
             overflow: hidden;
             background: #fff;
             text-align: left;
+            box-shadow: var(--warm-shadow);
+            transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
+        }
+
+        .ig-feature:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--warm-shadow-hover);
         }
 
         .ig-media { position: relative; background: #000; min-height: 260px; }
@@ -887,6 +961,273 @@
             to { transform: translateY(0); opacity: 1; }
         }
 
+        /* Nav CTA */
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: var(--ink);
+            color: var(--white) !important;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: none !important;
+            letter-spacing: 0 !important;
+            text-decoration: none;
+            transition: background 0.4s var(--ease-smooth), transform 0.3s var(--ease-smooth);
+        }
+        .nav-cta:hover {
+            background: var(--accent);
+            transform: translateY(-1px);
+            opacity: 1 !important;
+        }
+        .nav-cta-scarcity {
+            font-size: 11px;
+            opacity: 0.7;
+            font-weight: 400;
+        }
+
+        /* Offer package section */
+        .package-section {
+            background: var(--cream-soft);
+            margin: 0;
+            padding: 100px 48px;
+            max-width: none;
+        }
+        .package-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .package-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 48px;
+            align-items: start;
+            padding: 64px 0;
+            border-bottom: 1px solid rgba(31,21,17,0.08);
+        }
+        .package-row:last-child { border-bottom: none; }
+        .package-content {
+            max-width: 720px;
+        }
+        .package-counter {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(80px, 11vw, 180px);
+            font-weight: 400;
+            line-height: 0.85;
+            color: var(--ink);
+            opacity: 0.18;
+            user-select: none;
+        }
+        @media (max-width: 800px) {
+            .package-row { grid-template-columns: 1fr; gap: 16px; padding: 48px 0; }
+            .package-counter { font-size: 72px; order: -1; opacity: 0.25; }
+            .package-section { padding: 60px 24px; }
+        }
+        .package-eyebrow {
+            font-family: monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--gray-mid);
+            margin-bottom: 14px;
+        }
+        .package-row h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(28px, 4vw, 44px);
+            font-weight: 400;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 18px;
+            color: var(--ink);
+        }
+        .package-row p {
+            font-size: 17px;
+            color: var(--gray-mid);
+            line-height: 1.6;
+            margin-bottom: 12px;
+            max-width: 460px;
+        }
+        .package-preview {
+            background: var(--ink);
+            border-radius: 14px;
+            aspect-ratio: 16/10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.5);
+            font-family: monospace;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            box-shadow: var(--warm-shadow);
+            border: 1px dashed rgba(255,255,255,0.15);
+        }
+
+        /* Timeline */
+        .timeline-section {
+            padding: 100px 48px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        @media (max-width: 800px) {
+            .timeline-section { padding: 60px 24px; }
+        }
+        .timeline-block {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(31,21,17,0.12);
+        }
+        .timeline-pill {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--accent-soft);
+            color: var(--accent-deep);
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        .timeline-pill.warm { background: rgba(31,21,17,0.08); color: var(--ink); }
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+        }
+        @media (max-width: 900px) { .timeline-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 500px) { .timeline-grid { grid-template-columns: 1fr; } }
+        .timeline-day {
+            padding: 20px;
+            background: #fff;
+            border: 1px solid rgba(31,21,17,0.08);
+            border-radius: 12px;
+            min-height: 140px;
+            display: flex;
+            flex-direction: column;
+        }
+        .timeline-day-label {
+            font-family: monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-light);
+            margin-bottom: 8px;
+        }
+        .timeline-day h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--ink);
+            line-height: 1.2;
+        }
+        .timeline-day h4.workshop { color: var(--accent); }
+        .timeline-day-meta {
+            font-size: 12px;
+            color: var(--gray-light);
+            margin-bottom: 6px;
+        }
+        .timeline-day p {
+            font-size: 13px;
+            color: var(--gray-mid);
+            line-height: 1.45;
+            margin-top: auto;
+        }
+        .timeline-prework {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 16px;
+        }
+        @media (max-width: 700px) { .timeline-prework { grid-template-columns: 1fr; } }
+        .timeline-prework h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .timeline-prework p { font-size: 14px; color: var(--gray-mid); line-height: 1.55; }
+
+        /* FAQ */
+        .faq-section {
+            padding: 100px 48px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        @media (max-width: 800px) { .faq-section { padding: 60px 24px; } }
+        .faq-item {
+            border-bottom: 1px solid rgba(31,21,17,0.12);
+        }
+        .faq-q {
+            width: 100%;
+            text-align: left;
+            background: transparent;
+            border: 0;
+            padding: 24px 0;
+            font-family: inherit;
+            font-size: 19px;
+            font-weight: 600;
+            color: var(--ink);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+        .faq-q::after {
+            content: '+';
+            font-size: 24px;
+            font-weight: 400;
+            color: var(--gray-mid);
+            transition: transform 0.3s var(--ease-smooth);
+        }
+        .faq-item.is-open .faq-q::after {
+            transform: rotate(45deg);
+        }
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s var(--ease-smooth);
+            color: var(--gray-mid);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .faq-a-inner { padding: 0 0 24px; max-width: 720px; }
+        .faq-item.is-open .faq-a { max-height: 400px; }
+
+        /* Footer sitemap */
+        .footer-sitemap {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin: 80px auto 0;
+            max-width: 1400px;
+            padding-top: 48px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        @media (max-width: 800px) {
+            .footer-sitemap { grid-template-columns: 1fr 1fr; }
+        }
+        .footer-col h5 {
+            font-family: monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--gray-light);
+            margin-bottom: 16px;
+        }
+        .footer-col ul { list-style: none; }
+        .footer-col li { margin-bottom: 10px; }
+        .footer-col a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s var(--ease-smooth);
+        }
+        .footer-col a:hover { color: var(--accent); }
+        .footer-col p { color: rgba(255,255,255,0.6); font-size: 14px; line-height: 1.55; }
+
         /* Responsive */
         @media (max-width: 768px) {
             nav { padding: 16px 24px; mix-blend-mode: normal; }
@@ -925,6 +1266,118 @@
             .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
             .footer-links { justify-content: center; }
         }
+
+        /* AI Install Sprint deep dive */
+        .install-deep-section {
+            background: var(--cream);
+            padding: 80px 48px;
+        }
+        .install-card {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--cream-soft);
+            border: 1.5px solid var(--ink);
+            border-radius: 24px;
+            padding: 64px 56px;
+        }
+        .install-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr 1fr;
+            gap: 56px;
+            align-items: start;
+        }
+        .install-title {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(36px, 4.5vw, 52px);
+            font-weight: 400;
+            line-height: 1.05;
+            margin-bottom: 24px;
+            color: var(--ink);
+            letter-spacing: -0.005em;
+        }
+        .install-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--gray-mid);
+        }
+        .install-deliverables-label,
+        .install-pricing-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 24px;
+        }
+        .install-pricing-sub {
+            font-size: 13px;
+            color: var(--gray-light);
+            margin-top: -16px;
+            margin-bottom: 28px;
+        }
+        .install-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .install-list li {
+            margin-bottom: 28px;
+            padding-left: 28px;
+            position: relative;
+        }
+        .install-list li:last-child { margin-bottom: 0; }
+        .install-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            top: 1px;
+            color: var(--ink);
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .install-list h5 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        .install-list p {
+            font-size: 14px;
+            color: var(--gray-mid);
+            line-height: 1.55;
+        }
+        .pricing-tier {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 28px;
+            align-items: stretch;
+        }
+        .pricing-tier:last-child { margin-bottom: 0; }
+        .pricing-tier-bar {
+            width: 4px;
+            flex-shrink: 0;
+            border-radius: 2px;
+        }
+        .pricing-tier-content {
+            flex: 1;
+        }
+        .pricing-tier-label {
+            font-size: 14px;
+            color: var(--ink);
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+        .pricing-tier-price {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(32px, 4vw, 44px);
+            font-weight: 400;
+            color: var(--ink);
+            line-height: 1;
+        }
+        @media (max-width: 900px) {
+            .install-card { padding: 40px 24px; }
+            .install-grid { grid-template-columns: 1fr; gap: 40px; }
+            .install-deep-section { padding: 60px 24px; }
+        }
     </style>
 </head>
 <body>
@@ -933,16 +1386,14 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="index.html" class="nav-logo" style="mix-blend-mode: normal; isolation: isolate; position: relative; z-index: 2000;"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland" style="height: 32px; width: auto; display: block; mix-blend-mode: normal; position: relative; z-index: 2000;"></a>
+        <a href="/" class="nav-logo" style="mix-blend-mode: normal; isolation: isolate; position: relative; z-index: 2000;"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland" style="height: 32px; width: auto; display: block; mix-blend-mode: normal; position: relative; z-index: 2000;"></a>
         <div class="nav-links" id="navLinks">
-            <a href="#insight">Insight</a>
-            <a href="#proof">Proof</a>
-            <a href="podcast-charlotte-norman.html">Intelligent Growth</a>
-            <a href="work.html">Case Studies</a>
-            <a href="/blog">Blog</a>
+            <a href="/workshop">Workshop</a>
             <a href="/work-with-me">Work with me</a>
+            <a href="work.html">Case studies</a>
+            <a href="/blog">Writing</a>
             <a href="#newsletter">Newsletter</a>
-            <a href="#contact">Contact</a>
+            <a href="https://chat.whatsapp.com/JdMGFj6h1PVHWWeSweUVpc" target="_blank" rel="noopener" class="nav-cta">Join free</a>
         </div>
         <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
             <span class="nav-toggle-bar"></span>
@@ -951,19 +1402,23 @@
         </button>
     </nav>
 
-    <!-- Hero - Compact to keep subheader above fold -->
+    <!-- Hero -->
     <section class="hero" style="min-height: auto; padding: 140px 48px 80px;">
-        <h1 style="font-size: clamp(32px, 5.2vw, 72px); line-height: 1.05; position: relative; z-index: 2;">
-            <span class="line"><span>Your Product Went Viral.</span></span>
-            <span class="line"><span>Now You Need Enterprise Revenue.</span></span>
+        <h1 style="font-size: clamp(38px, 5.4vw, 74px); line-height: 1.05; position: relative; z-index: 2; max-width: 1120px;">
+            <span class="line"><span>Your product ships faster than</span></span>
+            <span class="line"><span>your marketing can keep up.</span></span>
         </h1>
-        <p class="hero-sub" style="margin-top: 24px; position: relative; z-index: 2;">
-            <span>Users share with friends, not colleagues. When colleagues sign up, they use it individually too.</span>
+        <p class="hero-sub" style="margin-top: 28px; position: relative; z-index: 2; max-width: 760px; font-size: clamp(18px, 1.7vw, 22px); line-height: 1.5;">
+            <span>AI made the making easy. Getting it seen is the hard part now. Build the workflows for it yourself, or have me build them with you.</span>
         </p>
-        <p style="font-size: 20px; font-weight: 700; margin-top: 16px; color: var(--accent-deep); position: relative; z-index: 2;">Same Product. Different Messages.</p>
-        <div class="hero-cta" style="margin-top: 28px;">
-            <a href="/work-with-me" class="btn-primary" style="background: var(--accent);">Work with me</a>
-            <a href="#insight" class="btn-secondary" style="border-color: var(--accent); color: var(--accent-deep);">See How It Works</a>
+        <div class="hero-cta" style="margin-top: 36px;">
+            <a href="/workshop" class="btn-primary" style="background: var(--accent);">Reserve my spot, free</a>
+            <a href="#paths" class="btn-secondary" style="border-color: var(--ink); color: var(--ink);">See the three ways</a>
+        </div>
+        <div class="hero-chips" style="margin-top: 28px; display: flex; gap: 10px 14px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 2;">
+            <span style="font-family: monospace; font-size: 12px; letter-spacing: 0.04em; color: var(--ink); background: var(--cream-soft); border-radius: 999px; padding: 8px 14px;">$180M launched</span>
+            <span style="font-family: monospace; font-size: 12px; letter-spacing: 0.04em; color: var(--ink); background: var(--cream-soft); border-radius: 999px; padding: 8px 14px;">2k &rarr; 350k users</span>
+            <span style="font-family: monospace; font-size: 12px; letter-spacing: 0.04em; color: var(--ink); background: var(--cream-soft); border-radius: 999px; padding: 8px 14px;">GTM for 4M+ users</span>
         </div>
 
         <div class="trust-strip" style="margin-top: 56px; max-width: 1080px; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; gap: 28px 36px; flex-wrap: wrap; opacity: 0.75; position: relative; z-index: 2;">
@@ -981,76 +1436,73 @@
 
     <!-- Marquee removed for cleaner first fold -->
 
-    <!-- Insight Section -->
-    <section id="insight">
-        <div class="section-tag">The Insight</div>
-        <h2 class="section-title">
-            It's a messaging problem,<br><span class="muted">not a product problem.</span>
-        </h2>
-        
-        <div class="insight-grid">
-            <div class="insight-card">
-                <span class="insight-card-tag">The Problem</span>
-                <div>
-                    <h3>Why Most Fail</h3>
-                    <p>Companies add admin controls and approval workflows. Then activation drops and sharing dies.</p>
+    <!-- Three paths -->
+    <section class="package-section" id="paths">
+        <div class="package-inner">
+            <div class="section-tag">Three ways in</div>
+            <h2 class="section-title">Community, learn, or build it with you.</h2>
+            <p style="font-size: 17px; color: var(--gray-mid); margin: -28px 0 44px; max-width: 640px;">Pick one, or stack all three.</p>
+
+            <a id="card-community" href="https://chat.whatsapp.com/JdMGFj6h1PVHWWeSweUVpc" target="_blank" rel="noopener" class="package-row" style="text-decoration:none; color:inherit;">
+                <div class="package-content">
+                    <div class="package-eyebrow">Community &middot; Free</div>
+                    <h3>Join the room.</h3>
+                    <p>A free group of marketers swapping what's actually working with AI. The real workflows, the stuff that flopped, and short live calls. The easiest way in.</p>
+                    <p style="font-size: 14px; color: var(--accent); margin-top: 18px; font-weight: 600;">Join the community &rarr;</p>
                 </div>
-            </div>
-            
-            <div class="insight-card">
-                <span class="insight-card-tag">The Solution</span>
-                <div>
-                    <h3>What Works</h3>
-                    <p>Keep individuals getting instant value. Show team buyers collaboration ROI. Same product. Different messages.</p>
+                <div class="package-counter">01</div>
+            </a>
+
+            <a id="card-learn" href="/workshop" class="package-row" style="text-decoration:none; color:inherit;">
+                <div class="package-content">
+                    <div class="package-eyebrow">Learn</div>
+                    <h3>Build it yourself.</h3>
+                    <p>Watch a full marketing system get built on screen in a free workshop, then build your own in the cohort. You walk out able to do it, not hooked on another tool.</p>
+                    <p style="font-size: 14px; color: var(--accent); margin-top: 18px; font-weight: 600;">See the workshop &rarr;</p>
                 </div>
-            </div>
-            
-            <div class="insight-card">
-                <span class="insight-card-tag">The Proof</span>
-                <div>
-                    <h3>How I Know</h3>
-                    <p>I've helped companies scale from individual users to enterprise revenue while keeping their growth engine intact.</p>
+                <div class="package-counter">02</div>
+            </a>
+
+            <a id="card-work" href="/work-with-me" class="package-row" style="text-decoration:none; color:inherit;">
+                <div class="package-content">
+                    <div class="package-eyebrow">Work with me</div>
+                    <h3>Get it built with you.</h3>
+                    <p>In two weeks your team has AI marketing systems live in your stack, and the training to run them. You keep the capability when the engagement ends.</p>
+                    <p style="font-size: 14px; color: var(--accent); margin-top: 18px; font-weight: 600;">Work with me &rarr;</p>
                 </div>
-            </div>
+                <div class="package-counter">03</div>
+            </a>
         </div>
     </section>
 
     <!-- Case Studies -->
     <section id="proof">
         <div class="section-tag">Proof</div>
-        <h2 class="section-title">
-            Results that<br><span class="muted">speak for themselves.</span>
-        </h2>
+        <h2 class="section-title">Results that speak for themselves.</h2>
         
         <div class="cases-grid">
             <a href="work.html#blinq-elc" class="case-card" style="text-decoration:none; color:inherit; display:block;">
-                <div class="case-image">
-                    <div>
-                        <div class="case-number" style="font-size: clamp(40px, 5vw, 72px); line-height: 1.02;">Flagship GTM</div>
-                        <div class="case-metric">Narrative Built</div>
-                    </div>
+                <div class="case-image" style="background: var(--ink); padding: 0;">
+                    <img src="images/case-studies/blinq-hero.png" alt="Blinq website hero" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
                 </div>
                 <div class="case-content">
                     <div>
                         <h4 class="case-title" style="display:flex; align-items:center;"><img src="images/blinq/logo.svg" alt="Blinq" style="height:28px; width:auto;"></h4>
-                        <p class="case-subtitle">Converting 4M+ individual users into enterprise revenue</p>
-                        <p class="case-desc">Building the GTM narrative for the shift from digital business card adoption to the future of personal CRM for teams, and aligning product, design, content, and sales around one market story.</p>
+                        <p class="case-subtitle">GTM narrative · 4M+ users</p>
+                        <p class="case-desc">Built the AI-native GTM narrative and the AI marketing systems behind it, then aligned product, design, content, and sales around one story.</p>
                     </div>
                     <div class="case-arrow">→</div>
                 </div>
             </a>
 
             <a href="work.html#ebay-pla" class="case-card" style="text-decoration:none; color:inherit; display:block;">
-                <div class="case-image">
-                    <div>
-                        <div class="case-number">$180M</div>
-                        <div class="case-metric">Revenue Generated</div>
-                    </div>
+                <div class="case-image" style="background: #fff; padding: 32px; display:flex; align-items:center; justify-content:center;">
+                    <img src="images/case-studies/ebay-pla.jpg" alt="eBay Promoted Listings Advanced" loading="lazy" style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block;">
                 </div>
                 <div class="case-content">
                     <div>
                         <h4 class="case-title" style="display:flex; align-items:center;"><img src="images/ebay/logo.svg" alt="eBay" style="height:28px; width:auto;"></h4>
-                        <p class="case-subtitle">While Keeping 83% Activation</p>
+                        <p class="case-subtitle">$180M Revenue · 83% Activation</p>
                         <p class="case-desc">Built separate positioning for team buyers. Individuals kept fast self-serve. Teams got dedicated support.</p>
                     </div>
                     <div class="case-arrow">→</div>
@@ -1058,11 +1510,8 @@
             </a>
 
             <a href="work.html#prompt-cowboy" class="case-card" style="text-decoration:none; color:inherit; display:block;">
-                <div class="case-image">
-                    <div>
-                        <div class="case-number">175×</div>
-                        <div class="case-metric">User Growth</div>
-                    </div>
+                <div class="case-image" style="background: var(--ink); padding: 0;">
+                    <img src="images/case-studies/promptcowboy-hero.png" alt="Prompt Cowboy product hero" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block;">
                 </div>
                 <div class="case-content">
                     <div>
@@ -1076,44 +1525,25 @@
         </div>
     </section>
 
-    <!-- Who This Is For -->
-    <section id="foryou">
-        <div class="section-tag">Who This Is For</div>
-        
-        <div class="foryou-grid">
-            <div class="foryou-col">
-                <h3>Series A or Series B</h3>
-                <ul class="foryou-list">
-                    <li>$10M-$50M ARR</li>
-                    <li>PLG motion that's proven</li>
-                    <li>Board wants enterprise revenue</li>
-                </ul>
-            </div>
-            
-            <div class="foryou-col">
-                <h3>You're Seeing This</h3>
-                <ul class="foryou-list">
-                    <li>Multiple people from same companies</li>
-                    <li>Power users who'd pay for teams</li>
-                    <li>No clear conversion path</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="foryou-cta">
-            <h3>You Need</h3>
-            <p>Someone who understands your growth engine. Not another growth hack.</p>
-        </div>
+    <!-- Writing -->
+    <section id="writing">
+        <div class="section-tag">Writing</div>
+        <h2 class="section-title">Read the thesis.</h2>
+        <a href="/blog/marketing-is-the-bottleneck" style="display:block; text-decoration:none; color:inherit; background: var(--cream-soft); border-radius: 18px; padding: 40px 32px; box-shadow: var(--warm-shadow); max-width: 840px; transition: transform 0.5s var(--ease-smooth);">
+            <div style="font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 12px;">Thesis &middot; 6 min read</div>
+            <h3 style="font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(28px, 4vw, 42px); line-height: 1.04; letter-spacing: -0.02em; margin-bottom: 12px;">Marketing is the bottleneck now</h3>
+            <p style="color: var(--gray-mid); font-size: 16px; line-height: 1.6; margin-bottom: 16px;">Product ships faster than marketing can tell anyone it exists. The constraint moved, and you don't fix it by buying more tools. You build a system.</p>
+            <span style="font-size: 13px; font-weight: 600; color: var(--ink); text-transform: uppercase; letter-spacing: 0.08em;">Read the thesis &rarr;</span>
+        </a>
+        <p style="margin-top: 20px;"><a href="/blog" style="font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-mid); text-decoration: none;">All writing &rarr;</a></p>
     </section>
 
     <!-- Newsletter / Intelligent Growth -->
     <section class="newsletter" id="newsletter">
         <div class="section-tag">Intelligent Growth</div>
-        <h2 class="section-title">
-            See How<br><span class="muted">It Works</span>
-        </h2>
-        <p class="newsletter-desc">I show you how PLG companies convert individuals to enterprise revenue, using real examples on screen, step by step.</p>
-        <p class="newsletter-desc">No theory, just workflows from marketers at companies like Canva and Adora who've done this.</p>
+        <h2 class="section-title">See how it works.</h2>
+        <p class="newsletter-desc">I show you the AI workflows that clear the busywork, so the part only you can do, your judgment and taste, is what ships. Real examples on screen, step by step.</p>
+        <p class="newsletter-desc">No theory, just systems from marketers at companies like Canva and Adora who've actually built them.</p>
 
         <div class="ig-feature">
             <a href="https://www.youtube.com/watch?v=5LHzjQbBptE" target="_blank" class="ig-media">
@@ -1128,7 +1558,7 @@
                 <span class="ig-badge primary">Latest Episode</span>
                 <span class="ig-badge ghost">38 min walkthrough</span>
                 <h3>Stop Your Team Going Off-Brand</h3>
-                <p>Charlotte Norman (ex-Canva PMM) runs marketing solo at Adora and built an AI system that keeps her whole team aligned.</p>
+                <p>Charlotte Norman (ex-Canva) runs marketing solo at Adora and built an AI system that keeps her whole team aligned.</p>
                 <p>Watch her build it live on screen in 38 minutes.</p>
                 <div class="ig-actions">
                     <a href="https://www.youtube.com/watch?v=5LHzjQbBptE" target="_blank" class="btn-primary" style="background: var(--accent);">Watch Episode</a>
@@ -1138,7 +1568,7 @@
         </div>
 
         <h3 style="font-size: 24px; font-weight: 700; margin: 18px 0 8px;">Subscribe to Intelligent Growth</h3>
-        <p class="newsletter-desc" style="margin-bottom: 18px;">My weekly newsletter and podcast, real workflows from PLG companies converting individuals to teams.</p>
+        <p class="newsletter-desc" style="margin-bottom: 18px;">My weekly newsletter and podcast on the AI workflows real marketing teams use to offload the grunt work and put their taste back at the centre, with the actual prompts and systems behind them.</p>
         <form class="newsletter-form" id="ig-subscribe-form">
             <input type="email" name="email" placeholder="Your email" required>
             <button type="submit">Subscribe</button>
@@ -1187,9 +1617,9 @@
         
         <div class="about-grid">
             <div class="about-content">
-                <h3>Will Mulholland</h3>
-                <p>I help Series A/B companies find the moment when users recognize team value, then build positioning that converts them.</p>
-                <p>Most recently Senior PMM at Blinq. Previously scaled products at eBay, NextDocs, and Prompt Cowboy.</p>
+                <h3>A marketer who actually builds.</h3>
+                <p>I'm Will. Ten years in marketing, from big-brand work at Ogilvy, KFC and eBay to scaling B2B SaaS at NextDocs, Prompt Cowboy, and most recently Blinq, where I led GTM for 4M+ users. Then I stopped talking about AI and started building with it.</p>
+                <p>Everything I teach, I run on my own work first. The systems doing my research, content and follow-up every day are the proof. Every output is the demo.</p>
             </div>
             <div class="about-image" style="background: none; overflow: hidden;">
                 <img src="images/headshot.jpg" alt="Will Mulholland" style="width: 100%; height: 100%; object-fit: cover; border-radius: 100px 24px 100px 24px;">
@@ -1202,24 +1632,59 @@
         <div class="footer-main" style="flex-direction: column; align-items: stretch;">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;" class="footer-grid">
                 <div class="footer-cta">
-                    <h2>LET'S<br>TALK.</h2>
+                    <h2>LET'S<br>BUILD.</h2>
                     <a href="mailto:wcmulholland@gmail.com">wcmulholland@gmail.com</a>
-                    <p>For inquiries, collaborations, and hiring conversations.</p>
+                    <p>Or just email me. I read everything.</p>
                     <div class="footer-social" style="margin-top: 32px;">
                         <a href="https://www.linkedin.com/in/willmulholland/" title="LinkedIn">Li</a>
                         <a href="https://www.youtube.com/@WillMulholland" title="YouTube">Yt</a>
                     </div>
                 </div>
-                <!-- Work with me CTA -->
-                <div style="background: #FFFFFF; border-radius: 16px; padding: 40px 32px; display: flex; flex-direction: column; justify-content: center; min-height: 280px;">
-                    <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 12px; color: #000; line-height: 1.2;">Want to work together?</h3>
-                    <p style="font-size: 16px; color: #444; margin-bottom: 24px; line-height: 1.5;">Tell me what you're working on. I'll come back within 24 hours with the right next step.</p>
-                    <a href="/work-with-me" style="display: inline-block; background: #000; color: #fff; padding: 14px 28px; border-radius: 999px; font-weight: 600; text-decoration: none; text-align: center; align-self: flex-start;">Work with me</a>
+                <div class="footer-cta-card" style="background: var(--cream); border-radius: 18px; padding: 40px 32px; display: flex; flex-direction: column; justify-content: center; min-height: 280px; transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth); box-shadow: var(--warm-shadow);">
+                    <h3 style="font-family: 'Instrument Serif', Georgia, serif; font-size: 36px; font-weight: 400; margin-bottom: 14px; color: var(--ink); line-height: 1.05; letter-spacing: -0.02em;">Want it built with you?</h3>
+                    <p style="font-size: 16px; color: var(--gray-mid); margin-bottom: 24px; line-height: 1.5;">Tell me what you're working on. I'll come back within 24 hours with the right next step.</p>
+                    <a href="/work-with-me" style="display: inline-block; background: var(--ink); color: #fff; padding: 14px 28px; border-radius: 999px; font-weight: 600; text-decoration: none; text-align: center; align-self: flex-start; transition: background 0.4s var(--ease-smooth);">Build it with me</a>
                 </div>
             </div>
         </div>
+
+        <div class="footer-sitemap">
+            <div class="footer-col">
+                <h5>Will Mulholland</h5>
+                <p>I install working AI systems for B2B SaaS marketing teams. Sydney, working globally.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Work with me</h5>
+                <ul>
+                    <li><a href="/work-with-me">2-week install</a></li>
+                    <li><a href="/work-with-me">Team training</a></li>
+                    <li><a href="/work-with-me">Fractional embed</a></li>
+                    <li><a href="/work-with-me">Speaking</a></li>
+                    <li><a href="/work-with-me">Sponsorship</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Work</h5>
+                <ul>
+                    <li><a href="work.html">All case studies</a></li>
+                    <li><a href="work.html#blinq-elc">Blinq</a></li>
+                    <li><a href="work.html#ebay-pla">eBay</a></li>
+                    <li><a href="work.html#prompt-cowboy">Prompt Cowboy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Writing</h5>
+                <ul>
+                    <li><a href="#newsletter">Intelligent Growth newsletter</a></li>
+                    <li><a href="podcast-charlotte-norman.html">Latest episode</a></li>
+                    <li><a href="https://www.youtube.com/@WillMulholland" target="_blank">YouTube</a></li>
+                    <li><a href="https://www.linkedin.com/in/willmulholland/" target="_blank">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+
         <div class="footer-bottom">
-            <span>© 2024 Will Mulholland. All rights reserved.</span>
+            <span>&copy; 2026 Will Mulholland. All rights reserved.</span>
             <div class="footer-links">
                 <a href="#">Privacy</a>
                 <a href="#">Terms</a>
@@ -1258,6 +1723,59 @@
             el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
         });
 
+        // Scroll reveal: auto-tag content blocks and observe
+        (function () {
+            var selectors = [
+                '.section-tag',
+                '.section-title',
+                '.insight-card',
+                '.case-card',
+                '.foryou-col',
+                '.foryou-cta',
+                '.ig-feature',
+                '.about-content',
+                '.about-image',
+                '.footer-cta',
+                '.footer-cta-card',
+                '.trust-strip',
+                '.package-row',
+                '.timeline-block',
+                '.faq-item'
+            ];
+            var nodes = document.querySelectorAll(selectors.join(','));
+            nodes.forEach(function (el, i) {
+                el.classList.add('reveal');
+                // stagger siblings inside grids
+                var idx = Array.prototype.indexOf.call(el.parentNode.children, el);
+                if (idx > 0 && idx <= 3) el.setAttribute('data-delay', String(idx));
+            });
+
+            if (!('IntersectionObserver' in window)) {
+                nodes.forEach(function (el) { el.classList.add('is-visible'); });
+                return;
+            }
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        io.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+            nodes.forEach(function (el) { io.observe(el); });
+        })();
+
+        // FAQ accordion
+        (function () {
+            document.querySelectorAll('.faq-item').forEach(function (item) {
+                var btn = item.querySelector('.faq-q');
+                if (!btn) return;
+                btn.addEventListener('click', function () {
+                    item.classList.toggle('is-open');
+                });
+            });
+        })();
+
         // Mobile burger menu
         (function() {
             var toggle = document.getElementById('navToggle');
@@ -1286,6 +1804,81 @@
                     setOpen(false);
                 }
             });
+        })();
+    </script>
+
+    <!-- Floating quick dock -->
+    <div class="quick-dock" aria-label="Quick links">
+        <a href="https://chat.whatsapp.com/JdMGFj6h1PVHWWeSweUVpc" target="_blank" rel="noopener" title="Join the community" aria-label="Join the community">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </a>
+        <a href="/workshop" title="Free workshop" aria-label="Free workshop">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </a>
+        <a href="/work-with-me" title="Work with me" aria-label="Work with me">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.6 5.6L3 18.1V21h2.9l6.2-6.2a4 4 0 0 0 5.6-5.6l-2.8 2.8-2-2 1.8-1.7z"/></svg>
+        </a>
+    </div>
+    <style>
+        .quick-dock {
+            position: fixed; left: 24px; top: 50%; transform: translateY(-50%);
+            z-index: 900; display: flex; flex-direction: column; gap: 14px;
+            opacity: 0; visibility: hidden; pointer-events: none;
+            transition: opacity 0.4s var(--ease-smooth), visibility 0.4s var(--ease-smooth);
+        }
+        .quick-dock.visible { opacity: 1; visibility: visible; pointer-events: auto; }
+        .quick-dock a {
+            width: 46px; height: 46px; border-radius: 12px; background: var(--cream-soft);
+            display: flex; align-items: center; justify-content: center; color: var(--ink);
+            box-shadow: var(--warm-shadow); transition: transform 0.3s var(--ease-smooth), background 0.3s var(--ease-smooth), color 0.3s var(--ease-smooth);
+        }
+        .quick-dock a:hover { transform: translateX(4px); background: #fff; }
+        .quick-dock a.active { background: var(--ink); color: var(--cream-soft); }
+        .quick-dock a.active:hover { background: var(--ink); }
+        .quick-dock svg { width: 20px; height: 20px; }
+        @media (max-width: 1100px) { .quick-dock { display: none; } }
+    </style>
+    <script>
+        // Dock: only visible while the three-ways section spans the viewport middle.
+        // Active icon = the card nearest the viewport centre. Cleared otherwise.
+        (function () {
+            var dock = document.querySelector('.quick-dock');
+            var paths = document.getElementById('paths');
+            if (!dock || !paths) return;
+            var icons = dock.querySelectorAll('a');
+            var cards = ['card-community', 'card-learn', 'card-work'].map(function (id) { return document.getElementById(id); });
+            function update() {
+                var vh = window.innerHeight || document.documentElement.clientHeight;
+                var r = paths.getBoundingClientRect();
+                var inView = r.top < vh * 0.6 && r.bottom > vh * 0.4;
+                dock.classList.toggle('visible', inView);
+                if (!inView) { icons.forEach(function (a) { a.classList.remove('active'); }); return; }
+                var mid = vh / 2, best = -1, bestDist = Infinity;
+                cards.forEach(function (c, i) {
+                    if (!c) return;
+                    var cr = c.getBoundingClientRect();
+                    var d = Math.abs((cr.top + cr.height / 2) - mid);
+                    if (d < bestDist) { bestDist = d; best = i; }
+                });
+                icons.forEach(function (a, i) { a.classList.toggle('active', i === best); });
+            }
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update, { passive: true });
+            update();
+        })();
+    </script>
+    <script>
+        // Smart nav: hide on scroll down, show on scroll up (like blinq.me)
+        (function () {
+            var nav = document.querySelector('nav');
+            if (!nav) return;
+            var last = window.pageYOffset;
+            window.addEventListener('scroll', function () {
+                var y = window.pageYOffset;
+                if (y > last && y > 120) { nav.classList.add('nav--hidden'); }
+                else { nav.classList.remove('nav--hidden'); }
+                last = y;
+            }, { passive: true });
         })();
     </script>
 </body>
