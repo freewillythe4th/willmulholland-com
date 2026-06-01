@@ -336,6 +336,16 @@
             transform: translateY(100%);
         }
 
+        /* Hero renders static on load, no entrance animation */
+        .hero-tag span,
+        .hero h1 .line span,
+        .hero-sub span,
+        .hero-cta > *,
+        .hero .trust-strip {
+            animation: none !important;
+            transform: none !important;
+        }
+
         .btn-primary {
             padding: 16px 32px;
             background: var(--black);
@@ -1720,7 +1730,6 @@
                 '.about-image',
                 '.footer-cta',
                 '.footer-cta-card',
-                '.trust-strip',
                 '.package-row',
                 '.timeline-block',
                 '.faq-item'
