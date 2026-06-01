@@ -3,6 +3,7 @@
       { "handle": "filesystem" },
       { "src": "/blog", "dest": "/blog.html" },
       { "src": "/blog/marketing-is-the-bottleneck", "dest": "/blog/marketing-is-the-bottleneck.html" },
+      { "src": "/blog/claude-prompts-for-product-marketers", "dest": "/blog/claude-prompts-for-product-marketers.html" },
       { "src": "/workshop", "dest": "/workshop.html" },
       { "src": "/workshop-confirmed", "dest": "/workshop-confirmed.html" },
       { "src": "/community", "dest": "/community.html" },
