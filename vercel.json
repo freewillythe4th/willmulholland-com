@@ -5,6 +5,7 @@
       { "src": "/blog/marketing-is-the-bottleneck", "dest": "/blog/marketing-is-the-bottleneck.html" },
       { "src": "/workshop", "dest": "/workshop.html" },
       { "src": "/workshop-confirmed", "dest": "/workshop-confirmed.html" },
+      { "src": "/community", "dest": "/community.html" },
       { "src": "/resource-download", "dest": "/resource-download.html" },
       { "src": "/check-inbox", "dest": "/check-inbox.html" },
       { "src": "/welcome-survey", "dest": "/welcome-survey.html" },
