@@ -16,6 +16,7 @@ export default async function handler(req, res) {
   const firstName = (body.firstName || '').trim().slice(0, 80);
   const segment = (body.segment || '').trim().slice(0, 120);
   const session = (body.session || '').trim().slice(0, 120);
+  const job = (body.job || '').trim().slice(0, 200);
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: 'Valid email required' });
@@ -77,6 +78,7 @@ export default async function handler(req, res) {
     `Email: <code>${esc(email)}</code>`,
     `Segment: ${esc(segment || 'not given')}`,
     `Session: ${esc(session || 'not given')}`,
+    `\u{1F5F3}\u{FE0F} Build vote: <b>${esc(job || 'not given')}</b>`,
     `Time: ${new Date().toISOString()}`,
     '',
     'Workshop: Run your marketing with AI (Wed 24 Jun 7pm AEST / Fri 26 Jun 7pm PT)',

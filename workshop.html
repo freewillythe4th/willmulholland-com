@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Run your marketing with AI | Free live workshop with Will Mulholland</title>
-    <meta name="description" content="A free 60-minute live workshop. I build a real marketing workflow on screen with AI, start to finish. Wed 24 June 7pm AEST or Fri 26 June 7pm PT.">
+    <title>Build your first AI marketing tool, live | Free workshop with Will Mulholland</title>
+    <meta name="description" content="A free 60-minute live workshop. I build one working marketing tool on screen, start to finish, the way I'd tell you to start. Wed 24 June or Fri 26 June.">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://willmulholland.com/workshop">
-    <meta property="og:title" content="Run your marketing with AI | Free live workshop">
-    <meta property="og:description" content="60 minutes, live. I build a real marketing workflow on screen with AI. No slides, just the work. Wed 24 June 7pm AEST or Fri 26 June 7pm PT.">
+    <meta property="og:title" content="Build your first AI marketing tool, live">
+    <meta property="og:description" content="60 minutes, live. I build one working marketing tool on screen, start to finish, then you go make your own. Wed 24 June or Fri 26 June.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://willmulholland.com/workshop">
     <meta property="og:image" content="https://willmulholland.com/og-image.jpg">
@@ -349,12 +349,13 @@
         /* Modal */
         .modal-overlay {
             position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
-            display: none; align-items: center; justify-content: center; z-index: 1000; padding: 24px;
+            display: none; align-items: flex-start; justify-content: center; z-index: 1000;
+            padding: 5vh 24px; overflow-y: auto; -webkit-overflow-scrolling: touch;
         }
         .modal-overlay.is-open { display: flex; }
         .modal {
             background: var(--white); border-radius: 24px; max-width: 480px; width: 100%;
-            padding: 40px; position: relative; max-height: 92vh; overflow-y: auto;
+            padding: 40px; position: relative; margin: auto;
             box-shadow: 0 24px 60px rgba(0,0,0,0.3);
         }
         .modal-close {
@@ -462,21 +463,20 @@
 
     <!-- Hero -->
     <section class="hero">
-        <span class="hero-tag">Free &middot; Live on Google Meet &middot; Two sessions</span>
-        <h1>Run your marketing<br><span class="accent">with AI.</span></h1>
-        <p class="hero-sub">60 minutes, live. I take a real product and run it through the whole system on screen: research, positioning, content, follow-up. No slides. Just the build.</p>
+        <span class="hero-tag">Free &middot; Live online</span>
+        <h1>Build your first<br>AI marketing tool, <span class="accent">live.</span></h1>
+        <p class="hero-sub">60 minutes, live. I build one working marketing tool start to finish on screen, the exact way I'd tell you to start. Just the build, then you go make your own.</p>
         <div class="hero-cta">
             <button type="button" class="btn-primary" data-open-modal>Reserve my spot, free</button>
         </div>
-        <p class="hero-meta">60 minutes &middot; Live on Google Meet &middot; No replay, show up live</p>
         <div class="sessions" style="margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 2;">
             <div style="background: var(--accent-soft); border-radius: 14px; padding: 16px 22px; text-align: left;">
                 <div style="font-weight: 700; font-size: 15px; color: var(--accent-deep);">Wed 24 June &middot; 7:00pm AEST</div>
-                <div style="font-family: monospace; font-size: 12px; color: var(--gray-mid); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em;">Wed 2:00am PT &middot; 5:00am ET &middot; best for APAC</div>
+                <div style="font-family: monospace; font-size: 12px; color: var(--gray-mid); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em;">10:00am BST &middot; 5:00am ET &middot; 2:00am PT &middot; best for APAC</div>
             </div>
             <div style="background: var(--accent-soft); border-radius: 14px; padding: 16px 22px; text-align: left;">
                 <div style="font-weight: 700; font-size: 15px; color: var(--accent-deep);">Fri 26 June &middot; 7:00pm PT &middot; 10:00pm ET</div>
-                <div style="font-family: monospace; font-size: 12px; color: var(--gray-mid); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em;">Sat 12:00pm AEST &middot; best for US</div>
+                <div style="font-family: monospace; font-size: 12px; color: var(--gray-mid); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em;">Sat 3:00am BST &middot; Sat 12:00pm AEST &middot; best for US</div>
             </div>
         </div>
 
@@ -485,27 +485,27 @@
     <!-- The 60 minutes -->
     <section>
         <div class="section-tag">The 60 minutes</div>
-        <h2 class="section-title">Three blocks.<br><span class="muted">No slides. Just the screen.</span></h2>
+        <h2 class="section-title">Three blocks.<br><span class="muted">Just the screen.</span></h2>
         <div class="agenda">
             <div class="agenda-card">
-                <span class="agenda-time">0-10 min</span>
+                <span class="agenda-time">First 7 min</span>
                 <div>
-                    <h3>What we're building</h3>
-                    <p>The setup. How research, positioning, content and distribution run from one AI workflow instead of ten disconnected tools.</p>
+                    <h3>The one idea</h3>
+                    <p>Your context is the product. The model does the building, you bring the judgement.</p>
                 </div>
             </div>
             <div class="agenda-card">
-                <span class="agenda-time">10-45 min</span>
+                <span class="agenda-time">Next ~35 min</span>
                 <div>
-                    <h3>Live build on screen</h3>
-                    <p>I take a real marketing job and build it in front of you. Research a buyer, write the positioning, turn it into a week of content, set up the follow-up. Live, on camera.</p>
+                    <h3>The live build</h3>
+                    <p>I take one marketing job, the one you all vote for, and build a working tool for it live, narrating every step. You watch it come together.</p>
                 </div>
             </div>
             <div class="agenda-card">
-                <span class="agenda-time">45-60 min</span>
+                <span class="agenda-time">Last ~15 min</span>
                 <div>
-                    <h3>Your questions</h3>
-                    <p>Bring any marketing or AI question. Positioning, launches, content, what to automate. I answer live.</p>
+                    <h3>Start tonight, plus Q&amp;A</h3>
+                    <p>Exactly how to build your own this week, and the room where marketers swap the builds that work.</p>
                 </div>
             </div>
         </div>
@@ -513,27 +513,26 @@
 
     <!-- The live build -->
     <section>
-        <div class="section-tag">The live build</div>
-        <h2 class="section-title">One marketing job,<br><span class="muted">built end to end.</span></h2>
+        <div class="section-tag">You pick the build</div>
+        <h2 class="section-title">One job. You vote,<br><span class="muted">I build it live.</span></h2>
         <div class="build-steps">
-            <div class="build-step"><div class="build-step-num">1</div><div><h3>Research the buyer</h3><p>Pull real signal on who they are, what they do, and why now. The part AI can't fake, and the part most people skip.</p></div></div>
-            <div class="build-step"><div class="build-step-num">2</div><div><h3>Build the positioning</h3><p>Run the five lines of the positioning house live: alternatives, attributes, value, who cares most, category.</p></div></div>
-            <div class="build-step"><div class="build-step-num">3</div><div><h3>Turn it into messaging</h3><p>Shape it into copy that leads with the buyer, not the product. The bit AI gets wrong by default.</p></div></div>
-            <div class="build-step"><div class="build-step-num">4</div><div><h3>Spin up a week of content</h3><p>One piece of signal, structured once, becomes a week of posts, an email, a launch note. In minutes.</p></div></div>
-            <div class="build-step"><div class="build-step-num">5</div><div><h3>Wire the follow-up</h3><p>Set the system that catches every lead and keeps the thread, so nothing you build goes cold.</p></div></div>
+            <div class="build-step"><div class="build-step-num">1</div><div><h3>Calls into insights</h3><p>Turn customer or sales calls into insights you can use, without re-listening to an hour of recording.</p></div></div>
+            <div class="build-step"><div class="build-step-num">2</div><div><h3>Competitor watch</h3><p>A tool that watches what a competitor is doing and tells you when something changes.</p></div></div>
+            <div class="build-step"><div class="build-step-num">3</div><div><h3>One idea into content</h3><p>Turn a single idea into content in your voice, so one thought becomes a week of posts.</p></div></div>
+            <div class="build-step"><div class="build-step-num">4</div><div><h3>The repeat email or doc</h3><p>The email or doc you write over and over, built once so it writes itself from here.</p></div></div>
         </div>
-        <p class="build-note">That is the whole frame: <strong>Signal, Structure, Scale.</strong> Your judgment and taste first, then AI does the volume. Not a prompt pack. A system you own.</p>
+        <p class="build-note">You vote on the booking form. The winner is what I build on the day, start to finish. <strong>One working tool, not a whole system.</strong> That is how you actually start: one thing, then another.</p>
     </section>
 
     <!-- Walk away with -->
     <section>
         <div class="section-tag">What you'll walk away with</div>
-        <h2 class="section-title">Not notes.<br><span class="muted">A system you can copy.</span></h2>
+        <h2 class="section-title">Not notes.<br><span class="muted">A tool you can rebuild.</span></h2>
         <div class="takeaways">
-            <div class="takeaway"><h3>The exact workflow</h3><p>The end-to-end build you watched on screen, the same one I run in real launches. Yours to rebuild.</p></div>
-            <div class="takeaway"><h3>Signal, Structure, Scale</h3><p>How to use AI without producing slop: the human part first, the volume part last.</p></div>
-            <div class="takeaway"><h3>System over prompt pack</h3><p>Why a setup you own compounds, and why the tool lists you have been sold go stale in a month.</p></div>
-            <div class="takeaway"><h3>Your problem, solved live</h3><p>Bring a real marketing problem. If we get to it in Q&amp;A, we work it on the spot.</p></div>
+            <div class="takeaway"><h3>The exact build</h3><p>The working tool you watched come together on screen, step by step. Yours to rebuild this week.</p></div>
+            <div class="takeaway"><h3>How to start small</h3><p>Why one working tool beats a half-built system, and how to pick the first thing worth building.</p></div>
+            <div class="takeaway"><h3>Tools, not tool lists</h3><p>How to build something that runs without you, instead of collecting another set of prompts that go stale.</p></div>
+            <div class="takeaway"><h3>Your job on the menu</h3><p>The job the room votes for gets built live. Bring the one you most want off your plate.</p></div>
         </div>
     </section>
 
@@ -542,10 +541,9 @@
         <div class="section-tag">Who shows up</div>
         <h2 class="section-title">Built for you if&hellip;</h2>
         <ul class="who-list">
-            <li>You're a marketer or product marketer who keeps hearing about AI but hasn't seen it actually run real marketing work.</li>
-            <li>You've got a launch or a content engine to build and you're sick of tool lists and prompt packs that fall apart on a real deadline.</li>
-            <li>You want AI to compound your craft, not replace it.</li>
-            <li>You'd rather copy a working system than figure it out from scratch.</li>
+            <li>Marketers and product marketers who use ChatGPT or Claude but have never built a tool that runs without them.</li>
+            <li>People who want to build their own tools, not collect another tool list.</li>
+            <li>Anyone who's been scared off the moment someone says terminal or GitHub.</li>
         </ul>
     </section>
 
@@ -553,7 +551,7 @@
     <section>
         <div class="proof-band">
             <p>I've launched products from zero to $180M, scaled a tool from 2,000 to 350,000 users, and spent the last year building marketing systems with AI in real launches. This is the setup I actually use.</p>
-            <div class="who">Will Mulholland &middot; eBay, NextDocs, Prompt Cowboy</div>
+            <div class="who">Will Mulholland &middot; eBay, NextDocs, Prompt Cowboy, Blinq</div>
         </div>
     </section>
 
@@ -563,11 +561,11 @@
         <h2 class="section-title">Before you sign up</h2>
         <div class="faq-item">
             <h3>Is it really free?</h3>
-            <p>Yes. No card, no catch. Drop your email and I'll send the Google Meet link and a calendar invite.</p>
+            <p>Yes. No card, no catch. Drop your email and I'll send a calendar invite with the join link.</p>
         </div>
         <div class="faq-item">
             <h3>Is this the whole course?</h3>
-            <p>No, it's a free taster. You'll see the full system run end to end in 60 minutes. The deeper build, the skills and the operating setup, is the cohort.</p>
+            <p>No. This one is about building your first tool, one working thing, start to finish. The full system, the operating setup and the skills, is a later workshop and the cohort.</p>
         </div>
         <div class="faq-item">
             <h3>Is it recorded?</h3>
@@ -579,7 +577,7 @@
         </div>
         <div class="faq-item">
             <h3>Who's running it?</h3>
-            <p>Me, Will Mulholland. I've done product marketing at eBay, NextDocs and Prompt Cowboy, and I build marketing systems with AI every day.</p>
+            <p>Me, Will Mulholland. I've done product marketing at eBay, NextDocs, Prompt Cowboy and Blinq, and I build marketing systems with AI every day.</p>
         </div>
     </section>
 
@@ -594,7 +592,7 @@
     <section>
         <div class="reserve-band">
             <h2>The 60 minutes that change how you do marketing.</h2>
-            <p>Two sessions: Wed 24 June 7pm AEST, or Fri 26 June 7pm PT / 10pm ET (Sat 12pm AEST). Live on Google Meet. Free.</p>
+            <p>Wed 24 June: 7:00pm AEST / 10:00am BST / 5:00am ET / 2:00am PT. Fri 26 June: 7:00pm PT / 10:00pm ET / Sat 3:00am BST / Sat 12:00pm AEST. Free.</p>
             <button type="button" class="btn-primary" data-open-modal>Reserve my spot, free</button>
         </div>
     </section>
@@ -625,9 +623,9 @@
     <div class="modal-overlay" id="reserveModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal">
             <button type="button" class="modal-close" data-close-modal aria-label="Close">&times;</button>
-            <span class="modal-badge">Free &middot; Live on Google Meet</span>
+            <span class="modal-badge">Free &middot; Live online</span>
             <h2 id="modalTitle">Reserve your spot</h2>
-            <p class="modal-sub">Drop your details and I'll send the Google Meet link and calendar invite straight to your inbox.</p>
+            <p class="modal-sub">Drop your details and I'll send a calendar invite with the join link straight to your inbox.</p>
             <form id="reserveForm">
                 <div class="field">
                     <label for="firstName">First name</label>
@@ -641,8 +639,8 @@
                     <label for="session">Which session?</label>
                     <select id="session" name="session" required>
                         <option value="" disabled selected>Pick one...</option>
-                        <option>Wed 24 June, 7:00pm AEST (APAC)</option>
-                        <option>Fri 26 June, 7:00pm PT / 10:00pm ET (US)</option>
+                        <option>Wed 24 June, 7:00pm AEST / 10:00am BST / 5:00am ET / 2:00am PT (APAC)</option>
+                        <option>Fri 26 June, 7:00pm PT / 10:00pm ET / Sat 3:00am BST / Sat 12:00pm AEST (US)</option>
                     </select>
                 </div>
                 <div class="field">
@@ -657,9 +655,24 @@
                         <option>Other</option>
                     </select>
                 </div>
+                <div class="field">
+                    <label for="job">What's the one job you'd most want to stop doing by hand?</label>
+                    <select id="job" name="job" required>
+                        <option value="" disabled selected>Pick one... this decides what I build live</option>
+                        <option>Turning customer or sales calls into insights I can use</option>
+                        <option>Watching what a competitor is doing</option>
+                        <option>Turning one idea into content in my voice</option>
+                        <option>Writing the same email or doc over and over</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="field" id="jobOtherField" style="display: none;">
+                    <label for="jobOther">Tell me the one job</label>
+                    <input type="text" id="jobOther" name="jobOther" placeholder="The thing you'd love to stop doing by hand">
+                </div>
                 <button type="submit" class="btn-primary" id="reserveSubmit">Reserve my spot, free</button>
                 <p class="modal-error" id="reserveError"></p>
-                <p class="modal-fine">I'll email the Meet link and calendar invite. Unsubscribe anytime. I never sell or share your details.</p>
+                <p class="modal-fine">You'll get a calendar invite with the join link. Unsubscribe anytime. I never sell or share your details.</p>
             </form>
         </div>
     </div>
@@ -694,6 +707,15 @@
                 if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal();
             });
 
+            // Reveal the free-text box when "Other" is the chosen job
+            var jobSelect = document.getElementById('job');
+            var jobOtherField = document.getElementById('jobOtherField');
+            if (jobSelect && jobOtherField) {
+                jobSelect.addEventListener('change', function () {
+                    jobOtherField.style.display = jobSelect.value === 'Other' ? 'block' : 'none';
+                });
+            }
+
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 errEl.style.display = 'none';
@@ -701,6 +723,9 @@
                 var email = document.getElementById('email').value.trim();
                 var segment = document.getElementById('segment').value;
                 var session = document.getElementById('session').value;
+                var jobChoice = document.getElementById('job').value;
+                var jobOther = document.getElementById('jobOther').value.trim();
+                var job = jobChoice === 'Other' ? (jobOther || 'Other') : jobChoice;
                 if (!firstName || !email) return;
 
                 var original = submitBtn.textContent;
@@ -710,10 +735,10 @@
                 fetch('/api/workshop-register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ firstName: firstName, email: email, segment: segment, session: session })
+                    body: JSON.stringify({ firstName: firstName, email: email, segment: segment, session: session, job: job })
                 }).then(function (r) {
                     if (r.ok) {
-                        var s = /APAC|AEST/i.test(session) ? 'apac' : (/US|PT|ET/i.test(session) ? 'us' : '');
+                        var s = /\(APAC\)/i.test(session) ? 'apac' : (/\(US\)/i.test(session) ? 'us' : '');
                         window.location.href = '/workshop-confirmed' + (s ? '?s=' + s : '');
                     } else {
                         submitBtn.disabled = false;

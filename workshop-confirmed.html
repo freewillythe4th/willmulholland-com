@@ -124,7 +124,7 @@
 
     <div class="check">&#10003;</div>
     <h1>You're in.</h1>
-    <p class="lead">Add it to your calendar now so you don't miss it. I'll email your Google Meet link before the session.</p>
+    <p class="lead">Add it to your calendar now so you don't miss it. Your Google Meet link is in the invite, just hit join when it's time.</p>
     <span class="when" id="whenBadge">Live on Google Meet</span>
 
     <div class="calblock" id="calblock">
@@ -183,16 +183,16 @@
         (function () {
             // If you create standing Google Meet links per session, drop them here and
             // they'll appear in the calendar event + description automatically.
-            var MEET_LINKS = { apac: '', us: '' };
+            var MEET_LINKS = { apac: 'https://meet.google.com/kod-vzhi-qjr', us: 'https://meet.google.com/kod-vzhi-qjr' };
 
             var SESSIONS = {
                 apac: {
-                    label: 'Wed 24 June, 7:00pm AEST',
+                    label: 'Wed 24 June, 7:00pm AEST / 10:00am BST / 5:00am ET / 2:00am PT',
                     start: '20260624T090000Z',   // 7:00pm AEST (UTC+10)
                     end:   '20260624T100000Z'
                 },
                 us: {
-                    label: 'Fri 26 June, 7:00pm PT / 10:00pm ET',
+                    label: 'Fri 26 June, 7:00pm PT / 10:00pm ET / Sat 3:00am BST / Sat 12:00pm AEST',
                     start: '20260627T020000Z',   // 7:00pm PDT (UTC-7) = Sat 12:00pm AEST
                     end:   '20260627T030000Z'
                 }
@@ -201,7 +201,7 @@
             var TITLE = 'Run your marketing with AI (live workshop)';
 
             function descFor(key) {
-                var base = 'Live on Google Meet. Will Mulholland builds a marketing system with AI on screen, start to finish.';
+                var base = 'Live online. Will Mulholland builds one working marketing tool with AI on screen, start to finish.';
                 var link = MEET_LINKS[key];
                 return link ? (base + ' Join: ' + link) : (base + ' Your Google Meet link will be emailed before the session.');
             }
@@ -245,14 +245,14 @@
             var block = document.getElementById('calblock');
 
             if (key && SESSIONS[key]) {
-                badge.textContent = SESSIONS[key].label + ' · Google Meet';
+                badge.textContent = SESSIONS[key].label;
                 var g = document.getElementById('calGoogle');
                 var i = document.getElementById('calIcs');
                 g.href = googleUrl(key);
                 i.addEventListener('click', function (e) { e.preventDefault(); downloadIcs(key); });
             } else {
                 // No session known, offer both.
-                badge.textContent = 'Two sessions · pick the one you registered for';
+                badge.textContent = 'Pick the time you registered for';
                 block.innerHTML = '';
                 ['apac', 'us'].forEach(function (k) {
                     var row = document.createElement('div');
