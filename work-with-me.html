@@ -1960,8 +1960,13 @@
                         io.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+            }, { threshold: 0, rootMargin: '0px 0px -8% 0px' });
             nodes.forEach(function (el) { io.observe(el); });
+
+            // Safety net: never let a section stay invisible (tall blocks, observer edge cases)
+            setTimeout(function () {
+                nodes.forEach(function (el) { el.classList.add('is-visible'); });
+            }, 2500);
         })();
 
         // FAQ accordion
