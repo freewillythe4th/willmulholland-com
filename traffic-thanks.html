@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>It's on its way | Will Mulholland</title>
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ink: #1F1511; --cream: #F2EDE3; --cream-soft: #EBE5D8; --white: #FFFFFF;
+            --gray-mid: #5C4F47; --gray-light: #8B7E73; --accent: #2563EB; --accent-soft: #DBEAFE; --accent-deep: #1E3A8A;
+            --offset-shadow: 6px 6px 0 rgba(31,21,17,0.14); --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.55; letter-spacing: -0.01em; min-height: 100vh; padding: 48px 22px; }
+        ::selection { background: var(--accent); color: var(--white); }
+        h1 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
+
+        .card { max-width: 600px; margin: 0 auto; background: var(--white); border: 1px solid var(--ink); border-radius: 24px; box-shadow: var(--offset-shadow); padding: 44px; }
+        @media (max-width: 600px) { .card { padding: 28px 20px; } }
+        .brand img { height: 26px; width: auto; display: block; margin-bottom: 28px; }
+        h1 { font-size: clamp(28px, 5vw, 40px); line-height: 1.05; margin-bottom: 12px; }
+        .sub { font-size: 16px; color: var(--gray-mid); margin-bottom: 22px; }
+        .sub em { font-style: italic; color: var(--ink); }
+        .guide-btn { display: inline-block; background: var(--accent); color: var(--white); padding: 14px 24px; border-radius: 999px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; text-decoration: none; transition: border-radius 0.3s var(--ease-smooth); }
+        .guide-btn:hover { border-radius: 12px; }
+        .divider { margin: 30px 0 24px; border-top: 1px solid rgba(31,21,17,0.1); }
+
+        .q { margin-bottom: 20px; }
+        .q label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+        .q .req { color: var(--accent); }
+        .q input[type=text], .q textarea { width: 100%; padding: 13px 15px; border: 1px solid rgba(0,0,0,0.18); border-radius: 12px; font-size: 16px; font-family: inherit; outline: none; background: var(--white); }
+        .q input:focus, .q textarea:focus { border-color: var(--accent); }
+        .q textarea { resize: vertical; min-height: 84px; }
+        .radios { display: flex; flex-direction: column; gap: 8px; }
+        .radio { display: flex; align-items: center; gap: 10px; border: 1px solid rgba(0,0,0,0.16); border-radius: 12px; padding: 12px 14px; cursor: pointer; font-size: 15px; transition: border-color 0.2s var(--ease-smooth), background 0.2s var(--ease-smooth); }
+        .radio:hover { border-color: var(--accent); }
+        .radio input { accent-color: var(--accent); }
+        .submit { width: 100%; padding: 16px; background: var(--ink); color: var(--white); border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: inherit; margin-top: 6px; transition: background 0.3s var(--ease-smooth); }
+        .submit:hover { background: var(--accent); }
+        .done { display: none; text-align: center; padding: 10px 0; }
+        .done h2 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 28px; margin-bottom: 10px; }
+        .done p { color: var(--gray-mid); font-size: 16px; }
+        .err { color: #dc2626; font-size: 14px; margin-top: 10px; display: none; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <a href="/" class="brand"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland"></a>
+        <h1>&#127919; It's on its way.</h1>
+        <p class="sub">The guide is landing in your inbox now. Want to read it right away?</p>
+        <a href="/traffic-guide" class="guide-btn">Read the guide now</a>
+
+        <div class="divider"></div>
+
+        <form id="surveyForm">
+            <p class="sub">A few quick questions so I can tailor what I send to what's most useful to <em>you</em>.</p>
+            <div class="q">
+                <label for="firstName">What's your first name?</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Jane">
+            </div>
+            <div class="q">
+                <label for="company">What company or organisation do you work for?</label>
+                <input type="text" id="company" name="company" placeholder="Where you work">
+            </div>
+            <div class="q">
+                <label for="role">What's your role?</label>
+                <input type="text" id="role" name="role" placeholder="Your job title">
+            </div>
+            <div class="q">
+                <label>Which goal resonates most right now? <span class="req">*</span></label>
+                <div class="radios">
+                    <label class="radio"><input type="radio" name="goal" value="Use AI to do my marketing better" required> Use AI to do my marketing better</label>
+                    <label class="radio"><input type="radio" name="goal" value="Land a new role or promotion"> Land a new role or promotion</label>
+                    <label class="radio"><input type="radio" name="goal" value="Grow my own thing"> Grow my own thing</label>
+                </div>
+            </div>
+            <div class="q">
+                <label for="blocker">What's the single biggest thing getting in your way right now?</label>
+                <textarea id="blocker" name="blocker" maxlength="400" placeholder="The one blocker you'd love solved"></textarea>
+            </div>
+            <button type="submit" class="submit" id="surveySubmit">Done, send my picks</button>
+            <p class="err" id="surveyErr"></p>
+        </form>
+
+        <div class="done" id="surveyDone">
+            <h2>Got it, thank you.</h2>
+            <p>I'll tailor what I send around that. The guide's in your inbox, or read it <a href="/traffic-guide" style="color:var(--accent);font-weight:600;text-decoration:none;">here</a>.</p>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var params = new URLSearchParams(window.location.search);
+            var email = params.get('email') || '';
+            var form = document.getElementById('surveyForm');
+            var done = document.getElementById('surveyDone');
+            var btn = document.getElementById('surveySubmit');
+            var err = document.getElementById('surveyErr');
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                err.style.display = 'none';
+                var goal = (form.querySelector('input[name=goal]:checked') || {}).value || '';
+                var payload = {
+                    email: email,
+                    firstName: document.getElementById('firstName').value.trim(),
+                    company: document.getElementById('company').value.trim(),
+                    role: document.getElementById('role').value.trim(),
+                    goal: goal,
+                    blocker: document.getElementById('blocker').value.trim(),
+                    source: 'traffic lead magnet'
+                };
+                var original = btn.textContent;
+                btn.disabled = true; btn.textContent = 'Saving...';
+                fetch('/api/lead-survey', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).then(function (r) {
+                    if (r.ok) { form.style.display = 'none'; done.style.display = 'block'; }
+                    else { btn.disabled = false; btn.textContent = original; err.textContent = 'Something went wrong, but the guide is still in your inbox.'; err.style.display = 'block'; }
+                }).catch(function () { btn.disabled = false; btn.textContent = original; err.textContent = 'Network error. The guide is still in your inbox.'; err.style.display = 'block'; });
+            });
+        })();
+    </script>
+</body>
+</html>
