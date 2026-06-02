@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll sequence component | Will Mulholland</title>
+    <meta name="description" content="Apple-style scroll-driven image sequence. A reusable component for willmulholland.com.">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ink: #1F1511;
+            --cream: #F2EDE3;
+            --cream-soft: #EBE5D8;
+            --white: #FFFFFF;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink);
+            overflow-x: hidden; line-height: 1.5; letter-spacing: -0.02em;
+        }
+        ::selection { background: var(--accent); color: var(--white); }
+
+        .wrap { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+        /* Intro */
+        .intro { padding: 120px 32px 60px; max-width: 760px; margin: 0 auto; text-align: center; }
+        .intro .tag {
+            display: inline-block; font-family: monospace; font-size: 13px; text-transform: uppercase;
+            letter-spacing: 0.12em; color: var(--accent-deep); margin-bottom: 22px; font-weight: 700;
+            background: var(--accent-soft); padding: 8px 16px; border-radius: 999px;
+        }
+        .intro h1 {
+            font-family: 'Instrument Serif', Georgia, serif; font-weight: 400;
+            font-size: clamp(38px, 7vw, 68px); line-height: 0.98; letter-spacing: -0.01em; margin-bottom: 18px;
+        }
+        .intro p { font-size: clamp(16px, 2.2vw, 19px); color: var(--gray-mid); }
+        .intro .hint { margin-top: 28px; font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-light); }
+        .intro .hint::after { content: ' \2193'; }
+
+        /* The scroll sequence. The section gives scroll distance, the inner stage pins. */
+        .seq { position: relative; height: 400vh; }       /* 400vh = 3 screens of scroll to play the sequence */
+        .seq-stage {
+            position: sticky; top: 0; height: 100vh; width: 100%;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--ink);
+        }
+        .seq-canvas { width: 100%; height: 100%; display: block; object-fit: cover; }
+        .seq-caption {
+            position: absolute; left: 0; right: 0; bottom: 48px; text-align: center;
+            color: var(--white); font-family: monospace; font-size: 12px; text-transform: uppercase;
+            letter-spacing: 0.14em; opacity: 0.7;
+        }
+        .seq-progress {
+            position: absolute; left: 50%; transform: translateX(-50%); bottom: 28px;
+            width: 160px; height: 3px; background: rgba(255,255,255,0.2); border-radius: 999px; overflow: hidden;
+        }
+        .seq-progress span { display: block; height: 100%; width: 0%; background: var(--accent); }
+
+        /* After */
+        .after { padding: 80px 32px 40px; }
+        .after h2 {
+            font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(28px, 4vw, 40px);
+            letter-spacing: -0.01em; margin-bottom: 18px; max-width: 760px; margin-left: auto; margin-right: auto;
+        }
+        .howto { background: var(--cream-soft); border: 1px solid rgba(31,21,17,0.08); border-radius: 20px; padding: 32px; box-shadow: var(--warm-shadow); }
+        .howto h3 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-mid); margin-bottom: 16px; }
+        .howto ol { margin: 0 0 8px 20px; }
+        .howto li { font-size: 16px; color: var(--ink); line-height: 1.7; margin-bottom: 10px; }
+        .howto code { font-family: monospace; font-size: 14px; background: rgba(31,21,17,0.07); padding: 2px 6px; border-radius: 6px; }
+        .howto .note { font-size: 14px; color: var(--gray-mid); margin-top: 14px; line-height: 1.6; }
+        .back { display: inline-block; margin-top: 28px; font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none; }
+        .back:hover { text-decoration: underline; }
+
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    </style>
+</head>
+<body>
+    <!-- Intro -->
+    <header class="intro">
+        <span class="tag">Component &middot; Scroll sequence</span>
+        <h1>Scroll-driven image sequence.</h1>
+        <p>The Apple-product-page effect: frames swap as you scroll, so a sequence of images plays under the reader's control. This demo runs on synthetic frames so the mechanism works with no image files. Swap in real JPEGs and it becomes the real thing.</p>
+        <p class="hint">Scroll to play</p>
+    </header>
+
+    <!-- The pinned sequence -->
+    <section class="seq" id="seq">
+        <div class="seq-stage">
+            <canvas class="seq-canvas" id="seqCanvas"></canvas>
+            <div class="seq-caption" id="seqCaption">frame 1 / 80</div>
+            <div class="seq-progress"><span id="seqBar"></span></div>
+        </div>
+    </section>
+
+    <!-- After / how to use -->
+    <section class="after">
+        <div class="wrap">
+            <h2>Make it real in three steps.</h2>
+            <div class="howto">
+                <h3>Drop in your own frames</h3>
+                <ol>
+                    <li>Export your animation as a numbered JPEG sequence: <code>frame_0001.jpg</code> to <code>frame_00NN.jpg</code>. Put them in <code>images/sequences/&lt;name&gt;/</code>.</li>
+                    <li>In this file's <code>CONFIG</code> block, set <code>useRealFrames: true</code>, set <code>frameCount</code> to how many frames you have, and point <code>framePath</code> at your folder.</li>
+                    <li>Drop the <code>.seq</code> section and its script into any page. Adjust the section height (<code>400vh</code>) for faster or slower playback.</li>
+                </ol>
+                <p class="note">Frames load lazily and draw on a canvas at device resolution, so it stays sharp and smooth. Keep each JPEG light (around 1280px wide, quality 70-80) so a 60-80 frame sequence stays fast. Honest trade-off: this is the same technique Framer's Workshop plugin generates, just living in your own code with no Framer account or monthly cost. If you would rather drive it inside Framer, that route is in the handoff notes.</p>
+            </div>
+            <a href="/" class="back">&larr; Back to home</a>
+        </div>
+    </section>
+
+    <script>
+        (function () {
+            // ----------------------------------------------------------------
+            // CONFIG: the only block you touch to use real frames.
+            // ----------------------------------------------------------------
+            var CONFIG = {
+                useRealFrames: false,                 // flip to true once your JPEGs are in place
+                frameCount: 80,                       // number of frames in the sequence
+                framePath: function (i) {             // path for frame i (1-based)
+                    return 'images/sequences/demo/frame_' + String(i).padStart(4, '0') + '.jpg';
+                }
+            };
+            // ----------------------------------------------------------------
+
+            var section = document.getElementById('seq');
+            var canvas = document.getElementById('seqCanvas');
+            var caption = document.getElementById('seqCaption');
+            var bar = document.getElementById('seqBar');
+            var ctx = canvas.getContext('2d');
+            var dpr = Math.min(window.devicePixelRatio || 1, 2);
+            var images = [];
+            var loaded = 0;
+
+            function sizeCanvas() {
+                var w = canvas.clientWidth, h = canvas.clientHeight;
+                canvas.width = Math.round(w * dpr);
+                canvas.height = Math.round(h * dpr);
+            }
+
+            // Synthetic frame: draws a frame procedurally so the demo works with no files.
+            function drawSynthetic(i) {
+                var w = canvas.width, h = canvas.height;
+                var t = i / (CONFIG.frameCount - 1);            // 0..1 progress
+                ctx.clearRect(0, 0, w, h);
+                // background shifts cream -> blue across the scroll
+                var g = ctx.createLinearGradient(0, 0, w, h);
+                g.addColorStop(0, 'hsl(' + (28 + t * 190) + ', 40%, ' + (14 + t * 6) + '%)');
+                g.addColorStop(1, 'hsl(' + (220 - t * 30) + ', 70%, ' + (20 + t * 25) + '%)');
+                ctx.fillStyle = g;
+                ctx.fillRect(0, 0, w, h);
+                // a rotating ring that sweeps as you scroll
+                var cx = w / 2, cy = h / 2, r = Math.min(w, h) * 0.22;
+                ctx.lineWidth = Math.max(6, r * 0.06);
+                ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+                ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.stroke();
+                ctx.strokeStyle = '#DBEAFE';
+                ctx.beginPath(); ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + t * Math.PI * 2); ctx.stroke();
+                // frame number
+                ctx.fillStyle = '#FFFFFF';
+                ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                ctx.font = '700 ' + Math.round(r * 0.5) + 'px Inter, sans-serif';
+                ctx.fillText(String(i + 1), cx, cy);
+            }
+
+            function drawReal(i) {
+                var img = images[i];
+                if (!img || !img.complete || !img.naturalWidth) return;
+                var w = canvas.width, h = canvas.height;
+                // cover-fit the image
+                var ir = img.naturalWidth / img.naturalHeight, cr = w / h;
+                var dw, dh, dx, dy;
+                if (ir > cr) { dh = h; dw = h * ir; dx = (w - dw) / 2; dy = 0; }
+                else { dw = w; dh = w / ir; dx = 0; dy = (h - dh) / 2; }
+                ctx.clearRect(0, 0, w, h);
+                ctx.drawImage(img, dx, dy, dw, dh);
+            }
+
+            function render(i) {
+                if (CONFIG.useRealFrames) drawReal(i); else drawSynthetic(i);
+                caption.textContent = 'frame ' + (i + 1) + ' / ' + CONFIG.frameCount;
+            }
+
+            var current = -1, ticking = false;
+            function update() {
+                ticking = false;
+                var rect = section.getBoundingClientRect();
+                var scrollable = section.offsetHeight - window.innerHeight;
+                var progress = Math.min(1, Math.max(0, -rect.top / scrollable));
+                var frame = Math.round(progress * (CONFIG.frameCount - 1));
+                bar.style.width = (progress * 100) + '%';
+                if (frame !== current) { current = frame; render(frame); }
+            }
+            function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+
+            function init() {
+                sizeCanvas();
+                if (CONFIG.useRealFrames) {
+                    for (var i = 0; i < CONFIG.frameCount; i++) {
+                        var img = new Image();
+                        img.onload = function () { loaded++; if (loaded === 1) update(); };
+                        img.src = CONFIG.framePath(i + 1);
+                        images.push(img);
+                    }
+                } else {
+                    update();
+                }
+                window.addEventListener('scroll', onScroll, { passive: true });
+                window.addEventListener('resize', function () {
+                    dpr = Math.min(window.devicePixelRatio || 1, 2);
+                    sizeCanvas(); current = -1; update();
+                });
+            }
+
+            init();
+        })();
+    </script>
+</body>
+</html>
