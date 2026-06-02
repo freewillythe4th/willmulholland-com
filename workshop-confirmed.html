@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You're in | Run your marketing with AI</title>
-    <meta name="description" content="You're registered for Run your marketing with AI. Wed 24 June 7pm AEST or Fri 26 June 7pm PT.">
+    <meta name="description" content="You're registered for Build your first AI marketing tool, live. Wed 24 June 7pm AEST.">
     <meta name="robots" content="noindex">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -241,40 +241,12 @@
 
             var params = new URLSearchParams(window.location.search);
             var key = params.get('s');
+            if (!key || !SESSIONS[key]) key = 'apac';
             var badge = document.getElementById('whenBadge');
-            var block = document.getElementById('calblock');
 
-            if (key && SESSIONS[key]) {
-                badge.textContent = SESSIONS[key].label;
-                var g = document.getElementById('calGoogle');
-                var i = document.getElementById('calIcs');
-                g.href = googleUrl(key);
-                i.addEventListener('click', function (e) { e.preventDefault(); downloadIcs(key); });
-            } else {
-                // No session known, offer both.
-                badge.textContent = 'Pick the time you registered for';
-                block.innerHTML = '';
-                ['apac', 'us'].forEach(function (k) {
-                    var row = document.createElement('div');
-                    row.style.cssText = 'display:flex;flex-direction:column;gap:10px;align-items:center;';
-                    var lbl = document.createElement('span');
-                    lbl.style.cssText = 'font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:var(--gray-mid);';
-                    lbl.textContent = SESSIONS[k].label;
-                    var btns = document.createElement('div');
-                    btns.style.cssText = 'display:flex;gap:10px;flex-wrap:wrap;justify-content:center;';
-                    var g = document.createElement('a');
-                    g.className = 'cal-btn primary'; g.href = googleUrl(k); g.target = '_blank'; g.rel = 'noopener';
-                    g.textContent = 'Google Calendar';
-                    var i = document.createElement('a');
-                    i.className = 'cal-btn ghost'; i.href = '#'; i.textContent = '.ics';
-                    i.addEventListener('click', function (e) { e.preventDefault(); downloadIcs(k); });
-                    btns.appendChild(g); btns.appendChild(i);
-                    row.appendChild(lbl); row.appendChild(btns);
-                    block.appendChild(row);
-                });
-                block.style.flexDirection = 'column';
-                block.style.gap = '20px';
-            }
+            badge.textContent = SESSIONS[key].label;
+            document.getElementById('calGoogle').href = googleUrl(key);
+            document.getElementById('calIcs').addEventListener('click', function (e) { e.preventDefault(); downloadIcs(key); });
         })();
     </script>
 </body>
