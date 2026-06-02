@@ -1402,8 +1402,8 @@
             <a href="/work-with-me">Work with me</a>
             <a href="work.html">Case studies</a>
             <a href="/blog">Blog</a>
-            <a href="#newsletter">Newsletter</a>
-            <a href="/workshop" class="nav-cta">Reserve a seat</a>
+            <a href="/traffic">Free gift</a>
+            <a href="#subscribe" class="nav-cta">Subscribe</a>
         </div>
         <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
             <span class="nav-toggle-bar"></span>
@@ -1421,9 +1421,12 @@
         <p class="hero-sub" style="margin-top: 28px; position: relative; z-index: 2; max-width: 760px; font-size: clamp(18px, 1.7vw, 22px); line-height: 1.5;">
             <span>AI made the making easy. Getting it seen is the hard part now. Build the workflows for it yourself, or have me build them with you.</span>
         </p>
-        <div class="hero-cta" style="margin-top: 36px;">
-            <a href="/workshop" class="btn-primary" style="background: var(--accent);">Reserve my spot, free</a>
-            <a href="#paths" class="btn-secondary" style="border-color: var(--ink); color: var(--ink);">How it works</a>
+        <div class="hero-cta" id="subscribe" style="margin-top: 32px; position: relative; z-index: 2; scroll-margin-top: 90px;">
+            <form id="heroSubscribe" style="display: flex; gap: 10px; flex-wrap: wrap; max-width: 540px;">
+                <input type="email" id="heroEmail" name="email" placeholder="Enter your email" required style="flex: 1; min-width: 220px; padding: 16px 18px; border: 1px solid rgba(31,21,17,0.25); border-radius: 999px; font-size: 16px; font-family: inherit; outline: none; background: var(--white); color: var(--ink);">
+                <button type="submit" id="heroSubscribeBtn" class="btn-primary" style="background: var(--accent); border: none; cursor: pointer; font-family: inherit;">Get the playbooks</button>
+            </form>
+            <p id="heroSubscribeMsg" style="font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-light); margin-top: 16px;">Join 100+ marketers learning AI-native GTM &middot; <a href="/workshop" style="color: var(--accent-deep); text-decoration: none;">or join the free workshop &rarr;</a></p>
         </div>
 
         <div class="trust-strip" style="margin-top: 56px; max-width: 1080px; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; gap: 28px 36px; flex-wrap: wrap; opacity: 0.75; position: relative; z-index: 2;">
@@ -1599,6 +1602,28 @@
                         btn.textContent = originalLabel;
                         meta.textContent = 'Network error. Try again in a moment.';
                     });
+                });
+            })();
+
+            // Hero email capture (priority)
+            (function () {
+                var form = document.getElementById('heroSubscribe');
+                var msg = document.getElementById('heroSubscribeMsg');
+                if (!form) return;
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var btn = document.getElementById('heroSubscribeBtn');
+                    var email = (document.getElementById('heroEmail').value || '').trim();
+                    if (!email) return;
+                    var original = btn.textContent;
+                    btn.disabled = true; btn.textContent = 'Sending...';
+                    fetch('/api/subscribe', {
+                        method: 'POST', headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: email })
+                    }).then(function (r) {
+                        if (r.ok) { form.style.display = 'none'; msg.textContent = 'You’re in. Check your inbox to confirm.'; }
+                        else { btn.disabled = false; btn.textContent = original; msg.textContent = 'Something went wrong. Try again or email wcmulholland@gmail.com.'; }
+                    }).catch(function () { btn.disabled = false; btn.textContent = original; msg.textContent = 'Network error. Try again in a moment.'; });
                 });
             })();
         </script>
