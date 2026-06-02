@@ -61,6 +61,18 @@
             text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-deep);
             background: var(--accent-soft); padding: 10px 18px; border-radius: 999px; margin: 24px 0 8px;
         }
+        /* Add to calendar */
+        .calblock { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 20px auto 0; }
+        .cal-btn {
+            display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 999px;
+            font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer;
+            transition: all 0.4s var(--ease-smooth); font-family: inherit;
+        }
+        .cal-btn.primary { background: var(--ink); color: var(--white); }
+        .cal-btn.primary:hover { background: var(--accent); border-radius: 14px; }
+        .cal-btn.ghost { border: 1px solid var(--ink); color: var(--ink); }
+        .cal-btn.ghost:hover { border-radius: 14px; }
+
         .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 720px; width: 100%; margin: 48px auto 0; text-align: left; }
         @media (max-width: 720px) { .cards { grid-template-columns: 1fr; } }
         .card {
@@ -112,8 +124,13 @@
 
     <div class="check">&#10003;</div>
     <h1>You're in.</h1>
-    <p class="lead">Your Google Meet link and calendar invite are on their way to your inbox. Add the event to your calendar so you don't miss it.</p>
-    <span class="when">Two sessions &middot; Wed 24 June 7pm AEST, or Fri 26 June 7pm PT &middot; Google Meet</span>
+    <p class="lead">Add it to your calendar now so you don't miss it. I'll email your Google Meet link before the session.</p>
+    <span class="when" id="whenBadge">Live on Google Meet</span>
+
+    <div class="calblock" id="calblock">
+        <a class="cal-btn primary" id="calGoogle" href="#" target="_blank" rel="noopener">Add to Google Calendar</a>
+        <a class="cal-btn ghost" id="calIcs" href="#">Apple / Outlook (.ics)</a>
+    </div>
 
     <div class="cards">
         <div class="card">
@@ -160,6 +177,104 @@
                     else { btn.disabled = false; btn.textContent = original; meta.textContent = 'Something went wrong. Try again.'; }
                 }).catch(function () { btn.disabled = false; btn.textContent = original; meta.textContent = 'Network error. Try again.'; });
             });
+        })();
+
+        // Add-to-calendar, session aware
+        (function () {
+            // If you create standing Google Meet links per session, drop them here and
+            // they'll appear in the calendar event + description automatically.
+            var MEET_LINKS = { apac: '', us: '' };
+
+            var SESSIONS = {
+                apac: {
+                    label: 'Wed 24 June, 7:00pm AEST',
+                    start: '20260624T090000Z',   // 7:00pm AEST (UTC+10)
+                    end:   '20260624T100000Z'
+                },
+                us: {
+                    label: 'Fri 26 June, 7:00pm PT / 10:00pm ET',
+                    start: '20260627T020000Z',   // 7:00pm PDT (UTC-7) = Sat 12:00pm AEST
+                    end:   '20260627T030000Z'
+                }
+            };
+
+            var TITLE = 'Run your marketing with AI (live workshop)';
+
+            function descFor(key) {
+                var base = 'Live on Google Meet. Will Mulholland builds a marketing system with AI on screen, start to finish.';
+                var link = MEET_LINKS[key];
+                return link ? (base + ' Join: ' + link) : (base + ' Your Google Meet link will be emailed before the session.');
+            }
+            function locationFor(key) { return MEET_LINKS[key] || 'Google Meet'; }
+
+            function googleUrl(key) {
+                var s = SESSIONS[key];
+                return 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+                    + '&text=' + encodeURIComponent(TITLE)
+                    + '&dates=' + s.start + '/' + s.end
+                    + '&details=' + encodeURIComponent(descFor(key))
+                    + '&location=' + encodeURIComponent(locationFor(key));
+            }
+            function icsText(key) {
+                var s = SESSIONS[key];
+                var stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+                return [
+                    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//willmulholland//workshop//EN',
+                    'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'BEGIN:VEVENT',
+                    'UID:' + key + '-wmworkshop@willmulholland.com',
+                    'DTSTAMP:' + stamp,
+                    'DTSTART:' + s.start, 'DTEND:' + s.end,
+                    'SUMMARY:' + TITLE,
+                    'DESCRIPTION:' + descFor(key).replace(/,/g, '\\,'),
+                    'LOCATION:' + locationFor(key).replace(/,/g, '\\,'),
+                    'END:VEVENT', 'END:VCALENDAR'
+                ].join('\r\n');
+            }
+            function downloadIcs(key) {
+                var blob = new Blob([icsText(key)], { type: 'text/calendar;charset=utf-8' });
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url; a.download = 'run-your-marketing-with-ai.ics';
+                document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+            }
+
+            var params = new URLSearchParams(window.location.search);
+            var key = params.get('s');
+            var badge = document.getElementById('whenBadge');
+            var block = document.getElementById('calblock');
+
+            if (key && SESSIONS[key]) {
+                badge.textContent = SESSIONS[key].label + ' · Google Meet';
+                var g = document.getElementById('calGoogle');
+                var i = document.getElementById('calIcs');
+                g.href = googleUrl(key);
+                i.addEventListener('click', function (e) { e.preventDefault(); downloadIcs(key); });
+            } else {
+                // No session known, offer both.
+                badge.textContent = 'Two sessions · pick the one you registered for';
+                block.innerHTML = '';
+                ['apac', 'us'].forEach(function (k) {
+                    var row = document.createElement('div');
+                    row.style.cssText = 'display:flex;flex-direction:column;gap:10px;align-items:center;';
+                    var lbl = document.createElement('span');
+                    lbl.style.cssText = 'font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:var(--gray-mid);';
+                    lbl.textContent = SESSIONS[k].label;
+                    var btns = document.createElement('div');
+                    btns.style.cssText = 'display:flex;gap:10px;flex-wrap:wrap;justify-content:center;';
+                    var g = document.createElement('a');
+                    g.className = 'cal-btn primary'; g.href = googleUrl(k); g.target = '_blank'; g.rel = 'noopener';
+                    g.textContent = 'Google Calendar';
+                    var i = document.createElement('a');
+                    i.className = 'cal-btn ghost'; i.href = '#'; i.textContent = '.ics';
+                    i.addEventListener('click', function (e) { e.preventDefault(); downloadIcs(k); });
+                    btns.appendChild(g); btns.appendChild(i);
+                    row.appendChild(lbl); row.appendChild(btns);
+                    block.appendChild(row);
+                });
+                block.style.flexDirection = 'column';
+                block.style.gap = '20px';
+            }
         })();
     </script>
 </body>
