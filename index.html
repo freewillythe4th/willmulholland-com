@@ -40,6 +40,7 @@
             --accent-deep: #1E3A8A;
             --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
             --warm-shadow-hover: 0 20px 48px rgba(31,21,17,0.16), 0 4px 12px rgba(31,21,17,0.08);
+            --offset-shadow: 6px 6px 0 rgba(31,21,17,0.14);
             --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -153,6 +154,35 @@
             gap: 10px;
             color: var(--black);
             text-decoration: none;
+            perspective: 600px;
+        }
+
+        .nav-logo .logo-mark {
+            height: 30px;
+            width: auto;
+            display: block;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-style: preserve-3d;
+        }
+
+        .nav-logo:hover .logo-mark {
+            transform: rotateY(360deg);
+        }
+
+        .nav-logo .logo-word {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.01em;
+            font-size: 16px;
+            color: var(--ink);
+            white-space: nowrap;
+            line-height: 1;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .nav-logo .logo-mark { transition: none; }
+            .nav-logo:hover .logo-mark { transform: none; }
         }
 
         .nav-logo-mark {
@@ -523,24 +553,16 @@
         /* Case Studies */
         .cases-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 64px 48px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
         }
 
         @media (max-width: 800px) {
-            .cases-grid { grid-template-columns: 1fr; }
+            .cases-grid { grid-template-columns: 1fr; gap: 48px; }
         }
 
         .case-card {
             position: relative;
-        }
-
-        .case-card:nth-child(even) {
-            margin-top: 80px;
-        }
-
-        @media (max-width: 800px) {
-            .case-card:nth-child(even) { margin-top: 0; }
         }
 
         .case-card {
@@ -595,7 +617,7 @@
         }
 
         .case-title {
-            font-size: 24px;
+            font-size: 21px;
             font-weight: 700;
             letter-spacing: -0.03em;
             margin-bottom: 8px;
@@ -1253,7 +1275,8 @@
             .nav-toggle { display: block; color: var(--black); }
             .nav-toggle.is-open { color: var(--white); }
             body.nav-open .nav-logo { color: var(--white); }
-            body.nav-open .nav-logo img { filter: brightness(0) invert(1); }
+            body.nav-open .nav-logo .logo-word { color: var(--white); }
+            body.nav-open .nav-logo .logo-mark { filter: brightness(0) invert(1); }
             .nav-links .nav-cta { background: var(--accent); color: #fff; padding: 12px 28px; }
             body.nav-open nav { backdrop-filter: none; -webkit-backdrop-filter: none; transform: none; }
             .nav-links {
@@ -1407,7 +1430,7 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="/" class="nav-logo" style="mix-blend-mode: normal; isolation: isolate; position: relative; z-index: 2000;"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland" style="height: 32px; width: auto; display: block; mix-blend-mode: normal; position: relative; z-index: 2000;"></a>
+        <a href="/" class="nav-logo" style="mix-blend-mode: normal; isolation: isolate; position: relative; z-index: 2000;"><img class="logo-mark" src="images/wm-logo/mark-only.png" alt="Will Mulholland"><span class="logo-word">Will Mulholland</span></a>
         <div class="nav-links" id="navLinks">
             <a href="/workshop">Workshop</a>
             <a href="/work-with-me">Work with me</a>
@@ -1428,30 +1451,46 @@
         .hero.hero-2col { display: grid; grid-template-columns: 1.05fr 0.92fr; gap: 56px; align-items: center; text-align: left; }
         .hero.hero-2col .trust-strip { grid-column: 1 / -1; flex-wrap: nowrap; justify-content: space-between; max-width: none; }
         .hero-graphic { display: flex; justify-content: center; }
-        .sysviz { width: 100%; max-width: 390px; background: var(--white); border: 1px solid var(--ink); border-radius: 18px; box-shadow: 6px 6px 0 rgba(31,21,17,0.14); padding: 26px 24px; transform: rotate(2deg); }
-        .sysviz .sv-label { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-light); margin-bottom: 14px; }
-        .sysviz .sv-input { display: inline-block; background: var(--accent-soft); color: var(--accent-deep); font-weight: 600; font-size: 14px; padding: 8px 14px; border-radius: 999px; }
-        .sysviz .sv-pipe { position: relative; height: 30px; margin: 8px 0 8px 22px; border-left: 2px solid rgba(31,21,17,0.18); }
-        .sysviz .sv-pipe::after { content: ''; position: absolute; left: -5px; top: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: svflow 2s linear infinite; }
-        @keyframes svflow { 0% { top: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { top: 26px; opacity: 0; } }
-        .sysviz .sv-hub { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: var(--white); font-weight: 700; font-size: 13px; padding: 9px 16px; border-radius: 999px; }
-        .sysviz .sv-hub::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: svpulse 1.6s ease-in-out infinite; }
-        @keyframes svpulse { 0%,100% { opacity: 0.4; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
-        .sysviz .sv-outs { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
-        .sysviz .sv-chip { display: flex; align-items: center; gap: 9px; border: 1px solid rgba(31,21,17,0.16); border-radius: 10px; padding: 10px 13px; font-size: 14px; color: var(--ink); background: var(--cream); }
-        .sysviz .sv-chip::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
-        @keyframes svpop { 0% { opacity: 0.25; transform: translateY(6px); } 11% { opacity: 1; transform: translateY(0); } 84% { opacity: 1; transform: translateY(0); } 100% { opacity: 0.25; transform: translateY(6px); } }
+        /* Second-brain file-tree visual (hero) */
+        .brain-card { width: 100%; max-width: 390px; background: var(--white); border: 1px solid var(--ink); border-radius: 16px; box-shadow: var(--offset-shadow); overflow: hidden; transform: rotate(1.5deg); }
+        .brain-bar { display: flex; align-items: center; gap: 7px; padding: 12px 16px; border-bottom: 1px solid rgba(31,21,17,0.08); }
+        .brain-bar i { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+        .brain-bar .d1 { background: #E06C5A; } .brain-bar .d2 { background: #E0B44A; } .brain-bar .d3 { background: #4FA56B; }
+        .brain-bar span { margin-left: 8px; font-family: monospace; font-size: 12px; color: var(--gray-light); }
+        .brain-body { padding: 18px 20px 20px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; line-height: 1.5; }
+        .bt { display: flex; align-items: baseline; gap: 10px; padding: 3px 0; color: var(--ink); }
+        .bt-i { padding-left: 18px; } .bt-ii { padding-left: 36px; }
+        .bt-folder { color: var(--accent-deep); font-weight: 700; }
+        .bt-file { color: var(--ink); }
+        .bt-note { color: var(--gray-light); font-size: 12px; margin-left: auto; white-space: nowrap; }
+        .brain-badge { margin-top: 16px; display: inline-block; font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; padding: 7px 12px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-deep); font-weight: 700; }
+        .brain-cursor { display: inline-block; width: 8px; height: 1.05em; background: var(--accent); margin-left: 2px; transform: translateY(2px); animation: brainBlink 1.05s step-end infinite; }
+        @keyframes brainBlink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+        /* Staggered type-in reveal for each row */
+        .brain-card .bt, .brain-card .brain-badge { opacity: 0; transform: translateY(6px); transition: opacity 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth); }
+        .brain-card.brain-in .bt, .brain-card.brain-in .brain-badge { opacity: 1; transform: translateY(0); }
+        .brain-card.brain-in .bt:nth-child(1) { transition-delay: 0.05s; }
+        .brain-card.brain-in .bt:nth-child(2) { transition-delay: 0.16s; }
+        .brain-card.brain-in .bt:nth-child(3) { transition-delay: 0.27s; }
+        .brain-card.brain-in .bt:nth-child(4) { transition-delay: 0.38s; }
+        .brain-card.brain-in .bt:nth-child(5) { transition-delay: 0.49s; }
+        .brain-card.brain-in .bt:nth-child(6) { transition-delay: 0.60s; }
+        .brain-card.brain-in .bt:nth-child(7) { transition-delay: 0.71s; }
+        .brain-card.brain-in .brain-badge { transition-delay: 0.84s; }
         @media (max-width: 900px) {
             .hero.hero-2col { grid-template-columns: 1fr; gap: 34px; }
             .hero-graphic { justify-content: flex-start; }
-            .sysviz { transform: none; }
+            .brain-card { transform: none; }
             .hero.hero-2col .trust-strip { flex-wrap: wrap; justify-content: flex-start; }
         }
-        @media (prefers-reduced-motion: reduce) { .sysviz *::before, .sysviz *::after, .sysviz .sv-chip { animation: none !important; } }
+        @media (prefers-reduced-motion: reduce) {
+            .brain-cursor { animation: none; }
+            .brain-card .bt, .brain-card .brain-badge { opacity: 1; transform: none; transition: none; }
+        }
     </style>
     <section class="hero hero-2col" style="min-height: auto; padding: 140px 48px 80px;">
         <div class="hero-col-left">
-        <h1 style="font-size: clamp(38px, 5.4vw, 74px); line-height: 1.05; position: relative; z-index: 2; max-width: 1120px;">
+        <h1 style="font-size: clamp(40px, 6vw, 88px); line-height: 1.05; position: relative; z-index: 2; max-width: 1120px;">
             <span class="line"><span>Your product ships faster than</span></span>
             <span class="line"><span>your marketing can keep up.</span></span>
         </h1>
@@ -1468,19 +1507,29 @@
         </div>
 
         <div class="hero-graphic">
-            <div class="sysviz" aria-hidden="true">
-                <div class="sv-label">Your marketing system</div>
-                <span class="sv-input">Your context</span>
-                <div class="sv-pipe"></div>
-                <span class="sv-hub">AI builds it</span>
-                <div class="sv-outs">
-                    <div class="sv-chip" style="--d:0">Positioning that lands</div>
-                    <div class="sv-chip" style="--d:1">A week of content</div>
-                    <div class="sv-chip" style="--d:2">A launch, ready to send</div>
-                    <div class="sv-chip" style="--d:3">Nurture that runs itself</div>
+            <div class="brain-card" id="heroBrain" aria-hidden="true">
+                <div class="brain-bar"><i class="d1"></i><i class="d2"></i><i class="d3"></i><span>your-marketing-brain</span></div>
+                <div class="brain-body">
+                    <div class="bt"><span class="bt-folder">your-marketing-brain/</span></div>
+                    <div class="bt bt-i"><span class="bt-file">context.md</span><span class="bt-note">everything you know</span></div>
+                    <div class="bt bt-i"><span class="bt-folder">skills/</span><span class="bt-note">your reusable plays</span></div>
+                    <div class="bt bt-ii"><span class="bt-file">positioning.md</span></div>
+                    <div class="bt bt-ii"><span class="bt-file">launch-comms.md</span></div>
+                    <div class="bt bt-ii"><span class="bt-file">weekly-content.md</span></div>
+                    <div class="bt bt-i"><span class="bt-folder">connections/</span><span class="bt-note">your stack, wired in</span><span class="brain-cursor" aria-hidden="true"></span></div>
+                    <span class="brain-badge">12 plays &middot; growing every week</span>
                 </div>
             </div>
         </div>
+        <script>
+            (function () {
+                var card = document.getElementById('heroBrain');
+                if (!card) return;
+                requestAnimationFrame(function () {
+                    setTimeout(function () { card.classList.add('brain-in'); }, 250);
+                });
+            })();
+        </script>
 
         <div class="trust-strip" style="margin-top: 44px; display: flex; align-items: center; gap: 18px 22px; opacity: 0.75; position: relative; z-index: 2;">
             <img src="images/blinq/logo.svg" alt="Blinq" style="height: 22px; width: auto; filter: grayscale(100%);">
@@ -1609,14 +1658,87 @@
         </div>
     </section>
 
-    <!-- On stage -->
-    <section style="padding: 8px 48px 80px;">
+    <!-- Count-up stat band -->
+    <style>
+        .stat-band { background: var(--cream-soft); max-width: none; margin: 0; padding: 80px 48px; }
+        .stat-band-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+        .stat-band .stat { text-align: center; }
+        .stat-band .stat b {
+            display: block;
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(48px, 6.5vw, 84px);
+            line-height: 1;
+            letter-spacing: -0.01em;
+            color: var(--accent);
+            margin-bottom: 12px;
+        }
+        .stat-band .stat span {
+            font-family: monospace;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gray-mid);
+            display: block;
+        }
+        @media (max-width: 900px) { .stat-band-inner { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; } }
+        @media (max-width: 480px) { .stat-band { padding: 60px 24px; } }
+        /* Dark stage band: suppress default accent dot, lime span supplies it */
+        .stage-band .section-tag::before { display: none; }
+    </style>
+    <section class="stat-band" aria-label="Track record">
+        <div class="stat-band-inner">
+            <div class="stat"><b class="count" data-target="180" data-prefix="$" data-suffix="M">$0M</b><span>Launched</span></div>
+            <div class="stat"><b class="count" data-target="350" data-suffix="k">0k</b><span>Users scaled to</span></div>
+            <div class="stat"><b class="count" data-target="4" data-suffix="M+">0M+</b><span>Users reached</span></div>
+            <div class="stat"><b class="count" data-target="500" data-suffix="+">0+</b><span>Leaders trained</span></div>
+        </div>
+    </section>
+    <script>
+        (function () {
+            var band = document.querySelector('.stat-band');
+            if (!band) return;
+            var els = band.querySelectorAll('.count');
+            var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            function format(el, val) {
+                var prefix = el.getAttribute('data-prefix') || '';
+                var suffix = el.getAttribute('data-suffix') || '';
+                el.textContent = prefix + Math.round(val) + suffix;
+            }
+            function run() {
+                els.forEach(function (el) {
+                    var target = parseFloat(el.getAttribute('data-target')) || 0;
+                    if (reduce) { format(el, target); return; }
+                    var dur = 1200, start = null;
+                    function step(ts) {
+                        if (start === null) start = ts;
+                        var p = Math.min((ts - start) / dur, 1);
+                        var eased = 1 - Math.pow(1 - p, 3);
+                        format(el, target * eased);
+                        if (p < 1) requestAnimationFrame(step);
+                        else format(el, target);
+                    }
+                    requestAnimationFrame(step);
+                });
+            }
+            if (!('IntersectionObserver' in window)) { run(); return; }
+            var io = new IntersectionObserver(function (entries) {
+                entries.forEach(function (e) {
+                    if (e.isIntersecting) { run(); io.disconnect(); }
+                });
+            }, { threshold: 0.4 });
+            io.observe(band);
+        })();
+    </script>
+
+    <!-- On stage (dark rhythm band) -->
+    <section class="stage-band" style="background: var(--ink); max-width: none; margin: 0; padding: 96px 48px;">
         <div class="stage-grid" style="max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 44px; align-items: center;">
-            <img src="images/speaking/generate-mic.jpg" alt="Will Mulholland speaking at Generate Summit 2025" loading="lazy" style="width: 100%; border: 1px solid var(--ink); border-radius: 18px; box-shadow: var(--offset-shadow); display: block;">
+            <img src="images/speaking/generate-mic.jpg" alt="Will Mulholland speaking at Generate Summit 2025" loading="lazy" style="width: 100%; border: 1px solid rgba(255,255,255,0.16); border-radius: 18px; box-shadow: var(--offset-shadow); display: block;">
             <div>
-                <div class="section-tag">On stage</div>
-                <h2 style="font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 42px); line-height: 1.04; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 16px;">500+ growth leaders, trained live.</h2>
-                <p style="font-size: 17px; color: var(--gray-mid); line-height: 1.6;">I keynote and run AI marketing sessions at Product Marketing Alliance, Generate Summit, Canva and Salesforce events. The free workshop is the same thing in a smaller room, on your screen.</p>
+                <div class="section-tag" style="color: rgba(255,255,255,0.65);"><span style="width: 8px; height: 8px; border-radius: 50%; background: #A3E635; display: inline-block;"></span>On stage</div>
+                <h2 style="font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 42px); line-height: 1.04; letter-spacing: -0.02em; color: var(--cream); margin-bottom: 16px;">500+ growth leaders, trained live.</h2>
+                <p style="font-size: 17px; color: rgba(255,255,255,0.78); line-height: 1.6;">I keynote and run AI marketing sessions at Product Marketing Alliance, Generate Summit, Canva and Salesforce events. The free workshop is the same thing in a smaller room, on your screen.</p>
             </div>
         </div>
     </section>
