@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your workshop recording | Will Mulholland</title>
+    <meta name="description" content="Watch a full live AI marketing workshop, start to finish.">
+    <meta name="robots" content="noindex,follow">
+    <link rel="canonical" href="https://willmulholland.com/workshop-recording">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ink: #1F1511; --cream: #F2EDE3; --cream-soft: #EBE5D8; --white: #FFFFFF;
+            --gray-mid: #5C4F47; --gray-light: #8B7E73; --accent: #2563EB; --accent-soft: #DBEAFE; --accent-deep: #1E3A8A;
+            --offset-shadow: 6px 6px 0 rgba(31,21,17,0.14); --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.55; letter-spacing: -0.01em; min-height: 100vh; padding: 96px 22px 56px; }
+        ::selection { background: var(--accent); color: var(--white); }
+        h1 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: 0; }
+
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 16px 48px; display: flex; justify-content: space-between; align-items: center; background: rgba(242,237,227,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(31,21,17,0.06); }
+        nav .nav-logo img { height: 30px; width: auto; display: block; }
+        nav .nav-cta { padding: 10px 18px; background: var(--ink); color: var(--white); border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.4s var(--ease-smooth); white-space: nowrap; }
+        nav .nav-cta:hover { background: var(--accent); }
+        @media (max-width: 600px) { nav { padding: 14px 20px; } }
+
+        .wrap { max-width: 920px; margin: 0 auto; text-align: center; }
+        .eyebrow { display: inline-block; font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-deep); background: var(--accent-soft); padding: 7px 14px; border-radius: 999px; margin-bottom: 18px; font-weight: 700; }
+        h1 { font-size: clamp(32px, 5vw, 52px); line-height: 1.02; letter-spacing: -0.02em; margin-bottom: 14px; }
+        .sub { font-size: clamp(17px, 2vw, 20px); color: var(--gray-mid); max-width: 600px; margin: 0 auto 32px; }
+        .video { position: relative; width: 100%; aspect-ratio: 16 / 9; border: 1px solid var(--ink); border-radius: 16px; overflow: hidden; box-shadow: var(--offset-shadow); background: var(--ink); }
+        .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+        .fallback { font-size: 14px; color: var(--gray-light); margin-top: 16px; }
+        .fallback a { color: var(--accent-deep); font-weight: 600; text-decoration: none; }
+        .cta { margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(31,21,17,0.1); }
+        .cta h2 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(24px, 3vw, 34px); letter-spacing: -0.01em; margin-bottom: 16px; }
+        .cta a { display: inline-block; background: var(--ink); color: var(--white); padding: 15px 28px; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.4s var(--ease-smooth); }
+        .cta a:hover { background: var(--accent); }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland"></a>
+        <a href="/workshop" class="nav-cta">Join the next live one</a>
+    </nav>
+
+    <div class="wrap">
+        <span class="eyebrow">Your recording</span>
+        <h1>A full workshop, start to finish.</h1>
+        <p class="sub">Here's a complete live AI marketing workshop I ran in 2024. Watch how it actually runs, then come build your own with me live.</p>
+        <div class="video">
+            <iframe src="https://drive.google.com/file/d/195hu3LdQcTM94mX_J6BLBiGuixgqGPuD/preview" allow="autoplay; fullscreen" allowfullscreen title="Will Mulholland live AI marketing workshop, 2024"></iframe>
+        </div>
+        <p class="fallback">Video not loading? <a href="https://drive.google.com/file/d/195hu3LdQcTM94mX_J6BLBiGuixgqGPuD/view" target="_blank" rel="noopener">Open it in a new tab</a>.</p>
+
+        <div class="cta">
+            <h2>Want to build one with me, live?</h2>
+            <a href="/workshop">See the free workshop</a>
+        </div>
+    </div>
+</body>
+</html>

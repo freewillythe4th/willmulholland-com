@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>It's on its way | Will Mulholland</title>
+    <title>Your guide is ready | Will Mulholland</title>
     <meta name="robots" content="noindex">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,8 +50,8 @@
 <body>
     <div class="card">
         <a href="/" class="brand"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland"></a>
-        <h1>&#127919; It's on its way.</h1>
-        <p class="sub">The guide is landing in your inbox now. Want to read it right away?</p>
+        <h1>&#127919; Here's your guide.</h1>
+        <p class="sub">All yours, no waiting. Tap below and start reading.</p>
         <a href="/traffic-guide" class="guide-btn">Read the guide now</a>
 
         <div class="divider"></div>
@@ -88,7 +88,7 @@
 
         <div class="done" id="surveyDone">
             <h2>Got it, thank you.</h2>
-            <p>I'll tailor what I send around that. The guide's in your inbox, or read it <a href="/traffic-guide" style="color:var(--accent);font-weight:600;text-decoration:none;">here</a>.</p>
+            <p>I'll tailor what I send around that. Your guide is right <a href="/traffic-guide" style="color:var(--accent);font-weight:600;text-decoration:none;">here</a>.</p>
         </div>
     </div>
 
@@ -120,8 +120,8 @@
                     body: JSON.stringify(payload)
                 }).then(function (r) {
                     if (r.ok) { form.style.display = 'none'; done.style.display = 'block'; }
-                    else { btn.disabled = false; btn.textContent = original; err.textContent = 'Something went wrong, but the guide is still in your inbox.'; err.style.display = 'block'; }
-                }).catch(function () { btn.disabled = false; btn.textContent = original; err.textContent = 'Network error. The guide is still in your inbox.'; err.style.display = 'block'; });
+                    else { btn.disabled = false; btn.textContent = original; err.textContent = 'Something went wrong, but your guide is still ready above.'; err.style.display = 'block'; }
+                }).catch(function () { btn.disabled = false; btn.textContent = original; err.textContent = 'Network error, but your guide is still ready above.'; err.style.display = 'block'; });
             });
         })();
     </script>

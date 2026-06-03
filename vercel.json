@@ -6,6 +6,7 @@
       { "src": "/blog/claude-prompts-for-product-marketers", "dest": "/blog/claude-prompts-for-product-marketers.html" },
       { "src": "/workshop", "dest": "/workshop.html" },
       { "src": "/workshop-confirmed", "dest": "/workshop-confirmed.html" },
+      { "src": "/workshop-recording", "dest": "/workshop-recording.html" },
       { "src": "/community", "dest": "/community.html" },
       { "src": "/scroll-sequence", "dest": "/scroll-sequence.html" },
       { "src": "/traffic", "dest": "/traffic.html" },
