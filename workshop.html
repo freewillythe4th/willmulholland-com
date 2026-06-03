@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Build your first AI marketing tool, live | Free workshop with Will Mulholland</title>
-    <meta name="description" content="A free 60-minute live workshop. I build one working marketing tool on screen, start to finish, the way I'd tell you to start. Wed 24 June, 7pm AEST.">
+    <title>Build the brain behind your marketing, live | Free workshop with Will Mulholland</title>
+    <meta name="description" content="A free 60-minute live workshop. We set up your context and build your first reusable AI marketing skill on screen, the foundation that makes AI work like it knows your business. Wed 24 June, 7pm AEST.">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://willmulholland.com/workshop">
-    <meta property="og:title" content="Build your first AI marketing tool, live">
-    <meta property="og:description" content="60 minutes, live. I build one working marketing tool on screen, start to finish, then you go make your own. Wed 24 June, 7pm AEST.">
+    <meta property="og:title" content="Build the brain behind your marketing, live">
+    <meta property="og:description" content="60 minutes, live. We build the foundation of your AI marketing system on screen, your context and your first reusable skill. Wed 24 June, 7pm AEST.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://willmulholland.com/workshop">
     <meta property="og:image" content="https://willmulholland.com/og-image.jpg">
@@ -241,28 +241,57 @@
         </button>
     </nav>
 
+    <style>
+        /* Second-brain file-tree visual */
+        .brain-card { width: 100%; max-width: 380px; background: var(--white); border: 1px solid var(--ink); border-radius: 16px; box-shadow: var(--offset-shadow); overflow: hidden; }
+        .brain-body { padding: 18px 20px 20px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 13.5px; line-height: 1.5; }
+        .bt { display: flex; align-items: baseline; gap: 10px; padding: 3px 0; color: var(--ink); }
+        .bt-i { padding-left: 18px; } .bt-ii { padding-left: 36px; }
+        .bt-folder { color: var(--accent-deep); font-weight: 700; }
+        .bt-file { color: var(--ink); }
+        .bt-note { color: var(--gray-light); font-size: 12px; margin-left: auto; white-space: nowrap; }
+        .brain-body .tool-badge { margin-top: 14px; display: inline-block; }
+        /* Trust stat strip */
+        .stat-strip { display: flex; flex-wrap: wrap; gap: 18px 56px; justify-content: center; align-items: flex-start; max-width: 920px; margin: 0 auto; }
+        .stat-strip .stat { text-align: center; flex: 1; min-width: 180px; }
+        .stat-strip .stat b { display: block; font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(32px, 4.4vw, 48px); color: var(--ink); line-height: 1; letter-spacing: -0.01em; margin-bottom: 8px; }
+        .stat-strip .stat span { font-size: 14px; color: var(--gray-mid); line-height: 1.4; display: block; }
+        /* Fit / not-fit */
+        .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+        @media (max-width: 720px) { .fit-grid { grid-template-columns: 1fr; } }
+        .fit-list { list-style: none; padding: 0; margin: 16px 0 0; }
+        .fit-list li { position: relative; padding: 8px 0 8px 30px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; }
+        .fit-list li::before { position: absolute; left: 0; top: 8px; font-weight: 700; }
+        .fit-list.yes li::before { content: '\2713'; color: #1f7a4d; }
+        .fit-list.no li::before { content: '\00d7'; color: #b4452f; font-size: 18px; line-height: 1; }
+        /* Testimonial stars */
+        .stars { color: var(--accent); letter-spacing: 3px; font-size: 15px; margin-bottom: 14px; }
+    </style>
+
     <!-- Hero -->
     <section class="hero">
         <div>
             <span class="hero-tag">Free &middot; Live online</span>
-            <h1>Build your first AI marketing tool, <span class="hl">live.</span></h1>
-            <p class="hero-sub">60 minutes, live. I build one working marketing tool start to finish on screen, the exact way I'd tell you to start. Just the build, then you go make your own.</p>
+            <h1>Build the brain behind your marketing, <span class="hl">live.</span></h1>
+            <p class="hero-sub">60 minutes, live. We set up your context and build your first reusable skill on screen, the foundation that makes AI stop sounding generic and start working like it knows your business. You leave with it built, not a pile of notes.</p>
             <div class="hero-cta">
                 <button type="button" class="btn-primary" data-open-modal>Reserve my spot, free</button>
                 <span class="hero-meta">Wed 24 Jun &middot; <b>7pm AEST</b> &middot; free</span>
             </div>
         </div>
         <div>
-            <p class="tool-label">For example, a tool you could build live &darr;</p>
-            <div class="tool-card" aria-hidden="true">
-                <div class="tool-bar"><i class="d1"></i><i class="d2"></i><i class="d3"></i><span>morning-brief</span></div>
-                <div class="tool-body">
-                    <div class="accent-bar"></div>
-                    <h4>Your 7am brief</h4>
-                    <div class="tool-row">Scanned 6 sources overnight</div>
-                    <div class="tool-row">Drafted 3 hooks in your voice</div>
-                    <div class="tool-row">Flagged 1 competitor move</div>
-                    <span class="tool-badge">sent 7:00am &middot; ran without you</span>
+            <p class="tool-label">What you'll start building &darr;</p>
+            <div class="brain-card" aria-hidden="true">
+                <div class="tool-bar"><i class="d1"></i><i class="d2"></i><i class="d3"></i><span>your-marketing-brain</span></div>
+                <div class="brain-body">
+                    <div class="bt"><span class="bt-folder">your-marketing-brain/</span></div>
+                    <div class="bt bt-i"><span class="bt-file">context.md</span><span class="bt-note">everything you know</span></div>
+                    <div class="bt bt-i"><span class="bt-folder">skills/</span><span class="bt-note">your reusable plays</span></div>
+                    <div class="bt bt-ii"><span class="bt-file">positioning.md</span></div>
+                    <div class="bt bt-ii"><span class="bt-file">launch-comms.md</span></div>
+                    <div class="bt bt-ii"><span class="bt-file">weekly-content.md</span></div>
+                    <div class="bt bt-i"><span class="bt-folder">connections/</span><span class="bt-note">your stack, wired in</span></div>
+                    <span class="tool-badge">12 plays &middot; growing every week</span>
                 </div>
             </div>
         </div>
@@ -282,6 +311,29 @@
         <img src="images/clemenger-bbdo/bbdo.svg" alt="BBDO">
     </div>
 
+    <!-- Trust stats -->
+    <div class="band band--soft">
+        <section class="wrap" style="padding-top: 40px; padding-bottom: 40px;">
+            <div class="stat-strip">
+                <div class="stat"><b>500+</b><span>growth leaders trained, keynoting at Product Marketing Alliance, Generate Summit, Canva and Salesforce</span></div>
+                <div class="stat"><b>Startmate</b><span>angel investor and mentor across the S23, W23 and S24 cohorts</span></div>
+                <div class="stat"><b>100+</b><span>growth leaders read the Intelligent Growth newsletter each week</span></div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Sound familiar -->
+    <section class="wrap">
+        <div class="section-tag">Sound familiar?</div>
+        <h2 class="section-title">You're prompting.<br><span class="muted">You're not building.</span></h2>
+        <div class="edge-grid cols-2">
+            <div class="edge-card"><h3>Every output sounds generic</h3><p>You paste the same context into the chat box again and again, and it still reads like everyone else's AI.</p></div>
+            <div class="edge-card"><h3>Nothing you make sticks</h3><p>A good prompt today is gone tomorrow. There's no system, so you start from a blank box every time.</p></div>
+            <div class="edge-card"><h3>Marketing is the bottleneck</h3><p>The product ships faster than you can tell anyone it exists. You need leverage, not another tool to learn.</p></div>
+            <div class="edge-card"><h3>Demos, not your work</h3><p>You've watched the AI tutorials. None of them built something on your business, with your context, that you got to keep.</p></div>
+        </div>
+    </section>
+
     <!-- The 60 minutes -->
     <section class="wrap">
         <div class="section-tag">The 60 minutes</div>
@@ -298,14 +350,14 @@
                 <span class="agenda-time">Next ~35 min</span>
                 <div>
                     <h3>The live build</h3>
-                    <p>I take the winning job, the one the room voted for in the form, and build a working tool for it live, narrating every step. You watch it come together.</p>
+                    <p>I take the skill the room voted for in the form and build it into your brain live, narrating every step. You watch it come together.</p>
                 </div>
             </div>
             <div class="agenda-card">
                 <span class="agenda-time">Last ~15 min</span>
                 <div>
                     <h3>Start tonight, plus Q&amp;A</h3>
-                    <p>Exactly how to build your own this week. I send you the tool I built afterwards so you can adapt it, plus the room where marketers swap the builds that work.</p>
+                    <p>Exactly how to keep building your own this week. I send you what we built afterwards so you can adapt it, plus the room where marketers swap the builds that work.</p>
                 </div>
             </div>
         </div>
@@ -315,25 +367,25 @@
     <div class="band band--soft">
         <section class="wrap">
             <div class="section-tag">You vote in the form</div>
-            <h2 class="section-title">One job, voted by the room.<br><span class="muted">I build it live.</span></h2>
+            <h2 class="section-title">One skill, voted by the room.<br><span class="muted">I build it into your brain live.</span></h2>
             <div class="edge-grid cols-2">
                 <div class="edge-card"><span class="edge-num">01</span><h3>Calls into insights</h3><p>Turn customer or sales calls into insights you can use, without re-listening to an hour of recording.</p></div>
-                <div class="edge-card"><span class="edge-num">02</span><h3>Competitor watch</h3><p>A tool that watches what a competitor is doing and tells you when something changes.</p></div>
+                <div class="edge-card"><span class="edge-num">02</span><h3>Competitor watch</h3><p>A skill that watches what a competitor is doing and tells you when something changes.</p></div>
                 <div class="edge-card"><span class="edge-num">03</span><h3>One idea into content</h3><p>Turn a single idea into content in your voice, so one thought becomes a week of posts.</p></div>
                 <div class="edge-card"><span class="edge-num">04</span><h3>The repeat email or doc</h3><p>The email or doc you write over and over, built once so it writes itself from here.</p></div>
             </div>
-            <p class="vote-note">You vote on the booking form when you register. The winner is what I build on the day, start to finish. <strong>One working tool, not a whole system.</strong> That is how you actually start: one thing, then another.</p>
+            <p class="vote-note">You vote on the booking form when you register. The winning skill is what I build into your brain on the day, start to finish. <strong>The first skill, not the whole brain.</strong> That is how you actually start: one, then another.</p>
         </section>
     </div>
 
     <!-- Walk away with -->
     <section class="wrap">
         <div class="section-tag">What you'll walk away with</div>
-        <h2 class="section-title">Not notes.<br><span class="muted">A tool you can rebuild.</span></h2>
+        <h2 class="section-title">Not notes.<br><span class="muted">The start of your brain.</span></h2>
         <div class="edge-grid cols-4">
-            <div class="edge-card"><h3>The exact build</h3><p>The working tool you watched come together, step by step. I send it to you afterwards so you can adapt it to your own work.</p></div>
-            <div class="edge-card"><h3>How to start small</h3><p>Why one working tool beats a half-built system, and how to pick the first thing worth building.</p></div>
-            <div class="edge-card"><h3>Tools, not tool lists</h3><p>How to build something that runs without you, instead of collecting another set of prompts that go stale.</p></div>
+            <div class="edge-card"><h3>The exact build</h3><p>The working skill you watched come together, step by step. I send it to you afterwards so you can adapt it to your own work.</p></div>
+            <div class="edge-card"><h3>How to start small</h3><p>Why one working skill beats a half-built system, and how to pick the first thing worth building.</p></div>
+            <div class="edge-card"><h3>Skills, not prompt lists</h3><p>How to build something that runs without you, instead of collecting another set of prompts that go stale.</p></div>
             <div class="edge-card"><h3>Your job on the menu</h3><p>The job the room votes for gets built live. Bring the one you most want off your plate.</p></div>
         </div>
     </section>
@@ -341,7 +393,7 @@
     <!-- Proof -->
     <div class="band band--dark">
         <section class="wrap proof-band">
-            <p>I've launched products from zero to $180M, scaled a tool from 2,000 to 350,000 users, and spent the last year building marketing systems with AI in real launches. This is the setup I actually use.</p>
+            <p>I've launched products from zero to $180M, scaled a tool from 2,000 to 350,000 users, and spent the last year building marketing systems with AI in real launches. This is the setup I actually use. No theory weeks, no decks to action later, we build it live.</p>
             <div class="who">Will Mulholland &middot; eBay, NextDocs, Prompt Cowboy, Blinq</div>
         </section>
     </div>
@@ -350,9 +402,10 @@
     <section class="wrap" style="padding-top: 24px; padding-bottom: 24px;">
         <p style="text-align: center; font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-deep); font-weight: 700; margin-bottom: 22px;">From a recent session</p>
         <div style="max-width: 720px; margin: 0 auto; background: var(--white); border: 1px solid var(--ink); border-radius: 18px; box-shadow: var(--offset-shadow); padding: 40px 38px;">
+            <div class="stars" aria-label="5 out of 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
             <p style="font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(20px, 2.6vw, 26px); line-height: 1.42; color: var(--ink); letter-spacing: -0.01em; margin: 0 0 26px;">&ldquo;Will&rsquo;s session helped me see how AI tools like Claude can turn customer conversations and market signals into stronger messaging work, instead of relying only on internal positioning docs. What clicked was the idea of working backwards from those inputs to shape positioning, messaging and content. I&rsquo;d recommend it to marketers and founders who want more customer-informed messaging without starting from a blank page.&rdquo;</p>
             <div style="display: flex; align-items: center; gap: 14px;">
-                <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-deep); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; flex-shrink: 0; letter-spacing: 0.02em;">PR</div>
+                <img src="images/testimonials/pallavi-roy.jpg" alt="Pallavi Roy" loading="lazy" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
                 <div>
                     <div style="font-weight: 700; font-size: 15px; color: var(--ink);">Pallavi Roy</div>
                     <div style="font-size: 13px; color: var(--gray-mid);">Product Marketing &amp; GTM</div>
@@ -365,12 +418,18 @@
     <div class="band band--white">
         <section class="wrap split">
             <div>
-                <div class="section-tag">Who shows up</div>
+                <div class="section-tag">Is this for you?</div>
                 <h2 class="section-title">Built for you if&hellip;</h2>
-                <ul class="who-list">
-                    <li>Marketers and product marketers who use ChatGPT or Claude but have never built a tool that runs without them.</li>
-                    <li>People who want to build their own tools, not collect another tool list.</li>
-                    <li>Anyone who's been scared off the moment someone says terminal or GitHub.</li>
+                <ul class="fit-list yes">
+                    <li>You use ChatGPT or Claude but have never built something that runs without you.</li>
+                    <li>You want to build your own system, not collect another tool list.</li>
+                    <li>You've been scared off the moment someone says terminal or GitHub.</li>
+                </ul>
+                <h3 style="font-family:'Instrument Serif',Georgia,serif; font-weight:400; font-size:24px; margin:26px 0 0; color:var(--ink); letter-spacing:-0.01em;">Not for you if&hellip;</h3>
+                <ul class="fit-list no">
+                    <li>You want a done-for-you agency. This is about owning the capability yourself.</li>
+                    <li>You're after AI theory and trends, not a thing built live.</li>
+                    <li>You can't give it one focused hour to build alongside me.</li>
                 </ul>
             </div>
             <div>
@@ -381,11 +440,11 @@
                     <details class="faq"><summary>Do I need to know how to code?</summary><p>No. You describe what you want, the AI builds it. You'll watch it happen on screen.</p></details>
                     <details class="faq"><summary>Do I need to use the terminal?</summary><p>No. You can do all of this just by talking to the AI, no terminal and no code. The terminal makes you faster once you're comfortable, but you don't need it to start.</p></details>
                     <details class="faq"><summary>Why is my AI output always generic?</summary><p>Because the chat box forgets who you are. The fix isn't a cleverer prompt, it's giving the AI your context once, your brand, your customer, the way you write, so it stops sounding generic. That's what we build. You shouldn't have to tell anyone it came from AI. If it's useful, it's useful.</p></details>
-                    <details class="faq"><summary>Where does the tool live, and how does it run without me?</summary><p>It's just files in a folder. No app to host, no website to build. The AI handles the technical plumbing, you don't memorise a single command. Once it's built it can run on a schedule and send you the result, so it works while you don't.</p></details>
+                    <details class="faq"><summary>Where does this live, and how does it run without me?</summary><p>It's just files in a folder. No app to host, no website to build. The AI handles the technical plumbing, you don't memorise a single command. Once it's built it can run on a schedule and send you the result, so it works while you don't.</p></details>
                     <details class="faq"><summary>Is it safe to point AI at my work?</summary><p>Yes, with a bit of care. The thing to avoid is leaving something exposed, like a password or a key. I'll show you how to keep what you build safe, so you leave knowing how to work without putting yourself at risk.</p></details>
-                    <details class="faq"><summary>Is this the whole course?</summary><p>No. This one is about building your first tool, one working thing, start to finish. The full system, the operating setup and the skills, is a later workshop and the cohort.</p></details>
+                    <details class="faq"><summary>Is this the whole course?</summary><p>No. This one builds the foundation, your context and your first reusable skill, start to finish. The full brain, the operating setup and the rest of the skills, is a later workshop and the cohort.</p></details>
                     <details class="faq"><summary>Is it recorded?</summary><p>No. This one is live only. The whole point is building with you in real time and answering your questions on the spot, so block out the hour and show up. Bring a marketing problem you want solved.</p></details>
-                    <details class="faq"><summary>Is this just a pitch for the cohort?</summary><p>No. The hour is the build. There's a paid cohort later and I'll mention it once, but you walk away with a working tool and the steps to make your own whether you ever pay me a cent or not.</p></details>
+                    <details class="faq"><summary>Is this just a pitch for the cohort?</summary><p>No. The hour is the build. There's a paid cohort later and I'll mention it once, but you walk away with a working skill and the steps to make your own whether you ever pay me a cent or not.</p></details>
                     <details class="faq"><summary>Who's running it?</summary><p>Me, Will Mulholland. I've done product marketing at eBay, NextDocs, Prompt Cowboy and Blinq, and I build marketing systems with AI every day.</p></details>
                 </div>
             </div>
