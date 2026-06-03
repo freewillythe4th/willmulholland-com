@@ -4,12 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Build a Claude Writing Assistant | Intelligent Growth Podcast</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
     <!-- PostHog Analytics -->
     <script>
         !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);var n=t;if(void 0!==e){n=t[e]=function(){n.push([e].concat(Array.prototype.slice.call(arguments,0)))}}else n.push([e].concat(Array.prototype.slice.call(arguments,0)))}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.crossOrigin="anonymous",p.src=(s.api_host||"").replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -19,7 +17,7 @@
             capture_pageleave: true
         })
     </script>
-    
+
     <!-- UTM capture -->
     <script>
         (function () {
@@ -61,352 +59,389 @@
             try { posthog.capture('$pageview'); } catch (e) {}
         })();
     </script>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var downloadForm = document.querySelector('form[action*="beehiiv.com"]');
             if (downloadForm) {
                 downloadForm.addEventListener('submit', function () {
-                    try { 
-                        posthog.capture('podcast_resource_download', { 
+                    try {
+                        posthog.capture('podcast_resource_download', {
                             resource: 'charlotte-norman-claude-guide',
                             episode: 'charlotte-norman-brand-voice',
                             path: window.location.pathname,
                             method: 'beehiiv_native'
-                        }); 
+                        });
                     } catch (e) {}
                 });
             }
         });
     </script>
-    
+
     <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
         :root {
-            --primary: #1E3A8A;
-            --secondary: #0EA5E9;
-            --accent: #06B6D4;
-            --dark: #0F172A;
-            --light: #F8FAFC;
+            --ink: #1F1511;
+            --black: #1F1511;
+            --white: #FFFFFF;
+            --cream: #F2EDE3;
+            --cream-soft: #EBE5D8;
+            --gray-dark: #1F1511;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --offset-shadow: 6px 6px 0 rgba(31,21,17,0.14);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            color: #0F172A;
-            scroll-behavior: smooth;
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            overflow-x: hidden;
+            line-height: 1.55;
+            letter-spacing: -0.01em;
         }
-        
-        .hero-gradient {
-            background: linear-gradient(135deg, #1E3A8A 0%, #0EA5E9 100%);
+
+        ::selection { background: var(--accent); color: var(--white); }
+
+        /* Display typography */
+        h1, h2, .display { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
+
+        a { color: inherit; }
+
+        /* Navigation */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 16px 48px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(242,237,227,0.85);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(31,21,17,0.06);
         }
-        
+        .nav-logo { display: flex; align-items: center; text-decoration: none; }
+        .nav-logo img { height: 30px; width: auto; display: block; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; transition: color 0.4s var(--ease-smooth); }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-cta { padding: 10px 18px; background: var(--ink); color: var(--white); border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.4s var(--ease-smooth); white-space: nowrap; }
+        .nav-cta:hover { background: var(--accent); }
+
+        /* Buttons */
         .btn-primary {
-            background: linear-gradient(135deg, #0EA5E9 0%, #06B6D4 100%);
-            transition: all 0.3s ease;
+            padding: 16px 32px; background: var(--ink); color: var(--white);
+            font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            border: none; border-radius: 999px; text-decoration: none; display: inline-block;
+            transition: background 0.5s var(--ease-smooth);
         }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(6, 182, 212, 0.2);
+        .btn-primary:hover { background: var(--accent); }
+
+        .section-tag {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-mid); margin-bottom: 18px; display: inline-flex; align-items: center; gap: 12px;
         }
-        
+        .section-tag::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+
+        /* Layout */
+        .episode-section { padding: 120px 48px 64px; max-width: 1200px; margin: 0 auto; }
+
+        .breadcrumb { margin-bottom: 28px; }
+        .breadcrumb a { font-size: 14px; font-weight: 500; color: var(--gray-mid); text-decoration: none; transition: color 0.3s var(--ease-smooth); }
+        .breadcrumb a:hover { color: var(--accent); }
+
+        .episode-grid { display: flex; gap: 56px; align-items: flex-start; }
+        .episode-main { flex: 1 1 60%; min-width: 0; }
+        .episode-aside { flex: 0 0 360px; }
+
+        .episode-head h1 {
+            font-size: clamp(34px, 5vw, 58px); line-height: 1.02; margin: 14px 0 16px;
+        }
+        .episode-sub { font-size: clamp(18px, 2vw, 22px); color: var(--gray-mid); margin-bottom: 18px; max-width: 640px; }
+        .episode-meta {
+            display: flex; flex-wrap: wrap; gap: 24px; font-family: monospace; font-size: 12px;
+            text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light);
+            padding-bottom: 32px; border-bottom: 1px solid rgba(31,21,17,0.12);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white); border: 1px solid var(--ink); border-radius: 18px;
+            box-shadow: var(--offset-shadow); padding: 32px; margin-top: 32px;
+        }
+        .card h2 { font-size: clamp(26px, 3vw, 34px); margin-bottom: 20px; }
+
+        /* Video */
         .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            max-width: 100%;
-            background: #000;
-            border-radius: 12px;
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+            max-width: 100%; background: var(--ink); border-radius: 18px; border: 1px solid var(--ink);
+            box-shadow: var(--offset-shadow); margin-top: 32px;
         }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+        /* Listen on */
+        .listen-row { display: flex; flex-wrap: wrap; gap: 14px; }
+        .listen-link {
+            display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px;
+            border: 1px solid rgba(31,21,17,0.16); border-radius: 999px; font-size: 14px; font-weight: 600;
+            color: var(--ink); text-decoration: none; transition: all 0.3s var(--ease-smooth);
+        }
+        .listen-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+        /* Learn list */
+        .learn-list { list-style: none; }
+        .learn-list li {
+            position: relative; padding: 12px 0 12px 30px; font-size: 16px; color: var(--gray-mid);
+            line-height: 1.6; border-bottom: 1px solid rgba(31,21,17,0.08);
+        }
+        .learn-list li:last-child { border-bottom: none; }
+        .learn-list li::before { content: '\2713'; position: absolute; left: 0; top: 12px; color: var(--accent); font-weight: 700; }
+
+        /* About guest */
+        .about-card { background: var(--cream-soft); border: 1px solid rgba(31,21,17,0.12); border-radius: 18px; padding: 32px; margin-top: 32px; }
+        .about-card h2 { font-size: clamp(24px, 3vw, 32px); margin-bottom: 16px; }
+        .about-card p { font-size: 16px; color: var(--gray-mid); line-height: 1.7; margin-bottom: 14px; }
+        .about-link { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--accent); text-decoration: none; }
+        .about-link:hover { color: var(--accent-deep); }
+
+        /* Lead magnet */
+        .lead-magnet {
+            background: var(--ink); color: var(--white); border-radius: 18px; padding: 32px;
+            box-shadow: var(--offset-shadow);
+        }
+        .lead-magnet-head { text-align: center; margin-bottom: 24px; }
+        .lead-magnet .badge {
+            display: inline-block; font-family: monospace; font-size: 11px; text-transform: uppercase;
+            letter-spacing: 0.1em; color: var(--cream); background: var(--accent); padding: 6px 14px;
+            border-radius: 999px; margin-bottom: 18px; font-weight: 600;
+        }
+        .lead-magnet h3 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 30px; line-height: 1.1; margin-bottom: 10px; }
+        .lead-magnet-head p { color: rgba(242,237,227,0.75); font-size: 15px; }
+        .benefit-list { list-style: none; margin-bottom: 24px; }
+        .benefit-list li { position: relative; padding: 8px 0 8px 28px; font-size: 14px; color: rgba(242,237,227,0.88); }
+        .benefit-list li::before { content: '\2713'; position: absolute; left: 0; top: 8px; color: var(--accent); font-weight: 700; }
+        .form-wrap { background: var(--white); border-radius: 14px; padding: 16px; }
+        .lead-magnet-fine { color: rgba(242,237,227,0.55); font-size: 12px; text-align: center; margin-top: 16px; line-height: 1.5; }
+        .sticky-aside { position: sticky; top: 96px; }
+
+        /* Mobile lead magnet (cream version inline) */
+        .lead-magnet-mobile { display: none; }
+
+        /* More episodes */
+        .more-section { padding: 72px 48px; max-width: 1200px; margin: 0 auto; text-align: center; }
+        .more-section h2 { font-size: clamp(28px, 4vw, 44px); margin-bottom: 12px; }
+        .more-section p { color: var(--gray-mid); font-size: 16px; margin-bottom: 28px; }
+        .social-row { display: flex; justify-content: center; gap: 16px; }
+        .social-row a {
+            width: 52px; height: 52px; border: 1px solid var(--ink); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--ink);
+            text-decoration: none; font-family: monospace; font-size: 13px; font-weight: 600;
+            transition: all 0.4s var(--ease-smooth);
+        }
+        .social-row a:hover { background: var(--accent); border-color: var(--accent); color: var(--white); transform: translateY(-4px); }
+
+        /* Footer */
+        footer { background: var(--ink); color: var(--white); padding: 100px 48px 48px; }
+        .footer-main { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 64px; flex-wrap: wrap; }
+        .footer-cta h2 { font-size: clamp(48px, 10vw, 120px); line-height: 0.9; margin-bottom: 32px; }
+        .footer-cta a.email { font-size: 28px; font-weight: 600; color: var(--white); text-decoration: none; transition: color 0.5s var(--ease-smooth); display: block; margin-bottom: 24px; }
+        .footer-cta a.email:hover { color: var(--accent); }
+        .footer-social { display: flex; gap: 16px; }
+        .footer-social a {
+            width: 52px; height: 52px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--white);
+            text-decoration: none; font-family: monospace; font-size: 13px; font-weight: 600;
+            transition: all 0.5s var(--ease-smooth);
+        }
+        .footer-social a:hover { background: var(--white); color: var(--ink); transform: translateY(-6px); }
+        .footer-bottom {
+            max-width: 1200px; margin: 80px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: space-between; font-family: monospace; font-size: 12px;
+            text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-light);
+        }
+        .footer-links { display: flex; gap: 32px; }
+        .footer-links a { color: var(--gray-light); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
+        .footer-links a:hover { color: var(--white); }
+
+        @media (max-width: 980px) {
+            .episode-grid { flex-direction: column; }
+            .episode-aside { display: none; }
+            .lead-magnet-mobile { display: block; margin-top: 32px; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+            .nav-links a:not(.nav-cta) { display: none; }
+            .episode-section { padding: 110px 24px 48px; }
+            .more-section { padding: 56px 24px; }
+            footer { padding: 72px 24px 32px; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+            .footer-links { justify-content: center; }
         }
     </style>
 </head>
-<body class="bg-white">
-    <!-- Header -->
-    <header class="py-4 px-4 md:px-8 lg:px-16 fixed w-full z-50 bg-white shadow-sm">
-        <div class="container mx-auto">
-            <div class="flex justify-between items-center">
-                <a href="index.html">
-                    <h1 class="text-2xl font-bold text-gray-900">Will Mulholland</h1>
-                </a>
-                <nav class="hidden md:flex space-x-8">
-                    <a href="index.html#insight" class="nav-link font-medium text-gray-800 hover:text-blue-500">Insights</a>
-                    <a href="index.html#proof" class="nav-link font-medium text-gray-800 hover:text-blue-500">Proof</a>
-                    <a href="index.html#contact" class="nav-link font-medium text-gray-800 hover:text-blue-500">Contact</a>
-                </nav>
-                <a href="index.html#contact" class="btn-primary hidden md:block px-6 py-2 rounded-full text-white font-bold shadow-lg">Get Started</a>
-            </div>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="/" class="nav-logo"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland"></a>
+        <div class="nav-links">
+            <a href="/workshop">Workshop</a>
+            <a href="/work-with-me">Work with me</a>
+            <a href="work.html">Case studies</a>
+            <a href="/blog">Blog</a>
+            <a href="/traffic">Free gift</a>
+            <a href="/#subscribe" class="nav-cta">Subscribe</a>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Content -->
-    <section class="pt-32 pb-20 px-4 md:px-8 lg:px-16 bg-gray-50">
-        <div class="container mx-auto max-w-6xl">
-            <!-- Breadcrumb -->
-            <div class="mb-6">
-                <a href="index.html" class="text-blue-500 hover:text-blue-700">← Back to Home</a>
-            </div>
-            
-            <div class="flex flex-col lg:flex-row gap-12">
-                <!-- Left Column - Content -->
-                <div class="lg:w-3/5">
-                    <!-- Episode Badge -->
-                    <div class="mb-6">
-                        <span class="inline-block bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium mb-4">
-                            <i class="fas fa-podcast mr-2"></i>Intelligent Growth Podcast
-                        </span>
-                        <h1 class="text-4xl md:text-5xl font-black mb-6 leading-tight text-gray-900">
-                            Stop Your Team Going Off-Brand: Build a Claude Writing Assistant
-                        </h1>
-                        <p class="text-xl text-gray-600 mb-4">
-                            How the ex-Head of Product Marketing from Canva uses Claude to run marketing solo
-                        </p>
-                        <div class="flex items-center text-gray-500 text-sm mb-8">
-                            <span class="mr-4"><i class="fas fa-user mr-2"></i>Charlotte Norman</span>
-                            <span><i class="fas fa-calendar mr-2"></i>November 4, 2025</span>
-                        </div>
+    <!-- Episode -->
+    <section class="episode-section">
+        <div class="breadcrumb">
+            <a href="index.html">&larr; Back to Home</a>
+        </div>
+
+        <div class="episode-grid">
+            <!-- Main column -->
+            <div class="episode-main">
+                <div class="episode-head">
+                    <span class="section-tag">Intelligent Growth Podcast</span>
+                    <h1>Stop Your Team Going Off-Brand: Build a Claude Writing Assistant</h1>
+                    <p class="episode-sub">How the ex-Head of Product Marketing from Canva uses Claude to run marketing solo</p>
+                    <div class="episode-meta">
+                        <span>Charlotte Norman</span>
+                        <span>November 4, 2025</span>
                     </div>
+                </div>
 
-                    <!-- Mobile Newsletter Signup (visible on mobile only) -->
-                    <div class="lg:hidden bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-6 shadow-md mb-8">
-                        <div class="text-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full mx-auto mb-3 flex items-center justify-center">
-                                <i class="fas fa-gift text-white text-xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-900 mb-2">Get Charlotte's Free Guide</h3>
-                            <p class="text-gray-700 text-sm">Step-by-step cheat sheet + 5 bonus Claude project ideas</p>
+                <!-- Mobile lead magnet -->
+                <div class="lead-magnet lead-magnet-mobile">
+                    <div class="lead-magnet-head">
+                        <span class="badge">Free guide</span>
+                        <h3>Get Charlotte's Free Guide</h3>
+                        <p>Step-by-step cheat sheet plus 5 bonus Claude project ideas</p>
+                    </div>
+                    <div class="form-wrap">
+                        <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+                        <iframe src="https://subscribe-forms.beehiiv.com/7168971d-19f6-48b7-83ab-76fd8a0124fd"
+                                class="beehiiv-embed"
+                                data-test-id="beehiiv-embed"
+                                frameborder="0"
+                                scrolling="no"
+                                style="width: 100%; height: 320px; margin: 0; border-radius: 8px !important; background-color: transparent; box-shadow: none; max-width: 100%;">
+                        </iframe>
+                    </div>
+                    <p class="lead-magnet-fine">By opting in, you agree to receive my Intelligent Growth newsletter. You can unsubscribe at any time.</p>
+                </div>
+
+                <!-- Video -->
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/5LHzjQbBptE"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- Listen On -->
+                <div class="card">
+                    <h2>Listen on</h2>
+                    <div class="listen-row">
+                        <a href="https://youtu.be/5LHzjQbBptE" target="_blank" class="listen-link">YouTube</a>
+                        <a href="#" target="_blank" class="listen-link">Spotify</a>
+                        <a href="#" target="_blank" class="listen-link">Apple Podcasts</a>
+                    </div>
+                </div>
+
+                <!-- What You'll Learn -->
+                <div class="card">
+                    <h2>What you'll learn</h2>
+                    <ul class="learn-list">
+                        <li>The 3 AI workflows Charlotte uses daily to punch above her weight as a solo marketer</li>
+                        <li>How to build a brand voice system in Claude that your whole team can use</li>
+                        <li>The exact project setup that keeps everyone on-brand automatically</li>
+                        <li>See Charlotte's screen as she builds a Claude project from scratch</li>
+                        <li>5 more project ideas beyond tone of voice (competitive intelligence, sales enablement, and more)</li>
+                    </ul>
+                </div>
+
+                <!-- About Guest -->
+                <div class="about-card">
+                    <h2>About Charlotte Norman</h2>
+                    <p>Charlotte Norman is the ex-Head of Product Marketing at Canva, where she built the team from scratch and used AI to turn over a million pieces of user feedback into product roadmaps.</p>
+                    <p>Now she runs marketing at Adora completely solo, doing what normally would take a full team. She's gone from a 500-person marketing org to one, using AI to upskill quickly and deliver work at pace across a broad range of marketing areas.</p>
+                    <a href="https://www.linkedin.com/in/charlotte-norman/" target="_blank" class="about-link">Connect with Charlotte on LinkedIn &rarr;</a>
+                </div>
+            </div>
+
+            <!-- Aside: Lead magnet (desktop) -->
+            <aside class="episode-aside">
+                <div class="sticky-aside">
+                    <div class="lead-magnet">
+                        <div class="lead-magnet-head">
+                            <span class="badge">Free guide</span>
+                            <h3>Get Charlotte's Free Guide</h3>
+                            <p>Step-by-step cheat sheet for building Claude projects</p>
                         </div>
-                        
-                        <div class="bg-white rounded-lg p-4">
+                        <ul class="benefit-list">
+                            <li>Complete setup instructions</li>
+                            <li>Brand voice templates</li>
+                            <li>5 bonus project ideas</li>
+                            <li>Testing and iteration framework</li>
+                        </ul>
+                        <div class="form-wrap">
                             <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-                            <iframe src="https://subscribe-forms.beehiiv.com/7168971d-19f6-48b7-83ab-76fd8a0124fd" 
-                                    class="beehiiv-embed" 
-                                    data-test-id="beehiiv-embed" 
-                                    frameborder="0" 
-                                    scrolling="no" 
+                            <iframe src="https://subscribe-forms.beehiiv.com/7168971d-19f6-48b7-83ab-76fd8a0124fd"
+                                    class="beehiiv-embed"
+                                    data-test-id="beehiiv-embed"
+                                    frameborder="0"
+                                    scrolling="no"
                                     style="width: 100%; height: 320px; margin: 0; border-radius: 8px !important; background-color: transparent; box-shadow: none; max-width: 100%;">
                             </iframe>
                         </div>
-                        
-                        <p class="text-gray-600 text-xs text-center mt-3">
-                            By opting in, you agree to receive my Intelligent Growth newsletter. You can unsubscribe at any time.
-                        </p>
-                    </div>
-
-                    <!-- Video Embed -->
-                    <div class="mb-8">
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/5LHzjQbBptE" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
-
-                    <!-- Listen On -->
-                    <div class="bg-white rounded-xl p-6 shadow-md mb-8">
-                        <h3 class="text-lg font-bold mb-4">Listen On</h3>
-                        <div class="flex flex-wrap gap-4">
-                            <a href="https://youtu.be/5LHzjQbBptE" target="_blank" class="flex items-center text-red-600 hover:text-red-700">
-                                <i class="fab fa-youtube text-2xl mr-2"></i>
-                                <span class="font-medium">YouTube</span>
-                            </a>
-                            <a href="#" target="_blank" class="flex items-center text-green-600 hover:text-green-700">
-                                <i class="fab fa-spotify text-2xl mr-2"></i>
-                                <span class="font-medium">Spotify</span>
-                            </a>
-                            <a href="#" target="_blank" class="flex items-center text-purple-600 hover:text-purple-700">
-                                <i class="fab fa-apple text-2xl mr-2"></i>
-                                <span class="font-medium">Apple Podcasts</span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Key Takeaways -->
-                    <div class="bg-white rounded-xl p-8 shadow-md mb-8">
-                        <h2 class="text-2xl font-bold mb-6">What You'll Learn</h2>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3 text-xl"></i>
-                                <span class="text-gray-700">The 3 AI workflows Charlotte uses daily to punch above her weight as a solo marketer</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3 text-xl"></i>
-                                <span class="text-gray-700">How to build a brand voice system in Claude that your whole team can use</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3 text-xl"></i>
-                                <span class="text-gray-700">The exact project setup that keeps everyone on-brand automatically</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3 text-xl"></i>
-                                <span class="text-gray-700">See Charlotte's screen as she builds a Claude project from scratch</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3 text-xl"></i>
-                                <span class="text-gray-700">5 more project ideas beyond tone of voice (competitive intelligence, sales enablement, and more)</span>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- About Guest -->
-                    <div class="bg-gray-50 rounded-xl p-8">
-                        <h2 class="text-2xl font-bold mb-4">About Charlotte Norman</h2>
-                        <p class="text-gray-700 mb-4">
-                            Charlotte Norman is the ex-Head of Product Marketing at Canva, where she built the team from scratch and used AI to turn over a million pieces of user feedback into product roadmaps.
-                        </p>
-                        <p class="text-gray-700 mb-4">
-                            Now she runs marketing at Adora completely solo, doing what normally would take a full team. She's gone from a 500-person marketing org to one, using AI to upskill quickly and deliver work at pace across a broad range of marketing areas.
-                        </p>
-                        <a href="https://www.linkedin.com/in/charlotte-norman/" target="_blank" class="text-blue-500 hover:text-blue-700 font-medium">
-                            <i class="fab fa-linkedin mr-2"></i>Connect with Charlotte on LinkedIn
-                        </a>
+                        <p class="lead-magnet-fine">By opting in, you agree to receive my Intelligent Growth newsletter. You can unsubscribe at any time.</p>
                     </div>
                 </div>
-
-                <!-- Right Column - Resource Download (hidden on mobile, visible on desktop) -->
-                <div class="hidden lg:block lg:w-2/5">
-                    <div class="sticky top-24">
-                        <div class="bg-white rounded-xl shadow-2xl p-8 mb-6">
-                            <div class="text-center mb-6">
-                                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                    <i class="fas fa-file-alt text-white text-2xl"></i>
-                                </div>
-                                <h3 class="text-2xl font-bold text-gray-900 mb-2">Get Charlotte's Free Guide</h3>
-                                <p class="text-gray-600">Step-by-step cheat sheet for building Claude projects</p>
-                            </div>
-                            
-                            <!-- Benefits Preview -->
-                            <div class="space-y-3 mb-6 text-left">
-                                <div class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span class="text-sm text-gray-700">Complete setup instructions</span>
-                                </div>
-                                <div class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span class="text-sm text-gray-700">Brand voice templates</span>
-                                </div>
-                                <div class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span class="text-sm text-gray-700">5 bonus project ideas</span>
-                                </div>
-                                <div class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                                    <span class="text-sm text-gray-700">Testing & iteration framework</span>
-                                </div>
-                            </div>
-
-                            <!-- Download Form - Beehiiv Embed -->
-                            <div class="border-t border-gray-200 pt-6">
-                                <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-                                <iframe src="https://subscribe-forms.beehiiv.com/7168971d-19f6-48b7-83ab-76fd8a0124fd" 
-                                        class="beehiiv-embed" 
-                                        data-test-id="beehiiv-embed" 
-                                        frameborder="0" 
-                                        scrolling="no" 
-                                        style="width: 100%; height: 320px; margin: 0; border-radius: 8px !important; background-color: transparent; box-shadow: none; max-width: 100%;">
-                                </iframe>
-                            </div>
-                            
-                            <p class="text-gray-500 text-xs text-center mt-4">
-                                By opting in, you agree to receive my Intelligent Growth newsletter. You can unsubscribe at any time.
-                            </p>
-                        </div>
-
-                        <!-- Floating Badge -->
-                        <div class="relative">
-                            <div class="absolute -top-4 right-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
-                                FREE GUIDE
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </aside>
         </div>
     </section>
 
-    <!-- More Episodes Section -->
-    <section class="py-16 px-4 md:px-8 lg:px-16 bg-white">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-3xl font-bold mb-8 text-center">More Episodes</h2>
-            <div class="text-center">
-                <p class="text-gray-600 mb-6">Subscribe to get notified when new episodes drop</p>
-                <div class="flex justify-center space-x-6">
-                    <a href="https://www.youtube.com/@WillMulholland" target="_blank" class="text-red-600 hover:text-red-700">
-                        <i class="fab fa-youtube text-3xl"></i>
-                    </a>
-                    <a href="#" target="_blank" class="text-green-600 hover:text-green-700">
-                        <i class="fab fa-spotify text-3xl"></i>
-                    </a>
-                    <a href="#" target="_blank" class="text-purple-600 hover:text-purple-700">
-                        <i class="fab fa-apple text-3xl"></i>
-                    </a>
-                </div>
-            </div>
+    <!-- More Episodes -->
+    <section class="more-section">
+        <h2>More episodes</h2>
+        <p>Subscribe to get notified when new episodes drop</p>
+        <div class="social-row">
+            <a href="https://www.youtube.com/@WillMulholland" target="_blank" title="YouTube">Yt</a>
+            <a href="#" target="_blank" title="Spotify">Sp</a>
+            <a href="#" target="_blank" title="Apple Podcasts">Ap</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-4 md:px-8 lg:px-16 bg-gray-900 text-white">
-        <div class="container mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-                <div class="md:w-1/3 mb-8 md:mb-0">
-                    <h3 class="text-2xl font-bold text-white mb-4">Will Mulholland</h3>
-                    <p class="text-gray-300 mb-6">PLG to Team Revenue</p>
-                    <div class="flex space-x-4">
-                        <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" class="text-gray-300 hover:text-white text-xl">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://twitter.com/" target="_blank" class="text-gray-300 hover:text-white text-xl">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="mailto:will@intelligentmarketer.xyz" class="text-gray-300 hover:text-white text-xl">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                </div>
-                
-                <div class="md:w-2/3 grid grid-cols-2 md:grid-cols-3 gap-8">
-                    <div>
-                        <h4 class="font-bold text-lg mb-4">Company</h4>
-                        <ul class="space-y-2">
-                            <li><a href="index.html#about" class="text-gray-300 hover:text-white">About Us</a></li>
-                            <li><a href="index.html#proof" class="text-gray-300 hover:text-white">Case Studies</a></li>
-                            <li><a href="index.html#contact" class="text-gray-300 hover:text-white">Contact</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h4 class="font-bold text-lg mb-4">Resources</h4>
-                        <ul class="space-y-2">
-                            <li><a href="https://intelligent-growth.beehiiv.com/subscribe" target="_blank" class="text-gray-300 hover:text-white">Newsletter</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white">Podcast</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div>
-                        <h4 class="font-bold text-lg mb-4">Legal</h4>
-                        <ul class="space-y-2">
-                            <li><a href="#" class="text-gray-300 hover:text-white">Privacy Policy</a></li>
-                            <li><a href="#" class="text-gray-300 hover:text-white">Terms of Service</a></li>
-                        </ul>
-                    </div>
-                </div>
+    <footer>
+        <div class="footer-main">
+            <div class="footer-cta">
+                <h2>LET'S TALK.</h2>
+                <a href="mailto:will@intelligentmarketer.xyz" class="email">will@intelligentmarketer.xyz</a>
+                <a href="https://intelligent-growth.beehiiv.com/subscribe" target="_blank" class="btn-primary">Subscribe to the newsletter</a>
             </div>
-            
-            <div class="border-t border-gray-700 pt-8 text-center">
-                <p class="text-gray-400">© 2025 Will Mulholland. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" title="LinkedIn">Li</a>
+                <a href="https://www.youtube.com/@WillMulholland" target="_blank" title="YouTube">Yt</a>
+                <a href="mailto:will@intelligentmarketer.xyz" title="Email">@</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Will Mulholland. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
             </div>
         </div>
     </footer>
 </body>
 </html>
-
