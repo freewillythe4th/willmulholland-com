@@ -1934,16 +1934,24 @@
         })();
     </script>
     <script>
-        // Subscribe nav: scroll to the top email capture and focus it (avoids mid-page anchor jump that traps scroll)
+        // Subscribe: any #subscribe link, OR a direct /#subscribe visit, resolves to the top email form.
+        // The native anchor jump parks mid-hero and scroll-anchoring traps it there on reflow, so we never use it.
         (function () {
-            var link = document.getElementById('navSubscribe');
-            if (!link) return;
             var input = document.getElementById('heroEmail');
-            link.addEventListener('click', function (e) {
-                e.preventDefault();
+            function goToForm(focus) {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                if (input) { setTimeout(function () { try { input.focus({ preventScroll: true }); } catch (err) { input.focus(); } }, 520); }
+                if (focus && input) { setTimeout(function () { try { input.focus({ preventScroll: true }); } catch (err) { input.focus(); } }, 520); }
+            }
+            document.querySelectorAll('a[href$="#subscribe"]').forEach(function (a) {
+                a.addEventListener('click', function (e) { e.preventDefault(); goToForm(true); });
             });
+            if (location.hash === '#subscribe') {
+                // strip the hash so the browser has no fragment target to scroll-anchor back to
+                if (history.replaceState) { history.replaceState(null, '', location.pathname + location.search); }
+                window.scrollTo(0, 0);
+                requestAnimationFrame(function () { window.scrollTo(0, 0); });
+                goToForm(false);
+            }
         })();
 
         // Smart nav: hide on scroll down, show on scroll up (like blinq.me)

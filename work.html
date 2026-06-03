@@ -3,19 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work Samples | Will Mulholland</title>
+    <title>Case studies | Will Mulholland</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --black: #000000;
+            --ink: #1F1511;
+            --black: #1F1511;
             --white: #FFFFFF;
-            --gray-dark: #0A0A0A;
-            --gray-mid: #525252;
-            --gray-light: #737373;
+            --cream: #F2EDE3;
+            --cream-soft: #EBE5D8;
+            --gray-dark: #1F1511;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
             --accent: #2563EB;
             --accent-soft: #DBEAFE;
             --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --offset-shadow: 6px 6px 0 rgba(31,21,17,0.14);
             --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -23,26 +31,31 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: radial-gradient(1200px 500px at 20% -10%, rgba(37,99,235,0.08), transparent 60%), var(--white);
-            color: var(--black);
+            background: var(--cream);
+            color: var(--ink);
             overflow-x: hidden;
-            line-height: 1.5;
-            letter-spacing: -0.02em;
+            line-height: 1.55;
+            letter-spacing: -0.01em;
         }
 
         ::selection { background: var(--accent); color: var(--white); }
 
         nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            padding: 24px 48px;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 16px 48px;
             display: flex; justify-content: space-between; align-items: center;
-            mix-blend-mode: difference;
+            background: rgba(242,237,227,0.85);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(31,21,17,0.06);
         }
-
-        .nav-logo { font-size: 24px; font-weight: 700; letter-spacing: -0.05em; color: var(--white); text-decoration: none; text-transform: lowercase; }
-        .nav-links { display: flex; gap: 32px; }
-        .nav-links a { font-size: 14px; font-weight: 500; color: var(--white); text-decoration: none; text-transform: uppercase; letter-spacing: 0.1em; transition: opacity 0.5s var(--ease-smooth); }
-        .nav-links a:hover { opacity: 0.6; }
+        .nav-logo { display: flex; align-items: center; text-decoration: none; }
+        .nav-logo img { height: 30px; width: auto; display: block; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; transition: color 0.4s var(--ease-smooth); }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a.is-current { color: var(--accent); }
+        .nav-cta { padding: 10px 18px; background: var(--ink); color: var(--white); border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.4s var(--ease-smooth); white-space: nowrap; }
+        .nav-cta:hover { background: var(--accent); }
 
         .btn-primary { padding: 16px 32px; background: var(--black); color: var(--white); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; border: none; text-decoration: none; transition: all 0.5s var(--ease-smooth); display: inline-block; }
         .btn-primary:hover { background: var(--accent); }
@@ -175,20 +188,36 @@
             .work-stats { gap: 24px; }
             .project-toggle { width: 40px; height: 40px; margin-left: 0; margin-top: 16px; }
             .metrics-row { flex-direction: column; }
+            .nav-links { display: none; }
         }
+
+        /* Brand alignment with the rest of the site: serif display headings, offset-shadow cards on cream, ink dark blocks */
+        .work-hero h1, .project-title, .how-card h2, .cta-strip h2, .footer-cta h2 {
+            font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.01em;
+        }
+        .work-hero::before { display: none; }
+        .project-card {
+            background: var(--white); border: 1px solid var(--ink); border-radius: 18px;
+            box-shadow: var(--offset-shadow);
+            transition: box-shadow 0.4s var(--ease-smooth), border-color 0.4s var(--ease-smooth);
+        }
+        .project-card:hover { border-color: var(--ink); box-shadow: 9px 9px 0 rgba(31,21,17,0.16); }
+        .how-card { background: var(--ink); }
+        .metric-card { background: var(--ink); }
+        footer { background: var(--ink); }
     </style>
 </head>
 <body>
     <nav>
-        <a href="index.html" class="nav-logo">wm</a>
+        <a href="/" class="nav-logo"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland"></a>
         <div class="nav-links">
-            <a href="index.html#insight">Insight</a>
-            <a href="index.html#proof">Proof</a>
-            <a href="podcast-charlotte-norman.html">Intelligent Growth</a>
-            <a href="work.html" style="opacity:0.6;">Work</a>
-            <a href="index.html#newsletter">Newsletter</a>
-            <a href="index.html#contact">Contact</a>
+            <a href="/workshop">Workshop</a>
+            <a href="/work-with-me">Work with me</a>
+            <a href="work.html" class="is-current">Case studies</a>
+            <a href="/blog">Blog</a>
+            <a href="/traffic">Free gift</a>
         </div>
+        <a href="/#subscribe" class="nav-cta">Subscribe</a>
     </nav>
 
     <!-- Hero -->
