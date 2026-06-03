@@ -22,7 +22,7 @@
             --gray-mid: #5C4F47; --gray-light: #8B7E73; --accent: #2563EB; --accent-soft: #DBEAFE; --accent-deep: #1E3A8A;
             --offset-shadow: 6px 6px 0 rgba(31,21,17,0.14); --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
         }
-        body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.55; letter-spacing: -0.01em; min-height: 100vh; padding: 40px 22px; }
+        body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.55; letter-spacing: -0.01em; min-height: 100vh; padding: 96px 22px 40px; }
         ::selection { background: var(--accent); color: var(--white); }
         h1, .hl { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: 0; }
 
@@ -57,11 +57,32 @@
         .warn { margin-top: 26px; background: var(--cream-soft); border-radius: 14px; padding: 20px 22px; font-size: 15px; color: var(--gray-mid); line-height: 1.6; }
         .warn strong { color: var(--ink); }
         .sign { margin-top: 16px; font-size: 15px; color: var(--gray-mid); }
+
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 16px 48px; display: flex; justify-content: space-between; align-items: center; background: rgba(242,237,227,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(31,21,17,0.06); }
+        nav .nav-logo { display: flex; align-items: center; text-decoration: none; }
+        nav .nav-logo img { height: 30px; width: auto; display: block; }
+        nav .nav-links { display: flex; gap: 30px; align-items: center; }
+        nav .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; transition: color 0.4s var(--ease-smooth); }
+        nav .nav-links a:hover { color: var(--accent); }
+        nav .nav-links a.is-current { color: var(--accent); }
+        nav .nav-cta { padding: 10px 18px; background: var(--ink); color: var(--white); border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.4s var(--ease-smooth); white-space: nowrap; }
+        nav .nav-cta:hover { background: var(--accent); }
+        @media (max-width: 760px) { nav { padding: 14px 20px; } nav .nav-links { display: none; } }
     </style>
 </head>
 <body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland"></a>
+        <div class="nav-links">
+            <a href="/workshop">Workshop</a>
+            <a href="/work-with-me">Work with me</a>
+            <a href="work.html">Case studies</a>
+            <a href="/blog">Blog</a>
+            <a href="/traffic" class="is-current">Free gift</a>
+        </div>
+        <a href="/#subscribe" class="nav-cta">Subscribe</a>
+    </nav>
     <div class="card">
-        <a href="/" class="brand"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland"></a>
 
         <div class="top">
             <div>
@@ -97,7 +118,7 @@
                 <li><strong>Make better strategic arguments</strong><span>Back your bets with real evidence of what's actually working, not "I think".</span></li>
             </ul>
             <div class="warn"><strong>Fair warning:</strong> this one is addictive and will change how you use the internet. Once you can see any site's traffic volume and where it comes from, you'll start checking it on every website you land on.</div>
-            <p class="sign">Enjoy. <br>&mdash; Will</p>
+            <p class="sign">Enjoy.<br>Will</p>
         </div>
     </div>
 

@@ -64,18 +64,18 @@
         .section-tag::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
 
         /* Hero */
-        .work-hero { padding: 160px 48px 80px; max-width: 1400px; margin: 0 auto; position: relative; }
+        .work-hero { padding: 120px 48px 36px; max-width: 1400px; margin: 0 auto; position: relative; }
         .work-hero::before { content: ''; position: absolute; width: 520px; height: 520px; border-radius: 999px; background: radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.06) 45%, transparent 70%); top: -260px; left: -120px; filter: blur(2px); pointer-events: none; }
-        .work-hero h1 { font-size: clamp(48px, 8vw, 120px); font-weight: 700; letter-spacing: -0.05em; line-height: 0.9; margin-bottom: 24px; }
+        .work-hero h1 { font-size: clamp(40px, 6vw, 78px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.0; margin-bottom: 18px; }
         .work-hero h1 .accent { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 70%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .work-hero p { font-size: clamp(18px, 2vw, 24px); color: var(--gray-mid); max-width: 700px; }
 
-        .work-stats { display: flex; gap: 48px; margin-top: 48px; padding-top: 48px; border-top: 1px solid rgba(0,0,0,0.1); flex-wrap: wrap; }
+        .work-stats { display: flex; gap: 40px; margin-top: 28px; padding-top: 28px; border-top: 1px solid rgba(31,21,17,0.12); flex-wrap: wrap; }
         .work-stat-number { font-size: 48px; font-weight: 900; letter-spacing: -0.05em; color: var(--accent); }
         .work-stat-label { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-light); margin-top: 4px; }
 
         /* Projects container */
-        .projects-section { padding: 80px 48px; max-width: 1400px; margin: 0 auto; }
+        .projects-section { padding: 44px 48px; max-width: 1400px; margin: 0 auto; }
 
         .company-pill { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 999px; font-weight: 600; display: inline-block; margin-bottom: 12px; }
         .company-pill.blinq { background: #E0F2FE; color: #0369A1; }
@@ -109,8 +109,8 @@
         .project-body { padding: 0 32px 32px; border-top: 1px solid rgba(0,0,0,0.06); }
         .project-body h4 { font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 32px; margin-bottom: 16px; }
         .project-body ul { list-style: none; padding: 0; }
-        .project-body ul li { display: flex; align-items: flex-start; gap: 12px; padding: 8px 0; font-size: 15px; color: var(--gray-mid); line-height: 1.6; }
-        .project-body ul li::before { content: '\2192'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+        .project-body ul li { position: relative; padding: 8px 0 8px 26px; font-size: 15px; color: var(--gray-mid); line-height: 1.6; }
+        .project-body ul li::before { content: '\2192'; color: var(--accent); font-weight: 700; position: absolute; left: 0; top: 8px; }
         .project-body p { font-size: 15px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 8px; }
         .project-body p strong { color: var(--black); }
 
@@ -223,13 +223,12 @@
     <!-- Hero -->
     <section class="work-hero">
         <div class="section-tag"><span>Portfolio</span></div>
-        <h1>Work <span class="accent">Samples</span></h1>
+        <h1>Case studies</h1>
         <p>GTM strategy, product launches, campaign development, and sales enablement across B2B and B2C. Ordered by impact.</p>
         <div class="work-stats">
             <div><div class="work-stat-number">$700M+</div><div class="work-stat-label">Revenue Impact</div></div>
             <div><div class="work-stat-number">460M</div><div class="work-stat-label">Campaign Impressions</div></div>
-            <div><div class="work-stat-number">8</div><div class="work-stat-label">Years PMM</div></div>
-            <div><div class="work-stat-number">5</div><div class="work-stat-label">Companies</div></div>
+            <div><div class="work-stat-number">9</div><div class="work-stat-label">Years PMM</div></div>
         </div>
     </section>
 
@@ -398,7 +397,7 @@
                         <span class="project-tag blue">Positioning</span>
                         <span class="project-tag outline">Buying Committee</span>
                     </div>
-                    <h3 class="project-title">From 40K Teams of 3 to 1K Teams of 10+: A Senior PMM Take-Home for Gamma</h3>
+                    <h3 class="project-title">From 40K teams of 3 to 1K teams of 10+: a growth strategy for Gamma</h3>
                     <p class="project-summary">Gamma's brief gave me four personas and a growth target. I ran original primary research with sales enablement leaders at Mastercard, UpGuard, Deel, and Rithum, then pushed past the four personas to name the real enterprise champion: not the VP from the brief, the enablement leader who actually owns the rollout.</p>
                 </div>
                 <div class="project-toggle">&darr;</div>
@@ -640,7 +639,7 @@
                     <div class="video-embed">
                         <iframe src="https://www.youtube.com/embed/S8I9WXjXygs" title="Best Event Lead Capture App in 2026" allowfullscreen></iframe>
                     </div>
-                    <p style="font-size:13px; color:var(--gray-light); margin-top:8px; margin-bottom:16px;">Independent review naming Blinq the best event lead capture app in 2026 — published after the GTM work shipped.</p>
+                    <p style="font-size:13px; color:var(--gray-light); margin-top:8px; margin-bottom:16px;">Independent review naming Blinq the best event lead capture app in 2026, published after the GTM work shipped.</p>
                     <div class="evidence-row">
                         <a href="https://www.linkedin.com/posts/blinq-me_today-were-launching-event-lead-capture-activity-7426746740030119936-D6HO" target="_blank" class="evidence-link" onclick="event.stopPropagation()">Li ELC Launch Post</a>
                         <a href="https://www.linkedin.com/posts/jasonkhood_eventmarketing-leadgeneration-b2bmarketing-ugcPost-7432537523127668736-wniF" target="_blank" class="evidence-link" onclick="event.stopPropagation()">Li Customer Advocacy</a>
