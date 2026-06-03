@@ -38,7 +38,7 @@ export default async function handler(req, res) {
         reactivate_existing: false,
         send_welcome_email: true,
         utm_source: 'willmulholland.com',
-        utm_medium: 'homepage_form',
+        utm_medium: (body.utm_medium || 'homepage_form').toString().slice(0, 100),
       }),
     });
 

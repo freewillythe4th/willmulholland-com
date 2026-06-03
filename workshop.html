@@ -334,6 +334,48 @@
         </div>
     </section>
 
+    <!-- Where you are / where you'll be -->
+    <div class="band band--soft">
+        <section class="wrap">
+            <div class="section-tag">The shift</div>
+            <h2 class="section-title">Where you are.<br><span class="muted">Where you'll be.</span></h2>
+            <div class="fit-grid" style="margin-top: 28px;">
+                <div style="background: var(--white); border: 1px solid var(--ink); border-radius: 18px; box-shadow: var(--offset-shadow); padding: 28px 30px;">
+                    <h3 style="font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 26px; letter-spacing: -0.01em; color: var(--ink); margin: 0;">Right now</h3>
+                    <ul class="fit-list no">
+                        <li>You prompt from scratch every time</li>
+                        <li>The output reads generic, so you rewrite it</li>
+                        <li>A good prompt today is gone tomorrow</li>
+                        <li>Nothing you build runs without you</li>
+                    </ul>
+                </div>
+                <div style="background: var(--white); border: 1px solid var(--accent); border-radius: 18px; box-shadow: 6px 6px 0 var(--accent-soft); padding: 28px 30px;">
+                    <h3 style="font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 26px; letter-spacing: -0.01em; color: var(--ink); margin: 0;">After the workshop</h3>
+                    <ul class="fit-list yes">
+                        <li>A context file the AI reads before it writes</li>
+                        <li>Output that sounds like you, first try</li>
+                        <li>One reusable skill, saved and ready to run again</li>
+                        <li>Something that works while you don't</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Works with -->
+    <section class="wrap" style="padding-top: 36px; padding-bottom: 36px; text-align: center;">
+        <p style="font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gray-mid); font-weight: 600; margin-bottom: 18px;">Built in the tools you already use</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 16px 40px; justify-content: center; align-items: center; font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(22px, 3vw, 30px); color: var(--ink); letter-spacing: -0.01em;">
+            <span>Claude</span>
+            <span style="color: var(--gray-light);">&middot;</span>
+            <span>ChatGPT</span>
+            <span style="color: var(--gray-light);">&middot;</span>
+            <span>Gemini</span>
+            <span style="color: var(--gray-light);">&middot;</span>
+            <span>Codex</span>
+        </div>
+    </section>
+
     <!-- The 60 minutes -->
     <section class="wrap">
         <div class="section-tag">The 60 minutes</div>
@@ -415,18 +457,41 @@
         </div>
     </section>
 
-    <!-- Experience a real workshop -->
-    <section class="wrap" style="padding-top: 8px;">
-        <div class="section-tag">See a real one</div>
-        <h2 class="section-title">Want a taste first?<br><span class="muted">Watch a full workshop I ran in 2024.</span></h2>
-        <p style="font-size: 17px; color: var(--gray-mid); max-width: 640px; margin: 10px 0 28px;">Before you reserve a spot, see exactly how one of these runs, start to finish. A full live AI marketing workshop, recorded in 2024.</p>
-        <div style="position: relative; width: 100%; max-width: 880px; aspect-ratio: 16 / 9; border: 1px solid var(--ink); border-radius: 16px; overflow: hidden; box-shadow: var(--offset-shadow);">
-            <iframe src="https://drive.google.com/file/d/195hu3LdQcTM94mX_J6BLBiGuixgqGPuD/preview" allow="autoplay; fullscreen" allowfullscreen loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; border: 0;" title="Will Mulholland live AI marketing workshop, 2024"></iframe>
-        </div>
-        <div style="margin-top: 24px;">
-            <button type="button" class="btn-primary" data-open-modal>Reserve your spot for the next live one</button>
-        </div>
-    </section>
+    <!-- Lead magnet: 2024 workshop recording -->
+    <div class="band band--soft">
+        <section class="wrap">
+            <div class="section-tag">See a real one</div>
+            <h2 class="section-title">Want a taste first?<br><span class="muted">I'll send you a full workshop from 2024.</span></h2>
+            <p style="font-size: 17px; color: var(--gray-mid); max-width: 600px; margin: 10px 0 24px;">Drop your email and I'll send you the recording of a full live AI marketing workshop, start to finish. The whole thing, exactly as it ran.</p>
+            <form id="recordingForm" style="display: flex; gap: 12px; flex-wrap: wrap; max-width: 520px;">
+                <input type="email" id="recordingEmail" name="email" placeholder="Enter your email" required style="flex: 1; min-width: 220px; padding: 15px 18px; border: 1px solid rgba(31,21,17,0.25); border-radius: 999px; font-size: 16px; font-family: inherit; outline: none; background: var(--white); color: var(--ink);">
+                <button type="submit" class="btn-primary" id="recordingBtn">Send me the recording</button>
+            </form>
+            <p id="recordingMsg" style="font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-light); margin-top: 14px;">No spam. You'll also get my weekly AI marketing newsletter, unsubscribe any time.</p>
+        </section>
+    </div>
+    <script>
+        (function () {
+            var form = document.getElementById('recordingForm');
+            if (!form) return;
+            var msg = document.getElementById('recordingMsg');
+            var btn = document.getElementById('recordingBtn');
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var email = (document.getElementById('recordingEmail').value || '').trim();
+                if (!email) return;
+                var original = btn.textContent;
+                btn.disabled = true; btn.textContent = 'Sending...';
+                fetch('/api/subscribe', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, utm_medium: 'workshop-recording-2024' })
+                }).then(function (r) {
+                    if (r.ok) { form.style.display = 'none'; msg.textContent = 'On its way. Check your inbox for the recording.'; }
+                    else { btn.disabled = false; btn.textContent = original; msg.textContent = 'Something went wrong. Try again or email wcmulholland@gmail.com.'; }
+                }).catch(function () { btn.disabled = false; btn.textContent = original; msg.textContent = 'Network error. Try again in a moment.'; });
+            });
+        })();
+    </script>
 
     <!-- Who + FAQ -->
     <div class="band band--white">
