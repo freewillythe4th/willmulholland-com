@@ -218,6 +218,9 @@
             .nav-links.is-open { transform: translateX(0); }
             body.nav-open { overflow: hidden; }
             .nav-toggle.is-open { color: var(--white); }
+            body.nav-open nav { backdrop-filter: none; -webkit-backdrop-filter: none; transform: none; }
+            body.nav-open .nav-logo img { filter: brightness(0) invert(1); }
+            .nav-links .nav-cta { background: var(--accent); }
             .wrap { padding: 48px 24px; }
             footer { padding: 56px 24px 28px; }
             .modal { padding: 32px 24px; }
@@ -229,9 +232,11 @@
     <nav>
         <a href="/" class="nav-logo"><img src="images/wm-logo/full-logo-transparent.png" alt="Will Mulholland" style="height: 32px; width: auto; display: block;"></a>
         <div class="nav-links" id="navLinks">
+            <a href="/workshop" class="is-current">Workshop</a>
             <a href="/work-with-me">Work with me</a>
             <a href="work.html">Case studies</a>
             <a href="/blog">Blog</a>
+            <a href="/traffic">Free gift</a>
             <button type="button" class="nav-cta" data-open-modal>Reserve a seat</button>
         </div>
         <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
