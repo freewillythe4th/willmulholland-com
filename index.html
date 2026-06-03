@@ -1413,7 +1413,33 @@
     </nav>
 
     <!-- Hero -->
-    <section class="hero" style="min-height: auto; padding: 140px 48px 80px; align-items: flex-start; text-align: left;">
+    <style>
+        .hero.hero-2col { display: grid; grid-template-columns: 1.05fr 0.92fr; gap: 56px; align-items: center; text-align: left; }
+        .hero.hero-2col .trust-strip { grid-column: 1 / -1; flex-wrap: nowrap; justify-content: space-between; max-width: none; }
+        .hero-graphic { display: flex; justify-content: center; }
+        .sysviz { width: 100%; max-width: 390px; background: var(--white); border: 1px solid var(--ink); border-radius: 18px; box-shadow: 6px 6px 0 rgba(31,21,17,0.14); padding: 26px 24px; transform: rotate(2deg); }
+        .sysviz .sv-label { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-light); margin-bottom: 14px; }
+        .sysviz .sv-input { display: inline-block; background: var(--accent-soft); color: var(--accent-deep); font-weight: 600; font-size: 14px; padding: 8px 14px; border-radius: 999px; }
+        .sysviz .sv-pipe { position: relative; height: 30px; margin: 8px 0 8px 22px; border-left: 2px solid rgba(31,21,17,0.18); }
+        .sysviz .sv-pipe::after { content: ''; position: absolute; left: -5px; top: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: svflow 2s linear infinite; }
+        @keyframes svflow { 0% { top: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { top: 26px; opacity: 0; } }
+        .sysviz .sv-hub { display: inline-flex; align-items: center; gap: 8px; background: var(--ink); color: var(--white); font-weight: 700; font-size: 13px; padding: 9px 16px; border-radius: 999px; }
+        .sysviz .sv-hub::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: svpulse 1.6s ease-in-out infinite; }
+        @keyframes svpulse { 0%,100% { opacity: 0.4; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+        .sysviz .sv-outs { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+        .sysviz .sv-chip { display: flex; align-items: center; gap: 9px; border: 1px solid rgba(31,21,17,0.16); border-radius: 10px; padding: 10px 13px; font-size: 14px; color: var(--ink); background: var(--cream); animation: svpop 5.2s var(--ease-smooth) infinite; animation-delay: calc(var(--d) * 0.5s); }
+        .sysviz .sv-chip::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+        @keyframes svpop { 0% { opacity: 0.25; transform: translateY(6px); } 11% { opacity: 1; transform: translateY(0); } 84% { opacity: 1; transform: translateY(0); } 100% { opacity: 0.25; transform: translateY(6px); } }
+        @media (max-width: 900px) {
+            .hero.hero-2col { grid-template-columns: 1fr; gap: 34px; }
+            .hero-graphic { justify-content: flex-start; }
+            .sysviz { transform: none; }
+            .hero.hero-2col .trust-strip { flex-wrap: wrap; justify-content: flex-start; }
+        }
+        @media (prefers-reduced-motion: reduce) { .sysviz *::before, .sysviz *::after, .sysviz .sv-chip { animation: none !important; } }
+    </style>
+    <section class="hero hero-2col" style="min-height: auto; padding: 140px 48px 80px;">
+        <div class="hero-col-left">
         <h1 style="font-size: clamp(38px, 5.4vw, 74px); line-height: 1.05; position: relative; z-index: 2; max-width: 1120px;">
             <span class="line"><span>Your product ships faster than</span></span>
             <span class="line"><span>your marketing can keep up.</span></span>
@@ -1422,14 +1448,30 @@
             <span>AI made the making easy. Getting it seen is the hard part now. Build the workflows for it yourself, or have me build them with you.</span>
         </p>
         <div class="hero-cta" id="subscribe" style="margin-top: 32px; position: relative; z-index: 2; scroll-margin-top: 90px; display: flex; flex-direction: column; align-items: flex-start; gap: 0;">
-            <form id="heroSubscribe" style="display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 380px;">
-                <input type="email" id="heroEmail" name="email" placeholder="Enter your email" required style="width: 100%; padding: 16px 18px; border: 1px solid rgba(31,21,17,0.25); border-radius: 999px; font-size: 16px; font-family: inherit; outline: none; background: var(--white); color: var(--ink);">
-                <button type="submit" id="heroSubscribeBtn" class="btn-primary" style="width: 100%; background: var(--accent); border: none; cursor: pointer; font-family: inherit;">Get the playbooks</button>
+            <form id="heroSubscribe" style="display: flex; gap: 10px; flex-wrap: wrap; width: 100%; max-width: 560px;">
+                <input type="email" id="heroEmail" name="email" placeholder="Enter your email" required style="flex: 1; min-width: 220px; padding: 16px 18px; border: 1px solid rgba(31,21,17,0.25); border-radius: 999px; font-size: 16px; font-family: inherit; outline: none; background: var(--white); color: var(--ink);">
+                <button type="submit" id="heroSubscribeBtn" class="btn-primary" style="background: var(--accent); border: none; cursor: pointer; font-family: inherit; white-space: nowrap;">Get the playbooks</button>
             </form>
             <p id="heroSubscribeMsg" style="font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-light); margin-top: 16px;">Join 100+ marketers learning AI-native GTM &middot; <a href="/workshop" style="color: var(--accent-deep); text-decoration: none;">or join the free workshop &rarr;</a></p>
         </div>
+        </div>
 
-        <div class="trust-strip" style="margin-top: 48px; max-width: 1000px; margin-left: 0; display: flex; align-items: center; justify-content: flex-start; gap: 24px 34px; flex-wrap: wrap; opacity: 0.75; position: relative; z-index: 2;">
+        <div class="hero-graphic">
+            <div class="sysviz" aria-hidden="true">
+                <div class="sv-label">Your marketing system</div>
+                <span class="sv-input">Your context</span>
+                <div class="sv-pipe"></div>
+                <span class="sv-hub">AI builds it</span>
+                <div class="sv-outs">
+                    <div class="sv-chip" style="--d:0">Positioning that lands</div>
+                    <div class="sv-chip" style="--d:1">A week of content</div>
+                    <div class="sv-chip" style="--d:2">A launch, ready to send</div>
+                    <div class="sv-chip" style="--d:3">Follow-up that never drops</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="trust-strip" style="margin-top: 44px; display: flex; align-items: center; gap: 18px 22px; opacity: 0.75; position: relative; z-index: 2;">
             <img src="images/blinq/logo.svg" alt="Blinq" style="height: 22px; width: auto; filter: grayscale(100%);">
             <img src="images/ebay/logo.svg" alt="eBay" style="height: 22px; width: auto; filter: grayscale(100%);">
             <span style="display: inline-flex; align-items: center; gap: 8px;"><img src="images/prompt-cowboy/logo.png" alt="Prompt Cowboy" style="height: 22px; width: 22px; filter: grayscale(100%);"><span style="font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: #1a1a1a;">Prompt Cowboy</span></span>
