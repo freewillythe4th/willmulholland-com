@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog | Will Mulholland</title>
-    <meta name="description" content="Essays on AI-native marketing, systems, and building things that compound.">
+    <meta name="description" content="Writing on AI-native marketing, systems, and building things that compound.">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://willmulholland.com/blog">
     <meta property="og:title" content="Blog | Will Mulholland">
-    <meta property="og:description" content="Essays on AI-native marketing, systems, and building things that compound.">
+    <meta property="og:description" content="Writing on AI-native marketing, systems, and building things that compound.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://willmulholland.com/blog">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,7 @@
         }
         html { scroll-behavior: smooth; }
         body {
-            font-family: 'Inter', sans-serif; color: var(--ink); line-height: 1.5; letter-spacing: -0.02em;
+            font-family: 'Inter', sans-serif; color: var(--ink); line-height: 1.5; letter-spacing: -0.01em;
             background: var(--cream);
             -webkit-font-smoothing: antialiased; min-height: 100vh;
         }
@@ -51,6 +51,13 @@
             color: var(--gray-mid); text-decoration: none; transition: color 0.4s var(--ease-smooth);
         }
         .nav-back:hover { color: var(--ink); }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; transition: color 0.4s var(--ease-smooth); }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a.is-current { color: var(--accent); }
+        .nav-cta { padding: 10px 18px; background: var(--ink); color: var(--white); border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.4s var(--ease-smooth); white-space: nowrap; }
+        .nav-cta:hover { background: var(--accent); }
+        @media (max-width: 760px) { .nav-links { display: none; } }
 
         .wrap { max-width: 760px; margin: 0 auto; padding: 80px 24px 64px; }
         .kicker {
@@ -66,12 +73,12 @@
 
         .posts { display: flex; flex-direction: column; gap: 24px; }
         .post-card {
-            display: block; text-decoration: none; color: inherit; border: 1px solid rgba(31,21,17,0.10);
-            border-radius: 20px; padding: 32px; background: var(--cream-soft);
-            box-shadow: var(--warm-shadow);
-            transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth), border-color 0.5s var(--ease-smooth);
+            display: block; text-decoration: none; color: inherit; border: 1px solid var(--ink);
+            border-radius: 18px; padding: 32px; background: var(--white);
+            box-shadow: 6px 6px 0 rgba(31,21,17,0.14);
+            transition: transform 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth);
         }
-        .post-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(31,21,17,0.14); border-color: rgba(31,21,17,0.18); }
+        .post-card:hover { transform: translate(-2px,-2px); box-shadow: 9px 9px 0 rgba(31,21,17,0.16); }
         .post-meta {
             font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
             color: var(--accent); margin-bottom: 14px;
@@ -89,9 +96,14 @@
         .post-card:hover .post-arrow .arr { transform: translateX(6px); }
 
         .subscribe {
-            margin-top: 56px; padding: 40px 32px; border-radius: 20px; text-align: center;
-            background: var(--cream-soft); border: 1px solid rgba(31,21,17,0.10);
+            margin-top: 56px; padding: 44px 32px; border-radius: 18px; text-align: center;
+            background: var(--ink); border: 1px solid var(--ink);
         }
+        .subscribe h3 { color: var(--white); }
+        .subscribe p { color: rgba(255,255,255,0.72); }
+        .subscribe .sub-form button { background: var(--accent); }
+        .subscribe .sub-form button:hover { background: var(--white); color: var(--ink); }
+        .subscribe .sub-meta { color: rgba(255,255,255,0.55); }
         .subscribe h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
         .subscribe p { font-size: 15px; color: var(--gray-mid); margin-bottom: 20px; }
         .sub-form { display: flex; gap: 12px; max-width: 440px; margin: 0 auto; }
@@ -125,12 +137,19 @@
 <body>
     <nav>
         <a href="/" class="nav-logo"><img src="/images/wm-logo/full-logo-transparent.png" alt="Will Mulholland"></a>
-        <a href="/" class="nav-back">&larr; Home</a>
+        <div class="nav-links">
+            <a href="/workshop">Workshop</a>
+            <a href="/work-with-me">Work with me</a>
+            <a href="/work.html">Case studies</a>
+            <a href="/blog" class="is-current">Blog</a>
+            <a href="/traffic">Free gift</a>
+        </div>
+        <a href="/#subscribe" class="nav-cta">Subscribe</a>
     </nav>
 
     <div class="wrap">
         <div class="kicker">Blog</div>
-        <h1>Essays</h1>
+        <h1>Writing</h1>
         <p class="intro">On AI-native marketing, building systems that compound, and turning your work into assets instead of hours.</p>
 
         <div class="posts">
