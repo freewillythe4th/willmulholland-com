@@ -285,7 +285,8 @@
 
         .hero h1 .line {
             display: block;
-            overflow: hidden;
+            overflow: visible;
+            padding-bottom: 0.08em;
         }
 
         .hero h1 .line span {
@@ -1012,28 +1013,34 @@
         .package-row {
             display: grid;
             grid-template-columns: 1fr auto;
-            gap: 48px;
-            align-items: start;
-            padding: 64px 0;
-            border-bottom: 1px solid rgba(31,21,17,0.08);
+            gap: 40px;
+            align-items: center;
+            padding: 40px 44px;
+            background: var(--white);
+            border: 1px solid var(--ink);
+            border-radius: 18px;
+            box-shadow: 6px 6px 0 rgba(31,21,17,0.14);
+            margin-bottom: 22px;
+            transition: transform 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth);
         }
-        .package-row:last-child { border-bottom: none; }
+        .package-row:last-child { margin-bottom: 0; }
+        .package-row:hover { transform: translate(-2px,-2px); box-shadow: 9px 9px 0 rgba(31,21,17,0.16); }
         .package-content {
             max-width: 720px;
         }
         .package-counter {
             font-family: 'Instrument Serif', Georgia, serif;
-            font-size: clamp(80px, 11vw, 180px);
+            font-size: clamp(54px, 7vw, 104px);
             font-weight: 400;
             line-height: 0.85;
-            color: var(--ink);
-            opacity: 0.18;
+            color: var(--accent);
+            opacity: 0.22;
             user-select: none;
         }
         @media (max-width: 800px) {
-            .package-row { grid-template-columns: 1fr; gap: 16px; padding: 48px 0; }
-            .package-counter { font-size: 72px; order: -1; opacity: 0.25; }
-            .package-section { padding: 60px 24px; }
+            .package-row { grid-template-columns: 1fr; gap: 12px; padding: 30px 26px; }
+            .package-counter { font-size: 58px; order: -1; opacity: 0.28; }
+            .package-section { padding: 60px 22px; }
         }
         .package-eyebrow {
             font-family: monospace;
@@ -1403,7 +1410,7 @@
             <a href="work.html">Case studies</a>
             <a href="/blog">Blog</a>
             <a href="/traffic">Free gift</a>
-            <a href="#subscribe" class="nav-cta">Subscribe</a>
+            <a href="#subscribe" class="nav-cta" id="navSubscribe">Subscribe</a>
         </div>
         <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
             <span class="nav-toggle-bar"></span>
@@ -1427,7 +1434,7 @@
         .sysviz .sv-hub::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: svpulse 1.6s ease-in-out infinite; }
         @keyframes svpulse { 0%,100% { opacity: 0.4; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
         .sysviz .sv-outs { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
-        .sysviz .sv-chip { display: flex; align-items: center; gap: 9px; border: 1px solid rgba(31,21,17,0.16); border-radius: 10px; padding: 10px 13px; font-size: 14px; color: var(--ink); background: var(--cream); animation: svpop 5.2s var(--ease-smooth) infinite; animation-delay: calc(var(--d) * 0.5s); }
+        .sysviz .sv-chip { display: flex; align-items: center; gap: 9px; border: 1px solid rgba(31,21,17,0.16); border-radius: 10px; padding: 10px 13px; font-size: 14px; color: var(--ink); background: var(--cream); }
         .sysviz .sv-chip::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
         @keyframes svpop { 0% { opacity: 0.25; transform: translateY(6px); } 11% { opacity: 1; transform: translateY(0); } 84% { opacity: 1; transform: translateY(0); } 100% { opacity: 0.25; transform: translateY(6px); } }
         @media (max-width: 900px) {
@@ -1927,6 +1934,18 @@
         })();
     </script>
     <script>
+        // Subscribe nav: scroll to the top email capture and focus it (avoids mid-page anchor jump that traps scroll)
+        (function () {
+            var link = document.getElementById('navSubscribe');
+            if (!link) return;
+            var input = document.getElementById('heroEmail');
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (input) { setTimeout(function () { try { input.focus({ preventScroll: true }); } catch (err) { input.focus(); } }, 520); }
+            });
+        })();
+
         // Smart nav: hide on scroll down, show on scroll up (like blinq.me)
         (function () {
             var nav = document.querySelector('nav');
