@@ -170,14 +170,9 @@
         }
 
         .nav-logo .logo-word {
-            font-family: 'Inter', sans-serif;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.01em;
-            font-size: 16px;
-            color: var(--ink);
-            white-space: nowrap;
-            line-height: 1;
+            height: 30px;
+            width: auto;
+            display: block;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1275,7 +1270,7 @@
             .nav-toggle { display: block; color: var(--black); }
             .nav-toggle.is-open { color: var(--white); }
             body.nav-open .nav-logo { color: var(--white); }
-            body.nav-open .nav-logo .logo-word { color: var(--white); }
+            body.nav-open .nav-logo .logo-word { filter: brightness(0) invert(1); }
             body.nav-open .nav-logo .logo-mark { filter: brightness(0) invert(1); }
             .nav-links .nav-cta { background: var(--accent); color: #fff; padding: 12px 28px; }
             body.nav-open nav { backdrop-filter: none; -webkit-backdrop-filter: none; transform: none; }
@@ -1430,7 +1425,7 @@
 
     <!-- Navigation -->
     <nav>
-        <a href="/" class="nav-logo" style="mix-blend-mode: normal; isolation: isolate; position: relative; z-index: 2000;"><img class="logo-mark" src="images/wm-logo/mark-only.png" alt="Will Mulholland"><span class="logo-word">Will Mulholland</span></a>
+        <a href="/" class="nav-logo" style="mix-blend-mode: normal; isolation: isolate; position: relative; z-index: 2000;"><img class="logo-mark" src="images/wm-logo/mark-only.png" alt=""><img class="logo-word" src="images/wm-logo/wordmark-only.png" alt="Will Mulholland"></a>
         <div class="nav-links" id="navLinks">
             <a href="/workshop">Workshop</a>
             <a href="/work-with-me">Work with me</a>
@@ -1490,9 +1485,8 @@
     </style>
     <section class="hero hero-2col" style="min-height: auto; padding: 140px 48px 80px;">
         <div class="hero-col-left">
-        <h1 style="font-size: clamp(40px, 6vw, 88px); line-height: 1.05; position: relative; z-index: 2; max-width: 1120px;">
-            <span class="line"><span>Your product ships faster than</span></span>
-            <span class="line"><span>your marketing can keep up.</span></span>
+        <h1 style="font-size: clamp(38px, 5.2vw, 80px); line-height: 1.04; letter-spacing: -0.02em; position: relative; z-index: 2; max-width: 920px; text-wrap: balance;">
+            Your product ships faster than your marketing can keep up.
         </h1>
         <p class="hero-sub" style="margin-top: 28px; position: relative; z-index: 2; max-width: 760px; font-size: clamp(18px, 1.7vw, 22px); line-height: 1.5;">
             <span>AI made the making easy. Getting it seen is the hard part now. Build the workflows for it yourself, or have me build them with you.</span>
@@ -1661,7 +1655,7 @@
     <!-- Count-up stat band -->
     <style>
         .stat-band { background: var(--cream-soft); max-width: none; margin: 0; padding: 80px 48px; }
-        .stat-band-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+        .stat-band-inner { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
         .stat-band .stat { text-align: center; }
         .stat-band .stat b {
             display: block;
@@ -1681,7 +1675,7 @@
             color: var(--gray-mid);
             display: block;
         }
-        @media (max-width: 900px) { .stat-band-inner { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; } }
+        @media (max-width: 900px) { .stat-band-inner { grid-template-columns: repeat(3, 1fr); gap: 28px 18px; } }
         @media (max-width: 480px) { .stat-band { padding: 60px 24px; } }
         /* Dark stage band: suppress default accent dot, lime span supplies it */
         .stage-band .section-tag::before { display: none; }
@@ -1691,7 +1685,6 @@
             <div class="stat"><b class="count" data-target="180" data-prefix="$" data-suffix="M">$0M</b><span>Launched</span></div>
             <div class="stat"><b class="count" data-target="350" data-suffix="k">0k</b><span>Users scaled to</span></div>
             <div class="stat"><b class="count" data-target="4" data-suffix="M+">0M+</b><span>Users reached</span></div>
-            <div class="stat"><b class="count" data-target="500" data-suffix="+">0+</b><span>Leaders trained</span></div>
         </div>
     </section>
     <script>
