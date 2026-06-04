@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI Product Launch System | Will Mulholland</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F1511; --cream:#F2EDE3; --cream-soft:#EBE5D8; --white:#FFFFFF;
+    --gray-mid:#5C4F47; --gray-light:#8B7E73;
+    --accent:#2563EB; --accent-soft:#DBEAFE; --accent-deep:#1E3A8A;
+    --warm-shadow:0 12px 32px rgba(31,21,17,0.10),0 2px 8px rgba(31,21,17,0.06);
+    --offset-shadow:6px 6px 0 rgba(31,21,17,0.14);
+    --ease:cubic-bezier(0.16,1,0.3,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5;letter-spacing:-0.01em}
+  .wrap{max-width:1100px;margin:0 auto;padding:80px 32px 120px}
+
+  /* header */
+  .head{text-align:center;max-width:760px;margin:0 auto 14px}
+  .eyebrow{font-family:monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+  .head h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(40px,6vw,72px);line-height:0.98;letter-spacing:-0.02em}
+  .head h1 em{font-style:italic}
+  .head .one{font-size:clamp(17px,2vw,20px);color:var(--gray-mid);margin-top:22px;line-height:1.5}
+  .legend{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin:30px 0 8px;font-family:monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--gray-mid)}
+  .legend span{display:inline-flex;align-items:center;gap:8px}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block;flex-shrink:0}
+  .dot.run{background:var(--accent)}
+  .dot.part{background:linear-gradient(90deg,var(--accent) 50%,transparent 50%);border:1.5px solid var(--accent)}
+  .dot.todo{background:transparent;border:1.5px dashed var(--gray-light)}
+
+  /* connector */
+  .flow-arrow{display:flex;justify-content:center;align-items:center;height:46px;color:var(--accent);font-size:22px}
+  .flow-arrow::after{content:"\2193";font-weight:700}
+
+  /* layer card */
+  .layer{background:var(--white);border:1px solid rgba(31,21,17,0.10);border-radius:20px;box-shadow:var(--offset-shadow);padding:30px 32px;display:grid;grid-template-columns:230px 1fr;gap:28px;align-items:start}
+  .layer-id{display:flex;flex-direction:column;gap:8px}
+  .layer-num{font-family:'Instrument Serif',Georgia,serif;font-size:54px;line-height:0.8;color:var(--accent-soft);-webkit-text-stroke:1px var(--accent);color:transparent}
+  .layer-name{font-family:monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
+  .layer-role{font-size:14.5px;color:var(--gray-mid);line-height:1.45}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
+  .chip{font-size:13px;font-weight:500;padding:8px 13px;border-radius:8px;line-height:1.1;display:inline-flex;align-items:center;gap:8px}
+  .chip::before{content:"";width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .chip.run{background:var(--accent-soft);color:var(--accent-deep);border:1px solid rgba(37,99,235,0.14)}
+  .chip.run::before{background:var(--accent)}
+  .chip.part{background:var(--cream);color:var(--gray-mid);border:1px solid rgba(37,99,235,0.30)}
+  .chip.part::before{background:linear-gradient(90deg,var(--accent) 50%,transparent 50%);border:1px solid var(--accent)}
+  .chip.todo{background:transparent;color:var(--gray-light);border:1px dashed rgba(139,126,115,0.6)}
+  .chip.todo::before{border:1px dashed var(--gray-light)}
+
+  /* synthesis sequence */
+  .seq{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+  .seq .step{font-size:13px;font-weight:600;padding:8px 12px;border-radius:8px;background:var(--accent-soft);color:var(--accent-deep);white-space:nowrap}
+  .seq .step.key{background:var(--accent);color:#fff}
+  .seq .sep{color:var(--accent);opacity:0.6;font-size:12px}
+  .gates{margin-top:14px;font-size:13px;color:var(--gray-mid);line-height:1.5}
+  .gates b{color:var(--ink);font-weight:600}
+  .note{margin-top:14px;font-size:13.5px;color:var(--gray-mid);line-height:1.5;border-left:2px solid var(--accent);padding-left:12px}
+  .note b{color:var(--ink)}
+
+  /* foundation band */
+  .foundation{background:var(--ink);color:var(--cream);border-radius:20px;padding:36px 34px;margin-top:46px}
+  .foundation .layer-name{color:#A3E635}
+  .foundation h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:28px;margin:10px 0 22px;color:var(--cream)}
+  .frow{display:grid;grid-template-columns:120px 1fr;gap:18px;padding:14px 0;border-top:1px solid rgba(255,255,255,0.12);align-items:baseline}
+  .frow:first-of-type{border-top:none}
+  .frow .k{font-family:monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55)}
+  .frow .v{display:flex;flex-wrap:wrap;gap:7px}
+  .fchip{font-size:12.5px;padding:6px 11px;border-radius:7px;background:rgba(255,255,255,0.08);color:var(--cream);border:1px solid rgba(255,255,255,0.12)}
+
+  /* closing */
+  .close{margin-top:40px;text-align:center;max-width:780px;margin-left:auto;margin-right:auto}
+  .close .big{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(24px,3.2vw,34px);line-height:1.15;letter-spacing:-0.01em}
+  .close .big em{font-style:italic}
+  .builds{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px;text-align:left}
+  .build{background:var(--cream-soft);border-radius:14px;padding:20px}
+  .build .bn{font-family:monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
+  .build h4{font-size:15px;font-weight:700;margin-bottom:6px}
+  .build p{font-size:13px;color:var(--gray-mid);line-height:1.45}
+
+  @media (max-width:760px){
+    .wrap{padding:56px 18px 80px}
+    .layer{grid-template-columns:1fr;gap:18px;padding:24px 20px}
+    .layer-num{font-size:40px}
+    .builds{grid-template-columns:1fr}
+    .frow{grid-template-columns:1fr;gap:8px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <div class="eyebrow">What I've built</div>
+    <h1>The AI Product <em>Launch System</em></h1>
+    <p class="one">One feature in. Every asset out. The whole company armed. Intelligence about what to say flows into one brain, the brain turns it into the positioning, messaging and every launch asset, and a ready-to-post asset arms every team. This is the full stack, end to end.</p>
+    <div class="legend">
+      <span><i class="dot run"></i> running today</span>
+      <span><i class="dot part"></i> partial</span>
+      <span><i class="dot todo"></i> on the roadmap</span>
+    </div>
+  </div>
+
+  <!-- LAYER 0 -->
+  <div class="layer">
+    <div class="layer-id">
+      <div class="layer-num">00</div>
+      <div class="layer-name">Intelligence in</div>
+      <div class="layer-role">The senses. Everything that tells you what to say, flowing into one place instead of twenty tabs.</div>
+    </div>
+    <div class="chips">
+      <span class="chip run">Competitor live ads · proxy MCP</span>
+      <span class="chip run">Competitor digest cron</span>
+      <span class="chip run">Authenticated sites + pricing · autonomous browser</span>
+      <span class="chip run">Competitor wiki · 20 brands</span>
+      <span class="chip run">Sales + customer calls · granola</span>
+      <span class="chip run">Ambient transcripts · Limitless</span>
+      <span class="chip run">Process interviews</span>
+      <span class="chip run">Roadmap op ref · Notion + Limitless</span>
+      <span class="chip part">Competitor product recordings · screenpipe</span>
+      <span class="chip todo">Reviews · G2 / Capterra</span>
+      <span class="chip todo">Gong</span>
+    </div>
+  </div>
+
+  <div class="flow-arrow"></div>
+
+  <!-- LAYER 1 -->
+  <div class="layer">
+    <div class="layer-id">
+      <div class="layer-num">01</div>
+      <div class="layer-name">The brain</div>
+      <div class="layer-role">Memory and retrieval. One context layer that reads all of it at once. The moat is here, not the model.</div>
+    </div>
+    <div class="chips">
+      <span class="chip run">Second brain · PARA</span>
+      <span class="chip run">Semantic search · Chroma</span>
+      <span class="chip run">Observer / reflector</span>
+      <span class="chip run">Context graph</span>
+      <span class="chip run">Voice DNA</span>
+      <span class="chip run">Approved-copy library</span>
+    </div>
+  </div>
+
+  <div class="flow-arrow"></div>
+
+  <!-- LAYER 2 -->
+  <div class="layer">
+    <div class="layer-id">
+      <div class="layer-num">02</div>
+      <div class="layer-name">Synthesis</div>
+      <div class="layer-role">The PMM craft chain. Intelligence becomes the launch, one ordered pass per feature.</div>
+    </div>
+    <div>
+      <div class="seq">
+        <span class="step">research</span><span class="sep">&rarr;</span>
+        <span class="step">audience</span><span class="sep">&rarr;</span>
+        <span class="step">whitespace</span><span class="sep">&rarr;</span>
+        <span class="step key">positioning</span><span class="sep">&rarr;</span>
+        <span class="step key">messaging</span><span class="sep">&rarr;</span>
+        <span class="step">pricing</span><span class="sep">&rarr;</span>
+        <span class="step key">GTM plan</span><span class="sep">&rarr;</span>
+        <span class="step">launch plan</span><span class="sep">&rarr;</span>
+        <span class="step">enablement</span>
+      </div>
+      <div class="gates"><b>Gates over every draft:</b> Maya persona test · humaniser · fact-checker · refine-spec · council on high-stakes calls.</div>
+    </div>
+  </div>
+
+  <div class="flow-arrow"></div>
+
+  <!-- LAYER 3 -->
+  <div class="layer">
+    <div class="layer-id">
+      <div class="layer-num">03</div>
+      <div class="layer-name">Outputs</div>
+      <div class="layer-role">One approved messaging doc fans out to every launch asset, in one voice.</div>
+    </div>
+    <div>
+      <div class="chips">
+        <span class="chip part">GTM plan</span>
+        <span class="chip run">Sales one-pager</span>
+        <span class="chip part">Website updates</span>
+        <span class="chip todo">Help article</span>
+        <span class="chip todo">Blog</span>
+        <span class="chip run">Founder post</span>
+        <span class="chip part">Company-page post</span>
+        <span class="chip part">Messaging doc</span>
+        <span class="chip run">Lifecycle emails</span>
+        <span class="chip run">Battlecard</span>
+        <span class="chip todo">Asset for everyone to post</span>
+      </div>
+      <div class="note"><b>The engine that already works:</b> elc-content-refresh turns one messaging doc into four derived assets in a pass, with provenance and an approval gate. Generalising it to all of these is the build that turns the pile of skills into the system.</div>
+    </div>
+  </div>
+
+  <div class="flow-arrow"></div>
+
+  <!-- LAYER 4 -->
+  <div class="layer">
+    <div class="layer-id">
+      <div class="layer-num">04</div>
+      <div class="layer-name">Distribution</div>
+      <div class="layer-role">Arm every team. Each person handed a ready-to-post asset, staged to approve then publish on launch day.</div>
+    </div>
+    <div>
+      <div class="chips">
+        <span class="chip run">Marketing</span>
+        <span class="chip run">Sales</span>
+        <span class="chip run">Product</span>
+        <span class="chip run">Engineering</span>
+        <span class="chip run">Founder</span>
+        <span class="chip run">Creator team</span>
+      </div>
+      <div class="note"><b>Rails:</b> Composio (LinkedIn / X / YouTube, stage then approve) · Braze (lifecycle email) · Webflow + Vercel (site) · HubSpot marketplace · Canva + Drive + Notion (collateral) · Slack (internal amplification).</div>
+    </div>
+  </div>
+
+  <!-- FOUNDATION -->
+  <div class="foundation">
+    <div class="layer-name">Underneath it all</div>
+    <h3>The automation that runs the whole thing.</h3>
+    <div class="frow">
+      <div class="k">Agents</div>
+      <div class="v">
+        <span class="fchip">Bob · Milo · Hermes (3-agent)</span>
+        <span class="fchip">Hermes Kanban Flow · the launch chassis</span>
+        <span class="fchip">create-farmer</span>
+        <span class="fchip">printing-press · CLI factory</span>
+        <span class="fchip">Discord multi-agent workspace</span>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="k">Crons</div>
+      <div class="v">
+        <span class="fchip">op ref · 2x daily</span>
+        <span class="fchip">creator intel</span>
+        <span class="fchip">planning sweep</span>
+        <span class="fchip">asset go-live monitor</span>
+        <span class="fchip">self-healing health monitor</span>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="k">MCP stack</div>
+      <div class="v">
+        <span class="fchip">proxy</span><span class="fchip">dex</span><span class="fchip">screenpipe</span>
+        <span class="fchip">perplexity</span><span class="fchip">context7</span><span class="fchip">playwright</span>
+        <span class="fchip">granola</span><span class="fchip">gws</span><span class="fchip">beehiiv</span>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="k">Quality gates</div>
+      <div class="v">
+        <span class="fchip">refine-spec</span><span class="fchip">Codex stop-time review</span>
+        <span class="fchip">council</span><span class="fchip">48 reviewer agents</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSE -->
+  <div class="close">
+    <p class="big">Real today as an operator workflow. <em>The gaps are the roadmap.</em></p>
+    <div class="builds">
+      <div class="build">
+        <div class="bn">Build 01</div>
+        <h4>launch-content-refresh</h4>
+        <p>Generalise the fan-out so one messaging doc produces all nine assets. Closes the biggest output gaps in one move.</p>
+      </div>
+      <div class="build">
+        <div class="bn">Build 02</div>
+        <h4>Launch orchestrator</h4>
+        <p>One entry point that runs intelligence to synthesis to fan-out to arm-everyone as a gated chain, on the Hermes Kanban chassis.</p>
+      </div>
+      <div class="build">
+        <div class="bn">Build 03</div>
+        <h4>Post-launch loop</h4>
+        <p>Pipe the retro and metrics back into the intelligence layer so every launch starts smarter than the last.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
