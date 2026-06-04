@@ -106,7 +106,10 @@
             display: flex; align-items: center; justify-content: center; color: var(--white);
             text-decoration: none; transition: all 0.5s var(--ease-smooth);
         }
+        .footer-social a svg { width: 24px; height: 24px; fill: currentColor; display: block; }
         .footer-social a:hover { background: var(--white); color: var(--black); transform: translateY(-6px); }
+        .footer-grid { max-width: 1100px; }
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr !important; } }
         .footer-bottom {
             max-width: 1100px; margin: 64px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);
             display: flex; justify-content: space-between; font-family: monospace; font-size: 12px;
@@ -160,7 +163,7 @@
     </header>
 
     <!-- Tally form -->
-    <main class="form-wrap">
+    <main class="form-wrap" id="form">
         <div class="form-card">
             <iframe data-tally-src="https://tally.so/embed/PdvVeb?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="Work With Me"></iframe>
             <p class="form-fallback">Form not loading? <a href="https://tally.so/r/PdvVeb" target="_blank" rel="noopener">Open it in a new tab</a>.</p>
@@ -169,13 +172,21 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-main">
-            <div class="footer-cta">
-                <h2>LET'S<br>BUILD.</h2>
-                <a href="mailto:wcmulholland@gmail.com">wcmulholland@gmail.com</a>
-                <div class="footer-social">
-                    <a href="https://www.linkedin.com/in/willmulholland/" title="LinkedIn">Li</a>
-                    <a href="https://www.youtube.com/@WillMulholland" title="YouTube">Yt</a>
+        <div class="footer-main" style="flex-direction: column; align-items: stretch;">
+            <div class="footer-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;">
+                <div class="footer-cta">
+                    <h2>LET'S<br>BUILD.</h2>
+                    <a href="mailto:wcmulholland@gmail.com">wcmulholland@gmail.com</a>
+                    <p style="font-size: 16px; color: var(--gray-light); margin-top: 16px;">Or just email me. I read everything.</p>
+                    <div class="footer-social" style="margin-top: 32px;">
+                        <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+                        <a href="https://www.youtube.com/@WillMulholland" target="_blank" rel="noopener" title="YouTube" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-cta-card" style="background: var(--cream); border-radius: 18px; padding: 40px 32px; display: flex; flex-direction: column; justify-content: center; min-height: 280px; box-shadow: var(--warm-shadow);">
+                    <h3 style="font-family: 'Instrument Serif', Georgia, serif; font-size: 36px; font-weight: 400; margin-bottom: 14px; color: var(--ink); line-height: 1.05; letter-spacing: -0.02em;">Tell me what you're building.</h3>
+                    <p style="font-size: 16px; color: var(--gray-mid); margin-bottom: 24px; line-height: 1.5;">A few short questions, about two minutes. I come back within a day with the next step.</p>
+                    <a href="#form" style="display: inline-block; background: var(--ink); color: #fff; padding: 14px 28px; border-radius: 999px; font-weight: 600; text-decoration: none; text-align: center; align-self: flex-start;">Start the form</a>
                 </div>
             </div>
         </div>
