@@ -1540,6 +1540,115 @@
 
     <!-- Marquee removed for cleaner first fold -->
 
+    <!-- What changes for you: the launch collapse -->
+    <style>
+      .collapse-section { padding: 100px 48px; }
+      .collapse-wrap { max-width: 1040px; margin: 0 auto; }
+      .collapse-head { max-width: 760px; margin-bottom: 52px; }
+      .collapse-eyebrow { font-family: monospace; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+      .collapse-head h2 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(34px, 5vw, 58px); line-height: 1.0; letter-spacing: -0.02em; color: var(--ink); }
+      .collapse-head h2 em { font-style: italic; }
+      .collapse-head p { font-size: 18px; color: var(--gray-mid); line-height: 1.55; margin-top: 22px; max-width: 600px; }
+      .collapse-card { background: var(--white); border: 1px solid rgba(31,21,17,0.10); border-radius: 22px; padding: 44px 44px 38px; box-shadow: var(--offset-shadow); }
+      .collapse-card .row-label { font-family: monospace; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 16px; }
+      .collapse-card .before .row-label { color: var(--gray-light); }
+      .collapse-card .chain { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 6px; }
+      .collapse-card .chip { font-size: 13.5px; font-weight: 500; padding: 8px 13px; border-radius: 8px; white-space: nowrap; line-height: 1; }
+      .collapse-card .before .chip { background: var(--cream-soft); color: var(--gray-mid); border: 1px solid rgba(31,21,17,0.06); }
+      .collapse-card .arrow { color: var(--gray-light); font-size: 13px; opacity: 0.6; }
+      .collapse-card .before .meta { margin-top: 18px; font-size: 14px; color: var(--gray-light); display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+      .collapse-card .before .meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--gray-light); display: inline-block; }
+      .collapse-card .strike-note { color: #B0413E; font-weight: 600; }
+      .collapse-card .fold { display: flex; align-items: center; gap: 18px; margin: 30px 0; }
+      .collapse-card .fold .line { flex: 1; height: 1px; background: rgba(31,21,17,0.10); }
+      .collapse-card .fold .pill { font-family: monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-deep); background: var(--accent-soft); padding: 7px 14px; border-radius: 999px; white-space: nowrap; }
+      .collapse-card .after .row-label { color: var(--accent); }
+      .collapse-card .after-flow { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+      .collapse-card .brief-node { font-size: 14px; font-weight: 600; padding: 12px 18px; border-radius: 10px; background: var(--ink); color: #fff; white-space: nowrap; }
+      .collapse-card .brain-node { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; padding: 12px 18px; border-radius: 10px; background: var(--accent); color: #fff; white-space: nowrap; box-shadow: 0 8px 20px rgba(37,99,235,0.28); }
+      .collapse-card .flow-arrow { color: var(--accent); font-size: 20px; font-weight: 700; }
+      .collapse-card .out-stack { display: flex; flex-wrap: wrap; gap: 7px; flex: 1; min-width: 260px; }
+      .collapse-card .after .chip { background: var(--accent-soft); color: var(--accent-deep); border: 1px solid rgba(37,99,235,0.14); font-weight: 600; }
+      .collapse-card .after .meta { margin-top: 20px; font-size: 14.5px; color: var(--gray-mid); }
+      .collapse-card .after .meta strong { color: var(--ink); }
+      .collapse-payoff { margin-top: 40px; text-align: center; }
+      .collapse-payoff .big { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(26px, 3.6vw, 40px); letter-spacing: -0.01em; line-height: 1.1; }
+      .collapse-payoff .big .from { color: var(--gray-light); }
+      .collapse-payoff .big .to { color: var(--ink); }
+      .collapse-payoff .sub { color: var(--gray-mid); margin-top: 10px; font-style: italic; font-family: 'Instrument Serif', Georgia, serif; font-size: 19px; }
+      @media (max-width: 640px) {
+        .collapse-section { padding: 72px 20px; }
+        .collapse-card { padding: 28px 22px; }
+        .collapse-card .after-flow { gap: 12px; }
+        .collapse-card .brief-node, .collapse-card .brain-node { width: 100%; justify-content: center; }
+        .collapse-card .flow-arrow { width: 100%; text-align: center; transform: rotate(90deg); }
+        .collapse-card .fold { flex-direction: column; gap: 14px; }
+        .collapse-card .fold .line { width: 100%; }
+        .collapse-card .fold .pill { white-space: normal; text-align: center; font-size: 10px; letter-spacing: 0.08em; line-height: 1.5; }
+      }
+    </style>
+    <section class="collapse-section">
+      <div class="collapse-wrap">
+        <div class="collapse-head">
+          <div class="collapse-eyebrow">What changes for you</div>
+          <h2>The launch that used to eat <em>your whole fortnight.</em></h2>
+          <p>A real launch was never one job. It is fifteen, spread across two weeks and five people, and your context leaks at every handoff until what ships barely sounds like what you meant.</p>
+        </div>
+        <div class="collapse-card">
+          <div class="before">
+            <div class="row-label">The old way</div>
+            <div class="chain">
+              <span class="chip">positioning</span><span class="arrow">&rarr;</span>
+              <span class="chip">messaging</span><span class="arrow">&rarr;</span>
+              <span class="chip">the GTM doc</span><span class="arrow">&rarr;</span>
+              <span class="chip">sales one-pager</span><span class="arrow">&rarr;</span>
+              <span class="chip">website copy</span><span class="arrow">&rarr;</span>
+              <span class="chip">help article</span><span class="arrow">&rarr;</span>
+              <span class="chip">the blog</span><span class="arrow">&rarr;</span>
+              <span class="chip">founder post</span><span class="arrow">&rarr;</span>
+              <span class="chip">company post</span><span class="arrow">&rarr;</span>
+              <span class="chip">chase everyone to share</span>
+            </div>
+            <div class="meta">
+              <span>2 weeks</span><span class="dot"></span>
+              <span>5 people</span><span class="dot"></span>
+              <span class="strike-note">context leaks at every handoff</span>
+            </div>
+          </div>
+          <div class="fold">
+            <div class="line"></div>
+            <div class="pill">build the brain once &middot; it does the rest</div>
+            <div class="line"></div>
+          </div>
+          <div class="after">
+            <div class="row-label">With the brain behind you</div>
+            <div class="after-flow">
+              <span class="brief-node">one brief in</span>
+              <span class="flow-arrow">&rarr;</span>
+              <span class="brain-node">&#9632; your marketing brain</span>
+              <span class="flow-arrow">&rarr;</span>
+              <div class="out-stack">
+                <span class="chip">positioning</span>
+                <span class="chip">messaging</span>
+                <span class="chip">GTM plan</span>
+                <span class="chip">sales one-pager</span>
+                <span class="chip">website copy</span>
+                <span class="chip">help article</span>
+                <span class="chip">blog</span>
+                <span class="chip">founder post</span>
+                <span class="chip">company post</span>
+              </div>
+            </div>
+            <div class="meta">Every asset out in <strong>an afternoon</strong>, in one voice, with you in the driver's seat. The brain does the typing. You keep the taste.</div>
+          </div>
+        </div>
+        <div class="collapse-payoff">
+          <div class="big"><span class="from">a fortnight and five people</span> &rarr; <span class="to">an afternoon and one you</span></div>
+          <div class="sub">Same ideas. Same judgement. None of the grind.</div>
+        </div>
+      </div>
+    </section>
+
     <!-- Three paths -->
     <section class="package-section" id="paths">
         <div class="package-inner">
