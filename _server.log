@@ -1,0 +1,4 @@
+::1 - - [04/Jun/2026 18:56:37] "GET /podcast.html HTTP/1.1" 200 -
+::1 - - [04/Jun/2026 18:56:37] "GET /images/wm-logo/mark-only.png HTTP/1.1" 200 -
+::1 - - [04/Jun/2026 18:56:37] "GET /images/wm-logo/wordmark-only.png HTTP/1.1" 200 -
+::1 - - [04/Jun/2026 18:56:37] "GET /images/favicon/favicon.ico HTTP/1.1" 200 -

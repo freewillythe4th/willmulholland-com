@@ -141,6 +141,21 @@
   .btn-lime{background:#A3E635;color:var(--ink)}
   .btn-lime:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(163,230,53,0.28)}
   .green-actions .note{font-size:14px;color:rgba(255,255,255,0.6)}
+  .lineup{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px}
+  .gcard{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:22px}
+  .gcard .ep{font-family:monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#A3E635;margin-bottom:10px}
+  .gcard h4{font-size:17px;font-weight:700;color:var(--cream);margin-bottom:5px;letter-spacing:-0.01em}
+  .gcard p{font-size:13.5px;color:rgba(255,255,255,0.62);line-height:1.45}
+  .gcard a.w{display:inline-block;margin-top:12px;font-size:13px;font-weight:600;color:#A3E635;text-decoration:none}
+  .gcard.open{border-style:dashed;border-color:rgba(255,255,255,0.28);background:transparent}
+  .green-form{display:flex;gap:10px;flex-wrap:wrap}
+  .green-form input{flex:1;min-width:180px;padding:13px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.06);color:var(--cream);font-family:inherit;font-size:14px;outline:none;transition:border-color 0.3s var(--ease)}
+  .green-form input:focus{border-color:#A3E635}
+  .green-form input::placeholder{color:rgba(255,255,255,0.45)}
+  .green-form button{background:#A3E635;color:var(--ink);border:none;border-radius:999px;padding:13px 24px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;white-space:nowrap;transition:transform 0.3s var(--ease)}
+  .green-form button:hover{transform:translateY(-2px)}
+  .green-msg{font-size:13.5px;color:rgba(255,255,255,0.6);margin-top:13px}
+  @media(max-width:560px){.lineup{grid-template-columns:1fr}}
 
   /* LISTEN */
   .listen-grid{max-width:1000px;margin:36px auto 0;display:grid;grid-template-columns:0.9fr 1.1fr;gap:54px;align-items:start}
@@ -225,6 +240,7 @@
     <a href="/workshop">Workshop</a>
     <a href="/work-with-me">Work with me</a>
     <a href="work.html">Case studies</a>
+    <a href="/podcast">Podcast</a>
     <a href="/blog">Blog</a>
     <a href="/traffic">Free gift</a>
     <a href="#subscribe" class="nav-cta">Subscribe</a>
@@ -332,15 +348,30 @@
     <p>The next guest slot is open. I want operators running a real AI marketing system, the kind you'd actually want to watch build it live. Know someone? Tell me.</p>
   </div>
   <div class="green-card">
+    <div class="lineup">
+      <div class="gcard">
+        <div class="ep">Episode 01 &middot; live now</div>
+        <h4>Charlotte Norman</h4>
+        <p>Ex-Head of Product Marketing at Canva, now running marketing solo at Adora.</p>
+        <a class="w" href="https://youtu.be/5LHzjQbBptE" target="_blank" rel="noopener">Watch the build &rarr;</a>
+      </div>
+      <div class="gcard open">
+        <div class="ep" style="color:rgba(255,255,255,0.5)">Episode 02 &middot; open</div>
+        <h4>The next slot is yours to fill</h4>
+        <p>Suggest the operator you'd most want to watch build their system live.</p>
+      </div>
+    </div>
     <div class="crit">
       <span>Runs a real AI system</span>
       <span>Will build it live on screen</span>
       <span>Has the receipts, not the theory</span>
     </div>
-    <div class="green-actions">
-      <a class="btn btn-lime" href="mailto:wcmulholland@gmail.com?subject=Guest%20idea%20for%20Intelligent%20Growth&body=Who%20should%20Will%20build%20with%20next%3F%0A%0AName%3A%0AWhat%20they%20build%3A%0AWhy%20they%27d%20be%20great%3A">Suggest a guest</a>
-      <span class="note">or <a href="#subscribe" style="color:#A3E635;text-decoration:none;">subscribe</a> to see who lands it.</span>
-    </div>
+    <form class="green-form" id="guestForm">
+      <input type="text" name="guest" placeholder="Who should I build with?" required>
+      <input type="email" name="email" placeholder="Your email" required>
+      <button type="submit">Suggest a guest</button>
+    </form>
+    <p class="green-msg" id="guestMsg">Drop a name and I'll let you know who lands the next slot.</p>
   </div>
 </section>
 
@@ -444,6 +475,22 @@
       fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,utm_medium:'podcast-page'})})
       .then(function(r){
         if(r.ok){f.style.display='none';m.textContent='Subscribed. Check your inbox to confirm.';}
+        else{btn.disabled=false;btn.textContent=label;m.textContent='Something went wrong. Try again or email wcmulholland@gmail.com.';}
+      }).catch(function(){btn.disabled=false;btn.textContent=label;m.textContent='Network error. Try again in a moment.';});
+    });
+  })();
+  // guest suggestion (captures email + stores the name in Beehiiv via utm)
+  (function(){
+    var f=document.getElementById('guestForm'),m=document.getElementById('guestMsg');
+    if(!f)return;
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var btn=f.querySelector('button'),g=(f.guest.value||'').trim(),email=(f.email.value||'').trim();
+      if(!g||!email)return;
+      var label=btn.textContent;btn.disabled=true;btn.textContent='Sending...';
+      fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,utm_medium:('guest: '+g).slice(0,100)})})
+      .then(function(r){
+        if(r.ok){f.style.display='none';m.textContent='Got it. '+g+' is on the list, and I\'ll let you know who lands the next slot.';m.style.color='#A3E635';}
         else{btn.disabled=false;btn.textContent=label;m.textContent='Something went wrong. Try again or email wcmulholland@gmail.com.';}
       }).catch(function(){btn.disabled=false;btn.textContent=label;m.textContent='Network error. Try again in a moment.';});
     });
