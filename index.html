@@ -1511,7 +1511,7 @@
             Build your Marketing Brain.
         </h1>
         <p class="hero-sub" style="margin-top: 28px; position: relative; z-index: 2; max-width: 760px; font-size: clamp(18px, 1.7vw, 22px); line-height: 1.5;">
-            <span>The context layer your AI runs from. Build it once, and every feature you ship gets positioned, written, and launched from it. Marketing finally keeps up with product.</span>
+            <span>The context layer your AI runs from, so marketing finally keeps up with product.</span>
         </p>
         <div class="hero-cta" id="subscribe" style="margin-top: 32px; position: relative; z-index: 2; scroll-margin-top: 90px; display: flex; flex-direction: column; align-items: flex-start; gap: 0;">
             <form id="heroSubscribe" style="display: flex; gap: 10px; flex-wrap: wrap; width: 100%; max-width: 560px;">
@@ -1523,19 +1523,47 @@
         </div>
 
         <div class="hero-graphic">
-            <div class="brain-card" id="heroBrain" aria-hidden="true">
-                <div class="brain-bar"><i class="d1"></i><i class="d2"></i><i class="d3"></i><span>your-marketing-brain</span></div>
-                <div class="brain-body">
-                    <div class="bt"><span class="bt-folder">your-marketing-brain/</span></div>
-                    <div class="bt bt-i"><span class="bt-file">context.md</span><span class="bt-note">everything you know</span></div>
-                    <div class="bt bt-i"><span class="bt-folder">skills/</span><span class="bt-note">your reusable plays</span></div>
-                    <div class="bt bt-ii"><span class="bt-file">positioning.md</span></div>
-                    <div class="bt bt-ii"><span class="bt-file">launch-comms.md</span></div>
-                    <div class="bt bt-ii"><span class="bt-file">weekly-content.md</span></div>
-                    <div class="bt bt-i"><span class="bt-folder">connections/</span><span class="bt-note">the tools you use</span><span class="brain-cursor" aria-hidden="true"></span></div>
-                    <span class="brain-badge">12 plays &middot; growing every week</span>
-                </div>
+          <style>
+            .mb-hub{width:100%;max-width:400px;background:var(--white);border:1px solid var(--ink);border-radius:18px;box-shadow:var(--offset-shadow);padding:22px 22px 24px;transform:rotate(-1deg)}
+            .mb-cap{font-family:monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-light);margin-bottom:13px;display:flex;align-items:center;gap:8px}
+            .mb-cap::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
+            .mb-row{display:flex;flex-wrap:wrap;gap:6px}
+            .mb-chip{font-size:12.5px;font-weight:500;padding:6px 11px;border-radius:8px;background:var(--cream-soft);color:var(--gray-mid);border:1px solid rgba(31,21,17,0.07);white-space:nowrap}
+            .mb-flow{display:flex;justify-content:center;padding:8px 0;color:var(--accent)}
+            .mb-core{display:flex;align-items:center;gap:14px;background:var(--ink);border-radius:14px;padding:16px 18px;color:#fff;box-shadow:0 16px 34px rgba(31,21,17,0.22)}
+            .mb-core-t{font-family:'Instrument Serif',Georgia,serif;font-size:23px;line-height:1.04}
+            .mb-core-s{font-family:monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:4px}
+            .mb-out .mb-chip{background:var(--accent-soft);color:var(--accent-deep);border-color:rgba(37,99,235,0.16);font-weight:600}
+            .mb-pulse{animation:mbPulse 2.8s ease-in-out infinite}
+            @keyframes mbPulse{0%,100%{opacity:0.9}50%{opacity:0.4}}
+            @media(max-width:900px){.mb-hub{transform:none;max-width:none}}
+            @media(prefers-reduced-motion:reduce){.mb-pulse{animation:none}}
+          </style>
+          <div class="mb-hub" id="heroBrain" aria-hidden="true">
+            <div class="mb-cap">your context</div>
+            <div class="mb-row">
+              <span class="mb-chip">market</span><span class="mb-chip">competitors</span><span class="mb-chip">customers</span><span class="mb-chip">product</span><span class="mb-chip">voice</span>
             </div>
+            <div class="mb-flow"><svg width="24" height="22" viewBox="0 0 24 22" fill="none"><path d="M12 1 V16 M6 11 L12 17 L18 11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="mb-core">
+              <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="flex-shrink:0">
+                <circle cx="24" cy="24" r="22" stroke="rgba(255,255,255,0.16)" stroke-width="1.5"/>
+                <g class="mb-pulse" stroke="#fff" stroke-width="1.4" stroke-linecap="round">
+                  <line x1="24" y1="24" x2="13" y2="15"/><line x1="24" y1="24" x2="35" y2="15"/><line x1="24" y1="24" x2="14" y2="33"/><line x1="24" y1="24" x2="34" y2="33"/><line x1="24" y1="24" x2="24" y2="10"/>
+                </g>
+                <g fill="#fff"><circle cx="24" cy="24" r="3.6"/><circle cx="13" cy="15" r="2.3"/><circle cx="35" cy="15" r="2.3"/><circle cx="14" cy="33" r="2.3"/><circle cx="34" cy="33" r="2.3"/><circle cx="24" cy="10" r="2.3"/></g>
+              </svg>
+              <div>
+                <div class="mb-core-t">your marketing brain</div>
+                <div class="mb-core-s">one context, every launch</div>
+              </div>
+            </div>
+            <div class="mb-flow"><svg width="24" height="22" viewBox="0 0 24 22" fill="none"><path d="M12 1 V16 M6 11 L12 17 L18 11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="mb-cap">every launch</div>
+            <div class="mb-row mb-out">
+              <span class="mb-chip">positioning</span><span class="mb-chip">messaging</span><span class="mb-chip">GTM plan</span><span class="mb-chip">content</span>
+            </div>
+          </div>
         </div>
         <script>
             (function () {
@@ -1778,7 +1806,7 @@
                 <div class="case-content">
                     <div>
                         <h4 class="case-title" style="display:flex; align-items:center; gap:10px;"><img src="images/prompt-cowboy/logo.png" alt="Prompt Cowboy" style="height:28px; width:28px;"> <span>Prompt Cowboy</span></h4>
-                        <p class="case-subtitle">2k → 350k Users</p>
+                        <p class="case-subtitle">2k → 250k Users</p>
                         <p class="case-desc">Built the "Context Engineering" positioning that defined the Pro tier. The frame from 2025 is the frame the product is sold on today.</p>
                     </div>
                     <div class="case-arrow">→</div>
@@ -1982,7 +2010,7 @@
                 <p>I'm Will. Ten years in marketing, from big-brand work at Ogilvy and eBay to scaling B2B SaaS at NextDocs, Prompt Cowboy, and most recently Blinq, where I led GTM for 4M+ users. Then I stopped talking about AI and started building with it. I'm not an engineer. I taught myself these systems in my evenings, which is exactly why I can teach them to marketers instead of developers.</p>
                 <p>Everything I teach, I run on my own work first. The systems doing my research, content and follow-up every day are the proof. Every output is the demo.</p>
                 <ul style="list-style: none; margin: 26px 0 0; padding: 0;">
-                    <li style="position: relative; padding: 10px 0 10px 26px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; border-top: 1px solid rgba(31,21,17,0.08);"><span style="position: absolute; left: 0; color: var(--accent); font-weight: 700;">&rarr;</span>$180M+ launched, a product scaled from 2k to 350k users, GTM for 4M+ users</li>
+                    <li style="position: relative; padding: 10px 0 10px 26px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; border-top: 1px solid rgba(31,21,17,0.08);"><span style="position: absolute; left: 0; color: var(--accent); font-weight: 700;">&rarr;</span>$180M+ launched, a product scaled from 2k to 250k users, GTM for 4M+ users</li>
                     <li style="position: relative; padding: 10px 0 10px 26px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; border-top: 1px solid rgba(31,21,17,0.08);"><span style="position: absolute; left: 0; color: var(--accent); font-weight: 700;">&rarr;</span>Keynote speaker at Product Marketing Alliance, Generate Summit, Canva and Salesforce</li>
                     <li style="position: relative; padding: 10px 0 10px 26px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; border-top: 1px solid rgba(31,21,17,0.08);"><span style="position: absolute; left: 0; color: var(--accent); font-weight: 700;">&rarr;</span>Angel investor and mentor with Startmate (S23, W23, S24)</li>
                     <li style="position: relative; padding: 10px 0 10px 26px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; border-top: 1px solid rgba(31,21,17,0.08);"><span style="position: absolute; left: 0; color: var(--accent); font-weight: 700;">&rarr;</span>Publisher of the Intelligent Growth newsletter, read by 100+ growth leaders</li>
