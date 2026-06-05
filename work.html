@@ -1274,6 +1274,9 @@
 
         // Password gate always shows on page load (no session persistence)
 
+        // --- TEMP UNGATE 2026-06-05 — remove these two lines to restore the password gate ---
+        unlockGate();
+
         // Password unlock
         document.getElementById('password-form').addEventListener('submit', function(e) {
             e.preventDefault();
