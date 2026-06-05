@@ -1,0 +1,6 @@
+::1 - - [05/Jun/2026 23:00:41] "GET /_og-card.html HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 23:00:49] "GET /_og-card.html HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 23:00:49] "GET /images/ig-logo/ig-mark.png HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 23:00:50] "GET /images/hero/mountain.jpg HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 23:00:50] code 404, message File not found
+::1 - - [05/Jun/2026 23:00:50] "GET /favicon.ico HTTP/1.1" 404 -
