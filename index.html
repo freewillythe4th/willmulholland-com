@@ -1489,7 +1489,22 @@
             .brain-card .bt, .brain-card .brain-badge { opacity: 1; transform: none; transition: none; }
         }
     </style>
-    <section class="hero hero-2col" style="min-height: auto; padding: 140px 48px 80px;">
+    <style>
+      .hero-mtn{position:relative;min-height:88vh;display:flex;align-items:center;padding:130px 48px 90px;background:#16202c url('/images/hero/mountain.jpg') center 30%/cover no-repeat;overflow:hidden}
+      .hero-mtn::before{content:"";position:absolute;inset:0;background:linear-gradient(96deg,rgba(13,20,30,0.82) 0%,rgba(13,20,30,0.52) 36%,rgba(13,20,30,0.14) 62%,rgba(13,20,30,0) 100%)}
+      .hero-mtn::after{content:"";position:absolute;left:0;right:0;bottom:0;height:170px;background:linear-gradient(to bottom,rgba(242,237,227,0),var(--cream));z-index:1}
+      .hero-mtn-inner{position:relative;z-index:2;max-width:1240px;margin:0 auto;width:100%;display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center}
+      .hero-mtn h1{color:#fff !important;text-shadow:0 2px 30px rgba(0,0,0,0.38)}
+      .hero-mtn .hero-sub{color:rgba(255,255,255,0.92)}
+      .hero-mtn #heroSubscribeMsg{color:rgba(255,255,255,0.78) !important}
+      .hero-mtn #heroSubscribeMsg a{color:#a9c6ff !important}
+      .hero-mtn .brain-card{box-shadow:0 34px 90px rgba(0,0,0,0.5)}
+      .trust-section{background:var(--cream);padding:34px 48px 6px}
+      .trust-section .trust-strip{justify-content:center;max-width:1100px;margin:0 auto !important}
+      @media (max-width:900px){.hero-mtn{min-height:auto;padding:120px 24px 70px}.hero-mtn::before{background:linear-gradient(180deg,rgba(13,20,30,0.70),rgba(13,20,30,0.50))}.hero-mtn-inner{grid-template-columns:1fr;gap:38px}}
+    </style>
+    <section class="hero-mtn">
+      <div class="hero-mtn-inner">
         <div class="hero-col-left">
         <h1 style="font-size: clamp(38px, 5.2vw, 80px); line-height: 1.04; letter-spacing: -0.02em; position: relative; z-index: 2; max-width: 920px; text-wrap: balance;">
             Your product ships faster than your marketing can keep up.
@@ -1530,8 +1545,11 @@
                 });
             })();
         </script>
+      </div>
+    </section>
 
-        <div class="trust-strip" style="margin-top: 44px; display: flex; align-items: center; gap: 18px 22px; opacity: 0.75; position: relative; z-index: 2;">
+    <section class="trust-section">
+        <div class="trust-strip" style="margin-top: 0; display: flex; align-items: center; gap: 18px 22px; opacity: 0.85; position: relative; z-index: 2;">
             <img src="images/blinq/logo.svg" alt="Blinq" style="height: 22px; width: auto; filter: grayscale(100%);">
             <img src="images/ebay/logo.svg" alt="eBay" style="height: 22px; width: auto; filter: grayscale(100%);">
             <span style="display: inline-flex; align-items: center; gap: 8px;"><img src="images/prompt-cowboy/logo.png" alt="Prompt Cowboy" style="height: 22px; width: 22px; filter: grayscale(100%);"><span style="font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: #1a1a1a;">Prompt Cowboy</span></span>
@@ -1704,7 +1722,7 @@
             <p style="text-align: center; font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-deep); font-weight: 700; margin-bottom: 22px;">What people are saying</p>
             <div style="background: var(--white); border: 1px solid var(--ink); border-radius: 18px; box-shadow: var(--offset-shadow); padding: 40px 38px;">
                 <div style="color: var(--accent); letter-spacing: 3px; font-size: 15px; margin-bottom: 14px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p style="font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(20px, 2.6vw, 26px); line-height: 1.42; color: var(--ink); letter-spacing: -0.01em; margin: 0 0 26px;">&ldquo;Will&rsquo;s session helped me see how AI tools like Claude can turn customer conversations and market signals into stronger messaging work, instead of relying only on internal positioning docs. What clicked was the idea of working backwards from those inputs to shape positioning, messaging and content. I&rsquo;d recommend it to marketers and founders who want more customer-informed messaging without starting from a blank page.&rdquo;</p>
+                <p style="font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(20px, 2.6vw, 26px); line-height: 1.42; color: var(--ink); letter-spacing: -0.01em; margin: 0 0 26px;">&ldquo;You wouldn&rsquo;t need a team of ten to do what you&rsquo;re doing once you&rsquo;ve built the second brain. It frees up your time, you stop spending it on the grunt work and start doing more than before. Honestly, it&rsquo;s not scary, it&rsquo;s inspiring.&rdquo;</p>
                 <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
                     <img src="images/testimonials/pallavi-roy.jpg" alt="Pallavi Roy" loading="lazy" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
                     <div style="flex: 1; min-width: 140px;">
@@ -1919,7 +1937,7 @@
                         } else {
                             btn.disabled = false;
                             btn.textContent = originalLabel;
-                            meta.textContent = 'Something went wrong. Try again or email will@intelligentgrowth.app.';
+                            meta.textContent = 'Something went wrong. Try again or email wcmulholland@gmail.com.';
                         }
                     }).catch(function () {
                         btn.disabled = false;
@@ -1946,7 +1964,7 @@
                         body: JSON.stringify({ email: email })
                     }).then(function (r) {
                         if (r.ok) { form.style.display = 'none'; msg.textContent = 'You’re in. Check your inbox to confirm.'; }
-                        else { btn.disabled = false; btn.textContent = original; msg.textContent = 'Something went wrong. Try again or email will@intelligentgrowth.app.'; }
+                        else { btn.disabled = false; btn.textContent = original; msg.textContent = 'Something went wrong. Try again or email wcmulholland@gmail.com.'; }
                     }).catch(function () { btn.disabled = false; btn.textContent = original; msg.textContent = 'Network error. Try again in a moment.'; });
                 });
             })();
@@ -1981,7 +1999,7 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;" class="footer-grid">
                 <div class="footer-cta">
                     <h2>LET'S<br>BUILD.</h2>
-                    <a href="mailto:will@intelligentgrowth.app">will@intelligentgrowth.app</a>
+                    <a href="mailto:wcmulholland@gmail.com">wcmulholland@gmail.com</a>
                     <p>Or just email me. I read everything.</p>
                     <div class="footer-social" style="margin-top: 32px;">
                         <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
