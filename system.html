@@ -3,44 +3,81 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The AI Product Launch System | Intelligent Growth</title>
+<title>The Marketing Brain | Intelligent Growth</title>
+<meta name="description" content="The AI launch system one operator runs instead of a team. Market intelligence flows into one brain, the brain turns any feature brief into positioning, messaging and every launch asset, every team gets armed, and adoption feeds back in.">
+<meta property="og:title" content="The Marketing Brain | Intelligent Growth">
+<meta property="og:description" content="The AI launch system one operator runs instead of a team. Intelligence in, one context brain, every launch asset out, every team armed, adoption measured.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://intelligentgrowth.app/system">
+<meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#1F1511; --cream:#F2EDE3; --cream-soft:#EBE5D8; --white:#FFFFFF;
+    --ink:#1F1511; --black:#1F1511; --cream:#F2EDE3; --cream-soft:#EBE5D8; --white:#FFFFFF;
     --gray-mid:#5C4F47; --gray-light:#8B7E73;
-    --accent:#2563EB; --accent-soft:#DBEAFE; --accent-deep:#1E3A8A;
+    --accent:#2563EB; --accent-soft:#DBEAFE; --accent-deep:#1E3A8A; --lime:#A3E635;
     --warm-shadow:0 12px 32px rgba(31,21,17,0.10),0 2px 8px rgba(31,21,17,0.06);
     --offset-shadow:6px 6px 0 rgba(31,21,17,0.14);
-    --ease:cubic-bezier(0.16,1,0.3,1);
+    --ease:cubic-bezier(0.16,1,0.3,1); --ease-smooth:cubic-bezier(0.16,1,0.3,1);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5;letter-spacing:-0.01em}
-  .wrap{max-width:1100px;margin:0 auto;padding:80px 32px 120px}
+  .wrap{max-width:1100px;margin:0 auto;padding:132px 32px 110px}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(242,237,227,0.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(31,21,17,0.06);transition:transform 0.4s var(--ease-smooth)}
+  nav.nav--hidden{transform:translateY(-100%)}
+  .nav-logo{display:inline-flex;align-items:center;gap:10px;color:var(--black);text-decoration:none}
+  .nav-links{display:flex;align-items:center;gap:32px}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--black);text-decoration:none;text-transform:uppercase;letter-spacing:0.1em;transition:opacity 0.5s var(--ease-smooth)}
+  .nav-links a:hover{opacity:0.6}
+  .nav-links a.is-current{opacity:0.5}
+  .nav-cta{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--ink);color:var(--white) !important;border-radius:999px;font-size:13px;font-weight:600;text-transform:none !important;letter-spacing:0 !important;text-decoration:none;transition:background 0.4s var(--ease-smooth),transform 0.3s var(--ease-smooth)}
+  .nav-cta:hover{background:var(--accent) !important;transform:translateY(-1px);opacity:1 !important}
+  .nav-toggle{display:none;background:transparent;border:0;padding:8px;cursor:pointer;color:var(--black);z-index:1100}
+  .nav-toggle-bar{display:block;width:26px;height:2px;background:currentColor;margin:5px 0;transition:transform 0.3s var(--ease-smooth),opacity 0.3s var(--ease-smooth)}
+  .nav-toggle.is-open .nav-toggle-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle.is-open .nav-toggle-bar:nth-child(2){opacity:0}
+  .nav-toggle.is-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
   /* header */
-  .head{text-align:center;max-width:760px;margin:0 auto 14px}
+  .head{text-align:center;max-width:780px;margin:0 auto 14px}
   .eyebrow{font-family:monospace;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
-  .head h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(40px,6vw,72px);line-height:0.98;letter-spacing:-0.02em}
+  .head h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(44px,7vw,84px);line-height:0.96;letter-spacing:-0.02em}
   .head h1 em{font-style:italic}
-  .head .one{font-size:clamp(17px,2vw,20px);color:var(--gray-mid);margin-top:22px;line-height:1.5}
-  .legend{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin:30px 0 8px;font-family:monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--gray-mid)}
+  .head .one{font-size:clamp(16px,2vw,19px);color:var(--gray-mid);margin-top:22px;line-height:1.55}
+  .legend{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin:30px 0 0;font-family:monospace;font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--gray-mid)}
   .legend span{display:inline-flex;align-items:center;gap:8px}
   .dot{width:11px;height:11px;border-radius:50%;display:inline-block;flex-shrink:0}
   .dot.run{background:var(--accent)}
   .dot.part{background:linear-gradient(90deg,var(--accent) 50%,transparent 50%);border:1.5px solid var(--accent)}
   .dot.todo{background:transparent;border:1.5px dashed var(--gray-light)}
 
+  /* stat bar */
+  .stats{display:flex;flex-wrap:wrap;justify-content:center;margin:38px auto 0;max-width:940px;border:1px solid rgba(31,21,17,0.10);border-radius:16px;background:var(--white);box-shadow:var(--offset-shadow);overflow:hidden}
+  .stat{flex:1 1 150px;padding:20px 14px;text-align:center;border-right:1px solid rgba(31,21,17,0.07)}
+  .stat:last-child{border-right:none}
+  .stat .num{font-family:'Instrument Serif',Georgia,serif;font-size:36px;line-height:1;color:var(--accent-deep)}
+  .stat .lbl{font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-mid);margin-top:8px;line-height:1.3}
+
+  /* section label */
+  .section-label{text-align:center;margin:72px auto 28px;max-width:760px}
+  .section-label .eyebrow{margin-bottom:14px}
+  .section-label h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(30px,4.6vw,50px);line-height:1.0;letter-spacing:-0.02em}
+  .section-label h2 em{font-style:italic}
+  .section-label p{font-size:16px;color:var(--gray-mid);margin-top:14px;line-height:1.55}
+
   /* connector */
-  .flow-arrow{display:flex;justify-content:center;align-items:center;height:46px;color:var(--accent);font-size:22px}
+  .flow-arrow{display:flex;justify-content:center;align-items:center;height:42px;color:var(--accent);font-size:22px}
   .flow-arrow::after{content:"\2193";font-weight:700}
 
   /* layer card */
   .layer{background:var(--white);border:1px solid rgba(31,21,17,0.10);border-radius:20px;box-shadow:var(--offset-shadow);padding:30px 32px;display:grid;grid-template-columns:230px 1fr;gap:28px;align-items:start}
   .layer-id{display:flex;flex-direction:column;gap:8px}
-  .layer-num{font-family:'Instrument Serif',Georgia,serif;font-size:54px;line-height:0.8;color:var(--accent-soft);-webkit-text-stroke:1px var(--accent);color:transparent}
+  .layer-num{font-family:'Instrument Serif',Georgia,serif;font-size:54px;line-height:0.8;-webkit-text-stroke:1px var(--accent);color:transparent}
   .layer-name{font-family:monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-deep);font-weight:700}
   .layer-role{font-size:14.5px;color:var(--gray-mid);line-height:1.45}
   .chips{display:flex;flex-wrap:wrap;gap:8px;align-content:flex-start}
@@ -60,50 +97,143 @@
   .seq .sep{color:var(--accent);opacity:0.6;font-size:12px}
   .gates{margin-top:14px;font-size:13px;color:var(--gray-mid);line-height:1.5}
   .gates b{color:var(--ink);font-weight:600}
-  .note{margin-top:14px;font-size:13.5px;color:var(--gray-mid);line-height:1.5;border-left:2px solid var(--accent);padding-left:12px}
+  .note{margin-top:14px;font-size:13.5px;color:var(--gray-mid);line-height:1.55;border-left:2px solid var(--accent);padding-left:12px}
   .note b{color:var(--ink)}
 
+  /* expandable detail */
+  .more{margin-top:14px}
+  .more summary{cursor:pointer;font-family:monospace;font-size:11px;letter-spacing:0.07em;text-transform:uppercase;color:var(--accent);list-style:none;display:inline-flex;align-items:center;gap:7px;user-select:none}
+  .more summary::-webkit-details-marker{display:none}
+  .more summary::after{content:"+";font-weight:700;font-size:13px}
+  .more[open] summary::after{content:"\2212"}
+  .more summary:hover{color:var(--accent-deep)}
+  .more-body{margin-top:8px;border-top:1px solid rgba(31,21,17,0.08)}
+  .drow{font-size:13px;color:var(--gray-mid);padding:9px 0;border-bottom:1px solid rgba(31,21,17,0.06);line-height:1.45;display:flex;gap:10px;align-items:baseline}
+  .drow:last-child{border-bottom:none}
+  .drow .dd{width:9px;height:9px;border-radius:50%;flex-shrink:0;position:relative;top:4px}
+  .drow .dd.run{background:var(--accent)}
+  .drow .dd.part{background:linear-gradient(90deg,var(--accent) 50%,transparent 50%);border:1px solid var(--accent)}
+  .drow .dd.todo{background:transparent;border:1px dashed var(--gray-light)}
+  .drow b{color:var(--ink);font-weight:600}
+
+  /* loop close band */
+  .loopclose{background:var(--ink);color:var(--cream);border-radius:16px;padding:22px 28px;margin-top:18px;display:flex;align-items:center;gap:18px;justify-content:center;text-align:left}
+  .loopclose .ic{font-size:30px;color:var(--lime);line-height:1}
+  .loopclose p{font-size:14.5px;line-height:1.5;color:rgba(242,237,227,0.85);max-width:660px}
+  .loopclose b{color:#fff;font-weight:600}
+
+  /* matrix */
+  .matrix-band{margin-top:26px}
+  .matrix-band:first-of-type{margin-top:8px}
+  .matrix-band-title{font-family:monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent-deep);font-weight:700;margin-bottom:11px;padding-left:4px}
+  .mrow{display:grid;grid-template-columns:230px 1fr 116px;gap:18px;align-items:center;padding:14px 20px;background:var(--white);border:1px solid rgba(31,21,17,0.08);border-radius:12px;margin-bottom:8px}
+  .mrow .job{font-weight:600;font-size:14.5px;line-height:1.3}
+  .mrow .runs{font-size:13.5px;color:var(--gray-mid);line-height:1.7}
+  .mrow .runs code.sk{font-family:monospace;font-size:11.5px;background:var(--accent-soft);color:var(--accent-deep);padding:2px 7px;border-radius:5px;margin:0 3px 2px 0;white-space:nowrap;letter-spacing:0;display:inline-block}
+  .mrow .stag{justify-self:end;font-family:monospace;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;color:var(--gray-mid)}
+
   /* foundation band */
-  .foundation{background:var(--ink);color:var(--cream);border-radius:20px;padding:36px 34px;margin-top:46px}
-  .foundation .layer-name{color:#A3E635}
+  .foundation{background:var(--ink);color:var(--cream);border-radius:20px;padding:36px 34px;margin-top:24px}
+  .foundation .layer-name{color:var(--lime)}
   .foundation h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:28px;margin:10px 0 22px;color:var(--cream)}
-  .frow{display:grid;grid-template-columns:120px 1fr;gap:18px;padding:14px 0;border-top:1px solid rgba(255,255,255,0.12);align-items:baseline}
+  .frow{display:grid;grid-template-columns:130px 1fr;gap:18px;padding:14px 0;border-top:1px solid rgba(255,255,255,0.12);align-items:baseline}
   .frow:first-of-type{border-top:none}
   .frow .k{font-family:monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55)}
   .frow .v{display:flex;flex-wrap:wrap;gap:7px}
   .fchip{font-size:12.5px;padding:6px 11px;border-radius:7px;background:rgba(255,255,255,0.08);color:var(--cream);border:1px solid rgba(255,255,255,0.12)}
 
   /* closing */
-  .close{margin-top:40px;text-align:center;max-width:780px;margin-left:auto;margin-right:auto}
-  .close .big{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(24px,3.2vw,34px);line-height:1.15;letter-spacing:-0.01em}
+  .close{margin-top:64px;text-align:center;max-width:820px;margin-left:auto;margin-right:auto}
+  .close .big{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(26px,3.4vw,38px);line-height:1.12;letter-spacing:-0.01em}
   .close .big em{font-style:italic}
   .builds{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px;text-align:left}
-  .build{background:var(--cream-soft);border-radius:14px;padding:20px}
+  .build{background:var(--cream-soft);border-radius:14px;padding:22px}
   .build .bn{font-family:monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
   .build h4{font-size:15px;font-weight:700;margin-bottom:6px}
   .build p{font-size:13px;color:var(--gray-mid);line-height:1.45}
 
+  /* footer */
+  footer{background:var(--ink);color:var(--white);padding:80px 48px 40px}
+  .footer-main{max-width:1100px;margin:0 auto}
+  .footer-cta h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(48px,12vw,120px);letter-spacing:-0.03em;line-height:0.85;margin-bottom:32px}
+  .footer-cta a{font-size:24px;font-weight:600;color:var(--white);text-decoration:none;transition:color 0.5s var(--ease-smooth)}
+  .footer-cta a:hover{color:var(--accent)}
+  .footer-social{display:flex;gap:16px;margin-top:28px}
+  .footer-social a{width:48px;height:48px;border-radius:50%;border:1px solid rgba(255,255,255,0.2);display:inline-flex;align-items:center;justify-content:center;color:var(--white);transition:all 0.4s var(--ease-smooth)}
+  .footer-social a svg{width:24px;height:24px;fill:currentColor;display:block}
+  .footer-social a:hover{background:var(--white);color:var(--black);transform:translateY(-6px)}
+  .footer-bottom{max-width:1100px;margin:56px auto 0;padding-top:28px;border-top:1px solid rgba(255,255,255,0.12);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:14px;color:var(--gray-light)}
+  .footer-links{display:flex;gap:28px}
+  .footer-links a{color:var(--gray-light);text-decoration:none;transition:color 0.5s var(--ease-smooth)}
+  .footer-links a:hover{color:var(--white)}
+
+  @media (max-width:820px){
+    nav{padding:16px 22px}
+    .nav-toggle{display:block}
+    .nav-links{position:fixed;inset:0;background:var(--ink);flex-direction:column;justify-content:center;gap:30px;transform:translateX(100%);transition:transform 0.4s var(--ease-smooth)}
+    .nav-links a{font-size:22px;color:var(--white);letter-spacing:0.04em}
+    .nav-links.is-open{transform:translateX(0)}
+    body.nav-open{overflow:hidden}
+    .nav-toggle.is-open{color:var(--white)}
+  }
   @media (max-width:760px){
-    .wrap{padding:56px 18px 80px}
+    .wrap{padding:104px 18px 80px}
     .layer{grid-template-columns:1fr;gap:18px;padding:24px 20px}
     .layer-num{font-size:40px}
     .builds{grid-template-columns:1fr}
     .frow{grid-template-columns:1fr;gap:8px}
+    .stat{flex-basis:33%}
+    .mrow{grid-template-columns:1fr;gap:8px}
+    .mrow .stag{justify-self:start}
+    footer{padding:64px 24px 32px}
   }
 </style>
 </head>
 <body>
+
+<nav>
+  <a href="/" class="nav-logo"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+  <div class="nav-links" id="navLinks">
+    <a href="/workshop">Workshop</a>
+    <a href="/work-with-me">Work with me</a>
+    <a href="work.html">Case studies</a>
+    <a href="/podcast">Podcast</a>
+    <a href="/blog">Blog</a>
+    <a href="/traffic">Free gift</a>
+    <a href="/#subscribe" class="nav-cta">Subscribe</a>
+  </div>
+  <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+    <span class="nav-toggle-bar"></span>
+  </button>
+</nav>
+
 <div class="wrap">
 
   <div class="head">
-    <div class="eyebrow">What I've built</div>
-    <h1>The AI Product <em>Launch System</em></h1>
-    <p class="one">One feature in. Every asset out. The whole company armed. Intelligence about what to say flows into one brain, the brain turns it into the positioning, messaging and every launch asset, and a ready-to-post asset arms every team. This is the full stack, end to end.</p>
+    <div class="eyebrow">What I have built</div>
+    <h1>The Marketing <em>Brain</em></h1>
+    <p class="one">The AI launch system one operator runs instead of a team. Market intelligence flows into one brain, the brain turns any feature brief into the positioning, messaging and every launch asset, every team gets armed, adoption gets driven, and the result feeds back in. The whole stack, end to end.</p>
     <div class="legend">
       <span><i class="dot run"></i> running today</span>
       <span><i class="dot part"></i> partial</span>
       <span><i class="dot todo"></i> on the roadmap</span>
     </div>
+    <div class="stats">
+      <div class="stat"><div class="num">10+</div><div class="lbl">intelligence<br>sources</div></div>
+      <div class="stat"><div class="num">1</div><div class="lbl">context<br>brain</div></div>
+      <div class="stat"><div class="num">35</div><div class="lbl">PMM<br>skills</div></div>
+      <div class="stat"><div class="num">3</div><div class="lbl">autonomous<br>agents</div></div>
+      <div class="stat"><div class="num">33</div><div class="lbl">scheduled<br>jobs</div></div>
+      <div class="stat"><div class="num">12</div><div class="lbl">assets from<br>one doc</div></div>
+    </div>
+  </div>
+
+  <div class="section-label">
+    <div class="eyebrow">How it runs</div>
+    <h2>The <em>loop</em></h2>
+    <p>One feature in. Every asset out. The whole company armed. And it does not stop at ship, it closes the loop on adoption and starts the next launch smarter.</p>
   </div>
 
   <!-- LAYER 0 -->
@@ -111,19 +241,32 @@
     <div class="layer-id">
       <div class="layer-num">00</div>
       <div class="layer-name">Intelligence in</div>
-      <div class="layer-role">The senses. Everything that tells you what to say, flowing into one place instead of twenty tabs.</div>
+      <div class="layer-role">The senses. Everything that tells you what to say, landing in one place instead of twenty tabs.</div>
     </div>
-    <div class="chips">
-      <span class="chip run">Competitor live ads · proxy MCP</span>
-      <span class="chip run">Competitor digest cron</span>
-      <span class="chip run">Authenticated sites + pricing · autonomous browser</span>
-      <span class="chip run">Competitor wiki · 20 brands</span>
-      <span class="chip run">Sales + customer calls · granola</span>
-      <span class="chip run">Process interviews</span>
-      <span class="chip run">Roadmap op ref · Notion</span>
-      <span class="chip part">Competitor product recordings · screenpipe</span>
-      <span class="chip todo">Reviews · G2 / Capterra</span>
-      <span class="chip todo">Gong</span>
+    <div class="chips-wrap">
+      <div class="chips">
+        <span class="chip run">Competitor live ads &middot; proxy MCP</span>
+        <span class="chip run">Authenticated sites + pricing &middot; autonomous browser</span>
+        <span class="chip run">Sales + customer calls &middot; granola</span>
+        <span class="chip run">Competitor wiki &middot; 20 brands</span>
+        <span class="chip run">Process interviews</span>
+        <span class="chip run">Roadmap op ref &middot; Notion</span>
+      </div>
+      <details class="more">
+        <summary>show all 10 sources</summary>
+        <div class="more-body">
+          <div class="drow"><span class="dd run"></span><span><b>Competitor live ads</b>, proxy MCP. Meta, Google and LinkedIn ad libraries, pulled and analysed on demand.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Authenticated sites and pricing</b>, autonomous browser. Drives my real logged-in browser to read gated competitor pages.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Sales and customer calls</b>, granola and Limitless. Every call transcribed and mirrored into the brain.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Competitor wiki, 20 brands</b>. A maintained intelligence file per competitor, farmed daily by a cron.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Process interviews</b>. Structured extraction of what is actually in a stakeholder or customer's head.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Roadmap op ref</b>, Notion. The live product and roadmap context, refreshed twice daily.</span></div>
+          <div class="drow"><span class="dd part"></span><span><b>Competitor product recordings</b>, screenpipe. Screen capture of rival products in use.</span></div>
+          <div class="drow"><span class="dd part"></span><span><b>Field and Slack signal</b>. What the team is hearing, routed into the brain.</span></div>
+          <div class="drow"><span class="dd todo"></span><span><b>Reviews</b>, G2 and Capterra. Structured voice-of-customer from review sites.</span></div>
+          <div class="drow"><span class="dd todo"></span><span><b>Gong</b>. Call intelligence at full team scale.</span></div>
+        </div>
+      </details>
     </div>
   </div>
 
@@ -136,13 +279,26 @@
       <div class="layer-name">The brain</div>
       <div class="layer-role">Memory and retrieval. One context layer that reads all of it at once. The moat is here, not the model.</div>
     </div>
-    <div class="chips">
-      <span class="chip run">Second brain · PARA</span>
-      <span class="chip run">Semantic search · Chroma</span>
-      <span class="chip run">Observer / reflector</span>
-      <span class="chip run">Context graph</span>
-      <span class="chip run">Voice DNA</span>
-      <span class="chip run">Approved-copy library</span>
+    <div class="chips-wrap">
+      <div class="chips">
+        <span class="chip run">Second brain &middot; PARA</span>
+        <span class="chip run">Semantic search &middot; Chroma</span>
+        <span class="chip run">Observer / reflector</span>
+        <span class="chip run">Context graph</span>
+        <span class="chip run">Voice DNA</span>
+        <span class="chip run">Approved-copy library</span>
+      </div>
+      <details class="more">
+        <summary>what each one does</summary>
+        <div class="more-body">
+          <div class="drow"><span class="dd run"></span><span><b>Second brain, PARA</b>. A structured knowledge base. Every project, person, decision and source in one place.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Semantic search, Chroma</b>. 361k chunks, hybrid retrieval. The brain reads everything relevant at once.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Observer and reflector</b>. An ambient pipeline that captures what happens and clusters it back into memory.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Context graph</b>. Relationship-aware routing that loads the right context for the task automatically.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Voice DNA</b>. My actual writing voice encoded, so output sounds like me, not like every other AI draft.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Approved-copy library</b>. Every line of live, signed-off copy, held as the consistency baseline.</span></div>
+        </div>
+      </details>
     </div>
   </div>
 
@@ -167,7 +323,17 @@
         <span class="step">launch plan</span><span class="sep">&rarr;</span>
         <span class="step">enablement</span>
       </div>
-      <div class="gates"><b>Gates over every draft:</b> Maya persona test · humaniser · fact-checker · refine-spec · council on high-stakes calls.</div>
+      <div class="gates"><b>Gates over every draft:</b> Maya persona test &middot; humaniser &middot; fact-checker &middot; refine-spec &middot; council on high-stakes calls.</div>
+      <details class="more">
+        <summary>how the gates keep the bar high</summary>
+        <div class="more-body">
+          <div class="drow"><span class="dd run"></span><span><b>Maya persona test</b>. Every line checked against the real buyer's worldview and ban list before it ships.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Humaniser</b>. Strips AI tells, kills the slop patterns, tightens to spoken rhythm.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Fact-checker</b>. Claims verified against the source before they go out.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>refine-spec</b>. Pressure-tests the plan before anything gets built.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Council</b>. A panel of reviewer agents that argues the high-stakes calls from different angles.</span></div>
+        </div>
+      </details>
     </div>
   </div>
 
@@ -186,15 +352,16 @@
         <span class="chip run">Sales one-pager</span>
         <span class="chip part">Website updates</span>
         <span class="chip todo">Help article</span>
-        <span class="chip todo">Blog</span>
+        <span class="chip part">Blog</span>
         <span class="chip run">Founder post</span>
         <span class="chip part">Company-page post</span>
         <span class="chip part">Messaging doc</span>
         <span class="chip run">Lifecycle emails</span>
         <span class="chip run">Battlecard</span>
+        <span class="chip part">Video walkthrough</span>
         <span class="chip todo">Asset for everyone to post</span>
       </div>
-      <div class="note"><b>The engine that already works:</b> elc-content-refresh turns one messaging doc into four derived assets in a pass, with provenance and an approval gate. Generalising it to all of these is the build that turns the pile of skills into the system.</div>
+      <div class="note"><b>The engine that already works:</b> elc-content-refresh turns one messaging doc into four derived assets in a single pass, with provenance and an approval gate. Generalising that fan-out to all of these is the build that turns the pile of skills into the system.</div>
     </div>
   </div>
 
@@ -212,36 +379,150 @@
         <span class="chip run">Marketing</span>
         <span class="chip run">Sales</span>
         <span class="chip run">Product</span>
-        <span class="chip run">Engineering</span>
+        <span class="chip run">Lifecycle</span>
+        <span class="chip run">Social</span>
         <span class="chip run">Founder</span>
         <span class="chip run">Creator team</span>
       </div>
-      <div class="note"><b>Rails:</b> Composio (LinkedIn / X / YouTube, stage then approve) · Braze (lifecycle email) · Webflow + Vercel (site) · HubSpot marketplace · Canva + Drive + Notion (collateral) · Slack (internal amplification).</div>
+      <div class="note"><b>Rails:</b> Composio (LinkedIn / X / YouTube, stage then approve) &middot; Braze (lifecycle email) &middot; Webflow + Vercel (site) &middot; HubSpot marketplace &middot; Canva + Drive + Notion (collateral) &middot; Slack (internal amplification).</div>
     </div>
   </div>
 
+  <div class="flow-arrow"></div>
+
+  <!-- LAYER 5 (NEW) -->
+  <div class="layer">
+    <div class="layer-id">
+      <div class="layer-num">05</div>
+      <div class="layer-name">Adoption + lifecycle</div>
+      <div class="layer-role">The launch is not done when it ships. It is done when people use the thing. Move the user from seeing it to adopting it.</div>
+    </div>
+    <div class="chips-wrap">
+      <div class="chips">
+        <span class="chip run">Lifecycle email journeys</span>
+        <span class="chip run">Welcome + onboarding series</span>
+        <span class="chip part">Personalised by segment / ICP</span>
+        <span class="chip todo">In-app triggers</span>
+        <span class="chip todo">Paid-feature adoption nudges</span>
+        <span class="chip todo">Expansion + retention prompts</span>
+      </div>
+      <div class="note"><b>The in-app layer:</b> partner with lifecycle and product to design the moment that converts a user into an adopter of a paid surface. Running on email today, the personalised in-app trigger is the next build.</div>
+    </div>
+  </div>
+
+  <div class="flow-arrow"></div>
+
+  <!-- LAYER 6 (NEW) -->
+  <div class="layer">
+    <div class="layer-id">
+      <div class="layer-num">06</div>
+      <div class="layer-name">Measurement</div>
+      <div class="layer-role">Close the loop. Did it land. What moved adoption, what fell flat, and what the next launch should do differently.</div>
+    </div>
+    <div class="chips-wrap">
+      <div class="chips">
+        <span class="chip part">Win/loss capture</span>
+        <span class="chip part">Launch retro</span>
+        <span class="chip part">Signal back into the brain</span>
+        <span class="chip todo">Adoption + usage metrics</span>
+        <span class="chip todo">Campaign-level attribution</span>
+      </div>
+      <div class="note"><b>The honest gap:</b> today the loop closes by hand, a retro written back into the intelligence layer. Automating the metrics-to-brain feedback is build 03, so every launch genuinely starts smarter than the last.</div>
+    </div>
+  </div>
+
+  <!-- LOOP CLOSE -->
+  <div class="loopclose">
+    <div class="ic">&#8635;</div>
+    <p><b>The loop closes.</b> What you learn at adoption and measurement feeds straight back into intelligence in. The brain compounds. Every launch starts from a smarter place than the one before it.</p>
+  </div>
+
+  <!-- EVERY PMM JOB -->
+  <div class="section-label">
+    <div class="eyebrow">The proof</div>
+    <h2>Every PMM job, <em>covered</em></h2>
+    <p>The full product marketing remit, and the skill I built to run each one. Every box below is a real, reusable skill in the system, not a thing I did once by hand. Honest status on each, so you can see what is live versus what is the roadmap.</p>
+  </div>
+
+  <div class="matrix">
+
+    <div class="matrix-band">
+      <div class="matrix-band-title">Strategy + insight</div>
+      <div class="mrow"><div class="job">Competitive intelligence + battlecards</div><div class="runs"><code class="sk">pmm-competitive</code><code class="sk">proxy MCP</code> live ads plus the 20-brand competitor wiki</div><div class="stag"><i class="dot run"></i>running</div></div>
+      <div class="mrow"><div class="job">Voice of customer + research</div><div class="runs"><code class="sk">pmm-research</code><code class="sk">process-interviewer</code> over granola and Limitless call capture</div><div class="stag"><i class="dot run"></i>running</div></div>
+      <div class="mrow"><div class="job">ICP + persona development</div><div class="runs"><code class="sk">pmm-audience-insight</code> the Maya persona, run as a live content test</div><div class="stag"><i class="dot run"></i>running</div></div>
+      <div class="mrow"><div class="job">Positioning</div><div class="runs"><code class="sk">pmm-positioning</code> Dunford and Fletch frameworks encoded</div><div class="stag"><i class="dot run"></i>running</div></div>
+      <div class="mrow"><div class="job">Messaging + narrative</div><div class="runs"><code class="sk">pmm-messaging</code><code class="sk">pmm-story-craft</code> the messaging hierarchy</div><div class="stag"><i class="dot run"></i>running</div></div>
+      <div class="mrow"><div class="job">Pricing + packaging</div><div class="runs"><code class="sk">pmm-pricing</code> Hormozi offer design</div><div class="stag"><i class="dot run"></i>running</div></div>
+    </div>
+
+    <div class="matrix-band">
+      <div class="matrix-band-title">Launch + GTM</div>
+      <div class="mrow"><div class="job">GTM strategy</div><div class="runs"><code class="sk">pmm-gtm</code> segment and motion-specific go-to-market</div><div class="stag"><i class="dot run"></i>running</div></div>
+      <div class="mrow"><div class="job">Launch planning, end to end</div><div class="runs"><code class="sk">pmm-launch</code><code class="sk">shipping-and-launch</code> the checklist and the day-of run</div><div class="stag"><i class="dot run"></i>running</div></div>
+      <div class="mrow"><div class="job">Sales enablement</div><div class="runs"><code class="sk">pmm-sales-enablement</code> one-pagers, talk tracks, objection handling</div><div class="stag"><i class="dot run"></i>running</div></div>
+      <div class="mrow"><div class="job">Win/loss feedback</div><div class="runs"><code class="sk">pmm-competitive</code> wins and losses folded back into positioning</div><div class="stag"><i class="dot part"></i>partial</div></div>
+    </div>
+
+    <div class="matrix-band">
+      <div class="matrix-band-title">Content + storytelling</div>
+      <div class="mrow"><div class="job">Website + product-surface copy</div><div class="runs"><code class="sk">pmm-homepage</code> persona and comparison pages, this whole site</div><div class="stag"><i class="dot run"></i>running</div></div>
+      <div class="mrow"><div class="job">Longform, social + blog</div><div class="runs"><code class="sk">seo-content</code><code class="sk">create-farmer</code> the content system</div><div class="stag"><i class="dot part"></i>partial</div></div>
+      <div class="mrow"><div class="job">Video, demos + walkthroughs</div><div class="runs"><code class="sk">intelligent-growth-video</code><code class="sk">/watch</code> record-your-own walkthroughs</div><div class="stag"><i class="dot part"></i>partial</div></div>
+      <div class="mrow"><div class="job">Customer stories + case studies</div><div class="runs"><code class="sk">case-study-production</code> identify to interview to ship, end to end</div><div class="stag"><i class="dot part"></i>partial</div></div>
+    </div>
+
+    <div class="matrix-band">
+      <div class="matrix-band-title">Growth + adoption</div>
+      <div class="mrow"><div class="job">Demand + product-led growth</div><div class="runs"><code class="sk">pmm-growth</code><code class="sk">lifecycle-growth</code> full-funnel, acquisition to retention</div><div class="stag"><i class="dot part"></i>partial</div></div>
+      <div class="mrow"><div class="job">Lifecycle + in-app adoption</div><div class="runs"><code class="sk">elc-launch-emails</code> lifecycle running, in-app triggers next</div><div class="stag"><i class="dot part"></i>partial</div></div>
+      <div class="mrow"><div class="job">Brand moments + creator partnerships</div><div class="runs"><code class="sk">pmm-creator-marketing</code> the Dream 100 tracker</div><div class="stag"><i class="dot part"></i>partial</div></div>
+    </div>
+
+    <div class="matrix-band">
+      <div class="matrix-band-title">Measurement + operating system</div>
+      <div class="mrow"><div class="job">Attribution + adoption metrics</div><div class="runs"><code class="sk">pmm-metrics</code> the loop-closing measurement layer</div><div class="stag"><i class="dot todo"></i>roadmap</div></div>
+      <div class="mrow"><div class="job">Cross-functional partnership</div><div class="runs"><code class="sk">pmm-internal-comms</code> one messaging doc arms product, sales, lifecycle and social</div><div class="stag"><i class="dot run"></i>running</div></div>
+      <div class="mrow"><div class="job">Internal tooling + multiplier</div><div class="runs"><code class="sk">printing-press</code> CLI factory, skills shared as team playbooks</div><div class="stag"><i class="dot run"></i>running</div></div>
+      <div class="mrow"><div class="job">Taste + editorial QA</div><div class="runs"><code class="sk">council</code><code class="sk">humaniser</code><code class="sk">fact-checker</code> human in the loop</div><div class="stag"><i class="dot run"></i>running</div></div>
+    </div>
+
+  </div>
+
   <!-- FOUNDATION -->
+  <div class="section-label">
+    <div class="eyebrow">Underneath it all</div>
+    <h2>The automation that <em>runs the whole thing</em></h2>
+  </div>
+
   <div class="foundation">
-    <div class="layer-name">Underneath it all</div>
-    <h3>The automation that runs the whole thing.</h3>
     <div class="frow">
       <div class="k">Agents</div>
       <div class="v">
-        <span class="fchip">Bob · Milo · Hermes (3-agent)</span>
-        <span class="fchip">Hermes Kanban Flow · the launch chassis</span>
+        <span class="fchip">Bob &middot; Milo &middot; Hermes (3-agent)</span>
+        <span class="fchip">Hermes Kanban Flow &middot; the launch chassis</span>
         <span class="fchip">create-farmer</span>
-        <span class="fchip">printing-press · CLI factory</span>
+        <span class="fchip">printing-press &middot; CLI factory</span>
         <span class="fchip">Discord multi-agent workspace</span>
       </div>
     </div>
     <div class="frow">
       <div class="k">Crons</div>
       <div class="v">
-        <span class="fchip">op ref · 2x daily</span>
-        <span class="fchip">creator intel</span>
+        <span class="fchip">op ref &middot; 2x daily</span>
+        <span class="fchip">creator + competitor intel</span>
         <span class="fchip">planning sweep</span>
         <span class="fchip">asset go-live monitor</span>
         <span class="fchip">self-healing health monitor</span>
+      </div>
+    </div>
+    <div class="frow">
+      <div class="k">Craft tooling</div>
+      <div class="v">
+        <span class="fchip">/watch &middot; video + transcript</span>
+        <span class="fchip">case-study production</span>
+        <span class="fchip">ascii-plan &middot; sketch first</span>
+        <span class="fchip">refine-implementation</span>
       </div>
     </div>
     <div class="frow">
@@ -255,8 +536,9 @@
     <div class="frow">
       <div class="k">Quality gates</div>
       <div class="v">
-        <span class="fchip">refine-spec</span><span class="fchip">Codex stop-time review</span>
-        <span class="fchip">council</span><span class="fchip">48 reviewer agents</span>
+        <span class="fchip">Maya persona test</span><span class="fchip">humaniser</span>
+        <span class="fchip">fact-checker</span><span class="fchip">refine-spec</span>
+        <span class="fchip">Codex stop-time review</span><span class="fchip">council</span>
       </div>
     </div>
   </div>
@@ -268,21 +550,73 @@
       <div class="build">
         <div class="bn">Build 01</div>
         <h4>launch-content-refresh</h4>
-        <p>Generalise the fan-out so one messaging doc produces all nine assets. Closes the biggest output gaps in one move.</p>
+        <p>Generalise the fan-out so one messaging doc produces all of the assets in a pass. Closes the biggest output gaps in one move.</p>
       </div>
       <div class="build">
         <div class="bn">Build 02</div>
         <h4>Launch orchestrator</h4>
-        <p>One entry point that runs intelligence to synthesis to fan-out to arm-everyone as a gated chain, on the Hermes Kanban chassis.</p>
+        <p>One entry point that runs intelligence to synthesis to fan-out to arm-everyone to adoption as a gated chain, on the Hermes Kanban chassis.</p>
       </div>
       <div class="build">
         <div class="bn">Build 03</div>
         <h4>Post-launch loop</h4>
-        <p>Pipe the retro and metrics back into the intelligence layer so every launch starts smarter than the last.</p>
+        <p>Pipe the retro, the adoption metrics and the attribution back into the intelligence layer so every launch starts smarter than the last.</p>
       </div>
     </div>
   </div>
 
 </div>
+
+<footer>
+  <div class="footer-main">
+    <div class="footer-cta">
+      <h2>LET'S<br>BUILD.</h2>
+      <a href="mailto:wcmulholland@gmail.com">wcmulholland@gmail.com</a>
+      <p style="font-size:16px;color:var(--gray-light);margin-top:16px;">Or just email me. I read everything.</p>
+      <div class="footer-social" style="margin-top:32px;">
+        <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+        <a href="https://www.youtube.com/@WillMulholland" target="_blank" rel="noopener" title="YouTube" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Will Mulholland. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile burger menu
+  (function() {
+    var toggle = document.getElementById('navToggle');
+    var links = document.getElementById('navLinks');
+    if (!toggle || !links) return;
+    function setOpen(open) {
+      toggle.classList.toggle('is-open', open);
+      links.classList.toggle('is-open', open);
+      document.body.classList.toggle('nav-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    toggle.addEventListener('click', function() { setOpen(!links.classList.contains('is-open')); });
+    links.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { setOpen(false); }); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && links.classList.contains('is-open')) setOpen(false); });
+  })();
+  // Smart nav: hide on scroll down, show on scroll up
+  (function () {
+    var nav = document.querySelector('nav');
+    if (!nav) return;
+    var last = window.pageYOffset;
+    window.addEventListener('scroll', function () {
+      var y = window.pageYOffset;
+      if (y > last && y > 120) { nav.classList.add('nav--hidden'); }
+      else { nav.classList.remove('nav--hidden'); }
+      last = y;
+    }, { passive: true });
+  })();
+</script>
 </body>
 </html>
