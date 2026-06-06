@@ -152,6 +152,19 @@
   .build h4{font-size:15px;font-weight:700;margin-bottom:6px}
   .build p{font-size:13px;color:var(--gray-mid);line-height:1.45}
 
+  /* frameworks grid */
+  .fw-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+  .fw{background:var(--white);border:1px solid rgba(31,21,17,0.08);border-radius:12px;padding:16px 18px}
+  .fw .fw-k{font-weight:700;font-size:14.5px;margin-bottom:5px}
+  .fw .fw-v{font-size:13px;color:var(--gray-mid);line-height:1.5}
+
+  /* project skills grid */
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  .proj{background:var(--cream-soft);border:1px solid rgba(31,21,17,0.07);border-radius:12px;padding:16px 18px;display:flex;gap:13px;align-items:flex-start}
+  .proj .pn{font-family:monospace;font-size:11px;color:var(--accent);font-weight:700;margin-top:2px;flex-shrink:0}
+  .proj .pt{font-weight:700;font-size:14.5px;margin-bottom:4px;line-height:1.25}
+  .proj .pd{font-size:12.5px;color:var(--gray-mid);line-height:1.45}
+
   /* footer */
   footer{background:var(--ink);color:var(--white);padding:80px 48px 40px}
   .footer-main{max-width:1100px;margin:0 auto}
@@ -185,6 +198,8 @@
     .stat{flex-basis:33%}
     .mrow{grid-template-columns:1fr;gap:8px}
     .mrow .stag{justify-self:start}
+    .fw-grid{grid-template-columns:1fr}
+    .proj-grid{grid-template-columns:1fr}
     footer{padding:64px 24px 32px}
   }
 </style>
@@ -323,11 +338,11 @@
         <span class="step">launch plan</span><span class="sep">&rarr;</span>
         <span class="step">enablement</span>
       </div>
-      <div class="gates"><b>Gates over every draft:</b> Maya persona test &middot; humaniser &middot; fact-checker &middot; refine-spec &middot; council on high-stakes calls.</div>
+      <div class="gates"><b>Gates over every draft:</b> buyer-persona test &middot; humaniser &middot; fact-checker &middot; refine-spec &middot; council on high-stakes calls.</div>
       <details class="more">
         <summary>how the gates keep the bar high</summary>
         <div class="more-body">
-          <div class="drow"><span class="dd run"></span><span><b>Maya persona test</b>. Every line checked against the real buyer's worldview and ban list before it ships.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Buyer-persona test</b>. Every line checked against the real buyer's worldview and ban list before it ships.</span></div>
           <div class="drow"><span class="dd run"></span><span><b>Humaniser</b>. Strips AI tells, kills the slop patterns, tightens to spoken rhythm.</span></div>
           <div class="drow"><span class="dd run"></span><span><b>Fact-checker</b>. Claims verified against the source before they go out.</span></div>
           <div class="drow"><span class="dd run"></span><span><b>refine-spec</b>. Pressure-tests the plan before anything gets built.</span></div>
@@ -450,7 +465,7 @@
       <div class="matrix-band-title">Strategy + insight</div>
       <div class="mrow"><div class="job">Competitive intelligence + battlecards</div><div class="runs"><code class="sk">pmm-competitive</code><code class="sk">proxy MCP</code> live ads plus the 20-brand competitor wiki</div><div class="stag"><i class="dot run"></i>running</div></div>
       <div class="mrow"><div class="job">Voice of customer + research</div><div class="runs"><code class="sk">pmm-research</code><code class="sk">process-interviewer</code> over granola and Limitless call capture</div><div class="stag"><i class="dot run"></i>running</div></div>
-      <div class="mrow"><div class="job">ICP + persona development</div><div class="runs"><code class="sk">pmm-audience-insight</code> the Maya persona, run as a live content test</div><div class="stag"><i class="dot run"></i>running</div></div>
+      <div class="mrow"><div class="job">ICP + persona development</div><div class="runs"><code class="sk">pmm-audience-insight</code> ICP and persona built, then run as a live content test</div><div class="stag"><i class="dot run"></i>running</div></div>
       <div class="mrow"><div class="job">Positioning</div><div class="runs"><code class="sk">pmm-positioning</code> Dunford and Fletch frameworks encoded</div><div class="stag"><i class="dot run"></i>running</div></div>
       <div class="mrow"><div class="job">Messaging + narrative</div><div class="runs"><code class="sk">pmm-messaging</code><code class="sk">pmm-story-craft</code> the messaging hierarchy</div><div class="stag"><i class="dot run"></i>running</div></div>
       <div class="mrow"><div class="job">Pricing + packaging</div><div class="runs"><code class="sk">pmm-pricing</code> Hormozi offer design</div><div class="stag"><i class="dot run"></i>running</div></div>
@@ -487,6 +502,45 @@
       <div class="mrow"><div class="job">Taste + editorial QA</div><div class="runs"><code class="sk">council</code><code class="sk">humaniser</code><code class="sk">fact-checker</code> human in the loop</div><div class="stag"><i class="dot run"></i>running</div></div>
     </div>
 
+  </div>
+
+  <!-- FRAMEWORKS -->
+  <div class="section-label">
+    <div class="eyebrow">Not generic AI</div>
+    <h2>The frameworks <em>baked in</em></h2>
+    <p>This is not Claude Code out of the box. Each skill encodes the methodology I actually run, the named thinkers and processes behind real product marketing, so the output reflects how a senior PMM thinks, not how a chatbot writes.</p>
+  </div>
+
+  <div class="fw-grid">
+    <div class="fw"><div class="fw-k">Positioning</div><div class="fw-v">April Dunford, Obviously Awesome, plus the Fletch PMM approach to product-led positioning.</div></div>
+    <div class="fw"><div class="fw-k">Market frame</div><div class="fw-v">Big Fish, Small Pond. Own a sharp niche instead of competing in the crowded middle.</div></div>
+    <div class="fw"><div class="fw-k">Messaging</div><div class="fw-v">A messaging hierarchy and the reveal-tension structure. Lead with the benefit, show the machinery second.</div></div>
+    <div class="fw"><div class="fw-k">Launch + GTM</div><div class="fw-v">Martina Lauchengco, LOVED, plus tiered and rolling-thunder launch models for sustained momentum.</div></div>
+    <div class="fw"><div class="fw-k">Research + VOC</div><div class="fw-v">Jobs to be Done and structured voice-of-customer synthesis pulled from real sales and customer calls.</div></div>
+    <div class="fw"><div class="fw-k">Pricing + offer</div><div class="fw-v">Value-based tiering and Hormozi grand-slam offer design.</div></div>
+    <div class="fw"><div class="fw-k">Growth</div><div class="fw-v">Brian Balfour and Reforge growth loops, full-funnel from acquisition through to retention.</div></div>
+    <div class="fw"><div class="fw-k">Competitive</div><div class="fw-v">Displacement messaging, objection handling, and win/loss fed back into the positioning.</div></div>
+    <div class="fw"><div class="fw-k">Comms + persuasion</div><div class="fw-v">Wes Kao and Molly Graham operating principles. Lead with the point, write for the reader's context.</div></div>
+  </div>
+
+  <!-- REAL LAUNCHES -->
+  <div class="section-label">
+    <div class="eyebrow">Real work, not theory</div>
+    <h2>Launches I have run, <em>captured as skills</em></h2>
+    <p>Every one of these is a real launch or project I ran end to end as a PMM, then captured as a reusable skill so the next one is faster and starts from a higher bar. The system is not abstract, it is the sum of work that actually shipped.</p>
+  </div>
+
+  <div class="proj-grid">
+    <div class="proj"><div class="pn">01</div><div><div class="pt">Event lead-capture launch</div><div class="pd">Full go-to-market, onboarding, activation and sales enablement for a new capture product, end to end.</div></div></div>
+    <div class="proj"><div class="pn">02</div><div><div class="pt">AI notetaker launch</div><div class="pd">Founder video shoot, UGC scaling, and the distribution plan across channels.</div></div></div>
+    <div class="proj"><div class="pn">03</div><div><div class="pt">Product Hunt launch</div><div class="pd">A full Product Hunt launch run, asset prep through to day-of execution.</div></div></div>
+    <div class="proj"><div class="pn">04</div><div><div class="pt">Marketplace app listing</div><div class="pd">Listing copy and launch for an app marketplace, where listing quality is most of the approval.</div></div></div>
+    <div class="proj"><div class="pn">05</div><div><div class="pt">Feature launch, messaging house</div><div class="pd">Positioning, the messaging house, a video brief and the enablement for a net-new feature.</div></div></div>
+    <div class="proj"><div class="pn">06</div><div><div class="pt">Lifecycle email rebuild</div><div class="pd">A full lifecycle audit plus welcome and premium-upgrade journeys, mapped and rebuilt.</div></div></div>
+    <div class="proj"><div class="pn">07</div><div><div class="pt">Case-study production line</div><div class="pd">Research, scoring, interview, edit, publish and social distribution, run as one repeatable system.</div></div></div>
+    <div class="proj"><div class="pn">08</div><div><div class="pt">Website rebrand</div><div class="pd">Positioning, full-site copy and the build. This site is the working example.</div></div></div>
+    <div class="proj"><div class="pn">09</div><div><div class="pt">Sales enablement library</div><div class="pd">Battlecards, one-pagers, talk tracks and objection handling for the sales team.</div></div></div>
+    <div class="proj"><div class="pn">10</div><div><div class="pt">Onboarding + welcome series</div><div class="pd">Lifecycle copy and flow designed to move a new user to first value and adoption.</div></div></div>
   </div>
 
   <!-- FOUNDATION -->
@@ -536,7 +590,7 @@
     <div class="frow">
       <div class="k">Quality gates</div>
       <div class="v">
-        <span class="fchip">Maya persona test</span><span class="fchip">humaniser</span>
+        <span class="fchip">buyer-persona test</span><span class="fchip">humaniser</span>
         <span class="fchip">fact-checker</span><span class="fchip">refine-spec</span>
         <span class="fchip">Codex stop-time review</span><span class="fchip">council</span>
       </div>
