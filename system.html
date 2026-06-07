@@ -116,6 +116,11 @@
   .drow .dd.todo{background:transparent;border:1px dashed var(--gray-light)}
   .drow b{color:var(--ink);font-weight:600}
 
+  /* input groups (always-visible source lists) */
+  .igroups{display:flex;flex-direction:column;gap:22px}
+  .igroup-title{font-family:monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-deep);font-weight:700;margin-bottom:4px;padding-bottom:7px;border-bottom:1px solid rgba(31,21,17,0.12)}
+  .igroup .drow{padding:10px 0}
+
   /* loop close band */
   .loopclose{background:var(--ink);color:var(--cream);border-radius:16px;padding:22px 28px;margin-top:18px;display:flex;align-items:center;gap:18px;justify-content:center;text-align:left}
   .loopclose .ic{font-size:30px;color:var(--lime);line-height:1}
@@ -259,28 +264,25 @@
       <div class="layer-role">The senses. Everything that tells you what to say, landing in one place instead of twenty tabs.</div>
     </div>
     <div class="chips-wrap">
-      <div class="chips">
-        <span class="chip run">How buyers describe the problem &middot; Gong, Granola</span>
-        <span class="chip run">What the team is hearing &middot; Granola, Notion</span>
-        <span class="chip run">Live competitor ads + creative counts &middot; proxy</span>
-        <span class="chip run">Anything I can see logged in &middot; autonomous browser</span>
-        <span class="chip run">Today's product truth &middot; operational reference, 2x daily</span>
-        <span class="chip run">The full plan out of my head &middot; process interviews</span>
-      </div>
-      <details class="more">
-        <summary>every source, and what it gives the brain</summary>
-        <div class="more-body">
-          <div class="drow"><span class="dd run"></span><span><b>Know exactly how buyers describe the problem, in their own words.</b> Every sales and customer call is transcribed by Gong and Granola, and the customer language, objections and win-loss flow through the GTM knowledge base into the brain. It is the raw material positioning and messaging get built from, instead of guesses.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>The brain knows what the whole company knows.</b> Granola and Notion capture every product, sales and strategy meeting and route it in, so nothing said in a room gets lost or has to be re-explained.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>See what every competitor is spending on and saying, live.</b> proxy pulls their running ads across Google, LinkedIn and Meta, including how many creatives each one has live, and analyses them on demand, so I can read a rival's whole strategy off their ad spend.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Read anything I can see when logged in, with no copy-paste.</b> The autonomous browser drives my real browser through competitor sites, LinkedIn, HubSpot and Notion and pulls the pages, pricing and roadmap straight into the brain.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Never start competitive research from zero.</b> A maintained intelligence file per competitor, 20 brands, farmed daily by a cron so it is already current the moment I need it.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>The whole system runs off today's truth, not last month's.</b> Twice a day an automated job rebuilds the operational reference, the one core context document that holds the live product, the roadmap from Notion, the people, the decisions, the competitive state and the current priorities, regenerated from the latest meeting transcripts.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Get the full plan out of my head before any build starts.</b> A relentless structured interview that extracts the complete brief first, so nothing important is left assumed. This is process interviews.</span></div>
-          <div class="drow"><span class="dd part"></span><span><b>See how rival products actually work, not just their marketing.</b> screenpipe captures competitor products as they are used on screen.</span></div>
-          <div class="drow"><span class="dd todo"></span><span><b>Voice of customer at scale.</b> G2 and Capterra reviews mined for patterns. Next on the roadmap.</span></div>
+      <div class="igroups">
+
+        <div class="igroup">
+          <div class="igroup-title">Calls + conversations</div>
+          <div class="drow"><span class="dd run"></span><span><b>Know exactly how buyers describe the problem, in their own words.</b> Every sales call is transcribed by Gong and Granola, and the customer language, the objections, and the reasons deals are won or lost flow through the GTM knowledge base into the brain. Positioning and messaging get built from real language, not from guesses.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>The brain knows what the whole company knows.</b> Internal calls and meetings are captured by Granola and Notion, so every product, sales and strategy discussion is routed in. Nothing said in a room gets lost or has to be re-explained later.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Get the complete plan out of my own head before any build starts.</b> Process interviews run a relentless structured interview that extracts the full brief first, so nothing important is left assumed.</span></div>
         </div>
-      </details>
+
+        <div class="igroup">
+          <div class="igroup-title">Competitive intelligence</div>
+          <div class="drow"><span class="dd run"></span><span><b>See what every competitor is spending on and saying, live.</b> Competitor ads are pulled by proxy across Google, LinkedIn and Meta, including how many creatives each rival has running, so I can read their whole strategy off their ad spend.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Read any competitor page the moment it changes, with no copy-paste.</b> The autonomous browser drives my real logged-in browser through their product, pricing and positioning pages and pulls them straight into the brain.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Never start competitive research from zero.</b> A maintained intelligence file per competitor, 20 brands, is farmed daily by a cron, so the landscape is already current the moment I need it.</span></div>
+          <div class="drow"><span class="dd part"></span><span><b>See how rival products actually work, not just how they market.</b> screenpipe captures competitor products as they are used on screen.</span></div>
+          <div class="drow"><span class="dd todo"></span><span><b>Hear what customers love, hate and switch for, at scale.</b> Competitor reviews mined across G2, Capterra, TrustRadius, the App Store and Google Play for patterns and switching triggers. Next on the roadmap.</span></div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -294,29 +296,19 @@
       <div class="layer-role">Memory and retrieval. One context layer that reads all of it at once. The moat is here, not the model.</div>
     </div>
     <div class="chips-wrap">
-      <div class="chips">
-        <span class="chip run">Every project in one file &middot; PARA second brain</span>
-        <span class="chip run">Living skill files</span>
-        <span class="chip run">Op ref &middot; rebuilt 2x daily</span>
-        <span class="chip run">Reads everything at once &middot; Chroma, 361k chunks</span>
-        <span class="chip run">Observer / reflector</span>
-        <span class="chip run">Context graph</span>
-        <span class="chip run">Voice DNA</span>
-        <span class="chip run">Approved-copy library</span>
-      </div>
-      <details class="more">
-        <summary>what each one does</summary>
-        <div class="more-body">
-          <div class="drow"><span class="dd run"></span><span><b>Every project in one file, PARA second brain</b>. Each project, person, decision and source lives in one structured file, so the whole history of a launch is one place the brain can read, not scattered across tools.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Living skill files</b>. Each capability is a file that updates itself after every session, the work, the decisions, the next steps. The system gets sharper with use instead of starting cold each time.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>The operational reference, rebuilt twice daily</b>. The live product and market context regenerated from meeting transcripts, so every piece of work runs off today's truth, not last month's.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Reads everything at once, Chroma</b>. 361k chunks, hybrid retrieval. The brain pulls everything relevant in one pass instead of me searching tab by tab.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Observer and reflector</b>. An ambient pipeline that captures what happens and clusters it back into memory.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Context graph</b>. Relationship-aware routing that loads the right context for the task automatically.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Voice DNA</b>. My actual writing voice encoded, so output sounds like me, not like every other AI draft.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Approved-copy library</b>. Every line of live, signed-off copy, held as the consistency baseline.</span></div>
+      <div class="igroups">
+        <div class="igroup">
+          <div class="igroup-title">Where it all lives, and how it stays current</div>
+          <div class="drow"><span class="dd run"></span><span><b>The whole history of a launch sits in one place the brain can read.</b> A PARA-structured second brain holds every project, person, decision and source as one file, instead of scattered across tools and tabs.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Every piece of work runs off today's truth, not last month's.</b> The operational reference, the one core context document covering the live product, the roadmap from Notion, the people, the decisions and the current priorities, is rebuilt twice a day from the latest meeting transcripts.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>The system gets sharper with use instead of starting cold.</b> Living skill files update themselves after every session with the work done, the decisions made and the next steps, so each capability remembers how it was run last time.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>The brain pulls everything relevant in one pass.</b> Semantic search over 361k chunks with hybrid retrieval surfaces the right context at once, instead of me searching tab by tab.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Nothing important slips through the cracks.</b> An observer and reflector pipeline ambiently captures what happens and clusters it back into memory.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>The right context loads itself for the task at hand.</b> A relationship-aware context graph routes the relevant people, projects and history into every job automatically.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Output sounds like me, not like every other AI draft.</b> My actual writing voice is encoded as Voice DNA and applied to everything that gets written.</span></div>
+          <div class="drow"><span class="dd run"></span><span><b>Every line stays consistent with what is already live.</b> An approved-copy library holds every signed-off line as the baseline to check new copy against.</span></div>
         </div>
-      </details>
+      </div>
     </div>
   </div>
 
