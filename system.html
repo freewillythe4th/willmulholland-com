@@ -116,10 +116,19 @@
   .drow .dd.todo{background:transparent;border:1px dashed var(--gray-light)}
   .drow b{color:var(--ink);font-weight:600}
 
-  /* input groups (always-visible source lists) */
-  .igroups{display:flex;flex-direction:column;gap:22px}
-  .igroup-title{font-family:monospace;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent-deep);font-weight:700;margin-bottom:4px;padding-bottom:7px;border-bottom:1px solid rgba(31,21,17,0.12)}
-  .igroup .drow{padding:10px 0}
+  /* accordion rows: scannable headline, detail on click */
+  .acc-list{display:flex;flex-direction:column}
+  .acc{border-top:1px solid rgba(31,21,17,0.10)}
+  .acc-list .acc:last-child{border-bottom:1px solid rgba(31,21,17,0.10)}
+  .acc>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:13px;padding:16px 2px;font-size:15.5px;font-weight:600;color:var(--ink);line-height:1.3}
+  .acc>summary::-webkit-details-marker{display:none}
+  .acc>summary .dot{flex-shrink:0}
+  .acc>summary::after{content:"+";margin-left:auto;padding-left:14px;color:var(--accent);font-weight:700;font-size:17px;line-height:1}
+  .acc[open]>summary::after{content:"\2212"}
+  .acc>summary:hover{color:var(--accent-deep)}
+  .acc-body{padding:0 2px 18px 32px;font-size:13.5px;color:var(--gray-mid);line-height:1.6}
+  .acc-body p{margin:0}
+  .acc-body .tool{margin-top:9px;font-family:monospace;font-size:11px;letter-spacing:0.03em;color:var(--gray-light)}
 
   /* loop close band */
   .loopclose{background:var(--ink);color:var(--cream);border-radius:16px;padding:22px 28px;margin-top:18px;display:flex;align-items:center;gap:18px;justify-content:center;text-align:left}
@@ -264,23 +273,38 @@
       <div class="layer-role">The senses. Everything that tells you what to say, landing in one place instead of twenty tabs.</div>
     </div>
     <div class="chips-wrap">
-      <div class="igroups">
+      <div class="acc-list">
 
-        <div class="igroup">
-          <div class="igroup-title">Calls + conversations</div>
-          <div class="drow"><span class="dd run"></span><span><b>Know exactly how buyers describe the problem, in their own words.</b> Every sales call is transcribed by Gong and Granola, and the customer language, the objections, and the reasons deals are won or lost flow through the GTM knowledge base into the brain. Positioning and messaging get built from real language, not from guesses.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>The brain knows what the whole company knows.</b> Internal calls and meetings are captured by Granola and Notion, so every product, sales and strategy discussion is routed in. Nothing said in a room gets lost or has to be re-explained later.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Get the complete plan out of my own head before any build starts.</b> Process interviews run a relentless structured interview that extracts the full brief first, so nothing important is left assumed.</span></div>
-        </div>
+        <details class="acc">
+          <summary><i class="dot run"></i>I always know how buyers actually describe the problem</summary>
+          <div class="acc-body">
+            <p>Every sales call is transcribed, and the customer language, the objections, and the reasons deals are won or lost feed straight into the system. Positioning and messaging get written from how buyers really talk, not from guesses.</p>
+            <p class="tool">From Gong and Granola calls</p>
+          </div>
+        </details>
 
-        <div class="igroup">
-          <div class="igroup-title">Competitive intelligence</div>
-          <div class="drow"><span class="dd run"></span><span><b>See what every competitor is spending on and saying, live.</b> Competitor ads are pulled by proxy across Google, LinkedIn and Meta, including how many creatives each rival has running, so I can read their whole strategy off their ad spend.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Read any competitor page the moment it changes, with no copy-paste.</b> The autonomous browser drives my real logged-in browser through their product, pricing and positioning pages and pulls them straight into the brain.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Never start competitive research from zero.</b> A maintained intelligence file per competitor, 20 brands, is farmed daily by a cron, so the landscape is already current the moment I need it.</span></div>
-          <div class="drow"><span class="dd part"></span><span><b>See how rival products actually work, not just how they market.</b> screenpipe captures competitor products as they are used on screen.</span></div>
-          <div class="drow"><span class="dd todo"></span><span><b>Hear what customers love, hate and switch for, at scale.</b> Competitor reviews mined across G2, Capterra, TrustRadius, the App Store and Google Play for patterns and switching triggers. Next on the roadmap.</span></div>
-        </div>
+        <details class="acc">
+          <summary><i class="dot run"></i>I see what every competitor is doing, live</summary>
+          <div class="acc-body">
+            <p>Their live ads across Google, LinkedIn and Meta, including how many creatives each one is running. Their product, pricing and positioning pages, read the moment they change. Screen recordings of their product in use. Customer reviews mined for what people love, hate and switch for. And a maintained file on each of 20 competitors, refreshed every day.</p>
+            <p class="tool">Ad libraries, live web pages, screen record, reviews across G2 / Capterra / TrustRadius / App Store / Google Play (reviews next), 20-brand competitor wiki</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary><i class="dot run"></i>Nothing the team learns gets lost</summary>
+          <div class="acc-body">
+            <p>Internal calls and meetings are captured and routed in, so every product, sales and strategy conversation is in the system instead of in one person's memory.</p>
+            <p class="tool">From Granola and Notion</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary><i class="dot run"></i>Every brief is fully scoped before I build</summary>
+          <div class="acc-body">
+            <p>A structured interview pulls the complete plan out of my head first, so the work starts from a clear brief with nothing important assumed.</p>
+          </div>
+        </details>
 
       </div>
     </div>
@@ -296,18 +320,29 @@
       <div class="layer-role">Memory and retrieval. One context layer that reads all of it at once. The moat is here, not the model.</div>
     </div>
     <div class="chips-wrap">
-      <div class="igroups">
-        <div class="igroup">
-          <div class="igroup-title">Where it all lives, and how it stays current</div>
-          <div class="drow"><span class="dd run"></span><span><b>The whole history of a launch sits in one place the brain can read.</b> A PARA-structured second brain holds every project, person, decision and source as one file, instead of scattered across tools and tabs.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Every piece of work runs off today's truth, not last month's.</b> The operational reference, the one core context document covering the live product, the roadmap from Notion, the people, the decisions and the current priorities, is rebuilt twice a day from the latest meeting transcripts.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>The system gets sharper with use instead of starting cold.</b> Living skill files update themselves after every session with the work done, the decisions made and the next steps, so each capability remembers how it was run last time.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>The brain pulls everything relevant in one pass.</b> Semantic search over 361k chunks with hybrid retrieval surfaces the right context at once, instead of me searching tab by tab.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Nothing important slips through the cracks.</b> An observer and reflector pipeline ambiently captures what happens and clusters it back into memory.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>The right context loads itself for the task at hand.</b> A relationship-aware context graph routes the relevant people, projects and history into every job automatically.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Output sounds like me, not like every other AI draft.</b> My actual writing voice is encoded as Voice DNA and applied to everything that gets written.</span></div>
-          <div class="drow"><span class="dd run"></span><span><b>Every line stays consistent with what is already live.</b> An approved-copy library holds every signed-off line as the baseline to check new copy against.</span></div>
-        </div>
+      <div class="acc-list">
+
+        <details class="acc">
+          <summary><i class="dot run"></i>The output sounds like me, not like AI</summary>
+          <div class="acc-body">
+            <p>My actual writing voice is encoded and applied to everything, and every line is checked against the copy I have already approved. What comes out reads like me, not like a generic AI draft.</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary><i class="dot run"></i>It always works off the latest truth</summary>
+          <div class="acc-body">
+            <p>One core context document covering the live product, the roadmap, the people, the decisions and the current priorities is rebuilt twice a day from the latest meetings. Each skill also updates its own notes after every use, so the system gets sharper over time instead of starting cold.</p>
+          </div>
+        </details>
+
+        <details class="acc">
+          <summary><i class="dot run"></i>Everything I have ever learned is one search away</summary>
+          <div class="acc-body">
+            <p>Every project, person, decision and source lives in one organised knowledge base the system reads in full, and the relevant context loads itself into whatever I am working on.</p>
+          </div>
+        </details>
+
       </div>
     </div>
   </div>
