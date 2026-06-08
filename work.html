@@ -1477,7 +1477,15 @@
 
         // --- Existing site JS ---
         function toggleProject(card) {
-            card.classList.toggle('active');
+            // Only the header toggles. Clicks inside the open body (text, links, video) are ignored,
+            // so an accidental click on an expanded card never closes it.
+            if (window.event && window.event.target && window.event.target.closest('.project-details')) return;
+            var wasActive = card.classList.contains('active');
+            // Accordion: close any other open card so the page never shifts under a pending click.
+            document.querySelectorAll('.project-card.active').forEach(function (c) {
+                if (c !== card) c.classList.remove('active');
+            });
+            card.classList.toggle('active', !wasActive);
         }
 
         function playVideo(thumbnail, embedUrl) {
