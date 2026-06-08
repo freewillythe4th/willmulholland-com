@@ -63,6 +63,26 @@
   .stat .num{font-family:'Instrument Serif',Georgia,serif;font-size:36px;line-height:1;color:var(--accent-deep)}
   .stat .lbl{font-family:monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-mid);margin-top:8px;line-height:1.3}
 
+  /* loop map (at-a-glance flow) */
+  .loopmap{margin:40px 0 6px;padding:26px 24px 22px;background:var(--white);border:1px solid rgba(31,21,17,0.10);border-radius:20px;box-shadow:var(--offset-shadow)}
+  .loopmap .eyebrow{text-align:center;margin-bottom:9px}
+  .loopmap-beats{text-align:center;font-family:monospace;font-size:12px;letter-spacing:0.05em;text-transform:uppercase;color:var(--gray-mid);margin-bottom:22px}
+  .loopmap-beats span{color:var(--accent);margin:0 7px;font-weight:700}
+  .loopmap-row{display:flex;align-items:stretch;justify-content:center;gap:5px;flex-wrap:wrap}
+  .lm-node{flex:1 1 100px;min-width:94px;max-width:132px;background:var(--cream);border:1px solid rgba(37,99,235,0.18);border-radius:12px;padding:13px 8px;text-align:center;display:flex;flex-direction:column;gap:3px}
+  .lm-num{font-family:'Instrument Serif',Georgia,serif;font-size:28px;line-height:0.9;color:var(--accent-deep)}
+  .lm-name{font-size:12.5px;font-weight:600;line-height:1.2;color:var(--ink)}
+  .lm-sub{font-family:monospace;font-size:10px;letter-spacing:0.02em;color:var(--gray-light);line-height:1.25}
+  .lm-arrow{display:flex;align-items:center;color:var(--accent);font-size:17px;font-weight:700;flex:0 0 auto}
+  .loopmap-return{margin-top:16px;display:flex;align-items:center;justify-content:center;gap:11px;background:var(--ink);color:rgba(242,237,227,0.92);border-radius:12px;padding:13px 18px;font-size:13px;line-height:1.45}
+  .loopmap-return .lm-ic{color:var(--lime);font-size:21px;line-height:1;flex-shrink:0}
+  .loopmap-return b{color:#fff;font-weight:600}
+  @media (max-width:720px){
+    .loopmap-row{flex-direction:column;align-items:stretch}
+    .lm-node{max-width:none}
+    .lm-arrow{transform:rotate(90deg);justify-content:center;padding:2px 0}
+  }
+
   /* section label */
   .section-label{text-align:center;margin:72px auto 28px;max-width:760px}
   .section-label .eyebrow{margin-bottom:14px}
@@ -257,6 +277,28 @@
       <div class="stat"><div class="num">35</div><div class="lbl">PMM<br>skills</div></div>
       <div class="stat"><div class="num">12</div><div class="lbl">assets from<br>one doc</div></div>
     </div>
+  </div>
+
+  <!-- LOOP MAP -->
+  <div class="loopmap">
+    <div class="eyebrow">The whole loop, at a glance</div>
+    <div class="loopmap-beats">one feature in <span>&rarr;</span> every asset out <span>&rarr;</span> the whole company armed</div>
+    <div class="loopmap-row">
+      <div class="lm-node"><div class="lm-num">00</div><div class="lm-name">Intelligence in</div><div class="lm-sub">calls, ads, reviews</div></div>
+      <div class="lm-arrow">&rarr;</div>
+      <div class="lm-node"><div class="lm-num">01</div><div class="lm-name">Memory + context</div><div class="lm-sub">the brain</div></div>
+      <div class="lm-arrow">&rarr;</div>
+      <div class="lm-node"><div class="lm-num">02</div><div class="lm-name">Synthesis</div><div class="lm-sub">the PMM craft</div></div>
+      <div class="lm-arrow">&rarr;</div>
+      <div class="lm-node"><div class="lm-num">03</div><div class="lm-name">Outputs</div><div class="lm-sub">every launch asset</div></div>
+      <div class="lm-arrow">&rarr;</div>
+      <div class="lm-node"><div class="lm-num">04</div><div class="lm-name">Distribution</div><div class="lm-sub">arm every team</div></div>
+      <div class="lm-arrow">&rarr;</div>
+      <div class="lm-node"><div class="lm-num">05</div><div class="lm-name">Adoption</div><div class="lm-sub">drive usage</div></div>
+      <div class="lm-arrow">&rarr;</div>
+      <div class="lm-node"><div class="lm-num">06</div><div class="lm-name">Measurement</div><div class="lm-sub">close the loop</div></div>
+    </div>
+    <div class="loopmap-return"><span class="lm-ic">&#8635;</span> <span><b>The loop closes.</b> Adoption and measurement feed back into intelligence in, so the brain compounds and every launch starts smarter than the last.</span></div>
   </div>
 
   <div class="section-label">
