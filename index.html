@@ -1311,6 +1311,35 @@
             .footer-links { justify-content: center; }
         }
 
+        /* Hamburger kicks in before the link row gets cramped */
+        @media (max-width: 980px) {
+            nav { padding: 16px 24px; mix-blend-mode: normal; }
+            .nav-logo { color: var(--black); }
+            .nav-toggle { display: block; color: var(--black); }
+            .nav-toggle.is-open { color: var(--white); }
+            body.nav-open .nav-logo { color: var(--white); }
+            body.nav-open .nav-logo img { filter: brightness(0) invert(1); }
+            .nav-links .nav-cta { background: var(--accent); color: #fff; padding: 12px 28px; }
+            body.nav-open nav { backdrop-filter: none; -webkit-backdrop-filter: none; transform: none; }
+            .nav-links {
+                position: fixed;
+                inset: 0;
+                background: var(--black);
+                color: var(--white);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 28px;
+                padding: 80px 24px 40px;
+                transform: translateX(100%);
+                transition: transform 0.4s var(--ease-smooth);
+                z-index: 1050;
+            }
+            .nav-links a { font-size: 22px; color: var(--white); }
+            .nav-links.is-open { transform: translateX(0); }
+            body.nav-open { overflow: hidden; }
+        }
+
         /* AI Install Sprint deep dive */
         .install-deep-section {
             background: var(--cream);
