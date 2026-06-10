@@ -120,6 +120,23 @@
   .learn li::before{content:"\2192";position:absolute;left:0;color:var(--accent);font-weight:700}
   .feat-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
 
+  /* GUIDE (lead magnet) */
+  div.feat-media:hover{transform:none}
+  .guide-grid{max-width:1080px;margin:38px auto 0;display:grid;grid-template-columns:1.05fr 0.95fr;gap:52px;align-items:center}
+  .guide-body h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(30px,4vw,48px);line-height:1.02;letter-spacing:-0.02em;margin-top:16px}
+  .guide-body h2 em{font-style:italic;color:var(--accent)}
+  .guide-body p.gl{font-size:16.5px;color:var(--gray-mid);line-height:1.55;margin-top:16px;max-width:480px}
+  .guide-list{list-style:none;margin:22px 0 0;padding:0}
+  .guide-list li{position:relative;padding:9px 0 9px 30px;font-size:15px;color:var(--ink);line-height:1.5}
+  .guide-list li::before{content:"\2713";position:absolute;left:0;top:9px;width:20px;height:20px;border-radius:50%;background:var(--accent-soft);color:var(--accent-deep);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .guide-card{background:var(--white);border:1px solid rgba(31,21,17,0.12);border-radius:18px;box-shadow:var(--offset-shadow);padding:30px 28px;transform:rotate(1.2deg)}
+  .guide-card .badge{display:inline-block;font-family:monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;background:var(--accent);color:#fff;padding:6px 12px;border-radius:999px;font-weight:700}
+  .guide-card h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:28px;letter-spacing:-0.01em;line-height:1.05;margin-top:14px}
+  .guide-card .gsub{font-size:14.5px;color:var(--gray-mid);margin-top:8px;line-height:1.5}
+  .guide-card .form-wrap{margin-top:18px}
+  .guide-card .fine{font-size:12px;color:var(--gray-light);margin-top:12px;line-height:1.5}
+  @media (max-width:900px){.guide-grid{grid-template-columns:1fr;gap:34px}.guide-card{transform:none}}
+
   /* WHAT THE SHOW IS */
   .promise-grid{max-width:1000px;margin:44px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
   .pcard{background:var(--white);border:1px solid rgba(31,21,17,0.10);border-radius:16px;padding:28px 26px;box-shadow:var(--warm-shadow)}
@@ -250,9 +267,9 @@
     <div>
       <div class="eyebrow">Intelligent Growth &middot; the podcast</div>
       <h1>Watch real operators build their <em>AI marketing systems,</em> live.</h1>
-      <p class="lede">Each episode, a marketer who has actually done it shares their screen and builds the system in front of you. No theory, no slideware, no PR-polished takes. Just the workflow, and you can copy it.</p>
+      <p class="lede">Cut through the AI hype and see what actually works in marketing. Each episode, a marketer who has actually done it shares their screen and builds their system in front of you. No theory, no slideware. Just the workflow, and you can copy it.</p>
       <div class="hero-cta">
-        <a href="https://youtu.be/5LHzjQbBptE" target="_blank" rel="noopener" class="btn btn-pri">Watch the latest</a>
+        <a href="#episode" class="btn btn-pri">Watch the latest</a>
         <a href="#subscribe" class="btn btn-sec">Get new episodes</a>
       </div>
       <div class="hero-stats">
@@ -262,7 +279,7 @@
       </div>
     </div>
     <div class="hero-card">
-      <a class="epcard" href="https://youtu.be/5LHzjQbBptE" target="_blank" rel="noopener">
+      <a class="epcard" href="#episode">
         <div class="epthumb">
           <img src="https://img.youtube.com/vi/5LHzjQbBptE/maxresdefault.jpg" alt="Stop Your Team Going Off-Brand, with Charlotte Norman" loading="lazy" onerror="this.src='https://img.youtube.com/vi/5LHzjQbBptE/hqdefault.jpg'">
           <span class="eptag"><i class="dot"></i> Latest episode</span>
@@ -279,15 +296,14 @@
 </section>
 
 <!-- FEATURED EPISODE -->
-<section class="sec feat">
+<section class="sec feat" id="episode">
   <div class="sec-head left wrap" style="padding:0;">
     <div class="eyebrow"><span class="num">01</span> &middot; Latest episode</div>
   </div>
   <div class="feat-grid">
-    <a class="feat-media" href="https://youtu.be/5LHzjQbBptE" target="_blank" rel="noopener">
-      <img src="https://img.youtube.com/vi/5LHzjQbBptE/maxresdefault.jpg" alt="Charlotte Norman building a Claude writing assistant" loading="lazy" onerror="this.src='https://img.youtube.com/vi/5LHzjQbBptE/hqdefault.jpg'">
-      <span class="play"></span>
-    </a>
+    <div class="feat-media" style="box-shadow:var(--offset-shadow)">
+      <iframe src="https://www.youtube.com/embed/5LHzjQbBptE" title="Stop Your Team Going Off-Brand: Build a Claude Writing Assistant, with Charlotte Norman" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;display:block;border:0"></iframe>
+    </div>
     <div class="feat-body">
       <h3>Stop your team going off-brand: build a Claude writing assistant.</h3>
       <div class="feat-guest">
@@ -304,19 +320,52 @@
         <li>Watch her screen as she builds the Claude project from scratch</li>
       </ul>
       <div class="feat-cta">
-        <a href="https://youtu.be/5LHzjQbBptE" target="_blank" rel="noopener" class="btn btn-pri">Watch the episode</a>
-        <a href="podcast-charlotte-norman.html" class="btn btn-sec">Get Charlotte's free guide</a>
+        <a href="#guide" class="btn btn-pri">Get Charlotte's free guide</a>
+        <a href="https://youtu.be/5LHzjQbBptE" target="_blank" rel="noopener" class="btn btn-sec">Watch on YouTube</a>
       </div>
     </div>
   </div>
 </section>
 
+<!-- GUIDE: lead magnet -->
+<section class="sec" id="guide">
+  <div class="guide-grid">
+    <div class="guide-body">
+      <div class="eyebrow"><span class="num">02</span> &middot; The free guide</div>
+      <h2>Don't just watch it. <em>Take it with you.</em></h2>
+      <p class="gl">Charlotte's guide is the system from the episode, written down: a step-by-step cheat sheet for building Claude projects that keep your whole team on-brand.</p>
+      <ul class="guide-list">
+        <li>Complete setup instructions for the Claude writing assistant</li>
+        <li>Brand voice templates you can adapt to your company</li>
+        <li>5 bonus project ideas beyond tone of voice</li>
+        <li>Testing and iteration framework so it actually sticks</li>
+      </ul>
+    </div>
+    <div class="guide-card">
+      <span class="badge">Free guide</span>
+      <h3>Get Charlotte's free guide</h3>
+      <p class="gsub">Step-by-step cheat sheet plus 5 bonus Claude project ideas, straight to your inbox.</p>
+      <div class="form-wrap">
+        <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+        <iframe src="https://subscribe-forms.beehiiv.com/7168971d-19f6-48b7-83ab-76fd8a0124fd"
+                class="beehiiv-embed"
+                data-test-id="beehiiv-embed"
+                frameborder="0"
+                scrolling="no"
+                style="width: 100%; height: 320px; margin: 0; border-radius: 8px !important; background-color: transparent; box-shadow: none; max-width: 100%;">
+        </iframe>
+      </div>
+      <p class="fine">By opting in, you agree to receive my Intelligent Growth newsletter. You can unsubscribe at any time.</p>
+    </div>
+  </div>
+</section>
+
 <!-- WHAT THE SHOW IS -->
-<section class="sec">
+<section class="sec" style="background:var(--cream-soft)">
   <div class="sec-head">
-    <div class="eyebrow"><span class="num">02</span> &middot; What you're watching</div>
+    <div class="eyebrow"><span class="num">03</span> &middot; What you're watching</div>
     <h2>Built live. <em>Not talked about.</em></h2>
-    <p>Most marketing content tells you AI matters. This shows you the actual build, end to end, from someone running the system for real. You leave with something you can do on Monday, not a reading list.</p>
+    <p>The marketers getting results aren't using different tools. They're onboarding AI properly. This show is the actual build, end to end, from someone running the system for real. You leave with something you can do on Monday, not a reading list.</p>
   </div>
   <div class="promise-grid">
     <div class="pcard">
@@ -335,12 +384,13 @@
       <p>Every episode comes with the setup, so you rebuild it in your own stack instead of just nodding along.</p>
     </div>
   </div>
+  <p style="max-width:700px;margin:36px auto 0;text-align:center;font-family:monospace;font-size:13px;letter-spacing:0.04em;line-height:1.7;color:var(--gray-mid);">Every episode opens with the same question: &ldquo;What are the last three pieces of marketing work you've done with AI?&rdquo;</p>
 </section>
 
 <!-- GREENROOM -->
 <section class="sec green">
   <div class="sec-head">
-    <div class="eyebrow"><span class="num" style="color:rgba(255,255,255,0.4)">03</span> &middot; The greenroom</div>
+    <div class="eyebrow"><span class="num" style="color:rgba(255,255,255,0.4)">04</span> &middot; The greenroom</div>
     <h2>Who should I build with <em>next?</em></h2>
     <p>The next guest slot is open. I want operators running a real AI marketing system, the kind you'd actually want to watch build it live. Know someone? Tell me.</p>
   </div>
@@ -376,7 +426,7 @@
 <section class="sec">
   <div class="listen-grid">
     <div class="sec-head left">
-      <div class="eyebrow"><span class="num">04</span> &middot; Where to watch</div>
+      <div class="eyebrow"><span class="num">05</span> &middot; Where to watch</div>
       <h2 style="margin-top:14px;">Catch every <em>episode.</em></h2>
     </div>
     <div>

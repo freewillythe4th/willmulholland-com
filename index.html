@@ -1500,7 +1500,15 @@
       .hero-mtn #heroSubscribeMsg a{color:#a9c6ff !important}
       .hero-mtn .brain-card{box-shadow:0 34px 90px rgba(0,0,0,0.5)}
       .trust-section{background:var(--cream);padding:34px 48px 6px}
-      .trust-section .trust-strip{justify-content:center;max-width:1100px;margin:0 auto !important}
+      .trust-section .trust-strip{justify-content:center;max-width:1100px;margin:0 auto !important;flex-wrap:wrap !important}
+      @media (max-width:640px){
+        .trust-section{padding:26px 24px 2px}
+        .trust-section .trust-strip{gap:14px 20px !important}
+        .trust-section .trust-strip img{height:18px !important}
+        .trust-section .trust-strip img[alt="Velocity Frequent Flyer"]{height:22px !important}
+        .trust-section .trust-strip img[alt="Startmate"]{height:15px !important}
+        .trust-section .trust-strip span span{font-size:13px !important}
+      }
       @media (max-width:900px){.hero-mtn{min-height:auto;padding:120px 24px 70px}.hero-mtn::before{background:linear-gradient(180deg,rgba(13,20,30,0.70),rgba(13,20,30,0.50))}.hero-mtn-inner{grid-template-columns:1fr;gap:38px}}
     </style>
     <section class="hero-mtn">
@@ -1578,7 +1586,7 @@
     </section>
 
     <section class="trust-section">
-        <div class="trust-strip" style="margin-top: 0; display: flex; align-items: center; gap: 18px 22px; opacity: 0.85; position: relative; z-index: 2;">
+        <div class="trust-strip" style="margin-top: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 18px 22px; opacity: 0.85; position: relative; z-index: 2;">
             <img src="images/blinq/logo.svg" alt="Blinq" style="height: 22px; width: auto; filter: grayscale(100%);">
             <img src="images/ebay/logo.svg" alt="eBay" style="height: 22px; width: auto; filter: grayscale(100%);">
             <span style="display: inline-flex; align-items: center; gap: 8px;"><img src="images/prompt-cowboy/logo.png" alt="Prompt Cowboy" style="height: 22px; width: 22px; filter: grayscale(100%);"><span style="font-size: 15px; font-weight: 700; letter-spacing: -0.01em; color: #1a1a1a;">Prompt Cowboy</span></span>
@@ -1913,7 +1921,7 @@
         <p class="newsletter-desc">No theory, just systems from marketers at companies like Canva and Adora who've actually built them.</p>
 
         <div class="ig-feature">
-            <a href="https://www.youtube.com/watch?v=5LHzjQbBptE" target="_blank" class="ig-media">
+            <a href="/podcast" class="ig-media">
                 <img src="https://img.youtube.com/vi/5LHzjQbBptE/hqdefault.jpg" alt="Stop Your Team Going Off-Brand" loading="lazy" decoding="async">
                 <div class="ig-play">
                     <div class="ig-play-dot">
@@ -1928,8 +1936,8 @@
                 <p>Charlotte Norman (ex-Canva) runs marketing solo at Adora and built an AI system that keeps her whole team aligned.</p>
                 <p>Watch her build it live on screen in 38 minutes.</p>
                 <div class="ig-actions">
-                    <a href="https://www.youtube.com/watch?v=5LHzjQbBptE" target="_blank" class="btn-primary" style="background: var(--accent);">Watch Episode</a>
-                    <a href="podcast-charlotte-norman.html" class="btn-secondary" style="border-color: rgba(0,0,0,0.25); color: var(--black);">Get Free Template</a>
+                    <a href="/podcast" class="btn-primary" style="background: var(--accent);">Watch Episode</a>
+                    <a href="/podcast#guide" class="btn-secondary" style="border-color: rgba(0,0,0,0.25); color: var(--black);">Get Free Template</a>
                 </div>
             </div>
         </div>
@@ -2071,7 +2079,7 @@
                 <h5>Blog</h5>
                 <ul>
                     <li><a href="#newsletter">Intelligent Growth newsletter</a></li>
-                    <li><a href="podcast-charlotte-norman.html">Latest episode</a></li>
+                    <li><a href="/podcast">The podcast</a></li>
                     <li><a href="https://www.youtube.com/@WillMulholland" target="_blank">YouTube</a></li>
                     <li><a href="https://www.linkedin.com/in/willmulholland/" target="_blank">LinkedIn</a></li>
                 </ul>
@@ -2090,6 +2098,13 @@
     <style>
         @media (max-width: 900px) {
             .footer-grid { grid-template-columns: 1fr !important; }
+        }
+        .footer-cta a { overflow-wrap: anywhere; }
+        @media (max-width: 640px) {
+            .footer-grid { gap: 36px !important; }
+            .footer-cta a { font-size: 21px; }
+            .footer-cta-card { padding: 32px 24px !important; min-height: 0 !important; }
+            .footer-cta-card h3 { font-size: 30px !important; }
         }
     </style>
 
