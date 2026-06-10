@@ -201,6 +201,50 @@
   .proj .pt{font-weight:700;font-size:14.5px;margin-bottom:4px;line-height:1.25}
   .proj .pd{font-size:12.5px;color:var(--gray-mid);line-height:1.45}
 
+  /* 30-second rundown */
+  .tldr{margin:44px 0 0;background:var(--white);border:1px solid rgba(31,21,17,0.10);border-radius:20px;box-shadow:var(--offset-shadow);padding:28px 30px}
+  .tldr .eyebrow{margin-bottom:6px}
+  .tldr-rows{display:flex;flex-direction:column;margin-top:10px}
+  .tldr-row{display:flex;align-items:baseline;gap:14px;padding:13px 2px;border-top:1px solid rgba(31,21,17,0.08);text-decoration:none;transition:padding-left 0.25s var(--ease-smooth)}
+  .tldr-row:first-child{border-top:none}
+  .tldr-row:hover{padding-left:8px}
+  .tldr-row .tn{font-family:monospace;font-size:11px;color:var(--accent);font-weight:700;flex-shrink:0;width:20px}
+  .tldr-row .tt{font-size:15px;font-weight:600;color:var(--ink);line-height:1.35}
+  .tldr-row .tt span{font-weight:400;color:var(--gray-mid)}
+  .tldr-row .ta{margin-left:auto;color:var(--accent);font-size:15px;flex-shrink:0;padding-left:10px}
+
+  /* cycle diagram */
+  .cycle{margin:40px 0 6px;padding:26px 24px 24px;background:var(--white);border:1px solid rgba(31,21,17,0.10);border-radius:20px;box-shadow:var(--offset-shadow)}
+  .cycle .eyebrow{text-align:center;margin-bottom:18px}
+  .cycle-top,.cycle-bot{display:flex;align-items:stretch;justify-content:center;gap:6px}
+  .cycle-bot{flex-direction:row-reverse}
+  a.lm-node{text-decoration:none;transition:transform 0.25s var(--ease-smooth),border-color 0.25s var(--ease-smooth)}
+  a.lm-node:hover{transform:translateY(-2px);border-color:var(--accent)}
+  .cycle-mid{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 30px;margin:4px auto;max-width:680px}
+  .cycle-mid .cm-up,.cycle-mid .cm-down{color:var(--accent);font-size:20px;font-weight:700;line-height:1}
+  .cycle-mid .cm-label{font-family:monospace;font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase;color:var(--gray-mid);text-align:center;line-height:1.5}
+  .cycle-mid .cm-label b{color:var(--accent-deep)}
+  @media (max-width:720px){
+    .cycle-top,.cycle-bot{flex-direction:column;align-items:stretch}
+    .cycle-bot{flex-direction:column}
+    .cycle .lm-arrow{transform:rotate(90deg);justify-content:center;padding:2px 0}
+    .cycle-bot .lm-arrow{transform:rotate(-90deg)}
+    .cycle-mid{padding:6px 0;flex-direction:column;gap:6px}
+    .cycle-mid .cm-up{display:none}
+    .cycle-mid .cm-down{transform:rotate(90deg)}
+  }
+
+  /* orchestration cards */
+  .orc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 6px}
+  .orc{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:22px 20px}
+  .orc .on{font-family:monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--lime);margin-bottom:9px}
+  .orc h4{font-size:15.5px;font-weight:700;color:var(--cream);margin-bottom:7px;letter-spacing:-0.01em}
+  .orc p{font-size:13px;color:rgba(242,237,227,0.72);line-height:1.55}
+  @media (max-width:760px){.orc-grid{grid-template-columns:1fr}}
+
+  /* anchor offset under fixed nav */
+  [id]{scroll-margin-top:92px}
+
   /* footer */
   footer{background:var(--ink);color:var(--white);padding:80px 48px 40px}
   .footer-main{max-width:1100px;margin:0 auto}
@@ -268,7 +312,7 @@
   <div class="head">
     <div class="eyebrow">What I have built</div>
     <h1>The Marketing <em>Brain</em></h1>
-    <p class="one">The AI launch system one operator runs instead of a team. A feature goes in. Positioning, messaging and every launch asset come out, every team gets armed, and adoption feeds back in.</p>
+    <p class="one">Product ships faster than marketing can keep up. The Marketing Brain is how one operator keeps up: a feature goes in, positioning, messaging and every launch asset come out, every team gets armed, and what the launch learns feeds the next one.</p>
     <div class="legend">
       <span><i class="dot run"></i> running today</span>
       <span><i class="dot part"></i> partial</span>
@@ -282,36 +326,53 @@
     </div>
   </div>
 
-  <!-- LOOP MAP -->
-  <div class="loopmap">
-    <div class="eyebrow">The whole loop, at a glance</div>
-    <div class="loopmap-beats">one feature in <span>&rarr;</span> every asset out <span>&rarr;</span> the whole company armed</div>
-    <div class="loopmap-row">
-      <div class="lm-node"><div class="lm-num">00</div><div class="lm-name">Intelligence in</div><div class="lm-sub">calls, ads, reviews</div></div>
-      <div class="lm-arrow">&rarr;</div>
-      <div class="lm-node"><div class="lm-num">01</div><div class="lm-name">Memory + context</div><div class="lm-sub">the brain</div></div>
-      <div class="lm-arrow">&rarr;</div>
-      <div class="lm-node"><div class="lm-num">02</div><div class="lm-name">Synthesis</div><div class="lm-sub">the PMM craft</div></div>
-      <div class="lm-arrow">&rarr;</div>
-      <div class="lm-node"><div class="lm-num">03</div><div class="lm-name">Outputs</div><div class="lm-sub">every launch asset</div></div>
-      <div class="lm-arrow">&rarr;</div>
-      <div class="lm-node"><div class="lm-num">04</div><div class="lm-name">Distribution</div><div class="lm-sub">arm every team</div></div>
-      <div class="lm-arrow">&rarr;</div>
-      <div class="lm-node"><div class="lm-num">05</div><div class="lm-name">Adoption</div><div class="lm-sub">drive usage</div></div>
-      <div class="lm-arrow">&rarr;</div>
-      <div class="lm-node"><div class="lm-num">06</div><div class="lm-name">Measurement</div><div class="lm-sub">close the loop</div></div>
+  <!-- 30-SECOND RUNDOWN -->
+  <div class="tldr" id="rundown">
+    <div class="eyebrow">The 30-second version</div>
+    <div class="tldr-rows">
+      <a class="tldr-row" href="#layer-00"><span class="tn">01</span><span class="tt">Intelligence flows in. <span>Sales calls, reviews, competitor moves and team meetings land in one place.</span></span><span class="ta">&rarr;</span></a>
+      <a class="tldr-row" href="#layer-02"><span class="tn">02</span><span class="tt">The craft turns it into the launch. <span>Research to positioning to messaging to GTM, with quality gates over every draft.</span></span><span class="ta">&rarr;</span></a>
+      <a class="tldr-row" href="#layer-03"><span class="tn">03</span><span class="tt">One doc fans out to every asset. <span>Sales, lifecycle, social, web: every team gets armed in one voice.</span></span><span class="ta">&rarr;</span></a>
+      <a class="tldr-row" href="#layer-05"><span class="tn">04</span><span class="tt">The loop closes. <span>Adoption and measurement feed back in, so every launch starts smarter.</span></span><span class="ta">&rarr;</span></a>
+      <a class="tldr-row" href="#orchestration"><span class="tn">05</span><span class="tt">Agents run it. <span>Goals, loops and workflows keep the system moving while I direct it.</span></span><span class="ta">&rarr;</span></a>
+      <a class="tldr-row" href="#coverage"><span class="tn">06</span><span class="tt">Every PMM job, covered. <span>The full remit mapped to real skills, with honest status on each.</span></span><span class="ta">&rarr;</span></a>
     </div>
-    <div class="loopmap-return"><span class="lm-ic">&#8635;</span> <span><b>The loop closes.</b> Adoption and measurement feed back into intelligence in, so the brain compounds and every launch starts smarter than the last.</span></div>
+  </div>
+
+  <!-- THE LOOP, AS A LOOP -->
+  <div class="cycle" id="loop">
+    <div class="eyebrow">The whole loop, at a glance &middot; click any stage</div>
+    <div class="cycle-top">
+      <a class="lm-node" href="#layer-00"><div class="lm-num">00</div><div class="lm-name">Intelligence in</div><div class="lm-sub">calls, ads, reviews</div></a>
+      <div class="lm-arrow">&rarr;</div>
+      <a class="lm-node" href="#layer-01"><div class="lm-num">01</div><div class="lm-name">Memory + context</div><div class="lm-sub">the brain</div></a>
+      <div class="lm-arrow">&rarr;</div>
+      <a class="lm-node" href="#layer-02"><div class="lm-num">02</div><div class="lm-name">Synthesis</div><div class="lm-sub">the PMM craft</div></a>
+      <div class="lm-arrow">&rarr;</div>
+      <a class="lm-node" href="#layer-03"><div class="lm-num">03</div><div class="lm-name">Outputs</div><div class="lm-sub">every launch asset</div></a>
+    </div>
+    <div class="cycle-mid">
+      <span class="cm-up">&uarr;</span>
+      <span class="cm-label"><b>It's a loop, not a line.</b> What ships feeds what's learned, and what's learned feeds the next launch.</span>
+      <span class="cm-down">&darr;</span>
+    </div>
+    <div class="cycle-bot">
+      <a class="lm-node" href="#layer-04"><div class="lm-num">04</div><div class="lm-name">Distribution</div><div class="lm-sub">arm every team</div></a>
+      <div class="lm-arrow">&larr;</div>
+      <a class="lm-node" href="#layer-05"><div class="lm-num">05</div><div class="lm-name">Adoption</div><div class="lm-sub">drive usage</div></a>
+      <div class="lm-arrow">&larr;</div>
+      <a class="lm-node" href="#layer-06"><div class="lm-num">06</div><div class="lm-name">Measurement</div><div class="lm-sub">feeds 00</div></a>
+    </div>
   </div>
 
   <div class="section-label">
     <div class="eyebrow">How it runs</div>
-    <h2>The <em>loop</em></h2>
-    <p>One feature goes in, every asset comes out, and the whole company gets armed. It does not stop at ship: it closes the loop on adoption so the next launch starts smarter.</p>
+    <h2>The <em>loop</em>, stage by stage</h2>
+    <p>One feature goes in, every asset comes out, and the whole company gets armed. It does not stop at ship: adoption and measurement feed back in, so the next launch starts smarter.</p>
   </div>
 
   <!-- LAYER 0 -->
-  <div class="layer">
+  <div class="layer" id="layer-00">
     <div class="layer-id">
       <div class="layer-num">00</div>
       <div class="layer-name">Intelligence in</div>
@@ -347,7 +408,7 @@
   <div class="flow-arrow"></div>
 
   <!-- LAYER 1 -->
-  <div class="layer">
+  <div class="layer" id="layer-01">
     <div class="layer-id">
       <div class="layer-num">01</div>
       <div class="layer-name">Memory + context</div>
@@ -378,7 +439,7 @@
   <div class="flow-arrow"></div>
 
   <!-- LAYER 2 -->
-  <div class="layer">
+  <div class="layer" id="layer-02">
     <div class="layer-id">
       <div class="layer-num">02</div>
       <div class="layer-name">Synthesis</div>
@@ -413,7 +474,7 @@
   <div class="flow-arrow"></div>
 
   <!-- LAYER 3 -->
-  <div class="layer">
+  <div class="layer" id="layer-03">
     <div class="layer-id">
       <div class="layer-num">03</div>
       <div class="layer-name">Outputs</div>
@@ -434,14 +495,14 @@
         <span class="chip part">Video walkthrough</span>
         <span class="chip todo">Asset for everyone to post</span>
       </div>
-      <div class="note"><b>The engine that already works:</b> elc-content-refresh turns one messaging doc into four derived assets in a single pass, with provenance and an approval gate. Generalising that fan-out to all of these is the build that turns the pile of skills into the system.</div>
+      <div class="note"><b>The engine that already works:</b> the content-refresh skill turns one approved messaging doc into four derived assets in a single pass, with provenance on every claim and an approval gate before anything ships. Generalising that fan-out to the full list is build 01 on the roadmap.</div>
     </div>
   </div>
 
   <div class="flow-arrow"></div>
 
   <!-- LAYER 4 -->
-  <div class="layer">
+  <div class="layer" id="layer-04">
     <div class="layer-id">
       <div class="layer-num">04</div>
       <div class="layer-name">Distribution</div>
@@ -457,14 +518,14 @@
         <span class="chip run">Founder</span>
         <span class="chip run">Creator team</span>
       </div>
-      <div class="note"><b>Rails:</b> Composio (LinkedIn / X / YouTube, stage then approve) &middot; Braze (lifecycle email) &middot; Webflow + Vercel (site) &middot; HubSpot marketplace &middot; Canva + Drive + Notion (collateral) &middot; Slack (internal amplification).</div>
+      <div class="note"><b>The rails:</b> social posts staged on LinkedIn, X and YouTube for one-click approval &middot; lifecycle email through the email platform &middot; site updates straight to the website &middot; collateral into the shared drive &middot; internal amplification through Slack. Nothing publishes without a human approving it.</div>
     </div>
   </div>
 
   <div class="flow-arrow"></div>
 
   <!-- LAYER 5 (NEW) -->
-  <div class="layer">
+  <div class="layer" id="layer-05">
     <div class="layer-id">
       <div class="layer-num">05</div>
       <div class="layer-name">Adoption + lifecycle</div>
@@ -487,7 +548,7 @@
   <div class="flow-arrow"></div>
 
   <!-- LAYER 6 (NEW) -->
-  <div class="layer">
+  <div class="layer" id="layer-06">
     <div class="layer-id">
       <div class="layer-num">06</div>
       <div class="layer-name">Measurement</div>
@@ -513,10 +574,10 @@
   </div>
 
   <!-- EVERY PMM JOB -->
-  <div class="section-label">
+  <div class="section-label" id="coverage">
     <div class="eyebrow">The proof</div>
     <h2>Every PMM job, <em>covered</em></h2>
-    <p>The loop above is how it runs. This is the full PMM remit it covers, every job mapped to a real skill I built, the framework inside it, and honest status, live versus roadmap. Not Claude Code out of the box, each one encodes how a senior PMM thinks.</p>
+    <p>The loop is how it runs. This is what it covers: the full PMM remit, every job mapped to a skill I built, the framework inside it, and honest status on each. None of this is AI out of the box. Each skill encodes how a senior PMM does the job.</p>
   </div>
 
   <div class="matrix">
@@ -553,7 +614,7 @@
       <div class="mrow"><div class="job">Demand + product-led growth</div><div class="runs">Builds acquisition and retention loops across the full funnel. <code class="sk">pmm-growth</code><code class="sk">lifecycle-growth</code> Balfour, Reforge.</div><div class="stag"><i class="dot part"></i>partial</div></div>
       <div class="mrow"><div class="job">Demand gen + integrated campaigns</div><div class="runs">Turns positioning into multi-channel campaigns across email, social and paid, tied back to pipeline. <code class="sk">campaigns-launch</code><code class="sk">email-journey-mapping</code> attribution next.</div><div class="stag"><i class="dot part"></i>partial</div></div>
       <div class="mrow"><div class="job">Lifecycle + in-app adoption</div><div class="runs">Audits the full lifecycle and rebuilds the welcome, onboarding and upgrade journeys to move a user to first value. <code class="sk">email-journey-mapping</code><code class="sk">lifecycle-growth</code> in-app triggers next.</div><div class="stag"><i class="dot part"></i>partial</div></div>
-      <div class="mrow"><div class="job">Activation tutorials + explainer video</div><div class="runs">Turns the questions sales and customers actually ask into explainer videos, posted to YouTube and seated in-product to pull users to first use. <code class="sk">notetaker-explainer-demo-videos</code><code class="sk">blinq-video-project</code>.</div><div class="stag"><i class="dot run"></i>running</div></div>
+      <div class="mrow"><div class="job">Activation tutorials + explainer video</div><div class="runs">Turns the questions sales and customers actually ask into explainer videos, posted to YouTube and seated in-product to pull users to first use. <code class="sk">explainer-demo-videos</code>.</div><div class="stag"><i class="dot run"></i>running</div></div>
       <div class="mrow"><div class="job">Creator partnerships + power users</div><div class="runs">Finds and ranks creators on real engagement, splits budget 70/20/10 micro to macro, tracks ROI by word-of-mouth lift, and activates power users for authentic UGC. <code class="sk">pmm-creator-marketing</code>.</div><div class="stag"><i class="dot part"></i>partial</div></div>
     </div>
 
@@ -568,77 +629,38 @@
 
   </div>
 
-  <!-- REAL LAUNCHES -->
-  <div class="section-label">
-    <div class="eyebrow">Real work, not theory</div>
-    <h2>Launches I have run, <em>captured as skills</em></h2>
-    <p>Every one of these is a real launch or project I ran end to end as a PMM, then captured as a reusable skill so the next one is faster and starts from a higher bar. All of it shipped.</p>
-  </div>
-
-  <div class="proj-grid">
-    <div class="proj"><div class="pn">01</div><div><div class="pt">Event lead-capture launch</div><div class="pd">Full go-to-market, onboarding, activation and sales enablement for a new capture product, end to end.</div></div></div>
-    <div class="proj"><div class="pn">02</div><div><div class="pt">AI notetaker launch</div><div class="pd">Founder video shoot, UGC scaling, and the distribution plan across channels.</div></div></div>
-    <div class="proj"><div class="pn">03</div><div><div class="pt">Product Hunt launch</div><div class="pd">A full Product Hunt launch run, asset prep through to day-of execution.</div></div></div>
-    <div class="proj"><div class="pn">04</div><div><div class="pt">Marketplace app listing</div><div class="pd">Listing copy and launch for an app marketplace, where listing quality is most of the approval.</div></div></div>
-    <div class="proj"><div class="pn">05</div><div><div class="pt">Feature launch, messaging house</div><div class="pd">Positioning, the messaging house, a video brief and the enablement for a net-new feature.</div></div></div>
-    <div class="proj"><div class="pn">06</div><div><div class="pt">Lifecycle email rebuild</div><div class="pd">A full lifecycle audit plus welcome and premium-upgrade journeys, mapped and rebuilt.</div></div></div>
-    <div class="proj"><div class="pn">07</div><div><div class="pt">Case-study production line</div><div class="pd">Research, scoring, interview, edit, publish and social distribution, run as one repeatable system.</div></div></div>
-    <div class="proj"><div class="pn">08</div><div><div class="pt">Website rebrand</div><div class="pd">Positioning, full-site copy and the build. This site is the working example.</div></div></div>
-    <div class="proj"><div class="pn">09</div><div><div class="pt">Sales enablement library</div><div class="pd">Battlecards, one-pagers, talk tracks and objection handling for the sales team.</div></div></div>
-    <div class="proj"><div class="pn">10</div><div><div class="pt">Onboarding + welcome series</div><div class="pd">Lifecycle copy and flow that moves a new user to first value and adoption.</div></div></div>
-  </div>
-
-  <!-- FOUNDATION -->
-  <div class="section-label">
-    <div class="eyebrow">Underneath it all</div>
-    <h2>The automation that <em>runs the whole thing</em></h2>
+  <!-- ORCHESTRATION + ENGINE ROOM -->
+  <div class="section-label" id="orchestration">
+    <div class="eyebrow">Who runs it</div>
+    <h2>Agents run the system. <em>I direct it.</em></h2>
+    <p>A manager agent runs a stack of worker lanes, one lane per task, each with the right skill loaded and its own memory of the work so far. Three primitives keep it honest.</p>
   </div>
 
   <div class="foundation">
-    <div class="frow">
-      <div class="k">Runtimes</div>
-      <div class="v">
-        <span class="fchip">Claude Code &middot; the build harness</span>
-        <span class="fchip">OpenClaw &middot; always-on</span>
-        <span class="fchip">The bridge</span>
-        <span class="fchip">Hermes &middot; async worker + dispatch</span>
+    <div class="orc-grid">
+      <div class="orc">
+        <div class="on">Goals</div>
+        <h4>A finish line it cannot fake</h4>
+        <p>Every task gets a written goal with a measurable end state. The agent cannot stop until the condition actually holds, with proof in the transcript. Done means verified done, not "sounded finished".</p>
+      </div>
+      <div class="orc">
+        <div class="on">Loops</div>
+        <h4>Recurring work that paces itself</h4>
+        <p>Work that repeats, like intel sweeps, monitors and content refreshes, runs as a loop that decides when to check back. The system keeps working between conversations, not just during them.</p>
+      </div>
+      <div class="orc">
+        <div class="on">Workflows</div>
+        <h4>Fan-out with a referee</h4>
+        <p>When a job is genuinely parallel, like a research sweep or a review panel, it fans out to multiple agents at once, then adversarial verifiers attack the findings before anything is trusted.</p>
       </div>
     </div>
     <div class="frow">
-      <div class="k">Orchestration</div>
+      <div class="k">Always on</div>
       <div class="v">
-        <span class="fchip">Hermes Kanban &middot; the launch chassis</span>
-        <span class="fchip">create-farmer</span>
-        <span class="fchip">printing-press &middot; CLI factory</span>
-        <span class="fchip">Discord multi-agent workspace</span>
-      </div>
-    </div>
-    <div class="frow">
-      <div class="k">Crons</div>
-      <div class="v">
-        <span class="fchip">op ref &middot; 2x daily</span>
-        <span class="fchip">creator + competitor intel</span>
-        <span class="fchip">planning sweep</span>
+        <span class="fchip">operational reference rebuilt twice daily</span>
+        <span class="fchip">competitor + creator intel sweeps</span>
         <span class="fchip">asset go-live monitor</span>
-        <span class="fchip">self-healing health monitor</span>
-      </div>
-    </div>
-    <div class="frow">
-      <div class="k">Craft tooling</div>
-      <div class="v">
-        <span class="fchip">/watch &middot; video + transcript</span>
-        <span class="fchip">case-study production</span>
-        <span class="fchip">ascii-plan &middot; sketch first</span>
-        <span class="fchip">refine-implementation</span>
-      </div>
-    </div>
-    <div class="frow">
-      <div class="k">MCP stack</div>
-      <div class="v">
-        <span class="fchip">proxy</span><span class="fchip">dex</span><span class="fchip">screen record</span>
-        <span class="fchip">perplexity</span><span class="fchip">context7</span><span class="fchip">playwright</span>
-        <span class="fchip">granola</span><span class="fchip">gws</span><span class="fchip">beehiiv</span>
-        <span class="fchip">Notion</span><span class="fchip">HubSpot</span>
+        <span class="fchip">self-healing health checks</span>
       </div>
     </div>
     <div class="frow">
@@ -646,13 +668,17 @@
       <div class="v">
         <span class="fchip">buyer-persona test</span><span class="fchip">humaniser</span>
         <span class="fchip">fact-checker</span><span class="fchip">refine-spec</span>
-        <span class="fchip">Codex stop-time review</span><span class="fchip">council</span>
+        <span class="fchip">council &middot; reviewer panel</span>
       </div>
+    </div>
+    <div class="frow">
+      <div class="k">The rule</div>
+      <div class="v"><span class="fchip">agents draft and verify &middot; a human approves everything that ships</span></div>
     </div>
   </div>
 
   <!-- CLOSE -->
-  <div class="close">
+  <div class="close" id="roadmap">
     <p class="big">Real today as an operator workflow. <em>The gaps are the roadmap.</em></p>
     <div class="builds">
       <div class="build">
@@ -663,7 +689,7 @@
       <div class="build">
         <div class="bn">Build 02</div>
         <h4>Launch orchestrator</h4>
-        <p>One entry point that runs intelligence to synthesis to fan-out to arm-everyone to adoption as a gated chain, on the Hermes Kanban chassis.</p>
+        <p>One entry point that runs the whole loop as a gated chain: intelligence to synthesis to fan-out to arm-everyone to adoption, with an approval gate at each stage.</p>
       </div>
       <div class="build">
         <div class="bn">Build 03</div>
