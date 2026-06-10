@@ -1459,6 +1459,19 @@
 
         // Password gate always shows on page load (no session persistence)
 
+        // Shared-access link: ?key=<token> skips the password. Once used, it
+        // stays unlocked for the rest of the browser session so links and
+        // refreshes do not re-gate the visitor.
+        const ACCESS_KEY = 'ig-portfolio-2026';
+        const SHARE_FLAG = 'wm_work_shared_access';
+        const gateParams = new URLSearchParams(window.location.search);
+        if (gateParams.get('key') === ACCESS_KEY) {
+            sessionStorage.setItem(SHARE_FLAG, '1');
+        }
+        if (sessionStorage.getItem(SHARE_FLAG) === '1') {
+            unlockGate();
+        }
+
         // Password unlock
         document.getElementById('password-form').addEventListener('submit', function(e) {
             e.preventDefault();
