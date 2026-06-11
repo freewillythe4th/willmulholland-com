@@ -1519,8 +1519,8 @@
         }
     </style>
     <style>
-      .hero-mtn{position:relative;min-height:88vh;display:flex;align-items:center;padding:130px 48px 90px;background:#16202c url('/images/hero/mountain.jpg') center 30%/cover no-repeat;overflow:hidden}
-      .hero-mtn::before{content:"";position:absolute;inset:0;background:linear-gradient(96deg,rgba(13,20,30,0.82) 0%,rgba(13,20,30,0.52) 36%,rgba(13,20,30,0.14) 62%,rgba(13,20,30,0) 100%)}
+      .hero-mtn{position:relative;min-height:88vh;display:flex;align-items:center;padding:130px 48px 90px;background:radial-gradient(900px 520px at 80% 12%,rgba(37,99,235,0.30),transparent 62%),radial-gradient(640px 420px at 8% 92%,rgba(163,230,53,0.08),transparent 56%),linear-gradient(158deg,#141b27 0%,#1c1712 76%,#1F1511 100%);overflow:hidden}
+      .hero-mtn::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.085) 1px,transparent 1.6px);background-size:26px 26px;mask-image:radial-gradient(820px 560px at 72% 30%,rgba(0,0,0,0.9),transparent 75%);-webkit-mask-image:radial-gradient(820px 560px at 72% 30%,rgba(0,0,0,0.9),transparent 75%)}
       .hero-mtn::after{content:"";position:absolute;left:0;right:0;bottom:0;height:170px;background:linear-gradient(to bottom,rgba(242,237,227,0),var(--cream));z-index:1}
       .hero-mtn-inner{position:relative;z-index:2;max-width:1240px;margin:0 auto;width:100%;display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center}
       .hero-mtn h1{color:#fff !important;text-shadow:0 2px 30px rgba(0,0,0,0.38)}
@@ -1538,17 +1538,17 @@
         .trust-section .trust-strip img[alt="Startmate"]{height:15px !important}
         .trust-section .trust-strip span span{font-size:13px !important}
       }
-      @media (max-width:900px){.hero-mtn{min-height:auto;padding:120px 24px 70px}.hero-mtn::before{background:linear-gradient(180deg,rgba(13,20,30,0.70),rgba(13,20,30,0.50))}.hero-mtn-inner{grid-template-columns:1fr;gap:38px}}
+      @media (max-width:900px){.hero-mtn{min-height:auto;padding:120px 24px 70px}.hero-mtn-inner{grid-template-columns:1fr;gap:38px}}
     </style>
     <section class="hero-mtn">
       <div class="hero-mtn-inner">
         <div class="hero-col-left">
-        <div style="font-family: monospace; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.82); margin-bottom: 20px; position: relative; z-index: 2;">AI marketing systems for product launches</div>
+        <div style="font-family: monospace; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.82); margin-bottom: 20px; position: relative; z-index: 2;">AI marketing systems for teams that ship every week</div>
         <h1 style="font-size: clamp(38px, 5.2vw, 80px); line-height: 1.04; letter-spacing: -0.02em; position: relative; z-index: 2; max-width: 920px; text-wrap: balance;">
             Build your Marketing Brain.
         </h1>
         <p class="hero-sub" style="margin-top: 28px; position: relative; z-index: 2; max-width: 760px; font-size: clamp(18px, 1.7vw, 22px); line-height: 1.5;">
-            <span>Product ships faster than marketing can tell anyone. The Brain fixes that: it listens to your calls, customers and competitors all the time, so every launch ships ready, and every launch teaches the next one.</span>
+            <span>Your product releases twenty times a month. Marketing tells people about three of them. The Brain listens to your calls, customers and competitors, and turns every release into positioning, messaging and ready-to-publish assets.</span>
         </p>
         <div class="hero-cta" id="subscribe" style="margin-top: 32px; position: relative; z-index: 2; scroll-margin-top: 90px; display: flex; flex-direction: column; align-items: flex-start; gap: 0;">
             <form id="heroSubscribe" style="display: flex; gap: 10px; flex-wrap: wrap; width: 100%; max-width: 560px;">
@@ -1666,6 +1666,15 @@
       .collapse-payoff .big .from { color: var(--gray-light); }
       .collapse-payoff .big .to { color: var(--ink); }
       .collapse-payoff .sub { color: var(--gray-mid); margin-top: 10px; font-style: italic; font-family: 'Instrument Serif', Georgia, serif; font-size: 19px; }
+      /* Sequential reveal: the card tells the story in order */
+      .collapse-card [data-anim] { opacity: 0; transform: translateY(8px); transition: opacity 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth); }
+      .collapse-card.collapse-in [data-anim] { opacity: 1; transform: none; }
+      .collapse-card.collapse-in .brain-node { animation: brainGlow 2.6s ease-in-out 1.2s infinite; }
+      @keyframes brainGlow { 0%, 100% { box-shadow: 0 8px 20px rgba(37,99,235,0.28); } 50% { box-shadow: 0 8px 30px rgba(37,99,235,0.55); } }
+      @media (prefers-reduced-motion: reduce) {
+        .collapse-card [data-anim] { opacity: 1; transform: none; transition: none; }
+        .collapse-card.collapse-in .brain-node { animation: none; }
+      }
       @media (max-width: 640px) {
         .collapse-section { padding: 72px 20px; }
         .collapse-card { padding: 28px 22px; }
@@ -1743,6 +1752,34 @@
         </div>
       </div>
     </section>
+    <script>
+      (function () {
+        var card = document.querySelector('.collapse-card');
+        if (!card || !('IntersectionObserver' in window)) return;
+        var seq = [];
+        card.querySelectorAll('.before .chain > *').forEach(function (el) { seq.push([el, 0.07]); });
+        var meta = card.querySelector('.before .meta'); if (meta) seq.push([meta, 0.3]);
+        var fold = card.querySelector('.fold'); if (fold) seq.push([fold, 0.3]);
+        card.querySelectorAll('.after-flow > *').forEach(function (el) {
+          if (el.classList.contains('out-stack')) return;
+          seq.push([el, 0.2]);
+        });
+        card.querySelectorAll('.out-stack .chip').forEach(function (el) { seq.push([el, 0.09]); });
+        var am = card.querySelector('.after .meta'); if (am) seq.push([am, 0.3]);
+        var t = 0;
+        seq.forEach(function (pair) {
+          t += pair[1];
+          pair[0].setAttribute('data-anim', '');
+          pair[0].style.transitionDelay = t.toFixed(2) + 's';
+        });
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { card.classList.add('collapse-in'); io.disconnect(); }
+          });
+        }, { threshold: 0.25 });
+        io.observe(card);
+      })();
+    </script>
 
     <!-- Three paths -->
     <section class="package-section" id="paths">
