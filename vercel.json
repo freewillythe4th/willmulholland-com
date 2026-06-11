@@ -1,27 +1,99 @@
 {
-    "routes": [
-      { "handle": "filesystem" },
-      { "src": "/blog", "dest": "/blog.html" },
-      { "src": "/blog/marketing-is-the-bottleneck", "dest": "/blog/marketing-is-the-bottleneck.html" },
-      { "src": "/blog/claude-prompts-for-product-marketers", "dest": "/blog/claude-prompts-for-product-marketers.html" },
-      { "src": "/system", "dest": "/system.html" },
-      { "src": "/podcast", "dest": "/podcast.html" },
-      { "src": "/workshop", "dest": "/workshop.html" },
-      { "src": "/workshop-confirmed", "dest": "/workshop-confirmed.html" },
-      { "src": "/workshop-recording", "dest": "/workshop-recording.html" },
-      { "src": "/community", "dest": "/community.html" },
-      { "src": "/scroll-sequence", "dest": "/scroll-sequence.html" },
-      { "src": "/traffic", "dest": "/traffic.html" },
-      { "src": "/traffic-thanks", "dest": "/traffic-thanks.html" },
-      { "src": "/traffic-guide", "dest": "/traffic-guide.html" },
-      { "src": "/resource-download", "dest": "/resource-download.html" },
-      { "src": "/check-inbox", "dest": "/check-inbox.html" },
-      { "src": "/welcome-survey", "dest": "/welcome-survey.html" },
-      { "src": "/resource-delivery", "dest": "/resource-delivery.html" },
-      { "src": "/work-with-me", "dest": "/work-with-me.html" },
-      { "src": "/survey", "dest": "/survey.html" },
-      { "src": "/privacy", "dest": "/privacy.html" },
-      { "src": "/terms", "dest": "/terms.html" },
-      { "src": "/(.*)", "dest": "/index.html" }
-    ]
-  }
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/blog",
+      "dest": "/blog.html"
+    },
+    {
+      "src": "/blog/marketing-is-the-bottleneck",
+      "dest": "/blog/marketing-is-the-bottleneck.html"
+    },
+    {
+      "src": "/blog/claude-prompts-for-product-marketers",
+      "dest": "/blog/claude-prompts-for-product-marketers.html"
+    },
+    {
+      "src": "/system",
+      "dest": "/system.html"
+    },
+    {
+      "src": "/podcast",
+      "dest": "/podcast.html"
+    },
+    {
+      "src": "/workshop",
+      "dest": "/workshop.html"
+    },
+    {
+      "src": "/workshop-confirmed",
+      "dest": "/workshop-confirmed.html"
+    },
+    {
+      "src": "/workshop-recording",
+      "dest": "/workshop-recording.html"
+    },
+    {
+      "src": "/community",
+      "dest": "/community.html"
+    },
+    {
+      "src": "/scroll-sequence",
+      "dest": "/scroll-sequence.html"
+    },
+    {
+      "src": "/traffic",
+      "dest": "/traffic.html"
+    },
+    {
+      "src": "/traffic-thanks",
+      "dest": "/traffic-thanks.html"
+    },
+    {
+      "src": "/traffic-guide",
+      "dest": "/traffic-guide.html"
+    },
+    {
+      "src": "/resource-download",
+      "dest": "/resource-download.html"
+    },
+    {
+      "src": "/check-inbox",
+      "dest": "/check-inbox.html"
+    },
+    {
+      "src": "/welcome-survey",
+      "dest": "/welcome-survey.html"
+    },
+    {
+      "src": "/resource-delivery",
+      "dest": "/resource-delivery.html"
+    },
+    {
+      "src": "/work-with-me",
+      "dest": "/work-with-me.html"
+    },
+    {
+      "src": "/survey",
+      "dest": "/survey.html"
+    },
+    {
+      "src": "/privacy",
+      "dest": "/privacy.html"
+    },
+    {
+      "src": "/terms",
+      "dest": "/terms.html"
+    },
+    {
+      "src": "/pitch",
+      "dest": "https://ig-pitch.vercel.app/"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
