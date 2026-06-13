@@ -1519,15 +1519,11 @@
         }
     </style>
     <style>
-      .hero-mtn{position:relative;min-height:88vh;display:flex;align-items:center;padding:130px 48px 90px;background:radial-gradient(900px 520px at 80% 12%,rgba(37,99,235,0.30),transparent 62%),radial-gradient(640px 420px at 8% 92%,rgba(163,230,53,0.08),transparent 56%),linear-gradient(158deg,#141b27 0%,#1c1712 76%,#1F1511 100%);overflow:hidden}
-      .hero-mtn::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,0.085) 1px,transparent 1.6px);background-size:26px 26px;mask-image:radial-gradient(820px 560px at 72% 30%,rgba(0,0,0,0.9),transparent 75%);-webkit-mask-image:radial-gradient(820px 560px at 72% 30%,rgba(0,0,0,0.9),transparent 75%)}
-      .hero-mtn::after{content:"";position:absolute;left:0;right:0;bottom:0;height:170px;background:linear-gradient(to bottom,rgba(242,237,227,0),var(--cream));z-index:1}
-      .hero-mtn-inner{position:relative;z-index:2;max-width:1240px;margin:0 auto;width:100%;display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center}
-      .hero-mtn h1{color:#fff !important;text-shadow:0 2px 30px rgba(0,0,0,0.38)}
-      .hero-mtn .hero-sub{color:rgba(255,255,255,0.92)}
-      .hero-mtn #heroSubscribeMsg{color:rgba(255,255,255,0.78) !important}
-      .hero-mtn #heroSubscribeMsg a{color:#a9c6ff !important}
-      .hero-mtn .brain-card{box-shadow:0 34px 90px rgba(0,0,0,0.5)}
+      .hero-mtn{position:relative;max-width:none !important;min-height:auto;display:flex;align-items:center;padding:150px 48px 70px;background:radial-gradient(1100px 620px at 82% 4%,rgba(37,99,235,0.10),transparent 60%),radial-gradient(720px 480px at 2% 96%,rgba(163,230,53,0.07),transparent 58%),var(--cream);overflow:hidden}
+      .hero-mtn::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(31,21,17,0.055) 1px,transparent 1.5px);background-size:28px 28px;mask-image:radial-gradient(900px 600px at 78% 26%,rgba(0,0,0,0.7),transparent 72%);-webkit-mask-image:radial-gradient(900px 600px at 78% 26%,rgba(0,0,0,0.7),transparent 72%);pointer-events:none}
+      .hero-mtn-inner{position:relative;z-index:2;max-width:1180px;margin:0 auto;width:100%;display:grid;grid-template-columns:1.04fr 0.96fr;gap:64px;align-items:center}
+      .hero-mtn h1{color:var(--ink) !important}
+      .hero-mtn .hero-sub{color:var(--gray-mid)}
       .trust-section{background:var(--cream);padding:34px 48px 6px}
       .trust-section .trust-strip{justify-content:center;max-width:1100px;margin:0 auto !important;flex-wrap:wrap !important}
       @media (max-width:640px){
@@ -1543,7 +1539,7 @@
     <section class="hero-mtn">
       <div class="hero-mtn-inner">
         <div class="hero-col-left">
-        <div style="font-family: monospace; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.82); margin-bottom: 20px; position: relative; z-index: 2;">AI marketing systems for teams that ship every week</div>
+        <div style="font-family: monospace; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-deep); margin-bottom: 20px; position: relative; z-index: 2;">AI marketing systems for teams that ship every week</div>
         <h1 style="font-size: clamp(38px, 5.2vw, 80px); line-height: 1.04; letter-spacing: -0.02em; position: relative; z-index: 2; max-width: 920px; text-wrap: balance;">
             Build your Marketing Brain.
         </h1>
