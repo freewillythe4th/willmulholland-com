@@ -572,6 +572,68 @@
 
 
         <!-- 2. Prompt Cowboy -->
+        <!-- Blinq Rebrand Baseline Dashboards -->
+        <div id="blinq-dashboards" class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <img class="card-logo" src="images/blinq/logo.svg" alt="Blinq">
+                    <span class="company-pill blinq">Blinq &middot; Senior PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag dark">Metrics</span>
+                        <span class="project-tag blue">Analytics</span>
+                        <span class="project-tag outline">Rebrand</span>
+                    </div>
+                    <h3 class="project-title">Measuring the Rebrand: Setting the Baseline Before It Shipped</h3>
+                    <p class="project-summary">Before Blinq rebranded the whole website, I wanted to prove whether the new positioning actually moved conversion, not ship it and hope. So I spec'd a web-page attribution dashboard in Amplitude and built it with our data analyst, capturing a clean baseline across every page before launch so the uplift could be measured, not guessed.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <div class="video-thumbnail" style="cursor:default; max-width:760px;">
+                        <img src="images/blinq/rebrand-baseline-dashboard.png" alt="Web-page attribution dashboard: per-page bounce rate (integrations 78 percent, pricing 59 percent, enterprise 47 percent) plus the metrics tracked per page (page views, bounce and exit rate, demo conversion, trial starts by landing page, conversion paths), set up as a pre-rebrand baseline">
+                    </div>
+                    <p style="font-size:13px; color:var(--gray-light); margin-top:8px; margin-bottom:16px;">The web-page attribution dashboard I spec'd in Amplitude and built with our data analyst (recreated view). Per-page bounce and exit rate, conversion paths, and trial starts by landing page, captured as a baseline before the rebrand went live.</p>
+
+                    <h4>Overview</h4>
+                    <p>Blinq was about to rebrand the entire website, with new positioning and copy across the enterprise, pricing, integrations, AI Notetaker and lead-capture pages. The trap with a rebrand is that it ships and nobody can say whether it improved anything. There was no clean, page-level view of how the site converted, and no baseline to compare against once the new content went live. I set out to fix that before a single page changed.</p>
+
+                    <h4>What I Did</h4>
+                    <ul>
+                        <li><strong>Spec'd the dashboard.</strong> Defined the five pages and the metrics that mattered per page (page views, time on page, demo-request conversion, trial starts), with the explicit goal of a before-and-after comparison around the rebrand. Built it in Amplitude with our data analyst</li>
+                        <li><strong>Drove the metric decisions.</strong> When bounce rates came in around 50 percent, time-on-page was unreliable for half our visitors, so I killed it as a key metric and pivoted the dashboard to bounce rate by page, conversion paths, and trial starts by landing page, adding exit rate as the cleaner attention signal</li>
+                        <li><strong>Captured the baseline before launch.</strong> The whole point was to lock the baseline before any new content went live, so the uplift could be attributed to the work and not to luck</li>
+                        <li><strong>Used it as a diagnostic.</strong> The baseline immediately flagged the integrations page leaking nearly 8 in 10 visitors, which targeted the copy rewrite, while enterprise had the lowest bounce on the smallest traffic</li>
+                        <li><strong>Shared it as a team resource.</strong> Rolled the dashboard out to marketing with a walkthrough so the whole team could track page performance through the rebrand</li>
+                    </ul>
+
+                    <h4>Challenges and Solutions</h4>
+                    <ul>
+                        <li><strong>Half of visitors bounced, making time-on-page unreliable.</strong> I chose not to sink engineering time into fixing it and switched the key signal to bounce, exit, and conversion paths instead</li>
+                        <li><strong>I do not own the data stack.</strong> The job was to spec precisely and make the trade-offs, then enable the data analyst to build and query it fast</li>
+                        <li><strong>Timing risk.</strong> A baseline only counts if it is captured before the change, so I made that the priority over a more elaborate build</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <ul>
+                        <li>A web-page attribution dashboard live in Amplitude, with the baseline captured before the rebrand, used as the team's shared way to track page performance</li>
+                        <li>It turned the rebrand from a creative project into a measurable one. On launch day I could say we had been baselining the pages for months and could now read the uplift from the new content</li>
+                        <li>Honest scope: I left soon after launch, so I do not claim a final uplift number. What I owned was making the work measurable in the first place</li>
+                    </ul>
+
+                    <h4>Delivered</h4>
+                    <div class="deliverables">
+                        <span class="deliverable">Amplitude dashboard spec</span>
+                        <span class="deliverable">Per-page metric definitions</span>
+                        <span class="deliverable">Pre-rebrand baseline</span>
+                        <span class="deliverable">Companion AI Notetaker dashboard</span>
+                        <span class="deliverable">Team rollout + walkthrough</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div id="prompt-cowboy" class="project-card" onclick="toggleProject(this)">
             <div class="project-header">
                 <div class="project-header-content">
