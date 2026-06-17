@@ -127,6 +127,7 @@
         .field label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-mid); margin-bottom: 8px; }
         .field input, .field select { width: 100%; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.18); border-radius: 12px; font-size: 16px; font-family: inherit; color: var(--black); outline: none; background: var(--white); transition: border-color 0.3s var(--ease-smooth); }
         .field input:focus, .field select:focus { border-color: var(--accent); }
+        .field-help { font-size: 12px; color: var(--gray-light); margin-top: 7px; line-height: 1.4; }
         .gate-card .btn-primary { width: 100%; padding: 18px; text-align: center; margin-top: 6px; }
         .gate-fine { font-size: 12px; color: var(--gray-light); text-align: center; margin-top: 16px; line-height: 1.5; }
         .gate-error { color: #dc2626; font-size: 14px; margin-top: 12px; text-align: center; display: none; }
@@ -216,9 +217,9 @@
 
     <!-- Hero -->
     <section class="hero">
-        <span class="hero-tag">See a real one</span>
-        <h1>Build your marketing brain.</h1>
-        <p class="hero-sub">Watch a full live AI marketing workshop, start to finish. The whole thing, exactly as it ran.</p>
+        <span class="hero-tag">You're registered</span>
+        <h1>You're in. Here's a head start.</h1>
+        <p class="hero-sub">While you wait for the live session, unlock a full past workshop, start to finish. Answer a few questions below and it plays right here.</p>
     </section>
 
     <!-- Video block -->
@@ -240,19 +241,19 @@
         <section class="wrap" style="padding-top: 40px;">
             <div class="gate-card" id="gateCard">
                 <form id="gateForm" class="gate-form">
-                    <span class="gate-badge">Unlock the recording</span>
-                    <h2>Answer two quick questions</h2>
-                    <p class="gate-sub">Tell me who you are and the one job you'd most want off your plate. Then the recording plays in full, right here.</p>
+                    <span class="gate-badge">Why I'm asking</span>
+                    <p class="gate-sub" style="margin-bottom: 28px;">I read every one of these before we go live and use them to decide what we build on the day, so your hour is actually useful to you.</p>
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="jane@yourbusiness.com" required>
+                        <p class="field-help">So I can match this to your registration.</p>
+                    </div>
                     <div class="field">
                         <label for="firstName">First name</label>
                         <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
                     </div>
                     <div class="field">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="jane@yourbusiness.com" required>
-                    </div>
-                    <div class="field">
-                        <label for="segment">What best describes you?</label>
+                        <label for="segment">What do you do?</label>
                         <select id="segment" name="segment" required>
                             <option value="" disabled selected>Pick one...</option>
                             <option>I'm a product marketer</option>
@@ -260,6 +261,17 @@
                             <option>I'm a founder doing my own marketing</option>
                             <option>I run an agency / studio</option>
                             <option>I want to AI-proof my marketing career</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="goal">What do you most want to get out of the session?</label>
+                        <select id="goal" name="goal" required>
+                            <option value="" disabled selected>Pick one...</option>
+                            <option>Set up my marketing brain from scratch</option>
+                            <option>Get my AI to sound like my brand</option>
+                            <option>Stop redoing the same work</option>
+                            <option>Just want to see how you do it</option>
                             <option>Other</option>
                         </select>
                     </div>
@@ -274,7 +286,11 @@
                             <option>Other</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn-primary" id="gateSubmit">Unlock the training</button>
+                    <div class="field">
+                        <label for="aiUse">What are you using AI for in your marketing right now? <span style="text-transform:none;font-weight:400;letter-spacing:0;color:var(--gray-light);">(optional)</span></label>
+                        <input type="text" id="aiUse" name="aiUse" placeholder="A line or two is plenty">
+                    </div>
+                    <button type="submit" class="btn-primary" id="gateSubmit">Unlock the recording</button>
                     <p class="gate-error" id="gateError"></p>
                     <p class="gate-fine">No spam. You'll also get my weekly AI marketing newsletter, unsubscribe any time.</p>
                 </form>
@@ -291,9 +307,8 @@
     <div class="band unlock-cta" id="unlockCta">
         <section class="wrap wrap--tight">
             <div class="reserve-band">
-                <h2>Want to build yours live with me?</h2>
-                <p>Free workshop, Wednesday 1 July, 7pm AEST.</p>
-                <a href="https://intelligent-growth.beehiiv.com/products/build-the-brain-behind-your-marketing" class="btn-primary">Reserve my spot</a>
+                <h2>You're all set.</h2>
+                <p>Enjoy the recording. I'll see you live, the join link and reminders are in your inbox.</p>
             </div>
         </section>
     </div>
@@ -341,9 +356,12 @@
                 var firstName = document.getElementById('firstName').value.trim();
                 var email = document.getElementById('email').value.trim();
                 var segment = document.getElementById('segment').value;
+                var goal = document.getElementById('goal').value;
                 var job = document.getElementById('job').value;
+                var aiUse = document.getElementById('aiUse').value.trim();
                 if (!firstName || !email) return;
-                if (!segment) { errEl.textContent = 'Pick what best describes you.'; errEl.style.display = 'block'; return; }
+                if (!segment) { errEl.textContent = 'Pick what you do.'; errEl.style.display = 'block'; return; }
+                if (!goal) { errEl.textContent = 'Pick what you most want out of the session.'; errEl.style.display = 'block'; return; }
                 if (!job) { errEl.textContent = 'Pick the one job you want off your plate.'; errEl.style.display = 'block'; return; }
 
                 var original = submitBtn.textContent;
@@ -353,7 +371,7 @@
                 fetch('/api/workshop-register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ firstName: firstName, email: email, segment: segment, session: '2024 workshop recording (training gate)', job: job })
+                    body: JSON.stringify({ firstName: firstName, email: email, segment: segment, session: 'training bonus (post-signup)', job: job, goal: goal, aiUse: aiUse })
                 }).then(function (r) {
                     if (r.ok) {
                         frame.classList.remove('is-locked');
