@@ -624,7 +624,7 @@
     <section class="wrap wrap--tight">
         <div class="reserve-band">
             <h2>The 60 minutes that change how you do marketing.</h2>
-            <p>Wed 24 June, 7:00pm AEST. Also 10:00am BST, 5:00am ET, 2:00am PT. Live online. Free.</p>
+            <p>Two sessions, same workshop. Founders: Wed 24 June. Marketers: Wed 1 July. Both 7:00pm AEST, live online, free.</p>
             <button type="button" class="btn-primary" data-open-modal>Reserve my spot, free</button>
         </div>
     </section>
@@ -661,7 +661,7 @@
             <button type="button" class="modal-close" data-close-modal aria-label="Close">&times;</button>
             <span class="modal-badge">Free &middot; Live online</span>
             <h2 id="modalTitle">Reserve your spot</h2>
-            <p class="modal-sub">Drop your details to lock in your spot. You'll get the join link and an add-to-calendar button on the next screen.</p>
+            <p class="modal-sub">Pick your session and drop your details. You confirm your seat and get the calendar invite on the next screen.</p>
             <form id="reserveForm">
                 <div class="field">
                     <label for="firstName">First name</label>
@@ -672,8 +672,16 @@
                     <input type="email" id="email" name="email" placeholder="jane@yourbusiness.com" required>
                 </div>
                 <div class="field">
-                    <label>When</label>
-                    <div style="padding: 13px 15px; border: 1px solid rgba(0,0,0,0.12); border-radius: 12px; background: var(--accent-soft); font-size: 14px; color: var(--accent-deep); font-weight: 600;">Wed 24 June, 7:00pm AEST<span style="display:block; font-family: monospace; font-size: 11px; color: var(--gray-mid); font-weight: 400; margin-top: 3px; text-transform: uppercase; letter-spacing: 0.05em;">10:00am BST &middot; 5:00am ET &middot; 2:00am PT</span></div>
+                    <label>Pick your session</label>
+                    <label style="display:flex; align-items:center; gap:10px; padding:13px 15px; border:1px solid rgba(0,0,0,0.12); border-radius:12px; background:var(--accent-soft); font-size:14px; color:var(--accent-deep); font-weight:600; cursor:pointer; margin-bottom:8px;">
+                        <input type="radio" name="session" value="founders" required style="margin:0; width:auto;">
+                        <span>For founders, Wed 24 June, 7:00pm AEST</span>
+                    </label>
+                    <label style="display:flex; align-items:center; gap:10px; padding:13px 15px; border:1px solid rgba(0,0,0,0.12); border-radius:12px; background:var(--accent-soft); font-size:14px; color:var(--accent-deep); font-weight:600; cursor:pointer;">
+                        <input type="radio" name="session" value="marketers" style="margin:0; width:auto;">
+                        <span>For marketers, Wed 1 July, 7:00pm AEST</span>
+                    </label>
+                    <p style="font-family:monospace; font-size:11px; color:var(--gray-mid); margin-top:8px; text-transform:uppercase; letter-spacing:0.05em;">Both 7pm AEST. Also 10:00am BST, 5:00am ET, 2:00am PT.</p>
                 </div>
                 <div class="field">
                     <label for="segment">What best describes you?</label>
@@ -746,11 +754,13 @@
                 var firstName = document.getElementById('firstName').value.trim();
                 var email = document.getElementById('email').value.trim();
                 var segment = document.getElementById('segment').value;
-                var session = 'Wed 24 June, 7:00pm AEST';
+                var sessionChoice = (document.querySelector('input[name="session"]:checked') || {}).value || '';
+                var session = sessionChoice === 'marketers' ? 'Marketers, Wed 1 July 7:00pm AEST' : 'Founders, Wed 24 June 7:00pm AEST';
                 var jobChoice = document.getElementById('job').value;
                 var jobOther = document.getElementById('jobOther').value.trim();
                 var job = jobChoice === 'Other' ? (jobOther || 'Other') : jobChoice;
                 if (!firstName || !email) return;
+                if (!sessionChoice) { errEl.textContent = 'Pick which session you want.'; errEl.style.display = 'block'; return; }
 
                 var original = submitBtn.textContent;
                 submitBtn.disabled = true;
@@ -762,7 +772,10 @@
                     body: JSON.stringify({ firstName: firstName, email: email, segment: segment, session: session, job: job })
                 }).then(function (r) {
                     if (r.ok) {
-                        window.location.href = '/workshop-confirmed?s=apac';
+                        var dest = sessionChoice === 'marketers'
+                            ? 'https://intelligent-growth.beehiiv.com/products/build-the-brain-behind-your-marketing'
+                            : 'https://intelligent-growth.beehiiv.com/products/build-the-brain-behind-your-marketing-now';
+                        window.location.href = dest;
                     } else {
                         submitBtn.disabled = false;
                         submitBtn.textContent = original;
