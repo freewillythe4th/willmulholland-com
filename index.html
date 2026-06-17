@@ -65,6 +65,7 @@
 
         /* Display typography */
         .hero h1,
+        .hero-mtn h1,
         .section-title,
         .footer-cta h2,
         .ig-copy h3,
@@ -75,6 +76,19 @@
             font-weight: 400;
             letter-spacing: 0;
             font-feature-settings: "kern" 1, "liga" 1;
+        }
+
+        /* Unified label / eyebrow treatment (one system, not monospace slop) */
+        .section-tag,
+        .collapse-eyebrow,
+        .package-eyebrow,
+        .hero-eyebrow,
+        .label-cap {
+            font-family: 'Inter', sans-serif !important;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
         }
 
         .hero h1 {
@@ -455,11 +469,7 @@
         }
 
         .section-tag {
-            font-family: monospace;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--gray-mid);
+            color: var(--accent-deep);
             margin-bottom: 28px;
             display: flex;
             align-items: center;
@@ -484,6 +494,22 @@
 
         .section-title .muted {
             color: var(--gray-light);
+        }
+
+        .offer-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: var(--accent-soft);
+            color: var(--accent-deep);
+            margin-bottom: 18px;
+        }
+        .package-row:hover .offer-icon {
+            background: var(--accent);
+            color: #fff;
         }
 
         /* Insight Cards */
@@ -1539,26 +1565,26 @@
     <section class="hero-mtn">
       <div class="hero-mtn-inner">
         <div class="hero-col-left">
-        <div style="font-family: monospace; font-size: 12.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-deep); margin-bottom: 20px; position: relative; z-index: 2;">AI marketing systems for teams that ship every week</div>
-        <h1 style="font-size: clamp(38px, 5.2vw, 80px); line-height: 1.04; letter-spacing: -0.02em; position: relative; z-index: 2; max-width: 920px; text-wrap: balance;">
-            Build your Marketing Brain.
+        <div class="hero-eyebrow" style="color: var(--accent-deep); margin-bottom: 20px; position: relative; z-index: 2;">AI marketing systems for teams that ship every week</div>
+        <h1 style="font-size: clamp(40px, 5.6vw, 84px); line-height: 1.0; letter-spacing: -0.015em; position: relative; z-index: 2; max-width: 940px; text-wrap: balance;">
+            Ship marketing as fast as you ship product.
         </h1>
-        <p class="hero-sub" style="margin-top: 28px; position: relative; z-index: 2; max-width: 760px; font-size: clamp(18px, 1.7vw, 22px); line-height: 1.5;">
-            <span>Your product releases twenty times a month. Marketing tells people about three of them. The Brain listens to your calls, customers and competitors, and turns every release into positioning, messaging and ready-to-publish assets.</span>
+        <p class="hero-sub" style="margin-top: 26px; position: relative; z-index: 2; max-width: 600px; font-size: clamp(17px, 1.6vw, 21px); line-height: 1.55;">
+            <span>Your product ships every week. Marketing covers a fraction of it. I build you a <b style="color: var(--ink); font-weight: 600;">Marketing Brain</b>: an AI system that turns every release into positioning, messaging and ready-to-publish assets, so the launch never waits on marketing.</span>
         </p>
         <div class="hero-cta" id="subscribe" style="margin-top: 32px; position: relative; z-index: 2; scroll-margin-top: 90px; display: flex; flex-direction: column; align-items: flex-start; gap: 0;">
             <form id="heroSubscribe" style="display: flex; gap: 10px; flex-wrap: wrap; width: 100%; max-width: 560px;">
                 <input type="email" id="heroEmail" name="email" placeholder="Enter your email" required style="flex: 1; min-width: 220px; padding: 16px 18px; border: 1px solid rgba(31,21,17,0.25); border-radius: 999px; font-size: 16px; font-family: inherit; outline: none; background: var(--white); color: var(--ink);">
                 <button type="submit" id="heroSubscribeBtn" class="btn-primary" style="background: var(--accent); border: none; cursor: pointer; font-family: inherit; white-space: nowrap;">Get the playbooks</button>
             </form>
-            <p id="heroSubscribeMsg" style="font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-light); margin-top: 16px;">Join 100+ marketers learning AI-native GTM &middot; <a href="/workshop" style="color: var(--accent-deep); text-decoration: none;">or join the free workshop &rarr;</a></p>
+            <p id="heroSubscribeMsg" style="font-size: 14px; color: var(--gray-mid); margin-top: 16px;">Join 100+ marketers learning AI-native GTM. <a href="/workshop" style="color: var(--accent-deep); text-decoration: none; font-weight: 600;">Or join the free workshop &rarr;</a></p>
         </div>
         </div>
 
         <div class="hero-graphic">
           <style>
-            .mb-hub{width:100%;max-width:400px;background:var(--white);border:1px solid var(--ink);border-radius:18px;box-shadow:var(--offset-shadow);padding:22px 22px 24px;transform:rotate(-1deg)}
-            .mb-cap{font-family:monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-light);margin-bottom:13px;display:flex;align-items:center;gap:8px}
+            .mb-hub{width:100%;max-width:430px;background:var(--white);border:1px solid var(--ink);border-radius:18px;box-shadow:var(--offset-shadow);padding:26px 26px 28px}
+            .mb-cap{font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gray-light);margin-bottom:13px;display:flex;align-items:center;gap:8px}
             .mb-cap::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent)}
             .mb-row{display:flex;flex-wrap:wrap;gap:6px}
             .mb-chip{font-size:12.5px;font-weight:500;padding:6px 11px;border-radius:8px;background:var(--cream-soft);color:var(--gray-mid);border:1px solid rgba(31,21,17,0.07);white-space:nowrap}
@@ -1573,9 +1599,9 @@
             @media(prefers-reduced-motion:reduce){.mb-pulse{animation:none}}
           </style>
           <div class="mb-hub" id="heroBrain" aria-hidden="true">
-            <div class="mb-cap">your context</div>
+            <div class="mb-cap">What goes in</div>
             <div class="mb-row">
-              <span class="mb-chip">market</span><span class="mb-chip">competitors</span><span class="mb-chip">customers</span><span class="mb-chip">product</span><span class="mb-chip">voice</span>
+              <span class="mb-chip">sales calls</span><span class="mb-chip">customers</span><span class="mb-chip">competitors</span><span class="mb-chip">roadmap</span><span class="mb-chip">brand voice</span>
             </div>
             <div class="mb-flow"><svg width="24" height="22" viewBox="0 0 24 22" fill="none"><path d="M12 1 V16 M6 11 L12 17 L18 11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
             <div class="mb-core">
@@ -1592,9 +1618,9 @@
               </div>
             </div>
             <div class="mb-flow"><svg width="24" height="22" viewBox="0 0 24 22" fill="none"><path d="M12 1 V16 M6 11 L12 17 L18 11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="mb-cap">every launch</div>
+            <div class="mb-cap">What comes out</div>
             <div class="mb-row mb-out">
-              <span class="mb-chip">positioning</span><span class="mb-chip">messaging</span><span class="mb-chip">GTM plan</span><span class="mb-chip">content</span>
+              <span class="mb-chip">positioning</span><span class="mb-chip">messaging</span><span class="mb-chip">GTM plan</span><span class="mb-chip">launch assets</span>
             </div>
           </div>
         </div>
@@ -1625,6 +1651,28 @@
     </section>
 
     <!-- Marquee removed for cleaner first fold -->
+
+    <!-- About -->
+    <section id="about">
+        <div class="section-tag">About</div>
+        
+        <div class="about-grid">
+            <div class="about-content">
+                <h3>A marketer who actually builds.</h3>
+                <p>I'm Will. Ten years in marketing, from big-brand work at Ogilvy and eBay to scaling B2B SaaS at NextDocs, Prompt Cowboy, and most recently Blinq. Then I stopped talking about AI and started building with it. I'm not an engineer. I taught myself these systems in my evenings, which is exactly why I can teach them to marketers instead of developers.</p>
+                <p>Everything I teach, I run on my own work first. The systems doing my research, content and follow-up every day are the proof. Every output is the demo.</p>
+                <ul style="list-style: none; margin: 26px 0 0; padding: 0;">
+                    <li style="position: relative; padding: 10px 0 10px 26px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; border-top: 1px solid rgba(31,21,17,0.08);"><span style="position: absolute; left: 0; color: var(--accent); font-weight: 700;">&rarr;</span>$180M+ launched, a product scaled from 2k to 55k weekly active users, GTM at Blinq and eBay</li>
+                    <li style="position: relative; padding: 10px 0 10px 26px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; border-top: 1px solid rgba(31,21,17,0.08);"><span style="position: absolute; left: 0; color: var(--accent); font-weight: 700;">&rarr;</span>Keynote speaker at Product Marketing Alliance, Generate Summit, Canva and Salesforce</li>
+                    <li style="position: relative; padding: 10px 0 10px 26px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; border-top: 1px solid rgba(31,21,17,0.08);"><span style="position: absolute; left: 0; color: var(--accent); font-weight: 700;">&rarr;</span>Angel investor and mentor with Startmate (S23, W23, S24)</li>
+                    <li style="position: relative; padding: 10px 0 10px 26px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; border-top: 1px solid rgba(31,21,17,0.08);"><span style="position: absolute; left: 0; color: var(--accent); font-weight: 700;">&rarr;</span>Publisher of the Intelligent Growth newsletter, read by 100+ growth leaders</li>
+                </ul>
+            </div>
+            <div class="about-image" style="background: none; overflow: hidden;">
+                <img src="images/headshot.jpg" alt="Will Mulholland" style="width: 100%; height: 100%; object-fit: cover; border-radius: 100px 24px 100px 24px;">
+            </div>
+        </div>
+    </section>
 
     <!-- What changes for you: the launch collapse -->
     <style>
@@ -1662,6 +1710,12 @@
       .collapse-payoff .big .from { color: var(--gray-light); }
       .collapse-payoff .big .to { color: var(--ink); }
       .collapse-payoff .sub { color: var(--gray-mid); margin-top: 10px; font-style: italic; font-family: 'Instrument Serif', Georgia, serif; font-size: 19px; }
+      /* Separate the two worlds into distinct panels */
+      .collapse-card .before { background: var(--cream-soft); border: 1px solid rgba(31,21,17,0.07); border-radius: 16px; padding: 26px 26px 24px; }
+      .collapse-card .after { background: #fff; border: 1.5px solid var(--accent); border-radius: 16px; padding: 26px 26px 24px; box-shadow: 0 12px 32px rgba(37,99,235,0.10); }
+      .collapse-card .row-label, .collapse-card .fold .pill, .fr-head, .fb-cap { font-family: 'Inter', sans-serif; }
+      .collapse-card .fold { margin: 18px 0; }
+      .collapse-card .fold .pill { font-weight: 700; }
       /* Sequential reveal: the card tells the story in order */
       .collapse-card [data-anim] { opacity: 0; transform: translateY(8px); transition: opacity 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth); }
       .collapse-card.collapse-in [data-anim] { opacity: 1; transform: none; }
@@ -1691,7 +1745,7 @@
       .fr-head em { font-style: normal; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--gray-light); margin-left: 7px; }
       .fr-chips { display: flex; flex-wrap: wrap; gap: 6px; }
       .fan-beam { fill: none; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
-      .collapse-card.collapse-in .fan-beam { animation: beamDraw 0.9s var(--ease-smooth) forwards; }
+      .collapse-card.collapse-in .fan-beam { animation: beamDraw 0.7s var(--ease-smooth) forwards; }
       @keyframes beamDraw { to { stroke-dashoffset: 0; } }
       @media (prefers-reduced-motion: reduce) {
         .collapse-card [data-anim] { opacity: 1; transform: none; transition: none; }
@@ -1804,14 +1858,14 @@
 
         // 1. staged reveal order
         var seq = [];
-        card.querySelectorAll('.before .chain > *').forEach(function (el) { seq.push([el, 0.07]); });
-        var meta = card.querySelector('.before .meta'); if (meta) seq.push([meta, 0.3]);
-        var fold = card.querySelector('.fold'); if (fold) seq.push([fold, 0.3]);
+        card.querySelectorAll('.before .chain > *').forEach(function (el) { seq.push([el, 0.035]); });
+        var meta = card.querySelector('.before .meta'); if (meta) seq.push([meta, 0.16]);
+        var fold = card.querySelector('.fold'); if (fold) seq.push([fold, 0.16]);
         ['.fan-left .brief-node', '.fan-feed', '.fan-brain'].forEach(function (s) {
-          var el = card.querySelector(s); if (el) seq.push([el, 0.18]);
+          var el = card.querySelector(s); if (el) seq.push([el, 0.1]);
         });
-        rows.forEach(function (el) { seq.push([el, 0.15]); });
-        var am = card.querySelector('.after .meta'); if (am) seq.push([am, 0.35]);
+        rows.forEach(function (el) { seq.push([el, 0.09]); });
+        var am = card.querySelector('.after .meta'); if (am) seq.push([am, 0.2]);
         var t = 0;
         seq.forEach(function (pair) {
           t += pair[1];
@@ -1843,7 +1897,7 @@
               p.setAttribute('class', 'fan-beam');
               p.setAttribute('stroke', layer[0]);
               p.setAttribute('stroke-width', layer[1]);
-              p.style.animationDelay = (beamStart + i * 0.12 + layer[2]).toFixed(2) + 's';
+              p.style.animationDelay = (beamStart + i * 0.08 + layer[2]).toFixed(2) + 's';
               svg.appendChild(p);
             });
             var wrap = document.createElementNS(NS, 'g');
@@ -1887,7 +1941,7 @@
             io.disconnect();
             drawBeams();
             card.classList.add('collapse-in');
-            setTimeout(function () { card.classList.add('oldway-dim'); }, (beamStart + 1.6) * 1000);
+            setTimeout(function () { card.classList.add('oldway-dim'); }, (beamStart + 1.0) * 1000);
           });
         }, { threshold: 0.25 });
         io.observe(card);
@@ -1895,18 +1949,19 @@
     </script>
     <style>
       .fan-svg .fan-pulse { opacity: 0; transition: opacity 0.5s var(--ease-smooth); }
-      .collapse-card.collapse-in .fan-pulse { opacity: 1; transition-delay: 3.4s; }
+      .collapse-card.collapse-in .fan-pulse { opacity: 1; transition-delay: 2.0s; }
     </style>
 
     <!-- Three paths -->
     <section class="package-section" id="paths">
         <div class="package-inner">
-            <div class="section-tag">Three ways in</div>
-            <h2 class="section-title">Three ways to build your Marketing Brain.</h2>
+            <div class="section-tag">Work with me</div>
+            <h2 class="section-title">Three ways to work with me.</h2>
             <p style="font-size: 17px; color: var(--gray-mid); margin: -28px 0 44px; max-width: 640px;">Build it in a room of marketers, learn it in a workshop, or have me build it with you. Pick one. Stack all three.</p>
 
             <a id="card-community" href="/community" class="package-row" style="text-decoration:none; color:inherit;">
                 <div class="package-content">
+                    <span class="offer-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
                     <div class="package-eyebrow">Community &middot; Free</div>
                     <h3>Join the room.</h3>
                     <p>A free room of marketers building with AI. The workflows that landed, the ones that flopped, and short live calls. Vetted, so it stays useful.</p>
@@ -1917,7 +1972,8 @@
 
             <a id="card-learn" href="/workshop" class="package-row" style="text-decoration:none; color:inherit;">
                 <div class="package-content">
-                    <div class="package-eyebrow">Learn</div>
+                    <span class="offer-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></span>
+                    <div class="package-eyebrow">Learn &middot; Workshop + cohort</div>
                     <h3>Build it yourself.</h3>
                     <p>Watch a Marketing Brain built live on screen in a free workshop. Then build your own in the cohort. You walk out running it yourself, not hooked on another tool.</p>
                     <p style="font-size: 14px; color: var(--accent); margin-top: 18px; font-weight: 600;">See the workshop &rarr;</p>
@@ -1927,7 +1983,8 @@
 
             <a id="card-work" href="/work-with-me" class="package-row" style="text-decoration:none; color:inherit;">
                 <div class="package-content">
-                    <div class="package-eyebrow">Work with me</div>
+                    <span class="offer-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.8 2.8-2.2-2.2z"/></svg></span>
+                    <div class="package-eyebrow">Done with you &middot; Fractional</div>
                     <h3>Get it built with you.</h3>
                     <p>I build your Marketing Brain in your stack, and train your team to run it. When I leave, the capability stays.</p>
                     <p style="font-size: 14px; color: var(--accent); margin-top: 18px; font-weight: 600;">Work with me &rarr;</p>
@@ -1973,8 +2030,8 @@
                 <div class="case-content">
                     <div>
                         <h4 class="case-title" style="display:flex; align-items:center;"><img src="images/blinq/logo.svg" alt="Blinq" style="height:28px; width:auto;"></h4>
-                        <p class="case-subtitle">GTM narrative · 4M+ users</p>
-                        <p class="case-desc">Built the AI-native GTM narrative and the AI marketing systems behind it, then aligned product, design, content, and sales around one story.</p>
+                        <p class="case-subtitle">AI-native GTM narrative</p>
+                        <p class="case-desc">Built the AI-native GTM narrative and the marketing systems behind it, then aligned product, design, content, and sales around one story.</p>
                     </div>
                     <div class="case-arrow">→</div>
                 </div>
@@ -1987,7 +2044,7 @@
                 <div class="case-content">
                     <div>
                         <h4 class="case-title" style="display:flex; align-items:center;"><img src="images/ebay/logo.svg" alt="eBay" style="height:28px; width:auto;"></h4>
-                        <p class="case-subtitle">$180M Revenue · 83% Activation</p>
+                        <p class="case-subtitle">$180M revenue · 550 → 2,500+ brands</p>
                         <p class="case-desc">Built separate positioning for team buyers. Individuals kept fast self-serve. Teams got dedicated support.</p>
                     </div>
                     <div class="case-arrow">→</div>
@@ -2001,8 +2058,22 @@
                 <div class="case-content">
                     <div>
                         <h4 class="case-title" style="display:flex; align-items:center; gap:10px;"><img src="images/prompt-cowboy/logo.png" alt="Prompt Cowboy" style="height:28px; width:28px;"> <span>Prompt Cowboy</span></h4>
-                        <p class="case-subtitle">2k → 250k Users</p>
+                        <p class="case-subtitle">2k → 55k weekly active users in 2 months</p>
                         <p class="case-desc">Built the "Context Engineering" positioning that defined the Pro tier. The frame from 2025 is the frame the product is sold on today.</p>
+                    </div>
+                    <div class="case-arrow">→</div>
+                </div>
+            </a>
+
+            <a href="work.html#kfc" class="case-card" style="text-decoration:none; color:inherit; display:block;">
+                <div class="case-image" style="background: #fff; padding: 40px; display:flex; align-items:center; justify-content:center;">
+                    <img src="images/kfc/logo.svg" alt="KFC" loading="lazy" style="max-width:70%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block;">
+                </div>
+                <div class="case-content">
+                    <div>
+                        <h4 class="case-title" style="display:flex; align-items:center;"><img src="images/kfc/logo.svg" alt="KFC" style="height:30px; width:auto;"></h4>
+                        <p class="case-subtitle">460M impressions · $0 media spend</p>
+                        <p class="case-desc">A campaign idea, not an ad buy. Earned reach at consumer scale, the brand craft behind the B2B systems.</p>
                     </div>
                     <div class="case-arrow">→</div>
                 </div>
@@ -2195,27 +2266,6 @@
         </script>
     </section>
 
-    <!-- About -->
-    <section id="about">
-        <div class="section-tag">About</div>
-        
-        <div class="about-grid">
-            <div class="about-content">
-                <h3>A marketer who actually builds.</h3>
-                <p>I'm Will. Ten years in marketing, from big-brand work at Ogilvy and eBay to scaling B2B SaaS at NextDocs, Prompt Cowboy, and most recently Blinq, where I led GTM for 4M+ users. Then I stopped talking about AI and started building with it. I'm not an engineer. I taught myself these systems in my evenings, which is exactly why I can teach them to marketers instead of developers.</p>
-                <p>Everything I teach, I run on my own work first. The systems doing my research, content and follow-up every day are the proof. Every output is the demo.</p>
-                <ul style="list-style: none; margin: 26px 0 0; padding: 0;">
-                    <li style="position: relative; padding: 10px 0 10px 26px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; border-top: 1px solid rgba(31,21,17,0.08);"><span style="position: absolute; left: 0; color: var(--accent); font-weight: 700;">&rarr;</span>$180M+ launched, a product scaled from 2k to 250k users, GTM for 4M+ users</li>
-                    <li style="position: relative; padding: 10px 0 10px 26px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; border-top: 1px solid rgba(31,21,17,0.08);"><span style="position: absolute; left: 0; color: var(--accent); font-weight: 700;">&rarr;</span>Keynote speaker at Product Marketing Alliance, Generate Summit, Canva and Salesforce</li>
-                    <li style="position: relative; padding: 10px 0 10px 26px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; border-top: 1px solid rgba(31,21,17,0.08);"><span style="position: absolute; left: 0; color: var(--accent); font-weight: 700;">&rarr;</span>Angel investor and mentor with Startmate (S23, W23, S24)</li>
-                    <li style="position: relative; padding: 10px 0 10px 26px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; border-top: 1px solid rgba(31,21,17,0.08);"><span style="position: absolute; left: 0; color: var(--accent); font-weight: 700;">&rarr;</span>Publisher of the Intelligent Growth newsletter, read by 100+ growth leaders</li>
-                </ul>
-            </div>
-            <div class="about-image" style="background: none; overflow: hidden;">
-                <img src="images/headshot.jpg" alt="Will Mulholland" style="width: 100%; height: 100%; object-fit: cover; border-radius: 100px 24px 100px 24px;">
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer id="contact">
