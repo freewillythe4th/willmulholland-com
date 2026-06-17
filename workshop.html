@@ -756,61 +756,9 @@
         })();
     </script>
 
-    <!-- Motion layer: scroll reveals + smooth scroll -->
+    <!-- Motion layer removed: no scroll-reveal fade, no momentum smooth-scroll -->
     <style>
-      [data-rv] { opacity: 0; transform: translateY(18px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); will-change: opacity, transform; }
-      [data-rv].rv-in { opacity: 1; transform: none; }
-      @media (prefers-reduced-motion: reduce) { [data-rv] { opacity: 1 !important; transform: none !important; transition: none !important; } }
+      [data-rv] { opacity: 1; transform: none; }
     </style>
-    <script src="/js/lenis.min.js" defer></script>
-    <script>
-      (function () {
-        var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        // 1) Scroll reveals (skip the hero, it has its own entrance)
-        (function () {
-          if (reduce || !('IntersectionObserver' in window)) return;
-          var sel = ['.section-tag', '.section-title', '.agenda-card', '.edge-card',
-                     '.who-list li', 'details.faq', '.proof-band p', '.proof-band .who',
-                     '.reserve-band', '.seg-card', '.split > *', '.logo-strip', '.vote-note'];
-          var targets = [];
-          sel.forEach(function (s) {
-            document.querySelectorAll(s).forEach(function (el) {
-              if (el.closest('.hero') || el.hasAttribute('data-rv')) return;
-              el.setAttribute('data-rv', '');
-              var sibs = el.parentNode ? el.parentNode.children : [el];
-              var i = [].indexOf.call(sibs, el);
-              el.style.transitionDelay = (Math.min(i, 6) * 0.06).toFixed(2) + 's';
-              targets.push(el);
-            });
-          });
-          var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) {
-              if (!e.isIntersecting) return;
-              e.target.classList.add('rv-in');
-              io.unobserve(e.target);
-            });
-          }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
-          targets.forEach(function (el) { io.observe(el); });
-        })();
-
-        // 2) Smooth scroll (Lenis, self-hosted). Guarded; no-ops if unavailable.
-        window.addEventListener('load', function () {
-          if (reduce || typeof Lenis === 'undefined') return;
-          var lenis = new Lenis({ duration: 1.05, smoothWheel: true, smoothTouch: false });
-          function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
-          requestAnimationFrame(raf);
-          document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-            a.addEventListener('click', function (e) {
-              var id = a.getAttribute('href');
-              if (id && id.length > 1) {
-                var t = document.querySelector(id);
-                if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -80 }); }
-              }
-            });
-          });
-        });
-      })();
-    </script>
 </body>
 </html>

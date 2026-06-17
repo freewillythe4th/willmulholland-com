@@ -101,12 +101,10 @@
             letter-spacing: -0.005em;
         }
 
-        /* Scroll reveal */
+        /* Scroll reveal removed: content renders immediately, no fade-on-scroll */
         .reveal {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.9s var(--ease-smooth), transform 0.9s var(--ease-smooth);
-            will-change: opacity, transform;
+            opacity: 1;
+            transform: none;
         }
         .reveal.is-visible {
             opacity: 1;
