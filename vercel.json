@@ -28,6 +28,10 @@
       "dest": "/workshop.html"
     },
     {
+      "src": "/training",
+      "dest": "/training.html"
+    },
+    {
       "src": "/workshop-confirmed",
       "dest": "/workshop-confirmed.html"
     },
