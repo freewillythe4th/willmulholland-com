@@ -125,8 +125,9 @@
         .gate-sub { font-size: 15px; color: var(--gray-mid); margin-bottom: 24px; line-height: 1.5; }
         .field { margin-bottom: 18px; }
         .field label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-mid); margin-bottom: 8px; }
-        .field input, .field select { width: 100%; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.18); border-radius: 12px; font-size: 16px; font-family: inherit; color: var(--black); outline: none; background: var(--white); transition: border-color 0.3s var(--ease-smooth); }
-        .field input:focus, .field select:focus { border-color: var(--accent); }
+        .field input, .field select, .field textarea { width: 100%; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.18); border-radius: 12px; font-size: 16px; font-family: inherit; color: var(--black); outline: none; background: var(--white); transition: border-color 0.3s var(--ease-smooth); }
+        .field textarea { resize: vertical; line-height: 1.5; }
+        .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); }
         .field-help { font-size: 12px; color: var(--gray-light); margin-top: 7px; line-height: 1.4; }
         .gate-card .btn-primary { width: 100%; padding: 18px; text-align: center; margin-top: 6px; }
         .gate-fine { font-size: 12px; color: var(--gray-light); text-align: center; margin-top: 16px; line-height: 1.5; }
@@ -244,13 +245,21 @@
                     <span class="gate-badge">Why I'm asking</span>
                     <p class="gate-sub" style="margin-bottom: 28px;">I read every one of these before we go live and use them to decide what we build on the day, so your hour is actually useful to you.</p>
                     <div class="field">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="jane@yourbusiness.com" required>
-                        <p class="field-help">So I can match this to your registration.</p>
+                        <label for="fullName">Full name</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="Jane Smith" required>
                     </div>
                     <div class="field">
-                        <label for="firstName">First name</label>
-                        <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="jane@yourbusiness.com" required>
+                        <p class="field-help">Use the same email you registered with so I can match your seat.</p>
+                    </div>
+                    <div class="field">
+                        <label for="linkedin">LinkedIn profile URL</label>
+                        <input type="url" id="linkedin" name="linkedin" placeholder="linkedin.com/in/you" required>
+                    </div>
+                    <div class="field">
+                        <label for="website">Website or portfolio URL <span style="text-transform:none;font-weight:400;letter-spacing:0;color:var(--gray-light);">(optional)</span></label>
+                        <input type="url" id="website" name="website" placeholder="yoursite.com">
                     </div>
                     <div class="field">
                         <label for="segment">What do you do?</label>
@@ -263,6 +272,10 @@
                             <option>I want to AI-proof my marketing career</option>
                             <option>Other</option>
                         </select>
+                    </div>
+                    <div class="field">
+                        <label for="whoWhat">Who do you market to, and what do you sell?</label>
+                        <input type="text" id="whoWhat" name="whoWhat" placeholder="e.g. B2B SaaS founders, done-for-you content" required>
                     </div>
                     <div class="field">
                         <label for="goal">What do you most want to get out of the session?</label>
@@ -287,8 +300,19 @@
                         </select>
                     </div>
                     <div class="field">
-                        <label for="aiUse">What are you using AI for in your marketing right now? <span style="text-transform:none;font-weight:400;letter-spacing:0;color:var(--gray-light);">(optional)</span></label>
-                        <input type="text" id="aiUse" name="aiUse" placeholder="A line or two is plenty">
+                        <label for="aiUse">What are you using AI for in your marketing right now, and where's it falling short?</label>
+                        <textarea id="aiUse" name="aiUse" rows="3" placeholder="The more detail the better, it genuinely helps me shape the session." required></textarea>
+                    </div>
+                    <div class="field">
+                        <label for="spend">Roughly what do you spend on marketing tools and AI each month? <span style="text-transform:none;font-weight:400;letter-spacing:0;color:var(--gray-light);">(optional)</span></label>
+                        <select id="spend" name="spend">
+                            <option value="" disabled selected>Pick one...</option>
+                            <option>Nothing yet</option>
+                            <option>Under $50 a month</option>
+                            <option>$50 to $200 a month</option>
+                            <option>$200 to $1,000 a month</option>
+                            <option>Over $1,000 a month</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn-primary" id="gateSubmit">Unlock the recording</button>
                     <p class="gate-error" id="gateError"></p>
@@ -353,16 +377,24 @@
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 errEl.style.display = 'none';
-                var firstName = document.getElementById('firstName').value.trim();
+                var fullName = document.getElementById('fullName').value.trim();
                 var email = document.getElementById('email').value.trim();
+                var linkedin = document.getElementById('linkedin').value.trim();
+                var website = document.getElementById('website').value.trim();
                 var segment = document.getElementById('segment').value;
+                var whoWhat = document.getElementById('whoWhat').value.trim();
                 var goal = document.getElementById('goal').value;
                 var job = document.getElementById('job').value;
                 var aiUse = document.getElementById('aiUse').value.trim();
-                if (!firstName || !email) return;
+                var spend = document.getElementById('spend').value;
+                var firstName = fullName.split(/\s+/)[0];
+                if (!fullName || !email) return;
+                if (!linkedin) { errEl.textContent = 'Add your LinkedIn profile URL.'; errEl.style.display = 'block'; return; }
                 if (!segment) { errEl.textContent = 'Pick what you do.'; errEl.style.display = 'block'; return; }
+                if (!whoWhat) { errEl.textContent = 'Tell me who you market to and what you sell.'; errEl.style.display = 'block'; return; }
                 if (!goal) { errEl.textContent = 'Pick what you most want out of the session.'; errEl.style.display = 'block'; return; }
                 if (!job) { errEl.textContent = 'Pick the one job you want off your plate.'; errEl.style.display = 'block'; return; }
+                if (!aiUse) { errEl.textContent = 'Tell me what you are using AI for right now.'; errEl.style.display = 'block'; return; }
 
                 var original = submitBtn.textContent;
                 submitBtn.disabled = true;
@@ -371,7 +403,7 @@
                 fetch('/api/workshop-register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ firstName: firstName, email: email, segment: segment, session: 'training bonus (post-signup)', job: job, goal: goal, aiUse: aiUse })
+                    body: JSON.stringify({ firstName: firstName, fullName: fullName, email: email, linkedin: linkedin, website: website, segment: segment, whoWhat: whoWhat, goal: goal, job: job, aiUse: aiUse, spend: spend, session: 'training bonus (post-signup)' })
                 }).then(function (r) {
                     if (r.ok) {
                         frame.classList.remove('is-locked');

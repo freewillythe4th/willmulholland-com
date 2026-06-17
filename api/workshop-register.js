@@ -13,10 +13,17 @@ export default async function handler(req, res) {
 
   const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
   const email = (body.email || '').trim();
-  const firstName = (body.firstName || '').trim().slice(0, 80);
+  const fullName = (body.fullName || '').trim().slice(0, 160);
+  const firstName = ((body.firstName || '').trim() || fullName.split(/\s+/)[0] || '').slice(0, 80);
+  const linkedin = (body.linkedin || '').trim().slice(0, 300);
+  const website = (body.website || '').trim().slice(0, 300);
   const segment = (body.segment || '').trim().slice(0, 120);
+  const whoWhat = (body.whoWhat || '').trim().slice(0, 300);
+  const goal = (body.goal || '').trim().slice(0, 120);
   const session = (body.session || '').trim().slice(0, 120);
   const job = (body.job || '').trim().slice(0, 200);
+  const aiUse = (body.aiUse || '').trim().slice(0, 1000);
+  const spend = (body.spend || '').trim().slice(0, 80);
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: 'Valid email required' });
@@ -32,6 +39,22 @@ export default async function handler(req, res) {
   const publicationId = process.env.BEEHIIV_PUBLICATION_ID || 'pub_493c9454-ead1-40c6-b28b-81d4d81a63aa';
   if (beehiivKey) {
     try {
+      // Persist every answer onto the subscriber record via custom fields, so the
+      // strategic intel lives where it can be read and segmented, not just in Telegram.
+      const customFields = [
+        { name: 'first_name', value: firstName },
+        { name: 'full_name', value: fullName },
+        { name: 'linkedin_url', value: linkedin },
+        { name: 'website_url', value: website },
+        { name: 'segment', value: segment },
+        { name: 'who_and_what', value: whoWhat },
+        { name: 'session_goal', value: goal },
+        { name: 'build_vote', value: job },
+        { name: 'ai_use', value: aiUse },
+        { name: 'monthly_spend', value: spend },
+        { name: 'lead_source', value: session || 'training bonus (post-signup)' },
+      ].filter((f) => f.value);
+
       const bhRes = await fetch(`https://api.beehiiv.com/v2/publications/${publicationId}/subscriptions`, {
         method: 'POST',
         headers: {
@@ -45,6 +68,7 @@ export default async function handler(req, res) {
           utm_source: 'willmulholland.com',
           utm_medium: 'workshop',
           utm_campaign: 'workshop-2026-06-22',
+          custom_fields: customFields,
         }),
       });
       if (!bhRes.ok) {
@@ -72,13 +96,19 @@ export default async function handler(req, res) {
   const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}&su=${subject}&body=${emailBody}`;
 
   const text = [
-    '<b>\u{1F4C5} Workshop registration</b>',
+    '<b>\u{1F4C5} Workshop bonus unlock</b>',
     '',
-    `Name: <b>${esc(firstName)}</b>`,
+    `Name: <b>${esc(fullName || firstName)}</b>`,
     `Email: <code>${esc(email)}</code>`,
-    `Segment: ${esc(segment || 'not given')}`,
-    `Session: ${esc(session || 'not given')}`,
+    `LinkedIn: ${esc(linkedin || 'not given')}`,
+    `Website: ${esc(website || 'not given')}`,
+    `Does: ${esc(segment || 'not given')}`,
+    `Who/what they sell: ${esc(whoWhat || 'not given')}`,
+    `Wants from session: ${esc(goal || 'not given')}`,
     `\u{1F5F3}\u{FE0F} Build vote: <b>${esc(job || 'not given')}</b>`,
+    `AI use + gaps: ${esc(aiUse || 'not given')}`,
+    `Monthly spend: ${esc(spend || 'not given')}`,
+    `Source: ${esc(session || 'not given')}`,
     `Time: ${new Date().toISOString()}`,
     '',
     'Workshop: Run your marketing with AI (Wed 24 Jun 7pm AEST / Fri 26 Jun 7pm PT)',
