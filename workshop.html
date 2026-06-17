@@ -779,17 +779,10 @@
                     body: JSON.stringify({ firstName: firstName, email: email, segment: segment, session: session, job: job })
                 }).then(function (r) {
                     if (r.ok) {
-                        var isMarketers = sessionChoice === 'marketers';
-                        var sessionLine = isMarketers
-                            ? 'Wednesday 1 July, 7:00pm AEST.'
-                            : 'Wednesday 24 June, 7:00pm AEST.';
-                        var calStart = isMarketers ? '20260701T090000Z' : '20260624T090000Z';
-                        var calEnd = isMarketers ? '20260701T100000Z' : '20260624T100000Z';
-                        var calHref = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Build%20your%20marketing%20brain%2C%20live&dates=' + calStart + '/' + calEnd + '&details=Live%20online.%20Your%20join%20link%20will%20be%20emailed%20before%20the%20session.&ctz=Australia/Sydney';
-                        document.getElementById('confirmSession').textContent = sessionLine + ' 60 minutes, live online.';
-                        document.getElementById('confirmCalendar').setAttribute('href', calHref);
-                        form.style.display = 'none';
-                        document.getElementById('reserveConfirm').style.display = 'block';
+                        var dest = sessionChoice === 'marketers'
+                            ? 'https://intelligent-growth.beehiiv.com/products/build-the-brain-behind-your-marketing'
+                            : 'https://intelligent-growth.beehiiv.com/products/build-the-brain-behind-your-marketing-now';
+                        window.location.href = dest;
                     } else {
                         submitBtn.disabled = false;
                         submitBtn.textContent = original;
