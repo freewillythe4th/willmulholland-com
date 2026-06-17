@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case studies | Intelligent Growth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ink: #1F1511;
+            --black: #1F1511;
+            --white: #FFFFFF;
+            --cream: #F2EDE3;
+            --cream-soft: #EBE5D8;
+            --gray-dark: #1F1511;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --offset-shadow: 6px 6px 0 rgba(31,21,17,0.14);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            overflow-x: hidden;
+            line-height: 1.55;
+            letter-spacing: -0.01em;
+        }
+
+        ::selection { background: var(--accent); color: var(--white); }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 16px 48px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(242,237,227,0.85);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(31,21,17,0.06);
+        }
+        .nav-logo { display: flex; align-items: center; text-decoration: none; }
+        .nav-logo img { height: 30px; width: auto; display: block; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; transition: color 0.4s var(--ease-smooth); }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a.is-current { color: var(--accent); }
+        .nav-cta { padding: 10px 18px; background: var(--ink); color: var(--white); border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.4s var(--ease-smooth); white-space: nowrap; }
+        .nav-cta:hover { background: var(--accent); }
+
+        .btn-primary { padding: 16px 32px; background: var(--black); color: var(--white); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; border: none; text-decoration: none; transition: all 0.5s var(--ease-smooth); display: inline-block; }
+        .btn-primary:hover { background: var(--accent); }
+
+        .section-tag { font-family: monospace; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-mid); margin-bottom: 48px; display: flex; align-items: center; gap: 12px; }
+        .section-tag::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+
+        /* Hero */
+        .work-hero { padding: 120px 48px 36px; max-width: 1400px; margin: 0 auto; position: relative; }
+        .work-hero::before { content: ''; position: absolute; width: 520px; height: 520px; border-radius: 999px; background: radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.06) 45%, transparent 70%); top: -260px; left: -120px; filter: blur(2px); pointer-events: none; }
+        .work-hero h1 { font-size: clamp(40px, 6vw, 78px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.0; margin-bottom: 18px; }
+        .work-hero h1 .accent { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 70%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .work-hero p { font-size: clamp(18px, 2vw, 24px); color: var(--gray-mid); max-width: 700px; }
+
+        .work-stats { display: flex; gap: 40px; margin-top: 28px; padding-top: 28px; border-top: 1px solid rgba(31,21,17,0.12); flex-wrap: wrap; }
+        .work-stat-number { font-size: 48px; font-weight: 900; letter-spacing: -0.05em; color: var(--accent); }
+        .work-stat-label { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-light); margin-top: 4px; }
+
+        /* Projects container */
+        .projects-section { padding: 44px 48px; max-width: 1400px; margin: 0 auto; }
+
+        .company-pill { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 999px; font-weight: 600; display: inline-block; margin-bottom: 12px; }
+        .company-pill.blinq { background: #E0F2FE; color: #0369A1; }
+        .company-pill.ebay { background: #FEF3C7; color: #92400E; }
+        .company-pill.ogilvy { background: #FEE2E2; color: #991B1B; }
+        .company-pill.ig { background: #E0E7FF; color: #3730A3; }
+
+        /* Project cards */
+        .project-card { border: 1px solid rgba(0,0,0,0.1); border-radius: 16px; margin-bottom: 24px; overflow: hidden; transition: border-color 0.5s var(--ease-smooth); cursor: pointer; }
+        .project-card:hover { border-color: rgba(37,99,235,0.3); }
+
+        .project-header { padding: 32px; display: flex; justify-content: space-between; align-items: flex-start; }
+        .project-header-content { flex: 1; }
+
+        .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+        .project-tag { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 999px; font-weight: 600; }
+        .project-tag.blue { background: var(--accent-soft); color: var(--accent-deep); }
+        .project-tag.dark { background: var(--gray-dark); color: var(--white); }
+        .project-tag.outline { border: 1px solid rgba(0,0,0,0.15); color: var(--gray-mid); }
+
+        .project-title { font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 8px; }
+        .project-summary { font-size: 16px; color: var(--gray-mid); line-height: 1.6; max-width: 700px; }
+
+        .project-toggle { width: 48px; height: 48px; border: 1px solid rgba(0,0,0,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-left: 24px; transition: all 0.5s var(--ease-smooth); font-size: 18px; }
+        .project-card:hover .project-toggle { border-color: var(--accent); color: var(--accent); }
+        .project-card.active .project-toggle { background: var(--accent); border-color: var(--accent); color: var(--white); transform: rotate(180deg); }
+
+        .project-details { max-height: 0; overflow: hidden; transition: max-height 0.6s var(--ease-smooth); }
+        .project-card.active .project-details { max-height: 6000px; }
+
+        .project-body { padding: 0 32px 32px; border-top: 1px solid rgba(0,0,0,0.06); }
+        .project-body h4 { font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 32px; margin-bottom: 16px; }
+        .project-body ul { list-style: none; padding: 0; }
+        .project-body ul li { position: relative; padding: 8px 0 8px 26px; font-size: 15px; color: var(--gray-mid); line-height: 1.6; }
+        .project-body ul li::before { content: '\2192'; color: var(--accent); font-weight: 700; position: absolute; left: 0; top: 8px; }
+        .project-body p { font-size: 15px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 8px; }
+        .project-body p strong { color: var(--black); }
+
+        .metrics-row { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 16px; }
+        .metric-card { background: var(--gray-dark); color: var(--white); padding: 24px; border-radius: 12px; min-width: 140px; flex: 1; text-align: center; }
+        .metric-value { font-size: 28px; font-weight: 900; letter-spacing: -0.03em; color: var(--accent); }
+        .metric-label { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); margin-top: 4px; }
+
+        .project-quote { border-left: 3px solid var(--accent); padding: 16px 24px; margin-top: 24px; background: rgba(37,99,235,0.04); border-radius: 0 12px 12px 0; }
+        .project-quote p { font-style: italic; color: var(--gray-mid); font-size: 15px; line-height: 1.6; }
+        .project-quote .quote-source { font-style: normal; font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); margin-top: 8px; margin-bottom: 0; }
+
+        .evidence-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+        .evidence-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--gray-mid); text-decoration: none; transition: all 0.3s var(--ease-smooth); }
+        .evidence-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+        .deliverables { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+        .deliverable { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; padding: 6px 14px; background: rgba(0,0,0,0.04); border-radius: 999px; color: var(--gray-mid); }
+
+        .section-divider { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+        .section-divider hr { border: none; border-top: 1px solid rgba(0,0,0,0.1); }
+
+        /* Video thumbnail */
+        .video-thumbnail { margin-top: 24px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08); position: relative; cursor: pointer; }
+        .video-thumbnail img { width: 100%; height: auto; display: block; }
+        .video-thumbnail .play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.25); transition: background 0.3s var(--ease-smooth); }
+        .video-thumbnail:hover .play-overlay { background: rgba(0,0,0,0.4); }
+        .video-thumbnail .play-btn { width: 72px; height: 72px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.3s var(--ease-smooth); box-shadow: 0 4px 24px rgba(37,99,235,0.4); }
+        .video-thumbnail:hover .play-btn { transform: scale(1.1); }
+        .video-thumbnail .play-btn::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent var(--white); margin-left: 4px; }
+        .video-thumbnail-label { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); padding: 10px 16px; background: rgba(0,0,0,0.03); }
+        .video-embed { margin-top: 24px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08); }
+        .video-embed iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
+
+        /* How I Work */
+        .how-section { padding: 80px 48px; max-width: 1400px; margin: 0 auto; }
+        .how-card { background: linear-gradient(135deg, var(--gray-dark) 0%, #1a1a2e 100%); color: var(--white); padding: 64px; border-radius: 24px; }
+        .how-card h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 700; letter-spacing: -0.04em; margin-bottom: 24px; }
+        .how-card p { font-size: 18px; line-height: 1.7; opacity: 0.8; margin-bottom: 16px; max-width: 800px; }
+
+        .cta-strip { padding: 80px 48px; max-width: 1400px; margin: 0 auto; text-align: center; }
+        .cta-strip h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 700; letter-spacing: -0.04em; margin-bottom: 24px; }
+        .cta-assets { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 32px; }
+        .cta-asset { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; padding: 8px 16px; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px; color: var(--gray-mid); }
+
+        footer { background: var(--gray-dark); color: var(--white); padding: 120px 48px 48px; }
+        .footer-main { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 64px; flex-wrap: wrap; }
+        .footer-cta h2 { font-size: clamp(64px, 15vw, 200px); font-weight: 900; letter-spacing: -0.05em; line-height: 0.85; margin-bottom: 48px; }
+        .footer-cta a { font-size: 32px; font-weight: 600; color: var(--white); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
+        .footer-cta a:hover { color: var(--accent); }
+        .footer-cta p { font-size: 16px; color: var(--gray-light); margin-top: 16px; }
+        .footer-cta .btn-primary { margin-top: 32px; }
+        .footer-social { display: flex; gap: 22px; align-items: center; }
+        .footer-social a { width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; color: var(--cream); opacity: 0.72; text-decoration: none; transition: opacity 0.3s var(--ease-smooth), transform 0.3s var(--ease-smooth); }
+        .footer-social a svg { width: 24px; height: 24px; fill: currentColor; display: block; }
+        .footer-social a:hover { opacity: 1; transform: translateY(-3px); }
+        .footer-bottom { max-width: 1400px; margin: 120px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-light); }
+        .footer-links { display: flex; gap: 32px; }
+        .footer-links a { color: var(--gray-light); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
+        .footer-links a:hover { color: var(--white); }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .work-hero { padding: 120px 24px 60px; }
+            .projects-section { padding: 60px 24px; }
+            .how-section { padding: 60px 24px; }
+            .cta-strip { padding: 60px 24px; }
+            .section-divider { padding: 0 24px; }
+            .project-header { padding: 24px; flex-direction: column; }
+            .project-body { padding: 0 24px 24px; }
+            .how-card { padding: 40px 24px; }
+            footer { padding: 80px 24px 32px; }
+            .footer-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+            .footer-cta a { font-size: 21px; overflow-wrap: anywhere; }
+            .footer-cta-card { padding: 32px 24px !important; min-height: 0 !important; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+            .footer-links { justify-content: center; }
+            .work-stats { gap: 24px; }
+            .project-toggle { width: 40px; height: 40px; margin-left: 0; margin-top: 16px; }
+            .metrics-row { flex-direction: column; }
+            .nav-links { display: none; }
+        }
+
+        /* Brand alignment with the rest of the site: serif display headings, offset-shadow cards on cream, ink dark blocks */
+        .work-hero h1, .project-title, .how-card h2, .cta-strip h2, .footer-cta h2 {
+            font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.01em;
+        }
+        .work-hero::before { display: none; }
+        .project-card {
+            background: var(--white); border: 1px solid var(--ink); border-radius: 18px;
+            box-shadow: var(--offset-shadow);
+            margin-bottom: 40px;
+            transition: box-shadow 0.4s var(--ease-smooth), border-color 0.4s var(--ease-smooth);
+        }
+        .project-card:hover { box-shadow: 9px 9px 0 rgba(31,21,17,0.16); }
+        .project-card.active { box-shadow: 12px 12px 0 rgba(31,21,17,0.20); }
+        .card-logo { height: 26px; width: auto; max-width: 130px; object-fit: contain; display: block; margin-bottom: 16px; filter: grayscale(100%); opacity: 0.82; transition: filter 0.4s var(--ease-smooth), opacity 0.4s var(--ease-smooth); }
+        .project-card:hover .card-logo { filter: grayscale(0%); opacity: 1; }
+        .how-card { background: var(--ink); }
+        .metric-card { background: var(--ink); }
+        footer { background: var(--ink); }
+    </style>
+<style>.project-card{scroll-margin-top:90px;}</style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+        <div class="nav-links">
+            <a href="/workshop">Workshop</a>
+            <a href="/work-with-me">Work with me</a>
+            <a href="work.html" class="is-current">Case studies</a>
+            <a href="/podcast">Podcast</a>
+            <a href="/blog">Blog</a>
+            <a href="/traffic">Free gift</a>
+        </div>
+        <a href="/#subscribe" class="nav-cta">Subscribe</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="work-hero">
+        <div class="section-tag"><span>Portfolio</span></div>
+        <h1>Case studies</h1>
+        <p>GTM strategy, product launches, campaign development, and sales enablement across B2B and B2C.</p>
+        <div class="work-stats">
+            <div><div class="work-stat-number">$180M+</div><div class="work-stat-label">Revenue Line Built</div></div>
+            <div><div class="work-stat-number">460M</div><div class="work-stat-label">Campaign Impressions</div></div>
+            <div><div class="work-stat-number">8+</div><div class="work-stat-label">Years PMM</div></div>
+        </div>
+    </section>
+
+    <div class="projects-section" style="padding-bottom:0;">
+<div style="max-width:760px;margin:0 auto 8px;padding:0 24px;"><p style="font-size:15px;color:#555;line-height:1.6;">A selection of my product-marketing work, focused on the areas we have been discussing, content and education for adoption, the day-two adoption motion, category clarity, and the move up-market. Click any card to expand.</p></div>
+        <div id="manus-course" class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <img class="card-logo" src="images/manus/logo.png" alt="Manus">
+                    <span class="company-pill ig">Intelligent Growth &middot; Course Creator</span>
+                    <div class="project-tags">
+                        <span class="project-tag dark">Video Content</span>
+                        <span class="project-tag blue">Product Adoption</span>
+                        <span class="project-tag outline">Partnership</span>
+                    </div>
+                    <h3 class="project-title">Driving Manus Adoption Through Video: A Free Course Co-Built With Their Team on Build Club</h3>
+                    <p class="project-summary">On-camera video course built to drive product awareness and adoption for Manus. Six modules, roughly 15 minutes of total runtime, co-built with the Manus team and published free on Build Club. Each module turns a real product-marketing workflow into something the audience can take and run with in their next work session.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <div class="video-embed" style="max-width: 720px;">
+                        <video src="images/manus/trailer.mp4" poster="images/manus/trailer-poster.jpg" controls playsinline preload="metadata" style="width: 100%; display: block;" onclick="event.stopPropagation()"></video>
+                    </div>
+                    <p style="font-size:13px; color:var(--gray-light); margin-top:8px; margin-bottom:16px;">The course trailer. Built with Build Club, made with Manus, free to start.</p>
+
+                    <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; background:rgba(0,0,0,0.03); border-radius:8px; margin-bottom:24px;">
+                        <img src="images/manus/logo.png" alt="Manus" style="height:32px; width:32px; border-radius:6px; flex-shrink:0;">
+                        <p style="font-size:13px; color:var(--gray-light); margin:0;">In collaboration with <strong style="color:inherit;">Manus</strong>, the autonomous agent platform for marketing and research workflows.</p>
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>Most marketers use AI to brainstorm. I wanted to show what happens when you give a fully autonomous agent a real marketing job and walk away. Manus runs computer use, persistent logins, and parallel agents in the background. So I built four workflows I actually use as a product marketer, recorded them as a course, and shipped it free on Build Club with the Manus team as co-marketing partner.</p>
+
+                    <h4>What I Did</h4>
+                    <ul>
+                        <li><strong>Picked the four use cases that matter most to a PMM.</strong> Competitive messaging, positioning, influencer discovery, pricing intelligence. Each is a workflow I use in real work, not a synthetic demo</li>
+                        <li><strong>Built every workflow on real product data.</strong> Module 2 mines Otter and Fireflies reviews to extract differentiating language (the "feels like malware" framing came from G2 comments, not a workshop). Module 3 maps competitive territories beyond the homepage. Module 4 finds 15 creators already in your problem space ranked by relevance, not follower count. Module 5 reverse-engineers SaaS pricing structures across 10 companies</li>
+                        <li><strong>Wrote the prompts so the domain expertise is baked into the brief.</strong> Every module includes the exact prompt and a breakdown of why each line matters. Marketers swap in their own competitors, ICPs, and platforms and the same workflow runs unchanged</li>
+                        <li><strong>Got the Manus team on the collaboration.</strong> Co-branded launch on Build Club, in their distribution, with a certification track on top of the free course</li>
+                        <li><strong>Filmed and shipped end to end myself.</strong> On-camera host, RØDE setup, editing in Descript, YouTube plus Build Club distribution. Six modules, roughly 15 minutes of total runtime</li>
+                        <li><strong>Designed the certification track on Build Club</strong> so completing the course produces a portfolio piece the marketer can use back at work</li>
+                    </ul>
+
+                    <h4>Challenges and Solutions</h4>
+                    <ul>
+                        <li><strong>"How do you teach an agentic workflow without an hour-long screencast?"</strong> Kept each module under four minutes. Showed the prompt, showed the output, narrated the why. The viewer can copy the prompt and ship the workflow themselves in their next work session</li>
+                        <li><strong>"How do you write a prompt a generalist marketer can adapt?"</strong> Built every prompt around the structure of the job rather than the specifics of the brand. The script narrates the spec, not the prompt verbatim, so the audience learns the underlying pattern</li>
+                        <li><strong>"How do you make a free course feel like a real product, not a video dump?"</strong> Built the certification track. Marketers who complete the course submit their own Manus-driven workflow for review. Turns the course into productised accountability rather than passive content</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <ul>
+                        <li>Six modules published on YouTube and Build Club, roughly 15 minutes of total runtime</li>
+                        <li>Co-marketing with Manus including newsletter feature and Build Club platform placement</li>
+                        <li>Hosted on Build Club's certification platform with an open enrolment course path</li>
+                        <li>First Intelligent Growth free product shipped</li>
+                        <li>Became the credibility opener for AI-marketing speaking and podcast bookings</li>
+                    </ul>
+
+                    <h4>Delivered</h4>
+                    <div class="deliverables">
+                        <span class="deliverable">6-module video course</span>
+                        <span class="deliverable">Build Club course page</span>
+                        <span class="deliverable">Certification track</span>
+                        <span class="deliverable">Manus co-marketing motion</span>
+                        <span class="deliverable">4 reusable Manus prompt templates</span>
+                        <span class="deliverable">YouTube playlist + distribution</span>
+                        <span class="deliverable">Course landing page copy</span>
+                    </div>
+
+                    <h4>Evidence</h4>
+                    <div class="evidence-row">
+                        <a href="https://campus.buildclub.ai/courses/manus-for-marketing-692f82a7f918f9c55d017ef4" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Take the course free on Build Club</a>
+                        <a href="https://www.youtube.com/watch?v=ngKHmlDsk8s" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Module 1: Course Intro</a>
+                        <a href="https://www.youtube.com/watch?v=JPHDyKpGiqo" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Module 2: Competitive Messaging</a>
+                        <a href="https://www.youtube.com/watch?v=Wk0m6c2wVQ4" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Module 3: Competitive Positioning</a>
+                        <a href="https://www.youtube.com/watch?v=W2OmhSUnkVI" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Module 4: Influencer Discovery</a>
+                        <a href="https://www.youtube.com/watch?v=UqwCgw7BcAc" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Module 5: Pricing Intelligence</a>
+                        <a href="https://manus.im" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Manus (partner)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 3. Gamma GTM Strategy Deck -->
+        <div id="blinq-elc" class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <img class="card-logo" src="images/blinq/logo.svg" alt="Blinq">
+                    <span class="company-pill blinq">Blinq &middot; Senior PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag blue">GTM Strategy</span>
+                        <span class="project-tag outline">Research</span>
+                        <span class="project-tag outline">Sales Enablement</span>
+                    </div>
+                    <h3 class="project-title">GTM From Scratch: Diagnosing an 81% Activation Gap and Rebuilding the Go-to-Market</h3>
+                    <p class="project-summary">Blinq's event lead capture product had 1,715 workspaces but 81% had zero credit usage. No onboarding, no documentation, no structured handoff from sales. I ran a full diagnostic and built the GTM plan that became the company's #1 priority.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <div class="video-thumbnail" style="cursor:default; max-width:360px;">
+                        <img src="images/elc-demo.gif" alt="Blinq Event Lead Capture product demo">
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>Blinq had shipped a full event lead capture product (scanner + AI enrichment + CRM sync + campaigns) but had no go-to-market motion behind it. I pulled the usage data across all 1,715 workspaces and mapped the actual distribution. Then ran 10+ stakeholder interviews across sales, customer success, and growth.</p>
+
+                    <h4>My Role</h4>
+                    <p>Before writing a single asset, I ran the diagnostic:</p>
+                    <ul>
+                        <li>Pulled and analysed full usage data: 81% of workspaces had zero credit activity, zero workspaces hit the paid tier</li>
+                        <li>Interviewed 10+ stakeholders across sales, CS, and growth to validate what the data showed</li>
+                        <li>Discovered the real competitor wasn't Popl or Mobly (SaaS tools). It was the badge scanner included with every conference. 95% of event floors use them</li>
+                        <li>Identified that every closed deal was an add-on to an existing account. No standalone demand existed</li>
+                        <li>Reframed the ICP from "event managers" to teams running 10+ events/year without a dedicated solution</li>
+                    </ul>
+
+                    <p style="margin-top:16px;">Built an 8-initiative GTM plan sequenced by what would unblock the most downstream:</p>
+                    <ul>
+                        <li>Structured onboarding flow to close the sale-to-activation gap</li>
+                        <li>"One consistent tool" value prop to counter the "we already have Cvent" objection</li>
+                        <li>Training materials so sales could actually demo the product (they couldn't before)</li>
+                        <li>New competitive battlecard with talk tracks built from Gong transcripts, G2, Capterra, and Reddit reviews</li>
+                    </ul>
+
+                    <h4>Challenges and Solutions</h4>
+                    <ul>
+                        <li><strong>The "Event" framing was limiting.</strong> Customers connected it to conferences only. Repositioned around the 100-200 person regional event as the entry wedge (no badge provider, no hardware, Blinq wins on simplicity)</li>
+                        <li><strong>Zero standalone demand.</strong> Shifted entire GTM from demand gen to activation-first. If solved, 1,715 workspaces become 1,715 trials with 10% conversion = 140+ pipeline deals</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <p>The diagnostic became the company's top priority. CEO adopted the GTM plan as the roadmap for Event Lead Capture, shifting from demand gen to activation-first. Shipped all 8 initiatives within the first quarter. By the time I left, 8 ELC deals were in trial including 2 large enterprise accounts, and a single customer campaign tracked through the product showed <strong>$157K in campaign ROI</strong> from 16 of 30 captured leads converting.</p>
+
+                    <h4>Delivered</h4>
+                    <div class="deliverables">
+                        <span class="deliverable">GTM strategy doc</span>
+                        <span class="deliverable">Webpage copy (live)</span>
+                        <span class="deliverable">4-variant email series</span>
+                        <span class="deliverable">Sales 2-pager (4 versions)</span>
+                        <span class="deliverable">Competitive battlecard</span>
+                        <span class="deliverable">Onboarding flow copy</span>
+                        <span class="deliverable">8 LinkedIn hooks</span>
+                    </div>
+
+                    <h4>Evidence</h4>
+                    <div class="video-embed">
+                        <iframe src="https://www.youtube.com/embed/S8I9WXjXygs" title="Best Event Lead Capture App in 2026" allowfullscreen></iframe>
+                    </div>
+                    <p style="font-size:13px; color:var(--gray-light); margin-top:8px; margin-bottom:16px;">Independent review naming Blinq the best event lead capture app in 2026, published after the GTM work shipped.</p>
+                    <div class="evidence-row">
+                        <a href="https://www.linkedin.com/posts/blinq-me_today-were-launching-event-lead-capture-activity-7426746740030119936-D6HO" target="_blank" class="evidence-link" onclick="event.stopPropagation()">Li ELC Launch Post</a>
+                        <a href="https://www.linkedin.com/posts/jasonkhood_eventmarketing-leadgeneration-b2bmarketing-ugcPost-7432537523127668736-wniF" target="_blank" class="evidence-link" onclick="event.stopPropagation()">Li Customer Advocacy</a>
+                        <a href="https://www.linkedin.com/posts/hannahebrennan_most-event-teams-dont-have-a-lead-problem-activity-7440529510669877249-8Pwo" target="_blank" class="evidence-link" onclick="event.stopPropagation()">Li Head of Sales: The Lag Problem</a>
+                        <a href="https://www.linkedin.com/posts/jarrod-webb_im-in-sf-this-week-meeting-a-ton-of-people-activity-7440521239435317249-48aY" target="_blank" class="evidence-link" onclick="event.stopPropagation()">Li CEO: Using It in the Field (SF)</a>
+                        <a href="campaigns/elc/engaged-va.html" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Launch Email (Engaged)</a>
+                        <a href="campaigns/elc/free-users-va.html" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Launch Email (Free Users)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 5. Blinq HubSpot App Marketplace Launch -->
+        <div id="ai-operating-system" class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <h3 class="project-title" style="margin-top:0;">How I Work: AI as Operating System</h3>
+                    <p class="project-summary">Most marketers use AI as a writing tool. I use it as an operating system. One person operating with the context of a full team.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <p>The bottleneck in PMM isn't writing speed, it's context. Knowing what shipped, what customers said, what competitors changed, what the sales team is struggling with. That context is scattered across Slack, meeting transcripts, CRM notes, and product docs.</p>
+                    <p>I build systems that pull all of that together automatically. Semantic search across thousands of documents. Daily briefings generated from meeting transcripts and Slack. Competitive monitoring that flags changes before I have to look for them.</p>
+                    <p>This isn't about replacing thinking with AI. It's about eliminating the hours of context-gathering that sit between you and the actual work. The diagnostic, the positioning, the launch plan, the CEO briefing: that's the real work. Everything else is infrastructure, and infrastructure should be automated.</p>
+                </div>
+            </div>
+        </div>
+        <div id="campaigns-launch" class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <img class="card-logo" src="images/blinq/logo.svg" alt="Blinq">
+                    <span class="company-pill blinq">Blinq &middot; Senior PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag blue">Product Launch</span>
+                        <span class="project-tag outline">Messaging</span>
+                    </div>
+                    <h3 class="project-title">Campaigns Feature Launch: Solving a Category Clarity Problem Before Writing a Single Asset</h3>
+                    <p class="project-summary">Nobody could explain what "Campaigns" did. Not sales, not product, not even a B2B SaaS competitor who tested it. I built the messaging house first, then launched with video, EDM, LinkedIn, and a sales one-pager off one messaging spine.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <h4>Overview</h4>
+                    <p>Campaigns shipped to public beta but the content team was blocked on the video script and sales needed a one-pager. The real problem: no one could clearly explain what the product did. Feedback from a competitor: "I never understood what campaigns is." This was a messaging problem before it was a content problem.</p>
+
+                    <h4>What I Did</h4>
+                    <ul>
+                        <li>Built the messaging house before touching any asset: WHO (champion + company type), WHAT (product category + use case), WHY (problem with current way), HOW (capability + feature), SO THAT (benefit)</li>
+                        <li>Created three value prop canvases for three distinct use cases</li>
+                        <li>Wrote punch-up copy for headlines and CTAs</li>
+                        <li>Briefed the video editor with a 5-beat structure matching the app's actual flow</li>
+                        <li>Wrote email and LinkedIn copy off the same messaging spine</li>
+                        <li>Built the sales one-pager for the enterprise team</li>
+                    </ul>
+
+                    <h4>Challenges and Solutions</h4>
+                    <ul>
+                        <li><strong>Internal confusion about what the product even does:</strong> Started with messaging discipline (WHO/WHAT/WHY/HOW/SO THAT) before any creative work</li>
+                        <li><strong>Key objection: "We already have campaigns in Salesforce":</strong> Developed response frame: "Blinq does the data cleanup upfront so your Salesforce campaigns actually work"</li>
+                    </ul>
+
+                    <h4>Delivered</h4>
+                    <div class="deliverables">
+                        <span class="deliverable">Messaging house</span>
+                        <span class="deliverable">Value prop canvases (x3)</span>
+                        <span class="deliverable">Video brief (5 beats)</span>
+                        <span class="deliverable">Email copy</span>
+                        <span class="deliverable">LinkedIn post</span>
+                        <span class="deliverable">Sales one-pager</span>
+                    </div>
+
+                    <h4>Evidence</h4>
+                    <div class="evidence-row">
+                        <a href="https://www.linkedin.com/posts/blinq-me_you-capture-leads-at-a-conference-weeks-activity-7427833886757339136-1Fc5" target="_blank" class="evidence-link" onclick="event.stopPropagation()">Li Campaigns Video Post</a>
+                        <a href="https://www.linkedin.com/feed/update/urn:li:activity:7427502791428022272/" target="_blank" class="evidence-link" onclick="event.stopPropagation()">Li Influencer Campaign</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 10. NextDocs -->
+        <div id="gamma-bridge-sponsor" class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <img class="card-logo" src="images/gamma/logo.svg" alt="Gamma">
+                    <span class="company-pill ig">Gamma &middot; GTM Strategy</span>
+                    <div class="project-tags">
+                        <span class="project-tag dark">AI-Native PMM</span>
+                        <span class="project-tag blue">Positioning</span>
+                        <span class="project-tag outline">Buying Committee</span>
+                    </div>
+                    <h3 class="project-title">Enterprise GTM Strategy: From 40K Teams of 3 to 1K Teams of 10+</h3>
+                    <p class="project-summary">Gamma's brief gave me four personas and a growth target. I ran original primary research with sales enablement leaders at Mastercard, UpGuard, Deel, and Rithum, then pushed past the four personas to name the real enterprise champion: not the VP from the brief, the enablement leader who actually owns the rollout.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <a href="work-samples/the-bridge-sponsor-gamma.pdf" target="_blank" onclick="event.stopPropagation()" style="display:block;text-decoration:none;">
+                        <div class="video-thumbnail" style="cursor:pointer;">
+                            <img src="images/gamma-bridge-sponsor/hero-01.png" alt="The Bridge Sponsor - GTM strategy deck for Gamma - cover slide">
+                            <div class="video-thumbnail-label">Open the full deck (PDF) &rarr;</div>
+                        </div>
+                    </a>
+
+                    <h4>Overview</h4>
+                    <p>A strategic GTM deck I built for Gamma: how to take it from 40,000 teams of 3 users to 1,000 teams of 10+ users, across four personas. The deck covers positioning, persona reframing, pricing research methodology, and the GTM motion. The Bridge Sponsor is the framing I built for it.</p>
+
+                    <h4>What I Did</h4>
+                    <ul>
+                        <li><strong>Ran original primary research before touching the personas.</strong> Interviewed Kevin Bogdanov (ex-Indeed and Salesforce sales enablement leader) on how enablement teams actually buy AI content tools. Validated the pattern through conversations with sales enablement and commercial leaders at Mastercard, UpGuard, Deel, and Rithum. Cross-referenced with Gartner buying-committee research and McKinsey adoption data</li>
+                        <li><strong>Pushed past the four personas in the brief.</strong> The real enterprise buyer wasn't the VP Gamma had named, it was the enablement leader who feels the pain, translates product into content, runs pilots, and proves ROI before the VP signs the PO. Reframed the persona model around that insight</li>
+                        <li><strong>Built a two-persona dual GTM motion.</strong> Marcus (sales rep) lands individual users through PLG, Kevin (Enablement Director) converts scattered usage into team adoption. Same product, two stories, no mixed messaging between marketing and sales</li>
+                        <li><strong>Named the buying-committee dynamic.</strong> "Target Kevin to reach James, that's the enterprise motion." Gartner says the average B2B buying committee has 14 people. James (VP) signs the PO. Kevin (enablement) runs the pilot, trains the field, proves the value. Transformation is weaponising enablement</li>
+                        <li><strong>Designed two parallel pricing-research tracks.</strong> Van Westendorp price sensitivity research with two competing hypotheses: is complexity killing conversion (simplify 6 plans to 4), or is credit confusion the blocker (transparency calculator showing ROI upfront). Test both, measure what works, no more guessing</li>
+                        <li><strong>Anchored positioning on a category claim.</strong> "Gamma is the AI creation layer for sales enablement." Used April Dunford's framework on how market category shapes buyer perception. Seismic stores and distributes, Gong analyses, Gamma creates. Reduces surface area by integrating with what exists rather than competing for new platform real estate</li>
+                    </ul>
+
+                    <h4>The Strategic Reframe</h4>
+                    <a href="work-samples/the-bridge-sponsor-gamma.pdf" target="_blank" onclick="event.stopPropagation()" style="display:block;text-decoration:none;">
+                        <div class="video-thumbnail" style="cursor:pointer; margin-top:24px;">
+                            <img src="images/gamma-bridge-sponsor/hero-04.png" alt="But wait - what about James? - buying committee analysis slide">
+                        </div>
+                    </a>
+                    <p style="margin-top:16px;">The brief named the VP as the decision-maker. The research said otherwise. Enterprise tools get hired by the enablement leader and approved by the VP <em>after</em> the leader builds the case. Targeting James directly bypasses the person who feels the pain and runs the pilot. Targeting Kevin reaches both.</p>
+
+                    <h4>The Dual Motion</h4>
+                    <a href="work-samples/the-bridge-sponsor-gamma.pdf" target="_blank" onclick="event.stopPropagation()" style="display:block;text-decoration:none;">
+                        <div class="video-thumbnail" style="cursor:pointer; margin-top:24px;">
+                            <img src="images/gamma-bridge-sponsor/hero-03.png" alt="Two personas, dual GTM motion - PLG entry plus enterprise conversion">
+                        </div>
+                    </a>
+                    <p style="margin-top:16px;">Marcus (PLG entry) and Kevin (enterprise conversion) are two heads of the same monster. Same product, different stories. Marcus message: "Turn client research into winning decks in 30 minutes." Kevin message: "Turn 4-week content cycles into 1-week launches." Marketing and sales stay aligned because the messaging is engineered for the layer they own.</p>
+
+                    <h4>Delivered</h4>
+                    <div class="deliverables">
+                        <span class="deliverable">33-slide strategic deck (visual deck via Gamma)</span>
+                        <span class="deliverable">Primary research synthesis</span>
+                        <span class="deliverable">Persona reframe + buying committee map</span>
+                        <span class="deliverable">Dual-motion GTM playbook</span>
+                        <span class="deliverable">Pricing research test design (Van Westendorp)</span>
+                        <span class="deliverable">Category positioning thesis</span>
+                    </div>
+
+                    <h4>Evidence</h4>
+                    <div class="evidence-row">
+                        <a href="work-samples/the-bridge-sponsor-gamma.pdf" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Full deck (PDF, 33 slides)</a>
+                        <a href="https://gamma.app/" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Gamma (the product the work is for)</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 6. Blinq AI Notetaker Launch -->
+        <div id="ebay-pla" class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <img class="card-logo" src="images/ebay/logo.svg" alt="eBay">
+                    <span class="company-pill ebay">eBay Ads &middot; PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag blue">GTM Strategy</span>
+                        <span class="project-tag dark">Product Launch</span>
+                    </div>
+                    <h3 class="project-title">GTM Strategy &amp; Launch: From Beta to $180M in Annual Revenue</h3>
+                    <p class="project-summary">How do you launch unproven ad tech to skeptical enterprise buyers and drive adoption across APAC, US, and EU? I led the launch of eBay's Promoted Listings Advanced from beta to core revenue driver, attracting 2,500+ brands and contributing to eBay's $1B ads milestone.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <div class="video-thumbnail" onclick="event.stopPropagation(); playVideo(this, 'https://share.descript.com/embed/cMfYBwmlNGo')">
+                        <img src="images/ebay-pla-presentation.png" alt="eBay Promoted Listings Advanced differentiation slide showing product positioning">
+                        <div class="play-overlay"><div class="play-btn"></div></div>
+                        <div class="video-thumbnail-label">Watch presentation recording</div>
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>I led the launch of Promoted Listings Advanced, a new advertising product targeting larger eBay sellers and brands. Five products, 2,500+ active brands, helping grow eBay's ads business from $600M toward $1B.</p>
+
+                    <h4>Process</h4>
+                    <ul>
+                        <li><strong>Research:</strong> Conducted 20+ in-depth seller interviews and analysed competitor offerings to understand the market landscape</li>
+                        <li><strong>Positioning:</strong> Developed "Get more sales" messaging, resulting in an 87% increase in click-through rates</li>
+                        <li><strong>Product Collaboration:</strong> Worked with the product team to prioritise features based on seller feedback</li>
+                        <li><strong>Beta Testing:</strong> Recruited key brands like Dyson and Nespresso, incorporating their feedback into the final product</li>
+                        <li><strong>Sales Enablement:</strong> Created an education platform, webinars, and sales materials for the GTM team</li>
+                        <li><strong>Global Rollout:</strong> Supported teams worldwide in adapting the launch strategy to local markets across APAC, US, and EU</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <div class="metrics-row">
+                        <div class="metric-card"><div class="metric-value">$180M</div><div class="metric-label">Annual Revenue</div></div>
+                        <div class="metric-card"><div class="metric-value">2,500+</div><div class="metric-label">Active Brands</div></div>
+                        <div class="metric-card"><div class="metric-value">286%</div><div class="metric-label">YoY Growth</div></div>
+                    </div>
+
+                    <div class="project-quote">
+                        <p>"That launch exemplified our ability to work without global support, communicating new tools to the market and reeducating sellers on complex concepts. The product evolved rapidly, expanding from just the top spot of search to the whole first page and in-listing pages. This constant evolution required ongoing education of our seller base, adapting our messaging and support as the product grew and changed."</p>
+                        <p class="quote-source">Senior Product Marketing Manager, eBay</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 3. eBay ChannelAdvisor -->
+        <div id="blinq-lifecycle" class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <img class="card-logo" src="images/blinq/logo.svg" alt="Blinq">
+                    <span class="company-pill blinq">Blinq &middot; Senior PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag blue">Lifecycle</span>
+                        <span class="project-tag dark">Email</span>
+                        <span class="project-tag outline">Activation</span>
+                    </div>
+                    <h3 class="project-title">Lifecycle &amp; Onboarding: The Experiment That Proved Email Lifts Activation 16% and Referrals 115%</h3>
+                    <p class="project-summary">Blinq's lifecycle ran on autopilot: 25 email automations nobody had audited end to end. An experiment showed the welcome series alone lifted activation 16% and referrals 115% against control. I audited every automation, rebuilt the welcome series, and wrote the in-app nudges that pull dormant users back into the product.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <div class="video-thumbnail" style="cursor:default; max-width:720px;">
+                        <img src="images/blinq/welcome-series-rebrand.png" alt="The rebuilt Blinq welcome series structure, Capture-First: E1 Welcome an hour after signup, E2 Scanner and Enrichment on day 2, branching on day 4 into E3a Notetaker for sharers and E3b a nudge for non-sharers, E4 Ways to share on day 6, and E5 Premium at two weeks">
+                    </div>
+                    <p style="font-size:13px; color:var(--gray-light); margin-top:8px; margin-bottom:16px;">The rebuilt series, Capture-First. It branches on day 4 based on whether the user has shared their card yet, so sharers and non-sharers get different next steps.</p>
+
+                    <h4>Overview</h4>
+                    <p>Lifecycle was the highest-leverage channel in the business and the least owned. Emails had been written feature by feature over years, with no one accountable for the journey a new user actually experienced. The welcome series experiment gave us the proof that email moved the activation metric the company cared about, which turned a copy cleanup into a growth project.</p>
+
+                    <h4>What I Did</h4>
+                    <ul>
+                        <li><strong>Audited all 25 lifecycle automations end to end.</strong> Mapped every trigger, segment, and message against the user journey, and flagged where emails contradicted each other or fired at the wrong moment</li>
+                        <li><strong>Used the experiment as the strategy.</strong> The welcome series test lifted activation 16% and referrals 115% against control. That result set the priority: fix the journeys closest to first value before touching anything else</li>
+                        <li><strong>Rebuilt the welcome series.</strong> Rewrote the sequence around the first action that predicts retention, not the feature list, with subject lines and sends tested by segment</li>
+                        <li><strong>Wrote the in-app nudges.</strong> Copy that meets dormant users at the moment they return and routes them to the action that activates them</li>
+                        <li><strong>Cleaned up the hidden surface.</strong> The audit surfaced 47 transactional emails running outside marketing oversight, brought into one view so the lifecycle could be managed as a system</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <div class="metrics-row">
+                        <div class="metric-card"><div class="metric-value">+16%</div><div class="metric-label">Activation (Experiment vs Control)</div></div>
+                        <div class="metric-card"><div class="metric-value">+115%</div><div class="metric-label">Referrals (Experiment vs Control)</div></div>
+                        <div class="metric-card"><div class="metric-value">25</div><div class="metric-label">Automations Audited</div></div>
+                    </div>
+
+                    <h4>Where it was heading</h4>
+                    <p>In my last weeks I worked with the incoming lifecycle marketer on the next version. We agreed the binary "shared their card or not" signal was too blunt as the way to branch the journey, and started moving toward richer engagement signals (card updated, last login, profile completeness, features explored) and a "what to do next" nudge for everyone, rather than treating not-sharing as a negative. On my last day I mapped out the future-state journeys to align that direction before handing it over.</p>
+
+                    <h4>Delivered</h4>
+                    <div class="deliverables">
+                        <span class="deliverable">Welcome email series (rebuilt)</span>
+                        <span class="deliverable">Full lifecycle audit (25 canvases)</span>
+                        <span class="deliverable">In-app nudge copy</span>
+                        <span class="deliverable">Journey map + segmentation recommendations</span>
+                    </div>
+                    <h4>Evidence</h4>
+                    <div class="evidence-row">
+                        <a href="campaigns/welcome-series/welcome-series-structure.html" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Approved Series Structure (Capture-First)</a>
+                        <a href="campaigns/welcome-series/welcome-series-directions.html" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Three Directions Explored</a>
+                        <a href="images/blinq/welcome-series-directions.png" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Directions Visual (image)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- 2. Prompt Cowboy -->
+        <!-- Blinq Rebrand Baseline Dashboards -->
+    </div>
+    <footer style="max-width:760px;margin:64px auto;padding:24px;text-align:center;color:#888;font-size:13px;">Will Mulholland &middot; <a href="https://www.linkedin.com/in/willmulholland/" style="color:#888;">LinkedIn</a></footer>
+    <script>
+        // --- Existing site JS ---
+        function toggleProject(card) {
+            // Only the header toggles. Clicks inside the open body (text, links, video) are ignored,
+            // so an accidental click on an expanded card never closes it.
+            if (window.event && window.event.target && window.event.target.closest('.project-details')) return;
+            var wasActive = card.classList.contains('active');
+            // Accordion: close any other open card so the page never shifts under a pending click.
+            document.querySelectorAll('.project-card.active').forEach(function (c) {
+                if (c !== card) c.classList.remove('active');
+            });
+            card.classList.toggle('active', !wasActive);
+            if (!wasActive && card.id) { history.replaceState(null, '', '#' + card.id); }
+        }
+
+        function playVideo(thumbnail, embedUrl) {
+            var container = document.createElement('div');
+            container.className = 'video-embed';
+            var iframe = document.createElement('iframe');
+            iframe.src = embedUrl + (embedUrl.includes('?') ? '&' : '?') + 'autoplay=1';
+            iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+            iframe.allowFullscreen = true;
+            container.appendChild(iframe);
+            thumbnail.parentNode.replaceChild(container, thumbnail);
+        }
+
+        // Deep-link: open and scroll to a card from the URL hash (e.g. /work.html#blinq-pricing)
+        function openCardFromHash() {
+            var id = (window.location.hash || '').replace('#','');
+            if (!id) return;
+            var card = document.getElementById(id);
+            if (card && card.classList.contains('project-card')) {
+                document.querySelectorAll('.project-card.active').forEach(function (c) { if (c !== card) c.classList.remove('active'); });
+                card.classList.add('active');
+                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        window.addEventListener('DOMContentLoaded', openCardFromHash);
+        window.addEventListener('hashchange', openCardFromHash);
+    </script>
+</body>
+</html>
