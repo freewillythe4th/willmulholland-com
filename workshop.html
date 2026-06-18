@@ -661,16 +661,8 @@
             <button type="button" class="modal-close" data-close-modal aria-label="Close">&times;</button>
             <span class="modal-badge">Free &middot; Live online</span>
             <h2 id="modalTitle">Reserve your spot</h2>
-            <p class="modal-sub">Pick your session and your details. On the next screen you hit Reserve to lock your seat, that is what sends your calendar invite and join link.</p>
+            <p class="modal-sub">Pick your session. On the next screen you hit Reserve to lock your seat, that is what sends your calendar invite and join link.</p>
             <form id="reserveForm">
-                <div class="field">
-                    <label for="firstName">First name</label>
-                    <input type="text" id="firstName" name="firstName" placeholder="Jane" required>
-                </div>
-                <div class="field">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="jane@yourbusiness.com" required>
-                </div>
                 <div class="field">
                     <label>Pick your session</label>
                     <label style="display:flex; align-items:center; gap:10px; padding:13px 15px; border:1px solid rgba(0,0,0,0.12); border-radius:12px; background:var(--accent-soft); font-size:14px; color:var(--accent-deep); font-weight:600; cursor:pointer; margin-bottom:8px;">
@@ -682,33 +674,6 @@
                         <span>For marketers, Wed 1 July, 7:00pm AEST</span>
                     </label>
                     <p style="font-family:monospace; font-size:11px; color:var(--gray-mid); margin-top:8px; text-transform:uppercase; letter-spacing:0.05em;">Both 7pm AEST. Also 10:00am BST, 5:00am ET, 2:00am PT.</p>
-                </div>
-                <div class="field">
-                    <label for="segment">What best describes you?</label>
-                    <select id="segment" name="segment" required>
-                        <option value="" disabled selected>Pick one...</option>
-                        <option>I'm a product marketer</option>
-                        <option>I'm a marketer, want to use AI better</option>
-                        <option>I'm a founder doing my own marketing</option>
-                        <option>I run an agency / studio</option>
-                        <option>I want to AI-proof my marketing career</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label for="job">What's the one job you'd most want to stop doing by hand?</label>
-                    <select id="job" name="job" required>
-                        <option value="" disabled selected>Pick one... this decides what I build live</option>
-                        <option>Turning customer or sales calls into insights I can use</option>
-                        <option>Watching what a competitor is doing</option>
-                        <option>Turning one idea into content in my voice</option>
-                        <option>Writing the same email or doc over and over</option>
-                        <option>Other</option>
-                    </select>
-                </div>
-                <div class="field" id="jobOtherField" style="display: none;">
-                    <label for="jobOther">Tell me the one job</label>
-                    <input type="text" id="jobOther" name="jobOther" placeholder="The thing you'd love to stop doing by hand">
                 </div>
                 <button type="submit" class="btn-primary" id="reserveSubmit">Continue to reserve</button>
                 <p class="modal-error" id="reserveError"></p>
@@ -734,7 +699,7 @@
             function openModal() {
                 overlay.classList.add('is-open');
                 document.body.style.overflow = 'hidden';
-                setTimeout(function () { document.getElementById('firstName').focus(); }, 50);
+                setTimeout(function () { var r = document.querySelector('input[name="session"]'); if (r) r.focus(); }, 50);
             }
             function closeModal() {
                 overlay.classList.remove('is-open');
@@ -746,55 +711,16 @@
             overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
             document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeModal(); });
 
-            // Reveal the free-text box when "Other" is the chosen job
-            var jobSelect = document.getElementById('job');
-            var jobOtherField = document.getElementById('jobOtherField');
-            if (jobSelect && jobOtherField) {
-                jobSelect.addEventListener('change', function () {
-                    jobOtherField.style.display = jobSelect.value === 'Other' ? 'block' : 'none';
-                });
-            }
-
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 errEl.style.display = 'none';
-                var firstName = document.getElementById('firstName').value.trim();
-                var email = document.getElementById('email').value.trim();
-                var segment = document.getElementById('segment').value;
                 var sessionChoice = (document.querySelector('input[name="session"]:checked') || {}).value || '';
-                var session = sessionChoice === 'marketers' ? 'Marketers, Wed 1 July 7:00pm AEST' : 'Founders, Wed 24 June 7:00pm AEST';
-                var jobChoice = document.getElementById('job').value;
-                var jobOther = document.getElementById('jobOther').value.trim();
-                var job = jobChoice === 'Other' ? (jobOther || 'Other') : jobChoice;
-                if (!firstName || !email) return;
                 if (!sessionChoice) { errEl.textContent = 'Pick which session you want.'; errEl.style.display = 'block'; return; }
-
-                var original = submitBtn.textContent;
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Taking you there...';
-
-                fetch('/api/workshop-register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ firstName: firstName, email: email, segment: segment, session: session, job: job })
-                }).then(function (r) {
-                    if (r.ok) {
-                        var dest = sessionChoice === 'marketers'
-                            ? 'https://intelligent-growth.beehiiv.com/products/build-the-brain-behind-your-marketing'
-                            : 'https://intelligent-growth.beehiiv.com/products/build-the-brain-behind-your-marketing-now';
-                        window.location.href = dest;
-                    } else {
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = original;
-                        errEl.textContent = 'Something went wrong. Try again or email wcmulholland@gmail.com.';
-                        errEl.style.display = 'block';
-                    }
-                }).catch(function () {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = original;
-                    errEl.textContent = 'Network error. Try again in a moment.';
-                    errEl.style.display = 'block';
-                });
+                window.location.href = sessionChoice === 'marketers'
+                    ? 'https://intelligent-growth.beehiiv.com/products/build-the-brain-behind-your-marketing'
+                    : 'https://intelligent-growth.beehiiv.com/products/build-the-brain-behind-your-marketing-now';
             });
 
             if (window.location.hash === '#reserve') openModal();
