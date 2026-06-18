@@ -272,6 +272,7 @@
                             <option>I want to AI-proof my marketing career</option>
                             <option>Other</option>
                         </select>
+                        <input type="text" id="segmentOther" name="segmentOther" placeholder="Tell me what you do" style="display:none; margin-top:10px;">
                     </div>
                     <div class="field">
                         <label for="whoWhat">Who do you market to, and what do you sell?</label>
@@ -287,6 +288,7 @@
                             <option>Just want to see how you do it</option>
                             <option>Other</option>
                         </select>
+                        <input type="text" id="goalOther" name="goalOther" placeholder="Tell me what you're after" style="display:none; margin-top:10px;">
                     </div>
                     <div class="field">
                         <label for="job">What's the one job you'd most want to stop doing by hand?</label>
@@ -298,6 +300,7 @@
                             <option>Writing the same email or doc over and over</option>
                             <option>Other</option>
                         </select>
+                        <input type="text" id="jobOther" name="jobOther" placeholder="Tell me the one job" style="display:none; margin-top:10px;">
                     </div>
                     <div class="field">
                         <label for="aiUse">What are you using AI for in your marketing right now, and where's it falling short?</label>
@@ -374,6 +377,27 @@
             var done = document.getElementById('gateDone');
             var cta = document.getElementById('unlockCta');
 
+            function wireOther(selectId, otherId) {
+                var sel = document.getElementById(selectId);
+                var oth = document.getElementById(otherId);
+                if (!sel || !oth) return;
+                sel.addEventListener('change', function () {
+                    var on = sel.value === 'Other';
+                    oth.style.display = on ? 'block' : 'none';
+                    if (!on) oth.value = '';
+                    if (on) oth.focus();
+                });
+            }
+            wireOther('segment', 'segmentOther');
+            wireOther('goal', 'goalOther');
+            wireOther('job', 'jobOther');
+            function pickValue(selectId, otherId) {
+                var sel = document.getElementById(selectId);
+                var oth = document.getElementById(otherId);
+                if (sel && sel.value === 'Other') return (oth && oth.value.trim()) || 'Other';
+                return sel ? sel.value : '';
+            }
+
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 errEl.style.display = 'none';
@@ -381,10 +405,10 @@
                 var email = document.getElementById('email').value.trim();
                 var linkedin = document.getElementById('linkedin').value.trim();
                 var website = document.getElementById('website').value.trim();
-                var segment = document.getElementById('segment').value;
+                var segment = pickValue('segment', 'segmentOther');
                 var whoWhat = document.getElementById('whoWhat').value.trim();
-                var goal = document.getElementById('goal').value;
-                var job = document.getElementById('job').value;
+                var goal = pickValue('goal', 'goalOther');
+                var job = pickValue('job', 'jobOther');
                 var aiUse = document.getElementById('aiUse').value.trim();
                 var spend = document.getElementById('spend').value;
                 var firstName = fullName.split(/\s+/)[0];
