@@ -661,7 +661,7 @@
             <button type="button" class="modal-close" data-close-modal aria-label="Close">&times;</button>
             <span class="modal-badge">Free &middot; Live online</span>
             <h2 id="modalTitle">Reserve your spot</h2>
-            <p class="modal-sub">Pick your session and drop your details. You confirm your seat and get the calendar invite on the next screen.</p>
+            <p class="modal-sub">Pick your session and your details. On the next screen you hit Reserve to lock your seat, that is what sends your calendar invite and join link.</p>
             <form id="reserveForm">
                 <div class="field">
                     <label for="firstName">First name</label>
@@ -710,9 +710,9 @@
                     <label for="jobOther">Tell me the one job</label>
                     <input type="text" id="jobOther" name="jobOther" placeholder="The thing you'd love to stop doing by hand">
                 </div>
-                <button type="submit" class="btn-primary" id="reserveSubmit">Reserve my spot, free</button>
+                <button type="submit" class="btn-primary" id="reserveSubmit">Continue to reserve</button>
                 <p class="modal-error" id="reserveError"></p>
-                <p class="modal-fine">You'll get a calendar invite with the join link. Unsubscribe anytime. I never sell or share your details.</p>
+                <p class="modal-fine">One more step on the next screen: hit Reserve to confirm your seat. Unsubscribe anytime, I never sell or share your details.</p>
             </form>
             <div id="reserveConfirm" style="display:none;">
                 <span class="modal-badge">You're in</span>
@@ -771,7 +771,7 @@
 
                 var original = submitBtn.textContent;
                 submitBtn.disabled = true;
-                submitBtn.textContent = 'Reserving...';
+                submitBtn.textContent = 'Taking you there...';
 
                 fetch('/api/workshop-register', {
                     method: 'POST',
