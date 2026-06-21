@@ -255,11 +255,11 @@
                     </div>
                     <div class="field">
                         <label for="linkedin">LinkedIn profile URL</label>
-                        <input type="url" id="linkedin" name="linkedin" placeholder="linkedin.com/in/you" required>
+                        <input type="text" inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false" id="linkedin" name="linkedin" placeholder="linkedin.com/in/you" required>
                     </div>
                     <div class="field">
                         <label for="website">Website or portfolio URL <span style="text-transform:none;font-weight:400;letter-spacing:0;color:var(--gray-light);">(optional)</span></label>
-                        <input type="url" id="website" name="website" placeholder="yoursite.com">
+                        <input type="text" inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false" id="website" name="website" placeholder="yoursite.com">
                     </div>
                     <div class="field">
                         <label for="segment">What do you do?</label>
@@ -403,8 +403,9 @@
                 errEl.style.display = 'none';
                 var fullName = document.getElementById('fullName').value.trim();
                 var email = document.getElementById('email').value.trim();
-                var linkedin = document.getElementById('linkedin').value.trim();
-                var website = document.getElementById('website').value.trim();
+                var normUrl = function (v) { v = (v || '').trim(); return v && !/^https?:\/\//i.test(v) ? 'https://' + v.replace(/^\/+/, '') : v; };
+                var linkedin = normUrl(document.getElementById('linkedin').value);
+                var website = normUrl(document.getElementById('website').value);
                 var segment = pickValue('segment', 'segmentOther');
                 var whoWhat = document.getElementById('whoWhat').value.trim();
                 var goal = pickValue('goal', 'goalOther');
