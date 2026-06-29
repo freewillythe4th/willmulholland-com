@@ -1,6 +1,10 @@
 {
   "routes": [
     {
+      "src": "/augmented",
+      "dest": "/augmented.html"
+    },
+    {
       "handle": "filesystem"
     },
     {

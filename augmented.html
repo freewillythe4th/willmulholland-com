@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Will Mulholland · AI-Native Marketer</title>
+<meta name="description" content="Product marketer who builds the systems. The work, the story, and the Marketing Brain behind it.">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0C0F; --bg2:#101218; --panel:#14171E; --panel2:#191D26;
+    --bone:#ECE8E1; --soft:#B7BBC4; --mut:#7E838E; --line:rgba(255,255,255,0.08);
+    --cy:#39E2FF; --bl:#3B82F6; --in:#6366F1; --amber:#F5A623; --lime:#46F4A6;
+    --grad:linear-gradient(100deg,#39E2FF 0%,#3B82F6 48%,#6E6BF2 100%);
+    --ease:cubic-bezier(0.16,1,0.3,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Sora',system-ui,sans-serif;background:var(--bg);color:var(--bone);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+  body.boot-lock{overflow:hidden;height:100vh}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--cy);color:#04121a}
+  .mono{font-family:'JetBrains Mono',monospace}
+  .pix{font-family:'Press Start 2P',monospace;letter-spacing:0.02em;line-height:1.35}
+  .disp{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* ---------- blueprint grid backdrop ---------- */
+  .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:54px 54px;
+    -webkit-mask-image:radial-gradient(120% 90% at 70% 0%,#000 30%,transparent 80%);
+    mask-image:radial-gradient(120% 90% at 70% 0%,#000 30%,transparent 80%);opacity:0.5}
+  .glowblob{position:fixed;z-index:0;pointer-events:none;filter:blur(70px);opacity:0.5}
+  .glow1{top:-160px;right:-120px;width:520px;height:520px;background:radial-gradient(circle,rgba(57,130,246,0.34),transparent 65%)}
+  .glow2{bottom:-200px;left:-160px;width:560px;height:560px;background:radial-gradient(circle,rgba(99,102,241,0.22),transparent 65%)}
+
+  /* ---------- boot overlay ---------- */
+  #boot{position:fixed;inset:0;z-index:9000;background:#070809;display:flex;align-items:center;justify-content:center;transition:opacity .7s var(--ease),visibility .7s}
+  #boot.gone{opacity:0;visibility:hidden}
+  .boot-card{width:min(620px,90vw);padding:0 28px}
+  .boot-line{font-size:12px;color:var(--soft);opacity:0;transform:translateY(6px);animation:bootIn .45s var(--ease) forwards}
+  .boot-line .ok{color:var(--lime)} .boot-line .am{color:var(--amber)} .boot-line .cy{color:var(--cy)}
+  .b1{animation-delay:.25s}.b2{animation-delay:.95s}.b3{animation-delay:1.65s}.b4{animation-delay:2.5s}.b5{animation-delay:3.05s}
+  .boot-bar{height:8px;border:1px solid rgba(255,255,255,0.18);border-radius:2px;margin:18px 0;overflow:hidden;opacity:0;animation:bootIn .4s var(--ease) 1.95s forwards}
+  .boot-bar i{display:block;height:100%;width:0;background:var(--grad);animation:bootFill 1.0s var(--ease) 2.05s forwards}
+  .boot-fin{margin-top:18px;font-size:15px;color:var(--bone);opacity:0;animation:bootIn .5s var(--ease) 3.5s forwards}
+  .boot-skip{position:absolute;bottom:30px;left:0;right:0;text-align:center;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--mut);cursor:pointer}
+  .boot-skip:hover{color:var(--bone)}
+  @keyframes bootIn{to{opacity:1;transform:none}}
+  @keyframes bootFill{to{width:100%}}
+  @keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+  .caret{display:inline-block;width:8px;height:1em;background:var(--cy);margin-left:3px;transform:translateY(2px);animation:blink 1s step-end infinite}
+
+  /* ---------- nav ---------- */
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:rgba(11,12,15,0.6);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nv-l{display:flex;align-items:center;gap:11px;font-family:'Space Grotesk';font-weight:700;font-size:15px;letter-spacing:0.02em}
+  .nv-mark{width:26px;height:26px;border:1.5px solid var(--cy);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Press Start 2P';font-size:9px;color:var(--cy)}
+  .nv-r{display:flex;align-items:center;gap:26px;font-size:13px;color:var(--soft)}
+  .nv-r a{transition:color .3s}.nv-r a:hover{color:var(--bone)}
+  .nv-cta{padding:9px 16px;border:1px solid var(--line);border-radius:999px;color:var(--bone) !important}
+  .nv-cta:hover{border-color:var(--cy);background:rgba(57,226,255,0.06)}
+  @media(max-width:680px){.nv-r a.hidem{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;z-index:2;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px}
+  .hero-label{font-size:11px;letter-spacing:0.42em;text-transform:uppercase;color:var(--soft);margin-bottom:26px}
+  .hero h1{font-size:clamp(30px,7.4vw,86px);line-height:1.12;margin:0}
+  .hero h1 .grad-text{filter:drop-shadow(0 6px 30px rgba(57,130,246,0.35))}
+  .hero-sub{margin-top:30px;font-size:clamp(15px,1.7vw,19px);color:var(--soft);max-width:560px;line-height:1.6}
+  .hero-sub b{color:var(--bone);font-weight:600}
+  .hero-scroll{margin-top:54px;display:inline-flex;flex-direction:column;align-items:center;gap:10px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--mut)}
+  .hero-chev{width:20px;height:20px;border-right:1.5px solid var(--cy);border-bottom:1.5px solid var(--cy);transform:rotate(45deg);animation:bob 1.8s var(--ease) infinite}
+  @keyframes bob{0%,100%{transform:rotate(45deg) translate(0,0)}50%{transform:rotate(45deg) translate(4px,4px)}}
+  .particles{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+  .pdash{position:absolute;height:2px;border-radius:2px;opacity:0;animation:drift linear infinite}
+  @keyframes drift{0%{opacity:0;transform:translateY(20px)}10%{opacity:.7}90%{opacity:.7}100%{opacity:0;transform:translateY(-40px)}}
+
+  /* ---------- marquee strip ---------- */
+  .strip{position:relative;z-index:2;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);overflow:hidden;padding:16px 0}
+  .strip-row{display:flex;gap:34px;white-space:nowrap;width:max-content;animation:slide 26s linear infinite}
+  .strip-row span{font-family:'Space Grotesk';font-weight:600;font-size:14px;letter-spacing:0.06em;color:var(--soft);display:inline-flex;align-items:center;gap:34px;text-transform:uppercase}
+  .strip-row .di{color:var(--cy)}
+  @keyframes slide{to{transform:translateX(-50%)}}
+
+  /* ---------- section frame ---------- */
+  section.blk{position:relative;z-index:2;padding:110px 0}
+  .ey{font-family:'JetBrains Mono';font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:var(--cy);display:flex;align-items:center;gap:10px;margin-bottom:26px}
+  .ey::before{content:"◆";color:var(--amber);font-size:10px}
+  .h2{font-family:'Space Grotesk';font-weight:700;font-size:clamp(28px,4.2vw,48px);line-height:1.04;letter-spacing:-0.02em}
+
+  /* ---------- story (the AI narrative) ---------- */
+  .story-row{max-width:880px;margin:0 auto;padding:46px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:64px 1fr;gap:28px;align-items:start}
+  .story-row:first-of-type{border-top:none}
+  .story-n{font-family:'Press Start 2P';font-size:13px;color:var(--mut)}
+  .story-h{font-family:'Space Grotesk';font-weight:600;font-size:clamp(22px,3.2vw,34px);line-height:1.12;letter-spacing:-0.01em}
+  .story-row.lit .story-h{color:var(--bone)}
+  .story-row .story-h{color:#3c424d;transition:color .6s var(--ease)}
+  .story-p{margin-top:14px;color:var(--soft);font-size:16px;line-height:1.6;max-width:560px}
+  @media(max-width:620px){.story-row{grid-template-columns:1fr;gap:10px}.story-n{font-size:11px}}
+
+  /* ---------- reveal ---------- */
+  [data-rv]{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  [data-rv].in{opacity:1;transform:none}
+
+  /* ---------- bio ---------- */
+  .bio{display:grid;grid-template-columns:340px 1fr;gap:60px;align-items:center;max-width:1040px;margin:0 auto}
+  .portrait{position:relative;width:300px;height:300px;border-radius:20px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 70px rgba(0,0,0,0.5)}
+  .portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s var(--ease)}
+  .portrait .px{image-rendering:pixelated;filter:saturate(1.1) contrast(1.05);opacity:0;mix-blend-mode:normal}
+  .portrait .bw{filter:grayscale(1) contrast(1.05) brightness(0.96)}
+  .portrait:hover .px{opacity:1}
+  .portrait:hover .bw{opacity:0}
+  .portrait::after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,rgba(57,226,255,0.12),transparent 45%);pointer-events:none}
+  .pbadge{position:absolute;left:12px;bottom:12px;z-index:3;font-family:'JetBrains Mono';font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--bone);background:rgba(7,9,12,0.7);border:1px solid var(--line);padding:5px 9px;border-radius:6px;display:flex;align-items:center;gap:7px}
+  .pbadge i{width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 8px var(--lime)}
+  .bio-body p{color:var(--soft);font-size:16.5px;line-height:1.68;margin-bottom:18px}
+  .bio-body p b{color:var(--bone);font-weight:600}
+  .bio-stats{display:flex;gap:30px;flex-wrap:wrap;margin:26px 0 30px}
+  .bio-stat .n{font-family:'Space Grotesk';font-weight:700;font-size:30px;line-height:1}
+  .bio-stat .l{font-family:'JetBrains Mono';font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:0.06em;margin-top:7px}
+  .lnk{display:inline-flex;align-items:center;gap:9px;font-family:'Space Grotesk';font-weight:600;font-size:15px;color:var(--cy);border-bottom:1px solid rgba(57,226,255,0.3);padding-bottom:3px;transition:border-color .3s}
+  .lnk:hover{border-color:var(--cy)}
+  @media(max-width:820px){.bio{grid-template-columns:1fr;gap:38px;text-align:left}.portrait{margin:0}}
+
+  /* ---------- logos ---------- */
+  .logos{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);overflow:hidden;padding:30px 0}
+  .logo-row{display:flex;align-items:center;gap:60px;width:max-content;animation:slide 34s linear infinite}
+  .logo-row img{height:26px;width:auto;opacity:0.62;filter:grayscale(1) brightness(0) invert(1);transition:opacity .3s}
+  .logos:hover .logo-row{animation-play-state:paused}
+  .logo-row img:hover{opacity:1}
+
+  /* ---------- work grid ---------- */
+  .work-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:1040px;margin:0 auto}
+  .wcard{position:relative;display:block;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:30px 30px 26px;overflow:hidden;transition:transform .4s var(--ease),border-color .4s}
+  .wcard:hover{transform:translateY(-4px);border-color:rgba(57,226,255,0.4)}
+  .wcard::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 200px at 100% 0%,rgba(57,130,246,0.12),transparent 60%);opacity:0;transition:opacity .4s}
+  .wcard:hover::before{opacity:1}
+  .wc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;position:relative}
+  .wc-logo{height:24px;width:auto;filter:grayscale(1) brightness(0) invert(1);opacity:0.9}
+  .wc-tag{font-family:'JetBrains Mono';font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:0.08em}
+  .wc-metric{font-family:'Space Grotesk';font-weight:700;font-size:clamp(22px,2.6vw,30px);line-height:1.05;position:relative}
+  .wc-metric span{color:var(--cy)}
+  .wc-desc{margin-top:12px;color:var(--soft);font-size:14.5px;line-height:1.55;position:relative}
+  .wc-arrow{margin-top:20px;font-family:'JetBrains Mono';font-size:12px;color:var(--cy);text-transform:uppercase;letter-spacing:0.08em;position:relative;display:inline-flex;gap:8px}
+  .wcard.feat{grid-column:1 / -1;background:linear-gradient(120deg,#12161f,#171c27);border-color:rgba(57,130,246,0.3)}
+  @media(max-width:720px){.work-grid{grid-template-columns:1fr}}
+
+  /* ---------- cta ---------- */
+  .cta{position:relative;z-index:2;text-align:center;padding:120px 24px 90px;border-top:1px solid var(--line)}
+  .cta h2{font-family:'Press Start 2P';font-size:clamp(20px,4.2vw,40px);line-height:1.4}
+  .cta-mail{display:inline-block;margin-top:34px;font-family:'Space Grotesk';font-weight:600;font-size:clamp(18px,2.4vw,26px);color:var(--bone);border-bottom:2px solid var(--cy);padding-bottom:5px}
+  .cta-mail:hover{color:var(--cy)}
+  .cta-sub{margin-top:20px;color:var(--mut);font-family:'JetBrains Mono';font-size:12px;letter-spacing:0.08em}
+  footer{position:relative;z-index:2;border-top:1px solid var(--line);padding:26px 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:'JetBrains Mono';font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:0.08em}
+  footer a:hover{color:var(--bone)}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001s !important;animation-iteration-count:1 !important}
+    [data-rv]{opacity:1;transform:none}
+    .story-row .story-h{color:var(--bone)}
+    #boot{display:none}
+    .strip-row,.logo-row{animation:none}
+  }
+</style>
+</head>
+<body class="boot-lock">
+
+<!-- BOOT -->
+<div id="boot">
+  <div class="boot-card mono">
+    <div class="boot-line b1">&gt; initialising operator<span class="caret"></span></div>
+    <div class="boot-line b2"><span class="am">◆</span> INSTALLING: AI + engineering skills</div>
+    <div class="boot-line b3"><span class="am">◆</span> LOADING: 10 years of marketing craft</div>
+    <div class="boot-bar"><i></i></div>
+    <div class="boot-line b4"><span class="ok">★ UPGRADE COMPLETE</span></div>
+    <div class="boot-line b5"><span class="cy">MARKETING BRAIN: ONLINE</span></div>
+    <div class="boot-fin disp">Build it. Launch it. Compound it.</div>
+  </div>
+  <div class="boot-skip" id="bootSkip">skip intro ↓</div>
+</div>
+
+<div class="grid-bg"></div>
+<div class="glowblob glow1"></div>
+<div class="glowblob glow2"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nv-l" href="#top"><span class="nv-mark">W</span> WILL MULHOLLAND</a>
+  <div class="nv-r">
+    <a href="#story" class="hidem">The shift</a>
+    <a href="#work" class="hidem">Work</a>
+    <a href="/system" class="hidem">Marketing Brain</a>
+    <a href="/" class="nv-cta">Main site →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="particles" id="particles"></div>
+  <div class="hero-label">Will Mulholland</div>
+  <h1 class="pix"><span class="grad-text">AI-NATIVE</span><br><span class="grad-text">MARKETER</span></h1>
+  <p class="hero-sub">The product marketer who stopped briefing the work and started <b>building the systems that do it</b>. Same craft, now with code, live context and AI in reach.</p>
+  <a href="#story" class="hero-scroll">View the work<span class="hero-chev"></span></a>
+</header>
+
+<!-- MARQUEE STRIP -->
+<div class="strip">
+  <div class="strip-row">
+    <span>Positioning<i class="di">◆</i>Messaging<i class="di">◆</i>Launches<i class="di">◆</i>AI marketing systems<i class="di">◆</i>The Marketing Brain<i class="di">◆</i>Positioning<i class="di">◆</i>Messaging<i class="di">◆</i>Launches<i class="di">◆</i>AI marketing systems<i class="di">◆</i>The Marketing Brain<i class="di">◆</i></span>
+  </div>
+</div>
+
+<!-- STORY: the AI shift -->
+<section class="blk" id="story">
+  <div class="wrap">
+    <div class="ey" data-rv>The shift</div>
+    <h2 class="h2" data-rv style="max-width:760px;margin-bottom:18px;">What being AI-native actually changed.</h2>
+    <p data-rv style="color:var(--soft);max-width:560px;margin-bottom:30px;font-size:16px;">Same marketer. Same craft. A completely different reach.</p>
+
+    <div class="story-row" data-rv><div class="story-n">01</div><div><div class="story-h">I'm a product marketer, first and foremost.</div><div class="story-p">I own positioning, messaging and launches end to end, and I work shoulder to shoulder with product, sales and design until the thing ships.</div></div></div>
+    <div class="story-row" data-rv><div class="story-n">02</div><div><div class="story-h">Then AI made me an AI-native marketer.</div><div class="story-p">Same craft, now with code, live context and systems in reach. I stopped writing briefs for the work and started building the systems that do it.</div></div></div>
+    <div class="story-row" data-rv><div class="story-n">03</div><div><div class="story-h">Now every launch starts by talking to the data.</div><div class="story-p">Sales calls, customer reviews, competitor ads and the product roadmap, read straight from the source instead of guessed at in a doc.</div></div></div>
+    <div class="story-row" data-rv><div class="story-n">04</div><div><div class="story-h">I pull company-wide context into every message.</div><div class="story-p">Gong, Granola, review sites and the ad libraries, wired in through one brain, so the positioning is built on how buyers actually talk.</div></div></div>
+    <div class="story-row" data-rv><div class="story-n">05</div><div><div class="story-h">So I make sharper positioning calls, faster.</div><div class="story-p">I spot the pattern and pressure-test the angle before I commit, instead of finding out at launch whether the story landed.</div></div></div>
+    <div class="story-row" data-rv><div class="story-n">06</div><div><div class="story-h">I think in whole launches, not just assets.</div><div class="story-p">Positioning, messaging, GTM and every piece of content come out of one source, in one voice, so nothing leaks at the handoffs.</div></div></div>
+    <div class="story-row" data-rv><div class="story-n">07</div><div><div class="story-h">And I build the system that arms the whole team.</div><div class="story-p">The Marketing Brain: a feature goes in, every launch asset comes out, every team gets armed, and what the launch learns feeds the next one. <a href="/system" class="lnk" style="font-size:14px;margin-top:8px;">See how it works →</a></div></div></div>
+  </div>
+</section>
+
+<!-- BIO -->
+<section class="blk" style="padding-top:30px;">
+  <div class="wrap">
+    <div class="bio">
+      <div data-rv>
+        <div class="portrait">
+          <img class="bw" src="/images/headshot.jpg" alt="Will Mulholland">
+          <img class="px" src="/images/headshot.jpg" alt="" aria-hidden="true" style="image-rendering:pixelated;transform:scale(1.02);filter:grayscale(1) contrast(1.2) sepia(0.4) hue-rotate(150deg) saturate(2.2);">
+          <div class="pbadge"><i></i> AI-NATIVE · SYDNEY</div>
+        </div>
+      </div>
+      <div class="bio-body" data-rv>
+        <div class="ey">// Who's behind it</div>
+        <p>Hi, I'm <b>Will</b>. Ten years in marketing, from big-brand creative at <b>Ogilvy</b> and ad tech at <b>eBay</b> to scaling B2B SaaS at <b>NextDocs</b>, <b>Prompt Cowboy</b> and <b>Blinq</b>. Then I stopped talking about AI and started building with it.</p>
+        <p>I'm not an engineer. I taught myself these systems in my evenings, which is exactly why I can teach them to marketers instead of developers. Everything I teach, I run on my own work first, the systems doing my research, content and launches every day are the proof.</p>
+        <div class="bio-stats">
+          <div class="bio-stat"><div class="n grad-text">$180M+</div><div class="l">Revenue launched</div></div>
+          <div class="bio-stat"><div class="n grad-text">2k→55k</div><div class="l">Users in 2 months</div></div>
+          <div class="bio-stat"><div class="n grad-text">10 yrs</div><div class="l">PMM craft</div></div>
+        </div>
+        <a href="/system" class="lnk">Read the thesis: the Marketing Brain →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<div class="logos" data-rv>
+  <div class="logo-row">
+    <img src="/images/blinq/logo.svg" alt="Blinq"><img src="/images/ebay/logo.svg" alt="eBay"><img src="/images/kfc/logo.svg" alt="KFC"><img src="/images/prompt-cowboy/logo.png" alt="Prompt Cowboy"><img src="/images/nextdocs/logo.png" alt="NextDocs"><img src="/images/ogilvy/logo.svg" alt="Ogilvy"><img src="/images/startmate/logo.svg" alt="Startmate"><img src="/images/velocity/logo.svg" alt="Velocity">
+    <img src="/images/blinq/logo.svg" alt=""><img src="/images/ebay/logo.svg" alt=""><img src="/images/kfc/logo.svg" alt=""><img src="/images/prompt-cowboy/logo.png" alt=""><img src="/images/nextdocs/logo.png" alt=""><img src="/images/ogilvy/logo.svg" alt=""><img src="/images/startmate/logo.svg" alt=""><img src="/images/velocity/logo.svg" alt="">
+  </div>
+</div>
+
+<!-- WORK -->
+<section class="blk" id="work">
+  <div class="wrap">
+    <div class="ey" data-rv>Selected work</div>
+    <h2 class="h2" data-rv style="max-width:720px;margin-bottom:40px;">Launches I ran end to end, then captured as systems.</h2>
+    <div class="work-grid">
+      <a class="wcard feat" href="/system" data-rv>
+        <div class="wc-top"><span class="wc-tag mono">The system behind it all</span><span class="wc-tag mono" style="color:var(--lime);">● live</span></div>
+        <div class="wc-metric">The Marketing Brain: <span>good marketing as fast as you ship</span></div>
+        <div class="wc-desc">The AI launch system one operator runs instead of a team. It listens to your calls, customers and competitors, and turns every release into positioning, messaging and ready-to-publish assets.</div>
+        <div class="wc-arrow mono">Explore the system →</div>
+      </a>
+      <a class="wcard" href="/work.html#blinq-elc" data-rv>
+        <div class="wc-top"><img class="wc-logo" src="/images/blinq/logo.svg" alt="Blinq"><span class="wc-tag mono">Senior PMM</span></div>
+        <div class="wc-metric">AI-native GTM <span>narrative + relaunch</span></div>
+        <div class="wc-desc">Reframed a business-card utility into a relationship intelligence platform, and aligned product, sales and content around one story.</div>
+        <div class="wc-arrow mono">Read the case →</div>
+      </a>
+      <a class="wcard" href="/work.html#ebay-pla" data-rv>
+        <div class="wc-top"><img class="wc-logo" src="/images/ebay/logo.svg" alt="eBay"><span class="wc-tag mono">Ad tech</span></div>
+        <div class="wc-metric"><span>$180M</span> revenue · 550→2,500+ brands</div>
+        <div class="wc-desc">Built separate positioning for team buyers while individuals kept fast self-serve. Teams got dedicated support, the funnel got a new tier.</div>
+        <div class="wc-arrow mono">Read the case →</div>
+      </a>
+      <a class="wcard" href="/work.html#prompt-cowboy" data-rv>
+        <div class="wc-top"><span class="disp" style="font-weight:700;font-size:17px;color:var(--bone);">Prompt Cowboy</span><span class="wc-tag mono">Positioning</span></div>
+        <div class="wc-metric"><span>2k → 55k</span> weekly users in 2 months</div>
+        <div class="wc-desc">Built the "Context Engineering" positioning that defined the Pro tier. The frame from 2025 is the frame the product is still sold on today.</div>
+        <div class="wc-arrow mono">Read the case →</div>
+      </a>
+      <a class="wcard" href="/work.html" data-rv>
+        <div class="wc-top"><span class="wc-tag mono">Everything else</span><span class="wc-tag mono">KFC · NextDocs · Velocity</span></div>
+        <div class="wc-metric">The full <span>case study archive</span></div>
+        <div class="wc-desc">Consumer brand campaigns at 460M+ organic impressions, a 0→15k SaaS launch, lifecycle systems and more.</div>
+        <div class="wc-arrow mono">See all work →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="ey" data-rv style="justify-content:center;">Let's build</div>
+  <h2 class="grad-text" data-rv>WANT IT BUILT<br>WITH YOU?</h2>
+  <a class="cta-mail" href="mailto:will@intelligentgrowth.app" data-rv>will@intelligentgrowth.app</a>
+  <div class="cta-sub" data-rv>Tell me what you're launching. I read everything.</div>
+</section>
+
+<footer>
+  <span>© 2026 Will Mulholland</span>
+  <span><a href="/">Main site</a> · <a href="/system">Marketing Brain</a> · <a href="/work.html">Case studies</a></span>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // BOOT
+  var boot = document.getElementById('boot'), skip = document.getElementById('bootSkip');
+  function endBoot(){ if(!boot) return; boot.classList.add('gone'); document.body.classList.remove('boot-lock'); setTimeout(function(){ if(boot&&boot.parentNode) boot.parentNode.removeChild(boot); }, 800); }
+  if (reduce) { endBoot(); }
+  else { var t = setTimeout(endBoot, 4600); if(skip) skip.addEventListener('click', function(){ clearTimeout(t); endBoot(); }); }
+
+  // PARTICLES (light, CSS-driven dashes)
+  var pc = document.getElementById('particles');
+  if (pc && !reduce){
+    var cols = ['#39E2FF','#3B82F6','#6366F1','#F5A623','#46F4A6'];
+    for (var i=0;i<16;i++){
+      var d=document.createElement('span'); d.className='pdash';
+      d.style.left=(Math.random()*100)+'%';
+      d.style.bottom=(-10+Math.random()*20)+'%';
+      d.style.width=(14+Math.random()*30)+'px';
+      d.style.background=cols[i%cols.length];
+      d.style.animationDuration=(6+Math.random()*7)+'s';
+      d.style.animationDelay=(Math.random()*6)+'s';
+      pc.appendChild(d);
+    }
+  }
+
+  // REVEAL + story light-up (bulletproof: reveal-all fallback)
+  var rv = [].slice.call(document.querySelectorAll('[data-rv]'));
+  var rows = [].slice.call(document.querySelectorAll('.story-row'));
+  function showAll(){ rv.forEach(function(e){e.classList.add('in');}); rows.forEach(function(e){e.classList.add('lit');}); }
+  if (reduce || !('IntersectionObserver' in window)) { showAll(); }
+  else {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); if(e.target.classList.contains('story-row')) e.target.classList.add('lit'); io.unobserve(e.target); } });
+    }, { threshold:0.18, rootMargin:'0px 0px -8% 0px' });
+    rv.forEach(function(e){ io.observe(e); });
+    // failsafe: if anything is still hidden after 2.5s in viewport range, reveal
+    setTimeout(function(){ rv.forEach(function(e){ var r=e.getBoundingClientRect(); if(r.top < window.innerHeight) e.classList.add('in'); }); }, 2500);
+  }
+})();
+</script>
+</body>
+</html>
