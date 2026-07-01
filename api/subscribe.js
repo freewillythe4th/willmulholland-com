@@ -36,7 +36,9 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         email,
         reactivate_existing: false,
-        send_welcome_email: true,
+        // false: the 5-day course automation (signup trigger) is the welcome now.
+        // beehiiv's built-in welcome email on top of it would double-send.
+        send_welcome_email: false,
         utm_source: 'willmulholland.com',
         utm_medium: (body.utm_medium || 'homepage_form').toString().slice(0, 100),
       }),
