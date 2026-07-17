@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Intelligent Growth</title>
+    <meta name="description" content="Writing on AI-native marketing, systems, and building things that compound.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://intelligentgrowth.app/blog">
+    <meta property="og:title" content="Blog | Intelligent Growth">
+    <meta property="og:description" content="Writing on AI-native marketing, systems, and building things that compound.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://intelligentgrowth.app/blog">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #1F1511;
+            --ink: #1F1511;
+            --cream: #FFFFFF;
+            --cream-soft: #F4F4F2;
+            --white: #FFFFFF;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif; color: var(--ink); line-height: 1.5; letter-spacing: -0.01em;
+            background: var(--cream);
+            -webkit-font-smoothing: antialiased; min-height: 100vh;
+        }
+        ::selection { background: var(--accent); color: var(--white); }
+
+        nav {
+            position: sticky; top: 0; z-index: 100; padding: 20px 48px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.88); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(31,21,17,0.06);
+        }
+        .nav-logo img { height: 30px; width: auto; display: block; }
+        .nav-back {
+            font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-mid); text-decoration: none; transition: color 0.4s var(--ease-smooth);
+        }
+        .nav-back:hover { color: var(--ink); }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; transition: color 0.4s var(--ease-smooth); }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a.is-current { color: var(--accent); }
+        .nav-cta { padding: 10px 18px; background: var(--ink); color: var(--white); border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.4s var(--ease-smooth); white-space: nowrap; }
+        .nav-cta:hover { background: var(--accent); }
+        @media (max-width: 760px) { .nav-links { display: none; } }
+
+        .wrap { max-width: 760px; margin: 0 auto; padding: 80px 24px 64px; }
+        .kicker {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--accent); font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+        }
+        .kicker::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+        h1 {
+            font-family: 'Instrument Serif', Georgia, serif; font-weight: 400;
+            font-size: clamp(40px, 7vw, 72px); letter-spacing: -0.02em; line-height: 1.0; margin-bottom: 20px;
+        }
+        .intro { font-size: clamp(18px, 2.4vw, 22px); color: var(--gray-mid); max-width: 560px; margin-bottom: 56px; }
+
+        .posts { display: flex; flex-direction: column; gap: 24px; }
+        .post-card {
+            display: block; text-decoration: none; color: inherit; border: 1px solid var(--ink);
+            border-radius: 18px; padding: 32px; background: var(--white);
+            box-shadow: 6px 6px 0 rgba(31,21,17,0.14);
+            transition: transform 0.4s var(--ease-smooth), box-shadow 0.4s var(--ease-smooth);
+        }
+        .post-card:hover { transform: translate(-2px,-2px); box-shadow: 9px 9px 0 rgba(31,21,17,0.16); }
+        .post-meta {
+            font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--accent); margin-bottom: 14px;
+        }
+        .post-card h2 {
+            font-family: 'Instrument Serif', Georgia, serif; font-weight: 400;
+            font-size: clamp(24px, 3.4vw, 32px); letter-spacing: -0.01em; line-height: 1.1; margin-bottom: 12px;
+        }
+        .post-card p { font-size: 16px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 18px; }
+        .post-arrow {
+            display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink);
+        }
+        .post-arrow .arr { transition: transform 0.4s var(--ease-smooth); }
+        .post-card:hover .post-arrow .arr { transform: translateX(6px); }
+
+        .subscribe {
+            margin-top: 56px; padding: 44px 32px; border-radius: 18px; text-align: center;
+            background: var(--ink); border: 1px solid var(--ink);
+        }
+        .subscribe h3 { color: var(--white); }
+        .subscribe p { color: rgba(255,255,255,0.72); }
+        .subscribe .sub-form button { background: var(--accent); }
+        .subscribe .sub-form button:hover { background: var(--white); color: var(--ink); }
+        .subscribe .sub-meta { color: rgba(255,255,255,0.55); }
+        .subscribe h3 { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+        .subscribe p { font-size: 15px; color: var(--gray-mid); margin-bottom: 20px; }
+        .sub-form { display: flex; gap: 12px; max-width: 440px; margin: 0 auto; }
+        @media (max-width: 520px) { .sub-form { flex-direction: column; } }
+        .sub-form input {
+            flex: 1; padding: 14px 16px; border: 1px solid rgba(31,21,17,0.18); border-radius: 12px;
+            font-size: 15px; font-family: inherit; outline: none; background: var(--white); color: var(--ink);
+        }
+        .sub-form input::placeholder { color: var(--gray-light); }
+        .sub-form input:focus { border-color: var(--accent); }
+        .sub-form button {
+            padding: 14px 24px; background: var(--ink); color: var(--white); border: none; border-radius: 999px;
+            font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer;
+            font-family: inherit; transition: background 0.3s var(--ease-smooth);
+        }
+        .sub-form button:hover { background: var(--accent); }
+        .sub-meta { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); margin-top: 14px; }
+
+        footer {
+            max-width: 760px; margin: 48px auto 0; padding: 32px 24px 48px;
+            border-top: 1px solid rgba(31,21,17,0.10); display: flex; justify-content: space-between;
+            font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-light); flex-wrap: wrap; gap: 12px;
+        }
+        footer a { color: var(--gray-light); text-decoration: none; }
+        footer a:hover { color: var(--ink); }
+
+        @media (max-width: 600px) { nav { padding: 16px 24px; } .wrap { padding: 56px 24px 48px; } .post-card { padding: 24px; } }
+    </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+        <div class="nav-links">
+            <a href="/workshop">Workshop</a>
+            <a href="/brain">Marketing Brain</a>
+            <a href="/mcp">MCP</a>
+            <a href="/work-with-me">Work with me</a>
+            <a href="/work.html">Case studies</a>
+            <a href="/podcast">Podcast</a>
+            <a href="/blog" class="is-current">Blog</a>
+            <a href="/traffic">Free gift</a>
+        </div>
+        <a href="/#subscribe" class="nav-cta">Subscribe</a>
+    </nav>
+
+    <div class="wrap">
+        <div class="kicker">Blog</div>
+        <h1>Writing</h1>
+        <p class="intro">On AI-native marketing, building systems that compound, and turning your work into assets instead of hours.</p>
+
+        <div class="posts">
+            <a class="post-card" href="/blog/how-to-write-positioning-with-ai">
+                <div class="post-meta">Guide &middot; 10 min read</div>
+                <h2>How to write positioning with AI</h2>
+                <p>A six-step method for turning customer evidence, buyer alternatives, product truth and proof into a positioning decision your team can defend.</p>
+                <span class="post-arrow">Read the guide <span class="arr">&rarr;</span></span>
+            </a>
+            <a class="post-card" href="/blog/ai-competitive-analysis-for-product-marketers">
+                <div class="post-meta">Guide &middot; 9 min read</div>
+                <h2>AI competitive analysis for product marketers</h2>
+                <p>Build a consistent claim and evidence map, find the opening competitors weakly own and define the proof your product needs.</p>
+                <span class="post-arrow">Read the guide <span class="arr">&rarr;</span></span>
+            </a>
+            <a class="post-card" href="/blog/how-to-use-ai-for-a-product-launch">
+                <div class="post-meta">Guide &middot; 9 min read</div>
+                <h2>How to use AI for a product launch</h2>
+                <p>Move from an approved launch narrative to consistent channel assets, readiness checks and post-launch learning without losing strategic control.</p>
+                <span class="post-arrow">Read the guide <span class="arr">&rarr;</span></span>
+            </a>
+            <a class="post-card" href="/blog/claude-prompts-for-product-marketers">
+                <div class="post-meta">Guide &middot; 9 min read</div>
+                <h2>Claude prompts for product marketers (that aren't slop)</h2>
+                <p>Six Claude prompts for the PMM jobs that eat your week, positioning, messaging, competitive teardowns, launch narrative, plus the context to load so they don't hand you generic AI mush. The prompt is the easy part.</p>
+                <span class="post-arrow">Read the guide <span class="arr">&rarr;</span></span>
+            </a>
+            <a class="post-card" href="/blog/marketing-is-the-bottleneck">
+                <div class="post-meta">Thesis &middot; 6 min read</div>
+                <h2>Marketing is the bottleneck now</h2>
+                <p>Product ships faster than marketing can tell anyone it exists. The constraint moved, and you don't fix it by buying more tools. You build a system. A thesis on AI-native marketing, the Signal-Structure-Scale frame, and capability over dependency.</p>
+                <span class="post-arrow">Read the thesis <span class="arr">&rarr;</span></span>
+            </a>
+        </div>
+
+        <div class="subscribe">
+            <h3>Get the next one</h3>
+            <p>Intelligent Growth. Real AI marketing workflows, in your inbox each week.</p>
+            <form class="sub-form" id="ig-subscribe-form">
+                <input type="email" name="email" placeholder="Your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <p class="sub-meta" id="ig-subscribe-meta">Join 101+ marketing leaders &middot; Unsubscribe anytime</p>
+        </div>
+    </div>
+
+    <footer>
+        <span>&copy; 2026 Will Mulholland</span>
+        <span><a href="/">Home</a> &middot; <a href="/work.html">Case studies</a> &middot; <a href="/workshop">Workshop</a></span>
+    </footer>
+
+    <script>
+        (function () {
+            var form = document.getElementById('ig-subscribe-form');
+            var meta = document.getElementById('ig-subscribe-meta');
+            if (!form) return;
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var btn = form.querySelector('button[type="submit"]');
+                var input = form.querySelector('input[name="email"]');
+                var email = (input.value || '').trim();
+                if (!email) return;
+                var original = btn.textContent;
+                btn.disabled = true; btn.textContent = 'Subscribing...';
+                fetch('/api/subscribe', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                }).then(function (r) {
+                    if (r.ok) { form.style.display = 'none'; meta.textContent = 'Subscribed. Check your inbox to confirm.'; }
+                    else { btn.disabled = false; btn.textContent = original; meta.textContent = 'Something went wrong. Try again.'; }
+                }).catch(function () { btn.disabled = false; btn.textContent = original; meta.textContent = 'Network error. Try again.'; });
+            });
+        })();
+    </script>
+</body>
+</html>

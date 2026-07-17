@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free guide: see any company's web traffic | Intelligent Growth</title>
+    <meta name="description" content="A free guide on how to see how much traffic any website gets, where it comes from, and what's working. Drop your email and I'll send it over.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://intelligentgrowth.app/traffic">
+    <meta property="og:title" content="Free guide: see any company's web traffic in seconds">
+    <meta property="og:description" content="How to see how much traffic any website gets, where it comes from, and what's working. Free.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://intelligentgrowth.app/traffic">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ink: #1F1511; --cream: #FFFFFF; --cream-soft: #F4F4F2; --white: #FFFFFF;
+            --gray-mid: #5C4F47; --gray-light: #8B7E73; --accent: #2563EB; --accent-soft: #DBEAFE; --accent-deep: #1E3A8A;
+            --offset-shadow: 6px 6px 0 rgba(31,21,17,0.14); --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.55; letter-spacing: -0.01em; min-height: 100vh; padding: 96px 22px 40px; }
+        ::selection { background: var(--accent); color: var(--white); }
+        h1, .hl { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: 0; }
+
+        .card { max-width: 920px; margin: 0 auto; background: var(--white); border: 1px solid var(--ink); border-radius: 24px; box-shadow: var(--offset-shadow); padding: 44px; }
+        @media (max-width: 600px) { .card { padding: 28px 20px; } }
+        .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
+        .brand img { height: 28px; width: auto; }
+
+        .top { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        @media (max-width: 760px) { .top { grid-template-columns: 1fr; gap: 28px; } }
+        .preview { border: 1px solid var(--ink); border-radius: 16px; box-shadow: var(--offset-shadow); width: 100%; display: block; }
+        .eyebrow { display: inline-block; font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-deep); background: var(--accent-soft); padding: 6px 13px; border-radius: 999px; margin-bottom: 16px; font-weight: 700; }
+        h1 { font-size: clamp(30px, 4.4vw, 46px); line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 18px; }
+        h1 .hl { display: inline-block; background: var(--accent-soft); color: var(--accent-deep); padding: 0.02em 0.14em 0.06em; border-radius: 8px; line-height: 0.9; }
+
+        form { margin-top: 6px; display: flex; gap: 10px; }
+        @media (max-width: 480px) { form { flex-direction: column; } }
+        form input { flex: 1; padding: 15px 16px; border: 1px solid rgba(0,0,0,0.2); border-radius: 12px; font-size: 16px; font-family: inherit; outline: none; background: var(--white); }
+        form input:focus { border-color: var(--accent); }
+        form button { padding: 15px 24px; background: var(--ink); color: var(--white); border: none; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; white-space: nowrap; transition: background 0.3s var(--ease-smooth); }
+        form button:hover { background: var(--accent); }
+        .fine { font-size: 13px; color: var(--gray-light); margin-top: 12px; line-height: 1.5; }
+        .err { color: #dc2626; font-size: 14px; margin-top: 10px; display: none; }
+
+        .body { margin-top: 44px; border-top: 1px solid rgba(31,21,17,0.1); padding-top: 36px; }
+        .body > p { font-size: 17px; color: var(--gray-mid); margin-bottom: 22px; }
+        .lead-in { font-weight: 700; color: var(--ink); font-size: 17px; margin-bottom: 8px; }
+        .benefits { list-style: none; }
+        .benefits li { padding: 14px 0; border-bottom: 1px solid rgba(31,21,17,0.1); }
+        .benefits li strong { display: block; font-size: 17px; margin-bottom: 3px; }
+        .benefits li span { font-size: 15px; color: var(--gray-mid); }
+        .warn { margin-top: 26px; background: var(--cream-soft); border-radius: 14px; padding: 20px 22px; font-size: 15px; color: var(--gray-mid); line-height: 1.6; }
+        .warn strong { color: var(--ink); }
+        .sign { margin-top: 16px; font-size: 15px; color: var(--gray-mid); }
+
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 16px 48px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(31,21,17,0.06); }
+        nav .nav-logo { display: flex; align-items: center; text-decoration: none; }
+        nav .nav-logo img { height: 30px; width: auto; display: block; }
+        nav .nav-links { display: flex; gap: 30px; align-items: center; }
+        nav .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; transition: color 0.4s var(--ease-smooth); }
+        nav .nav-links a:hover { color: var(--accent); }
+        nav .nav-links a.is-current { color: var(--accent); }
+        nav .nav-cta { padding: 10px 18px; background: var(--ink); color: var(--white); border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.4s var(--ease-smooth); white-space: nowrap; }
+        nav .nav-cta:hover { background: var(--accent); }
+        @media (max-width: 760px) { nav { padding: 14px 20px; } nav .nav-links { display: none; } }
+    </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+        <div class="nav-links">
+            <a href="/workshop">Workshop</a>
+            <a href="/brain">Marketing Brain</a>
+            <a href="/mcp">MCP</a>
+            <a href="/work-with-me">Work with me</a>
+            <a href="work.html">Case studies</a>
+            <a href="/podcast">Podcast</a>
+            <a href="/blog">Blog</a>
+            <a href="/traffic" class="is-current">Free gift</a>
+        </div>
+        <a href="/#subscribe" class="nav-cta">Subscribe</a>
+    </nav>
+    <div class="card">
+
+        <div class="top">
+            <div>
+                <div style="border: 1px solid var(--ink); border-radius: 16px; box-shadow: var(--offset-shadow); background: var(--cream-soft); padding: 28px 26px;">
+                    <div style="font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-deep); font-weight: 700; margin-bottom: 16px;">Inside the guide</div>
+                    <div style="display: flex; flex-direction: column; gap: 0;">
+                        <div style="padding: 10px 0; border-bottom: 1px solid rgba(31,21,17,0.12); font-size: 15px; color: var(--gray-mid);"><span style="color: var(--accent); font-weight: 700; margin-right: 8px;">&rarr;</span>Read any site's traffic in seconds</div>
+                        <div style="padding: 10px 0; border-bottom: 1px solid rgba(31,21,17,0.12); font-size: 15px; color: var(--gray-mid);"><span style="color: var(--accent); font-weight: 700; margin-right: 8px;">&rarr;</span>See their top keywords and channels</div>
+                        <div style="padding: 10px 0; border-bottom: 1px solid rgba(31,21,17,0.12); font-size: 15px; color: var(--gray-mid);"><span style="color: var(--accent); font-weight: 700; margin-right: 8px;">&rarr;</span>Compare audiences side by side</div>
+                        <div style="padding: 10px 0; font-size: 15px; color: var(--gray-mid);"><span style="color: var(--accent); font-weight: 700; margin-right: 8px;">&rarr;</span>Spot the spikes and what caused them</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <span class="eyebrow">Free guide</span>
+                <h1>See <span class="hl">any company's</span> web traffic in seconds.</h1>
+                <form id="captureForm">
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                    <button type="submit" id="submitBtn">Send it to me</button>
+                </form>
+                <p class="err" id="err"></p>
+                <p class="fine">You'll also join my weekly newsletter on the AI and growth moves marketers can actually use. Unsubscribe any time, I never sell or share your details.</p>
+            </div>
+        </div>
+
+        <div class="body">
+            <p>Discover how to instantly see where <em>any</em> website gets its visitors from, what channels and tactics are working for them, and how to use that data in your day-to-day decisions. With a free tool and no technical skills.</p>
+            <p class="lead-in">What you'll learn in this free guide:</p>
+            <ul class="benefits">
+                <li><strong>Reverse-engineer any company's growth blueprint</strong><span>See exactly how any company gets its customers from little-known traffic dashboards, not guesswork.</span></li>
+                <li><strong>See the audience data behind any website</strong><span>Demographics, audience overlap, and who their visitors really are, no technical setup.</span></li>
+                <li><strong>Spot trends, spikes and opportunities</strong><span>Find the untapped channels and the events that move traffic in your market.</span></li>
+                <li><strong>Make better strategic arguments</strong><span>Back your bets with real evidence of what's actually working, not "I think".</span></li>
+            </ul>
+            <div class="warn"><strong>Fair warning:</strong> this one is addictive and will change how you use the internet. Once you can see any site's traffic volume and where it comes from, you'll start checking it on every website you land on.</div>
+            <p class="sign">Enjoy.<br>Will</p>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var form = document.getElementById('captureForm');
+            var btn = document.getElementById('submitBtn');
+            var err = document.getElementById('err');
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                err.style.display = 'none';
+                var email = document.getElementById('email').value.trim();
+                if (!email) return;
+                var original = btn.textContent;
+                btn.disabled = true; btn.textContent = 'Sending...';
+                fetch('/api/subscribe', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, utm_medium: 'lead-magnet-traffic' })
+                }).then(function (r) {
+                    if (r.ok) {
+                        window.location.href = '/traffic-thanks?email=' + encodeURIComponent(email);
+                    } else {
+                        btn.disabled = false; btn.textContent = original;
+                        err.textContent = 'Something went wrong. Try again or email will@intelligentgrowth.app.'; err.style.display = 'block';
+                    }
+                }).catch(function () {
+                    btn.disabled = false; btn.textContent = original;
+                    err.textContent = 'Network error. Try again in a moment.'; err.style.display = 'block';
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+::1 - - [05/Jun/2026 22:44:15] "GET /index.html HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 22:44:18] "GET /index.html HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 22:44:19] "GET /images/ig-logo/ig-logo-full.png HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 22:44:19] "GET /images/blinq/logo.svg HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 22:44:19] "GET /images/ebay/logo.svg HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 22:44:19] "GET /images/prompt-cowboy/logo.png HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 22:44:19] "GET /images/kfc/logo.svg HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 22:44:19] "GET /images/velocity/logo.svg HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 22:44:19] "GET /images/nextdocs/logo.png HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 22:44:19] "GET /images/ogilvy/logo.svg HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 22:44:19] "GET /images/startmate/logo.svg HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 22:44:19] "GET /images/clemenger-bbdo/bbdo.svg HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 22:44:19] "GET /images/headshot.jpg HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 22:44:19] "GET /images/hero/mountain.jpg HTTP/1.1" 200 -
+::1 - - [05/Jun/2026 22:44:19] "GET /images/favicon/favicon.ico HTTP/1.1" 200 -

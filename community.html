@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply to join the community | Intelligent Growth</title>
+    <meta name="description" content="A free group of marketers swapping what's actually working with AI. Every application is vetted to keep the room useful. Apply to join.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://intelligentgrowth.app/community">
+    <meta property="og:title" content="Apply to join the community | Intelligent Growth">
+    <meta property="og:description" content="A free group of marketers swapping what's actually working with AI. Every application is vetted to keep the room useful.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://intelligentgrowth.app/community">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #1F1511;
+            --ink: #1F1511;
+            --cream: #FFFFFF;
+            --cream-soft: #F4F4F2;
+            --white: #FFFFFF;
+            --gray-dark: #1F1511;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            overflow-x: hidden;
+            line-height: 1.5;
+            letter-spacing: -0.02em;
+        }
+
+        ::selection { background: var(--accent); color: var(--white); }
+
+        .apply-hero h1,
+        .section-title,
+        .apply-card-title,
+        .footer-cta h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            letter-spacing: 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(31, 21, 17, 0.06);
+            transition: transform 0.4s var(--ease-smooth);
+        }
+        nav.nav--hidden { transform: translateY(-100%); }
+
+        .nav-logo { display: inline-flex; align-items: center; gap: 10px; color: var(--black); text-decoration: none; }
+
+        .nav-links { display: flex; align-items: center; gap: 32px; }
+        .nav-links a {
+            font-size: 14px; font-weight: 500; color: var(--black); text-decoration: none;
+            text-transform: uppercase; letter-spacing: 0.1em; transition: opacity 0.5s var(--ease-smooth);
+        }
+        .nav-links a:hover { opacity: 0.6; }
+
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px;
+            background: var(--ink); color: var(--white) !important; border-radius: 999px;
+            font-size: 13px; font-weight: 600; text-transform: none !important; letter-spacing: 0 !important;
+            text-decoration: none; transition: background 0.4s var(--ease-smooth), transform 0.3s var(--ease-smooth);
+            cursor: pointer; border: none; font-family: inherit;
+        }
+        .nav-cta:hover { background: var(--accent) !important; transform: translateY(-1px); opacity: 1 !important; }
+
+        .nav-toggle { display: none; background: transparent; border: 0; padding: 8px; cursor: pointer; color: var(--black); z-index: 1100; }
+        .nav-toggle-bar { display: block; width: 26px; height: 2px; background: currentColor; margin: 5px 0; transition: transform 0.3s var(--ease-smooth), opacity 0.3s var(--ease-smooth); }
+        .nav-toggle.is-open .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-toggle.is-open .nav-toggle-bar:nth-child(2) { opacity: 0; }
+        .nav-toggle.is-open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .btn-primary {
+            padding: 16px 32px; background: var(--ink); color: var(--white); font-size: 14px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.1em; border: none; border-radius: 999px;
+            text-decoration: none; cursor: pointer; transition: all 0.5s var(--ease-smooth);
+            display: inline-block; font-family: inherit;
+        }
+        .btn-primary:hover { background: var(--accent); border-radius: 16px; }
+
+        /* Apply layout */
+        .apply-hero { padding: 140px 48px 24px; max-width: 1100px; margin: 0 auto; text-align: center; }
+        .apply-tag {
+            display: inline-block; font-family: monospace; font-size: 13px; text-transform: uppercase;
+            letter-spacing: 0.12em; color: var(--accent-deep); margin-bottom: 22px; font-weight: 700;
+            background: var(--accent-soft); padding: 8px 16px; border-radius: 999px;
+        }
+        .apply-hero h1 { font-size: clamp(38px, 7vw, 76px); line-height: 0.96; letter-spacing: -0.02em; margin-bottom: 18px; }
+        .apply-hero p { font-size: clamp(17px, 2.2vw, 20px); color: var(--gray-mid); max-width: 600px; margin: 0 auto; }
+
+        .apply-grid {
+            max-width: 1100px; margin: 0 auto; padding: 32px 48px 80px;
+            display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: start;
+        }
+        @media (max-width: 900px) { .apply-grid { grid-template-columns: 1fr; gap: 40px; padding: 24px 24px 64px; } }
+
+        /* Left: criteria */
+        .criteria-intro { font-size: 17px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 28px; max-width: 460px; }
+        .criteria-intro strong { color: var(--ink); font-weight: 700; }
+        .criteria-list { list-style: none; }
+        .criteria-list li {
+            display: flex; align-items: flex-start; gap: 14px; padding: 16px 0;
+            border-bottom: 1px solid rgba(31,21,17,0.1); font-size: 16px; font-weight: 600; color: var(--ink);
+        }
+        .criteria-check {
+            flex-shrink: 0; width: 28px; height: 28px; border-radius: 8px; background: var(--accent-soft);
+            color: var(--accent-deep); display: flex; align-items: center; justify-content: center;
+            font-size: 15px; font-weight: 800;
+        }
+        .criteria-note { margin-top: 24px; font-size: 14px; color: var(--gray-light); line-height: 1.6; max-width: 440px; }
+
+        /* Right: form card */
+        .apply-card {
+            background: var(--white); border: 1px solid rgba(31,21,17,0.08); border-radius: 24px;
+            padding: 40px; box-shadow: var(--warm-shadow);
+        }
+        @media (max-width: 480px) { .apply-card { padding: 28px 22px; } }
+        .apply-card-title { font-size: 28px; letter-spacing: -0.02em; margin-bottom: 6px; }
+        .apply-card-sub { font-size: 14px; color: var(--gray-mid); margin-bottom: 26px; line-height: 1.5; }
+
+        .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 480px) { .field-row { grid-template-columns: 1fr; gap: 0; } }
+        .field { margin-bottom: 18px; }
+        .field label {
+            display: block; font-size: 12px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.08em; color: var(--gray-mid); margin-bottom: 8px;
+        }
+        .field input, .field select {
+            width: 100%; padding: 13px 15px; border: 1px solid rgba(0,0,0,0.18); border-radius: 12px;
+            font-size: 16px; font-family: inherit; color: var(--black); outline: none; background: var(--white);
+            transition: border-color 0.3s var(--ease-smooth);
+        }
+        .field input:focus, .field select:focus { border-color: var(--accent); }
+        .apply-card .btn-primary { width: 100%; padding: 18px; text-align: center; margin-top: 6px; }
+        .form-fine { font-size: 12px; color: var(--gray-light); text-align: center; margin-top: 16px; line-height: 1.5; }
+        .form-error { color: #dc2626; font-size: 14px; margin-top: 12px; text-align: center; display: none; }
+
+        /* Success state */
+        .apply-success { display: none; text-align: center; padding: 16px 4px; }
+        .apply-success.is-shown { display: block; }
+        .apply-success .tick {
+            width: 64px; height: 64px; border-radius: 50%; background: var(--accent-soft); color: var(--accent-deep);
+            display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800;
+            margin: 0 auto 22px;
+        }
+        .apply-success h3 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: 30px; letter-spacing: -0.01em; margin-bottom: 12px; }
+        .apply-success p { font-size: 16px; color: var(--gray-mid); line-height: 1.6; max-width: 360px; margin: 0 auto 8px; }
+        .apply-success .back { display: inline-block; margin-top: 22px; font-size: 14px; font-weight: 600; color: var(--accent); text-decoration: none; }
+        .apply-success .back:hover { text-decoration: underline; }
+
+        /* Footer */
+        footer { background: var(--gray-dark); color: var(--white); padding: 80px 48px 40px; }
+        .footer-main { max-width: 1100px; margin: 0 auto; }
+        .footer-cta h2 { font-size: clamp(48px, 12vw, 120px); letter-spacing: -0.03em; line-height: 0.85; margin-bottom: 32px; }
+        .footer-cta a { font-size: 24px; font-weight: 600; color: var(--white); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
+        .footer-cta a:hover { color: var(--accent); }
+        .footer-social { display: flex; gap: 16px; margin-top: 28px; }
+        .footer-social a {
+            width: 52px; height: 52px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--white);
+            text-decoration: none; transition: all 0.5s var(--ease-smooth);
+        }
+        .footer-social a:hover { background: var(--white); color: var(--black); transform: translateY(-6px); }
+        .footer-bottom {
+            max-width: 1100px; margin: 64px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: space-between; font-family: monospace; font-size: 12px;
+            text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-light); flex-wrap: wrap; gap: 12px;
+        }
+        .footer-links { display: flex; gap: 28px; }
+        .footer-links a { color: var(--gray-light); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
+        .footer-links a:hover { color: var(--white); }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+            .nav-toggle { display: block; }
+            .nav-links {
+                position: fixed; inset: 0; background: var(--black); color: var(--white);
+                flex-direction: column; justify-content: center; align-items: center; gap: 28px;
+                padding: 80px 24px 40px; transform: translateX(100%);
+                transition: transform 0.4s var(--ease-smooth); z-index: 1050;
+            }
+            .nav-links a { font-size: 22px; color: var(--white); }
+            .nav-links.is-open { transform: translateX(0); }
+            body.nav-open { overflow: hidden; }
+            body.nav-open nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: transparent; border-bottom: none; }
+            body.nav-open .nav-logo { position: relative; z-index: 1100; }
+            body.nav-open .nav-logo img { filter: brightness(0) invert(1); }
+            .nav-toggle.is-open { color: var(--white); }
+            .apply-hero { padding: 116px 24px 16px; }
+            footer { padding: 64px 24px 32px; }
+        }
+
+        /* Hamburger kicks in before the link row gets cramped */
+        @media (max-width: 980px) {
+            .nav-toggle { display: block; }
+            .nav-links {
+                position: fixed; inset: 0; background: var(--black); color: var(--white);
+                flex-direction: column; justify-content: center; align-items: center; gap: 28px;
+                padding: 80px 24px 40px; transform: translateX(100%);
+                transition: transform 0.4s var(--ease-smooth); z-index: 1050;
+            }
+            .nav-links a { font-size: 22px; color: var(--white); }
+            .nav-links.is-open { transform: translateX(0); }
+            body.nav-open { overflow: hidden; }
+            body.nav-open nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: transparent; border-bottom: none; }
+            body.nav-open .nav-logo { position: relative; z-index: 1100; }
+            body.nav-open .nav-logo img { filter: brightness(0) invert(1); }
+            .nav-toggle.is-open { color: var(--white); }
+        }
+    </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="/" class="nav-logo"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+        <div class="nav-links" id="navLinks">
+            <a href="/workshop">Workshop</a>
+            <a href="/brain">Marketing Brain</a>
+            <a href="/mcp">MCP</a>
+            <a href="/work-with-me">Work with me</a>
+            <a href="work.html">Case studies</a>
+            <a href="/podcast">Podcast</a>
+            <a href="/blog">Blog</a>
+            <a href="/traffic">Free gift</a>
+            <a href="/#subscribe" class="nav-cta">Subscribe</a>
+        </div>
+        <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+        </button>
+    </nav>
+
+    <!-- Hero -->
+    <header class="apply-hero">
+        <span class="apply-tag">Community &middot; Free &middot; Vetted</span>
+        <h1>Join the room.</h1>
+        <p>A free group of marketers swapping what's actually working with AI. The real workflows, the stuff that flopped, and short live calls.</p>
+    </header>
+
+    <!-- Apply grid -->
+    <main class="apply-grid">
+        <!-- Left: criteria -->
+        <div>
+            <p class="criteria-intro">Every application is read before anyone gets in. That's how the room stays useful, marketers actually doing the work, not pitch decks and link drops. <strong>Apply below and I'll send the invite once you're approved.</strong></p>
+            <ul class="criteria-list">
+                <li><span class="criteria-check">&check;</span> You're a marketer, founder, or operator doing real marketing work</li>
+                <li><span class="criteria-check">&check;</span> You're actually using AI in your workflow, or about to start</li>
+                <li><span class="criteria-check">&check;</span> You're here to share and swap, not just to sell or lurk</li>
+            </ul>
+            <p class="criteria-note">No sales pitches, no SDR spam, no recruiters. Approved applicants get a WhatsApp invite by email, usually within a day or two.</p>
+        </div>
+
+        <!-- Right: form -->
+        <div class="apply-card">
+            <form id="applyForm">
+                <h2 class="apply-card-title">Apply to join</h2>
+                <p class="apply-card-sub">Quick form. I read every one. You'll get a confirmation once you're approved.</p>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label for="firstName">First name</label>
+                        <input type="text" id="firstName" name="firstName" autocomplete="given-name" required>
+                    </div>
+                    <div class="field">
+                        <label for="lastName">Last name</label>
+                        <input type="text" id="lastName" name="lastName" autocomplete="family-name">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" autocomplete="email" required>
+                    </div>
+                    <div class="field">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" autocomplete="address-level2">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label for="jobTitle">Job title</label>
+                        <input type="text" id="jobTitle" name="jobTitle" autocomplete="organization-title">
+                    </div>
+                    <div class="field">
+                        <label for="company">Company name</label>
+                        <input type="text" id="company" name="company" autocomplete="organization">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label for="type">In-house or agency?</label>
+                        <select id="type" name="type" required>
+                            <option value="" disabled selected>Select one...</option>
+                            <option>In-house (brand)</option>
+                            <option>Agency / studio</option>
+                            <option>Freelance / consultant</option>
+                            <option>Founder</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label for="source">How did you hear about us?</label>
+                        <input type="text" id="source" name="source" placeholder="LinkedIn, a friend, the workshop...">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary" id="applySubmit">Submit application</button>
+                <p class="form-error" id="applyError"></p>
+                <p class="form-fine">I read every application and never sell or share your details.</p>
+            </form>
+
+            <div class="apply-success" id="applySuccess">
+                <div class="tick">&check;</div>
+                <h3>Application in.</h3>
+                <p>I vet every application to keep the room relevant. Once you're approved, you'll get an email with the invite to join.</p>
+                <a href="/" class="back">&larr; Back to home</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-main">
+            <div class="footer-cta">
+                <h2>SEE YOU<br>IN THE ROOM.</h2>
+                <a href="mailto:will@intelligentgrowth.app">will@intelligentgrowth.app</a>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/in/willmulholland/" title="LinkedIn">Li</a>
+                    <a href="https://www.youtube.com/@WillMulholland" title="YouTube">Yt</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Will Mulholland. All rights reserved.</span>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Application form submit
+        (function () {
+            var form = document.getElementById('applyForm');
+            var successEl = document.getElementById('applySuccess');
+            var errEl = document.getElementById('applyError');
+            var submitBtn = document.getElementById('applySubmit');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                errEl.style.display = 'none';
+
+                var payload = {
+                    firstName: document.getElementById('firstName').value.trim(),
+                    lastName: document.getElementById('lastName').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    city: document.getElementById('city').value.trim(),
+                    jobTitle: document.getElementById('jobTitle').value.trim(),
+                    company: document.getElementById('company').value.trim(),
+                    type: document.getElementById('type').value,
+                    source: document.getElementById('source').value.trim()
+                };
+                if (!payload.firstName || !payload.email) return;
+
+                var original = submitBtn.textContent;
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Submitting...';
+
+                fetch('/api/community-apply', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).then(function (r) {
+                    if (r.ok) {
+                        form.style.display = 'none';
+                        successEl.classList.add('is-shown');
+                        successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = original;
+                        errEl.textContent = 'Something went wrong. Try again or email will@intelligentgrowth.app.';
+                        errEl.style.display = 'block';
+                    }
+                }).catch(function () {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = original;
+                    errEl.textContent = 'Network error. Try again in a moment.';
+                    errEl.style.display = 'block';
+                });
+            });
+        })();
+
+        // Mobile burger menu
+        (function() {
+            var toggle = document.getElementById('navToggle');
+            var links = document.getElementById('navLinks');
+            if (!toggle || !links) return;
+            function setOpen(open) {
+                toggle.classList.toggle('is-open', open);
+                links.classList.toggle('is-open', open);
+                document.body.classList.toggle('nav-open', open);
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            }
+            toggle.addEventListener('click', function() { setOpen(!links.classList.contains('is-open')); });
+            links.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { setOpen(false); }); });
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && links.classList.contains('is-open')) setOpen(false); });
+        })();
+
+        // Smart nav: hide on scroll down, show on scroll up
+        (function () {
+            var nav = document.querySelector('nav');
+            if (!nav) return;
+            var last = window.pageYOffset;
+            window.addEventListener('scroll', function () {
+                var y = window.pageYOffset;
+                if (y > last && y > 120) { nav.classList.add('nav--hidden'); }
+                else { nav.classList.remove('nav--hidden'); }
+                last = y;
+            }, { passive: true });
+        })();
+    </script>
+</body>
+</html>

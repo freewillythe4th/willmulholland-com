@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Intelligent Growth</title>
+    <meta name="description" content="Privacy policy for intelligentgrowth.app and connected personal automation apps.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://intelligentgrowth.app/privacy">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #000000;
+            --white: #FFFFFF;
+            --gray-mid: #525252;
+            --accent: #2563EB;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 80px 24px 120px;
+        }
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+        .updated {
+            color: var(--gray-mid);
+            font-size: 0.9rem;
+            margin-bottom: 48px;
+        }
+        h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        p, li {
+            margin-bottom: 12px;
+            color: var(--black);
+        }
+        ul {
+            padding-left: 24px;
+            margin-bottom: 16px;
+        }
+        a {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        .back {
+            display: inline-block;
+            margin-bottom: 32px;
+            color: var(--gray-mid);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .back:hover { color: var(--black); }
+        .brand { display: inline-flex; margin-bottom: 36px; }
+        .brand img { display: block; width: auto; height: 62px; }
+    </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <div class="container">
+        <a class="brand" href="/" aria-label="Intelligent Growth home"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth"></a>
+        <a href="/" class="back">&larr; Back to intelligentgrowth.app</a>
+        <h1>Privacy Policy</h1>
+        <p class="updated">Last updated: 14 July 2026</p>
+
+        <p>This privacy policy explains how Will Mulholland ("I", "me") handles information when you visit intelligentgrowth.app, subscribe to Intelligent Growth, connect the hosted Intelligent Growth MCP, or use another connected service I operate (collectively, "the Services").</p>
+
+        <h2>Who I am</h2>
+        <p>I'm Will Mulholland, an individual based in Sydney, Australia. The Services are operated by me personally, not a company. If you need to reach me, email <a href="mailto:will@intelligentgrowth.app">will@intelligentgrowth.app</a>.</p>
+
+        <h2>What information I collect</h2>
+        <p>Different parts of the Services collect different information.</p>
+
+        <p><strong>intelligentgrowth.app</strong></p>
+        <ul>
+            <li>Email address, if you subscribe to my newsletter, request access to gated content, or make your first free MCP connection. Submitted by you and stored in Beehiiv.</li>
+            <li>Subscription and payment status for paid memberships, handled by Beehiiv and Stripe.</li>
+            <li>Standard analytics: pages visited, referring domain, campaign tags, device type, calls to action clicked, setup stage, selected client category, and whether a first-party form succeeded or failed. Collected via PostHog Cloud in the United States.</li>
+            <li>Website analytics do not receive form contents, names, email addresses, phone numbers, copied connection values, starter prompt text, access tokens, company text, advertising click IDs, or full URLs. Autocapture and session recording are disabled.</li>
+        </ul>
+
+        <p><strong>Intelligent Growth MCP</strong></p>
+        <ul>
+            <li>Connection information, including an OAuth client identifier, access tier, and the email used to establish free access or verify paid access.</li>
+            <li>The product, customer, market, page, interview, brief, or other context you choose to send for the current task.</li>
+            <li>The applied result returned to your chosen AI client.</li>
+            <li>Privacy-safe product events including a pseudonymous identifier derived from the connection email using a secret keyed hash, client category, method, access tier, broad outcome, rate-limit state, server version, and rounded duration. The raw email is not sent to PostHog.</li>
+            <li>MCP analytics do not receive prompts, outputs, email addresses, credentials, IP addresses, raw user agents, company text, source text, or raw error messages.</li>
+        </ul>
+
+        <p><strong>Other connected services</strong></p>
+        <ul>
+            <li>Where a service connects to a third-party account, it uses the permissions shown during that platform's OAuth or connection flow.</li>
+            <li>The information available depends on the service and the permission you grant. I use it only to provide the requested connected function.</li>
+        </ul>
+
+        <h2>What I do with it</h2>
+        <ul>
+            <li>Newsletter and initial free access: send the newsletter you joined and establish the first free MCP connection linked to that email.</li>
+            <li>Membership and access: verify the current access tier, manage the connection, associate product usage with a pseudonymous account identifier, provide support, and prevent misuse.</li>
+            <li>Task processing: apply the selected product marketing method to the context you supplied and return the result to your AI client.</li>
+            <li>Analytics: understand acquisition, setup completion, successful work, repeat use, access friction, reliability, and broad performance so I can improve the Services.</li>
+            <li>Security: investigate abuse, protect accounts, enforce rate limits, and maintain service availability.</li>
+        </ul>
+
+        <h2>What I do not do</h2>
+        <ul>
+            <li>Sell your data. Ever.</li>
+            <li>Share data with advertisers or data brokers.</li>
+            <li>Use prompts, outputs, or company context as PostHog event properties.</li>
+            <li>Use your task context to train an Intelligent Growth model.</li>
+            <li>Ask you to send an access token, password, or private company content through a public issue or support message.</li>
+        </ul>
+
+        <h2>How task context is processed</h2>
+        <p>Your chosen AI client sends the context needed for the job to the hosted MCP. Selected methods and quality checks may send the minimum required task context to an AI model provider to produce the current result. The structured result returns to your AI client.</p>
+        <p>The Intelligent Growth application does not intentionally write raw task prompts or outputs into product analytics, audit logs, or protection logs. Model, hosting, and network providers may process or retain limited data under their own service terms and security controls. Avoid sending unnecessary personal, confidential, regulated, or customer information.</p>
+
+        <h2>Third-party services I use</h2>
+        <ul>
+            <li><strong>Beehiiv</strong> email newsletter platform. Their privacy policy: <a href="https://www.beehiiv.com/privacy" target="_blank" rel="noopener">beehiiv.com/privacy</a>.</li>
+            <li><strong>Stripe</strong> payment processing for paid memberships. Their privacy policy: <a href="https://stripe.com/privacy" target="_blank" rel="noopener">stripe.com/privacy</a>.</li>
+            <li><strong>PostHog</strong> product analytics, using its United States cloud service. Their privacy policy: <a href="https://posthog.com/privacy" target="_blank" rel="noopener">posthog.com/privacy</a>.</li>
+            <li><strong>Vercel</strong> hosting provider. Their privacy policy: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener">vercel.com/legal/privacy-policy</a>.</li>
+            <li><strong>Hostinger</strong> infrastructure for the hosted MCP. Their privacy policy: <a href="https://www.hostinger.com/legal/privacy-policy" target="_blank" rel="noopener">hostinger.com/legal/privacy-policy</a>.</li>
+            <li><strong>AI model providers</strong> used to process selected methods and quality checks for the current task. The provider may vary by method and reliability needs. Contact me for the current provider list before sending regulated or highly sensitive information.</li>
+        </ul>
+
+        <p>These providers may process information outside Australia. Current primary processing locations include the United States and Indonesia, and providers may also use other locations described in their policies. I use bounded data, privacy controls, contractual provider terms, and data minimisation to reduce cross-border risk.</p>
+
+        <h2>How long I keep it</h2>
+        <ul>
+            <li>Newsletter email: while the subscription is active, plus any limited period needed for support, security, dispute, or legal records.</li>
+            <li>MCP connection email: while the OAuth connection is active and for a limited period needed to refresh, revoke, secure, support, or investigate the connection. Unsubscribing from marketing email does not automatically remove the free MCP connection.</li>
+            <li>Analytics events: 12 months rolling.</li>
+            <li>OAuth connection records: while the connection is active and for a limited period needed to refresh, revoke, secure, or investigate the connection.</li>
+            <li>Raw MCP task context and results: not intentionally persisted by the Intelligent Growth application after the current response. Infrastructure and model providers may keep limited records under their terms and security controls.</li>
+        </ul>
+
+        <h2>Your rights</h2>
+        <p>You can ask me to:</p>
+        <ul>
+            <li>Tell you what data I hold about you.</li>
+            <li>Correct anything that's wrong.</li>
+            <li>Delete it all.</li>
+            <li>Disconnect an MCP or connected account.</li>
+            <li>Unsubscribe from the newsletter through the link in every email without losing existing free MCP access.</li>
+        </ul>
+        <p>Email <a href="mailto:will@intelligentgrowth.app">will@intelligentgrowth.app</a>. I may need to verify your identity before disclosing or deleting account information. I will respond within a reasonable period and explain if a legal or security obligation prevents a requested action.</p>
+
+        <h2>Security and complaints</h2>
+        <p>I use OAuth, encrypted network transport, access controls, bounded logs, private runtime repositories, rate limits, content protection, and credential rotation to reduce risk. No service can promise perfect security.</p>
+        <p>If you believe your information was mishandled, email <a href="mailto:will@intelligentgrowth.app">will@intelligentgrowth.app</a> with the minimum information needed to investigate. Do not include an access token or confidential company content. I will investigate and respond. If you are not satisfied, you may be able to contact the Office of the Australian Information Commissioner.</p>
+
+        <h2>Cookies</h2>
+        <p>The site uses PostHog analytics storage to count visits and remember first-touch and latest-touch campaign tags. Full query strings, full referrer URLs, advertising click IDs, form contents, names, email addresses, copied values, and task context are not retained in PostHog. No advertising cookies. No cross-site advertising tracking. You can block cookies or local storage in your browser without breaking the core site.</p>
+
+        <h2>Children</h2>
+        <p>The Services are not directed at anyone under 18. If you're under 18, please don't sign up.</p>
+
+        <h2>Changes</h2>
+        <p>If I change this policy materially, I'll update the date at the top and post a note to my newsletter.</p>
+
+        <h2>Governing law</h2>
+        <p>This policy is governed by the laws of New South Wales, Australia.</p>
+    </div>
+</body>
+</html>

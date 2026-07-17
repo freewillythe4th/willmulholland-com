@@ -1,0 +1,11 @@
+{
+  "name": "intelligent-growth-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "analytics:install": "node scripts/install-analytics.mjs",
+    "analytics:check": "node scripts/install-analytics.mjs --check",
+    "utm": "node scripts/utm-link.mjs"
+  }
+}

@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+  <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Marketing Brain: one place your AI tools learn your customers, your company, and how you work. Built with you in a four week cohort.">
+  <meta property="og:title" content="Build the brain behind your marketing">
+  <meta property="og:description" content="One place your AI tools learn your customers, your company, and how you work. Built with you in a four week cohort.">
+  <meta property="og:image" content="https://intelligentgrowth.app/images/brain/og-brain.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Build Your Marketing Brain · Intelligent Growth</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #1F1511;
+      --ink: #1F1511;
+      --cream: #FFFFFF;
+      --cream-soft: #F4F4F2;
+      --white: #FFFFFF;
+      --gray-dark: #1F1511;
+      --gray-mid: #5C4F47;
+      --gray-light: #8B7E73;
+      --accent: #2563EB;
+      --accent-soft: #DBEAFE;
+      --accent-deep: #1E3A8A;
+      --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+      --warm-shadow-hover: 0 20px 48px rgba(31,21,17,0.16), 0 4px 12px rgba(31,21,17,0.08);
+      --offset-shadow: 6px 6px 0 rgba(31,21,17,0.14);
+      --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); font-size: 17px; line-height: 1.6; letter-spacing: -0.01em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button, input { font: inherit; }
+    ::selection { background: var(--accent); color: var(--white); }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+    nav { position: fixed; inset: 0 0 auto; z-index: 1000; min-height: 82px; padding: 18px 48px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(31,21,17,0.06); }
+    .nav-logo { display: inline-flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 46px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 30px; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; font-variant-caps: all-small-caps; letter-spacing: 1.4px; transition: opacity 0.25s var(--ease-smooth), background 0.25s var(--ease-smooth); }
+    .nav-links a:hover { opacity: 0.6; }
+    .nav-links .nav-cta { display: inline-flex; align-items: center; padding: 10px 18px; background: var(--ink); color: var(--white); border-radius: 999px; font-size: 16px; font-variant-caps: normal; letter-spacing: normal; opacity: 1; }
+    .nav-links .nav-cta:hover { background: #17100D; opacity: 1; }
+
+    main { display: block; }
+    .section { padding: 90px 48px; }
+    .section.soft { background: var(--cream-soft); }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; }
+    .narrow { max-width: 640px; }
+    .center { text-align: center; margin-left: auto; margin-right: auto; }
+    .section-tag { color: var(--accent-deep); margin-bottom: 22px; display: flex; align-items: center; gap: 12px; font-family: 'Inter', sans-serif; font-weight: 700; font-size: 12px; font-variant-caps: all-small-caps; letter-spacing: 0.14em; }
+    .section-tag::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; flex: 0 0 auto; }
+    .section-tag.center { justify-content: center; }
+    h1, h2, .serif { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; }
+    h1 { font-size: clamp(40px, 5.6vw, 84px); line-height: 1; letter-spacing: -0.015em; text-wrap: balance; }
+    h2 { font-size: clamp(34px, 5vw, 58px); line-height: 1.05; letter-spacing: -0.02em; text-wrap: balance; }
+    .section-copy { margin-top: 22px; color: var(--gray-mid); font-size: 17px; line-height: 1.65; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 16px 32px; border-radius: 999px; font-size: 14px; font-weight: 600; letter-spacing: 1.4px; line-height: 1.2; font-variant-caps: all-small-caps; text-decoration: none; cursor: pointer; transition: box-shadow 0.25s var(--ease-smooth), background 0.25s var(--ease-smooth); }
+    .btn-primary { border: 1px solid var(--accent); background: var(--accent); color: var(--white); }
+    .btn-primary:hover { box-shadow: 0 10px 24px rgba(37,99,235,0.25); }
+    .btn-secondary { border: 1px solid var(--ink); background: var(--white); color: var(--ink); }
+    .btn-secondary:hover { background: var(--ink); color: var(--white); }
+
+    .hero { min-height: 760px; padding: 172px 48px 100px; display: flex; align-items: center; background-color: var(--white); background-image: radial-gradient(1100px 620px at 82% 4%, rgba(37,99,235,0.10), transparent 60%); }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(340px, 0.8fr); gap: 70px; align-items: center; }
+    .hero-copy { max-width: 690px; }
+    .hero .section-tag { margin-bottom: 24px; }
+    .hero-lede { max-width: 660px; margin-top: 26px; color: var(--gray-mid); font-size: clamp(17px, 1.6vw, 21px); line-height: 1.6; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .mb-hub { width: 100%; max-width: 430px; margin-left: auto; background: var(--white); border: 1px solid var(--ink); border-radius: 18px; box-shadow: var(--offset-shadow); padding: 26px 26px 28px; }
+    .mb-cap { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.12em; font-variant-caps: all-small-caps; color: var(--gray-light); margin-bottom: 13px; display: flex; align-items: center; gap: 8px; }
+    .mb-cap::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+    .mb-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .mb-chip { font-size: 16px; font-weight: 500; padding: 6px 11px; border-radius: 8px; background: var(--cream-soft); color: var(--gray-mid); border: 1px solid rgba(31,21,17,0.07); white-space: nowrap; }
+    .mb-flow { display: flex; justify-content: center; padding: 9px 0; color: var(--accent); font-size: 21px; line-height: 1; }
+    .mb-core { background: #16181D; border-radius: 14px; padding: 18px; color: var(--white); box-shadow: 0 16px 34px rgba(31,21,17,0.22); text-align: center; }
+    .mb-core-t { font-family: 'Instrument Serif', Georgia, serif; font-size: 25px; line-height: 1.04; }
+    .mb-core-s { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; font-variant-caps: all-small-caps; color: rgba(255,255,255,0.68); margin-top: 6px; }
+    .mb-out .mb-chip { background: var(--accent-soft); color: var(--accent-deep); border-color: rgba(37,99,235,0.16); font-weight: 600; }
+    .hero-proof { margin-top: 20px; color: var(--gray-mid); font-size: 16px; font-style: italic; }
+    .hero-proof span { margin-left: 5px; font-size: 16px; font-style: normal; }
+
+    .offer-strip { width: 100%; padding: 34px 48px; background: var(--cream-soft); border-top: 1px solid rgba(31,21,17,0.08); border-bottom: 1px solid rgba(31,21,17,0.08); }
+    .offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+    .offer-item + .offer-item { padding-left: 48px; border-left: 1px solid rgba(31,21,17,0.16); }
+    .offer-label { color: var(--accent-deep); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; font-variant-caps: all-small-caps; }
+    .offer-line { margin-top: 5px; font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; line-height: 1.25; }
+
+    .self-check-lead { margin-top: 34px; font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; line-height: 1.25; }
+    .self-checklist { display: grid; gap: 12px; max-width: 720px; margin-top: 18px; list-style: none; }
+    .self-check-row { min-width: 0; padding: 16px 18px; display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 13px; align-items: center; background: var(--white); border: 1px solid var(--ink); border-radius: 12px; font-size: 17px; line-height: 1.45; cursor: pointer; transition: background 0.2s var(--ease-smooth), border-color 0.2s var(--ease-smooth); }
+    .self-check-row:hover { background: rgba(219,234,254,0.42); }
+    .self-checkbox { position: relative; width: 20px; height: 20px; border: 1.5px solid var(--ink); border-radius: 3px; background: var(--white); overflow: hidden; }
+    .self-checkbox::before { content: ''; position: absolute; inset: -1px; border-radius: 3px; background: var(--accent); scale: 0; transition: scale 0.42s var(--ease-smooth); }
+    .self-checkbox::after { content: '\2713'; position: absolute; inset: 0; display: grid; place-items: center; color: var(--white); font-size: 14px; font-weight: 800; line-height: 1; opacity: 0; translate: 0 4px; scale: 0.75; transition: opacity 0.25s ease, translate 0.42s var(--ease-smooth), scale 0.42s var(--ease-smooth); }
+    .self-check-row.is-checked { border-color: var(--accent); background: rgba(219,234,254,0.58); }
+    .self-check-row.is-checked .self-checkbox::before { scale: 1; }
+    .self-check-row.is-checked .self-checkbox::after { opacity: 1; translate: 0 0; scale: 1; }
+    .self-check-resolution { max-width: 760px; margin-top: 20px; color: var(--gray-mid); font-size: 17px; line-height: 1.6; }
+    .brain-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr); gap: 54px; align-items: center; margin-top: 42px; }
+    .brain-canvas-wrap { position: relative; min-width: 0; min-height: 420px; }
+    .structure-brain-canvas { display: block; width: 100%; height: 420px; }
+    .brain-legend { display: grid; gap: 10px; }
+    .brain-region { width: 100%; padding: 16px; display: grid; grid-template-columns: 12px 1fr; gap: 12px; align-items: start; border: 1px solid transparent; border-radius: 12px; background: transparent; color: var(--ink); text-align: left; cursor: pointer; transition: background 0.2s var(--ease-smooth), border-color 0.2s var(--ease-smooth); }
+    .brain-layout[data-active-region="customer"] [data-brain-region="customer"], .brain-layout[data-active-region="company"] [data-brain-region="company"], .brain-layout[data-active-region="systems"] [data-brain-region="systems"] { background: var(--cream-soft); border-color: var(--ink); }
+    .brain-dot { width: 10px; height: 10px; margin-top: 4px; border-radius: 50%; background: var(--region-color); }
+    .brain-region-title { display: block; color: var(--ink); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; line-height: 1.3; font-variant-caps: all-small-caps; }
+    .brain-region-copy { display: block; margin-top: 4px; color: var(--gray-mid); font-size: 16px; line-height: 1.6; }
+    .context-close { margin-top: 38px; text-align: center; font-size: 17px; }
+
+    .job-flow { position: relative; display: flex; align-items: stretch; gap: 12px; margin-top: 44px; padding-top: 54px; }
+    .job-flow-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 1; }
+    .flow-node { position: relative; z-index: 2; min-width: 0; flex: 1; min-height: 86px; padding: 18px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--ink); border-radius: 14px; background: var(--white); text-align: center; font-size: 16px; font-weight: 700; }
+    .flow-node.core { flex: 1.35; background: #16181D; color: var(--white); }
+    .flow-arrow { display: flex; align-items: center; color: var(--accent); font-size: 24px; flex: 0 0 auto; visibility: hidden; }
+    .job-beam { fill: none; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+    .job-flow.flow-in .job-beam { animation: jobBeamDraw 0.72s var(--ease-smooth) forwards; }
+    .job-flow-svg .job-pulse { opacity: 0; transition: opacity 0.5s var(--ease-smooth) 2.2s; }
+    .job-flow.flow-in .job-pulse { opacity: 1; }
+    @keyframes jobBeamDraw { to { stroke-dashoffset: 0; } }
+    .learn-loop { margin-top: 16px; display: flex; justify-content: center; align-items: center; gap: 10px; color: var(--accent); font-family: 'Inter', sans-serif; font-size: 16px; }
+    .diagram-caption { margin-top: 18px; text-align: center; color: var(--gray-mid); font-size: 16px; }
+
+    .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 42px; }
+    .voice-panel { min-width: 0; padding: 30px; border-radius: 18px; }
+    .voice-panel.bad-copy { background: var(--cream-soft); border: 1px solid rgba(31,21,17,0.08); }
+    .voice-panel.your-copy { background: var(--white); border: 1.5px solid var(--accent); }
+    .voice-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; line-height: 1.4; font-variant-caps: all-small-caps; }
+    .bad-copy .voice-label { color: var(--gray-mid); }
+    .your-copy .voice-label { color: var(--accent-deep); }
+    .voice-list { display: grid; gap: 0; margin-top: 18px; list-style: none; }
+    .voice-list li { min-width: 0; padding: 16px 0; border-top: 1px solid rgba(31,21,17,0.12); font-size: 17px; line-height: 1.5; overflow-wrap: anywhere; }
+    .bad-copy .voice-list li { color: var(--gray-light); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+    .your-copy .voice-list li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px; color: var(--ink); }
+    .voice-check { color: var(--accent); font-weight: 800; }
+    .voice-note { max-width: 900px; margin: 26px auto 0; color: var(--gray-mid); text-align: center; font-size: 16px; line-height: 1.6; }
+
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 42px; }
+    .compare-panel { border-radius: 18px; padding: 30px; }
+    .compare-panel.before { background: var(--cream-soft); border: 1px solid rgba(31,21,17,0.08); }
+    .compare-panel.after { background: var(--white); border: 1.5px solid var(--accent); }
+    .mono-title { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; font-variant-caps: all-small-caps; color: var(--accent-deep); }
+    .compare-list, .boundary-list { list-style: none; margin-top: 18px; }
+    .compare-list li, .boundary-list li { padding: 16px 0; border-top: 1px solid rgba(31,21,17,0.12); font-size: 16px; }
+    .before .compare-list li { color: var(--gray-mid); }
+    .change-close { max-width: 890px; margin: 38px auto 0; text-align: center; font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; line-height: 1.3; }
+    .change-note { margin-top: 10px; text-align: center; color: var(--gray-mid); font-size: 16px; }
+
+    .pill-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+    .pill-row.center { justify-content: center; }
+    .outline-pill { padding: 10px 16px; border: 1px solid var(--ink); border-radius: 999px; background: var(--white); font-size: 16px; }
+
+    .cohort-intro { margin-top: 20px; font-size: 17px; }
+    .schedule-lead { margin-top: 32px; color: var(--accent-deep); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; line-height: 1.4; }
+    .schedule-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+    .schedule-header { display: contents; }
+    .schedule-day { padding: 0 10px 5px; color: var(--gray-light); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-align: center; }
+    .schedule-day.active { color: var(--accent-deep); }
+    .schedule-week { display: contents; }
+    .schedule-cell { min-width: 0; min-height: 142px; padding: 16px; border-radius: 10px; }
+    .schedule-placeholder { display: flex; align-items: center; justify-content: center; border: 1px dashed rgba(31,21,17,0.16); background: rgba(255,255,255,0.48); color: rgba(92,79,71,0.28); font-size: 13px; font-weight: 600; }
+    .schedule-card { background: var(--white); border: 1px solid rgba(31,21,17,0.10); border-top: 2px solid var(--schedule-color); box-shadow: 0 3px 10px rgba(31,21,17,0.05); }
+    .schedule-card.live { --schedule-color: var(--accent); }
+    .schedule-card.room { --schedule-color: #1E3A8A; }
+    .schedule-card.ship { --schedule-color: #DB2777; }
+    .schedule-card-label { color: var(--schedule-color); font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; line-height: 1.3; }
+    .schedule-card-copy { margin-top: 8px; color: var(--gray-mid); font-size: 14px; line-height: 1.5; }
+    .schedule-caption { margin-top: 16px; color: var(--gray-mid); font-size: 15px; line-height: 1.5; text-align: center; }
+    .curriculum-board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 38px; padding: 40px; overflow: hidden; border-radius: 18px; background-color: #F4F4F2; background-image: radial-gradient(rgba(31,21,17,0.06) 1px, transparent 1px); background-size: 22px 22px; }
+    .board-column { min-width: 0; }
+    .board-photo { display: flex; align-items: center; justify-content: center; height: 190px; margin-bottom: 20px; padding: 14px; border-radius: 10px; background: var(--white); box-shadow: 1px 3px 8px rgba(31,21,17,0.10); rotate: -0.4deg; }
+    .board-column:nth-child(even) .board-photo { rotate: 0.4deg; }
+    .board-photo img { width: 100%; max-height: 162px; object-fit: contain; }
+    .board-week { font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; font-weight: 400; line-height: 1.1; }
+    .board-title { margin-top: 14px; padding: 12px; border: 1px solid rgba(37,99,235,0.25); border-radius: 8px; background: #DBEAFE; font-size: 15px; font-weight: 700; line-height: 1.35; text-align: center; }
+    .board-notes { display: grid; gap: 10px; margin-top: 12px; list-style: none; }
+    .board-note { padding: 12px 13px; border: 1px solid rgba(31,21,17,0.13); background: var(--white); box-shadow: 1px 2px 5px rgba(31,21,17,0.08); font-size: 14px; font-weight: 500; line-height: 1.4; rotate: -0.5deg; }
+    .board-note:nth-child(even) { rotate: 0.5deg; }
+    .board-note.board-proof { background: var(--accent-soft); font-family: 'Inter', sans-serif; font-weight: 600; }
+    .week-detail { width: 100%; margin-top: 30px; border-bottom: 1px solid rgba(31,21,17,0.22); }
+    .week-detail-title { margin-bottom: 12px; font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 600; line-height: 1.4; }
+    .week-detail details { border-top-color: rgba(31,21,17,0.22); }
+    .week-detail summary { padding: 16px 44px 16px 0; font-size: 16px; }
+    .week-detail summary::after { top: 13px; }
+    .week-detail-content { max-width: 840px; padding: 0 44px 22px 0; }
+    .curriculum-group + .curriculum-group { margin-top: 22px; }
+    .curriculum-label { color: var(--accent-deep); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; font-variant-caps: all-small-caps; }
+    .curriculum-list { margin-top: 8px; list-style: none; }
+    .curriculum-list li { padding: 11px 0; font-size: 16px; line-height: 1.5; }
+    .curriculum-list li + li { border-top: 1px solid rgba(31,21,17,0.12); }
+    .cohort-note { margin-top: 24px; color: var(--gray-mid); font-size: 16px; }
+    .cohort-action { margin-top: 24px; }
+
+    .offer-cards { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr); gap: 24px; margin-top: 42px; align-items: start; }
+    .offer-card { min-width: 0; padding: 32px; border-radius: 14px; }
+    .offer-card-primary { background: var(--white); border: 1px solid var(--ink); box-shadow: var(--offset-shadow); }
+    .offer-card-team { background: var(--cream-soft); }
+    .offer-card-label { color: var(--accent-deep); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; font-variant-caps: all-small-caps; }
+    .offer-list { margin-top: 18px; list-style: none; }
+    .offer-list li { padding: 14px 0; border-top: 1px solid rgba(31,21,17,0.12); font-size: 16px; line-height: 1.55; }
+    .offer-price-note { margin-top: 22px; color: var(--accent-deep); font-family: monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; line-height: 1.5; font-variant-caps: all-small-caps; }
+    .offer-card .btn { margin-top: 20px; }
+    .offer-guarantee { display: grid; grid-template-columns: 18px 1fr; gap: 9px; align-items: start; margin-top: 18px; color: var(--gray-mid); font-size: 16px; line-height: 1.55; }
+    .offer-guarantee svg { width: 17px; height: 17px; margin-top: 2px; color: var(--accent-deep); }
+    .offer-team-copy { margin-top: 18px; font-size: 16px; line-height: 1.65; }
+
+    .testi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; margin-top: 42px; }
+    .testi-card { background: var(--white); border: 1px solid var(--ink); border-radius: 18px; box-shadow: var(--offset-shadow); padding: 36px 32px; display: flex; flex-direction: column; }
+    .testi-quote { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(18px, 1.6vw, 21px); line-height: 1.45; color: var(--ink); letter-spacing: -0.01em; margin: 0 0 26px; flex: 1; }
+    .testi-foot { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .testi-msg { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #fff; padding: 11px 18px; border-radius: 999px; font-size: 16px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .stat-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 54px; padding: 28px 0; border-top: 1px solid rgba(31,21,17,0.16); border-bottom: 1px solid rgba(31,21,17,0.16); }
+    .proof-stat { text-align: center; }
+    .proof-number { font-family: 'Instrument Serif', Georgia, serif; font-size: 34px; line-height: 1; color: var(--accent-deep); }
+    .proof-label { margin-top: 8px; font-family: 'Inter', sans-serif; font-size: 16px; color: var(--gray-mid); }
+    .proof-close { margin-top: 30px; text-align: center; font-size: 17px; }
+
+    .instructor-layout { display: grid; grid-template-columns: minmax(260px, 0.7fr) minmax(0, 1fr); gap: 64px; align-items: start; margin-top: 42px; }
+    .instructor-image { width: 100%; border: 1px solid var(--ink); border-radius: 18px; box-shadow: var(--offset-shadow); }
+    .instructor-copy p { font-size: 17px; line-height: 1.65; }
+    .instructor-copy p + p { margin-top: 20px; }
+    .instructor-points { margin-top: 28px; list-style: none; }
+    .instructor-points li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 10px; padding: 13px 0; border-top: 1px solid rgba(31,21,17,0.12); font-size: 16px; line-height: 1.55; }
+    .instructor-arrow { color: var(--accent); font-weight: 700; }
+    .instructor-logos { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 24px 36px; margin-top: 64px; padding-top: 32px; border-top: 1px solid rgba(31,21,17,0.12); }
+    .instructor-logos > img, .instructor-logo-item { flex: 0 0 auto; opacity: 0.75; }
+    .instructor-logos img { width: auto; max-width: 150px; filter: grayscale(100%); }
+    .instructor-logo-item { display: inline-flex; align-items: center; gap: 8px; }
+    .instructor-logo-item img { width: 22px; height: 22px; }
+    .instructor-logo-item span { color: var(--ink); font-size: 16px; font-weight: 700; letter-spacing: -0.01em; white-space: nowrap; }
+
+    .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 38px; }
+    .fit-card { padding: 28px; border-radius: 14px; }
+    .fit-card.yes { background: var(--white); border: 1px solid var(--ink); }
+    .fit-card.no { background: var(--cream-soft); border: 1px solid transparent; }
+    .fit-title { color: var(--accent-deep); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; font-variant-caps: all-small-caps; }
+    .fit-list { display: grid; gap: 0; margin-top: 14px; list-style: none; }
+    .fit-list li { display: grid; grid-template-columns: 20px 1fr; gap: 10px; padding: 12px 0; border-top: 1px solid rgba(31,21,17,0.12); font-size: 16px; line-height: 1.6; }
+    .fit-icon { color: var(--accent); font-weight: 800; }
+    .fit-card.no .fit-icon { color: var(--gray-light); }
+
+    .faq-list { margin-top: 40px; border-bottom: 1px solid var(--ink); }
+    details { border-top: 1px solid var(--ink); }
+    summary { position: relative; padding: 22px 44px 22px 0; cursor: pointer; list-style: none; font-size: 19px; font-weight: 600; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; position: absolute; top: 20px; right: 4px; color: var(--accent); font-size: 22px; font-weight: 400; }
+    details[open] summary::after { content: '\2212'; }
+    details p { max-width: 760px; padding: 0 44px 24px 0; color: var(--gray-mid); font-size: 16px; line-height: 1.6; }
+
+    .starter-layout { display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); gap: 56px; align-items: center; max-width: 980px; }
+    .starter-image { width: 100%; max-width: 300px; object-fit: contain; border-radius: 12px; }
+    .starter-content { min-width: 0; text-align: left; }
+    .starter-copy { max-width: 720px; margin-top: 20px; color: var(--gray-mid); font-size: 17px; line-height: 1.6; }
+    .starter-form { max-width: 610px; margin-top: 28px; display: flex; gap: 10px; }
+    .starter-form label, .join-form label { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .starter-form input { min-width: 0; flex: 1; padding: 15px 20px; border: 1px solid var(--ink); border-radius: 999px; background: var(--white); color: var(--ink); font-size: 16px; }
+    .starter-form button:disabled, .join-form button:disabled { cursor: wait; opacity: 0.72; }
+    .starter-message { max-width: 720px; min-height: 26px; margin-top: 16px; color: var(--gray-mid); font-size: 16px; }
+    .workshop-link { margin-top: 12px; font-size: 16px; }
+    .workshop-link a { color: var(--accent-deep); text-underline-offset: 3px; }
+
+    .join { padding: 100px 48px 92px; background: #16181D; color: var(--white); text-align: center; }
+    .join h2 { color: var(--white); font-size: clamp(42px, 6vw, 70px); }
+    .join-copy { max-width: 680px; margin: 20px auto 0; color: rgba(255,255,255,0.75); font-size: 17px; }
+    .join-form { max-width: 610px; margin: 30px auto 0; display: flex; gap: 10px; }
+    .join-form input { min-width: 0; flex: 1; padding: 15px 20px; border: 1px solid var(--white); border-radius: 999px; background: var(--white); color: var(--ink); font-size: 16px; }
+    .join-message { max-width: 680px; margin: 18px auto 0; color: rgba(255,255,255,0.78); font-size: 16px; min-height: 26px; }
+    .starter-link { margin-top: 16px; font-size: 16px; }
+    .starter-link a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
+
+    footer { background: #16181D; color: var(--white); padding: 34px 48px 42px; border-top: 1px solid rgba(255,255,255,0.12); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; gap: 32px; align-items: flex-start; }
+    .footer-wordmark { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 0.14em; }
+    .footer-line { margin-top: 10px; color: rgba(255,255,255,0.68); font-size: 16px; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px 22px; }
+    .footer-links a { color: rgba(255,255,255,0.78); font-size: 16px; text-decoration: none; }
+    .footer-links a:hover { color: var(--white); }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 24px; margin-top: 30px; padding-top: 22px; border-top: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.55); font-size: 16px; letter-spacing: 0.04em; }
+    .footer-bottom a { color: rgba(255,255,255,0.7); overflow-wrap: anywhere; }
+
+    @media (max-width: 1000px) {
+      .curriculum-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 52px; }
+      .hero-copy { max-width: 780px; }
+      .mb-hub { max-width: 580px; margin: 0; }
+    }
+
+    @media (max-width: 880px) {
+      .testi-grid, .offer-cards { grid-template-columns: 1fr; }
+      .instructor-layout { grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1fr); gap: 40px; }
+    }
+
+    @media (max-width: 760px) {
+      nav { min-height: 72px; padding: 13px 24px; }
+      .nav-logo img { height: 42px; }
+      .nav-links { gap: 0; }
+      .nav-links a:not(.nav-cta) { display: none; }
+      .nav-links .nav-cta { padding: 10px 18px; font-size: 16px; }
+      .section { padding: 70px 24px; }
+      .hero { min-height: 0; padding: 132px 24px 76px; background-size: auto, 24px 24px; }
+      .hero-grid { gap: 44px; }
+      h1 { font-size: clamp(45px, 13vw, 62px); }
+      .hero-actions { flex-direction: column; align-items: stretch; }
+      .hero-actions .btn { width: 100%; }
+      .mb-hub { max-width: none; padding: 22px 20px 24px; }
+      .offer-grid, .brain-layout, .compare-grid, .voice-grid, .fit-grid, .instructor-layout { grid-template-columns: 1fr; }
+      .schedule-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+      .schedule-header { display: none; }
+      .schedule-week { display: grid; grid-template-columns: 1fr; gap: 8px; }
+      .schedule-cell { min-height: 0; }
+      .schedule-placeholder { display: none; }
+      .instructor-image { max-width: 320px; margin: 0 auto; }
+      .instructor-logos { gap: 24px 30px; margin-top: 52px; }
+      .offer-strip { padding: 30px 24px; }
+      .offer-grid { gap: 24px; }
+      .offer-item + .offer-item { padding: 24px 0 0; border-top: 1px solid rgba(31,21,17,0.16); border-left: 0; }
+      .brain-layout { gap: 24px; }
+      .brain-canvas-wrap { min-height: 320px; }
+      .structure-brain-canvas { height: 320px; }
+      .starter-layout { grid-template-columns: 1fr; gap: 32px; justify-items: center; text-align: center; }
+      .starter-content { width: 100%; text-align: center; }
+      .starter-copy, .starter-form, .starter-message { margin-left: auto; margin-right: auto; }
+      .job-flow { flex-direction: column; padding-top: 0; }
+      .job-flow-svg { display: none; }
+      .flow-node { width: 100%; min-height: 72px; }
+      .flow-arrow { justify-content: center; font-size: 0; visibility: visible; }
+      .flow-arrow::after { content: '\2193'; font-size: 24px; }
+      .stat-strip { grid-template-columns: 1fr; gap: 0; }
+      .proof-stat { padding: 20px 0; }
+      .proof-stat + .proof-stat { border-top: 1px solid rgba(31,21,17,0.12); }
+      .join { padding: 78px 24px 70px; }
+      .starter-form, .join-form { flex-direction: column; }
+      .starter-form input, .starter-form button, .join-form input, .join-form button { width: 100%; }
+      footer { padding: 32px 24px 36px; }
+      .footer-top, .footer-bottom { flex-direction: column; }
+      .footer-links { justify-content: flex-start; }
+    }
+
+    @media (max-width: 420px) {
+      nav { padding-left: 16px; padding-right: 16px; }
+      .nav-logo img { height: 38px; max-width: 160px; object-fit: contain; }
+      .nav-links .nav-cta { padding: 10px 18px; font-size: 16px; }
+      .section, .hero, .join { padding-left: 20px; padding-right: 20px; }
+      .testi-card, .compare-panel, .fit-card, .offer-card { padding: 26px 22px; }
+      .curriculum-board { padding: 24px 18px; }
+      .testi-msg { white-space: normal; }
+    }
+
+    @media (max-width: 640px) {
+      .curriculum-board { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .self-check-row, .self-checkbox::before, .self-checkbox::after { transition: none; }
+      .job-beam { stroke-dashoffset: 0; animation: none !important; }
+      .job-flow-svg .job-pulse { display: none; }
+    }
+  </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+  <nav aria-label="Primary navigation">
+    <a href="/" class="nav-logo" aria-label="Intelligent Growth home"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth"></a>
+    <div class="nav-links">
+      <a href="#how">How it works</a>
+      <a href="#cohort">The cohort</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#faq">Faq</a>
+      <a href="#join" class="nav-cta">Register interest</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="section-tag">Build your Marketing Brain</div>
+          <h1>Build the brain behind your marketing.</h1>
+          <p class="hero-lede">Give Claude, ChatGPT, and the next AI tool one place to learn your customers, your company, and how you work. In the cohort, we set it up with your own material so every new chat stops starting from zero.</p>
+          <div class="hero-actions">
+            <a href="#join" class="btn btn-primary">Join the founding cohort</a>
+            <a href="#starter" class="btn btn-secondary">Get the free starter</a>
+          </div>
+          <p class="hero-proof">&quot;Honestly, it's not scary, it's inspiring.&quot;<span>Pallavi Roy, Marketing Director</span></p>
+        </div>
+        <div class="mb-hub" aria-label="Three kinds of context become one shared marketing brain">
+          <div class="mb-cap">Three kinds of context</div>
+          <div class="mb-row">
+            <span class="mb-chip">customer</span><span class="mb-chip">company</span><span class="mb-chip">systems</span>
+          </div>
+          <div class="mb-flow" aria-hidden="true">&#8595;</div>
+          <div class="mb-core">
+            <div class="mb-core-t">one shared marketing brain</div>
+            <div class="mb-core-s">Every tool · every launch</div>
+          </div>
+          <div class="mb-flow" aria-hidden="true">&#8595;</div>
+          <div class="mb-cap">What comes out</div>
+          <div class="mb-row mb-out">
+            <span class="mb-chip">positioning</span><span class="mb-chip">launch email</span><span class="mb-chip">founder post</span><span class="mb-chip">battle card</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="offer-strip" aria-label="Cohort offer">
+      <div class="container offer-grid">
+        <div class="offer-item">
+          <div class="offer-label">What you are buying</div>
+          <p class="offer-line">Four weeks live with me, building it together.</p>
+        </div>
+        <div class="offer-item">
+          <div class="offer-label">What you leave with</div>
+          <p class="offer-line">A Marketing Brain you own, running your marketing.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="container">
+        <div class="section-tag">The problem</div>
+        <h2>Every new chat starts like a clever stranger.</h2>
+        <p class="section-copy narrow">You explain the product again, paste the positioning again, and get something back that sounds like everyone else. The good version dies in a doc nobody opens.</p>
+        <p class="self-check-lead">Be honest, which one is you?</p>
+        <ul class="self-checklist" aria-label="Common frustrations">
+          <li class="self-check-row" role="checkbox" aria-checked="false" tabindex="0"><span class="self-checkbox" aria-hidden="true"></span><span>&quot;I keep re-pasting the same context.&quot;</span></li>
+          <li class="self-check-row" role="checkbox" aria-checked="false" tabindex="0"><span class="self-checkbox" aria-hidden="true"></span><span>&quot;I keep meaning to build something but I never start.&quot;</span></li>
+          <li class="self-check-row" role="checkbox" aria-checked="false" tabindex="0"><span class="self-checkbox" aria-hidden="true"></span><span>&quot;I don't want to become a developer to do this.&quot;</span></li>
+        </ul>
+        <p class="self-check-resolution">All three are the same problem: nothing you do teaches your tools anything. That is what the brain fixes.</p>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="container">
+        <div class="section-tag center">What it knows</div>
+        <h2 class="center">One brain, three kinds of context.</h2>
+        <div class="brain-layout" data-active-region="customer">
+          <div class="brain-canvas-wrap" role="img" aria-label="Marketing Brain with customer, company, and systems regions">
+            <canvas class="structure-brain-canvas" aria-hidden="true"></canvas>
+          </div>
+          <div class="brain-legend" aria-label="Marketing Brain regions">
+            <button class="brain-region" type="button" data-brain-region="customer" style="--region-color: rgb(37,99,235)">
+              <span class="brain-dot" aria-hidden="true"></span>
+              <span><span class="brain-region-title">Customer</span><span class="brain-region-copy">What buyers care about, in their words.</span></span>
+            </button>
+            <button class="brain-region" type="button" data-brain-region="company" style="--region-color: rgb(30,58,138)">
+              <span class="brain-dot" aria-hidden="true"></span>
+              <span><span class="brain-region-title">Company</span><span class="brain-region-copy">What you can say and prove.</span></span>
+            </button>
+            <button class="brain-region" type="button" data-brain-region="systems" style="--region-color: rgb(219,39,119)">
+              <span class="brain-dot" aria-hidden="true"></span>
+              <span><span class="brain-region-title">Systems</span><span class="brain-region-copy">How work gets done and improves.</span></span>
+            </button>
+          </div>
+        </div>
+        <p class="context-close">These stay useful across every campaign, launch, and AI tool you use.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-tag">How it works</div>
+        <h2>Watch one job run through it.</h2>
+        <p class="section-copy narrow">Drop this fortnight's sales calls in. The brain reads them against your positioning and drafts the launch email in your voice, grounded in what buyers actually said. What you fix, it learns.</p>
+        <div class="job-flow" id="jobFlow" aria-label="Your material flows through customer, company, and systems context to the job at hand and finished work">
+          <svg class="job-flow-svg" id="jobFlowSvg" aria-hidden="true"></svg>
+          <div class="flow-node" data-flow-node="material">your material</div>
+          <div class="flow-arrow" aria-hidden="true">&#8594;</div>
+          <div class="flow-node core" data-flow-node="context">customer · company · systems</div>
+          <div class="flow-arrow" aria-hidden="true">&#8594;</div>
+          <div class="flow-node" data-flow-node="job">the job at hand</div>
+          <div class="flow-arrow" aria-hidden="true">&#8594;</div>
+          <div class="flow-node" data-flow-node="finished">finished work</div>
+        </div>
+        <div class="learn-loop"><span aria-hidden="true">&#8592;</span> what you fix, it learns</div>
+        <p class="diagram-caption">No new tools to live in. The brain is files your AI tools read directly.</p>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="container">
+        <div class="section-tag center">What changes</div>
+        <h2 class="center">The same week, with a brain behind it.</h2>
+        <div class="compare-grid">
+          <div class="compare-panel before">
+            <div class="mono-title">Before</div>
+            <ul class="compare-list">
+              <li>Re-explain the business every chat</li>
+              <li>Output sounds generic</li>
+              <li>Knowledge scattered across docs, decks and heads</li>
+              <li>Good work disappears after it ships</li>
+            </ul>
+          </div>
+          <div class="compare-panel after">
+            <div class="mono-title">With your Marketing Brain</div>
+            <ul class="compare-list">
+              <li>The right context loads itself</li>
+              <li>Work reflects your evidence and voice</li>
+              <li>One private home you own</li>
+              <li>Every project makes the next one sharper</li>
+            </ul>
+          </div>
+        </div>
+        <p class="change-close">Day one it saves you half an hour. Day one hundred it saves you three, and surfaces things you didn't know to look for.</p>
+        <p class="change-note">Context compounds, so the best time to start feeding it is now.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-tag">Ownership</div>
+        <h2>Yours, privately.</h2>
+        <p class="section-copy narrow">The brain is plain files you own, on your machine and in your accounts. Nothing trains on your data. If you walk away, it walks with you.</p>
+        <div class="pill-row">
+          <span class="outline-pill">A private brain you own</span>
+          <span class="outline-pill">Remembers every decision</span>
+          <span class="outline-pill">Works in Claude, ChatGPT, and whatever comes next</span>
+          <span class="outline-pill">Kept current without you touching the plumbing</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="container">
+        <div class="section-tag center">Voice</div>
+        <h2 class="center">Sounds like you. Not like AI.</h2>
+        <div class="voice-grid">
+          <div class="voice-panel bad-copy">
+            <div class="voice-label">WHAT AI WRITES ON ITS OWN</div>
+            <ul class="voice-list">
+              <li>AI-powered revenue booster</li>
+              <li>Seamlessly supercharge your growth</li>
+              <li>Revolutionize your workflow</li>
+            </ul>
+          </div>
+          <div class="voice-panel your-copy">
+            <div class="voice-label">WHAT YOURS WRITES</div>
+            <ul class="voice-list">
+              <li><span class="voice-check" aria-hidden="true">&#10003;</span><span>It writes your launch email.</span></li>
+              <li><span class="voice-check" aria-hidden="true">&#10003;</span><span>It sounds like you on your best day.</span></li>
+              <li><span class="voice-check" aria-hidden="true">&#10003;</span><span>It quotes your customers, word for word.</span></li>
+            </ul>
+          </div>
+        </div>
+        <p class="voice-note">The brain learns your voice from your own writing, and everything is checked against it before it ships.</p>
+      </div>
+    </section>
+
+    <section class="section soft" id="cohort">
+      <div class="container">
+        <div class="section-tag">The cohort</div>
+        <h2>What happens in the cohort.</h2>
+        <p class="cohort-intro">Four weeks, live, small group. We build it together with your material, one layer a week.</p>
+        <div class="schedule-lead">A TYPICAL WEEK</div>
+        <div class="schedule-grid" role="table" aria-label="Indicative typical cohort week">
+          <div class="schedule-header" role="row">
+            <span class="schedule-day" role="columnheader">MON</span><span class="schedule-day active" role="columnheader">TUE</span><span class="schedule-day" role="columnheader">WED</span><span class="schedule-day active" role="columnheader">THU</span><span class="schedule-day active" role="columnheader">FRI</span>
+          </div>
+          <div class="schedule-week" role="row">
+            <div class="schedule-cell schedule-placeholder" role="cell">MON</div>
+            <div class="schedule-cell schedule-card live" role="cell"><div class="schedule-card-label">LIVE BUILD SESSION</div><p class="schedule-card-copy">Teaching blocks, building together, hot seats on real systems.</p></div>
+            <div class="schedule-cell schedule-placeholder" role="cell">WED</div>
+            <div class="schedule-cell schedule-card room" role="cell"><div class="schedule-card-label">COHORT ROOM</div><p class="schedule-card-copy">Feedback and troubleshooting on your build.</p></div>
+            <div class="schedule-cell schedule-card ship" role="cell"><div class="schedule-card-label">SHIP</div><p class="schedule-card-copy">The week's proof, out the door.</p></div>
+          </div>
+        </div>
+        <p class="schedule-caption">An indicative week. Days and times land with the founding dates.</p>
+        <div class="curriculum-board" aria-label="Four week curriculum overview">
+          <section class="board-column">
+            <div class="board-photo"><img src="images/brain/week-1-setup.png" alt="A marketer at a desk, a small network brain forming above the laptop" loading="lazy"></div>
+            <h3 class="board-week">Week 1</h3>
+            <div class="board-title">Set up your system.</div>
+            <ul class="board-notes"><li class="board-note">Install the full setup</li><li class="board-note">Company context from your real material</li><li class="board-note">Your first project, started right</li><li class="board-note">Recall with receipts</li><li class="board-note board-proof">You leave with: a working setup that answers with receipts.</li></ul>
+          </section>
+          <section class="board-column">
+            <div class="board-photo"><img src="images/brain/week-2-feed.png" alt="Documents and call notes streaming into a network brain" loading="lazy"></div>
+            <h3 class="board-week">Week 2</h3>
+            <div class="board-title">Feed it your world.</div>
+            <ul class="board-notes"><li class="board-note">Customer and systems context</li><li class="board-note">Calls, docs, research in</li><li class="board-note">First customer synthesis</li><li class="board-note">Facts versus assumptions</li><li class="board-note board-proof">You leave with: a customer evidence pack.</li></ul>
+          </section>
+          <section class="board-column">
+            <div class="board-photo"><img src="images/brain/week-3-craft.png" alt="Hands placing a new node into the network brain" loading="lazy"></div>
+            <h3 class="board-week">Week 3</h3>
+            <div class="board-title">Make it yours.</div>
+            <ul class="board-notes"><li class="board-note">Positioning and launch runs</li><li class="board-note">Your first skill of your own</li><li class="board-note">Corrections that stick</li><li class="board-note">Your method, kept yours</li><li class="board-note board-proof">You leave with: an artifact from your own skill.</li></ul>
+          </section>
+          <section class="board-column">
+            <div class="board-photo"><img src="images/brain/week-4-compound.png" alt="A dense network brain radiating finished marketing pieces" loading="lazy"></div>
+            <h3 class="board-week">Week 4</h3>
+            <div class="board-title">Make it compound.</div>
+            <ul class="board-notes"><li class="board-note">Weekly review and health checks</li><li class="board-note">The cold test</li><li class="board-note">Your 30 day operating guide</li><li class="board-note">Ship a real piece</li><li class="board-note board-proof">You leave with: a shipped piece and your operating guide.</li></ul>
+          </section>
+        </div>
+        <div class="week-detail">
+          <div class="week-detail-title">The full week-by-week detail</div>
+          <details>
+            <summary>Week 1: Set up your system.</summary>
+            <div class="week-detail-content">
+                  <div class="curriculum-group">
+                    <div class="curriculum-label">What we build live</div>
+                    <ul class="curriculum-list">
+                      <li>The full setup installed on your machine</li>
+                      <li>Your profile, permissions, and company context from your real material</li>
+                      <li>Your first project, started properly</li>
+                    </ul>
+                  </div>
+                  <div class="curriculum-group">
+                    <div class="curriculum-label">What you learn</div>
+                    <ul class="curriculum-list">
+                      <li>How the agent loop actually works and what context changes</li>
+                      <li>Safe prompting and keeping everything in files you control</li>
+                      <li>Recall with sources: facts with receipts, not vibes</li>
+                    </ul>
+                  </div>
+            </div>
+          </details>
+          <details>
+            <summary>Week 2: Feed it your world.</summary>
+            <div class="week-detail-content">
+                  <div class="curriculum-group">
+                    <div class="curriculum-label">What we build live</div>
+                    <ul class="curriculum-list">
+                      <li>Your customer and systems context</li>
+                      <li>Your calls, docs, and research imported</li>
+                      <li>Your first customer synthesis through the skill library</li>
+                    </ul>
+                  </div>
+                  <div class="curriculum-group">
+                    <div class="curriculum-label">What you learn</div>
+                    <ul class="curriculum-list">
+                      <li>Facts versus assumptions, quotes versus interpretation</li>
+                      <li>Why cite-or-refuse beats confident guessing</li>
+                      <li>What makes context worth feeding</li>
+                    </ul>
+                  </div>
+            </div>
+          </details>
+          <details>
+            <summary>Week 3: Make it yours.</summary>
+            <div class="week-detail-content">
+                  <div class="curriculum-group">
+                    <div class="curriculum-label">What we build live</div>
+                    <ul class="curriculum-list">
+                      <li>Positioning, messaging, and launch runs on your real work</li>
+                      <li>Your first skill of your own, built to your standards</li>
+                      <li>Corrections captured so mistakes stop repeating</li>
+                    </ul>
+                  </div>
+                  <div class="curriculum-group">
+                    <div class="curriculum-label">What you learn</div>
+                    <ul class="curriculum-list">
+                      <li>Codifying your judgment so quality repeats</li>
+                      <li>Where your method ends and the maintained library begins</li>
+                      <li>Picking work up cleanly across sessions</li>
+                    </ul>
+                  </div>
+            </div>
+          </details>
+          <details>
+            <summary>Week 4: Make it compound.</summary>
+            <div class="week-detail-content">
+                  <div class="curriculum-group">
+                    <div class="curriculum-label">What we build live</div>
+                    <ul class="curriculum-list">
+                      <li>Your weekly review and health checks</li>
+                      <li>A cold test: fresh session, no hand-holding</li>
+                      <li>Your operating guide for the next 30 days</li>
+                    </ul>
+                  </div>
+                  <div class="curriculum-group">
+                    <div class="curriculum-label">What you learn</div>
+                    <ul class="curriculum-list">
+                      <li>Maintenance that survives a busy month</li>
+                      <li>What stays yours versus company IP</li>
+                      <li>Extending the system without breaking it</li>
+                    </ul>
+                  </div>
+            </div>
+          </details>
+        </div>
+        <div class="pill-row">
+          <span class="outline-pill">4 weeks live</span>
+          <span class="outline-pill">1:1 onboarding before week one</span>
+          <span class="outline-pill">every recording yours to keep</span>
+        </div>
+        <p class="cohort-note">Founding cohort. No dates announced yet, the interest list hears first.</p>
+        <div class="cohort-action"><a href="#join" class="btn btn-primary">Register interest</a></div>
+      </div>
+    </section>
+
+    <section class="section" id="offer">
+      <div class="container">
+        <div class="section-tag">The offer</div>
+        <h2>One cohort, everything included.</h2>
+        <div class="offer-cards">
+          <article class="offer-card offer-card-primary">
+            <div class="offer-card-label">The founding cohort</div>
+            <ul class="offer-list">
+              <li>Four weeks of live build sessions, one layer a week</li>
+              <li>A 1:1 onboarding before week one, so nobody starts behind</li>
+              <li>The Intelligent Growth skill library plugged in for the cohort: positioning, messaging, competitive, launch, research, content</li>
+              <li>The cohort room and every recording, yours to keep</li>
+              <li>Your Marketing Brain and every file in it, yours forever</li>
+            </ul>
+            <p class="offer-price-note">Founding price confirmed at launch · the interest list hears first</p>
+            <a href="#join" class="btn btn-primary">Register interest</a>
+            <p class="offer-guarantee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 20 6v6c0 4.6-3.1 7.5-8 9-4.9-1.5-8-4.4-8-9V6l8-3Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg><span>Show up, build, and run the process. If you finish the four weeks without a working system, we keep working 1:1 until you have one. You keep everything either way.</span></p>
+          </article>
+          <article class="offer-card offer-card-team">
+            <div class="offer-card-label">Done with you, for teams</div>
+            <p class="offer-team-copy">Want it built inside your company instead? Bespoke integrations, authorised data ingestion, custom skills, and team rollout.</p>
+            <a href="/work-with-me" class="btn btn-secondary">Work with me</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="container">
+        <div class="section-tag center">Proof</div>
+        <h2 class="center">The people already running one.</h2>
+        <div class="testi-grid">
+          <div class="testi-card">
+            <div style="color: var(--accent); letter-spacing: 3px; font-size: 15px; margin-bottom: 14px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testi-quote">&ldquo;You wouldn&rsquo;t need a team of ten to do what you&rsquo;re doing once you&rsquo;ve built the Marketing Brain. It frees up your time, you stop spending it on the grunt work and start doing more than before. Honestly, it&rsquo;s not scary, it&rsquo;s inspiring.&rdquo;</p>
+            <div class="testi-foot">
+              <img src="images/testimonials/pallavi-roy.jpg" alt="Pallavi Roy" loading="lazy" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+              <div style="flex: 1; min-width: 140px;">
+                <div style="font-weight: 700; font-size: 16px; color: var(--ink);">Pallavi Roy</div>
+                <div style="font-size: 16px; color: var(--gray-mid);">Marketing Director</div>
+              </div>
+              <a href="https://www.linkedin.com/in/pallavikumari97/" target="_blank" rel="noopener" class="testi-msg"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>Got questions? Message Pallavi</a>
+            </div>
+          </div>
+          <div class="testi-card">
+            <div style="color: var(--accent); letter-spacing: 3px; font-size: 15px; margin-bottom: 14px;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="testi-quote">&ldquo;Will showed me the value of pulling all the fragmented feedback, analytics, customers, everything, into one Marketing Brain. That becomes your competitive edge the more you feed it. I&rsquo;d recommend it to any marketer or founder who wants marketing to move as fast as the product does.&rdquo;</p>
+            <div class="testi-foot">
+              <img src="images/testimonials/lotus-z.jpg" alt="Lotus Z" loading="lazy" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+              <div style="flex: 1; min-width: 140px;">
+                <div style="font-weight: 700; font-size: 16px; color: var(--ink);">Lotus Z</div>
+                <div style="font-size: 16px; color: var(--gray-mid);">Founder, personal safety app</div>
+              </div>
+              <a href="https://www.linkedin.com/in/lotus-z/" target="_blank" rel="noopener" class="testi-msg"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>Got questions? Message Lotus</a>
+            </div>
+          </div>
+        </div>
+        <div class="stat-strip">
+          <div class="proof-stat"><div class="proof-number">$180M</div><div class="proof-label">launched at eBay</div></div>
+          <div class="proof-stat"><div class="proof-number">2k &rarr; 55k</div><div class="proof-label">weekly users in 2 months</div></div>
+          <div class="proof-stat"><div class="proof-number">500+</div><div class="proof-label">marketers trained live</div></div>
+        </div>
+        <p class="proof-close">The launch that used to take a fortnight across five people comes out in an afternoon.</p>
+      </div>
+    </section>
+
+    <section class="section" id="instructor">
+      <div class="container">
+        <div class="section-tag">Who's teaching</div>
+        <h2>Built and run by Will Mulholland.</h2>
+        <div class="instructor-layout">
+          <img class="instructor-image" src="images/headshot.jpg" alt="Will Mulholland" loading="lazy">
+          <div class="instructor-copy">
+            <p>Ten years in marketing, from big-brand work at Ogilvy and eBay to scaling B2B SaaS at NextDocs, Prompt Cowboy, and most recently Blinq. Then I stopped talking about AI and started building with it. I'm not an engineer. I taught myself these systems in my evenings, which is exactly why I can teach them to marketers instead of developers.</p>
+            <p>Everything in the cohort runs on my own work first. The brain doing my research, content, and follow-up every day is the one you'll build. Every output is the demo.</p>
+            <ul class="instructor-points">
+              <li><span class="instructor-arrow" aria-hidden="true">&rarr;</span><span>$180M+ launched, and a product scaled from 2k to 55k weekly active users in 2 months</span></li>
+              <li><span class="instructor-arrow" aria-hidden="true">&rarr;</span><span>Keynote speaker at Product Marketing Alliance, Generate Summit, Canva and Salesforce events</span></li>
+              <li><span class="instructor-arrow" aria-hidden="true">&rarr;</span><span>Angel investor and mentor with Startmate</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="instructor-logos" aria-label="Organisations Will has worked with">
+          <img src="images/blinq/logo.svg" alt="Blinq" height="22" loading="lazy">
+          <img src="images/ebay/logo.svg" alt="eBay" height="22" loading="lazy">
+          <span class="instructor-logo-item"><img src="images/prompt-cowboy/logo.png" alt="Prompt Cowboy" width="22" height="22" loading="lazy"><span>Prompt Cowboy</span></span>
+          <img src="images/kfc/logo.svg" alt="KFC" height="22" loading="lazy">
+          <img src="images/velocity/logo.svg" alt="Velocity Frequent Flyer" height="28" loading="lazy">
+          <span class="instructor-logo-item"><img src="images/nextdocs/logo.png" alt="NextDocs" width="22" height="22" loading="lazy"><span>NextDocs</span></span>
+          <img src="images/startmate/logo.svg" alt="Startmate" height="18" loading="lazy">
+          <img src="images/ogilvy/logo.svg" alt="Ogilvy" height="22" loading="lazy">
+          <img src="images/clemenger-bbdo/bbdo.svg" alt="BBDO" height="22" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-tag">Fit</div>
+        <h2>Is this for you?</h2>
+        <div class="fit-grid">
+          <div class="fit-card yes">
+            <div class="fit-title">This is for you if</div>
+            <ul class="fit-list">
+              <li><span class="fit-icon" aria-hidden="true">&#10003;</span><span>You use Claude or ChatGPT most days, but nothing runs without you</span></li>
+              <li><span class="fit-icon" aria-hidden="true">&#10003;</span><span>You are tired of re-explaining the business in every chat</span></li>
+              <li><span class="fit-icon" aria-hidden="true">&#10003;</span><span>You own the marketing and want it moving at product speed</span></li>
+              <li><span class="fit-icon" aria-hidden="true">&#10003;</span><span>You can bring real material: calls, docs, positioning</span></li>
+            </ul>
+          </div>
+          <div class="fit-card no">
+            <div class="fit-title">Not for you if</div>
+            <ul class="fit-list">
+              <li><span class="fit-icon" aria-hidden="true">&#10005;</span><span>You want a prompt folder</span></li>
+              <li><span class="fit-icon" aria-hidden="true">&#10005;</span><span>You want the marketing done for you</span></li>
+              <li><span class="fit-icon" aria-hidden="true">&#10005;</span><span>You would rather wait for AI to settle down</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft" id="faq">
+      <div class="container">
+        <div class="section-tag">Questions</div>
+        <h2>Asked at every workshop.</h2>
+        <div class="faq-list">
+          <details>
+            <summary>Which AI tool does it work with?</summary>
+            <p>Claude and ChatGPT today. The brain is plain files, so when the next tool arrives it reads the same brain. Nothing to migrate.</p>
+          </details>
+          <details>
+            <summary>Can my existing Notion be the brain?</summary>
+            <p>Your Notion feeds it. The brain itself lives as files your AI tools read directly, so you keep Notion for what it is good at.</p>
+          </details>
+          <details>
+            <summary>Do I need to code?</summary>
+            <p>No. If you can write a doc, you can run this. Setup happens once, and in the cohort we do it together.</p>
+          </details>
+          <details>
+            <summary>Where does my information live?</summary>
+            <p>On your machine and in your own accounts. Nothing trains on your data, and you can take everything with you.</p>
+          </details>
+          <details>
+            <summary>Who keeps the files updated?</summary>
+            <p>Your normal work feeds it, that is the point of the workflows we set up together. The plumbing underneath is kept current for you.</p>
+          </details>
+          <details>
+            <summary>Can my team share one brain?</summary>
+            <p>Yes. Most people start solo in the cohort, then roll it out to the team once it is proving itself.</p>
+          </details>
+          <details>
+            <summary>What is free?</summary>
+            <p>The starter: the folder structure and setup guide to build a basic brain yourself. The cohort adds the guided build with your material, the live sessions, and the maintained skill library.</p>
+          </details>
+          <details>
+            <summary>What happens to the skill library after the cohort?</summary>
+            <p>You keep your brain and everything you built, full stop. Ongoing access to the maintained library is announced with the founding details.</p>
+          </details>
+          <details>
+            <summary>How much time does it take?</summary>
+            <p>One live session a week for four weeks, plus build time between sessions. You are building your own system as you go, so the hours land on your real work, not homework.</p>
+          </details>
+          <details>
+            <summary>Why not just figure it out from YouTube?</summary>
+            <p>You can, plenty do, slowly. The cohort exists for correct setup, feedback on your actual system, and troubleshooting when something breaks. You leave with it running, not with a watch-later list.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft starter" id="starter">
+      <div class="container starter-layout">
+        <img class="starter-image" src="images/brain/starter-kit.png" alt="A starter folder of files with a small network sprouting from them" loading="lazy">
+        <div class="starter-content">
+          <div class="section-tag">The free starter</div>
+          <h2>Start with the free version.</h2>
+          <p class="starter-copy">The starter folder: the structure and setup prompt to build a basic brain yourself. Free, emailed to your inbox.</p>
+          <form class="starter-form" id="starterForm">
+            <label for="starterEmail">Email address</label>
+            <input id="starterEmail" name="email" type="email" autocomplete="email" placeholder="Email address" required>
+            <button class="btn btn-primary" id="starterButton" type="submit">Send me the starter</button>
+          </form>
+          <p class="starter-message" id="starterMessage" role="status" aria-live="polite"></p>
+          <p class="workshop-link">Want to see one built live first? Join the <a href="/workshop">free workshop</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="join" id="join">
+      <div class="container">
+        <h2>Stop starting every chat from zero.</h2>
+        <p class="join-copy">No dates announced yet. Leave your email and founding cohort details land in your inbox first.</p>
+        <form class="join-form" id="joinForm">
+          <label for="joinEmail">Email address</label>
+          <input id="joinEmail" name="email" type="email" autocomplete="email" placeholder="Email address" required>
+          <button class="btn btn-primary" id="joinButton" type="submit">Register interest</button>
+        </form>
+        <p class="join-message" id="joinMessage" role="status" aria-live="polite"></p>
+        <p class="starter-link">Or start with the <a href="#starter">free starter</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-wordmark">WILL MULHOLLAND</div>
+          <p class="footer-line">AI marketing systems, Sydney, working globally.</p>
+        </div>
+        <div class="footer-links" aria-label="Footer navigation">
+          <a href="/">Home</a>
+          <a href="/workshop">Workshop</a>
+          <a href="/selected-work">Case studies</a>
+          <a href="/podcast">Podcast</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <a href="mailto:will@intelligentgrowth.app">will@intelligentgrowth.app</a>
+        <span>&copy; 2026 Will Mulholland. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var selfChecklist = document.querySelector('.self-checklist');
+      if (selfChecklist) {
+        Array.prototype.forEach.call(selfChecklist.querySelectorAll('.self-check-row'), function (row) {
+          function toggleRow() {
+            var checked = row.getAttribute('aria-checked') === 'true';
+            row.setAttribute('aria-checked', String(!checked));
+            row.classList.toggle('is-checked', !checked);
+          }
+
+          row.addEventListener('click', toggleRow);
+          row.addEventListener('keydown', function (event) {
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            toggleRow();
+          });
+        });
+      }
+
+      var jobFlow = document.getElementById('jobFlow');
+      var jobFlowSvg = document.getElementById('jobFlowSvg');
+      if (jobFlow && jobFlowSvg) {
+        var flowNs = 'http://www.w3.org/2000/svg';
+        var flowNodes = ['material', 'context', 'job', 'finished'].map(function (name) {
+          return jobFlow.querySelector('[data-flow-node="' + name + '"]');
+        });
+
+        function addFlowPath(pathData, index, isReturn) {
+          var layers = isReturn ? [['#2563EB', 2.2, 0], ['#FFFFFF', 0.8, 0.06]] : [['#2563EB', 2.5, 0], ['#FFFFFF', 0.9, 0.06]];
+          layers.forEach(function (layer) {
+            var path = document.createElementNS(flowNs, 'path');
+            path.setAttribute('d', pathData);
+            path.setAttribute('pathLength', '1');
+            path.setAttribute('class', 'job-beam');
+            path.setAttribute('stroke', layer[0]);
+            path.setAttribute('stroke-width', layer[1]);
+            path.setAttribute('opacity', isReturn ? '0.72' : '0.8');
+            path.style.animationDelay = ((isReturn ? 1.18 : index * 0.18) + layer[2]).toFixed(2) + 's';
+            jobFlowSvg.appendChild(path);
+          });
+
+          var pulseWrap = document.createElementNS(flowNs, 'g');
+          pulseWrap.setAttribute('class', 'job-pulse');
+          var pulse = document.createElementNS(flowNs, 'g');
+          pulse.setAttribute('opacity', '0');
+          var halo = document.createElementNS(flowNs, 'circle');
+          halo.setAttribute('r', isReturn ? '4' : '4.5');
+          halo.setAttribute('fill', '#2563EB');
+          halo.setAttribute('opacity', isReturn ? '0.3' : '0.36');
+          var core = document.createElementNS(flowNs, 'circle');
+          core.setAttribute('r', '1.8');
+          core.setAttribute('fill', '#FFFFFF');
+          pulse.appendChild(halo);
+          pulse.appendChild(core);
+
+          var fade = document.createElementNS(flowNs, 'animate');
+          fade.setAttribute('attributeName', 'opacity');
+          fade.setAttribute('dur', isReturn ? '4.8s' : '2.7s');
+          fade.setAttribute('begin', isReturn ? '2.8s' : (2.25 + index * 0.42).toFixed(2) + 's');
+          fade.setAttribute('repeatCount', 'indefinite');
+          fade.setAttribute('values', '0;1;1;0');
+          fade.setAttribute('keyTimes', '0;.12;.82;1');
+          var travel = document.createElementNS(flowNs, 'animateMotion');
+          travel.setAttribute('dur', isReturn ? '4.8s' : '2.7s');
+          travel.setAttribute('begin', isReturn ? '2.8s' : (2.25 + index * 0.42).toFixed(2) + 's');
+          travel.setAttribute('repeatCount', 'indefinite');
+          travel.setAttribute('calcMode', 'spline');
+          travel.setAttribute('keyPoints', '0;1');
+          travel.setAttribute('keyTimes', '0;1');
+          travel.setAttribute('keySplines', '.45 0 .55 1');
+          travel.setAttribute('path', pathData);
+          pulse.appendChild(fade);
+          pulse.appendChild(travel);
+          pulseWrap.appendChild(pulse);
+          jobFlowSvg.appendChild(pulseWrap);
+        }
+
+        function drawJobFlow() {
+          if (getComputedStyle(jobFlowSvg).display === 'none') {
+            jobFlowSvg.innerHTML = '';
+            return;
+          }
+          if (flowNodes.some(function (node) { return !node; })) return;
+          jobFlowSvg.innerHTML = '';
+          var flowRect = jobFlow.getBoundingClientRect();
+          if (flowRect.width < 2 || flowRect.height < 2) return;
+          jobFlowSvg.setAttribute('viewBox', '0 0 ' + flowRect.width + ' ' + flowRect.height);
+
+          for (var i = 0; i < flowNodes.length - 1; i++) {
+            var fromRect = flowNodes[i].getBoundingClientRect();
+            var toRect = flowNodes[i + 1].getBoundingClientRect();
+            var startX = fromRect.right - flowRect.left;
+            var startY = fromRect.top - flowRect.top + fromRect.height / 2;
+            var endX = toRect.left - flowRect.left;
+            var endY = toRect.top - flowRect.top + toRect.height / 2;
+            var span = Math.max(12, endX - startX);
+            var forwardPath = 'M' + startX + ',' + startY + ' C' + (startX + span * 0.45) + ',' + startY + ' ' + (endX - span * 0.45) + ',' + endY + ' ' + endX + ',' + endY;
+            addFlowPath(forwardPath, i, false);
+          }
+
+          var finishedRect = flowNodes[3].getBoundingClientRect();
+          var contextRect = flowNodes[1].getBoundingClientRect();
+          var returnStartX = finishedRect.left - flowRect.left + finishedRect.width / 2;
+          var returnStartY = finishedRect.top - flowRect.top;
+          var returnEndX = contextRect.left - flowRect.left + contextRect.width / 2;
+          var returnEndY = contextRect.top - flowRect.top;
+          var curveY = Math.max(7, Math.min(returnStartY, returnEndY) - 42);
+          var returnPath = 'M' + returnStartX + ',' + returnStartY + ' C' + returnStartX + ',' + curveY + ' ' + returnEndX + ',' + curveY + ' ' + returnEndX + ',' + returnEndY;
+          addFlowPath(returnPath, 3, true);
+        }
+
+        drawJobFlow();
+        var flowResizeTimer;
+        window.addEventListener('resize', function () {
+          clearTimeout(flowResizeTimer);
+          flowResizeTimer = setTimeout(drawJobFlow, 200);
+        });
+
+        if ('IntersectionObserver' in window) {
+          var flowObserver = new IntersectionObserver(function (entries) {
+            if (!entries[0].isIntersecting) return;
+            flowObserver.disconnect();
+            drawJobFlow();
+            jobFlow.classList.add('flow-in');
+          }, { threshold: 0.3 });
+          flowObserver.observe(jobFlow);
+        } else {
+          jobFlow.classList.add('flow-in');
+        }
+      }
+
+      function setupViz(canvas, build) {
+        if (!canvas) return null;
+        var ctx;
+        try { ctx = canvas.getContext('2d'); } catch (error) { ctx = null; }
+        if (!ctx) return null;
+
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var visible = true;
+        var width = 0;
+        var height = 0;
+        var draw = null;
+        var last = performance.now();
+        var resizeTimer;
+
+        function resize() {
+          var rect = canvas.getBoundingClientRect();
+          if (rect.width < 2 || rect.height < 2) return false;
+          width = rect.width;
+          height = rect.height;
+          canvas.width = Math.round(width * dpr);
+          canvas.height = Math.round(height * dpr);
+          ctx.scale(dpr, dpr);
+          draw = build(ctx);
+          return !!draw;
+        }
+
+        function paint(now, dt) {
+          if ((!draw && !resize()) || !draw) return;
+          draw(now, dt, width, height);
+        }
+
+        function frame(now) {
+          var dt = Math.min(40, now - last);
+          last = now;
+          if (visible) paint(now, dt);
+          requestAnimationFrame(frame);
+        }
+
+        if ('IntersectionObserver' in window) {
+          new IntersectionObserver(function (entries) {
+            visible = entries[0].isIntersecting;
+            last = performance.now();
+            if (visible && reduced) paint(last, 0);
+          }, { rootMargin: '120px 0px' }).observe(canvas);
+        }
+
+        window.addEventListener('resize', function () {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(function () {
+            draw = null;
+            if (visible && reduced) paint(performance.now(), 0);
+          }, 160);
+        });
+
+        resize();
+        if (reduced) paint(performance.now(), 0);
+        else requestAnimationFrame(frame);
+
+        return {
+          redraw: function () {
+            if (visible && reduced) paint(performance.now(), 0);
+          }
+        };
+      }
+
+      var canvas = document.querySelector('.structure-brain-canvas');
+      var grid = canvas && canvas.closest('.brain-layout');
+      if (canvas && grid) {
+        var cards = Array.prototype.slice.call(grid.querySelectorAll('[data-brain-region]'));
+        var order = ['customer', 'company', 'systems'];
+        var activeIndex = 0;
+        var hovered = null;
+        var cycleTime = 0;
+        var vizController = null;
+
+        function activate(region) {
+          var next = order.indexOf(region);
+          if (next < 0) return;
+          activeIndex = next;
+          grid.dataset.activeRegion = region;
+          if (vizController) vizController.redraw();
+        }
+
+        cards.forEach(function (card) {
+          var region = card.dataset.brainRegion;
+          card.addEventListener('pointerenter', function () {
+            hovered = region;
+            cycleTime = 0;
+            activate(region);
+          });
+          card.addEventListener('pointerleave', function () {
+            hovered = null;
+            cycleTime = 0;
+          });
+          card.addEventListener('focus', function () {
+            hovered = region;
+            cycleTime = 0;
+            activate(region);
+          });
+          card.addEventListener('blur', function () {
+            hovered = null;
+            cycleTime = 0;
+          });
+          card.addEventListener('click', function () {
+            hovered = null;
+            cycleTime = 0;
+            activate(region);
+          });
+        });
+
+        vizController = setupViz(canvas, function (ctx) {
+          var colors = {
+            customer: [37, 99, 235],
+            company: [30, 58, 138],
+            systems: [219, 39, 119]
+          };
+          var nodes = [];
+          var edges = [];
+          var seed = 713;
+
+          function rand() {
+            seed = (seed * 1664525 + 1013904223) >>> 0;
+            return seed / 4294967296;
+          }
+
+          function addNode(region, nx, ny, boundary) {
+            nodes.push({ region: region, nx: nx, ny: ny, phase: rand() * 6.283, boundary: !!boundary });
+          }
+
+          function insideLobe(nx, ny, side) {
+            var cx = side === 'customer' ? 0.345 : 0.655;
+            var dx = (nx - cx) / 0.245;
+            var dy = (ny - 0.55) / 0.40;
+            var edge = 1 + Math.sin(ny * 28 + (side === 'customer' ? 0 : 1.7)) * 0.045;
+            return dx * dx + dy * dy < edge && ny > 0.27 && (side === 'customer' ? nx < 0.485 : nx > 0.515);
+          }
+
+          function seedLobe(region) {
+            var left = region === 'customer';
+            var made = 0;
+            while (made < 58) {
+              var nx = (left ? 0.09 : 0.515) + rand() * 0.395;
+              var ny = 0.27 + rand() * 0.68;
+              if (insideLobe(nx, ny, region)) {
+                addNode(region, nx, ny, false);
+                made++;
+              }
+            }
+            for (var i = 0; i < 28; i++) {
+              var angle = (i / 28) * 6.283;
+              var bx = (left ? 0.345 : 0.655) + Math.cos(angle) * 0.245;
+              var by = 0.55 + Math.sin(angle) * 0.40;
+              if (by > 0.27 && (left ? bx < 0.485 : bx > 0.515)) addNode(region, bx, by, true);
+            }
+          }
+
+          function seedSystems() {
+            for (var side = 0; side < 2; side++) {
+              var cx = side === 0 ? 0.345 : 0.655;
+              var made = 0;
+              while (made < 28) {
+                var nx = cx + (rand() - 0.5) * 0.48;
+                var ny = 0.10 + rand() * 0.28;
+                var dx = (nx - cx) / 0.25;
+                var dy = (ny - 0.245) / 0.15;
+                if (dx * dx + dy * dy < 1 && (side === 0 ? nx < 0.485 : nx > 0.515)) {
+                  addNode('systems', nx, ny, false);
+                  made++;
+                }
+              }
+              for (var i = 0; i < 18; i++) {
+                var angle = (i / 18) * 6.283;
+                var bx = cx + Math.cos(angle) * 0.25;
+                var by = 0.245 + Math.sin(angle) * 0.15;
+                if (side === 0 ? bx < 0.485 : bx > 0.515) addNode('systems', bx, by, true);
+              }
+            }
+          }
+
+          function buildEdges() {
+            for (var i = 0; i < nodes.length; i++) {
+              var near = [];
+              for (var j = 0; j < nodes.length; j++) {
+                if (i === j || nodes[i].region !== nodes[j].region) continue;
+                var dx = nodes[i].nx - nodes[j].nx;
+                var dy = nodes[i].ny - nodes[j].ny;
+                var distance = dx * dx + dy * dy;
+                if (distance < 0.021) near.push({ index: j, distance: distance });
+              }
+              near.sort(function (a, b) { return a.distance - b.distance; });
+              for (var rank = 0; rank < Math.min(5, near.length); rank++) {
+                if (near[rank].index > i) edges.push({ a: i, b: near[rank].index, rank: rank, phase: rand() * 6.283, region: nodes[i].region });
+              }
+            }
+          }
+
+          seedLobe('customer');
+          seedLobe('company');
+          seedSystems();
+          buildEdges();
+
+          return function (now, dt, width, height) {
+            if (hovered === null) {
+              cycleTime += dt;
+              if (cycleTime >= 3800) {
+                cycleTime -= 3800;
+                activeIndex = (activeIndex + 1) % order.length;
+                activate(order[activeIndex]);
+              }
+            }
+
+            var active = hovered || order[activeIndex];
+            ctx.clearRect(0, 0, width, height);
+            ctx.globalCompositeOperation = 'source-over';
+            var size = Math.min(width * 0.96, height * 0.98);
+            var offsetX = (width - size) / 2;
+            var offsetY = (height - size) / 2;
+            var positions = nodes.map(function (node, index) {
+              return {
+                x: offsetX + node.nx * size + Math.sin(now * 0.00045 + node.phase) * (node.boundary ? 0.7 : 1.5),
+                y: offsetY + node.ny * size + Math.cos(now * 0.00038 + node.phase + index * 0.03) * (node.boundary ? 0.6 : 1.25)
+              };
+            });
+
+            edges.forEach(function (edge) {
+              var lit = edge.region === active;
+              if (!lit && edge.rank > 1) return;
+              var color = colors[edge.region];
+              var flicker = 0.5 + 0.5 * Math.sin(now * 0.0022 + edge.phase);
+              ctx.strokeStyle = 'rgba(' + color.join(',') + ',' + (lit ? 0.18 + flicker * 0.24 : 0.055 + flicker * 0.04) + ')';
+              ctx.lineWidth = lit && edge.rank < 3 ? 1.35 : 0.85;
+              ctx.beginPath();
+              ctx.moveTo(positions[edge.a].x, positions[edge.a].y);
+              ctx.lineTo(positions[edge.b].x, positions[edge.b].y);
+              ctx.stroke();
+            });
+
+            ctx.globalCompositeOperation = 'lighter';
+            nodes.forEach(function (node, index) {
+              var position = positions[index];
+              var lit = node.region === active;
+              var color = colors[node.region];
+              var twinkle = 0.5 + 0.5 * Math.sin(now * 0.002 + node.phase);
+              var alpha = lit ? 0.70 + twinkle * 0.28 : 0.24 + twinkle * 0.12;
+              var radius = (node.boundary ? 1.35 : 1.55) + twinkle * (lit ? 1.25 : 0.65);
+              if (lit && twinkle > 0.82) {
+                var glow = ctx.createRadialGradient(position.x, position.y, 0, position.x, position.y, radius * 3.2);
+                glow.addColorStop(0, 'rgba(' + color.join(',') + ',' + (alpha * 0.42) + ')');
+                glow.addColorStop(1, 'rgba(' + color.join(',') + ',0)');
+                ctx.fillStyle = glow;
+                ctx.beginPath();
+                ctx.arc(position.x, position.y, radius * 3.2, 0, 6.283);
+                ctx.fill();
+              }
+              ctx.fillStyle = 'rgba(' + color.join(',') + ',' + alpha + ')';
+              ctx.beginPath();
+              ctx.arc(position.x, position.y, radius, 0, 6.283);
+              ctx.fill();
+            });
+
+            ctx.globalCompositeOperation = 'source-over';
+            var middle = offsetX + size * 0.5;
+            var split = ctx.createLinearGradient(middle, offsetY + size * 0.12, middle, offsetY + size * 0.94);
+            split.addColorStop(0, 'rgba(30,58,138,0)');
+            split.addColorStop(0.38, 'rgba(30,58,138,0.24)');
+            split.addColorStop(1, 'rgba(30,58,138,0)');
+            ctx.strokeStyle = split;
+            ctx.lineWidth = 1.4;
+            ctx.beginPath();
+            ctx.moveTo(middle, offsetY + size * 0.12);
+            ctx.lineTo(middle, offsetY + size * 0.94);
+            ctx.stroke();
+
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.font = '700 13px Inter, sans-serif';
+            var regionLabels = [
+              { text: 'C U S T O M E R', region: 'customer', x: 0.345, y: 0.995 },
+              { text: 'C O M P A N Y', region: 'company', x: 0.655, y: 0.995 },
+              { text: 'S Y S T E M S', region: 'systems', x: 0.5, y: 0.035 }
+            ];
+            regionLabels.forEach(function (label) {
+              var c = colors[label.region];
+              var on = label.region === active;
+              ctx.fillStyle = 'rgba(' + c.join(',') + ',' + (on ? 0.95 : 0.45) + ')';
+              ctx.fillText(label.text, offsetX + label.x * size, offsetY + label.y * size);
+            });
+          };
+        });
+      }
+
+      function subscribe(config) {
+        var form = document.getElementById(config.formId);
+        var message = document.getElementById(config.messageId);
+        var button = document.getElementById(config.buttonId);
+        var emailInput = document.getElementById(config.emailId);
+        if (!form || !message || !button || !emailInput) return;
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          var email = (emailInput.value || '').trim();
+          if (!email) return;
+          var originalLabel = button.textContent;
+          button.disabled = true;
+          button.textContent = 'Sending...';
+          message.textContent = '';
+
+          fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, utm_medium: config.medium })
+          }).then(function (response) {
+            if (!response.ok) throw new Error('Subscribe failed');
+            form.style.display = 'none';
+            if (config.download) {
+              var downloadLink = document.createElement('a');
+              downloadLink.href = '/downloads/' + 'marketing-brain-starter.zip';
+              downloadLink.setAttribute('download', '');
+              document.body.appendChild(downloadLink);
+              downloadLink.click();
+              downloadLink.remove();
+            }
+            message.textContent = config.success;
+          }).catch(function () {
+            button.disabled = false;
+            button.textContent = originalLabel;
+            message.textContent = 'Something went wrong. Try again or email will@intelligentgrowth.app.';
+          });
+        });
+      }
+
+      subscribe({
+        formId: 'starterForm',
+        messageId: 'starterMessage',
+        buttonId: 'starterButton',
+        emailId: 'starterEmail',
+        medium: 'brain-starter',
+        download: true,
+        success: 'Downloading now. It is also in your inbox shortly, along with the 5 day course.'
+      });
+
+      subscribe({
+        formId: 'joinForm',
+        messageId: 'joinMessage',
+        buttonId: 'joinButton',
+        emailId: 'joinEmail',
+        medium: 'brain-cohort-interest',
+        download: false,
+        success: 'You are on the list. Founding details land in your inbox first.'
+      });
+    })();
+  </script>
+</body>
+</html>

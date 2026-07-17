@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!-- wm-meta -->
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+<link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intelligent Growth | The Podcast</title>
+<meta name="description" content="Watch real operators build their AI marketing systems live on screen. The Intelligent Growth podcast, hosted by Will Mulholland.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://intelligentgrowth.app/podcast">
+<meta property="og:title" content="Intelligent Growth | The Podcast">
+<meta property="og:description" content="Watch real operators build their AI marketing systems live on screen. No theory, just systems you can copy.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://intelligentgrowth.app/podcast">
+<meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1F1511; --black:#1F1511; --cream:#FFFFFF; --cream-soft:#F4F4F2; --white:#FFFFFF;
+    --gray-mid:#5C4F47; --gray-light:#8B7E73;
+    --accent:#2563EB; --accent-soft:#DBEAFE; --accent-deep:#1E3A8A;
+    --warm-shadow:0 12px 32px rgba(31,21,17,0.10),0 2px 8px rgba(31,21,17,0.06);
+    --offset-shadow:6px 6px 0 rgba(31,21,17,0.14);
+    --ease:cubic-bezier(0.16,1,0.3,1);
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5;letter-spacing:-0.01em;overflow-x:hidden}
+  ::selection{background:var(--accent);color:#fff}
+  a{color:inherit}
+  .serif{font-family:'Instrument Serif',Georgia,serif;font-weight:400}
+  .eyebrow{font-family:monospace;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .eyebrow .num{color:var(--gray-light)}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.82);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(31,21,17,0.06)}
+  .nav-logo{display:inline-flex;align-items:center;gap:9px;text-decoration:none}
+  .nav-logo img{display:block}
+  .logo-mark{height:30px;width:auto;transition:transform 0.7s var(--ease)}
+  .nav-logo:hover .logo-mark{transform:rotateY(360deg)}
+  .logo-word{height:30px;width:auto}
+  .nav-links{display:flex;align-items:center;gap:30px}
+  .nav-links a{font-size:14px;font-weight:500;color:var(--ink);text-decoration:none;text-transform:uppercase;letter-spacing:0.09em;transition:opacity 0.4s var(--ease)}
+  .nav-links a:hover{opacity:0.6}
+  .nav-cta{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:var(--ink);color:#fff !important;border-radius:999px;font-size:13px;font-weight:600;text-transform:none !important;letter-spacing:0 !important;text-decoration:none;transition:background 0.4s var(--ease),transform 0.3s var(--ease)}
+  .nav-cta:hover{background:var(--accent) !important;transform:translateY(-1px);opacity:1 !important}
+  .nav-toggle{display:none;background:transparent;border:0;padding:8px;cursor:pointer;color:var(--ink);z-index:1100}
+  .nav-toggle-bar{display:block;width:26px;height:2px;background:currentColor;margin:5px 0;transition:transform 0.3s var(--ease),opacity 0.3s var(--ease)}
+  .nav-toggle.is-open .nav-toggle-bar:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle.is-open .nav-toggle-bar:nth-child(2){opacity:0}
+  .nav-toggle.is-open .nav-toggle-bar:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  .wrap{max-width:1140px;margin:0 auto;padding:0 32px}
+  section{position:relative}
+
+  /* HERO */
+  .hero{padding:150px 32px 70px}
+  .hero-inner{max-width:820px;margin:0 auto}
+  .hero h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(42px,5.6vw,76px);line-height:0.98;letter-spacing:-0.02em;margin:20px 0 0;text-wrap:balance}
+  .hero h1 em{font-style:italic}
+  .hero .lede{font-size:clamp(17px,1.8vw,20px);color:var(--gray-mid);line-height:1.55;margin-top:24px;max-width:540px}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 24px;border-radius:999px;font-size:15px;font-weight:600;text-decoration:none;transition:transform 0.3s var(--ease),background 0.3s var(--ease),box-shadow 0.3s var(--ease)}
+  .btn-pri{background:var(--accent);color:#fff}
+  .btn-pri:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(37,99,235,0.3)}
+  .btn-sec{background:transparent;color:var(--ink);border:1px solid rgba(31,21,17,0.25)}
+  .btn-sec:hover{background:var(--ink);color:#fff}
+  .hero-stats{display:flex;gap:30px;margin-top:40px;flex-wrap:wrap}
+  .hstat b{display:block;font-family:'Instrument Serif',Georgia,serif;font-size:30px;line-height:1;color:var(--accent);margin-bottom:6px}
+  .hstat span{font-family:monospace;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-mid)}
+
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.35}}
+
+  /* generic section header */
+  .sec{padding:80px 32px}
+  .sec-head{max-width:760px;margin:0 auto 0;text-align:center}
+  .sec-head.left{margin:0;text-align:left}
+  .sec-head h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(32px,4.4vw,54px);line-height:1.0;letter-spacing:-0.02em;margin-top:16px}
+  .sec-head h2 em{font-style:italic;color:var(--accent)}
+  .sec-head p{font-size:17px;color:var(--gray-mid);line-height:1.55;margin-top:18px}
+
+  /* FEATURED episode full */
+  .feat{background:var(--cream-soft)}
+  .feat-grid{max-width:1080px;margin:34px auto 0;display:grid;grid-template-columns:1.15fr 0.85fr;gap:48px;align-items:center}
+  .feat-media{display:block;position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(31,21,17,0.12);box-shadow:var(--offset-shadow);aspect-ratio:16/9;background:var(--ink);text-decoration:none;transition:transform 0.4s var(--ease)}
+  .feat-media:hover{transform:translateY(-4px)}
+  .feat-media img{width:100%;height:100%;object-fit:cover;display:block}
+  .feat-media .play{position:absolute;inset:0;margin:auto;width:74px;height:74px;border-radius:50%;background:rgba(255,255,255,0.94);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(0,0,0,0.3)}
+  .feat-media .play::after{content:"";width:0;height:0;border-left:20px solid var(--ink);border-top:13px solid transparent;border-bottom:13px solid transparent;margin-left:5px}
+  .feat-body h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(26px,3vw,38px);line-height:1.04;letter-spacing:-0.01em}
+  .feat-guest{display:flex;align-items:center;gap:12px;margin-top:18px}
+  .feat-guest img{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--accent)}
+  .feat-guest .gn{font-weight:700;font-size:14.5px}
+  .feat-guest .gr{font-size:13px;color:var(--gray-mid)}
+  .learn{list-style:none;margin:24px 0 0;padding:0}
+  .learn li{position:relative;padding:9px 0 9px 26px;font-size:15px;color:var(--gray-mid);line-height:1.5;border-top:1px solid rgba(31,21,17,0.08)}
+  .learn li::before{content:"\2192";position:absolute;left:0;color:var(--accent);font-weight:700}
+  .feat-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+
+  /* GUIDE (lead magnet) */
+  div.feat-media:hover{transform:none}
+  .guide-grid{max-width:1080px;margin:38px auto 0;display:grid;grid-template-columns:1.05fr 0.95fr;gap:52px;align-items:center}
+  .guide-body h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(30px,4vw,48px);line-height:1.02;letter-spacing:-0.02em;margin-top:16px}
+  .guide-body h2 em{font-style:italic;color:var(--accent)}
+  .guide-body p.gl{font-size:16.5px;color:var(--gray-mid);line-height:1.55;margin-top:16px;max-width:480px}
+  .guide-list{list-style:none;margin:22px 0 0;padding:0}
+  .guide-list li{position:relative;padding:9px 0 9px 30px;font-size:15px;color:var(--ink);line-height:1.5}
+  .guide-list li::before{content:"\2713";position:absolute;left:0;top:9px;width:20px;height:20px;border-radius:50%;background:var(--accent-soft);color:var(--accent-deep);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .guide-card{background:var(--white);border:1px solid rgba(31,21,17,0.12);border-radius:18px;box-shadow:var(--offset-shadow);padding:30px 28px;transform:rotate(1.2deg)}
+  .guide-card .badge{display:inline-block;font-family:monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;background:var(--accent);color:#fff;padding:6px 12px;border-radius:999px;font-weight:700}
+  .guide-card h3{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:28px;letter-spacing:-0.01em;line-height:1.05;margin-top:14px}
+  .guide-card .gsub{font-size:14.5px;color:var(--gray-mid);margin-top:8px;line-height:1.5}
+  .guide-card .form-wrap{margin-top:18px}
+  .guide-card .fine{font-size:12px;color:var(--gray-light);margin-top:12px;line-height:1.5}
+  @media (max-width:900px){.guide-grid{grid-template-columns:1fr;gap:34px}.guide-card{transform:none}}
+
+  /* WHAT THE SHOW IS */
+  .promise-grid{max-width:1000px;margin:44px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .pcard{background:var(--white);border:1px solid rgba(31,21,17,0.10);border-radius:16px;padding:28px 26px;box-shadow:var(--warm-shadow)}
+  .pcard .pn{font-family:monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+  .pcard h4{font-size:18px;font-weight:700;margin-bottom:8px;letter-spacing:-0.01em}
+  .pcard p{font-size:14.5px;color:var(--gray-mid);line-height:1.5}
+
+  /* GREENROOM */
+  .green{background:var(--ink);color:var(--cream)}
+  .green .eyebrow{color:#A3E635}
+  .green .sec-head h2{color:var(--cream)}
+  .green .sec-head h2 em{color:#A3E635}
+  .green .sec-head p{color:rgba(255,255,255,0.72)}
+  .green-card{max-width:880px;margin:38px auto 0;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);border-radius:20px;padding:36px 34px}
+  .crit{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+  .crit span{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.14);color:var(--cream);font-size:14px;padding:10px 15px;border-radius:999px}
+  .crit span::before{content:"";width:8px;height:8px;border-radius:50%;background:#A3E635}
+  .green-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .btn-lime{background:#A3E635;color:var(--ink)}
+  .btn-lime:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(163,230,53,0.28)}
+  .green-actions .note{font-size:14px;color:rgba(255,255,255,0.6)}
+  .lineup{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:26px}
+  .gcard{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.14);border-radius:14px;padding:22px}
+  .gcard .ep{font-family:monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#A3E635;margin-bottom:10px}
+  .gcard h4{font-size:17px;font-weight:700;color:var(--cream);margin-bottom:5px;letter-spacing:-0.01em}
+  .gcard p{font-size:13.5px;color:rgba(255,255,255,0.62);line-height:1.45}
+  .gcard a.w{display:inline-block;margin-top:12px;font-size:13px;font-weight:600;color:#A3E635;text-decoration:none}
+  .gcard.open{border-style:dashed;border-color:rgba(255,255,255,0.28);background:transparent}
+  .green-form{display:flex;gap:10px;flex-wrap:wrap}
+  .green-form input{flex:1;min-width:180px;padding:13px 16px;border-radius:999px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.06);color:var(--cream);font-family:inherit;font-size:14px;outline:none;transition:border-color 0.3s var(--ease)}
+  .green-form input:focus{border-color:#A3E635}
+  .green-form input::placeholder{color:rgba(255,255,255,0.45)}
+  .green-form button{background:#A3E635;color:var(--ink);border:none;border-radius:999px;padding:13px 24px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;white-space:nowrap;transition:transform 0.3s var(--ease)}
+  .green-form button:hover{transform:translateY(-2px)}
+  .green-msg{font-size:13.5px;color:rgba(255,255,255,0.6);margin-top:13px}
+  @media(max-width:560px){.lineup{grid-template-columns:1fr}}
+
+  /* LISTEN */
+  .listen-grid{max-width:1000px;margin:36px auto 0;display:grid;grid-template-columns:0.9fr 1.1fr;gap:54px;align-items:start}
+  .listen-list{display:flex;flex-direction:column}
+  .prow{display:flex;align-items:center;gap:16px;padding:20px 4px;text-decoration:none;border-top:1px solid rgba(31,21,17,0.12);transition:padding-left 0.3s var(--ease)}
+  .prow:first-child{border-top:none}
+  .prow:hover{padding-left:10px}
+  .prow .pic{width:42px;height:42px;border-radius:11px;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .prow .pic svg{width:22px;height:22px;fill:currentColor}
+  .prow .pn{flex:1}
+  .prow .pn b{display:block;font-size:17px;font-weight:700;letter-spacing:-0.01em}
+  .prow .pn span{font-size:13px;color:var(--gray-mid)}
+  .prow .arr{color:var(--gray-light);font-size:17px}
+  .cadence{margin-top:26px;display:flex;align-items:center;gap:10px;font-family:monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--gray-mid)}
+  .cadence .dot{width:8px;height:8px;border-radius:50%;background:#ED4848;display:inline-block;animation:pulse 1.6s infinite}
+  .follow{margin-top:22px}
+  .follow .fl{font-family:monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-light);margin-bottom:12px}
+  .follow .chips{display:flex;gap:10px;flex-wrap:wrap}
+  .follow .chips a{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(31,21,17,0.2);border-radius:999px;padding:9px 15px;font-size:13px;font-weight:600;text-decoration:none;transition:all 0.3s var(--ease)}
+  .follow .chips a:hover{background:var(--ink);color:#fff}
+  .follow .chips svg{width:15px;height:15px;fill:currentColor}
+
+  /* SUBSCRIBE */
+  .subscribe{background:var(--cream-soft);text-align:center}
+  .sub-inner{max-width:620px;margin:0 auto}
+  .nl-form{display:flex;gap:10px;max-width:480px;margin:26px auto 0;flex-wrap:wrap}
+  .nl-form input{flex:1;min-width:220px;padding:15px 18px;border:1px solid rgba(31,21,17,0.25);border-radius:999px;font-size:15px;font-family:inherit;background:var(--white);color:var(--ink);outline:none}
+  .nl-form button{background:var(--accent);color:#fff;border:none;border-radius:999px;padding:15px 26px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap;transition:transform 0.3s var(--ease)}
+  .nl-form button:hover{transform:translateY(-2px)}
+  .nl-meta{font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:var(--gray-light);margin-top:16px}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:#fff;padding:80px 48px 40px}
+  .foot-main{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+  .foot-cta h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(48px,11vw,110px);line-height:0.85;letter-spacing:-0.03em;margin-bottom:30px}
+  .foot-cta a.mail{font-size:23px;font-weight:600;color:#fff;text-decoration:none;transition:color 0.4s var(--ease)}
+  .foot-cta a.mail:hover{color:var(--accent)}
+  .foot-social{display:flex;gap:16px;margin-top:28px}
+  .foot-social a{width:50px;height:50px;border:1px solid rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;transition:all 0.4s var(--ease)}
+  .foot-social a svg{width:23px;height:23px;fill:currentColor}
+  .foot-social a:hover{background:#fff;color:var(--ink);transform:translateY(-5px)}
+  .foot-card{background:var(--cream);border-radius:18px;padding:38px 32px;min-height:260px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--warm-shadow)}
+  .foot-card h3{font-family:'Instrument Serif',Georgia,serif;font-size:34px;color:var(--ink);line-height:1.05;letter-spacing:-0.02em;margin-bottom:14px}
+  .foot-card p{font-size:15px;color:var(--gray-mid);margin-bottom:22px;line-height:1.5}
+  .foot-card a.cta{display:inline-block;align-self:flex-start;background:var(--ink);color:#fff;padding:13px 26px;border-radius:999px;font-weight:600;text-decoration:none}
+  .foot-bottom{max-width:1100px;margin:62px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,0.1);display:flex;justify-content:space-between;font-family:monospace;font-size:12px;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.55);flex-wrap:wrap;gap:12px}
+  .foot-bottom a{color:rgba(255,255,255,0.55);text-decoration:none;margin-left:22px}
+  .foot-bottom a:hover{color:#fff}
+
+  @media (max-width:900px){
+    .feat-grid{grid-template-columns:1fr;gap:30px}
+    .listen-grid{grid-template-columns:1fr;gap:34px}
+    .promise-grid{grid-template-columns:1fr}
+    .foot-main{grid-template-columns:1fr;gap:36px}
+  }
+  @media (max-width:980px){
+    .nav-toggle{display:block}
+    .nav-links{position:fixed;inset:0;background:var(--ink);flex-direction:column;justify-content:center;gap:30px;transform:translateX(100%);transition:transform 0.4s var(--ease);z-index:1050}
+    .nav-links.is-open{transform:translateX(0)}
+    .nav-links a{color:#fff;font-size:21px}
+    body.nav-open{overflow:hidden}
+    body.nav-open nav{backdrop-filter:none;-webkit-backdrop-filter:none;background:transparent;border-bottom:none}
+    .nav-toggle.is-open{color:#fff}
+    body.nav-open .nav-logo{position:relative;z-index:1100}
+    body.nav-open .nav-logo img{filter:brightness(0) invert(1)}
+  }
+  @media (max-width:768px){
+    nav{padding:16px 22px}
+    .hero{padding:120px 22px 56px}
+    .sec{padding:60px 22px}
+  }
+</style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo" aria-label="Will Mulholland home"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
+  </button>
+  <div class="nav-links" id="navLinks">
+    <a href="/workshop">Workshop</a>
+    <a href="/brain">Marketing Brain</a>
+            <a href="/mcp">MCP</a>
+    <a href="/work-with-me">Work with me</a>
+    <a href="work.html">Case studies</a>
+    <a href="/podcast">Podcast</a>
+    <a href="/blog">Blog</a>
+    <a href="/traffic">Free gift</a>
+    <a href="#subscribe" class="nav-cta">Subscribe</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">Intelligent Growth &middot; the podcast</div>
+      <h1>Watch real operators build their <em>AI marketing systems,</em> live.</h1>
+      <p class="lede">Cut through the AI hype and see what actually works in marketing. Each episode, a marketer who has actually done it shares their screen and builds their system in front of you. No theory, no slideware. Just the workflow, and you can copy it.</p>
+      <div class="hero-cta">
+        <a href="#episode" class="btn btn-pri">Watch the latest</a>
+        <a href="#subscribe" class="btn btn-sec">Get new episodes</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hstat"><b>Live</b><span>built on screen, not slides</span></div>
+        <div class="hstat"><b>100+</b><span>growth leaders subscribed</span></div>
+        <div class="hstat"><b>Yours</b><span>every system, copy it</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED EPISODE -->
+<section class="sec feat" id="episode">
+  <div class="sec-head left wrap" style="padding:0;">
+    <div class="eyebrow"><span class="num">01</span> &middot; Latest episode</div>
+  </div>
+  <div class="feat-grid">
+    <div class="feat-media" style="box-shadow:var(--offset-shadow)">
+      <iframe src="https://www.youtube.com/embed/5LHzjQbBptE" title="Stop Your Team Going Off-Brand: Build a Claude Writing Assistant, with Charlotte Norman" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;display:block;border:0"></iframe>
+    </div>
+    <div class="feat-body">
+      <h3>Stop your team going off-brand: build a Claude writing assistant.</h3>
+      <div class="feat-guest">
+        <img src="https://img.youtube.com/vi/5LHzjQbBptE/default.jpg" alt="Charlotte Norman" loading="lazy">
+        <div>
+          <div class="gn">Charlotte Norman</div>
+          <div class="gr">Ex-Head of Product Marketing, Canva &middot; now solo at Adora</div>
+        </div>
+      </div>
+      <ul class="learn">
+        <li>The 3 AI workflows she uses daily to punch above her weight as a solo marketer</li>
+        <li>How to build a brand-voice system in Claude your whole team can use</li>
+        <li>The exact project setup that keeps everyone on-brand automatically</li>
+        <li>Watch her screen as she builds the Claude project from scratch</li>
+      </ul>
+      <div class="feat-cta">
+        <a href="#guide" class="btn btn-pri">Get Charlotte's free guide</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDE: lead magnet -->
+<section class="sec" id="guide">
+  <div class="guide-grid">
+    <div class="guide-body">
+      <div class="eyebrow"><span class="num">02</span> &middot; The free guide</div>
+      <h2>Don't just watch it. <em>Take it with you.</em></h2>
+      <p class="gl">Charlotte's guide is the system from the episode, written down: a step-by-step cheat sheet for building Claude projects that keep your whole team on-brand.</p>
+      <ul class="guide-list">
+        <li>Complete setup instructions for the Claude writing assistant</li>
+        <li>Brand voice templates you can adapt to your company</li>
+        <li>5 bonus project ideas beyond tone of voice</li>
+        <li>Testing and iteration framework so it actually sticks</li>
+      </ul>
+    </div>
+    <div class="guide-card">
+      <span class="badge">Free guide</span>
+      <h3>Get Charlotte's free guide</h3>
+      <p class="gsub">Step-by-step cheat sheet plus 5 bonus Claude project ideas, straight to your inbox.</p>
+      <div class="form-wrap">
+        <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
+        <iframe src="https://subscribe-forms.beehiiv.com/7168971d-19f6-48b7-83ab-76fd8a0124fd"
+                class="beehiiv-embed"
+                data-test-id="beehiiv-embed"
+                frameborder="0"
+                scrolling="no"
+                style="width: 100%; height: 320px; margin: 0; border-radius: 8px !important; background-color: transparent; box-shadow: none; max-width: 100%;">
+        </iframe>
+      </div>
+      <p class="fine">By opting in, you agree to receive my Intelligent Growth newsletter. You can unsubscribe at any time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT THE SHOW IS -->
+<section class="sec" style="background:var(--cream-soft)">
+  <div class="sec-head">
+    <div class="eyebrow"><span class="num">03</span> &middot; What you're watching</div>
+    <h2>Built live. <em>Not talked about.</em></h2>
+    <p>The marketers getting results aren't using different tools. They're onboarding AI properly. This show is the actual build, end to end, from someone running the system for real. You leave with something you can do on Monday, not a reading list.</p>
+  </div>
+  <div class="promise-grid">
+    <div class="pcard">
+      <div class="pn">Real operators</div>
+      <h4>People still in the work</h4>
+      <p>Marketers running real AI systems at real companies, not instant experts teaching from the sidelines.</p>
+    </div>
+    <div class="pcard">
+      <div class="pn">On screen</div>
+      <h4>The whole build, watched</h4>
+      <p>Screen shared, start to finish. You see the prompts, the setup, the dead ends, the thing that actually ships.</p>
+    </div>
+    <div class="pcard">
+      <div class="pn">Yours to keep</div>
+      <h4>Copy the system</h4>
+      <p>Every episode comes with the setup, so you rebuild it in your own stack instead of just nodding along.</p>
+    </div>
+  </div>
+  <p style="max-width:700px;margin:36px auto 0;text-align:center;font-family:monospace;font-size:13px;letter-spacing:0.04em;line-height:1.7;color:var(--gray-mid);">Every episode opens with the same question: &ldquo;What are the last three pieces of marketing work you've done with AI?&rdquo;</p>
+</section>
+
+<!-- GREENROOM -->
+<section class="sec green">
+  <div class="sec-head">
+    <div class="eyebrow"><span class="num" style="color:rgba(255,255,255,0.4)">04</span> &middot; The greenroom</div>
+    <h2>Who should I build with <em>next?</em></h2>
+    <p>The next guest slot is open. I want operators running a real AI marketing system, the kind you'd actually want to watch build it live. Know someone? Tell me.</p>
+  </div>
+  <div class="green-card">
+    <div class="lineup">
+      <div class="gcard">
+        <div class="ep">Episode 01 &middot; live now</div>
+        <h4>Charlotte Norman</h4>
+        <p>Ex-Head of Product Marketing at Canva, now running marketing solo at Adora.</p>
+        <a class="w" href="https://youtu.be/5LHzjQbBptE" target="_blank" rel="noopener">Watch the build &rarr;</a>
+      </div>
+      <div class="gcard open">
+        <div class="ep" style="color:rgba(255,255,255,0.5)">Episode 02 &middot; open</div>
+        <h4>The next slot is yours to fill</h4>
+        <p>Suggest the operator you'd most want to watch build their system live.</p>
+      </div>
+    </div>
+    <div class="crit">
+      <span>Runs a real AI system</span>
+      <span>Will build it live on screen</span>
+      <span>Has the receipts, not the theory</span>
+    </div>
+    <form class="green-form" id="guestForm">
+      <input type="text" name="guest" placeholder="Who should I build with?" required>
+      <input type="email" name="email" placeholder="Your email" required>
+      <button type="submit">Suggest a guest</button>
+    </form>
+    <p class="green-msg" id="guestMsg">Drop a name and I'll let you know who lands the next slot.</p>
+  </div>
+</section>
+
+<!-- LISTEN / FOLLOW -->
+<section class="sec">
+  <div class="listen-grid">
+    <div class="sec-head left">
+      <div class="eyebrow"><span class="num">05</span> &middot; Where to watch</div>
+      <h2 style="margin-top:14px;">Catch every <em>episode.</em></h2>
+    </div>
+    <div>
+      <div class="listen-list">
+        <a class="prow" href="https://www.youtube.com/@WillMulholland" target="_blank" rel="noopener">
+          <span class="pic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></span>
+          <span class="pn"><b>YouTube</b><span>Full episodes, the home of the show</span></span>
+          <span class="arr">&#8599;</span>
+        </a>
+        <a class="prow" href="https://open.spotify.com/show/4LJTD0mgyjVsJNj9DjJROr" target="_blank" rel="noopener">
+          <span class="pic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.5 17.3c-.2.34-.66.46-1 .26-2.76-1.7-6.24-2.08-10.34-1.14-.4.1-.78-.16-.86-.54-.1-.4.16-.78.54-.86 4.48-1.02 8.34-.6 11.42 1.28.36.2.46.66.24 1zm1.47-3.27c-.27.42-.83.56-1.25.3-3.16-1.94-7.98-2.5-11.72-1.37-.48.14-.99-.12-1.13-.6-.14-.48.12-.99.6-1.13 4.28-1.3 9.6-.67 13.22 1.55.42.26.56.82.28 1.25zm.13-3.4C15.24 8.6 8.82 8.4 5.1 9.53c-.57.17-1.18-.15-1.35-.72-.17-.57.15-1.18.72-1.35 4.28-1.3 11.37-1.05 15.84 1.6.5.3.67.96.37 1.46-.3.5-.95.67-1.45.38z"/></svg></span>
+          <span class="pn"><b>Spotify</b><span>Listen to every episode on the go</span></span>
+          <span class="arr">&#8599;</span>
+        </a>
+      </div>
+      <div class="cadence"><span class="dot"></span> New episodes drop here first</div>
+      <div class="follow">
+        <div class="fl">Follow Will</div>
+        <div class="chips">
+          <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>LinkedIn</a>
+          <a href="https://www.youtube.com/@WillMulholland" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg>YouTube</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSCRIBE -->
+<section class="sec subscribe" id="subscribe">
+  <div class="sub-inner">
+    <div class="eyebrow" style="color:var(--accent-deep)">Never miss a build</div>
+    <h2 class="serif" style="font-size:clamp(30px,4vw,46px);line-height:1.02;letter-spacing:-0.02em;margin-top:14px;">Get every episode, and the system to steal.</h2>
+    <p style="font-size:17px;color:var(--gray-mid);margin-top:16px;">Each drop comes with the workflow broken down step by step. Join the marketers building instead of just reading about it.</p>
+    <form class="nl-form" id="nlForm">
+      <input type="email" name="email" placeholder="Your email" required>
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="nl-meta" id="nlMeta">Join 100+ growth leaders &middot; unsubscribe anytime</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-main">
+    <div class="foot-cta">
+      <h2>LET'S<br>BUILD.</h2>
+      <a class="mail" href="mailto:will@intelligentgrowth.app">will@intelligentgrowth.app</a>
+      <div class="foot-social">
+        <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+        <a href="https://www.youtube.com/@WillMulholland" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></a>
+      </div>
+    </div>
+    <div class="foot-card">
+      <h3>Want it built with you?</h3>
+      <p>Tell me what you're working on with AI. I come back within a day with the right next step.</p>
+      <a class="cta" href="/work-with-me">Work with me</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>&copy; 2026 Will Mulholland. All rights reserved.</span>
+    <div>
+      <a href="/">Home</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // mobile nav
+  (function(){
+    var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');
+    if(!t||!l)return;
+    t.addEventListener('click',function(){
+      var open=l.classList.toggle('is-open');
+      t.classList.toggle('is-open',open);
+      document.body.classList.toggle('nav-open',open);
+      t.setAttribute('aria-expanded',open?'true':'false');
+    });
+    l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){
+      l.classList.remove('is-open');t.classList.remove('is-open');document.body.classList.remove('nav-open');
+    });});
+  })();
+  // newsletter
+  (function(){
+    var f=document.getElementById('nlForm'),m=document.getElementById('nlMeta');
+    if(!f)return;
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var btn=f.querySelector('button'),inp=f.querySelector('input'),email=(inp.value||'').trim();
+      if(!email)return;
+      var label=btn.textContent;btn.disabled=true;btn.textContent='Subscribing...';
+      fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,utm_medium:'podcast-page'})})
+      .then(function(r){
+        if(r.ok){f.style.display='none';m.textContent='Subscribed. Check your inbox to confirm.';}
+        else{btn.disabled=false;btn.textContent=label;m.textContent='Something went wrong. Try again or email will@intelligentgrowth.app.';}
+      }).catch(function(){btn.disabled=false;btn.textContent=label;m.textContent='Network error. Try again in a moment.';});
+    });
+  })();
+  // guest suggestion (captures email + stores the name in Beehiiv via utm)
+  (function(){
+    var f=document.getElementById('guestForm'),m=document.getElementById('guestMsg');
+    if(!f)return;
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var btn=f.querySelector('button'),g=(f.guest.value||'').trim(),email=(f.email.value||'').trim();
+      if(!g||!email)return;
+      var label=btn.textContent;btn.disabled=true;btn.textContent='Sending...';
+      fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,utm_medium:('guest: '+g).slice(0,100)})})
+      .then(function(r){
+        if(r.ok){f.style.display='none';m.textContent='Got it. '+g+' is on the list, and I\'ll let you know who lands the next slot.';m.style.color='#A3E635';}
+        else{btn.disabled=false;btn.textContent=label;m.textContent='Something went wrong. Try again or email will@intelligentgrowth.app.';}
+      }).catch(function(){btn.disabled=false;btn.textContent=label;m.textContent='Network error. Try again in a moment.';});
+    });
+  })();
+</script>
+</body>
+</html>

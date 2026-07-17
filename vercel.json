@@ -1,0 +1,163 @@
+{
+  "routes": [
+    {
+      "src": "/preview-superpower",
+      "dest": "/preview-superpower.html"
+    },
+    {
+      "src": "/brain",
+      "dest": "/brain.html"
+    },
+    {
+      "src": "/preview-deck",
+      "dest": "/preview-deck.html"
+    },
+    {
+      "src": "/augmented",
+      "dest": "/augmented.html"
+    },
+    {
+      "src": "/mcp/start",
+      "dest": "/mcp-start.html"
+    },
+    {
+      "src": "/mcp/competitive-gap",
+      "dest": "/api/mcp-job-page?slug=competitive-gap"
+    },
+    {
+      "src": "/mcp/positioning-review",
+      "dest": "/api/mcp-job-page?slug=positioning-review"
+    },
+    {
+      "src": "/mcp/messaging-review",
+      "dest": "/api/mcp-job-page?slug=messaging-review"
+    },
+    {
+      "src": "/mcp/launch-brief",
+      "dest": "/api/mcp-job-page?slug=launch-brief"
+    },
+    {
+      "src": "/mcp",
+      "dest": "/mcp.html"
+    },
+    {
+      "src": "/team-brain",
+      "dest": "/team-brain.html"
+    },
+    {
+      "src": "/team",
+      "dest": "/team-brain.html"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/blog",
+      "dest": "/blog.html"
+    },
+    {
+      "src": "/blog/marketing-is-the-bottleneck",
+      "dest": "/blog/marketing-is-the-bottleneck.html"
+    },
+    {
+      "src": "/blog/claude-prompts-for-product-marketers",
+      "dest": "/blog/claude-prompts-for-product-marketers.html"
+    },
+    {
+      "src": "/blog/ai-competitive-analysis-for-product-marketers",
+      "dest": "/blog/ai-competitive-analysis-for-product-marketers.html"
+    },
+    {
+      "src": "/blog/how-to-write-positioning-with-ai",
+      "dest": "/blog/how-to-write-positioning-with-ai.html"
+    },
+    {
+      "src": "/blog/how-to-use-ai-for-a-product-launch",
+      "dest": "/blog/how-to-use-ai-for-a-product-launch.html"
+    },
+    {
+      "src": "/system",
+      "dest": "/system.html"
+    },
+    {
+      "src": "/podcast",
+      "dest": "/podcast.html"
+    },
+    {
+      "src": "/workshop",
+      "dest": "/workshop.html"
+    },
+    {
+      "src": "/training",
+      "dest": "/training.html"
+    },
+    {
+      "src": "/workshop-confirmed",
+      "dest": "/workshop-confirmed.html"
+    },
+    {
+      "src": "/workshop-recording",
+      "dest": "/workshop-recording.html"
+    },
+    {
+      "src": "/community",
+      "dest": "/community.html"
+    },
+    {
+      "src": "/scroll-sequence",
+      "dest": "/scroll-sequence.html"
+    },
+    {
+      "src": "/traffic",
+      "dest": "/traffic.html"
+    },
+    {
+      "src": "/traffic-thanks",
+      "dest": "/traffic-thanks.html"
+    },
+    {
+      "src": "/traffic-guide",
+      "dest": "/traffic-guide.html"
+    },
+    {
+      "src": "/resource-download",
+      "dest": "/resource-download.html"
+    },
+    {
+      "src": "/check-inbox",
+      "dest": "/check-inbox.html"
+    },
+    {
+      "src": "/welcome-survey",
+      "dest": "/welcome-survey.html"
+    },
+    {
+      "src": "/resource-delivery",
+      "dest": "/resource-delivery.html"
+    },
+    {
+      "src": "/work-with-me",
+      "dest": "/work-with-me.html"
+    },
+    {
+      "src": "/survey",
+      "dest": "/survey.html"
+    },
+    {
+      "src": "/privacy",
+      "dest": "/privacy.html"
+    },
+    {
+      "src": "/terms",
+      "dest": "/terms.html"
+    },
+    {
+      "src": "/pitch",
+      "dest": "https://ig-pitch.vercel.app/"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}

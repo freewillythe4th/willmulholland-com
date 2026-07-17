@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connect Intelligent Growth | Guided setup</title>
+  <meta name="description" content="Choose a supported client, connect Intelligent Growth and start with your current product marketing job.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://intelligentgrowth.app/mcp/start">
+  <link rel="icon" type="image/png" href="/images/favicon/favicon-32.png">
+  <link rel="stylesheet" href="/css/mcp-funnel.css">
+  <script type="module" src="/js/analytics.js"></script>
+  <script type="module" src="/js/mcp-nav.js"></script>
+  <script type="module" src="/js/mcp-start.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to setup</a>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <a class="site-nav__brand" href="/" aria-label="Intelligent Growth home"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth"></a>
+    <div class="site-nav__links" id="site-nav-links">
+      <a href="/mcp">Back to overview</a>
+      <a href="/privacy">Privacy</a>
+      <a class="button button-secondary button-small whatsapp-link" href="/api/setup-help?placement=setup" data-ig-event="mcp_help_clicked" data-ig-channel="whatsapp" data-ig-placement="setup"><img class="channel-icon" src="/images/icons/whatsapp.svg" alt="" aria-hidden="true">Get setup help</a>
+    </div>
+    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav-links"><span></span><span></span><span></span></button>
+  </nav>
+
+  <main class="setup-shell" id="main">
+    <div class="container">
+      <div class="setup-notice" id="setup-unavailable" role="alert" tabindex="-1" hidden>WhatsApp setup help is not configured yet. Continue with the self-serve steps below, or email <a href="mailto:will@intelligentgrowth.app">will@intelligentgrowth.app</a> with the client and step that failed. Never send an access token or private company content.</div>
+      <div class="setup-header">
+        <div>
+          <p class="eyebrow">Connect once. No code.</p>
+          <h1>Get to your first useful result.</h1>
+          <p class="lead">Choose Claude, Claude Code, an eligible ChatGPT workspace or another supported client. The guide shows one step at a time, then gives you a starter prompt for <span id="job-label">the competitive gap</span>.</p>
+        </div>
+        <div class="progress" aria-label="Setup progress">
+          <span class="progress__item is-current" data-progress="1" title="Choose client"></span>
+          <span class="progress__item" data-progress="2" title="Connect"></span>
+          <span class="progress__item" data-progress="3" title="Copy prompt"></span>
+          <span class="progress__item" data-progress="4" title="Run the job"></span>
+        </div>
+      </div>
+
+      <div class="setup-layout">
+        <section class="setup-panel">
+          <p class="setup-panel__step" id="current-step" role="status" aria-live="polite" aria-atomic="true">Step 1 of 4</p>
+          <h2 id="setup-heading">Which client do you use?</h2>
+          <p id="setup-intro">MCP is the secure connection that lets Claude, ChatGPT and other supported clients use Intelligent Growth. Pick the client you want to work in. You can connect another later.</p>
+
+          <div class="client-grid" id="client-grid">
+            <button class="client-button" type="button" data-client="claude_desktop">Claude Desktop</button>
+            <button class="client-button" type="button" data-client="claude_code">Claude Code</button>
+            <button class="client-button" type="button" data-client="chatgpt">ChatGPT workspace</button>
+            <button class="client-button" type="button" data-client="other">Another supported client</button>
+          </div>
+
+          <div class="instruction" data-instruction="claude_desktop">
+            <div class="instruction-box">
+              <h3>Add the hosted connector</h3>
+              <p>Open Customize &gt; Connectors in Claude, select +, then choose Add custom connector. Name it <strong>Intelligent Growth</strong>, paste the URL below and complete the secure sign-in. For Team and Enterprise, an Owner must first add it in Organization settings &gt; Connectors.</p>
+              <div class="copy-row"><code class="copy-value" data-connection-value></code><button class="copy-button" type="button" data-copy="connection">Copy URL</button></div>
+            </div>
+          </div>
+
+          <div class="instruction" data-instruction="claude_code">
+            <div class="instruction-box">
+              <h3>Add the hosted MCP in your terminal</h3>
+              <p>Copy this command into Claude Code. Follow the browser sign-in when it opens, then return to the same session.</p>
+              <div class="copy-row"><code class="copy-value" data-connection-value></code><button class="copy-button" type="button" data-copy="connection">Copy command</button></div>
+            </div>
+          </div>
+
+          <div class="instruction" data-instruction="chatgpt">
+            <div class="instruction-box">
+              <h3>Add a custom connector</h3>
+              <p>Full custom MCP setup is currently available on ChatGPT web for eligible Business, Enterprise and Edu workspaces. An admin or owner enables developer mode, then opens Settings or Workspace settings &gt; Apps &gt; Create. Add <strong>Intelligent Growth</strong>, paste the endpoint, choose OAuth and scan the tools.</p>
+              <div class="copy-row"><code class="copy-value" data-connection-value></code><button class="copy-button" type="button" data-copy="connection">Copy URL</button></div>
+            </div>
+          </div>
+
+          <div class="instruction" data-instruction="other">
+            <div class="instruction-box">
+              <h3>Use the hosted web endpoint</h3>
+              <p>Add a remote MCP server in your client. If it asks for a server type, choose HTTP, which means it connects to the hosted web address below. Name it <strong>Intelligent Growth</strong>. If it asks how to sign in, choose OAuth, the secure browser sign-in option.</p>
+              <div class="copy-row"><code class="copy-value" data-connection-value></code><button class="copy-button" type="button" data-copy="connection">Copy URL</button></div>
+            </div>
+          </div>
+
+          <div class="instruction-box" id="prompt-box" hidden>
+            <h3>Start with your current job</h3>
+            <p>After Intelligent Growth is connected, paste this into a new chat. It asks for the context needed before any analysis begins.</p>
+            <div class="copy-row"><code class="copy-value" id="starter-prompt"></code><button class="copy-button" type="button" data-copy="prompt">Copy prompt</button></div>
+          </div>
+
+          <button class="button button-blue setup-next" id="ready-button" type="button">I am ready to run it</button>
+          <div class="privacy-line"><span aria-hidden="true">●</span><span>This page records the client and setup step, never the connection value, prompt, company context, email, access token or full URL.</span></div>
+        </section>
+
+        <aside class="setup-aside">
+          <div class="aside-card aside-card--blue">
+            <h3>What happens next</h3>
+            <ul><li>Your client asks for the missing context.</li><li>The hosted method runs without exporting its private files.</li><li>You get a structured result with reasoning and assumptions to review.</li></ul>
+          </div>
+          <div class="aside-card">
+            <h3>You make the final call</h3>
+            <p>Intelligent Growth should make the thinking visible and give you a stronger first version. Challenge it and check the evidence before anything ships.</p>
+          </div>
+          <div class="aside-card" id="setup-help">
+            <h3>Want a human hand?</h3>
+            <p>Message Will with the client and step that failed. Do not send access tokens or private company content.</p>
+            <a class="text-link whatsapp-link" href="/api/setup-help?placement=troubleshooting" data-ig-event="mcp_help_clicked" data-ig-channel="whatsapp" data-ig-placement="troubleshooting"><img class="channel-icon" src="/images/icons/whatsapp.svg" alt="" aria-hidden="true">Open WhatsApp setup help</a>
+          </div>
+          <div class="aside-card">
+            <details data-troubleshooting="connection"><summary>Connection not appearing?</summary><p>Restart the client after authorising. Then check that Intelligent Growth appears in its connector or MCP list before starting a new chat.</p></details>
+          </div>
+          <div class="aside-card">
+            <details data-troubleshooting="authentication"><summary>Sign-in did not finish?</summary><p>Open the connection again and complete the browser sign-in. Never paste a token into chat or send one to support.</p></details>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="mcp-footer"><div class="mcp-footer__inner"><div class="mcp-footer__legal"><span>&copy; 2026 Will Mulholland</span><a href="/mcp">MCP overview</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></div></footer>
+</body>
+</html>

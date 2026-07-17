@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>See any company's web traffic in seconds | Intelligent Growth</title>
+    <meta name="description" content="A free guide: how to see how much traffic any website gets, where it comes from, and what's working for them, using a free tool. The masterclass marketers keep checking compulsively.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://intelligentgrowth.app/traffic-guide">
+    <meta property="og:title" content="See any company's web traffic in seconds">
+    <meta property="og:description" content="How to see how much traffic any website gets, where it comes from, and what's working, using a free tool.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://intelligentgrowth.app/traffic-guide">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ink: #1F1511; --black: #1F1511; --cream: #FFFFFF; --cream-soft: #F4F4F2; --white: #FFFFFF;
+            --gray-mid: #5C4F47; --gray-light: #8B7E73; --accent: #2563EB; --accent-soft: #DBEAFE; --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --offset-shadow: 6px 6px 0 rgba(31,21,17,0.14); --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.6; letter-spacing: -0.01em; overflow-x: hidden; }
+        ::selection { background: var(--accent); color: var(--white); }
+        h1, h2, .step-h, .hl { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: 0; }
+
+        nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 18px 48px; display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(31,21,17,0.06); }
+        .nav-logo img { height: 30px; width: auto; display: block; }
+        .nav-cta { padding: 10px 18px; background: var(--ink); color: var(--white); border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.4s var(--ease-smooth); }
+        .nav-cta:hover { background: var(--accent); }
+        @media (max-width: 600px) { nav { padding: 14px 22px; } }
+
+        .article { max-width: 760px; margin: 0 auto; padding: 130px 28px 40px; }
+        .eyebrow { display: inline-block; font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-deep); background: var(--accent-soft); padding: 7px 14px; border-radius: 999px; margin-bottom: 24px; font-weight: 700; }
+        h1 { font-size: clamp(38px, 6vw, 60px); line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 20px; }
+        h1 .hl { display: inline-block; background: var(--accent-soft); color: var(--accent-deep); padding: 0.02em 0.16em 0.06em; border-radius: 8px; line-height: 0.9; }
+        .lede { font-size: clamp(18px, 2.2vw, 21px); color: var(--gray-mid); margin-bottom: 14px; }
+        .byline { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); margin-bottom: 36px; }
+
+        .article h2 { font-size: clamp(26px, 3.6vw, 36px); line-height: 1.1; margin: 48px 0 8px; }
+        .article p { font-size: 17px; color: var(--ink); margin: 14px 0; }
+        .article p.muted { color: var(--gray-mid); }
+        .article strong { font-weight: 700; }
+        .article a.lk { color: var(--accent-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px; transition: color 0.3s var(--ease-smooth); }
+        .article a.lk:hover { color: var(--accent); }
+        .article ul { margin: 14px 0 14px 4px; list-style: none; }
+        .article ul li { font-size: 16px; color: var(--gray-mid); padding: 8px 0 8px 26px; position: relative; line-height: 1.55; }
+        .article ul li::before { content: '\2192'; color: var(--accent); font-weight: 700; position: absolute; left: 0; }
+
+        .step { display: flex; align-items: baseline; gap: 14px; margin: 52px 0 4px; }
+        .step-num { font-family: 'Instrument Serif', Georgia, serif; font-size: 40px; line-height: 0.8; color: var(--accent); flex-shrink: 0; }
+        .step-h { font-size: clamp(24px, 3.4vw, 32px); line-height: 1.1; }
+
+        figure { margin: 22px 0 8px; }
+        figure img { width: 100%; border: 1px solid var(--ink); border-radius: 14px; box-shadow: var(--offset-shadow); display: block; }
+        figcaption { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-light); margin-top: 12px; text-align: center; }
+
+        .callout { background: var(--white); border: 1px solid var(--ink); border-radius: 16px; box-shadow: var(--offset-shadow); padding: 24px 26px; margin: 32px 0; }
+        .callout .tag { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-deep); font-weight: 700; margin-bottom: 8px; display: block; }
+        .callout p { margin: 6px 0; font-size: 16px; }
+
+        .usecase { padding: 18px 0; border-bottom: 1px solid rgba(31,21,17,0.12); }
+        .usecase h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+        .usecase p { font-size: 16px; color: var(--gray-mid); margin: 4px 0 0; }
+
+        .end-cta { background: var(--ink); color: var(--white); border-radius: 24px; padding: 44px 32px; text-align: center; margin: 56px 0 0; }
+        .end-cta h2 { font-size: clamp(26px, 4vw, 38px); margin-bottom: 12px; }
+        .end-cta p { color: rgba(255,255,255,0.82); font-size: 16px; max-width: 460px; margin: 0 auto 24px; }
+        .end-cta a { display: inline-block; padding: 15px 28px; border-radius: 999px; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; margin: 6px; transition: all 0.4s var(--ease-smooth); }
+        .end-cta a.primary { background: var(--accent); color: var(--white); }
+        .end-cta a.primary:hover { border-radius: 12px; }
+        .end-cta a.ghost { border: 1px solid rgba(255,255,255,0.4); color: var(--white); }
+        .end-cta a.ghost:hover { background: var(--white); color: var(--ink); }
+
+        footer { text-align: center; padding: 40px 24px 48px; font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); }
+        footer a { color: var(--gray-light); text-decoration: none; }
+        footer a:hover { color: var(--ink); }
+    </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+        <a href="/#subscribe" class="nav-cta">Subscribe</a>
+    </nav>
+
+    <article class="article">
+        <span class="eyebrow">Free guide</span>
+        <h1>See <span class="hl">any company's</span> web traffic in seconds.</h1>
+        <p class="lede">How to find out how much traffic any website gets, where it comes from, and what's actually working for them. With a free tool, no technical skills, and about ten minutes of setup.</p>
+        <p class="byline">By Will Mulholland &middot; 8 min read</p>
+
+        <p>Most strategy and growth problems come down to one question: <strong>how much traffic, and where does it come from?</strong> Once you can answer that for any website in seconds, you start seeing the internet differently. You land on a competitor, a prospect, a potential partner, and you can read their whole growth story off a sidebar.</p>
+        <p class="muted">Fair warning: it's addictive. You'll start checking the traffic on every site you visit.</p>
+
+        <div class="callout">
+            <span class="tag">The tool</span>
+            <p><strong>SimilarWeb.</strong> Two parts, both usable for free. The <a href="https://www.similarweb.com/corp/extension/" class="lk" target="_blank" rel="noopener"><strong>SimilarWeb Chrome extension</strong></a> shows traffic stats in a sidebar on whatever site you're viewing (free tier, about 25 scans a week). The <a href="https://www.similarweb.com/" class="lk" target="_blank" rel="noopener"><strong>SimilarWeb platform</strong></a> goes deeper on a free trial. That's all you need.</p>
+        </div>
+
+        <div class="step"><span class="step-num">1</span><h2 class="step-h">Scan any site from the sidebar</h2></div>
+        <p>Install the SimilarWeb Chrome extension, land on any website, and click the icon. A sidebar opens with the site's traffic at a glance, no leaving the page. Try it on the New York Times and read it top to bottom:</p>
+        <ul>
+            <li><strong>Monthly visits.</strong> The NYT pulls 640 to 685 million a month. Calibrate your gut: anything over a million a month is doing well in the startup world.</li>
+            <li><strong>Bounce rate.</strong> The share who hit one page and leave. 55% here, but paired with 3+ pages per visit it tells you a loyal cohort reads 10 to 15 pages and drags the average up.</li>
+            <li><strong>Pages per visit and average visit duration.</strong> Content sites run long (four minutes here), a SaaS marketing site runs short. The shape tells you the kind of business.</li>
+        </ul>
+
+        <div class="step"><span class="step-num">2</span><h2 class="step-h">Read their top keywords</h2></div>
+        <p>Scroll the sidebar and you get the keywords driving search traffic, with the cost-per-click next to each. This is the part people don't expect the free tool to do, and it's where the story is.</p>
+        <p>Look at the NYT's top five keywords: four of them are games. Wordle, Connections, Strands, Mini Crossword. In one glance you've learned something real about where their search traffic actually comes from, not the headline-news brand you assumed. The cost-per-click tells you how competitive and commercially valuable each term is.</p>
+
+        <div class="step"><span class="step-num">3</span><h2 class="step-h">See where the traffic comes from</h2></div>
+        <p>Keep scrolling for geography and traffic sources. This is the bit that changes how you read a business.</p>
+        <ul>
+            <li><strong>Direct</strong> is people typing the URL or using a bookmark. A high share usually means a strong brand (with a pinch of salt: blocked tracking also lands here).</li>
+            <li><strong>Search</strong> is organic plus those keywords you just saw.</li>
+            <li><strong>Social, email, referrals</strong> (backlinks from other sites) and <strong>display</strong> (programmatic ads). The mix is their playbook. If a competitor gets 40% from email, that's a signal to go sign up and reverse-engineer their sequence.</li>
+        </ul>
+
+        <div class="step"><span class="step-num">4</span><h2 class="step-h">Go deeper: who their audience actually is</h2></div>
+        <p>Open the SimilarWeb platform and you can compare sites side by side. Put in Nike and Adidas and look at demographics and audience overlap.</p>
+        <p>Age and gender splits, and the killer one: audience overlap. 16% of Adidas visitors also browse Nike, but only 4% the other way, and Adidas's top "also visited" site is literally Nike.com. In two minutes you've built an evidence-backed case that Nike has the more loyal audience. That's the kind of line that wins an internal argument.</p>
+
+        <div class="step"><span class="step-num">5</span><h2 class="step-h">Reverse-engineer their best pages</h2></div>
+        <p>In the platform's search and landing-pages views, you can see which specific pages and subfolders pull the most traffic for a site. Sort by clicks and their priorities show up: a sale page they're pushing, a product launch, the jobs page, a sub-brand. You're reading their marketing roadmap off their own traffic.</p>
+
+        <div class="step"><span class="step-num">6</span><h2 class="step-h">Spot spikes and what caused them</h2></div>
+        <p>Drop to the daily view of traffic over time and the spikes jump out. Take Apple: there's a clear jump on June 10.</p>
+        <p>Search "Apple June 10" and you find their developer conference. Now you can tie events to traffic, and even estimate the incremental visits a launch or a campaign drove. Do this on your own launches and you've got a measurement habit most teams never build.</p>
+
+        <h2>Where this actually pays off</h2>
+        <p class="muted">It looks like an SEO trick. It's much broader than that. A few ways to use it the moment you've got it:</p>
+        <div class="usecase"><h3>Competitor research</h3><p>Read a rival's channel mix and top pages, find the channel that's working, and go emulate it.</p></div>
+        <div class="usecase"><h3>Closing deals</h3><p>Before a call, pull the prospect's traffic and context so you walk in already understanding their business. It shows.</p></div>
+        <div class="usecase"><h3>Finding partners</h3><p>Filter for sites with complementary audiences, low bounce and long visits, then build the partnership case on real numbers.</p></div>
+        <div class="usecase"><h3>Content research</h3><p>See what's pulling traffic in your space and what people who read X also read, then write into the gap.</p></div>
+        <div class="usecase"><h3>Internal strategy memos</h3><p>Stop saying "I think" and start saying "here's the data." Traffic evidence makes a strategic bet hard to argue with.</p></div>
+
+        <div class="end-cta">
+            <h2>This is one tool. The system is the edge.</h2>
+            <p>I write up tactics like this every week, the practical AI and growth moves marketers can actually use. And I run a free live workshop where I build one with you on screen.</p>
+            <a href="/#subscribe" class="primary">Get the newsletter</a>
+            <a href="/workshop" class="ghost">See the free workshop</a>
+        </div>
+    </article>
+
+    <footer>
+        <a href="/">intelligentgrowth.app</a> &middot; &copy; 2026 Will Mulholland
+    </footer>
+</body>
+</html>

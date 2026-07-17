@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Prompts for Product Marketers (That Aren't Slop) | Intelligent Growth</title>
+    <meta name="description" content="Six Claude prompts for product marketers, with the context to load so they don't produce generic AI slop. Positioning, messaging, launch, and a de-AI pass.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://intelligentgrowth.app/blog/claude-prompts-for-product-marketers">
+    <meta property="og:title" content="Claude Prompts for Product Marketers (That Aren't Slop)">
+    <meta property="og:description" content="The prompt is the easy part. Here are six Claude prompts for product marketers plus the context that stops them producing slop.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://intelligentgrowth.app/blog/claude-prompts-for-product-marketers">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #1F1511;
+            --ink: #1F1511;
+            --cream: #F2EDE3;
+            --cream-soft: #EBE5D8;
+            --white: #FFFFFF;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            line-height: 1.65;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::selection { background: var(--accent); color: var(--white); }
+
+        nav {
+            position: sticky; top: 0; z-index: 100; padding: 20px 48px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(242,237,227,0.88); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(31,21,17,0.06);
+        }
+        .nav-logo img { height: 30px; width: auto; display: block; }
+        .nav-back {
+            font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-mid); text-decoration: none; transition: color 0.4s var(--ease-smooth);
+        }
+        .nav-back:hover { color: var(--ink); }
+
+        article { max-width: 720px; margin: 0 auto; padding: 72px 24px 48px; }
+
+        .kicker {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--accent); font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+        }
+        .kicker::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+
+        article h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(36px, 6vw, 60px);
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+        .lead { font-size: clamp(18px, 2.4vw, 22px); color: var(--gray-mid); line-height: 1.5; margin-bottom: 28px; }
+        .meta {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;
+            color: var(--gray-light); padding-bottom: 32px; border-bottom: 1px solid rgba(31,21,17,0.1); margin-bottom: 40px;
+        }
+
+        .tldr {
+            background: var(--cream-soft);
+            border: 1px solid rgba(31,21,17,0.12);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 48px;
+        }
+        .tldr h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(20px, 2.8vw, 26px);
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .tldr ul { list-style: none; padding: 0; margin: 0; }
+        .tldr li {
+            font-size: 17px; color: var(--gray-mid); margin-bottom: 13px; line-height: 1.6;
+            padding-left: 22px; position: relative;
+        }
+        .tldr li:last-child { margin-bottom: 0; }
+        .tldr li::before { content: ''; position: absolute; left: 0; top: 10px; width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
+
+        article h2.sec {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(24px, 3.4vw, 32px);
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+            margin: 52px 0 18px;
+            color: var(--ink);
+        }
+        article h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(22px, 2.9vw, 27px);
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+            margin: 0 0 14px;
+            color: var(--ink);
+        }
+        .prompt-label {
+            font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--accent); font-weight: 700; margin: 48px 0 8px;
+        }
+        article p { font-size: 18px; color: var(--gray-mid); margin-bottom: 20px; line-height: 1.65; }
+        article p strong { font-weight: 700; color: var(--ink); }
+        .accent-text { color: var(--accent-deep); }
+
+        .load { font-size: 16px; color: var(--gray-mid); margin-bottom: 14px; }
+        .load strong { color: var(--accent-deep); font-weight: 700; }
+
+        article ul.body-list { list-style: none; padding: 0; margin: 0 0 22px; }
+        article ul.body-list li {
+            font-size: 18px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 10px;
+            padding-left: 22px; position: relative;
+        }
+        article ul.body-list li::before { content: ''; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+
+        pre {
+            background: var(--ink); color: var(--cream); border-radius: 14px;
+            padding: 22px 24px; margin: 8px 0 22px; overflow-x: auto;
+            font-family: 'SF Mono', ui-monospace, 'Menlo', monospace; font-size: 13.5px; line-height: 1.6; letter-spacing: 0;
+        }
+        pre code { background: none; padding: 0; color: inherit; font-size: inherit; white-space: pre; }
+        code {
+            font-family: ui-monospace, 'SF Mono', 'Menlo', monospace; font-size: 0.92em;
+            background: var(--cream-soft); padding: 2px 6px; border-radius: 6px; color: var(--accent-deep);
+        }
+
+        table { width: 100%; border-collapse: collapse; margin: 14px 0 28px; font-size: 16px; }
+        th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid rgba(31,21,17,0.12); vertical-align: top; }
+        th { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink); background: var(--cream-soft); }
+        td { color: var(--gray-mid); line-height: 1.55; }
+        td strong { color: var(--ink); font-weight: 700; }
+
+        .divider-h2 {
+            font-family: 'Instrument Serif', Georgia, serif; font-weight: 400;
+            font-size: clamp(26px, 3.8vw, 36px); letter-spacing: -0.01em; line-height: 1.1;
+            margin: 56px 0 8px; color: var(--ink);
+        }
+
+        .end-cta {
+            margin-top: 56px; padding: 40px 32px; background: var(--ink); color: var(--white);
+            border-radius: 24px; text-align: center;
+        }
+        .end-cta h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: 28px;
+            letter-spacing: -0.01em;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        .end-cta p { font-size: 16px; color: rgba(242,237,227,0.8); margin-bottom: 24px; }
+        .end-cta .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .end-cta a {
+            padding: 14px 26px; border-radius: 999px; font-size: 13px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none;
+            transition: all 0.5s var(--ease-smooth);
+        }
+        .end-cta a.primary { background: var(--white); color: var(--ink); }
+        .end-cta a.primary:hover { background: var(--accent); color: var(--white); border-radius: 12px; }
+        .end-cta a.ghost { border: 1px solid rgba(242,237,227,0.3); color: var(--white); }
+        .end-cta a.ghost:hover { border-radius: 12px; background: rgba(242,237,227,0.1); }
+
+        footer {
+            max-width: 720px; margin: 64px auto 0; padding: 32px 24px 48px;
+            border-top: 1px solid rgba(31,21,17,0.10); display: flex; justify-content: space-between;
+            font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-light); flex-wrap: wrap; gap: 12px;
+        }
+        footer a { color: var(--gray-light); text-decoration: none; }
+        footer a:hover { color: var(--ink); }
+
+        @media (max-width: 600px) {
+            nav { padding: 16px 24px; }
+            article { padding: 48px 24px 40px; }
+            pre { font-size: 12.5px; padding: 18px 18px; }
+            th, td { padding: 11px 12px; font-size: 14px; }
+        }
+    </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+        <a href="/blog" class="nav-back">&larr; Blog</a>
+    </nav>
+
+    <article>
+        <div class="kicker">Guide</div>
+        <h1>Claude prompts for product marketers (that aren't slop)</h1>
+        <p class="lead">Six Claude prompts for the PMM jobs that eat your week, plus the context to load so they don't hand you generic AI mush.</p>
+        <div class="meta">Will Mulholland &middot; 9 min read</div>
+
+        <div class="tldr">
+            <h2>Key points</h2>
+            <ul>
+                <li>A prompt on its own produces generic output. What makes Claude useful for product marketing is the context you load before you run it, your interview transcripts, your positioning, your competitors, your voice.</li>
+                <li>The six prompts below cover the PMM jobs that eat your week: customer interview synthesis, positioning options, a messaging hierarchy, a competitive teardown, a launch narrative, and a de-AI editing pass.</li>
+                <li>Each one comes with the exact context to paste first and a note on what good output looks like.</li>
+                <li>Claude tends to win over ChatGPT here because it holds a brand voice across a long document and sounds less like a template. ChatGPT is better when you want twenty rough variations fast.</li>
+                <li>Save the ones that work into a Claude Project so you stop re-explaining your product every single time.</li>
+            </ul>
+        </div>
+
+        <h2 class="sec">Why most "AI prompts for product marketers" lists don't work</h2>
+        <p>You have seen the posts. Fifty prompts, each one a single line that starts with "Act as an expert product marketer." You paste it in, you get back something that reads fine and says nothing. Then you spend an hour fixing it, and you quietly decide AI is overrated for the actual job.</p>
+        <p>The problem is not the prompt. The problem is that the prompt has no context to work with. Ask Claude to "write a positioning statement" with nothing else and it averages every positioning statement on the internet. That average is slop. It is grammatically clean and strategically useless.</p>
+        <p>The marketers getting real value are not collecting better one-liners. They load their own material first, the customer interview transcripts, the competitive research, the messaging framework, three samples of their own best writing, then run a focused prompt on top of it. The context is the moat, not the prompt. Everyone can paste the same prompt. Almost nobody loads the same context, because the context is yours.</p>
+        <p>So the prompts below are written to be run on top of your stuff. Each one tells you what to paste first. Fill the brackets with real specifics, not placeholders. The more real the input, the less editing on the back end.</p>
+
+        <h2 class="divider-h2">The six prompts</h2>
+
+        <div class="prompt-label">Prompt 1</div>
+        <h3>Synthesise customer interviews into themes</h3>
+        <p>This is the one job AI genuinely speeds up without watering down. You still have to do the interviews. Claude just organises what people said so you can see the pattern instead of drowning in transcripts.</p>
+        <p class="load"><strong>Load first:</strong> three to five raw interview transcripts and a one-paragraph description of the product.</p>
+        <pre><code>Act as a sharp, skeptical research analyst. I'm pasting a product description
+and [NUMBER] real customer interview transcripts.
+
+Do three things:
+1. The three strongest themes across the interviews, in customers' own words
+   where possible. Quote them.
+2. The one thing my product description claims that the interviews do NOT
+   support. Tell me where I'm probably wrong.
+3. Three questions I should ask in the next round to pressure-test my
+   assumptions.
+
+Be blunt. If the evidence for a theme is thin, say so. Do not invent themes
+to fill the list.</code></pre>
+        <p>What good looks like: themes phrased the way buyers actually talk, not the way your deck talks. If a customer said "I just need it to stop losing my contacts," that is your headline, not "seamless data continuity."</p>
+
+        <div class="prompt-label">Prompt 2</div>
+        <h3>Generate three real positioning options</h3>
+        <p>Positioning is a decision, not a draft. Use Claude to put three genuinely different options on the table so you have something concrete to react to, then you make the call.</p>
+        <p class="load"><strong>Load first:</strong> your product, your target customer (be specific about the situation, not a demographic), the competitive set, what you do that they do not, and the proof.</p>
+        <pre><code>You're a B2B positioning strategist. Using only the context below, write three
+distinct positioning statements for [PRODUCT], each in this format:
+
+"For [target customer] who [situation], [PRODUCT] is the [category] that
+[differentiated benefit], because [proof]."
+
+Version 1: rational, feature-led.
+Version 2: emotional, outcome-led.
+Version 3: challenger, reframes the category.
+
+After the three, tell me which is most defensible long-term and why. Flag any
+assumption you had to make because my context was thin.
+
+Context:
+[PASTE: product, target customer + their situation, category, competitors,
+your differentiation, your proof]</code></pre>
+        <p>The "flag any assumption" line is the important part. It shows you exactly where your own inputs were vague, which is usually where your positioning is actually weak.</p>
+
+        <div class="prompt-label">Prompt 3</div>
+        <h3>Turn the chosen positioning into a messaging hierarchy</h3>
+        <p>Once positioning is locked, everything downstream inherits it. This prompt builds the spine that your landing page, emails, and sales one-pager all expand from.</p>
+        <p class="load"><strong>Load first:</strong> the single positioning statement you chose, your audience segments, and your proof points.</p>
+        <pre><code>Build a messaging hierarchy from the positioning below. Output:
+
+1. Master narrative: the one-paragraph story of why this product exists now.
+2. Primary message: one sentence that works across every segment.
+3. Per-segment messages: the primary message tailored to each segment I list.
+4. Supporting proofs: three facts, results, or stories that back the primary
+   claim.
+5. Objection responses: the top three objections and the pre-emptive message
+   for each.
+6. Messaging to avoid: two angles that are tempting but would undermine the
+   positioning.
+
+One page. No filler. If a proof point is weak, say which one and why.
+
+Positioning: [PASTE]
+Segments: [PASTE]
+Proof points: [PASTE]</code></pre>
+
+        <div class="prompt-label">Prompt 4</div>
+        <h3>Tear down competitor pages and find the gap</h3>
+        <p>Competitive research is the task PMMs redo every cycle by hand. This turns three competitor pages into a positioning gap you can credibly claim.</p>
+        <p class="load"><strong>Load first:</strong> the full copy from three competitor landing pages (paste the text, not the links, so Claude reads the actual words).</p>
+        <pre><code>You're a positioning analyst. I'm pasting three competitor landing pages.
+Compare them on:
+
+1. The single promise each page makes, one sentence each.
+2. Who each is actually talking to, not who they claim to target.
+3. The most specific, ownable phrase on each page.
+4. Where each is weakest, the part a competitor could attack.
+
+Then give me one positioning gap none of them are claiming, something true
+buyers care about that nobody is leading with. Make it specific and tell me
+what proof I'd need to own it credibly.
+
+Pages:
+[PASTE three competitor pages]</code></pre>
+        <p>What good looks like: not "they all focus on price, you could focus on quality." That is a platitude. Good output names a specific buyer concern that every competitor buries below the fold, and tells you what you would need to prove to own it.</p>
+
+        <div class="prompt-label">Prompt 5</div>
+        <h3>Draft a launch narrative</h3>
+        <p>The launch is the job with a deadline, a defined output, and the highest cost of getting it generic. Use Claude to draft the narrative, then you edit it into something with a point of view.</p>
+        <p class="load"><strong>Load first:</strong> the positioning, the messaging hierarchy from prompt 3, the launch goal, and the one primary audience.</p>
+        <pre><code>Draft a launch narrative for [PRODUCT] using the positioning and messaging
+below. I need:
+
+- A one-line launch hook (what we're announcing and why it matters now).
+- A three-sentence "why now" that connects the feature to a shift the buyer
+  already feels.
+- The single before/after the launch should land (their world before, their
+  world after).
+- Three proof points, ranked by how much they'd move a skeptical buyer.
+
+Lead with the customer's problem, not the feature. No hype words. If the
+"why now" isn't compelling, tell me the narrative is weak rather than dressing
+it up.
+
+Positioning + messaging: [PASTE]
+Launch goal: [PASTE]
+Primary audience: [PASTE]</code></pre>
+
+        <div class="prompt-label">Prompt 6</div>
+        <h3>The de-AI editing pass</h3>
+        <p>This is the one that protects your reputation. AI writing has tells, and your buyers and your team can smell them. Run this on anything before it ships.</p>
+        <p class="load"><strong>Load first:</strong> your draft, plus three samples of your own best past writing so Claude knows what your voice actually is.</p>
+        <pre><code>You're a brutal editor. Here are three samples of my own writing so you know
+my voice, then a draft.
+
+Flag every sentence in the draft that reads like AI wrote it. For each one:
+1. The exact sentence.
+2. Why it reads as AI, name the specific pattern, not "it's generic."
+3. A rewrite in the voice of my three samples.
+
+Watch for: the "it's not X, it's Y" contrast reflex, throat-clearing first
+sentences, hedging words (potentially, could, may), and stacked short
+sentences for fake drama.
+
+My voice samples:
+[PASTE three]
+
+Draft:
+[PASTE]</code></pre>
+        <p>After it flags everything, delete the throat-clearing, strip the hedges, and kill the binary contrasts. It takes about ten minutes and it is the difference between copy that sounds like you and copy that sounds like the feed.</p>
+
+        <h2 class="sec">How to make these yours</h2>
+        <p>Copying the prompts is step one. The leverage comes from the setup around them.</p>
+        <table>
+            <thead>
+                <tr><th>Move</th><th>Why it matters</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Build a Claude Project</strong></td><td>Upload your PRD, competitive research, interview transcripts, and messaging framework once. Every chat in the project has the full picture, so you stop re-explaining your product every time.</td></tr>
+                <tr><td><strong>Paste your style guide as text, not a link</strong></td><td>Claude reads pasted text. A link to your brand guide does nothing. Drop the actual words in.</td></tr>
+                <tr><td><strong>Give it three samples, not twenty</strong></td><td>Three pieces of your best past writing teach voice faster than a long instruction about tone.</td></tr>
+                <tr><td><strong>Write a "don't do" list</strong></td><td>Not "avoid jargon." List the specific words and opener patterns you keep seeing in the output and want gone.</td></tr>
+                <tr><td><strong>Treat the first output as a draft</strong></td><td>The first response is raw material. Follow up: "cut this to 80 words," "make the why-now sharper," "give me three more options."</td></tr>
+            </tbody>
+        </table>
+        <p>The pattern underneath all of it: do the human thinking first, the customer insight, the strategic call, the taste, then let Claude do the structuring and drafting on top of your context. AI does the eighty percent that is mechanical. You own the twenty percent that is judgment. That split is the whole game.</p>
+
+        <h2 class="sec">FAQ</h2>
+
+        <h3>Do these prompts work in ChatGPT too?</h3>
+        <p>Yes, the structure carries over. The difference shows up on customer-facing copy, where Claude tends to hold a brand voice across a long piece and sound less like a template, while ChatGPT is stronger for generating a lot of rough variations fast. For positioning, messaging, and anything a buyer will read, most product marketers reach for Claude. For brainstorming twenty angles in ninety seconds, ChatGPT.</p>
+
+        <h3>Why does my AI output still sound generic even with a good prompt?</h3>
+        <p>Almost always because the context is thin. If you did not paste real transcripts, real competitor copy, and real samples of your voice, the model fills the gaps with the internet average. Load more of your own material before you blame the prompt.</p>
+
+        <h3>How many prompts do I actually need?</h3>
+        <p>Fewer than the listicles suggest. Six good ones you run on loaded context beat fifty you paste cold. Save the ones that earn their place into a Project and build from there.</p>
+
+        <h3>Is it worth paying for Claude out of my own pocket?</h3>
+        <p>If your company will not buy it yet, the twenty to thirty dollars a month is the cheapest way to become the person on your team who actually knows how to use this. Most people who got there paid for it themselves first and expensed it later.</p>
+
+        <h3>Can AI do my positioning for me?</h3>
+        <p>No, and you do not want it to. AI is useful for drafting three options to react to and for pressure-testing your thinking. The decision about which way to position is yours, because it depends on judgment the model does not have about your market.</p>
+
+        <h2 class="sec">Take one into this week</h2>
+        <p>Pick the prompt that maps to the job you already hate doing most. If it is competitor research, run prompt 4 on three real pages this week. If it is the launch you are dreading, run prompt 5. One prompt, real context, one job. That is the whole first move.</p>
+
+        <div class="end-cta">
+            <h3>I run these end to end every week</h3>
+            <p>Intelligent Growth is where I write up the workflows behind real launches, the context layer, the Projects, the systems you can copy. No theory.</p>
+            <div class="btns">
+                <a class="primary" href="/workshop">See the workshop</a>
+                <a class="ghost" href="/community">Join the community</a>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <span>&copy; 2026 Will Mulholland</span>
+        <span><a href="/blog">Blog</a> &middot; <a href="/">Home</a> &middot; <a href="/work.html">Case studies</a>
+ <a href="/podcast">Podcast</a></span>
+    </footer>
+</body>
+</html>

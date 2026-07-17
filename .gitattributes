@@ -1,0 +1,2 @@
+# Override parent LFS settings for this specific image
+images/charlotte-episode-thumbnail.jpg !filter !diff !merge

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're in | Run your marketing with AI</title>
+    <meta name="description" content="You're registered for Build your first AI marketing tool, live. Wed 24 June 7pm AEST.">
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --cream: #FFFFFF;
+            --cream-soft: #F4F4F2;
+            --ink: #1F1511;
+            --black: #1F1511;
+            --white: #FFFFFF;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--ink);
+            line-height: 1.5;
+            letter-spacing: -0.02em;
+            background: var(--cream);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 24px;
+            text-align: center;
+        }
+        ::selection { background: var(--accent); color: var(--white); }
+        .logo { margin-bottom: 40px; }
+        .logo img { height: 36px; width: auto; }
+        .check {
+            width: 72px; height: 72px; border-radius: 50%; background: var(--accent);
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 28px;
+            color: var(--white); font-size: 36px; font-weight: 700;
+        }
+        h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(36px, 7vw, 64px);
+            letter-spacing: -0.02em;
+            line-height: 1.0;
+            margin-bottom: 20px;
+        }
+        .lead { font-size: 18px; color: var(--gray-mid); max-width: 540px; margin: 0 auto 8px; line-height: 1.6; }
+        .when {
+            display: inline-block; font-family: monospace; font-size: 14px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-deep);
+            background: var(--accent-soft); padding: 10px 18px; border-radius: 999px; margin: 24px 0 8px;
+        }
+        /* Add to calendar */
+        .calblock { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 20px auto 0; }
+        .cal-btn {
+            display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 999px;
+            font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer;
+            transition: all 0.4s var(--ease-smooth); font-family: inherit;
+        }
+        .cal-btn.primary { background: var(--ink); color: var(--white); }
+        .cal-btn.primary:hover { background: var(--accent); border-radius: 14px; }
+        .cal-btn.ghost { border: 1px solid var(--ink); color: var(--ink); }
+        .cal-btn.ghost:hover { border-radius: 14px; }
+
+        .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 720px; width: 100%; margin: 48px auto 0; text-align: left; }
+        @media (max-width: 720px) { .cards { grid-template-columns: 1fr; } }
+        .card {
+            border: 1px solid rgba(31,21,17,0.10);
+            border-radius: 20px;
+            padding: 28px;
+            background: var(--cream-soft);
+            box-shadow: var(--warm-shadow);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.5s var(--ease-smooth), box-shadow 0.5s var(--ease-smooth);
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(31,21,17,0.14), 0 4px 12px rgba(31,21,17,0.08); }
+        .card-tag { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 12px; }
+        .card h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; color: var(--ink); }
+        .card p { font-size: 14px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 20px; flex: 1; }
+        .card a {
+            align-self: flex-start; padding: 12px 22px; border-radius: 999px; font-size: 13px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; transition: all 0.5s var(--ease-smooth);
+        }
+        .card a.primary { background: var(--ink); color: var(--white); }
+        .card a.primary:hover { background: var(--accent); border-radius: 12px; }
+        .card a.ghost { border: 1px solid var(--ink); color: var(--ink); }
+        .card a.ghost:hover { border-radius: 12px; }
+        .home-link { margin-top: 40px; font-size: 14px; color: var(--gray-light); text-decoration: none; font-family: monospace; text-transform: uppercase; letter-spacing: 0.08em; }
+        .home-link:hover { color: var(--ink); }
+
+        /* Newsletter inline */
+        .nl { max-width: 480px; width: 100%; margin: 24px auto 0; }
+        .nl-form { display: flex; gap: 12px; }
+        @media (max-width: 520px) { .nl-form { flex-direction: column; } }
+        .nl-form input {
+            flex: 1; padding: 14px 16px; border: 1px solid rgba(31,21,17,0.18); border-radius: 12px;
+            font-size: 15px; font-family: inherit; outline: none; background: var(--cream); color: var(--ink);
+        }
+        .nl-form input::placeholder { color: var(--gray-light); }
+        .nl-form input:focus { border-color: var(--accent); }
+        .nl-form button {
+            padding: 14px 24px; background: var(--ink); color: var(--white); border: none; border-radius: 12px;
+            font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer;
+            font-family: inherit; transition: background 0.3s var(--ease-smooth);
+        }
+        .nl-form button:hover { background: var(--accent); }
+        .nl-meta { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); margin-top: 12px; }
+    </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <div class="logo"><img src="images/ig-logo/ig-logo-full.png" alt="Intelligent Growth"></div>
+
+    <div class="check">&#10003;</div>
+    <h1>You're in.</h1>
+    <p class="lead">Add it to your calendar now so you don't miss it. Your Google Meet link is in the invite, just hit join when it's time.</p>
+    <span class="when" id="whenBadge">Live on Google Meet</span>
+
+    <div class="calblock" id="calblock">
+        <a class="cal-btn primary" id="calGoogle" href="#" target="_blank" rel="noopener">Add to Google Calendar</a>
+        <a class="cal-btn ghost" id="calIcs" href="#">Apple / Outlook (.ics)</a>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <span class="card-tag">While you wait</span>
+            <h3>Join the community</h3>
+            <p>A free group of marketers sharing what's actually working with AI. Real workflows, no fluff. Apply to join and I'll send the invite once you're in.</p>
+            <a class="primary" href="/community">Apply to join</a>
+        </div>
+        <div class="card">
+            <span class="card-tag">Get the workflows</span>
+            <h3>Intelligent Growth</h3>
+            <p>My newsletter and podcast. Real AI marketing workflows from people building in public, in your inbox each week.</p>
+            <div class="nl">
+                <form class="nl-form" id="ig-subscribe-form">
+                    <input type="email" name="email" placeholder="Your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <p class="nl-meta" id="ig-subscribe-meta">Join 101+ marketing leaders &middot; Unsubscribe anytime</p>
+            </div>
+        </div>
+    </div>
+
+    <a class="home-link" href="/">&larr; Back to intelligentgrowth.app</a>
+
+    <script>
+        (function () {
+            var form = document.getElementById('ig-subscribe-form');
+            var meta = document.getElementById('ig-subscribe-meta');
+            if (!form) return;
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var btn = form.querySelector('button[type="submit"]');
+                var input = form.querySelector('input[name="email"]');
+                var email = (input.value || '').trim();
+                if (!email) return;
+                var original = btn.textContent;
+                btn.disabled = true; btn.textContent = 'Subscribing...';
+                fetch('/api/subscribe', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                }).then(function (r) {
+                    if (r.ok) { form.style.display = 'none'; meta.textContent = 'Subscribed. Check your inbox to confirm.'; }
+                    else { btn.disabled = false; btn.textContent = original; meta.textContent = 'Something went wrong. Try again.'; }
+                }).catch(function () { btn.disabled = false; btn.textContent = original; meta.textContent = 'Network error. Try again.'; });
+            });
+        })();
+
+        // Add-to-calendar, session aware
+        (function () {
+            // If you create standing Google Meet links per session, drop them here and
+            // they'll appear in the calendar event + description automatically.
+            var MEET_LINKS = { apac: 'https://meet.google.com/kod-vzhi-qjr', us: 'https://meet.google.com/kod-vzhi-qjr' };
+
+            var SESSIONS = {
+                apac: {
+                    label: 'Wed 24 June, 7:00pm AEST / 10:00am BST / 5:00am ET / 2:00am PT',
+                    start: '20260624T090000Z',   // 7:00pm AEST (UTC+10)
+                    end:   '20260624T100000Z'
+                },
+                us: {
+                    label: 'Fri 26 June, 7:00pm PT / 10:00pm ET / Sat 12:00pm AEST',
+                    start: '20260627T020000Z',   // 7:00pm PDT (UTC-7) = Sat 12:00pm AEST
+                    end:   '20260627T030000Z'
+                }
+            };
+
+            var TITLE = 'Run your marketing with AI (live workshop)';
+
+            function descFor(key) {
+                var base = 'Live online. Will Mulholland builds the foundation of your AI marketing system on screen, start to finish.';
+                var link = MEET_LINKS[key];
+                return link ? (base + ' Join: ' + link) : (base + ' Your Google Meet link is on your confirmation page.');
+            }
+            function locationFor(key) { return MEET_LINKS[key] || 'Google Meet'; }
+
+            function googleUrl(key) {
+                var s = SESSIONS[key];
+                return 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+                    + '&text=' + encodeURIComponent(TITLE)
+                    + '&dates=' + s.start + '/' + s.end
+                    + '&details=' + encodeURIComponent(descFor(key))
+                    + '&location=' + encodeURIComponent(locationFor(key));
+            }
+            function icsText(key) {
+                var s = SESSIONS[key];
+                var stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+                return [
+                    'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//willmulholland//workshop//EN',
+                    'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'BEGIN:VEVENT',
+                    'UID:' + key + '-will@intelligentgrowth.app',
+                    'DTSTAMP:' + stamp,
+                    'DTSTART:' + s.start, 'DTEND:' + s.end,
+                    'SUMMARY:' + TITLE,
+                    'DESCRIPTION:' + descFor(key).replace(/,/g, '\\,'),
+                    'LOCATION:' + locationFor(key).replace(/,/g, '\\,'),
+                    'END:VEVENT', 'END:VCALENDAR'
+                ].join('\r\n');
+            }
+            function downloadIcs(key) {
+                var blob = new Blob([icsText(key)], { type: 'text/calendar;charset=utf-8' });
+                var url = URL.createObjectURL(blob);
+                var a = document.createElement('a');
+                a.href = url; a.download = 'run-your-marketing-with-ai.ics';
+                document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+            }
+
+            var params = new URLSearchParams(window.location.search);
+            var key = params.get('s');
+            if (!key || !SESSIONS[key]) key = 'apac';
+            var badge = document.getElementById('whenBadge');
+
+            badge.textContent = SESSIONS[key].label;
+            document.getElementById('calGoogle').href = googleUrl(key);
+            document.getElementById('calIcs').addEventListener('click', function (e) { e.preventDefault(); downloadIcs(key); });
+        })();
+    </script>
+</body>
+</html>

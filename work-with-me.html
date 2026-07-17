@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work with me | Intelligent Growth</title>
+    <meta name="description" content="Tell me what you're building with AI and where you're stuck. I read every inquiry and come back within a day with the next step.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://intelligentgrowth.app/work-with-me">
+    <meta property="og:title" content="Work with me | Intelligent Growth">
+    <meta property="og:description" content="Tell me what you're building with AI and where you're stuck. I come back within a day with the next step.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://intelligentgrowth.app/work-with-me">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ink: #1F1511;
+            --black: #1F1511;
+            --cream: #FFFFFF;
+            --cream-soft: #F4F4F2;
+            --white: #FFFFFF;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink);
+            overflow-x: hidden; line-height: 1.5; letter-spacing: -0.02em;
+        }
+        ::selection { background: var(--accent); color: var(--white); }
+        .wm-hero h1 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: 0; }
+        .footer-cta h2 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: 0; }
+
+        /* Nav */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 48px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(31, 21, 17, 0.06); transition: transform 0.4s var(--ease-smooth);
+        }
+        nav.nav--hidden { transform: translateY(-100%); }
+        .nav-logo { display: inline-flex; align-items: center; gap: 10px; color: var(--black); text-decoration: none; }
+        .nav-links { display: flex; align-items: center; gap: 32px; }
+        .nav-links a {
+            font-size: 14px; font-weight: 500; color: var(--black); text-decoration: none;
+            text-transform: uppercase; letter-spacing: 0.1em; transition: opacity 0.5s var(--ease-smooth);
+        }
+        .nav-links a:hover { opacity: 0.6; }
+        .nav-cta {
+            display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--ink);
+            color: var(--white) !important; border-radius: 999px; font-size: 13px; font-weight: 600;
+            text-transform: none !important; letter-spacing: 0 !important; text-decoration: none;
+            transition: background 0.4s var(--ease-smooth), transform 0.3s var(--ease-smooth);
+        }
+        .nav-cta:hover { background: var(--accent) !important; transform: translateY(-1px); opacity: 1 !important; }
+        .nav-toggle { display: none; background: transparent; border: 0; padding: 8px; cursor: pointer; color: var(--black); z-index: 1100; }
+        .nav-toggle-bar { display: block; width: 26px; height: 2px; background: currentColor; margin: 5px 0; transition: transform 0.3s var(--ease-smooth), opacity 0.3s var(--ease-smooth); }
+        .nav-toggle.is-open .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-toggle.is-open .nav-toggle-bar:nth-child(2) { opacity: 0; }
+        .nav-toggle.is-open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* Hero */
+        .wm-hero { padding: 140px 32px 16px; max-width: 720px; margin: 0 auto; text-align: center; }
+        .wm-hero .tag {
+            display: inline-block; font-family: monospace; font-size: 13px; text-transform: uppercase;
+            letter-spacing: 0.12em; color: var(--accent-deep); margin-bottom: 22px; font-weight: 700;
+            background: var(--accent-soft); padding: 8px 16px; border-radius: 999px;
+        }
+        .wm-hero h1 { font-size: clamp(40px, 7vw, 72px); line-height: 0.98; letter-spacing: -0.01em; margin-bottom: 18px; }
+        .wm-hero p { font-size: clamp(17px, 2.2vw, 20px); color: var(--gray-mid); max-width: 600px; margin: 0 auto; }
+        .wm-hero .reassure { margin-top: 18px; font-size: 15px; color: var(--gray-light); }
+
+        /* Form card */
+        .form-wrap { max-width: 720px; margin: 28px auto 0; padding: 0 32px 80px; }
+        .form-card {
+            background: var(--white); border: 1px solid rgba(31,21,17,0.08); border-radius: 24px;
+            padding: 32px; box-shadow: var(--warm-shadow);
+        }
+        @media (max-width: 480px) { .form-card { padding: 22px 16px; } }
+        .form-card iframe { width: 100%; border: 0; min-height: 600px; display: block; }
+        .form-fallback { text-align: center; font-size: 15px; color: var(--gray-mid); margin-top: 16px; }
+        .form-fallback a { color: var(--accent); font-weight: 600; text-decoration: none; }
+        .form-fallback a:hover { text-decoration: underline; }
+
+        /* Footer */
+        footer { background: var(--ink); color: var(--white); padding: 80px 48px 40px; }
+        .footer-main { max-width: 1100px; margin: 0 auto; }
+        .footer-cta h2 { font-size: clamp(48px, 12vw, 120px); letter-spacing: -0.03em; line-height: 0.85; margin-bottom: 32px; }
+        .footer-cta a { font-size: 24px; font-weight: 600; color: var(--white); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
+        .footer-cta a:hover { color: var(--accent); }
+        .footer-social { display: flex; gap: 16px; margin-top: 28px; }
+        .footer-social a {
+            width: 52px; height: 52px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: var(--white);
+            text-decoration: none; transition: all 0.5s var(--ease-smooth);
+        }
+        .footer-social a svg { width: 24px; height: 24px; fill: currentColor; display: block; }
+        .footer-social a:hover { background: var(--white); color: var(--black); transform: translateY(-6px); }
+        .footer-grid { max-width: 1100px; }
+        @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr !important; } }
+        .footer-bottom {
+            max-width: 1100px; margin: 64px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex; justify-content: space-between; font-family: monospace; font-size: 12px;
+            text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-light); flex-wrap: wrap; gap: 12px;
+        }
+        .footer-links { display: flex; gap: 28px; }
+        .footer-links a { color: var(--gray-light); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
+        .footer-links a:hover { color: var(--white); }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+            .nav-toggle { display: block; }
+            .nav-links {
+                position: fixed; inset: 0; background: var(--black); color: var(--white);
+                flex-direction: column; justify-content: center; align-items: center; gap: 28px;
+                padding: 80px 24px 40px; transform: translateX(100%);
+                transition: transform 0.4s var(--ease-smooth); z-index: 1050;
+            }
+            .nav-links a { font-size: 22px; color: var(--white); }
+            .nav-links.is-open { transform: translateX(0); }
+            body.nav-open { overflow: hidden; }
+            body.nav-open nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: transparent; border-bottom: none; }
+            body.nav-open .nav-logo { position: relative; z-index: 1100; }
+            body.nav-open .nav-logo img { filter: brightness(0) invert(1); }
+            .nav-toggle.is-open { color: var(--white); }
+            .wm-hero { padding: 116px 24px 12px; }
+            .form-wrap { padding: 0 20px 64px; }
+            footer { padding: 64px 24px 32px; }
+        }
+
+        /* Hamburger kicks in before the link row gets cramped */
+        @media (max-width: 980px) {
+            .nav-toggle { display: block; }
+            .nav-links {
+                position: fixed; inset: 0; background: var(--black); color: var(--white);
+                flex-direction: column; justify-content: center; align-items: center; gap: 28px;
+                padding: 80px 24px 40px; transform: translateX(100%);
+                transition: transform 0.4s var(--ease-smooth); z-index: 1050;
+            }
+            .nav-links a { font-size: 22px; color: var(--white); }
+            .nav-links.is-open { transform: translateX(0); }
+            body.nav-open { overflow: hidden; }
+            body.nav-open nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: transparent; border-bottom: none; }
+            body.nav-open .nav-logo { position: relative; z-index: 1100; }
+            body.nav-open .nav-logo img { filter: brightness(0) invert(1); }
+            .nav-toggle.is-open { color: var(--white); }
+        }
+    </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="/" class="nav-logo"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+        <div class="nav-links" id="navLinks">
+            <a href="/workshop">Workshop</a>
+            <a href="/brain">Marketing Brain</a>
+            <a href="/mcp">MCP</a>
+            <a href="/work-with-me" class="is-current">Work with me</a>
+            <a href="work.html">Case studies</a>
+            <a href="/podcast">Podcast</a>
+            <a href="/blog">Blog</a>
+            <a href="/traffic">Free gift</a>
+            <a href="/#subscribe" class="nav-cta">Subscribe</a>
+        </div>
+        <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+            <span class="nav-toggle-bar"></span>
+        </button>
+    </nav>
+
+    <!-- Hero -->
+    <header class="wm-hero">
+        <span class="tag">Work with me</span>
+        <h1>Let's build it together.</h1>
+        <p>Tell me what you're working on with AI and where you're stuck. I read every one and come back within a day with the next step.</p>
+        <p class="reassure">A few short questions, about two minutes.</p>
+    </header>
+
+    <!-- How an engagement works -->
+    <style>
+        .steps-wrap { max-width: 1000px; margin: 0 auto; padding: 8px 24px 56px; }
+        .steps-label { font-family: monospace; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); text-align: center; margin-bottom: 26px; }
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .step-card { background: var(--white); border: 1px solid rgba(31,21,17,0.10); border-radius: 16px; padding: 26px 24px; box-shadow: var(--warm-shadow); }
+        .step-card .sn { font-family: 'Instrument Serif', Georgia, serif; font-size: 34px; line-height: 1; color: var(--accent); margin-bottom: 12px; }
+        .step-card h3 { font-size: 16.5px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 8px; color: var(--ink); }
+        .step-card p { font-size: 14px; color: var(--gray-mid); line-height: 1.55; }
+        @media (max-width: 760px) { .steps-grid { grid-template-columns: 1fr; } }
+    </style>
+    <section class="steps-wrap" aria-label="How an engagement works">
+        <div class="steps-label">How it works</div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="sn">01</div>
+                <h3>Tell me what you're working on</h3>
+                <p>The form below takes about two minutes. I read every one and come back within a day with the right next step, whether that's working together or not.</p>
+            </div>
+            <div class="step-card">
+                <div class="sn">02</div>
+                <h3>We build your brain together</h3>
+                <p>We map where your context lives, your calls, docs, customer feedback and competitors, stand up the foundations, and run your next release through it on real work.</p>
+            </div>
+            <div class="step-card">
+                <div class="sn">03</div>
+                <h3>Your team runs it</h3>
+                <p>You keep the system and the skills to run it without me. Every release after that starts from what the last one learned.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tally form -->
+    <main class="form-wrap" id="form">
+        <div class="form-card">
+            <iframe data-tally-src="https://tally.so/embed/PdvVeb?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0" title="Work With Me"></iframe>
+            <p class="form-fallback">Form not loading? <a href="https://tally.so/r/PdvVeb" target="_blank" rel="noopener">Open it in a new tab</a>.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-main" style="flex-direction: column; align-items: stretch;">
+            <div class="footer-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start;">
+                <div class="footer-cta">
+                    <h2>LET'S<br>BUILD.</h2>
+                    <a href="mailto:will@intelligentgrowth.app">will@intelligentgrowth.app</a>
+                    <p style="font-size: 16px; color: var(--gray-light); margin-top: 16px;">Or just email me. I read everything.</p>
+                    <div class="footer-social" style="margin-top: 32px;">
+                        <a href="https://www.linkedin.com/in/willmulholland/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg></a>
+                        <a href="https://www.youtube.com/@WillMulholland" target="_blank" rel="noopener" title="YouTube" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.51A3.02 3.02 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.88.51 9.38.51 9.38.51s7.5 0 9.38-.51a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></a>
+                    </div>
+                </div>
+                <div class="footer-cta-card" style="background: var(--cream); border-radius: 18px; padding: 40px 32px; display: flex; flex-direction: column; justify-content: center; min-height: 280px; box-shadow: var(--warm-shadow);">
+                    <h3 style="font-family: 'Instrument Serif', Georgia, serif; font-size: 36px; font-weight: 400; margin-bottom: 14px; color: var(--ink); line-height: 1.05; letter-spacing: -0.02em;">Tell me what you're building.</h3>
+                    <p style="font-size: 16px; color: var(--gray-mid); margin-bottom: 24px; line-height: 1.5;">A few short questions, about two minutes. I come back within a day with the next step.</p>
+                    <a href="#form" style="display: inline-block; background: var(--ink); color: #fff; padding: 14px 28px; border-radius: 999px; font-weight: 600; text-decoration: none; text-align: center; align-self: flex-start;">Start the form</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Will Mulholland. All rights reserved.</span>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Tally embed loader -->
+    <script src="https://tally.so/widgets/embed.js"></script>
+
+    <script>
+        // Mobile burger menu
+        (function() {
+            var toggle = document.getElementById('navToggle');
+            var links = document.getElementById('navLinks');
+            if (!toggle || !links) return;
+            function setOpen(open) {
+                toggle.classList.toggle('is-open', open);
+                links.classList.toggle('is-open', open);
+                document.body.classList.toggle('nav-open', open);
+                toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            }
+            toggle.addEventListener('click', function() { setOpen(!links.classList.contains('is-open')); });
+            links.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { setOpen(false); }); });
+            document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && links.classList.contains('is-open')) setOpen(false); });
+        })();
+
+        // Smart nav: hide on scroll down, show on scroll up
+        (function () {
+            var nav = document.querySelector('nav');
+            if (!nav) return;
+            var last = window.pageYOffset;
+            window.addEventListener('scroll', function () {
+                var y = window.pageYOffset;
+                if (y > last && y > 120) { nav.classList.add('nav--hidden'); }
+                else { nav.classList.remove('nav--hidden'); }
+                last = y;
+            }, { passive: true });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case studies | Intelligent Growth</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ink: #1F1511;
+            --black: #1F1511;
+            --white: #FFFFFF;
+            --cream: #FFFFFF;
+            --cream-soft: #F4F4F2;
+            --gray-dark: #1F1511;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --offset-shadow: 6px 6px 0 rgba(31,21,17,0.14);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            overflow-x: hidden;
+            line-height: 1.55;
+            letter-spacing: -0.01em;
+        }
+
+        ::selection { background: var(--accent); color: var(--white); }
+
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 16px 48px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(31,21,17,0.06);
+        }
+        .nav-logo { display: flex; align-items: center; text-decoration: none; }
+        .nav-logo img { height: 30px; width: auto; display: block; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: none; transition: color 0.4s var(--ease-smooth); }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a.is-current { color: var(--accent); }
+        .nav-cta { padding: 10px 18px; background: var(--ink); color: var(--white); border-radius: 999px; font-size: 13px; font-weight: 600; text-decoration: none; transition: background 0.4s var(--ease-smooth); white-space: nowrap; }
+        .nav-cta:hover { background: var(--accent); }
+
+        .btn-primary { padding: 16px 32px; background: var(--black); color: var(--white); font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; border: none; text-decoration: none; transition: all 0.5s var(--ease-smooth); display: inline-block; }
+        .btn-primary:hover { background: var(--accent); }
+
+        .section-tag { font-family: monospace; font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-mid); margin-bottom: 48px; display: flex; align-items: center; gap: 12px; }
+        .section-tag::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+
+        /* Hero */
+        .work-hero { padding: 120px 48px 36px; max-width: 1400px; margin: 0 auto; position: relative; }
+        .work-hero::before { content: ''; position: absolute; width: 520px; height: 520px; border-radius: 999px; background: radial-gradient(circle, rgba(37,99,235,0.22) 0%, rgba(37,99,235,0.06) 45%, transparent 70%); top: -260px; left: -120px; filter: blur(2px); pointer-events: none; }
+        .work-hero h1 { font-size: clamp(40px, 6vw, 78px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.0; margin-bottom: 18px; }
+        .work-hero h1 .accent { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-deep) 70%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .work-hero p { font-size: clamp(18px, 2vw, 24px); color: var(--gray-mid); max-width: 700px; }
+
+        .work-stats { display: flex; gap: 40px; margin-top: 28px; padding-top: 28px; border-top: 1px solid rgba(31,21,17,0.12); flex-wrap: wrap; }
+        .work-stat-number { font-size: 48px; font-weight: 900; letter-spacing: -0.05em; color: var(--accent); }
+        .work-stat-label { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-light); margin-top: 4px; }
+
+        /* Projects container */
+        .projects-section { padding: 44px 48px; max-width: 1400px; margin: 0 auto; }
+
+        .company-pill { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 12px; border-radius: 999px; font-weight: 600; display: inline-block; margin-bottom: 12px; }
+        .company-pill.ebay { background: #FEF3C7; color: #92400E; }
+        .company-pill.ogilvy { background: #FEE2E2; color: #991B1B; }
+        .company-pill.ig { background: #E0E7FF; color: #3730A3; }
+
+        /* Project cards */
+        .project-card { border: 1px solid rgba(0,0,0,0.1); border-radius: 16px; margin-bottom: 24px; overflow: hidden; transition: border-color 0.5s var(--ease-smooth); cursor: pointer; }
+        .project-card:hover { border-color: rgba(37,99,235,0.3); }
+
+        .project-header { padding: 32px; display: flex; justify-content: space-between; align-items: flex-start; }
+        .project-header-content { flex: 1; }
+
+        .project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+        .project-tag { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 999px; font-weight: 600; }
+        .project-tag.blue { background: var(--accent-soft); color: var(--accent-deep); }
+        .project-tag.dark { background: var(--gray-dark); color: var(--white); }
+        .project-tag.outline { border: 1px solid rgba(0,0,0,0.15); color: var(--gray-mid); }
+
+        .project-title { font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 8px; }
+        .project-summary { font-size: 16px; color: var(--gray-mid); line-height: 1.6; max-width: 700px; }
+
+        .project-toggle { width: 48px; height: 48px; border: 1px solid rgba(0,0,0,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-left: 24px; transition: all 0.5s var(--ease-smooth); font-size: 18px; }
+        .project-card:hover .project-toggle { border-color: var(--accent); color: var(--accent); }
+        .project-card.active .project-toggle { background: var(--accent); border-color: var(--accent); color: var(--white); transform: rotate(180deg); }
+
+        .project-details { max-height: 0; overflow: hidden; transition: max-height 0.6s var(--ease-smooth); }
+        .project-card.active .project-details { max-height: 6000px; }
+
+        .project-body { padding: 0 32px 32px; border-top: 1px solid rgba(0,0,0,0.06); }
+        .project-body h4 { font-size: 16px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 32px; margin-bottom: 16px; }
+        .project-body ul { list-style: none; padding: 0; }
+        .project-body ul li { position: relative; padding: 8px 0 8px 26px; font-size: 15px; color: var(--gray-mid); line-height: 1.6; }
+        .project-body ul li::before { content: '\2192'; color: var(--accent); font-weight: 700; position: absolute; left: 0; top: 8px; }
+        .project-body p { font-size: 15px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 8px; }
+        .project-body p strong { color: var(--black); }
+
+        .metrics-row { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 16px; }
+        .metric-card { background: var(--gray-dark); color: var(--white); padding: 24px; border-radius: 12px; min-width: 140px; flex: 1; text-align: center; }
+        .metric-value { font-size: 28px; font-weight: 900; letter-spacing: -0.03em; color: var(--accent); }
+        .metric-label { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); margin-top: 4px; }
+
+        .project-quote { border-left: 3px solid var(--accent); padding: 16px 24px; margin-top: 24px; background: rgba(37,99,235,0.04); border-radius: 0 12px 12px 0; }
+        .project-quote p { font-style: italic; color: var(--gray-mid); font-size: 15px; line-height: 1.6; }
+        .project-quote .quote-source { font-style: normal; font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); margin-top: 8px; margin-bottom: 0; }
+
+        .evidence-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+        .evidence-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--gray-mid); text-decoration: none; transition: all 0.3s var(--ease-smooth); }
+        .evidence-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+        .deliverables { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+        .deliverable { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; padding: 6px 14px; background: rgba(0,0,0,0.04); border-radius: 999px; color: var(--gray-mid); }
+
+        .section-divider { max-width: 1400px; margin: 0 auto; padding: 0 48px; }
+        .section-divider hr { border: none; border-top: 1px solid rgba(0,0,0,0.1); }
+
+        /* Video thumbnail */
+        .video-thumbnail { margin-top: 24px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08); position: relative; cursor: pointer; }
+        .video-thumbnail img { width: 100%; height: auto; display: block; }
+        .video-thumbnail .play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.25); transition: background 0.3s var(--ease-smooth); }
+        .video-thumbnail:hover .play-overlay { background: rgba(0,0,0,0.4); }
+        .video-thumbnail .play-btn { width: 72px; height: 72px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.3s var(--ease-smooth); box-shadow: 0 4px 24px rgba(37,99,235,0.4); }
+        .video-thumbnail:hover .play-btn { transform: scale(1.1); }
+        .video-thumbnail .play-btn::after { content: ''; display: block; width: 0; height: 0; border-style: solid; border-width: 12px 0 12px 22px; border-color: transparent transparent transparent var(--white); margin-left: 4px; }
+        .video-thumbnail-label { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); padding: 10px 16px; background: rgba(0,0,0,0.03); }
+        .video-embed { margin-top: 24px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08); }
+        .video-embed iframe { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
+
+        /* How I Work */
+        .how-section { padding: 80px 48px; max-width: 1400px; margin: 0 auto; }
+        .how-card { background: linear-gradient(135deg, var(--gray-dark) 0%, #1a1a2e 100%); color: var(--white); padding: 64px; border-radius: 24px; }
+        .how-card h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 700; letter-spacing: -0.04em; margin-bottom: 24px; }
+        .how-card p { font-size: 18px; line-height: 1.7; opacity: 0.8; margin-bottom: 16px; max-width: 800px; }
+
+        .cta-strip { padding: 80px 48px; max-width: 1400px; margin: 0 auto; text-align: center; }
+        .cta-strip h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 700; letter-spacing: -0.04em; margin-bottom: 24px; }
+        .cta-assets { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 32px; }
+        .cta-asset { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; padding: 8px 16px; border: 1px solid rgba(0,0,0,0.12); border-radius: 999px; color: var(--gray-mid); }
+
+        footer { background: var(--gray-dark); color: var(--white); padding: 120px 48px 48px; }
+        .footer-main { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 64px; flex-wrap: wrap; }
+        .footer-cta h2 { font-size: clamp(64px, 15vw, 200px); font-weight: 900; letter-spacing: -0.05em; line-height: 0.85; margin-bottom: 48px; }
+        .footer-cta a { font-size: 32px; font-weight: 600; color: var(--white); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
+        .footer-cta a:hover { color: var(--accent); }
+        .footer-cta p { font-size: 16px; color: var(--gray-light); margin-top: 16px; }
+        .footer-cta .btn-primary { margin-top: 32px; }
+        .footer-social { display: flex; gap: 22px; align-items: center; }
+        .footer-social a { width: 26px; height: 26px; display: flex; align-items: center; justify-content: center; color: var(--cream); opacity: 0.72; text-decoration: none; transition: opacity 0.3s var(--ease-smooth), transform 0.3s var(--ease-smooth); }
+        .footer-social a svg { width: 24px; height: 24px; fill: currentColor; display: block; }
+        .footer-social a:hover { opacity: 1; transform: translateY(-3px); }
+        .footer-bottom { max-width: 1400px; margin: 120px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray-light); }
+        .footer-links { display: flex; gap: 32px; }
+        .footer-links a { color: var(--gray-light); text-decoration: none; transition: color 0.5s var(--ease-smooth); }
+        .footer-links a:hover { color: var(--white); }
+
+        @media (max-width: 768px) {
+            nav { padding: 16px 24px; }
+            .nav-links { display: none; }
+            .work-hero { padding: 120px 24px 60px; }
+            .projects-section { padding: 60px 24px; }
+            .how-section { padding: 60px 24px; }
+            .cta-strip { padding: 60px 24px; }
+            .section-divider { padding: 0 24px; }
+            .project-header { padding: 24px; flex-direction: column; }
+            .project-body { padding: 0 24px 24px; }
+            .how-card { padding: 40px 24px; }
+            footer { padding: 80px 24px 32px; }
+            .footer-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+            .footer-cta a { font-size: 21px; overflow-wrap: anywhere; }
+            .footer-cta-card { padding: 32px 24px !important; min-height: 0 !important; }
+            .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+            .footer-links { justify-content: center; }
+            .work-stats { gap: 24px; }
+            .project-toggle { width: 40px; height: 40px; margin-left: 0; margin-top: 16px; }
+            .metrics-row { flex-direction: column; }
+            .nav-links { display: none; }
+        }
+
+        /* Brand alignment with the rest of the site: serif display headings, offset-shadow cards on cream, ink dark blocks */
+        .work-hero h1, .project-title, .how-card h2, .cta-strip h2, .footer-cta h2 {
+            font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; letter-spacing: -0.01em;
+        }
+        .work-hero::before { display: none; }
+        .project-card {
+            background: var(--white); border: 1px solid var(--ink); border-radius: 18px;
+            box-shadow: var(--offset-shadow);
+            margin-bottom: 40px;
+            transition: box-shadow 0.4s var(--ease-smooth), border-color 0.4s var(--ease-smooth);
+        }
+        .project-card:hover { box-shadow: 9px 9px 0 rgba(31,21,17,0.16); }
+        .project-card.active { box-shadow: 12px 12px 0 rgba(31,21,17,0.20); }
+        .card-logo { height: 26px; width: auto; max-width: 130px; object-fit: contain; display: block; margin-bottom: 16px; filter: grayscale(100%); opacity: 0.82; transition: filter 0.4s var(--ease-smooth), opacity 0.4s var(--ease-smooth); }
+        .project-card:hover .card-logo { filter: grayscale(0%); opacity: 1; }
+        .how-card { background: var(--ink); }
+        .metric-card { background: var(--ink); }
+        footer { background: var(--ink); }
+    </style>
+<style>.project-card{scroll-margin-top:90px;}</style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+        <div class="nav-links">
+            <a href="/workshop">Workshop</a>
+            <a href="/brain">Marketing Brain</a>
+            <a href="/mcp">MCP</a>
+            <a href="/work-with-me">Work with me</a>
+            <a href="work.html" class="is-current">Case studies</a>
+            <a href="/podcast">Podcast</a>
+            <a href="/blog">Blog</a>
+            <a href="/traffic">Free gift</a>
+        </div>
+        <a href="/#subscribe" class="nav-cta">Subscribe</a>
+    </nav>
+
+    <section class="work-hero">
+        <div class="section-tag"><span>Selected work</span></div>
+        <h1>Selected work</h1>
+        <p>A selection of my product-marketing work, focused on the areas we have been discussing: content and education for adoption, the day-two adoption motion, category clarity, working with product, and the move up-market. Click any card to expand.</p>
+    </section>
+
+    <div class="projects-section" style="padding-bottom:0;">
+        <div id="manus-course" class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <img class="card-logo" src="images/manus/logo.png" alt="Manus">
+                    <span class="company-pill ig">Intelligent Growth &middot; Course Creator</span>
+                    <div class="project-tags">
+                        <span class="project-tag dark">Video Content</span>
+                        <span class="project-tag blue">Product Adoption</span>
+                        <span class="project-tag outline">Partnership</span>
+                    </div>
+                    <h3 class="project-title">Driving Manus Adoption Through Video: A Free Course Co-Built With Their Team on Build Club</h3>
+                    <p class="project-summary">On-camera video course built to drive product awareness and adoption for Manus. Six modules, roughly 15 minutes of total runtime, co-built with the Manus team and published free on Build Club. Each module turns a real product-marketing workflow into something the audience can take and run with in their next work session.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <div class="video-embed" style="max-width: 720px;">
+                        <video src="images/manus/trailer.mp4" poster="images/manus/trailer-poster.jpg" controls playsinline preload="metadata" style="width: 100%; display: block;" onclick="event.stopPropagation()"></video>
+                    </div>
+                    <p style="font-size:13px; color:var(--gray-light); margin-top:8px; margin-bottom:16px;">The course trailer. Built with Build Club, made with Manus, free to start.</p>
+
+                    <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; background:rgba(0,0,0,0.03); border-radius:8px; margin-bottom:24px;">
+                        <img src="images/manus/logo.png" alt="Manus" style="height:32px; width:32px; border-radius:6px; flex-shrink:0;">
+                        <p style="font-size:13px; color:var(--gray-light); margin:0;">In collaboration with <strong style="color:inherit;">Manus</strong>, the autonomous agent platform for marketing and research workflows.</p>
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>Most marketers use AI to brainstorm. I wanted to show what happens when you give a fully autonomous agent a real marketing job and walk away. Manus runs computer use, persistent logins, and parallel agents in the background. So I built four workflows I actually use as a product marketer, recorded them as a course, and shipped it free on Build Club with the Manus team as co-marketing partner.</p>
+
+                    <h4>What I Did</h4>
+                    <ul>
+                        <li><strong>Picked the four use cases that matter most to a PMM.</strong> Competitive messaging, positioning, influencer discovery, pricing intelligence. Each is a workflow I use in real work, not a synthetic demo</li>
+                        <li><strong>Built every workflow on real product data.</strong> Module 2 mines Otter and Fireflies reviews to extract differentiating language (the "feels like malware" framing came from G2 comments, not a workshop). Module 3 maps competitive territories beyond the homepage. Module 4 finds 15 creators already in your problem space ranked by relevance, not follower count. Module 5 reverse-engineers SaaS pricing structures across 10 companies</li>
+                        <li><strong>Wrote the prompts so the domain expertise is baked into the brief.</strong> Every module includes the exact prompt and a breakdown of why each line matters. Marketers swap in their own competitors, ICPs, and platforms and the same workflow runs unchanged</li>
+                        <li><strong>Got the Manus team on the collaboration.</strong> Co-branded launch on Build Club, in their distribution, with a certification track on top of the free course</li>
+                        <li><strong>Filmed and shipped end to end myself.</strong> On-camera host, RØDE setup, editing in Descript, YouTube plus Build Club distribution. Six modules, roughly 15 minutes of total runtime</li>
+                        <li><strong>Designed the certification track on Build Club</strong> so completing the course produces a portfolio piece the marketer can use back at work</li>
+                    </ul>
+
+                    <h4>Challenges and Solutions</h4>
+                    <ul>
+                        <li><strong>"How do you teach an agentic workflow without an hour-long screencast?"</strong> Kept each module under four minutes. Showed the prompt, showed the output, narrated the why. The viewer can copy the prompt and ship the workflow themselves in their next work session</li>
+                        <li><strong>"How do you write a prompt a generalist marketer can adapt?"</strong> Built every prompt around the structure of the job rather than the specifics of the brand. The script narrates the spec, not the prompt verbatim, so the audience learns the underlying pattern</li>
+                        <li><strong>"How do you make a free course feel like a real product, not a video dump?"</strong> Built the certification track. Marketers who complete the course submit their own Manus-driven workflow for review. Turns the course into productised accountability rather than passive content</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <ul>
+                        <li>Six modules published on YouTube and Build Club, roughly 15 minutes of total runtime</li>
+                        <li>Co-marketing with Manus including newsletter feature and Build Club platform placement</li>
+                        <li>Hosted on Build Club's certification platform with an open enrolment course path</li>
+                        <li>First Intelligent Growth free product shipped</li>
+                        <li>Became the credibility opener for AI-marketing speaking and podcast bookings</li>
+                    </ul>
+
+                    <h4>Delivered</h4>
+                    <div class="deliverables">
+                        <span class="deliverable">6-module video course</span>
+                        <span class="deliverable">Build Club course page</span>
+                        <span class="deliverable">Certification track</span>
+                        <span class="deliverable">Manus co-marketing motion</span>
+                        <span class="deliverable">4 reusable Manus prompt templates</span>
+                        <span class="deliverable">YouTube playlist + distribution</span>
+                        <span class="deliverable">Course landing page copy</span>
+                    </div>
+
+                    <h4>Evidence</h4>
+                    <div class="evidence-row">
+                        <a href="https://campus.buildclub.ai/courses/manus-for-marketing-692f82a7f918f9c55d017ef4" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Take the course free on Build Club</a>
+                        <a href="https://www.youtube.com/watch?v=ngKHmlDsk8s" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Module 1: Course Intro</a>
+                        <a href="https://www.youtube.com/watch?v=JPHDyKpGiqo" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Module 2: Competitive Messaging</a>
+                        <a href="https://www.youtube.com/watch?v=Wk0m6c2wVQ4" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Module 3: Competitive Positioning</a>
+                        <a href="https://www.youtube.com/watch?v=W2OmhSUnkVI" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Module 4: Influencer Discovery</a>
+                        <a href="https://www.youtube.com/watch?v=UqwCgw7BcAc" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Module 5: Pricing Intelligence</a>
+                        <a href="https://manus.im" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Manus (partner)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="ebay-ads-academy" class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <img class="card-logo" src="images/ebay/logo.svg" alt="eBay">
+                    <span class="company-pill ebay">eBay Ads &middot; PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag dark">Activation</span>
+                        <span class="project-tag blue">Education / PLG</span>
+                        <span class="project-tag outline">Self-Serve</span>
+                    </div>
+                    <h3 class="project-title">Ads Academy: Turning Product Education Into an Activation Engine</h3>
+                    <p class="project-summary">Promoted Listings Advanced was powerful but complex, and sellers who could not optimise their campaigns blamed the product, not their setup. I launched the eBay Ads Academy, a self-serve education platform that taught sellers to run campaigns like an expert, lifting product adoption and cutting churn.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <div class="video-thumbnail" style="cursor:default; max-width:720px;">
+                        <img src="images/ebay/ads-academy.png" alt="The eBay Ads Academy homepage: Welcome to Ads Academy, learn how to get the most out of your ads, self-paced, free and available anytime, with learning paths for Promoted Listings Standard and Promoted Listings Advanced, featured courses and how-to videos">
+                    </div>
+                    <p style="font-size:13px; color:var(--gray-light); margin-top:8px; margin-bottom:16px;">The eBay Ads Academy I ran (the AU homepage): a self-paced, free, on-demand learning platform for sellers, with full learning paths for Promoted Listings Standard and Advanced.</p>
+                    <h4 style="margin-top:24px;">Sample marketing videos</h4>
+                    <p style="font-size:13px; color:var(--gray-light); margin-bottom:12px;">Two marketing videos I produced for eBay Ads, made with the eBay content team and localised for the Australian market. (The Academy itself also had an education-focused how-to series.)</p>
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;">
+                        <div class="video-embed" style="margin-top:0;"><iframe src="https://www.youtube.com/embed/joIYJPWn-TU" title="eBay Ads Academy how-to video" allowfullscreen></iframe></div>
+                        <div class="video-embed" style="margin-top:0;"><iframe src="https://www.youtube.com/embed/ROb8wBZyseU" title="eBay Ads Academy how-to video" allowfullscreen></iframe></div>
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>Promoted Listings Advanced was a powerful product, but a complicated one. If a seller did not know how to optimise their keywords or set their budgets, they got poor results and concluded the product was the problem. The post-launch reality was that the initial adoption spike drops off if people cannot get value. Education was the activation lever, so I launched the eBay Ads Academy: a self-serve platform that gave sellers a path to running campaigns like an expert.</p>
+
+                    <h4>What I Did</h4>
+                    <ul>
+                        <li><strong>Built the Promoted Listings Advanced learning path.</strong> Created the educational module on Promoted Listings Advanced, step by step, covering keyword optimisation, budgets and bidding, reading reports, and seller success stories by vertical</li>
+                        <li><strong>Made it self-serve.</strong> Webinars, step-by-step seller guides, and sales enablement materials, so sellers and the sales team could learn the product without a rep walking them through it every time</li>
+                        <li><strong>Ran the Australian Academy and produced the content.</strong> Localised the global Ads Academy content for the AU market and produced a three-part how-to video series on setting up a Promoted Listings Advanced campaign (manual, quick setup, and suggested), working with the e-learning team</li>
+                        <li><strong>Designed it into the launch, not after it.</strong> The Academy existed to close the gap between buying the product and getting value from it, so adoption and activation were built in rather than bolted on</li>
+                        <li><strong>Took load off sales.</strong> A self-serve path to expertise meant reps stopped repeating the same product education and could focus on selling</li>
+                    </ul>
+
+                    <h4>Challenges and Solutions</h4>
+                    <ul>
+                        <li><strong>Complexity was driving churn.</strong> Sellers who could not optimise blamed the product, not their setup. The Academy turned that complexity into a learnable skill, so trained sellers got results and stayed</li>
+                        <li><strong>Education is usually an afterthought.</strong> I built it as part of the launch so activation was designed in, the same lesson I now apply to any complex product launch</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <ul>
+                        <li>Course completers saw around <strong>30% better ad performance</strong></li>
+                        <li>Around <strong>26% lift in product adoption</strong> after launch</li>
+                        <li>Reduced churn, because trained sellers got results and stuck with the product</li>
+                        <li>Lower support and sales load, with a self-serve path replacing repeated one-to-one product education</li>
+                    </ul>
+
+                    <h4>Delivered</h4>
+                    <div class="deliverables">
+                        <span class="deliverable">Promoted Listings Advanced education module</span>
+                        <span class="deliverable">Webinar series</span>
+                        <span class="deliverable">Step-by-step seller guides</span>
+                        <span class="deliverable">Sales enablement materials</span>
+                        <span class="deliverable">Vertical case studies</span>
+                        <span class="deliverable">3-part how-to video series</span>
+                    </div>
+
+                    <h4>Evidence</h4>
+                    <div class="evidence-row">
+                        <a href="images/ebay/ads-academy.png" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; Ads Academy Homepage (image)</a>
+                        <a href="images/ebay/ads-academy-email.png" target="_blank" class="evidence-link" onclick="event.stopPropagation()">&rarr; In-Product Email Promo (image)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="ai-operating-system" class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <h3 class="project-title" style="margin-top:0;">How I Work: AI as Operating System</h3>
+                    <p class="project-summary">Most marketers use AI as a writing tool. I use it as an operating system. One person operating with the context of a full team.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <p>The bottleneck in PMM isn't writing speed, it's context. Knowing what shipped, what customers said, what competitors changed, what the sales team is struggling with. That context is scattered across Slack, meeting transcripts, CRM notes, and product docs.</p>
+                    <p>I build systems that pull all of that together automatically. Semantic search across thousands of documents. Daily briefings generated from meeting transcripts and Slack. Competitive monitoring that flags changes before I have to look for them.</p>
+                    <p>This isn't about replacing thinking with AI. It's about eliminating the hours of context-gathering that sit between you and the actual work. The diagnostic, the positioning, the launch plan, the CEO briefing: that's the real work. Everything else is infrastructure, and infrastructure should be automated.</p>
+                </div>
+            </div>
+        </div>
+        <div id="product-feedback" class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <img class="card-logo" src="images/ebay/logo.svg" alt="eBay">
+                    <span class="company-pill ebay">eBay Ads &middot; PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag outline">Product Collaboration</span>
+                        <span class="project-tag outline">Cross-Functional</span>
+                    </div>
+                    <h3 class="project-title">Product Collaboration: Feedback System That Influenced 20+ Product Features</h3>
+                    <p class="project-summary">How do you ensure customer insights reach global product teams and drive roadmap decisions? I created the APAC Ads Feedback Newsletter bridging local sellers and global product teams.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <h4>Overview</h4>
+                    <p>I created and managed a monthly APAC Ads Feedback Newsletter to bridge the gap between APAC sellers and global product teams, ensuring valuable insights were effectively communicated and acted upon.</p>
+
+                    <h4>Impact</h4>
+                    <ul>
+                        <li>Directly influenced the product roadmap, leading to <strong>20+ new features</strong> including Quick Setup for automating campaign creation and a Campaign Details Page Dashboard</li>
+                        <li>Received comments from product and senior leadership including the <strong>VP Global Advertising at eBay</strong></li>
+                        <li>Increased APAC's involvement in global product meetings and decision-making</li>
+                        <li>Improved cross-regional collaboration between product marketing and product development</li>
+                    </ul>
+
+                    <div class="project-quote">
+                        <p>"The feedback process Will set up through the newsletter helped us get alignment on what we were working on. It was helpful from a product standpoint to get a pulse on user feedback because it gave us a more comprehensive view of what was going on with users. It was valuable because it confirmed hypotheses we had, particularly around features like Quick Setup."</p>
+                        <p class="quote-source">Senior Product Manager, David Lyons, eBay</p>
+                    </div>
+                    <div class="project-quote" style="margin-top:12px;">
+                        <p>"The newsletter Will built was valuable for building relationships with leadership and product globally, putting our team on the map, and creating a structured feedback loop. It set the foundation for future product improvements."</p>
+                        <p class="quote-source">Senior Product Marketing Manager, eBay</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="ebay-pla" class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <img class="card-logo" src="images/ebay/logo.svg" alt="eBay">
+                    <span class="company-pill ebay">eBay Ads &middot; PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag blue">GTM Strategy</span>
+                        <span class="project-tag dark">Product Launch</span>
+                    </div>
+                    <h3 class="project-title">GTM Strategy &amp; Launch: From Beta to $180M in Annual Revenue</h3>
+                    <p class="project-summary">How do you launch unproven ad tech to skeptical enterprise buyers and drive adoption across APAC, US, and EU? I led the launch of eBay's Promoted Listings Advanced from beta to core revenue driver, attracting 2,500+ brands and contributing to eBay's $1B ads milestone.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <div class="video-thumbnail" onclick="event.stopPropagation(); playVideo(this, 'https://share.descript.com/embed/cMfYBwmlNGo')">
+                        <img src="images/ebay-pla-presentation.png" alt="eBay Promoted Listings Advanced differentiation slide showing product positioning">
+                        <div class="play-overlay"><div class="play-btn"></div></div>
+                        <div class="video-thumbnail-label">Watch presentation recording</div>
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>I led the launch of Promoted Listings Advanced, a new advertising product targeting larger eBay sellers and brands. Five products, 2,500+ active brands, helping grow eBay's ads business from $600M toward $1B.</p>
+
+                    <h4>Process</h4>
+                    <ul>
+                        <li><strong>Research:</strong> Conducted 20+ in-depth seller interviews and analysed competitor offerings to understand the market landscape</li>
+                        <li><strong>Positioning:</strong> Developed "Get more sales" messaging, resulting in an 87% increase in click-through rates</li>
+                        <li><strong>Product Collaboration:</strong> Worked with the product team to prioritise features based on seller feedback</li>
+                        <li><strong>Beta Testing:</strong> Recruited key brands like Dyson and Nespresso, incorporating their feedback into the final product</li>
+                        <li><strong>Sales Enablement:</strong> Created an education platform, webinars, and sales materials for the GTM team</li>
+                        <li><strong>Global Rollout:</strong> Supported teams worldwide in adapting the launch strategy to local markets across APAC, US, and EU</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <div class="metrics-row">
+                        <div class="metric-card"><div class="metric-value">$180M</div><div class="metric-label">Annual Revenue</div></div>
+                        <div class="metric-card"><div class="metric-value">2,500+</div><div class="metric-label">Active Brands</div></div>
+                        <div class="metric-card"><div class="metric-value">286%</div><div class="metric-label">YoY Growth</div></div>
+                    </div>
+
+                    <div class="project-quote">
+                        <p>"That launch exemplified our ability to work without global support, communicating new tools to the market and reeducating sellers on complex concepts. The product evolved rapidly, expanding from just the top spot of search to the whole first page and in-listing pages. This constant evolution required ongoing education of our seller base, adapting our messaging and support as the product grew and changed."</p>
+                        <p class="quote-source">Senior Product Marketing Manager, eBay</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="ebay-webinar" class="project-card" onclick="toggleProject(this)">
+            <div class="project-header">
+                <div class="project-header-content">
+                    <img class="card-logo" src="images/ebay/logo.svg" alt="eBay">
+                    <span class="company-pill ebay">eBay Ads &middot; PMM</span>
+                    <div class="project-tags">
+                        <span class="project-tag blue">Partnerships</span>
+                        <span class="project-tag outline">Campaign</span>
+                    </div>
+                    <h3 class="project-title">Strategic Partnership Adoption: 108x Budget Increase and $250K Revenue From One Webinar</h3>
+                    <p class="project-summary">How do you rescue a struggling enterprise integration and drive adoption among 2,000+ potential users? One strategic webinar with ChannelAdvisor drove 50% adoption and $250K in attributed revenue.</p>
+                </div>
+                <div class="project-toggle">&darr;</div>
+            </div>
+            <div class="project-details">
+                <div class="project-body">
+                    <div class="video-thumbnail" style="cursor:default; max-width:400px;">
+                        <img src="images/Webinar.png" alt="LinkedIn promotion: Reach More Buyers with eBay Promoted Listings Advanced Campaigns webinar with Will Mulholland and Simon Kelly">
+                    </div>
+
+                    <h4>Overview</h4>
+                    <p>I led a collaborative webinar with ChannelAdvisor to drive adoption of our Promoted Listings product through their new API integration. Despite having a robust API integration, adoption and revenue among sellers was unexpectedly low.</p>
+
+                    <h4>Key Challenges</h4>
+                    <ul>
+                        <li>Low awareness of the API integration among 2,000+ sellers on ChannelAdvisor's platform</li>
+                        <li>Complexity and early stages of the Promoted Listings Advanced product</li>
+                        <li>Engaging a diverse audience across various industries</li>
+                        <li>Balancing technical details with practical insights</li>
+                    </ul>
+
+                    <h4>Development Process</h4>
+                    <ul>
+                        <li>Collaborated with ChannelAdvisor to understand their platform and user base</li>
+                        <li>Worked with product managers to ensure accurate feature representation</li>
+                        <li>Spoke to sales team to ensure content addressed common seller objections</li>
+                        <li>Analysed API usage data with SQL queries and seller pain points to inform content</li>
+                        <li>Worked with global legal and Investor Relations to get script and content approved</li>
+                        <li>Set clear goals for API adoption, budget increases, and revenue growth</li>
+                    </ul>
+
+                    <h4>Results</h4>
+                    <div class="metrics-row">
+                        <div class="metric-card"><div class="metric-value">108x</div><div class="metric-label">Avg Daily Budget Increase</div></div>
+                        <div class="metric-card"><div class="metric-value">$250K</div><div class="metric-label">Attributed Revenue</div></div>
+                        <div class="metric-card"><div class="metric-value">50%</div><div class="metric-label">Adoption in 1 Year</div></div>
+                        <div class="metric-card"><div class="metric-value">133</div><div class="metric-label">Attendees</div></div>
+                    </div>
+                    <p style="margin-top:12px;">Strengthened partnership leading to more joint initiatives including a newsletter.</p>
+
+                    <h4>Evidence</h4>
+                    <div class="evidence-row">
+                        <a href="https://share.descript.com/view/xCl12F8biX6?t=331" target="_blank" class="evidence-link" onclick="event.stopPropagation()">Webinar Recording</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer style="max-width:760px;margin:64px auto;padding:24px;text-align:center;color:#888;font-size:13px;">Will Mulholland &middot; <a href="https://www.linkedin.com/in/willmulholland/" style="color:#888;">LinkedIn</a></footer>
+    <script>
+        // --- Existing site JS ---
+        function toggleProject(card) {
+            // Only the header toggles. Clicks inside the open body (text, links, video) are ignored,
+            // so an accidental click on an expanded card never closes it.
+            if (window.event && window.event.target && window.event.target.closest('.project-details')) return;
+            var wasActive = card.classList.contains('active');
+            // Accordion: close any other open card so the page never shifts under a pending click.
+            document.querySelectorAll('.project-card.active').forEach(function (c) {
+                if (c !== card) c.classList.remove('active');
+            });
+            card.classList.toggle('active', !wasActive);
+            if (!wasActive && card.id) { history.replaceState(null, '', '#' + card.id); }
+        }
+
+        function playVideo(thumbnail, embedUrl) {
+            var container = document.createElement('div');
+            container.className = 'video-embed';
+            var iframe = document.createElement('iframe');
+            iframe.src = embedUrl + (embedUrl.includes('?') ? '&' : '?') + 'autoplay=1';
+            iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+            iframe.allowFullscreen = true;
+            container.appendChild(iframe);
+            thumbnail.parentNode.replaceChild(container, thumbnail);
+        }
+
+        // Deep-link: open and scroll to a card from the URL hash.
+        function openCardFromHash() {
+            var id = (window.location.hash || '').replace('#','');
+            if (!id) return;
+            var card = document.getElementById(id);
+            if (card && card.classList.contains('project-card')) {
+                document.querySelectorAll('.project-card.active').forEach(function (c) { if (c !== card) c.classList.remove('active'); });
+                card.classList.add('active');
+                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        window.addEventListener('DOMContentLoaded', openCardFromHash);
+        window.addEventListener('hashchange', openCardFromHash);
+    </script>
+</body>
+</html>
