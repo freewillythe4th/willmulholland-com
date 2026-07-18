@@ -17,6 +17,11 @@ test('the page explains the skill, context and deliverable sequence', () => {
   assert.match(page, /recommendation, reasoning, assumptions and a deliverable/i);
 });
 
+test('customer-facing Connector pages do not describe the product as a method', () => {
+  assert.doesNotMatch(page, /\bmethods?\b/i);
+  assert.doesNotMatch(setupPage, /\bmethods?\b/i);
+});
+
 test('generic contrast headings are removed', () => {
   assert.doesNotMatch(page, /Advice is cheap\. The useful bit is the work that comes back\./);
   assert.doesNotMatch(page, /Same brief\. Different kind of result\./);
