@@ -11,15 +11,15 @@ Status: Approved for implementation, proof asset still required
 
 ## Hero
 
-Eyebrow: A product marketing method for Claude
+Eyebrow: Product marketing Connector for Claude and ChatGPT
 
-Headline: Do sharper product marketing work, without a bigger team.
+Headline: Give Claude 53 product marketing skills it can run on demand.
 
 Body:
 
-I turned the way I run product marketing into skills Claude can use.
+I turned the way I run product marketing into 53 maintained skills Claude and ChatGPT can run on demand.
 
-Bring the homepage, interviews, launch brief or competitor set already on your desk. Intelligent Growth helps turn that context into sharper positioning, messaging, launch plans and competitive work.
+Bring the homepage, interviews, launch brief or competitor set already on your desk. Intelligent Growth asks for what is missing, runs the right skill and returns the recommendation, reasoning and work you can review.
 
 Connect once. No code.
 
@@ -33,17 +33,13 @@ Proof line: 53 product marketing skills, kept current across Claude and ChatGPT.
 
 ## Problem transition
 
-Heading: Claude is good. A blank chat still makes you do too much of the work.
+Heading: A blank chat leaves the product marketing process with you.
 
 Body:
 
 You have to decide which process to use, write the prompt, remember the right questions and keep correcting the output when it goes generic.
 
-That is fine for low-stakes work.
-
-It is less fine when the homepage is going live on Friday and the CPO wants to know why this message will win.
-
-Intelligent Growth gives the model a method for the job, applies it to your context, and hands back something you can challenge, edit and put in front of the team.
+Intelligent Growth gives Claude the skills to run the job, from positioning and messaging to launches and competitive work.
 
 ## Jobs section
 
@@ -77,27 +73,16 @@ Action: Run the free competitive gap
 
 ## Proof section
 
-Heading: Same brief. Different result.
+Heading: Get the recommendation, reasoning and working deliverable.
 
 Intro:
 
-The point is not a longer answer.
+Every run gives you:
 
-It is a recommendation you can defend, the reasoning behind it, the assumptions it made, and a working deliverable you can improve.
-
-Generic AI column label: Blank Claude chat
-
-- Broad best practices
-- A list of possible directions
-- No clear decision
-- More prompting left for you
-
-Intelligent Growth column label: Claude with Intelligent Growth
-
-- A recommended direction
-- Reasoning tied to your context
-- Assumptions and missing evidence
-- A structured deliverable to review
+- A recommendation you can act on
+- The reasoning and evidence behind it
+- The assumptions that still need checking
+- A working deliverable you can edit and ship
 
 Proof requirement before launch: replace these descriptive bullets with one real, permissioned side-by-side run using the same brief. Label the input, model, date and any edits. Do not imply a benchmark before the test exists.
 
@@ -148,11 +133,9 @@ Body:
 
 I have spent eight years doing product marketing across launches, positioning, messaging, growth and sales support.
 
-The hardest part was rarely finding another framework.
+The work gets hard when the evidence is incomplete, the deadline moves and the team still needs a clear call it can use.
 
-It was making a good call with incomplete evidence, then turning it into work the team could use before the deadline moved again.
-
-So I turned the way I work into methods Claude can apply. I keep sharpening them as I use them. You get the updated version through the same connection.
+So I turned the way I work into 53 skills Claude can run on demand. I keep sharpening them as I use them. You get the updated version through the same connection.
 
 ## Pricing
 
@@ -162,11 +145,11 @@ Heading: Start with a real job. Pay when you need the rest of the system.
 
 Price: A$0
 
-Description: Enough to connect the product and feel how the method works.
+Description: Enough to connect the product and run two useful skills.
 
 - Connect to supported AI clients
 - Browse the current catalogue
-- Run the available free methods
+- Run the two free skills
 - Start with the competitive gap
 
 Action: Connect free
@@ -182,8 +165,8 @@ Trial: Seven days of complete Connector access, then A$49 a month. A payment car
 Description: For the person handling positioning, messaging, launches and competitive work every month.
 
 - Full product marketing catalogue
-- Protected methods applied to your context
-- New and improved methods through the same connection
+- All 53 product marketing skills
+- Skill updates through the same connection
 - Member access across supported clients
 
 Action: Start 7-day free trial
@@ -216,19 +199,19 @@ Hey Will, I want to try the Intelligent Growth MCP. I use [client] and want help
 
 ### I already use Claude. What changes?
 
-A blank model can give you an answer. Intelligent Growth gives it a defined product marketing method for the job, applies that method to your context and returns a structured recommendation and working deliverable.
+Intelligent Growth gives Claude 53 defined product marketing skills. It selects the right one for the job and runs it using the context you provide.
 
 ### Does it replace my judgment?
 
 No. You should challenge the recommendation, check the assumptions and make the final call. The product gives you a stronger first pass and makes the thinking visible.
 
-### Does it expose the underlying methods or source material?
+### Does it expose the underlying skill instructions or source material?
 
-No. Protected methods run on the hosted service. Your AI client receives the applied result for the current job, not the private method files, reference library, provider prompts or source documents.
+No. Protected skill knowledge runs on the hosted service. Your AI client receives the result for the current job, not the private skill files, reference library, provider prompts or source documents.
 
 ### Can it teach me how to do the work?
 
-Yes. It can explain the relevant principles, walk you through the process, show why a recommendation holds and help you apply the method to your situation. It will not reproduce or export the private source library.
+Yes. It can explain the relevant principles, walk you through the process, show why a recommendation holds and help you use the skill in your situation. It will not reproduce or export the private source library.
 
 ### What context should I give it?
 
@@ -236,11 +219,11 @@ Start with the product, audience, alternatives, customer evidence, business cons
 
 ### What happens to my data?
 
-The product needs the context you send for the current task. Product analytics record safe events such as connection, method, tier, client, outcome and broad error category. They do not record prompts, outputs, email addresses, credentials, source text or full URLs. Link to the current privacy policy for the complete terms.
+The product needs the context you send for the current task. Product analytics record safe events such as connection, skill, tier, client, outcome and broad error category. They do not record prompts, outputs, email addresses, credentials, source text or full URLs. Link to the current privacy policy for the complete terms.
 
 ### Why does part of the work run on your model API?
 
-MCP does not require this. It is a product choice. Selected methods and quality checks run on the hosted service so the deeper process can be applied consistently without sending the full private method to the user's model. The structured result is then returned to the AI client the user chose.
+MCP does not require this. It is a product choice. Selected skills and quality checks run on the hosted service so the deeper process can be applied consistently without sending the full private skill instructions to the user's model. The structured result is then returned to the AI client the user chose.
 
 ### Will it work in ChatGPT?
 
@@ -256,7 +239,7 @@ Heading: Bring the competitor set already on your desk.
 
 Body:
 
-You will know quickly whether the method is useful.
+You will know quickly whether the skill is useful.
 
 Run the free competitive gap, review the recommendation and decide from the work.
 

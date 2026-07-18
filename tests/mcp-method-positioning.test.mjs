@@ -5,15 +5,15 @@ import test from 'node:test';
 const page = fs.readFileSync(new URL('../mcp.html', import.meta.url), 'utf8');
 const setupPage = fs.readFileSync(new URL('../mcp-start.html', import.meta.url), 'utf8');
 
-test('the hero leads with maintained product marketing methods', () => {
-  assert.match(page, /Give Claude the product marketing method for the job\./);
+test('the hero leads with product marketing skills Claude can run', () => {
+  assert.match(page, /Give Claude 53 product marketing skills it can run on demand\./);
   assert.match(page, /53 maintained product marketing skills/i);
-  assert.match(page, /asks for what is missing, applies the right method and returns/i);
+  assert.match(page, /asks for what is missing, runs the right skill and returns/i);
 });
 
-test('the page explains the method, context and deliverable sequence', () => {
+test('the page explains the skill, context and deliverable sequence', () => {
   assert.match(page, /asks for any missing company, customer and market context/i);
-  assert.match(page, /selects and applies the right method/i);
+  assert.match(page, /selects and runs the right skill/i);
   assert.match(page, /recommendation, reasoning, assumptions and a deliverable/i);
 });
 
