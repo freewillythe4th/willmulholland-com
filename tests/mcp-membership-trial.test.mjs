@@ -40,7 +40,8 @@ test('the free plan remains separate from the paid OS trial', () => {
 
 test('the FAQ explains card, conversion, access and cancellation', () => {
   assert.match(page, /<summary>How does the 7-day free trial work\?<\/summary>/);
-  assert.match(page, /every paid method in Intelligent Growth OS/i);
+  assert.match(page, /Intelligent Growth OS is the membership for the complete Connector/i);
+  assert.match(page, /use every paid method for seven days/i);
   assert.match(page, /payment card/i);
   assert.match(page, /converts to A\$49 a month/i);
   assert.match(page, /annual option remains A\$490/i);

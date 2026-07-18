@@ -31,7 +31,8 @@ test('the pricing heading separates the free preview from the paid trial', () =>
 
 test('the setup guide explains what is free and where to trial the complete Connector', () => {
   assert.match(setupPage, /The free Connector includes two jobs/i);
-  assert.match(setupPage, /complete Connector free for 7 days/i);
+  assert.match(setupPage, /Intelligent Growth OS is the membership for complete access/i);
+  assert.match(setupPage, /try it free for 7 days/i);
   assert.match(setupPage, /A\$49 a month unless you cancel/i);
   assert.match(setupPage, /data-ig-event="mcp_trial_clicked"/);
 });
