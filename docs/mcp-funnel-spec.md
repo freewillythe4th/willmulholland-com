@@ -49,21 +49,21 @@ Help the person who owns product marketing alone move from a real job on their d
 
 1. Navigation with the real Intelligent Growth logo.
 2. Outcome-led hero with the free competitive-gap call to action.
-3. Small proof strip for method coverage, supported clients, and automatic updates.
+3. Small proof strip for skill coverage, supported clients, and automatic updates.
 4. Concrete jobs: positioning, messaging, launch, and competitive.
 5. A side-by-side proof section showing generic AI versus Intelligent Growth on the same brief.
 6. Three-step explanation: connect, bring context, review a usable first version.
 7. Visual output examples inside the AI client.
 8. Clear free and member boundaries.
 9. Self-serve onboarding choice with WhatsApp as optional help.
-10. FAQs covering Claude, ChatGPT, judgment, context, privacy, and protected methods.
+10. FAQs covering Claude, ChatGPT, judgment, context, privacy, and protected skill instructions.
 11. Final result-led call to action.
 
 ## Messaging contract
 
 ### Hero
 
-Eyebrow: A product marketing method for Claude
+Eyebrow: Product marketing Connector for Claude and ChatGPT
 
 Headline: Do sharper product marketing work, without a bigger team.
 
@@ -88,10 +88,10 @@ Proof line: 53 product marketing skills, updated as I sharpen them, across Claud
 
 ## Pricing boundary
 
-- Free: connection, catalogue discovery, and the current free methods.
+- Free: connection, catalogue discovery, and the current free skills.
 - Member: seven-day free trial converting to A$49 per month, with a payment card required. A$490 per year remains available without the trial while the founding offer remains active.
 - Do not publish a supporter tier until its entitlement and checkout are confirmed in the live billing system.
-- Paid members should never receive copy that tells them a method is free.
+- Paid members should never receive copy that tells them a skill is free.
 
 ## Public and private repository boundary
 
