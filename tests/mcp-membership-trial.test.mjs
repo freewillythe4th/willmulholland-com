@@ -20,7 +20,7 @@ test('the OS pricing card offers a seven-day trial with clear conversion terms',
 
   assert.match(memberCard, /7-day free trial/i);
   assert.match(memberCard, /every paid method/i);
-  assert.match(memberCard, /then A\$49 a month/i);
+  assert.match(memberCard, /becomes A\$49 a month unless you cancel/i);
   assert.match(memberCard, /A\$490 a year/i);
   assert.match(memberCard, /data-ig-event="mcp_trial_clicked"/);
   assert.match(memberCard, /data-ig-billing-interval="monthly"/);
