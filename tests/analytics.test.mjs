@@ -112,6 +112,7 @@ test('the MCP funnel has a stable event contract for every measurable step', () 
     'mcp_catalogue_viewed',
     'mcp_pricing_viewed',
     'mcp_checkout_clicked',
+    'mcp_trial_clicked',
     'mcp_troubleshooting_opened',
     'mcp_content_cta_clicked',
   ]);

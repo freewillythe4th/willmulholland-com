@@ -17,6 +17,7 @@ export const FUNNEL_EVENT_RULES = Object.freeze({
   mcp_catalogue_viewed: ['placement'],
   mcp_pricing_viewed: ['placement'],
   mcp_checkout_clicked: ['billing_interval', 'placement'],
+  mcp_trial_clicked: ['billing_interval', 'placement'],
   mcp_troubleshooting_opened: ['issue', 'client'],
   mcp_content_cta_clicked: ['content_cluster', 'content_slug', 'primary_keyword', 'destination_job', 'placement'],
 });

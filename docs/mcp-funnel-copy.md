@@ -177,6 +177,8 @@ Price: A$49 a month founding price
 
 Annual option: A$490 a year
 
+Trial: Seven days of complete Connector access, then A$49 a month. A payment card is required. The annual option does not use the trial.
+
 Description: For the person handling positioning, messaging, launches and competitive work every month.
 
 - Full product marketing catalogue
@@ -184,7 +186,7 @@ Description: For the person handling positioning, messaging, launches and compet
 - New and improved methods through the same connection
 - Member access across supported clients
 
-Action: Become a member
+Action: Start 7-day free trial
 
 Footnote: Founding pricing should appear only while the live checkout matches it.
 
