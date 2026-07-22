@@ -261,7 +261,7 @@
             <a href="/podcast">Podcast</a>
             <a href="/blog">Blog</a>
             <a href="/traffic">Free gift</a>
-            <a class="nav-cta" href="https://luma.com/zrt21ztf" target="_blank" rel="noopener">Save your spot</a>
+            <a class="nav-cta" href="#waitlist">Join the waitlist</a>
         </div>
         <button type="button" class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
             <span class="nav-toggle-bar"></span>
@@ -341,8 +341,8 @@
             <h1>Build the brain behind your marketing, <span class="hl">live.</span></h1>
             <p class="hero-sub">60 minutes, live. We set up your marketing brain, the place your AI learns your business and your market from, and build your first reusable skill on screen. That's what makes AI stop sounding generic and start working like it knows your business. You leave with it built, not a pile of notes.</p>
             <div class="hero-cta">
-                <a class="btn-primary" href="https://luma.com/zrt21ztf" target="_blank" rel="noopener">Save your spot</a>
-                <span class="hero-meta">Tuesday 28 July, 7:00pm AEST &middot; <b>free</b> &middot; live on Google Meet</span>
+                <a class="btn-primary" href="#waitlist">Get the next date first</a>
+                <span class="hero-meta">Next date announced soon &middot; <b>free</b> &middot; live on Google Meet</span>
             </div>
         </div>
         <div class="hero-fan-wrap">
@@ -407,9 +407,9 @@
     <!-- Waitlist: next workshop -->
     <div class="band band--soft" id="waitlist">
         <section class="wrap" style="text-align:center;">
-            <div class="section-tag" style="justify-content:center;">Can't make it?</div>
-            <h2 class="section-title" style="margin-bottom:14px;">Can't make the 28th?<br><span class="muted">Get first dibs on the one after.</span></h2>
-            <p style="font-size:17px; color:var(--gray-mid); max-width:560px; margin:0 auto 26px;">Drop your email and you'll be first to know when the next free workshop is locked in, before it goes out anywhere else.</p>
+            <div class="section-tag" style="justify-content:center;">Next workshop</div>
+            <h2 class="section-title" style="margin-bottom:14px;">The next date is not locked in yet.<br><span class="muted">Get first dibs when it is.</span></h2>
+            <p style="font-size:17px; color:var(--gray-mid); max-width:560px; margin:0 auto 26px;">Drop your email and you'll be first to know when the next free workshop is set, before it goes out anywhere else.</p>
             <form id="waitlistForm" style="display:flex; gap:12px; flex-wrap:wrap; max-width:520px; margin:0 auto; justify-content:center;">
                 <input type="email" id="waitlistEmail" name="email" placeholder="Enter your email" required style="flex:1; min-width:240px; padding:15px 18px; border:1px solid rgba(31,21,17,0.25); border-radius:999px; font-size:16px; font-family:inherit; outline:none; background:var(--white); color:var(--ink);">
                 <button type="submit" class="btn-primary" id="waitlistBtn">Notify me</button>
@@ -665,8 +665,8 @@
     <section class="wrap wrap--tight">
         <div class="reserve-band">
             <h2>The 60 minutes that change how you do marketing.</h2>
-            <p>Tuesday 28 July, 7:00pm AEST. Free, live on Google Meet, and you leave with it built.</p>
-            <a class="btn-primary" href="https://luma.com/zrt21ztf" target="_blank" rel="noopener">Save your spot</a>
+            <p>Free, live on Google Meet, and you leave with it built. The next date lands soon.</p>
+            <a class="btn-primary" href="#waitlist">Get the next date first</a>
         </div>
     </section>
 
@@ -708,9 +708,9 @@
                     <label>Your session</label>
                     <label style="display:flex; align-items:center; gap:10px; padding:13px 15px; border:1px solid rgba(0,0,0,0.12); border-radius:12px; background:var(--accent-soft); font-size:14px; color:var(--accent-deep); font-weight:600; cursor:pointer;">
                         <input type="radio" name="session" value="marketers" checked style="margin:0; width:auto;">
-                        <span>Tue 28 July, 7:00pm AEST</span>
+                        <span>Next workshop, date to be announced</span>
                     </label>
-                    <p style="font-family:monospace; font-size:11px; color:var(--gray-mid); margin-top:8px; text-transform:uppercase; letter-spacing:0.05em;">7pm AEST. Also 10:00am BST, 5:00am ET, 2:00am PT.</p>
+                    <p style="font-family:monospace; font-size:11px; color:var(--gray-mid); margin-top:8px; text-transform:uppercase; letter-spacing:0.05em;">Join the waitlist and you get the date before anyone else.</p>
                 </div>
                 <button type="submit" class="btn-primary" id="reserveSubmit">Continue to reserve</button>
                 <p class="modal-error" id="reserveError"></p>
@@ -755,7 +755,7 @@
                 if (!sessionChoice) { errEl.textContent = 'Pick which session you want.'; errEl.style.display = 'block'; return; }
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Taking you there...';
-                window.location.href = 'https://luma.com/zrt21ztf';
+                window.location.href = '#waitlist';
             });
 
             if (window.location.hash === '#reserve') openModal();
