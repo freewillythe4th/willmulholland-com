@@ -227,7 +227,7 @@ MCP does not require this. It is a product choice. Selected skills and quality c
 
 ### Will it work in ChatGPT?
 
-Yes, where custom MCP connectors are supported on the user's current plan and client. The setup page should show the current supported path and avoid claiming support for unavailable account types.
+Yes. Open Settings > Apps and connectors, turn on developer mode in advanced settings, then create a connector called Intelligent Growth using the URL on the setup page and sign in with OAuth. If the skills do not appear straight away, restart ChatGPT and start a new chat.
 
 ### What if setup does not work?
 
