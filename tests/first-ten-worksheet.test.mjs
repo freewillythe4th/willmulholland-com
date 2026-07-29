@@ -63,6 +63,7 @@ test('Copy for Claude output is concise, useful, and limited to filled answers',
   });
 
   assert.match(prompt, /Identify the riskiest assumption/);
+  assert.match(prompt, /^Help me get my first customers\./);
   assert.match(prompt, /Solo founders launching a B2B product/);
   assert.match(prompt, /Sam, who is preparing a launch/);
   assert.match(prompt, /Direct access and a say in what gets built/);
@@ -84,6 +85,7 @@ test('a step copy includes the new answers and the earlier context, not later bl
   assert.match(prompt, /Sam, who is preparing a launch/);
   assert.match(prompt, /Product Marketing Alliance/);
   assert.match(prompt, /first ten customer conversations/i);
+  assert.match(prompt, /^Help me get my first customers\./);
   assert.doesNotMatch(prompt, /Walk me through the last time/);
   assert.doesNotMatch(prompt, /Design-partner offer/);
 });

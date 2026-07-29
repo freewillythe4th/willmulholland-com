@@ -166,6 +166,7 @@ export function buildStepPrompt(input = {}, stepIndex = 0) {
   const worksheet = normalizeWorksheet(input);
   const lastStep = Math.max(0, Math.min(STEP_PROMPTS.length - 1, Number(stepIndex) || 0));
   const lines = [
+    'Help me get my first customers.',
     'I am working through my first-customer worksheet, one step at a time.',
     '',
     'Use only the answers below. Do not invent people, results, relationships, or credibility. If something is missing, tell me what I still need to learn.',
@@ -184,7 +185,8 @@ export function buildClaudePrompt(input = {}) {
   const worksheet = normalizeWorksheet(input);
   const outreach = buildOutreachMessage(worksheet);
   const lines = [
-    'Help me turn this first-customer worksheet into a practical plan.',
+    'Help me get my first customers.',
+    'Here is my completed first-customer worksheet. Turn it into a practical plan.',
     '',
     'Use only the evidence below. Do not invent people, results, relationships, or credibility. If something is missing, tell me what I still need to learn.',
     '',
