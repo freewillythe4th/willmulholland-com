@@ -122,6 +122,28 @@ Dependencies:
 
 There is no rendered logo, navigation, footer, image, or separate stylesheet.
 
+## /first-ten
+
+Entry: `first-ten.html`
+
+Rendered structure:
+
+- Sticky logo, save state, and copy action
+- Five progressive worksheet sections
+- Live design-partner offer and outreach previews
+- Optional consent-gated share dialog
+
+Dependencies:
+
+- `first-ten.html`
+  - `css/first-ten.css`
+  - `images/ig-logo/ig-nav-lockup.png`
+  - `js/first-ten-page.mjs`
+    - `js/first-ten-worksheet.mjs`
+  - `api/first-ten-worksheet.js`
+    - `api/_first-ten-worksheet.js`
+  - Google Fonts, external Inter and Instrument Serif CSS
+
 ## Shared analytics integration
 
 All four entries load this exact module tag in the document head:

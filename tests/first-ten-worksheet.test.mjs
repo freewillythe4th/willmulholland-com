@@ -3,12 +3,26 @@ import assert from 'node:assert/strict';
 
 import {
   buildClaudePrompt,
+  buildDesignPartnerOffer,
   buildOutreachMessage,
   createWorksheetId,
   normalizeWorksheet,
   resolveWorksheetId,
   storageKey,
 } from '../js/first-ten-worksheet.mjs';
+
+test('design partner offer preview keeps participant answers grammatical', () => {
+  const offer = buildDesignPartnerOffer({
+    offerTheyGet: 'I will give them direct access and a say in what gets built.',
+    offerYouGet: 'Use it in their current workflow and meet each week',
+    offerPrice: 'A $50 founding payment',
+  });
+
+  assert.equal(
+    offer,
+    'I am looking for five people to build this with.\nWhat you get: I will give them direct access and a say in what gets built.\nWhat I ask: Use it in their current workflow and meet each week\nFounding commitment: A $50 founding payment',
+  );
+});
 
 test('worksheet storage is isolated by a random browser-only worksheet id', () => {
   const cryptoStub = { randomUUID: () => '11111111-2222-4333-8444-555555555555' };

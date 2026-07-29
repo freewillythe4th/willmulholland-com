@@ -1,14 +1,45 @@
 import { buildSubmissionRecord, formatSubmissionCaption } from './_first-ten-worksheet.js';
 
+const MAX_REQUEST_BYTES = 50_000;
+
+function firstHeader(value) {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+function requestIsSameSite(req) {
+  const headers = req.headers || {};
+  if (firstHeader(headers['sec-fetch-site']) === 'cross-site') return false;
+
+  const origin = firstHeader(headers.origin);
+  if (!origin) return true;
+
+  const host = firstHeader(headers['x-forwarded-host'] || headers.host);
+  if (!host) return false;
+
+  try {
+    return new URL(origin).host === String(host).split(',')[0].trim();
+  } catch {
+    return false;
+  }
+}
+
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
 
-  if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  if (!requestIsSameSite(req)) return res.status(403).json({ error: 'Request not allowed' });
+
+  const contentLength = Number(firstHeader((req.headers || {})['content-length']));
+  if (Number.isFinite(contentLength) && contentLength > MAX_REQUEST_BYTES) {
+    return res.status(413).json({ error: 'Request too large' });
+  }
 
   let body;
   try {
     body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
+    if (JSON.stringify(body).length > MAX_REQUEST_BYTES) {
+      return res.status(413).json({ error: 'Request too large' });
+    }
   } catch {
     return res.status(400).json({ error: 'Invalid request' });
   }

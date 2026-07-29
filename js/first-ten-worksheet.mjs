@@ -92,6 +92,15 @@ export function buildOutreachMessage(input = {}) {
   ].filter(Boolean).join(' ');
 }
 
+export function buildDesignPartnerOffer(input = {}) {
+  const worksheet = normalizeWorksheet(input);
+  const lines = ['I am looking for five people to build this with.'];
+  if (worksheet.offerTheyGet) lines.push(`What you get: ${worksheet.offerTheyGet}`);
+  if (worksheet.offerYouGet) lines.push(`What I ask: ${worksheet.offerYouGet}`);
+  if (worksheet.offerPrice) lines.push(`Founding commitment: ${worksheet.offerPrice}`);
+  return lines.length > 1 ? lines.join('\n') : '';
+}
+
 function addSection(lines, title, entries) {
   const filled = entries.filter(([, value]) => value);
   if (!filled.length) return;
@@ -109,7 +118,7 @@ export function buildClaudePrompt(input = {}) {
     '',
     'Please:',
     '1. Identify the riskiest assumption and explain why in one sentence.',
-    '2. Suggest three Mom Test follow-up questions for my first conversation.',
+    '2. Suggest three follow-up questions about past behaviour for my first conversation.',
     '3. Tighten my design-partner offer so the exchange and commitment are clear.',
     '4. Rewrite my outreach message in plain language with one easy question.',
     '5. Give me the next three actions to take this week.',
@@ -129,7 +138,7 @@ export function buildClaudePrompt(input = {}) {
     ['One place to find more', worksheet.conversationPlace],
   ]);
 
-  addSection(lines, 'Mom Test prompts', [
+  addSection(lines, 'Conversation prompts', [
     ['Last time it happened', worksheet.momLastTime],
     ['Cost in time or money', worksheet.momCost],
     ['What they tried', worksheet.momTried],

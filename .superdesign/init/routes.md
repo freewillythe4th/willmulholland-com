@@ -16,6 +16,7 @@
 - `/terms` -> `terms.html`. Minimal legal document shell.
 - `/brain` -> `brain.html`. Marketing Brain page.
 - `/workshop` -> `workshop.html`. Workshop page.
+- `/first-ten` -> `first-ten.html`. Browser-private Soara workshop worksheet with an optional submission endpoint.
 - `/work-with-me` -> `work-with-me.html`. Services page.
 - `/blog` -> `blog.html`. Blog index.
 - `/podcast` -> `podcast.html`. Podcast page.
@@ -68,6 +69,10 @@ Source: `vercel.json`
     {
       "src": "/podcast",
       "dest": "/podcast.html"
+    },
+    {
+      "src": "/first-ten",
+      "dest": "/first-ten.html"
     },
     {
       "src": "/workshop",

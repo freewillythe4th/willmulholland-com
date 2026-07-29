@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your first ten customers | Workshop worksheet</title>
+  <meta name="description" content="A private, browser-saved worksheet for planning your first customer conversations.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/first-ten.css">
+</head>
+<body>
+  <a class="skip-link" href="#worksheet">Skip to worksheet</a>
+
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Intelligent Growth home">
+      <img src="/images/ig-logo/ig-nav-lockup.png" alt="Intelligent Growth">
+    </a>
+    <div class="header-actions">
+      <span class="save-status" id="saveStatus" aria-live="polite">
+        <span class="save-dot" aria-hidden="true"></span>
+        Saved in this browser
+      </span>
+      <button class="button button-secondary button-compact" type="button" id="copyClaudeTop">Copy for Claude</button>
+    </div>
+  </header>
+
+  <main id="worksheet" class="page-shell">
+    <section class="intro" aria-labelledby="pageTitle">
+      <p class="eyebrow">Soara workshop worksheet</p>
+      <h1 id="pageTitle">Your first ten <em>customers.</em></h1>
+      <p class="intro-copy">Turn the guesses behind your product into conversations you can have this fortnight.</p>
+      <p class="privacy-note">
+        <span aria-hidden="true">&#128274;</span>
+        Your draft stays in this browser. Nothing is shared unless you choose Share with Will. Shared answers may be used anonymously in workshop examples.
+      </p>
+    </section>
+
+    <nav class="step-nav" aria-label="Worksheet sections">
+      <div class="step-track" role="tablist" aria-orientation="horizontal">
+        <button class="step-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="step-assumptions" id="tab-assumptions" data-step-target="assumptions">
+          <span>01</span> Assumptions
+        </button>
+        <button class="step-tab" type="button" role="tab" aria-selected="false" aria-controls="step-conversations" id="tab-conversations" data-step-target="conversations">
+          <span>02</span> Conversations
+        </button>
+        <button class="step-tab" type="button" role="tab" aria-selected="false" aria-controls="step-prompts" id="tab-prompts" data-step-target="prompts">
+          <span>03</span> Better questions
+        </button>
+        <button class="step-tab" type="button" role="tab" aria-selected="false" aria-controls="step-offer" id="tab-offer" data-step-target="offer">
+          <span>04</span> The offer
+        </button>
+        <button class="step-tab" type="button" role="tab" aria-selected="false" aria-controls="step-outreach" id="tab-outreach" data-step-target="outreach">
+          <span>05</span> Outreach
+        </button>
+      </div>
+    </nav>
+
+    <form id="worksheetForm" novalidate>
+      <section class="worksheet-step" id="step-assumptions" role="tabpanel" aria-labelledby="tab-assumptions" data-step="assumptions">
+        <div class="step-heading">
+          <p class="step-kicker">Exercise 1</p>
+          <h2>Write down the four assumptions you need to test.</h2>
+          <p>Pick the one that kills the business if you are wrong. Test that first.</p>
+        </div>
+
+        <div class="field-stack">
+          <div class="numbered-field">
+            <span class="field-number">1</span>
+            <div class="field-body">
+              <label for="assumptionWho">Who has the problem, and when does it become urgent?</label>
+              <textarea id="assumptionWho" name="assumptionWho" rows="3" maxlength="1200" placeholder="One specific person in one specific moment"></textarea>
+            </div>
+          </div>
+          <div class="numbered-field">
+            <span class="field-number">2</span>
+            <div class="field-body">
+              <label for="assumptionCost">What does it cost them today?</label>
+              <textarea id="assumptionCost" name="assumptionCost" rows="3" maxlength="1200" placeholder="Time, money, missed work, or a risk they carry"></textarea>
+            </div>
+          </div>
+          <div class="numbered-field">
+            <span class="field-number">3</span>
+            <div class="field-body">
+              <label for="assumptionAlternative">What do they do instead today?</label>
+              <textarea id="assumptionAlternative" name="assumptionAlternative" rows="3" maxlength="1200" placeholder="A workaround, another product, another person, or nothing"></textarea>
+            </div>
+          </div>
+          <div class="numbered-field">
+            <span class="field-number">4</span>
+            <div class="field-body">
+              <label for="assumptionTrigger">What would make them commit or pay?</label>
+              <textarea id="assumptionTrigger" name="assumptionTrigger" rows="3" maxlength="1200" placeholder="The moment this becomes worth changing or paying for"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="focus-field">
+          <label for="assumptionRiskiest">The assumption I need to test first</label>
+          <textarea id="assumptionRiskiest" name="assumptionRiskiest" rows="2" maxlength="1200" placeholder="If this is wrong, the rest does not matter"></textarea>
+        </div>
+      </section>
+
+      <section class="worksheet-step" id="step-conversations" role="tabpanel" aria-labelledby="tab-conversations" data-step="conversations" hidden>
+        <div class="step-heading">
+          <p class="step-kicker">Exercise 2</p>
+          <h2>Work out how you will get your first ten conversations.</h2>
+          <p>Start with people you can reach, introductions, and places they gather.</p>
+        </div>
+
+        <div class="field-stack">
+          <div class="numbered-field">
+            <span class="field-number">1</span>
+            <div class="field-body">
+              <label for="conversationPerson">One person you know who has the problem</label>
+              <textarea id="conversationPerson" name="conversationPerson" rows="3" maxlength="1200" placeholder="Name them and note why the problem is relevant now"></textarea>
+            </div>
+          </div>
+          <div class="numbered-field">
+            <span class="field-number">2</span>
+            <div class="field-body">
+              <label for="conversationIntroducer">One person who could introduce you</label>
+              <textarea id="conversationIntroducer" name="conversationIntroducer" rows="3" maxlength="1200" placeholder="Who already knows people with this problem?"></textarea>
+            </div>
+          </div>
+          <div class="numbered-field">
+            <span class="field-number">3</span>
+            <div class="field-body">
+              <label for="conversationPlace">One place to find more people like them</label>
+              <textarea id="conversationPlace" name="conversationPlace" rows="3" maxlength="1200" placeholder="A community, event, team, or online conversation"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="ink-callout">
+          <p>Cannot get to ten? That is useful. Your next test is access, not a better message.</p>
+        </div>
+      </section>
+
+      <section class="worksheet-step" id="step-prompts" role="tabpanel" aria-labelledby="tab-prompts" data-step="prompts" hidden>
+        <div class="step-heading">
+          <p class="step-kicker">Plan the conversation</p>
+          <h2>Ask about their past, not your idea.</h2>
+          <p>Adapt these prompts to your riskiest assumption. Do not pitch. Listen.</p>
+        </div>
+
+        <div class="prompt-rule" role="note">
+          <span>Ask this</span>
+          <p>Walk me through the last time this happened.</p>
+          <small>Avoid: Would you use an app that did this?</small>
+        </div>
+
+        <div class="field-stack compact-stack">
+          <div class="numbered-field">
+            <span class="field-number">1</span>
+            <div class="field-body">
+              <label for="momLastTime">How will you ask about the last time?</label>
+              <textarea id="momLastTime" name="momLastTime" rows="2" maxlength="1200" placeholder="Walk me through the last time..."></textarea>
+            </div>
+          </div>
+          <div class="numbered-field">
+            <span class="field-number">2</span>
+            <div class="field-body">
+              <label for="momCost">How will you ask what it cost?</label>
+              <textarea id="momCost" name="momCost" rows="2" maxlength="1200" placeholder="What did that cost in time or money?"></textarea>
+            </div>
+          </div>
+          <div class="numbered-field">
+            <span class="field-number">3</span>
+            <div class="field-body">
+              <label for="momTried">How will you ask what they tried?</label>
+              <textarea id="momTried" name="momTried" rows="2" maxlength="1200" placeholder="What did you try? What happened next?"></textarea>
+            </div>
+          </div>
+          <div class="numbered-field">
+            <span class="field-number">4</span>
+            <div class="field-body">
+              <label for="momCurrent">How will you ask what they use now?</label>
+              <textarea id="momCurrent" name="momCurrent" rows="2" maxlength="1200" placeholder="What do you use for this today?"></textarea>
+            </div>
+          </div>
+          <div class="numbered-field">
+            <span class="field-number">5</span>
+            <div class="field-body">
+              <label for="momCommitment">What commitment will you ask for?</label>
+              <textarea id="momCommitment" name="momCommitment" rows="2" maxlength="1200" placeholder="A follow-up, introduction, trial, access, or payment"></textarea>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="worksheet-step" id="step-offer" role="tabpanel" aria-labelledby="tab-offer" data-step="offer" hidden>
+        <div class="step-heading">
+          <p class="step-kicker">Your first five design partners</p>
+          <h2>Make the exchange clear.</h2>
+          <p>They get access and a say. You get use on current work, honest feedback, and commitment.</p>
+        </div>
+
+        <div class="offer-grid">
+          <div class="offer-card">
+            <p class="card-label">What they get</p>
+            <label for="offerTheyGet">Why is it worth joining early?</label>
+            <textarea id="offerTheyGet" name="offerTheyGet" rows="4" maxlength="1200" placeholder="Direct access, a say in what gets built, and a founding price"></textarea>
+          </div>
+          <div class="offer-card">
+            <p class="card-label">What you ask</p>
+            <label for="offerYouGet">What commitment do you need?</label>
+            <textarea id="offerYouGet" name="offerYouGet" rows="4" maxlength="1200" placeholder="Use it in their current workflow, tell me what fails, and meet each week"></textarea>
+          </div>
+        </div>
+
+        <div class="focus-field">
+          <label for="offerPrice">Founding price or other commitment</label>
+          <textarea id="offerPrice" name="offerPrice" rows="2" maxlength="1200" placeholder="A small payment, time, access to work, or an introduction"></textarea>
+        </div>
+
+        <div class="message-preview" aria-live="polite">
+          <p class="card-label">Your offer</p>
+          <p id="offerPreview">Fill in the exchange above to build your offer.</p>
+        </div>
+      </section>
+
+      <section class="worksheet-step" id="step-outreach" role="tabpanel" aria-labelledby="tab-outreach" data-step="outreach" hidden>
+        <div class="step-heading">
+          <p class="step-kicker">Recruit your design partners</p>
+          <h2>Build a message people can reply to.</h2>
+          <p>Why them, what it does, why they can trust you, and one easy question.</p>
+        </div>
+
+        <div class="field-stack compact-stack">
+          <div class="numbered-field">
+            <span class="field-number">1</span>
+            <div class="field-body">
+              <label for="outreachName">Their first name</label>
+              <input id="outreachName" name="outreachName" type="text" maxlength="1200" placeholder="Maya">
+            </div>
+          </div>
+          <div class="numbered-field">
+            <span class="field-number">2</span>
+            <div class="field-body">
+              <label for="outreachSignal">Why them?</label>
+              <textarea id="outreachSignal" name="outreachSignal" rows="2" maxlength="1200" placeholder="A specific signal from their work or current situation"></textarea>
+            </div>
+          </div>
+          <div class="numbered-field">
+            <span class="field-number">3</span>
+            <div class="field-body">
+              <label for="outreachProduct">What does your product help them do?</label>
+              <textarea id="outreachProduct" name="outreachProduct" rows="2" maxlength="1200" placeholder="Plain words, no product jargon"></textarea>
+            </div>
+          </div>
+          <div class="numbered-field">
+            <span class="field-number">4</span>
+            <div class="field-body">
+              <label for="outreachCredibility">Why can they trust you? <span>Optional</span></label>
+              <textarea id="outreachCredibility" name="outreachCredibility" rows="2" maxlength="1200" placeholder="One true, relevant receipt. Leave blank if you do not have one"></textarea>
+            </div>
+          </div>
+          <div class="numbered-field">
+            <span class="field-number">5</span>
+            <div class="field-body">
+              <label for="outreachQuestion">One easy question</label>
+              <textarea id="outreachQuestion" name="outreachQuestion" rows="2" maxlength="1200" placeholder="Would you be open to comparing notes for 20 minutes?"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="message-preview" aria-live="polite">
+          <p class="card-label">Message preview</p>
+          <p id="outreachPreview">Fill in the fields above to build your message.</p>
+          <button class="text-button" type="button" id="copyOutreach">Copy message</button>
+        </div>
+
+        <section class="share-panel" aria-labelledby="shareHeading">
+          <div>
+            <p class="card-label">Optional</p>
+            <h3 id="shareHeading">Share your worksheet with Will.</h3>
+            <p>Useful if you want live feedback. Your answers may be used anonymously in workshop examples.</p>
+          </div>
+          <button class="button button-primary" type="button" id="openShareDialog">Share with Will</button>
+        </section>
+      </section>
+
+      <div class="form-actions">
+        <button class="button button-secondary" type="button" id="previousStep" disabled>Previous</button>
+        <p class="step-count" id="stepCount" aria-live="polite">Step 1 of 5</p>
+        <div class="action-group">
+          <button class="button button-secondary copy-bottom" type="button" id="copyClaudeBottom">Copy for Claude</button>
+          <button class="button button-primary" type="button" id="nextStep">Continue</button>
+        </div>
+      </div>
+    </form>
+  </main>
+
+  <footer class="page-footer">
+    <p>Intelligent Growth</p>
+    <a href="/privacy">Privacy</a>
+  </footer>
+
+  <dialog id="shareDialog" aria-labelledby="shareDialogTitle">
+    <form method="dialog" class="dialog-card" id="shareForm">
+      <button class="dialog-close" type="button" id="closeShareDialog" aria-label="Close share form">&#215;</button>
+      <p class="eyebrow">Optional submission</p>
+      <h2 id="shareDialogTitle">Share this worksheet with Will.</h2>
+      <p class="dialog-copy">Your draft remains in your browser. This sends a copy to Will so he can review it.</p>
+
+      <label for="shareName">Name <span>Optional</span></label>
+      <input id="shareName" name="name" type="text" maxlength="80" autocomplete="name">
+
+      <label for="shareEmail">Email <span>Optional</span></label>
+      <input id="shareEmail" name="email" type="email" maxlength="160" autocomplete="email" inputmode="email">
+
+      <div class="honeypot" aria-hidden="true">
+        <label for="company">Company</label>
+        <input id="company" name="company" type="text" tabindex="-1" autocomplete="off">
+      </div>
+
+      <label class="consent-row" for="shareConsent">
+        <input id="shareConsent" name="consent" type="checkbox" required>
+        <span>I understand this sends my answers to Will and they may be used anonymously in workshop examples.</span>
+      </label>
+
+      <p class="form-message" id="shareMessage" aria-live="polite"></p>
+      <button class="button button-primary button-full" type="submit" id="submitWorksheet">Send copy</button>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <script type="module" src="/js/first-ten-page.mjs"></script>
+</body>
+</html>
