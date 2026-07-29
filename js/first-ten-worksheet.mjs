@@ -108,6 +108,78 @@ function addSection(lines, title, entries) {
   for (const [label, value] of filled) lines.push(`- ${label}: ${value}`);
 }
 
+const STEP_PROMPTS = Object.freeze([
+  {
+    title: 'Assumptions',
+    instruction: 'Help me pressure-test these assumptions. Tell me which one is riskiest, then give me three questions about past behaviour that would help me test it.',
+    entries: (worksheet) => [
+      ['Who and urgency', worksheet.assumptionWho],
+      ['Cost today', worksheet.assumptionCost],
+      ['Current alternative', worksheet.assumptionAlternative],
+      ['Commit or pay trigger', worksheet.assumptionTrigger],
+      ['Riskiest assumption', worksheet.assumptionRiskiest],
+    ],
+  },
+  {
+    title: 'Route to the first ten customer conversations',
+    instruction: 'Help me turn this into a practical plan for my first ten customer conversations. Tell me the next person to contact and the first move to make.',
+    entries: (worksheet) => [
+      ['One person with the problem', worksheet.conversationPerson],
+      ['One possible introducer', worksheet.conversationIntroducer],
+      ['One place to find more', worksheet.conversationPlace],
+    ],
+  },
+  {
+    title: 'Conversation prompts',
+    instruction: 'Help me sharpen these questions so I learn about what has already happened, rather than pitching the idea.',
+    entries: (worksheet) => [
+      ['Last time it happened', worksheet.momLastTime],
+      ['Cost in time or money', worksheet.momCost],
+      ['What they tried', worksheet.momTried],
+      ['What they use now', worksheet.momCurrent],
+      ['Commitment to ask for', worksheet.momCommitment],
+    ],
+  },
+  {
+    title: 'Design-partner offer',
+    instruction: 'Help me make this exchange clear and tell me what still needs work before I invite someone to join.',
+    entries: (worksheet) => [
+      ['What they get', worksheet.offerTheyGet],
+      ['What I ask from them', worksheet.offerYouGet],
+      ['Founding price or commitment', worksheet.offerPrice],
+    ],
+  },
+  {
+    title: 'Outreach message builder',
+    instruction: 'Help me tighten this into a natural first message with a specific reason to reach out and one easy question.',
+    entries: (worksheet) => [
+      ['Why them', worksheet.outreachSignal],
+      ['What it does', worksheet.outreachProduct],
+      ['Credibility I can prove', worksheet.outreachCredibility],
+      ['Easy question', worksheet.outreachQuestion],
+      ['Draft message', buildOutreachMessage(worksheet)],
+    ],
+  },
+]);
+
+export function buildStepPrompt(input = {}, stepIndex = 0) {
+  const worksheet = normalizeWorksheet(input);
+  const lastStep = Math.max(0, Math.min(STEP_PROMPTS.length - 1, Number(stepIndex) || 0));
+  const lines = [
+    'I am working through my first-customer worksheet, one step at a time.',
+    '',
+    'Use only the answers below. Do not invent people, results, relationships, or credibility. If something is missing, tell me what I still need to learn.',
+  ];
+
+  for (let index = 0; index <= lastStep; index += 1) {
+    const step = STEP_PROMPTS[index];
+    addSection(lines, step.title, step.entries(worksheet));
+  }
+
+  lines.push('', STEP_PROMPTS[lastStep].instruction);
+  return lines.join('\n').trim();
+}
+
 export function buildClaudePrompt(input = {}) {
   const worksheet = normalizeWorksheet(input);
   const outreach = buildOutreachMessage(worksheet);

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 
 import {
   buildClaudePrompt,
+  buildStepPrompt,
   buildDesignPartnerOffer,
   buildOutreachMessage,
   createWorksheetId,
@@ -68,6 +69,23 @@ test('Copy for Claude output is concise, useful, and limited to filled answers',
   assert.match(prompt, /Would you be open to comparing notes for 20 minutes\?/);
   assert.doesNotMatch(prompt, /Current alternative:/);
   assert.doesNotMatch(prompt, /\bMCP\b|\bConnector\b/);
+});
+
+test('a step copy includes the new answers and the earlier context, not later blank sections', () => {
+  const prompt = buildStepPrompt({
+    assumptionWho: 'Solo founders launching a B2B product',
+    assumptionRiskiest: 'They will make time for a customer conversation this week',
+    conversationPerson: 'Sam, who is preparing a launch',
+    conversationPlace: 'Product Marketing Alliance',
+    momLastTime: 'Walk me through the last time you tried to find early customers.',
+  }, 1);
+
+  assert.match(prompt, /Solo founders launching a B2B product/);
+  assert.match(prompt, /Sam, who is preparing a launch/);
+  assert.match(prompt, /Product Marketing Alliance/);
+  assert.match(prompt, /first ten customer conversations/i);
+  assert.doesNotMatch(prompt, /Walk me through the last time/);
+  assert.doesNotMatch(prompt, /Design-partner offer/);
 });
 
 test('outreach builder produces a specific message without invented details', () => {

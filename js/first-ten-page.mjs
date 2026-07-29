@@ -1,6 +1,7 @@
 import {
   WORKSHEET_FIELDS,
   buildClaudePrompt,
+  buildStepPrompt,
   buildDesignPartnerOffer,
   buildOutreachMessage,
   hasWorksheetAnswers,
@@ -15,6 +16,8 @@ const saveStatus = document.getElementById('saveStatus');
 const stepCount = document.getElementById('stepCount');
 const previousButton = document.getElementById('previousStep');
 const nextButton = document.getElementById('nextStep');
+const copyClaudeTop = document.getElementById('copyClaudeTop');
+const copyClaudeBottom = document.getElementById('copyClaudeBottom');
 const offerPreview = document.getElementById('offerPreview');
 const outreachPreview = document.getElementById('outreachPreview');
 const shareDialog = document.getElementById('shareDialog');
@@ -134,6 +137,10 @@ function renderStep(options = {}) {
   previousButton.disabled = currentStep === 0;
   nextButton.hidden = currentStep === steps.length - 1;
   stepCount.textContent = `Step ${currentStep + 1} of ${steps.length}`;
+  const isFinalStep = currentStep === steps.length - 1;
+  const copyLabel = isFinalStep ? 'Copy complete worksheet' : 'Copy this step for Claude';
+  copyClaudeTop.textContent = copyLabel;
+  copyClaudeBottom.textContent = copyLabel;
 
   const activeTab = document.querySelector(`[data-step-target="${steps[currentStep]}"]`);
   if (activeTab) activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
@@ -179,7 +186,11 @@ function copyForClaude() {
     showToast('Add at least one answer first.');
     return;
   }
-  copyText(buildClaudePrompt(answers), 'Claude prompt copied.');
+  const isFinalStep = currentStep === steps.length - 1;
+  const prompt = isFinalStep
+    ? buildClaudePrompt(answers)
+    : buildStepPrompt(answers, currentStep);
+  copyText(prompt, isFinalStep ? 'Complete worksheet copied.' : 'This step copied.');
 }
 
 loadDraft();
@@ -222,8 +233,8 @@ document.querySelectorAll('[data-step-target]').forEach((tab, index, tabs) => {
   });
 });
 
-document.getElementById('copyClaudeTop').addEventListener('click', copyForClaude);
-document.getElementById('copyClaudeBottom').addEventListener('click', copyForClaude);
+copyClaudeTop.addEventListener('click', copyForClaude);
+copyClaudeBottom.addEventListener('click', copyForClaude);
 document.getElementById('copyOutreach').addEventListener('click', () => {
   const answers = readAnswers();
   const message = buildOutreachMessage(answers);
