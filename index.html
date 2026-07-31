@@ -1475,6 +1475,209 @@
             .install-grid { grid-template-columns: 1fr; gap: 40px; }
             .install-deep-section { padding: 60px 24px; }
         }
+
+        /* Consulting and expertise sections */
+        #career,
+        #craft,
+        #writing {
+            max-width: 1180px;
+            padding: 96px 48px;
+        }
+        #career .section-tag,
+        #craft .section-tag,
+        #writing .section-tag {
+            font-size: 13px;
+        }
+        #career .section-title,
+        #craft .section-title,
+        #writing .section-title {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+        }
+        .career-list,
+        .craft-list,
+        .writing-list {
+            margin-top: -20px;
+        }
+        .career-row {
+            position: relative;
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 24px;
+            padding: 22px 0 22px 18px;
+        }
+        .career-row + .career-row,
+        .craft-block + .craft-block,
+        .writing-row + .writing-row {
+            border-top: 1px solid rgba(31,21,17,0.08);
+        }
+        .career-row::before {
+            content: '';
+            position: absolute;
+            top: 22px;
+            bottom: 22px;
+            left: 0;
+            width: 3px;
+            border-radius: 2px;
+            background: var(--accent);
+            opacity: 0.25;
+            transition: opacity 0.3s var(--ease-smooth);
+        }
+        .career-row:hover::before {
+            opacity: 1;
+        }
+        .career-years {
+            font-family: monospace;
+            font-size: 13px;
+            color: var(--gray-light);
+        }
+        .career-company {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .career-detail {
+            margin-top: 4px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--gray-mid);
+        }
+        .craft-intro {
+            max-width: 560px;
+            margin: -40px 0 48px;
+            font-family: 'Inter', sans-serif;
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--gray-mid);
+        }
+        .craft-block {
+            display: grid;
+            grid-template-columns: 72px 1fr;
+            gap: 24px;
+            padding: 28px 0;
+        }
+        .craft-number {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 34px;
+            line-height: 1;
+            color: var(--accent);
+        }
+        .craft-content h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 1.1;
+            color: var(--ink);
+        }
+        .craft-content p {
+            max-width: 620px;
+            margin-top: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--gray-mid);
+        }
+        .craft-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+        .craft-chip {
+            padding: 6px 12px;
+            border: 1px solid rgba(31,21,17,0.07);
+            border-radius: 8px;
+            background: var(--cream-soft);
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            color: var(--gray-mid);
+        }
+        .consulting-link {
+            display: inline-block;
+            margin-top: 18px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-deep);
+            text-decoration: none;
+        }
+        .consulting-link:hover {
+            color: var(--accent);
+        }
+        .writing-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 24px;
+            gap: 24px;
+            align-items: center;
+            padding: 22px 0;
+            color: inherit;
+            text-decoration: none;
+        }
+        .writing-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .writing-arrow {
+            color: var(--accent);
+            transition: transform 0.3s var(--ease-smooth);
+        }
+        .writing-row:hover .writing-arrow {
+            transform: translateX(4px);
+        }
+        .help-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .help-button {
+            display: inline-block;
+            padding: 16px 32px;
+            border-radius: 999px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1.4px;
+            line-height: 1.5;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: transform 0.3s var(--ease-smooth);
+        }
+        .help-button:hover {
+            transform: translateY(-2px);
+        }
+        .help-button-primary {
+            background: var(--accent);
+            color: var(--white);
+        }
+        .help-button-secondary {
+            border: 1px solid rgba(255,255,255,0.4);
+            background: transparent;
+            color: var(--white);
+        }
+        @media (max-width: 700px) {
+            #career,
+            #craft,
+            #writing {
+                padding: 64px 24px;
+            }
+            .career-row,
+            .craft-block {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .career-row {
+                padding-left: 14px;
+            }
+            .craft-intro {
+                margin-top: -36px;
+                margin-bottom: 36px;
+            }
+        }
     </style>
     <script type="module" src="/js/analytics.js"></script>
 </head>
@@ -1661,6 +1864,7 @@
             <div class="about-content">
                 <h3>A marketer who actually builds.</h3>
                 <p>I'm Will. Ten years in marketing, from big-brand work at Ogilvy and eBay to scaling B2B SaaS at NextDocs, Prompt Cowboy, and most recently Blinq. Then I stopped talking about AI and started building with it. I'm not an engineer. I taught myself these systems in my evenings, which is exactly why I can teach them to marketers instead of developers.</p>
+                <p>8+ years in B2B product marketing. Agency years at Ogilvy and BBDO, then eBay's ads business, then first product marketer at Blinq. I am the PMM who builds the system, writes the copy and ships the launch.</p>
                 <p>Everything I teach, I run on my own work first. The systems doing my research, content and follow-up every day are the proof. Every output is the demo.</p>
                 <ul style="list-style: none; margin: 26px 0 0; padding: 0;">
                     <li style="position: relative; padding: 10px 0 10px 26px; font-size: 16px; color: var(--gray-mid); line-height: 1.5; border-top: 1px solid rgba(31,21,17,0.08);"><span style="position: absolute; left: 0; color: var(--accent); font-weight: 700;">&rarr;</span>$180M+ launched, a product scaled from 2k to 55k weekly active users, GTM at Blinq and eBay</li>
@@ -1671,6 +1875,95 @@
             </div>
             <div class="about-image" style="background: none; overflow: hidden;">
                 <img src="images/headshot.jpg" alt="Will Mulholland" style="width: 100%; height: 100%; object-fit: cover; border-radius: 100px 24px 100px 24px;">
+            </div>
+        </div>
+    </section>
+
+    <section id="career">
+        <div class="section-tag">Where the work comes from</div>
+        <h2 class="section-title">Companies I have helped shape.</h2>
+        <div class="career-list">
+            <div class="career-row">
+                <div class="career-years">2015 to 2018</div>
+                <div>
+                    <div class="career-company">BBDO Sydney + PHD Media</div>
+                    <div class="career-detail">Agency years. Account roles across creative and media.</div>
+                </div>
+            </div>
+            <div class="career-row">
+                <div class="career-years">2018 to 2020</div>
+                <div>
+                    <div class="career-company">Ogilvy, client KFC</div>
+                    <div class="career-detail">Product marketing specialist. KFC Secret Menu: 460M impressions and $1.1M in revenue on zero paid spend.</div>
+                </div>
+            </div>
+            <div class="career-row">
+                <div class="career-years">2021 to 2023</div>
+                <div>
+                    <div class="career-company">eBay Ads</div>
+                    <div class="career-detail">Product marketing manager across a 5-product ads portfolio, circa $180M. Took one product from $0 to $180M in annual revenue.</div>
+                </div>
+            </div>
+            <div class="career-row">
+                <div class="career-years">2023 to now</div>
+                <div>
+                    <div class="career-company">Intelligent Growth</div>
+                    <div class="career-detail">Founder and consultant. Prompt Cowboy from 2,000 to 55,000+ users. NextDocs from 0 to 15,000 users in 4 months. Startmate GTM mentor.</div>
+                </div>
+            </div>
+            <div class="career-row">
+                <div class="career-years">2025 to 2026</div>
+                <div>
+                    <div class="career-company">Blinq</div>
+                    <div class="career-detail">Senior product marketing manager and first PMM. Repositioned the company and shipped the HubSpot Marketplace launch end to end.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="craft">
+        <div class="section-tag">What I do</div>
+        <h2 class="section-title">Three things. Done properly.</h2>
+        <p class="craft-intro">Not a full-service agency and not pretending to be. These are the three jobs I take.</p>
+        <div class="craft-list">
+            <div class="craft-block">
+                <div class="craft-number">01</div>
+                <div class="craft-content">
+                    <h3>Marketing Brains</h3>
+                    <p>I build an AI marketing system inside your stack: one context layer that turns every release into positioning, messaging and launch assets. It stays when I leave.</p>
+                    <div class="craft-chips">
+                        <span class="craft-chip">System design and build</span>
+                        <span class="craft-chip">Context and voice encoded</span>
+                        <span class="craft-chip">Team trained to run it</span>
+                    </div>
+                    <a class="consulting-link" href="/brain">See how a Marketing Brain works →</a>
+                </div>
+            </div>
+            <div class="craft-block">
+                <div class="craft-number">02</div>
+                <div class="craft-content">
+                    <h3>Positioning and launches</h3>
+                    <p>Classic PMM craft with receipts. Positioning, messaging, launch strategy and the assets that carry them, written and shipped, not just advised on.</p>
+                    <div class="craft-chips">
+                        <span class="craft-chip">Positioning and messaging</span>
+                        <span class="craft-chip">Launch strategy and execution</span>
+                        <span class="craft-chip">Website and page copy</span>
+                    </div>
+                    <a class="consulting-link" href="/work.html">See the launches →</a>
+                </div>
+            </div>
+            <div class="craft-block">
+                <div class="craft-number">03</div>
+                <div class="craft-content">
+                    <h3>Training and workshops</h3>
+                    <p>I teach marketing teams to work this way themselves. 500+ marketers trained live, from startups to enterprise teams.</p>
+                    <div class="craft-chips">
+                        <span class="craft-chip">Live team workshops</span>
+                        <span class="craft-chip">AI marketing enablement</span>
+                        <span class="craft-chip">Startmate GTM mentor</span>
+                    </div>
+                    <a class="consulting-link" href="/workshop">Join a free workshop →</a>
+                </div>
             </div>
         </div>
     </section>
@@ -2090,6 +2383,34 @@
         </div>
     </section>
 
+    <section id="writing">
+        <div class="section-tag">Writing</div>
+        <h2 class="section-title">How I think, in writing.</h2>
+        <div class="writing-list">
+            <a class="writing-row" href="/blog/marketing-is-the-bottleneck">
+                <span class="writing-title">Marketing is the bottleneck now</span>
+                <span class="writing-arrow">→</span>
+            </a>
+            <a class="writing-row" href="/blog/how-to-write-positioning-with-ai">
+                <span class="writing-title">How to write positioning with AI</span>
+                <span class="writing-arrow">→</span>
+            </a>
+            <a class="writing-row" href="/blog/ai-competitive-analysis-for-product-marketers">
+                <span class="writing-title">AI competitive analysis for product marketers</span>
+                <span class="writing-arrow">→</span>
+            </a>
+            <a class="writing-row" href="/blog/how-to-use-ai-for-a-product-launch">
+                <span class="writing-title">How to use AI for a product launch</span>
+                <span class="writing-arrow">→</span>
+            </a>
+            <a class="writing-row" href="/blog/claude-prompts-for-product-marketers">
+                <span class="writing-title">Claude prompts for product marketers (that aren't slop)</span>
+                <span class="writing-arrow">→</span>
+            </a>
+        </div>
+        <a class="consulting-link" href="/blog.html">All posts →</a>
+    </section>
+
     <!-- Count-up stat band -->
     <style>
         .stat-band { background: var(--cream-soft); max-width: none; margin: 0; padding: 80px 48px; }
@@ -2274,6 +2595,8 @@
             })();
         </script>
     </section>
+
+    
 
 
     <!-- Footer -->
