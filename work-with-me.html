@@ -88,6 +88,12 @@
         .wm-hero h1 { font-size: clamp(40px, 7vw, 72px); line-height: 0.98; letter-spacing: -0.01em; margin-bottom: 18px; }
         .wm-hero p { font-size: clamp(17px, 2.2vw, 20px); color: var(--gray-mid); max-width: 600px; margin: 0 auto; }
         .wm-hero .reassure { margin-top: 18px; font-size: 15px; color: var(--gray-light); }
+        .wm-hero-cta { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+        .wm-hero-cta .go-form { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: var(--white); border-radius: 999px; padding: 16px 32px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 1.4px; text-transform: uppercase; text-decoration: none; transition: transform 0.2s var(--ease-smooth), box-shadow 0.2s var(--ease-smooth); }
+        .wm-hero-cta .go-form:hover { transform: translateY(-2px); box-shadow: var(--warm-shadow); }
+        .wm-hero-cta .go-work { display: inline-flex; align-items: center; background: transparent; color: var(--ink); border: 1px solid rgba(31,21,17,0.25); border-radius: 999px; padding: 16px 32px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px; letter-spacing: 1.4px; text-transform: uppercase; text-decoration: none; transition: border-color 0.2s; }
+        .wm-hero-cta .go-work:hover { border-color: var(--ink); }
+        #form { scroll-margin-top: 90px; }
 
         /* Form card */
         .form-wrap { max-width: 720px; margin: 28px auto 0; padding: 0 32px 80px; }
@@ -195,6 +201,10 @@
         <h1>Let's build it together.</h1>
         <p>Tell me what you're working on with AI and where you're stuck. I read every one and come back within a day with the next step.</p>
         <p class="reassure">A few short questions, about two minutes.</p>
+        <div class="wm-hero-cta">
+            <a class="go-form" href="#form">Tell me what you're working on &darr;</a>
+            <a class="go-work" href="#career">See the track record</a>
+        </div>
     </header>
 
     <!-- How an engagement works -->
