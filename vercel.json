@@ -1,6 +1,10 @@
 {
   "routes": [
     {
+      "src": "/drafts(/.*)?",
+      "status": 404
+    },
+    {
       "src": "/preview-superpower",
       "dest": "/preview-superpower.html"
     },
