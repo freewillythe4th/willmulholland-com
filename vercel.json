@@ -56,6 +56,10 @@
       "dest": "/blog.html"
     },
     {
+      "src": "/blog/claude-vs-chatgpt-for-marketing",
+      "dest": "/blog/claude-vs-chatgpt-for-marketing.html"
+    },
+    {
       "src": "/blog/marketing-is-the-bottleneck",
       "dest": "/blog/marketing-is-the-bottleneck.html"
     },

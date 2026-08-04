@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude vs ChatGPT for Marketing: A PMM's Practical Guide</title>
+    <meta name="description" content="Which AI wins for product marketing work? How Claude and ChatGPT compare on positioning, messaging, launch copy, and the tasks that actually ship.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://intelligentgrowth.app/blog/claude-vs-chatgpt-for-marketing">
+    <meta property="og:title" content="Claude vs ChatGPT for Marketing: A PMM's Practical Guide">
+    <meta property="og:description" content="Which AI wins for product marketing work? How Claude and ChatGPT compare on positioning, messaging, launch copy, and the tasks that actually ship.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://intelligentgrowth.app/blog/claude-vs-chatgpt-for-marketing">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #1F1511;
+            --ink: #1F1511;
+            --cream: #F2EDE3;
+            --cream-soft: #EBE5D8;
+            --white: #FFFFFF;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            line-height: 1.65;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::selection { background: var(--accent); color: var(--white); }
+
+        nav {
+            position: sticky; top: 0; z-index: 100; padding: 20px 48px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(242,237,227,0.88); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(31,21,17,0.06);
+        }
+        .nav-logo img { height: 30px; width: auto; display: block; }
+        .nav-back {
+            font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-mid); text-decoration: none; transition: color 0.4s var(--ease-smooth);
+        }
+        .nav-back:hover { color: var(--ink); }
+
+        article { max-width: 720px; margin: 0 auto; padding: 72px 24px 48px; }
+
+        .kicker {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--accent); font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+        }
+        .kicker::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+
+        article h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(36px, 6vw, 60px);
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+        .lead { font-size: clamp(18px, 2.4vw, 22px); color: var(--gray-mid); line-height: 1.5; margin-bottom: 28px; }
+        .meta {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;
+            color: var(--gray-light); padding-bottom: 32px; border-bottom: 1px solid rgba(31,21,17,0.1); margin-bottom: 40px;
+        }
+
+        .tldr {
+            background: var(--cream-soft);
+            border: 1px solid rgba(31,21,17,0.12);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 48px;
+        }
+        .tldr h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(20px, 2.8vw, 26px);
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .tldr ul { list-style: none; padding: 0; }
+        .tldr ul li {
+            font-size: 17px; color: var(--gray-mid); margin-bottom: 12px; line-height: 1.6;
+            padding-left: 20px; position: relative;
+        }
+        .tldr ul li::before {
+            content: '\2014'; position: absolute; left: 0; color: var(--accent); font-weight: 700;
+        }
+        .tldr ul li:last-child { margin-bottom: 0; }
+
+        article h2.sec {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(24px, 3.4vw, 32px);
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+            margin: 48px 0 18px;
+            color: var(--ink);
+        }
+        article h3.subsec {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.01em;
+            margin: 32px 0 12px;
+            color: var(--ink);
+        }
+        article p { font-size: 18px; color: var(--gray-mid); margin-bottom: 20px; line-height: 1.65; }
+        article p strong { font-weight: 700; color: var(--ink); }
+        article ul.body-list { list-style: none; padding: 0; margin-bottom: 20px; }
+        article ul.body-list li {
+            font-size: 18px; color: var(--gray-mid); margin-bottom: 10px; line-height: 1.6;
+            padding-left: 20px; position: relative;
+        }
+        article ul.body-list li::before { content: '\2192'; position: absolute; left: 0; color: var(--accent); }
+
+        .comparison-table {
+            width: 100%; border-collapse: collapse; margin: 32px 0 40px; font-size: 15px;
+        }
+        .comparison-table th {
+            font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+            font-weight: 700; color: var(--white); background: var(--ink);
+            padding: 14px 16px; text-align: left;
+        }
+        .comparison-table th:first-child { border-radius: 12px 0 0 0; }
+        .comparison-table th:last-child { border-radius: 0 12px 0 0; }
+        .comparison-table td {
+            padding: 14px 16px; vertical-align: top; color: var(--gray-mid); line-height: 1.5;
+            border-bottom: 1px solid rgba(31,21,17,0.08);
+        }
+        .comparison-table tr:last-child td { border-bottom: none; }
+        .comparison-table td:first-child { font-weight: 600; color: var(--ink); width: 28%; }
+        .comparison-table tr:nth-child(even) td { background: rgba(31,21,17,0.03); }
+        .winner { color: var(--accent-deep); font-weight: 600; }
+
+        .faq-item { margin-bottom: 36px; }
+        .faq-item h3 {
+            font-family: 'Inter', sans-serif; font-weight: 700; font-size: 17px;
+            color: var(--ink); margin-bottom: 10px;
+        }
+        .faq-item p { font-size: 17px; margin-bottom: 0; }
+
+        .end-cta {
+            margin-top: 56px; padding: 40px 32px; background: var(--ink); color: var(--white);
+            border-radius: 24px; text-align: center;
+        }
+        .end-cta h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: 28px;
+            letter-spacing: -0.01em;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        .end-cta p { font-size: 16px; color: rgba(242,237,227,0.8); margin-bottom: 24px; }
+        .end-cta .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .end-cta a {
+            padding: 14px 26px; border-radius: 999px; font-size: 13px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none;
+            transition: all 0.5s var(--ease-smooth);
+        }
+        .end-cta a.primary { background: var(--white); color: var(--ink); }
+        .end-cta a.primary:hover { background: var(--accent); color: var(--white); border-radius: 12px; }
+        .end-cta a.ghost { border: 1px solid rgba(242,237,227,0.3); color: var(--white); }
+        .end-cta a.ghost:hover { border-radius: 12px; background: rgba(242,237,227,0.1); }
+
+        footer {
+            max-width: 720px; margin: 64px auto 0; padding: 32px 24px 48px;
+            border-top: 1px solid rgba(31,21,17,0.10); display: flex; justify-content: space-between;
+            font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-light); flex-wrap: wrap; gap: 12px;
+        }
+        footer a { color: var(--gray-light); text-decoration: none; }
+        footer a:hover { color: var(--ink); }
+
+        @media (max-width: 600px) {
+            nav { padding: 16px 24px; }
+            article { padding: 48px 24px 40px; }
+            .comparison-table { font-size: 13px; }
+            .comparison-table td, .comparison-table th { padding: 10px 12px; }
+        }
+    </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+        <a href="/blog" class="nav-back">&larr; Blog</a>
+    </nav>
+
+    <article>
+        <div class="kicker">Comparison</div>
+        <h1>Claude vs ChatGPT for marketing: a PMM's practical guide</h1>
+        <p class="lead">Which AI wins for product marketing work? Here is how they compare on the tasks that actually ship.</p>
+        <div class="meta">Will Mulholland &middot; 8 min read &middot; August 2026</div>
+
+        <div class="tldr">
+            <h2>Key points</h2>
+            <ul>
+                <li>For customer-facing copy (positioning docs, messaging houses, email sequences, one-pagers), Claude holds brand voice better across long documents.</li>
+                <li>For rapid brainstorming and generating twenty angles in a short session, ChatGPT is faster and covers more ground.</li>
+                <li>If you are choosing one tool to start: Claude. Product marketers spend more time on outputs than inputs.</li>
+                <li>If you use both: explore in ChatGPT, write and refine in Claude.</li>
+                <li>Pricing is identical at the individual plan level: $20 per month each.</li>
+            </ul>
+        </div>
+
+        <p>Most Claude vs ChatGPT comparisons are written for people who have not picked a tool yet. This one is for product marketers who already use at least one and want to know where to route specific work.</p>
+
+        <p>The honest answer is that the question is less "which AI is better" and more "which task goes where." Both tools have improved significantly through 2025 and into 2026. Neither is objectively best. But for the PMM workflow, there are clear patterns in where each one earns its keep.</p>
+
+        <p>Here is what I have seen working with both across positioning work, launch campaigns, and competitive research.</p>
+
+        <h2 class="sec">What product marketers need from an AI writing tool</h2>
+
+        <p>Before comparing features, it helps to name what matters to a PMM. You are not grinding out fifty blog posts a month. The work is typically high-stakes, customer-facing, and identity-defining for the product: positioning documents, messaging houses, one-pagers for sales, launch copy, competitive battle cards, and email sequences going to thousands of buyers.</p>
+
+        <p>That changes what "good" means in an AI tool. You care about:</p>
+
+        <ul class="body-list">
+            <li>Brand voice consistency across long documents</li>
+            <li>Enough context capacity to load brand guidelines, research docs, and past messaging without the model forgetting them halfway through</li>
+            <li>Output that sounds like a person wrote it rather than a template</li>
+            <li>The ability to iterate without starting from scratch each time</li>
+        </ul>
+
+        <p>These are Claude's strongest areas. That is not a knock on ChatGPT. It is a routing decision.</p>
+
+        <h2 class="sec">How they compare</h2>
+
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Dimension</th>
+                    <th>Claude</th>
+                    <th>ChatGPT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Context window</td>
+                    <td class="winner">200,000 tokens. Loads a brand guide, research docs, and prior messaging in one session.</td>
+                    <td>128,000 tokens. Solid, but you hit limits on large context projects.</td>
+                </tr>
+                <tr>
+                    <td>Long-form brand voice</td>
+                    <td class="winner">Holds voice across long documents. Fewer editing rounds needed.</td>
+                    <td>Can drift from a defined voice. Better for shorter form.</td>
+                </tr>
+                <tr>
+                    <td>Image creation</td>
+                    <td>No native image generation.</td>
+                    <td class="winner">Native image generation built in. Useful for quick visual drafts alongside copy.</td>
+                </tr>
+                <tr>
+                    <td>Web search</td>
+                    <td>Available.</td>
+                    <td class="winner">Built in. Strong for current competitor data and recent announcements.</td>
+                </tr>
+                <tr>
+                    <td>Brainstorming speed</td>
+                    <td>Thoughtful. Tends toward one direction at a time.</td>
+                    <td class="winner">Fast and wide. Good for generating many angles quickly.</td>
+                </tr>
+                <tr>
+                    <td>Integrations</td>
+                    <td>API, Claude Projects for persistent shared context.</td>
+                    <td class="winner">Microsoft 365, Zapier, broad ecosystem.</td>
+                </tr>
+                <tr>
+                    <td>Pricing (individual)</td>
+                    <td>$20/month (Pro plan)</td>
+                    <td>$20/month (Plus plan)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>The one area where ChatGPT has a clear practical edge for marketers is image creation. If you need a rough visual alongside copy in one session (for ads, social, or a presentation), ChatGPT does it without switching tools. Claude cannot.</p>
+
+        <p>Everything else is a trade-off by task, not a clean win.</p>
+
+        <h2 class="sec">Routing guide: which tool for which PMM task</h2>
+
+        <h3 class="subsec">Positioning document</h3>
+        <p>Go to Claude. A positioning document requires loading significant context: customer interviews, competitive notes, the current positioning and its problems, and a prompt asking Claude to find the tension and write toward a new position. Claude's context window handles this without losing the thread. The output tends to be coherent and reasoned rather than templated.</p>
+        <p>ChatGPT can do this work. But it is faster at generating structured outputs than at holding nuanced argument across a long, ambiguous document. Expect more correcting.</p>
+
+        <h3 class="subsec">Messaging house</h3>
+        <p>Claude again. A messaging house lives or dies on internal consistency: every claim, proof point, and persona nuance has to align. Claude maintains that consistency well when you load the full brand brief and work from it.</p>
+        <p>What you trade: speed on the first pass. Claude is slower when the context is large. If you want fifteen rough variants in ten minutes, ChatGPT is quicker. But for a messaging house going to a sales team or CEO, you want Claude's more careful pass.</p>
+
+        <h3 class="subsec">Competitive one-pager and battle cards</h3>
+        <p>Both tools are useful, at different stages. Use ChatGPT for the initial research pass if you want live web data on a competitor's positioning, pricing, or recent announcements. Its web search integration is stronger for the discovery phase.</p>
+        <p>Switch to Claude to write the actual one-pager or battle card. The output holds a clearer argument, sounds less like a data dump, and needs fewer editing rounds.</p>
+
+        <h3 class="subsec">Launch copy: website, emails, press release</h3>
+        <p>Claude. The copy that goes to buyers should sound like a person wrote it. Claude produces copy that reads cleaner, holds a product's voice more reliably, and needs less editing before it is ready to send. From the product marketers I have spoken to, this is the clearest practical difference between the two tools: when the copy will be read by a customer, most reach for Claude.</p>
+        <p>For internal launch briefs (the documents your team reads), either tool works. Claude produces something more readable; ChatGPT produces something more structured. Depends on the audience.</p>
+
+        <h3 class="subsec">High-volume ad copy and social variants</h3>
+        <p>ChatGPT. If you need twenty variations of an ad headline in two minutes, ChatGPT is faster and more prolific. It will not hold nuanced brand voice the same way, but for testing purposes that trade-off is often fine. Bring the strongest candidates back to Claude for a final pass before they go to production.</p>
+
+        <h2 class="sec">Practical setup</h2>
+
+        <p><strong>If you are choosing one tool to start:</strong> Get Claude. Product marketers spend more time on outputs (documents and copy going to buyers, sales, and executives) than on the brainstorming and research that feeds them. Claude wins the output phase. The Pro plan at $20 per month is the clearest single productivity improvement in most PMM tool stacks.</p>
+
+        <p><strong>If you already have Claude and want to add a second tool:</strong> Add ChatGPT for the discovery and exploration layer. Use it for competitive research, rapid variation generation, and anything needing current web information or images. Keep Claude as the drafting and refinement tool. The routing decision is simple: explore in ChatGPT, write in Claude.</p>
+
+        <p>One setup worth building if you are on a team: Claude Projects. A shared project with your brand guidelines, key messages, and tone-of-voice doc loaded means everyone draws from the same context. No one prompts from scratch, and the output is more consistent across the team.</p>
+
+        <h2 class="sec">Pricing</h2>
+
+        <p>Both tools are $20 per month at the individual paid tier. Both offer team plans with shared billing and admin controls. Both have free tiers, but the free limits are too tight for daily PMM work. The paid plan on either tool is worth it.</p>
+
+        <h2 class="sec">FAQ</h2>
+
+        <div class="faq-item">
+            <h3>Is Claude better than ChatGPT for marketing?</h3>
+            <p>For customer-facing outputs (positioning, messaging, launch copy), Claude tends to produce more consistent, human-sounding results. For brainstorming, rapid variation testing, and anything needing images or live web data, ChatGPT fills gaps Claude cannot. Most experienced marketing teams use both with a clear routing decision between them.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Do they cost the same?</h3>
+            <p>Yes. Both are $20 per month at the individual paid plan level as of mid-2026. Team plan pricing varies by seat count and usage limits.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can I use Claude for ad copy?</h3>
+            <p>Yes. Claude writes strong ad copy, particularly for formats that require consistent brand voice: display ads, long-form landing pages, email sequences. For rapid A/B testing variant generation, ChatGPT is faster and more prolific.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Does Claude have image generation?</h3>
+            <p>No. As of mid-2026, Claude does not generate images natively. If you need visuals alongside copy in one session, ChatGPT's built-in image generation is the better fit.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Which tool is better for writing that sounds human?</h3>
+            <p>Claude. Consistent feedback from marketers using both puts Claude ahead on naturalness, readability, and brand voice adherence. For copy going to buyers, Claude is the safer default for the final draft.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can these tools help with SEO content?</h3>
+            <p>Both work for SEO content. Claude produces more natural-sounding prose, which helps with engagement. ChatGPT's web search integration is useful for topics that need current data. For a closer look at AI in full launch and content workflows, see <a href="/blog/how-to-use-ai-for-a-product-launch">how to use AI for a product launch</a> and <a href="/blog/how-to-write-positioning-with-ai">how to write positioning with AI</a>.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Should I use Claude or ChatGPT for competitive research?</h3>
+            <p>Start with ChatGPT for the research and discovery phase. Its web search integration pulls live data on competitor positioning, pricing, and announcements. Then switch to Claude to write the actual one-pager or battle card. See the full workflow in <a href="/blog/ai-competitive-analysis-for-product-marketers">AI competitive analysis for product marketers</a>.</p>
+        </div>
+
+        <div class="end-cta">
+            <h3>The workflows that make AI output ship-ready</h3>
+            <p>The tool choice is one decision. The practice that separates consistent AI output from an hour of correcting first drafts is how you structure context, write prompts, and review the result. The Intelligent Growth newsletter covers that in one issue per week.</p>
+            <div class="btns">
+                <a class="primary" href="/#subscribe">Subscribe free</a>
+                <a class="ghost" href="/blog">More guides</a>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <span>&copy; 2026 Will Mulholland</span>
+        <span><a href="/blog">Blog</a> &middot; <a href="/">Home</a> &middot; <a href="/work.html">Case studies</a> &middot; <a href="/podcast">Podcast</a></span>
+    </footer>
+</body>
+</html>
