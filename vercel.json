@@ -76,6 +76,10 @@
       "dest": "/blog/how-to-use-ai-for-a-product-launch.html"
     },
     {
+      "src": "/blog/ai-for-customer-research",
+      "dest": "/blog/ai-for-customer-research.html"
+    },
+    {
       "src": "/system",
       "dest": "/system.html"
     },

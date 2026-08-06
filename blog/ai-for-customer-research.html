@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Customer Research: A Practical Guide for Product Marketers</title>
+    <meta name="description" content="How product marketers actually use AI for customer research, from mining interview transcripts to running win-loss analysis without a research team.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://intelligentgrowth.app/blog/ai-for-customer-research">
+    <meta property="og:title" content="AI for Customer Research: A Practical Guide for Product Marketers">
+    <meta property="og:description" content="How product marketers actually use AI for customer research, from mining interview transcripts to running win-loss analysis without a research team.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://intelligentgrowth.app/blog/ai-for-customer-research">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #1F1511;
+            --ink: #1F1511;
+            --cream: #F2EDE3;
+            --cream-soft: #EBE5D8;
+            --white: #FFFFFF;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            line-height: 1.65;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::selection { background: var(--accent); color: var(--white); }
+
+        nav {
+            position: sticky; top: 0; z-index: 100; padding: 20px 48px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(242,237,227,0.88); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(31,21,17,0.06);
+        }
+        .nav-logo img { height: 30px; width: auto; display: block; }
+        .nav-back {
+            font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-mid); text-decoration: none; transition: color 0.4s var(--ease-smooth);
+        }
+        .nav-back:hover { color: var(--ink); }
+
+        article { max-width: 720px; margin: 0 auto; padding: 72px 24px 48px; }
+
+        .kicker {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--accent); font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+        }
+        .kicker::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+
+        article h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(36px, 6vw, 60px);
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+        .lead { font-size: clamp(18px, 2.4vw, 22px); color: var(--gray-mid); line-height: 1.5; margin-bottom: 28px; }
+        .meta {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;
+            color: var(--gray-light); padding-bottom: 32px; border-bottom: 1px solid rgba(31,21,17,0.1); margin-bottom: 40px;
+        }
+
+        .tldr {
+            background: var(--cream-soft);
+            border: 1px solid rgba(31,21,17,0.12);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 48px;
+        }
+        .tldr h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(20px, 2.8vw, 26px);
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .tldr ul { list-style: none; padding: 0; margin: 0; }
+        .tldr li {
+            font-size: 17px; color: var(--gray-mid); margin-bottom: 12px; line-height: 1.6;
+            padding-left: 20px; position: relative;
+        }
+        .tldr li::before { content: '\2014'; position: absolute; left: 0; color: var(--accent); }
+        .tldr li:last-child { margin-bottom: 0; }
+
+        article h2.sec {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(24px, 3.4vw, 32px);
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+            margin: 48px 0 18px;
+            color: var(--ink);
+        }
+        article h3.subsec {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin: 32px 0 12px;
+        }
+        article p { font-size: 18px; color: var(--gray-mid); margin-bottom: 20px; line-height: 1.65; }
+        article p strong { font-weight: 700; color: var(--ink); }
+        article a { color: var(--accent); text-decoration: none; }
+        article a:hover { text-decoration: underline; }
+        .accent-text { color: var(--accent-deep); }
+
+        .callout {
+            border-left: 3px solid var(--accent);
+            padding: 16px 20px;
+            margin: 28px 0;
+            background: var(--accent-soft);
+            border-radius: 0 8px 8px 0;
+        }
+        .callout p { font-size: 16px; margin-bottom: 0; color: var(--accent-deep); }
+
+        .faq-section { margin-top: 48px; }
+        .faq-section h2.sec { margin-top: 0; }
+        .faq-item { margin-bottom: 32px; }
+        .faq-item h3 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 17px;
+            color: var(--ink);
+            margin-bottom: 10px;
+        }
+        .faq-item p { font-size: 17px; margin-bottom: 0; }
+
+        .resources {
+            background: var(--cream-soft);
+            border: 1px solid rgba(31,21,17,0.12);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin: 40px 0;
+        }
+        .resources h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: 22px;
+            margin-bottom: 16px;
+            color: var(--ink);
+        }
+        .resources ul { list-style: none; padding: 0; margin: 0; }
+        .resources li { font-size: 16px; color: var(--gray-mid); margin-bottom: 10px; padding-left: 16px; position: relative; }
+        .resources li::before { content: '\2192'; position: absolute; left: 0; color: var(--accent); }
+        .resources a { color: var(--accent); text-decoration: none; }
+        .resources a:hover { text-decoration: underline; }
+
+        .end-cta {
+            margin-top: 56px; padding: 40px 32px; background: var(--ink); color: var(--white);
+            border-radius: 24px; text-align: center;
+        }
+        .end-cta h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: 28px;
+            letter-spacing: -0.01em;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        .end-cta p { font-size: 16px; color: rgba(242,237,227,0.8); margin-bottom: 24px; }
+        .end-cta .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .end-cta a {
+            padding: 14px 26px; border-radius: 999px; font-size: 13px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none;
+            transition: all 0.5s var(--ease-smooth);
+        }
+        .end-cta a.primary { background: var(--white); color: var(--ink); }
+        .end-cta a.primary:hover { background: var(--accent); color: var(--white); border-radius: 12px; }
+        .end-cta a.ghost { border: 1px solid rgba(242,237,227,0.3); color: var(--white); }
+        .end-cta a.ghost:hover { border-radius: 12px; background: rgba(242,237,227,0.1); }
+
+        footer {
+            max-width: 720px; margin: 64px auto 0; padding: 32px 24px 48px;
+            border-top: 1px solid rgba(31,21,17,0.10); display: flex; justify-content: space-between;
+            font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-light); flex-wrap: wrap; gap: 12px;
+        }
+        footer a { color: var(--gray-light); text-decoration: none; }
+        footer a:hover { color: var(--ink); }
+
+        @media (max-width: 600px) {
+            nav { padding: 16px 24px; }
+            article { padding: 48px 24px 40px; }
+        }
+    </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+        <a href="/blog" class="nav-back">&larr; Blog</a>
+    </nav>
+
+    <article>
+        <div class="kicker">Guide</div>
+        <h1>AI for customer research: a practical guide for product marketers</h1>
+        <p class="lead">How to go from raw customer data to usable insight without spending two weeks on it. Four workflows, the tools that do the job, and what to do about confidentiality.</p>
+        <div class="meta">Will Mulholland &middot; 11 min read</div>
+
+        <div class="tldr">
+            <h2>Key points</h2>
+            <ul>
+                <li>AI does not replace the judgment in customer research. It removes the hours of grunt work between collecting data and acting on it.</li>
+                <li>The biggest unlock for most PMMs is not a new research tool. It is using AI to finally surface insights from transcripts and recordings they already have.</li>
+                <li>Four high-value workflows: mining existing interview transcripts, faster win-loss analysis, building personas from raw data, and synthesising voice of customer across channels.</li>
+                <li>Confidentiality is a real blocker. There are practical ways to handle it without abandoning AI entirely.</li>
+                <li>NotebookLM, Claude, and ChatGPT cover 90% of what most product marketers need before they touch any specialist tool.</li>
+                <li>AI customer research is now the default method for 81% of research teams, but most PMMs are still using it at the chat level, not as a repeatable practice.</li>
+            </ul>
+        </div>
+
+        <h2 class="sec">The problem no one talks about</h2>
+        <p>Most product marketers sit on a small mountain of unanalysed research. Customer interview recordings from last quarter. Sales call transcripts in Gong. A Typeform survey from the last product launch with 120 responses. G2 reviews they meant to read through. A folder of win-loss notes a sales rep put together.</p>
+        <p>The insights are there. The time to pull them out is not.</p>
+        <p>That is the real problem AI solves for PMMs doing customer research. Not "should I run an interview or a survey." The question is: how do you go from raw data to something you can actually use in your messaging, your positioning doc, or your next sales enablement piece, without spending two weeks on it?</p>
+        <p>This guide covers four specific workflows, the tools that do the job, and the one thing most AI-for-research guides skip entirely: what to do about confidentiality.</p>
+
+        <h2 class="sec">What AI for customer research actually means</h2>
+        <p>AI for customer research covers two different things, and it helps to separate them.</p>
+        <p>The first is AI-assisted analysis: using AI to process, tag, transcribe, and synthesise research you have already collected. Interview recordings, survey responses, support tickets, sales calls. You bring the raw material, AI does the extraction.</p>
+        <p>The second is AI-driven collection: AI moderates the interviews or runs the surveys itself. Tools like Perspective AI conduct end-to-end conversational interviews, asking follow-up questions in real time based on what a respondent says. This is growing fast, but it is not where most PMMs should start.</p>
+        <p>Start with analysis. You almost certainly have more existing research than you have ever properly used.</p>
+
+        <h2 class="sec">Why this matters now for PMMs</h2>
+        <p>The research function in product marketing has always had a scale problem. You need customer insight to inform positioning, pricing, messaging, and launch strategy. But you rarely have a dedicated researcher. So research gets done in bursts around launches, gets shallow, or does not happen at all.</p>
+        <p>AI changes the economics. What used to require a research team or a specialist agency can now be done by one PMM with the right workflow in a fraction of the time.</p>
+        <p>A few numbers that put this in context. AI customer research is now the <a href="https://getperspective.ai/blog/state-of-ai-customer-research-2026-adoption-spend-survey-replacement" target="_blank" rel="noopener">default discovery method for 81% of research teams</a>, according to Perspective AI's 2026 State of AI in Customer Research report. AI-conversation tools grew 4.2x and are the fastest-growing budget line in research. And 65.2% of product managers are already using AI for product research, with analysing user feedback as the most common use case.</p>
+        <p>The gap is not awareness. It is practice. Most PMMs have tried AI for customer research at the "paste a transcript into ChatGPT" level and found it shallow. The step up is treating it as a repeatable workflow with clear inputs and clear outputs.</p>
+
+        <h2 class="sec">Four workflows worth building</h2>
+
+        <h3 class="subsec">1. Mining your existing transcripts</h3>
+        <p>This is the highest-leverage place to start.</p>
+        <p>Pull your last five to ten customer interview recordings. Get them transcribed if they are not already (Otter.ai, Granola, and most video conferencing tools do this automatically now). Upload the transcripts to <a href="https://notebooklm.google.com" target="_blank" rel="noopener">NotebookLM</a> or Claude.</p>
+        <p>Then run structured queries against them:</p>
+        <ul style="list-style:none;padding:0;margin:0 0 20px 0;">
+            <li style="font-size:17px;color:var(--gray-mid);margin-bottom:10px;padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">&#8212;</span>"What are the top three problems customers mention before they found a solution?"</li>
+            <li style="font-size:17px;color:var(--gray-mid);margin-bottom:10px;padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">&#8212;</span>"What language do customers use to describe the outcome they wanted?"</li>
+            <li style="font-size:17px;color:var(--gray-mid);margin-bottom:10px;padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">&#8212;</span>"What almost stopped them from buying, and what changed their mind?"</li>
+            <li style="font-size:17px;color:var(--gray-mid);margin-bottom:0;padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">&#8212;</span>"Which competitors come up and how are they described?"</li>
+        </ul>
+        <p>The output is not the final insight. It is a structured first pass that would have taken you three days of note-taking to produce manually. You read it, you edit it, you spot what does not ring true. That is still your job. The AI removes the hours between raw data and a usable first draft.</p>
+        <p>NotebookLM is particularly good for this because it stays grounded in the source material and cites where it is pulling from. You can verify every claim against the actual transcript, which matters when you are putting findings in front of a VP or a sales team.</p>
+
+        <div class="callout">
+            <p>If you cannot verify it, do not use it. AI will occasionally surface a pattern that is not in your data. Citation-grounded tools reduce this risk, but your read on the output is still the quality gate.</p>
+        </div>
+
+        <h3 class="subsec">2. Win-loss analysis without a research team</h3>
+        <p>Traditional win-loss programs take six to ten weeks per cycle. You schedule interviews with churned customers, wait for scheduling, run the calls, transcribe them, code themes, and write a report. By the time it is done, the deals that informed it are ancient history.</p>
+        <p>AI makes win-loss something you can run continuously.</p>
+        <p>The basic version: every time a deal closes or churns, have the AE drop the call recording and their notes into a shared folder. Connect that folder to a Claude project or a NotebookLM notebook. Run a weekly query: "Based on the last ten deals, what objections came up in losses that were absent in wins? What competitor came up most in losses? What outcome language did successful deals use?"</p>
+        <p>The advanced version uses a tool like <a href="https://getperspective.ai" target="_blank" rel="noopener">Perspective AI</a> or Clozd to trigger automated customer interviews after a deal closes, with an AI moderator that probes for depth. The synthesis happens in hours rather than weeks, and you get continuous insight rather than quarterly snapshots.</p>
+        <p>What changes when you do this properly: your competitive positioning becomes current. You stop building battlecards based on what lost three quarters ago.</p>
+
+        <h3 class="subsec">3. Persona building from raw VoC data</h3>
+        <p>Most buyer personas are built from a combination of demographic data, assumptions, and one round of interviews from two years ago. They get stale fast and stop being useful.</p>
+        <p>Collect raw voice-of-customer across four sources: customer interview transcripts, G2 or Capterra reviews, sales call recordings (Gong works well here), and any open-text survey responses you have. Put them all into one Claude project or NotebookLM notebook.</p>
+        <p>Then ask:</p>
+        <ul style="list-style:none;padding:0;margin:0 0 20px 0;">
+            <li style="font-size:17px;color:var(--gray-mid);margin-bottom:10px;padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">&#8212;</span>"What are the three to five distinct jobs-to-be-done described across these sources?"</li>
+            <li style="font-size:17px;color:var(--gray-mid);margin-bottom:10px;padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">&#8212;</span>"What language do customers use to describe their situation before they found a solution?"</li>
+            <li style="font-size:17px;color:var(--gray-mid);margin-bottom:10px;padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">&#8212;</span>"What metrics or outcomes do they mention most often?"</li>
+            <li style="font-size:17px;color:var(--gray-mid);margin-bottom:0;padding-left:20px;position:relative;"><span style="position:absolute;left:0;color:var(--accent);">&#8212;</span>"What are the most common frustrations with existing tools or approaches?"</li>
+        </ul>
+        <p>The output gives you raw material for a persona grounded in actual customer language, not marketing-speak you invented. It is faster than a traditional synthesis session, and because you can re-run it as new data comes in, it stays current.</p>
+        <p>This is where "context is the moat" becomes practical. You are not asking AI to invent a persona. You are asking it to extract patterns from real customer voices you have already collected. The persona it helps you build reflects your customers, not a generic B2B SaaS archetype.</p>
+
+        <h3 class="subsec">4. Synthesising customer signals across channels</h3>
+        <p>A PMM at a mid-size SaaS company sees customer signals from a dozen places: support tickets, NPS responses, sales call notes, renewal conversations, community posts, social mentions, review sites. Each source is a partial picture. Synthesising across all of them is where the real insight lives, and it is the job that nobody has time for.</p>
+        <p>Set up a monthly workflow: pull a sample from each source (50 support tickets, last month's NPS verbatims, five sales call transcripts, latest G2 reviews), drop them into Claude with a consistent prompt, and ask for a synthesis across all sources. What themes appear in multiple channels? What problem language is consistent? What new friction points are emerging?</p>
+        <p>This is not a replacement for deep customer conversations. It is a signal layer that tells you where to point the deeper research. When the same pain point shows up in support tickets, NPS comments, and renewal calls, that is where you go dig.</p>
+
+        <h2 class="sec">The confidentiality problem (and how to handle it)</h2>
+        <p>Most AI-for-research guides skip this entirely, which means you end up trying to apply them and immediately hitting a wall.</p>
+        <p>Customer interview transcripts contain names, company details, unannounced product feedback, and sometimes competitive intelligence your customers share in confidence. You cannot paste all of that into a public AI chat window, and most corporate IT policies are explicit about it.</p>
+        <p>A few practical approaches:</p>
+        <p><strong>Anonymise before you upload.</strong> Do a find-and-replace pass on names and company names before putting a transcript into any external tool. It takes ten minutes and removes the core confidentiality risk.</p>
+        <p><strong>Use the API or a team plan that does not train on your data.</strong> Both Anthropic and OpenAI offer enterprise plans where your inputs are not used for training. If you are doing this regularly, it is worth the cost.</p>
+        <p><strong>Use NotebookLM for the most sensitive material.</strong> Google's <a href="https://notebooklm.google.com" target="_blank" rel="noopener">NotebookLM</a> operates under Google Workspace privacy terms, which are more familiar to most legal and IT teams than newer AI tools. If you are working in a larger company, this is often the path of least resistance.</p>
+        <p><strong>For truly sensitive data, consider a local model.</strong> Tools like Ollama let you run an open-source model on your own machine. The quality is lower than Claude or GPT, but the data never leaves your device. For a quick theme-extraction pass on confidential interviews, it is often good enough.</p>
+        <p>Confidentiality is a real constraint, not an excuse. There is almost always a path that lets you use AI on your research without violating it.</p>
+
+        <h2 class="sec">Common mistakes</h2>
+        <p><strong>Treating the AI output as the finding.</strong> AI synthesis is a first draft. It will surface patterns, but it will also occasionally miss nuance or inflate a theme that appeared in two transcripts. You still read the output critically and push back where it does not match your understanding of the customer.</p>
+        <p><strong>Using AI for the wrong job.</strong> AI is good at extraction and synthesis across large volumes of text. It is not good at replacing the relationship and rapport that comes from a well-run customer interview. Use AI to scale what you already have, not to skip the human conversations you should be having.</p>
+        <p><strong>Building a new research stack before using what you have.</strong> Most PMMs do not need a new tool. They need a workflow for the transcripts and recordings they already have. Start there. Add specialist tools once you have exhausted what is possible with Claude, NotebookLM, and the data already in your Gong account.</p>
+        <p><strong>Skipping the confidentiality step.</strong> Pasting a raw customer transcript with names and company details into a free AI chat is a real risk. Anonymise first. It is a ten-minute step that removes a serious problem.</p>
+
+        <div class="faq-section">
+            <h2 class="sec">FAQ</h2>
+
+            <div class="faq-item">
+                <h3>What AI tools should a product marketer use for customer research?</h3>
+                <p>For most PMMs, three tools cover 90% of the job: Claude or ChatGPT for transcript analysis and synthesis, <a href="https://notebooklm.google.com" target="_blank" rel="noopener">NotebookLM</a> for grounded Q&amp;A across multiple documents (it cites its sources), and your existing call recording tool (Gong, Chorus, or Granola) for transcription and search. Specialist tools like Perspective AI are worth adding once you have a regular research practice and need to scale beyond what manual upload workflows can handle.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can AI actually replace customer interviews?</h3>
+                <p>No, and you would not want it to. AI-moderated interviews can run at scale and adapt questions in real time, which is useful for high-volume research. But the relationship depth and the unexpected direction a skilled human interviewer can take a conversation still produces insight that automated tools miss. Use AI to do more research, not to do without it.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How do I handle confidential customer data when using AI?</h3>
+                <p>Anonymise transcripts before uploading (replace names and company names with placeholders). Use a team plan with a no-training-data policy. For the most sensitive material, use NotebookLM, which operates under Google Workspace privacy terms, or a local model like Ollama that never sends data externally.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How do I start if I have no existing research?</h3>
+                <p>Start with reviews. Pull your last 20 G2, Capterra, or Trustpilot reviews. Paste them into Claude and ask: "What are the top three problems customers solved with this product, in their own words?" and "What frustrations come up most often?" That is a 20-minute exercise that gives you usable language grounded in real customer voice.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What is the best AI workflow for win-loss analysis?</h3>
+                <p>The minimum viable version: after each lost deal, have the AE record a five-minute voice memo covering the key objections, what competitor won, and what might have changed the outcome. Collect these into a folder, transcribe them monthly, and run a synthesis query in Claude asking for patterns across the batch. For more rigour, trigger an automated customer interview via Perspective AI after each churned deal and build a live synthesis notebook in NotebookLM.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Will AI make my customer research less credible?</h3>
+                <p>Only if you use it to skip steps rather than accelerate them. AI-synthesised research that you have reviewed, verified, and grounded in actual transcripts is more credible than research based on one or two interviews you half-remembered. The quality gate is still your judgment on the output. Run citation-grounded tools so you can verify every claim against its source.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>How long does it take to set up these workflows?</h3>
+                <p>The transcript mining workflow takes one afternoon: gather your existing transcripts, set up a NotebookLM notebook or Claude project, run your first round of queries. Win-loss synthesis takes slightly longer because you need an intake process for new deal data, but it is still a half-day build the first time. Neither requires specialist tools or a research budget.</p>
+            </div>
+        </div>
+
+        <div class="resources">
+            <h2>Key resources</h2>
+            <ul>
+                <li><a href="https://getperspective.ai/blog/state-of-ai-customer-research-2026-adoption-spend-survey-replacement" target="_blank" rel="noopener">Perspective AI's 2026 State of AI in Customer Research</a> for the adoption data behind these shifts</li>
+                <li><a href="https://notebooklm.google.com" target="_blank" rel="noopener">NotebookLM</a> for grounded transcript synthesis with citations</li>
+                <li><a href="https://getperspective.ai" target="_blank" rel="noopener">Perspective AI</a> if you want to scale AI-moderated interviews</li>
+                <li><a href="/blog/how-to-use-ai-for-a-product-launch">How to use AI for a product launch</a> for putting this research into action</li>
+            </ul>
+        </div>
+
+        <h2 class="sec">Start with what you already have</h2>
+        <p>The biggest shift is not adopting a new tool. It is building the habit of putting your existing research through a structured AI workflow before you declare you need more research.</p>
+        <p>Most PMMs do not have a research gap. They have a synthesis gap.</p>
+        <p>Take the last three customer interview transcripts in your folder. Upload them to NotebookLM. Run the four queries from the transcript mining section. That is your starting point. Everything else in this guide gets added once that habit is solid.</p>
+
+        <div class="end-cta">
+            <h3>Get practical AI marketing workflows every week</h3>
+            <p>The Intelligent Growth newsletter covers PMM AI workflows grounded in what actually works, not what looks impressive on a slide.</p>
+            <div class="btns">
+                <a class="primary" href="/#subscribe">Subscribe free</a>
+                <a class="ghost" href="/blog">More guides</a>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <span>&copy; 2026 Will Mulholland</span>
+        <span><a href="/blog">Blog</a> &middot; <a href="/">Home</a> &middot; <a href="/work.html">Case studies</a> &middot; <a href="/podcast">Podcast</a></span>
+    </footer>
+</body>
+</html>
