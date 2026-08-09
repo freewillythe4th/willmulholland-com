@@ -1396,7 +1396,9 @@
               downloadLink.click();
               downloadLink.remove();
             }
-            message.textContent = config.success;
+            message.textContent = (campaignSource().source && config.successCampaign)
+              ? config.successCampaign
+              : config.success;
           }).catch(function () {
             button.disabled = false;
             button.textContent = originalLabel;
@@ -1412,7 +1414,8 @@
         emailId: 'starterEmail',
         medium: 'brain-starter',
         download: true,
-        success: 'Downloading now. It is also in your inbox shortly, along with the 5 day course.'
+        success: 'Downloading now. It is also in your inbox shortly, along with the 5 day course.',
+        successCampaign: 'Downloading now. Check your inbox for the starter folder, the setup prompt and the Connector link.'
       });
 
       subscribe({
