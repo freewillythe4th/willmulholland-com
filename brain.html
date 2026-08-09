@@ -1354,6 +1354,17 @@
         });
       }
 
+      // /pma and any other ?src= landing carries its campaign through to the
+      // beehiiv Lead Source field, so talk signups can be segmented.
+      function campaignSource() {
+        try {
+          var src = new URLSearchParams(window.location.search).get('src');
+          return src ? { source: src } : {};
+        } catch (err) {
+          return {};
+        }
+      }
+
       function subscribe(config) {
         var form = document.getElementById(config.formId);
         var message = document.getElementById(config.messageId);
@@ -1373,7 +1384,7 @@
           fetch('/api/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email, utm_medium: config.medium })
+            body: JSON.stringify(Object.assign({ email: email, utm_medium: config.medium }, campaignSource()))
           }).then(function (response) {
             if (!response.ok) throw new Error('Subscribe failed');
             form.style.display = 'none';
