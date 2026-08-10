@@ -77,7 +77,7 @@
                 <button type="submit" id="everythingButton">Send it over</button>
             </form>
 
-            <p class="note" id="everythingNote">Free, and it works with whatever AI plan you are already on.</p>
+            <p class="note" id="everythingNote">Free, and it works with whatever AI plan you're already on.<br>You'll also get my weekly newsletter, where I share what I'm building and what's working. Unsubscribe any time.</p>
             <p class="message" id="everythingMessage" role="status" aria-live="polite"></p>
         </div>
     </main>
@@ -125,7 +125,7 @@
             form.style.display = 'none';
             note.style.display = 'none';
             message.className = 'message';
-            message.textContent = 'Sent. It lands in your inbox in a minute or two. If you cannot see it, check promotions and spam.';
+            message.textContent = "Sent. It'll land in your inbox in a minute or two. If you can't see it, check promotions and spam.";
           }).catch(function () {
             button.disabled = false;
             button.textContent = label;
