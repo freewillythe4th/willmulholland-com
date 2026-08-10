@@ -89,7 +89,7 @@ Proof line: 53 product marketing skills, updated as I sharpen them, across Claud
 ## Pricing boundary
 
 - Free: connection, catalogue discovery, and the current free skills.
-- Member: seven-day free trial converting to A$49 per month, with a payment card required. A$490 per year remains available without the trial while the founding offer remains active.
+- Member: seven-day free trial converting to A$35 per month, with a payment card required. A$340 per year remains available without the trial while the founding offer remains active.
 - Do not publish a supporter tier until its entitlement and checkout are confirmed in the live billing system.
 - Paid members should never receive copy that tells them a skill is free.
 

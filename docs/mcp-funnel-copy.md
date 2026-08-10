@@ -156,11 +156,11 @@ Action: Connect free
 
 ### Intelligent Growth OS member
 
-Price: A$49 a month founding price
+Price: A$35 a month founding price
 
-Annual option: A$490 a year
+Annual option: A$340 a year
 
-Trial: Seven days of complete Connector access, then A$49 a month. A payment card is required. The annual option does not use the trial.
+Trial: Seven days of complete Connector access, then A$35 a month. A payment card is required. The annual option does not use the trial.
 
 Description: For the person handling positioning, messaging, launches and competitive work every month.
 
