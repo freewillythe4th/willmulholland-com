@@ -179,7 +179,7 @@ h3 { margin-bottom: 14px; font-size: 21px; }
 .hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(72px, 10vw, 132px) 0 90px;
+  padding: clamp(52px, 5.5vw, 76px) 0 72px;
   background-color: var(--paper);
   background-image: radial-gradient(1000px 580px at 88% 6%, rgba(37, 99, 235, 0.1), transparent 62%);
 }
@@ -196,8 +196,13 @@ h3 { margin-bottom: 14px; font-size: 21px; }
 
 .hero__copy { position: relative; z-index: 1; }
 .hero__copy .lead strong { color: var(--ink); }
-.hero__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin: 38px 0 26px; }
-.hero__proof { color: var(--ink-soft); font-size: 14px; }
+/* The hero headline is capped well below the global h1 size so the single call to
+   action clears the fold on a laptop. The old 118px ceiling pushed it off screen. */
+.hero h1 { max-width: 20ch; margin-bottom: 22px; font-size: clamp(40px, 5.2vw, 72px); }
+.hero__copy .lead { max-width: 62ch; font-size: clamp(18px, 1.6vw, 21px); }
+.hero__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin: 26px 0 18px; }
+.hero__proof { color: var(--ink-soft); font-size: 14px; line-height: 1.7; }
+.hero__proof .text-link { display: inline-flex; align-items: center; gap: 6px; }
 
 .proof-strip {
   border-top: 1px solid var(--line);
