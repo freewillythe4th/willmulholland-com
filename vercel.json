@@ -5,9 +5,13 @@
       "status": 404
     },
     {
+      "src": "/everything",
+      "dest": "/everything.html"
+    },
+    {
       "src": "/pma",
       "status": 307,
-      "headers": { "Location": "/brain?src=pma_summit#starter" }
+      "headers": { "Location": "/everything?src=pma_summit" }
     },
     {
       "src": "/preview-superpower",

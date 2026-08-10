@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everything from the session | Intelligent Growth</title>
+    <meta name="description" content="The starter folder, the setup prompt and the connectors from the demo, sent to your inbox.">
+    <meta name="robots" content="noindex,follow">
+    <link rel="canonical" href="https://intelligentgrowth.app/everything">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --ink: #1F1511; --cream: #FFFFFF; --cream-soft: #F4F4F2; --white: #FFFFFF;
+            --gray-mid: #5C4F47; --gray-light: #8B7E73; --accent: #2563EB; --accent-soft: #DBEAFE; --accent-deep: #1E3A8A;
+            --offset-shadow: 6px 6px 0 rgba(31,21,17,0.14); --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--cream); color: var(--ink); line-height: 1.55; letter-spacing: -0.01em;
+            min-height: 100vh; display: flex; flex-direction: column; }
+        ::selection { background: var(--accent); color: var(--white); }
+
+        nav { padding: 18px 48px; display: flex; align-items: center; border-bottom: 1px solid rgba(31,21,17,0.06); }
+        nav .nav-logo img { height: 46px; width: auto; display: block; }
+        @media (max-width: 600px) { nav { padding: 14px 20px; } nav .nav-logo img { height: 38px; } }
+
+        main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 56px 22px 72px; }
+        .wrap { max-width: 620px; width: 100%; text-align: center; }
+
+        h1 { font-family: 'Instrument Serif', Georgia, serif; font-weight: 400; font-size: clamp(36px, 6.4vw, 60px);
+            line-height: 1.02; letter-spacing: -0.02em; margin-bottom: 18px; }
+        .sub { font-size: clamp(17px, 2.1vw, 20px); color: var(--gray-mid); max-width: 30em; margin: 0 auto 32px; }
+
+        form { display: flex; gap: 10px; justify-content: center; max-width: 480px; margin: 0 auto; }
+        input[type="email"] { flex: 1; min-width: 0; padding: 16px 20px; font-family: inherit; font-size: 16px; color: var(--ink);
+            background: var(--white); border: 1px solid rgba(31,21,17,0.18); border-radius: 999px; outline: none;
+            transition: border-color 0.3s var(--ease-smooth); }
+        input[type="email"]::placeholder { color: var(--gray-light); }
+        input[type="email"]:focus { border-color: var(--accent); }
+        button { padding: 16px 26px; font-family: inherit; font-size: 14px; font-weight: 700; letter-spacing: 0.04em;
+            text-transform: uppercase; color: var(--white); background: var(--ink); border: 0; border-radius: 999px;
+            cursor: pointer; white-space: nowrap; transition: background 0.4s var(--ease-smooth); }
+        button:hover { background: var(--accent); }
+        button:disabled { opacity: 0.6; cursor: default; }
+        @media (max-width: 520px) { form { flex-direction: column; } button { width: 100%; } }
+
+        .note { font-size: 15px; color: var(--gray-light); margin-top: 20px; }
+        .message { font-size: 17px; color: var(--ink); max-width: 30em; margin: 0 auto; }
+        .message.error { color: #B91C1C; font-size: 15px; margin-top: 18px; }
+    </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo" aria-label="Intelligent Growth home"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth"></a>
+    </nav>
+
+    <main>
+        <div class="wrap">
+            <h1>Everything I just showed you.</h1>
+            <p class="sub">Put your email in and I'll send the lot: the starter folder, the setup prompt, and the connectors I ran the demo on.</p>
+
+            <form id="everythingForm" novalidate>
+                <label for="everythingEmail" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Email address</label>
+                <input type="email" id="everythingEmail" name="email" placeholder="Email address" autocomplete="email" required>
+                <button type="submit" id="everythingButton">Send it over</button>
+            </form>
+
+            <p class="note" id="everythingNote">Free, and it works with whatever AI plan you are already on.</p>
+            <p class="message" id="everythingMessage" role="status" aria-live="polite"></p>
+        </div>
+    </main>
+
+    <script>
+      (function () {
+        // Every session gets its own Lead Source so each one can be segmented and
+        // followed up separately. /pma arrives here as ?src=pma_summit. Anyone
+        // landing without a source still gets a usable one rather than the
+        // always-on default, because these people came from a room, not the site.
+        function campaignSource() {
+          var src = 'post_workshop';
+          try {
+            var param = new URLSearchParams(window.location.search).get('src');
+            if (param) src = param;
+          } catch (err) { /* keep the default */ }
+          return { source: src };
+        }
+
+        var form = document.getElementById('everythingForm');
+        var input = document.getElementById('everythingEmail');
+        var button = document.getElementById('everythingButton');
+        var message = document.getElementById('everythingMessage');
+        var note = document.getElementById('everythingNote');
+
+        form.addEventListener('submit', function (event) {
+          event.preventDefault();
+          var email = (input.value || '').trim();
+          if (!email || email.indexOf('@') < 1) {
+            message.className = 'message error';
+            message.textContent = 'That email does not look right. Have another go.';
+            return;
+          }
+          var label = button.textContent;
+          button.disabled = true;
+          button.textContent = 'Sending...';
+          message.textContent = '';
+
+          fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(Object.assign({ email: email, utm_medium: 'post-session' }, campaignSource()))
+          }).then(function (response) {
+            if (!response.ok) throw new Error('Subscribe failed');
+            form.style.display = 'none';
+            note.style.display = 'none';
+            message.className = 'message';
+            message.textContent = 'Sent. It lands in your inbox in a minute or two. If you cannot see it, check promotions and spam.';
+          }).catch(function () {
+            button.disabled = false;
+            button.textContent = label;
+            message.className = 'message error';
+            message.textContent = 'Something went wrong. Try again, or email will@intelligentgrowth.app and I will send it manually.';
+          });
+        });
+      })();
+    </script>
+</body>
+</html>
