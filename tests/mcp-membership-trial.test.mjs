@@ -20,8 +20,8 @@ test('the OS pricing card offers a seven-day trial with clear conversion terms',
 
   assert.match(memberCard, /7-day free trial/i);
   assert.match(memberCard, /every paid skill/i);
-  assert.match(memberCard, /becomes A\$49 a month unless you cancel/i);
-  assert.match(memberCard, /A\$490 a year/i);
+  assert.match(memberCard, /becomes A\$35 a month unless you cancel/i);
+  assert.match(memberCard, /A\$340 a year/i);
   assert.match(memberCard, /data-ig-event="mcp_trial_clicked"/);
   assert.match(memberCard, /data-ig-billing-interval="monthly"/);
   assert.match(memberCard, />Start 7-day free trial<\/a>/);
@@ -43,7 +43,7 @@ test('the FAQ explains card, conversion, access and cancellation', () => {
   assert.match(page, /Intelligent Growth OS is the membership for the complete Connector/i);
   assert.match(page, /use all 53 skills for seven days/i);
   assert.match(page, /payment card/i);
-  assert.match(page, /converts to A\$49 a month/i);
-  assert.match(page, /annual option remains A\$490/i);
+  assert.match(page, /converts to A\$35 a month/i);
+  assert.match(page, /annual option remains A\$340/i);
   assert.match(page, /cancel before the trial ends/i);
 });

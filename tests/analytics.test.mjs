@@ -137,6 +137,15 @@ test('funnel properties are allowlisted and reject payload-like values', () => {
     client: 'claude_desktop',
   });
 
+  assert.deepEqual(sanitizeFunnelProperties('mcp_setup_step_completed', {
+    step: 'setup_video_started',
+    client: 'claude_desktop',
+    email: 'person@example.com',
+  }), {
+    step: 'setup_video_started',
+    client: 'claude_desktop',
+  });
+
   assert.deepEqual(sanitizeFunnelProperties('mcp_start_clicked', {
     job: 'positioning_diagnosis',
     placement: 'hero',

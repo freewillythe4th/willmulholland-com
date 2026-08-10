@@ -28,7 +28,7 @@ const FUNNEL_PROPERTY_VALUES = Object.freeze({
   channel: new Set(['whatsapp']),
   client: new Set(['claude_desktop', 'claude_code', 'chatgpt', 'other']),
   auth_mode: new Set(['oauth']),
-  step: new Set(['client_selected', 'connection_copied', 'prompt_copied', 'ready_to_run']),
+  step: new Set(['client_selected', 'connection_copied', 'setup_video_started', 'setup_video_completed', 'prompt_copied', 'ready_to_run']),
   billing_interval: new Set(['monthly', 'annual']),
   issue: new Set(['connection', 'authentication', 'client', 'other']),
   content_cluster: new Set(['product_marketing_mcp']),

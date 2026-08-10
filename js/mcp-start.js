@@ -29,6 +29,9 @@ const jobLabel = document.getElementById('job-label');
 const heading = document.getElementById('setup-heading');
 const intro = document.getElementById('setup-intro');
 const unavailableNotice = document.getElementById('setup-unavailable');
+const setupVideo = document.getElementById('claude-desktop-setup-video');
+let setupVideoStarted = false;
+let setupVideoCompleted = false;
 
 function capture(eventName, properties) {
   if (window.igAnalytics) window.igAnalytics.captureFunnel(eventName, properties);
@@ -135,6 +138,20 @@ readyButton.addEventListener('click', () => {
   readyButton.textContent = 'Ready';
   readyButton.disabled = true;
 });
+
+if (setupVideo) {
+  setupVideo.addEventListener('play', () => {
+    if (setupVideoStarted) return;
+    setupVideoStarted = true;
+    capture('mcp_setup_step_completed', { step: 'setup_video_started', client: 'claude_desktop' });
+  });
+
+  setupVideo.addEventListener('ended', () => {
+    if (setupVideoCompleted) return;
+    setupVideoCompleted = true;
+    capture('mcp_setup_step_completed', { step: 'setup_video_completed', client: 'claude_desktop' });
+  });
+}
 
 document.querySelectorAll('[data-troubleshooting]').forEach((details) => {
   details.addEventListener('toggle', () => {

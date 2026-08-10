@@ -1,0 +1,61 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:04.000
+Hey, it is Will. Here is how you set up the Intelligent Growth Connector.
+
+00:00:04.000 --> 00:00:08.000
+This also works in ChatGPT settings, but for Claude, jump into Customize.
+
+00:00:08.000 --> 00:00:13.000
+Scroll down to Connectors.
+
+00:00:13.000 --> 00:00:18.000
+Click Add in the top right, then click Add custom connector.
+
+00:00:18.000 --> 00:00:25.000
+Add the name, Intelligent Growth Connector, then grab the URL.
+
+00:00:25.000 --> 00:00:38.000
+Use mcp.intelligentgrowth.app/mcp, then click Add and Connect.
+
+00:00:38.000 --> 00:00:51.000
+The sign-in page opens. Enter your email and connect.
+
+00:00:51.000 --> 00:01:10.000
+That takes a moment. Open Claude again once it is connected.
+
+00:01:10.000 --> 00:01:21.000
+Now it is connected. Jump back into the Connector settings.
+
+00:01:21.000 --> 00:01:30.000
+I personally turn on Always allow for the tools, so Claude can use them when needed.
+
+00:01:30.000 --> 00:01:40.000
+Now copy the starter prompt from the setup guide and paste it into a new chat.
+
+00:01:40.000 --> 00:01:51.000
+You can use this prompt or another product marketing job you want to run.
+
+00:01:51.000 --> 00:02:04.000
+I am using Granola as the example company.
+
+00:02:04.000 --> 00:02:27.000
+It works better when we include the company URL, so I will add granola.ai and let it run.
+
+00:02:27.000 --> 00:02:37.000
+Claude goes through the tools. If you did not select Always allow, approve each tool as it runs.
+
+00:02:37.000 --> 00:02:47.000
+Now it is running the positioning diagnosis.
+
+00:02:47.000 --> 00:03:04.000
+Here is the diagnosis, including the biggest positioning risk and the missing evidence.
+
+00:03:04.000 --> 00:03:14.000
+It has given us a useful first analysis. That diagnosis is available on the free plan.
+
+00:03:14.000 --> 00:03:36.000
+For more, I can ask it to improve the positioning or create a full positioning, messaging and go-to-market plan.
+
+00:03:36.000 --> 00:03:42.869
+It will ask a series of questions so you can get started. That is how you set it up.
