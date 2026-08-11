@@ -5,13 +5,18 @@
       "status": 404
     },
     {
+      "src": "/resources",
+      "dest": "/resources.html"
+    },
+    {
       "src": "/everything",
-      "dest": "/everything.html"
+      "status": 307,
+      "headers": { "Location": "/resources" }
     },
     {
       "src": "/pma",
       "status": 307,
-      "headers": { "Location": "/everything?src=pma_summit" }
+      "headers": { "Location": "/resources?src=pma_summit" }
     },
     {
       "src": "/preview-superpower",
