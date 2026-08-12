@@ -97,6 +97,11 @@
           return { source: src };
         }
 
+        // beehiiv's post-signup survey. Its own title and description carry the
+        // confirmation, so the reader lands on "Thanks for signing up" rather
+        // than a cold form.
+        var SURVEY_URL = 'https://intelligent-growth.beehiiv.com/forms/8d050329-e6ca-4672-a17c-0e3a4bae7396';
+
         var form = document.getElementById('everythingForm');
         var input = document.getElementById('everythingEmail');
         var button = document.getElementById('everythingButton');
@@ -125,7 +130,13 @@
             form.style.display = 'none';
             note.style.display = 'none';
             message.className = 'message';
-            message.textContent = "Sent. It'll land in your inbox in a minute or two. If you can't see it, check promotions and spam.";
+            // Announce the move rather than making it. A silent jump off a page
+            // that looks finished reads as a bug; a stated one reads as a step.
+            message.textContent = "Thanks. It's on its way to your inbox. Taking you to one quick question.";
+            // The survey knows the reader when beehiiv can identify them, so the
+            // address goes with it. Falls back to the plain form either way.
+            var next = SURVEY_URL + '?email=' + encodeURIComponent(email);
+            window.setTimeout(function () { window.location.href = next; }, 2500);
           }).catch(function () {
             button.disabled = false;
             button.textContent = label;
