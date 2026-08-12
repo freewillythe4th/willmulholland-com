@@ -136,7 +136,10 @@
             // The survey knows the reader when beehiiv can identify them, so the
             // address goes with it. Falls back to the plain form either way.
             var next = SURVEY_URL + '?email=' + encodeURIComponent(email);
-            window.setTimeout(function () { window.location.href = next; }, 2500);
+            // Long enough for the eye to register that the submit worked, short
+            // enough that it never feels like waiting. The survey page repeats the
+            // confirmation, so this line does not need reading time.
+            window.setTimeout(function () { window.location.href = next; }, 700);
           }).catch(function () {
             button.disabled = false;
             button.textContent = label;
