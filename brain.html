@@ -7,12 +7,12 @@
   <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The Marketing Brain: one place your AI tools learn your customers, your company, and how you work. Built with you in a four week cohort.">
-  <meta property="og:title" content="Build the brain behind your marketing">
-  <meta property="og:description" content="One place your AI tools learn your customers, your company, and how you work. Built with you in a four week cohort.">
+  <meta name="description" content="A free four week live cohort for marketers. We build your Marketing Brain together: one place your AI tools learn your customers, your company, and how you work. Register your interest.">
+  <meta property="og:title" content="A free live cohort: build the brain behind your marketing">
+  <meta property="og:description" content="Four weeks, live and online, free for the founding cohort. We build the one place your AI tools learn your customers, your company, and how you work.">
   <meta property="og:image" content="https://intelligentgrowth.app/images/brain/og-brain.png">
   <meta name="twitter:card" content="summary_large_image">
-  <title>Build Your Marketing Brain · Intelligent Growth</title>
+  <title>Build Your Marketing Brain · Free live cohort · Intelligent Growth</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
@@ -77,6 +77,9 @@
     .hero-copy { max-width: 690px; }
     .hero .section-tag { margin-bottom: 24px; }
     .hero-lede { max-width: 660px; margin-top: 26px; color: var(--gray-mid); font-size: clamp(17px, 1.6vw, 21px); line-height: 1.6; }
+    .hero-facts { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 18px; margin-top: 24px; }
+    .hero-facts li { position: relative; padding-left: 18px; color: var(--gray-mid); font-size: 15px; font-weight: 500; }
+    .hero-facts li::before { content: ''; position: absolute; left: 0; top: 9px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
     .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
     .mb-hub { width: 100%; max-width: 430px; margin-left: auto; background: var(--white); border: 1px solid var(--ink); border-radius: 18px; box-shadow: var(--offset-shadow); padding: 26px 26px 28px; }
     .mb-cap { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.12em; font-variant-caps: all-small-caps; color: var(--gray-light); margin-bottom: 13px; display: flex; align-items: center; gap: 8px; }
@@ -92,8 +95,8 @@
     .hero-proof span { margin-left: 5px; font-size: 16px; font-style: normal; }
 
     .offer-strip { width: 100%; padding: 34px 48px; background: var(--cream-soft); border-top: 1px solid rgba(31,21,17,0.08); border-bottom: 1px solid rgba(31,21,17,0.08); }
-    .offer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-    .offer-item + .offer-item { padding-left: 48px; border-left: 1px solid rgba(31,21,17,0.16); }
+    .offer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    .offer-item + .offer-item { padding-left: 40px; border-left: 1px solid rgba(31,21,17,0.16); }
     .offer-label { color: var(--accent-deep); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.12em; font-variant-caps: all-small-caps; }
     .offer-line { margin-top: 5px; font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; line-height: 1.25; }
 
@@ -210,6 +213,10 @@
     .offer-list { margin-top: 18px; list-style: none; }
     .offer-list li { padding: 14px 0; border-top: 1px solid rgba(31,21,17,0.12); font-size: 16px; line-height: 1.55; }
     .offer-price-note { margin-top: 22px; color: var(--accent-deep); font-family: monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; line-height: 1.5; font-variant-caps: all-small-caps; }
+    .why-free { max-width: 680px; margin: 26px 0 40px; padding: 26px 30px; background: var(--accent-soft); border: 1px solid rgba(37,99,235,0.28); border-radius: 16px; }
+    .why-free-title { font-family: 'Instrument Serif', Georgia, serif; font-size: 26px; line-height: 1.2; margin-bottom: 12px; }
+    .why-free p { color: var(--gray-mid); font-size: 16px; line-height: 1.7; }
+    .why-free p + p { margin-top: 12px; }
     .offer-card .btn { margin-top: 20px; }
     .offer-guarantee { display: grid; grid-template-columns: 18px 1fr; gap: 9px; align-items: start; margin-top: 18px; color: var(--gray-mid); font-size: 16px; line-height: 1.55; }
     .offer-guarantee svg { width: 17px; height: 17px; margin-top: 2px; color: var(--accent-deep); }
@@ -273,9 +280,23 @@
     .join { padding: 100px 48px 92px; background: #16181D; color: var(--white); text-align: center; }
     .join h2 { color: var(--white); font-size: clamp(42px, 6vw, 70px); }
     .join-copy { max-width: 680px; margin: 20px auto 0; color: rgba(255,255,255,0.75); font-size: 17px; }
-    .join-form { max-width: 610px; margin: 30px auto 0; display: flex; gap: 10px; }
-    .join-form input { min-width: 0; flex: 1; padding: 15px 20px; border: 1px solid var(--white); border-radius: 999px; background: var(--white); color: var(--ink); font-size: 16px; }
+    .join-form { max-width: 610px; margin: 30px auto 0; display: flex; flex-direction: column; gap: 10px; text-align: left; }
+    .join-field { display: flex; }
+    .join-form input, .join-form select { width: 100%; min-width: 0; padding: 15px 20px; border: 1px solid var(--white); border-radius: 999px; background: var(--white); color: var(--ink); font-family: inherit; font-size: 16px; appearance: none; -webkit-appearance: none; }
+    .join-form select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%235C4F47' stroke-width='1.6'%3E%3Cpath d='M1 1.5 6 6.5l5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 20px center; background-size: 12px 8px; padding-right: 44px; cursor: pointer; }
+    /* --gray-mid, not --gray-light: the placeholder is visible text and has to
+       clear the 4.5:1 contrast floor for normal text. */
+    .join-form select:invalid { color: var(--gray-mid); }
+    .join-other { display: none; }
+    .join-other.is-shown { display: flex; }
     .join-message { max-width: 680px; margin: 18px auto 0; color: rgba(255,255,255,0.78); font-size: 16px; min-height: 26px; }
+    .join-confirm { max-width: 610px; margin: 30px auto 0; padding: 28px 30px; border: 1px solid rgba(255,255,255,0.24); border-radius: 18px; background: rgba(255,255,255,0.06); text-align: left; }
+    .join-confirm[hidden] { display: none; }
+    .join-confirm-title { font-family: 'Instrument Serif', Georgia, serif; font-size: 28px; line-height: 1.2; color: var(--white); margin-bottom: 12px; }
+    .join-confirm p { color: rgba(255,255,255,0.78); font-size: 16px; line-height: 1.7; }
+    .join-confirm p + p { margin-top: 12px; }
+    .join-confirm-note { font-size: 15px; }
+    .join-confirm a { color: var(--white); }
     .starter-link { margin-top: 16px; font-size: 16px; }
     .starter-link a { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
 
@@ -298,6 +319,19 @@
       .hero-grid { grid-template-columns: 1fr; gap: 52px; }
       .hero-copy { max-width: 780px; }
       .mb-hub { max-width: 580px; margin: 0; }
+    }
+
+    /* On a phone, and on any short viewport, the register action has to stay in
+       the first screen. The 760px min-height and 172px top padding were tuned
+       for a laptop and push the CTA under the fold on a 390x667 handset, so the
+       hero tightens up and the fact list moves below the buttons. */
+    @media (max-width: 760px), (max-height: 720px) {
+      .hero { min-height: 0; padding-top: 112px; padding-bottom: 64px; }
+      .hero-copy { display: flex; flex-direction: column; }
+      .hero-actions { order: 2; margin-top: 26px; }
+      .hero-facts { order: 3; margin-top: 22px; }
+      .hero-proof { order: 4; }
+      .hero-lede { margin-top: 20px; }
     }
 
     @media (max-width: 880px) {
@@ -390,11 +424,17 @@
     <section class="hero">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="section-tag">Build your Marketing Brain</div>
+          <div class="section-tag">Free live cohort · Build your Marketing Brain</div>
           <h1>Build the brain behind your marketing.</h1>
-          <p class="hero-lede">Give Claude, ChatGPT, and the next AI tool one place to learn your customers, your company, and how you work. In the cohort, we set it up with your own material so every new chat stops starting from zero.</p>
+          <p class="hero-lede">I am running the first Build Your Marketing Brain cohort free. Over four weeks, live and online, we build the one place your AI tools read before they write: your customers, your company, and the way you work. You leave with it built, and one of your own marketing jobs already running through it.</p>
+          <ul class="hero-facts" aria-label="Cohort at a glance">
+            <li>Four weeks, live and online</li>
+            <li>Free for the founding cohort</li>
+            <li>Small group, honest feedback both ways</li>
+            <li>Dates set with the people who register</li>
+          </ul>
           <div class="hero-actions">
-            <a href="#join" class="btn btn-primary">Join the founding cohort</a>
+            <a href="#join" class="btn btn-primary">Register your interest</a>
             <a href="#starter" class="btn btn-secondary">Get the free starter</a>
           </div>
           <p class="hero-proof">&quot;Honestly, it's not scary, it's inspiring.&quot;<span>Pallavi Roy, Marketing Director</span></p>
@@ -421,12 +461,16 @@
     <section class="offer-strip" aria-label="Cohort offer">
       <div class="container offer-grid">
         <div class="offer-item">
-          <div class="offer-label">What you are buying</div>
-          <p class="offer-line">Four weeks live with me, building it together.</p>
+          <div class="offer-label">What it costs</div>
+          <p class="offer-line">Nothing. The first cohort is free.</p>
         </div>
         <div class="offer-item">
           <div class="offer-label">What you leave with</div>
           <p class="offer-line">A Marketing Brain you own, running your marketing.</p>
+        </div>
+        <div class="offer-item">
+          <div class="offer-label">What I ask back</div>
+          <p class="offer-line">Honest feedback while we build it.</p>
         </div>
       </div>
     </section>
@@ -699,18 +743,23 @@
           <span class="outline-pill">1:1 onboarding before week one</span>
           <span class="outline-pill">every recording yours to keep</span>
         </div>
-        <p class="cohort-note">Founding cohort. No dates announced yet, the interest list hears first.</p>
-        <div class="cohort-action"><a href="#join" class="btn btn-primary">Register interest</a></div>
+        <p class="cohort-note">Free for the founding cohort. Dates are not set yet, they land with the people who register, and the interest list hears first.</p>
+        <div class="cohort-action"><a href="#join" class="btn btn-primary">Register your interest</a></div>
       </div>
     </section>
 
     <section class="section" id="offer">
       <div class="container">
         <div class="section-tag">The offer</div>
-        <h2>One cohort, everything included.</h2>
+        <h2>The cohort, everything included, no charge.</h2>
+        <div class="why-free">
+          <div class="why-free-title">Why the first one is free</div>
+          <p>I have taught this live to more than 500 marketers and I run it on my own work every day. What I have not done is run it as a four week cohort, so the first group gets the whole thing for nothing and I get to watch where it breaks and fix it.</p>
+          <p>The trade is honest feedback while we build. If it works for you and you want to say so publicly afterwards, I will ask you then. That is a separate question and the answer can be no.</p>
+        </div>
         <div class="offer-cards">
           <article class="offer-card offer-card-primary">
-            <div class="offer-card-label">The founding cohort</div>
+            <div class="offer-card-label">The free founding cohort</div>
             <ul class="offer-list">
               <li>Four weeks of live build sessions, one layer a week</li>
               <li>A 1:1 onboarding before week one, so nobody starts behind</li>
@@ -718,13 +767,13 @@
               <li>The cohort room and every recording, yours to keep</li>
               <li>Your Marketing Brain and every file in it, yours forever</li>
             </ul>
-            <p class="offer-price-note">Founding price confirmed at launch · the interest list hears first</p>
-            <a href="#join" class="btn btn-primary">Register interest</a>
+            <p class="offer-price-note">No payment, no card, nothing to cancel · later cohorts will be paid, this one is not</p>
+            <a href="#join" class="btn btn-primary">Register your interest</a>
             <p class="offer-guarantee"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 20 6v6c0 4.6-3.1 7.5-8 9-4.9-1.5-8-4.4-8-9V6l8-3Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg><span>Show up, build, and run the process. If you finish the four weeks without a working system, we keep working 1:1 until you have one. You keep everything either way.</span></p>
           </article>
           <article class="offer-card offer-card-team">
-            <div class="offer-card-label">Done with you, for teams</div>
-            <p class="offer-team-copy">Want it built inside your company instead? Bespoke integrations, authorised data ingestion, custom skills, and team rollout.</p>
+            <div class="offer-card-label">Done with you, for teams (paid)</div>
+            <p class="offer-team-copy">Want it built inside your company instead? Bespoke integrations, authorised data ingestion, custom skills, and team rollout. This one is separate paid work, not the free cohort.</p>
             <a href="/work-with-me" class="btn btn-secondary">Work with me</a>
           </article>
         </div>
@@ -856,8 +905,20 @@
             <p>Yes. Most people start solo in the cohort, then roll it out to the team once it is proving itself. Sharing it across the team, with cited answers and per-person access, is the <a href="/team-brain">Team Brain</a>.</p>
           </details>
           <details>
-            <summary>What is free?</summary>
-            <p>The starter: the folder structure and setup guide to build a basic brain yourself. The cohort adds the guided build with your material, the live sessions, and the maintained skill library.</p>
+            <summary>What does the cohort cost?</summary>
+            <p>Nothing. The founding cohort is free, there is no payment step and no card. Later cohorts will be paid, this one is not, and being in it does not turn into a bill afterwards.</p>
+          </details>
+          <details>
+            <summary>What is the catch?</summary>
+            <p>You tell me honestly what is working and what is not while we build, because that is how the next version gets better. If you are happy at the end and want to say so publicly, I will ask you then, and no is a fine answer.</p>
+          </details>
+          <details>
+            <summary>What else is free?</summary>
+            <p>The starter: the folder structure and setup guide to build a basic brain yourself, without waiting for a cohort. The cohort adds the guided build with your own material, the live sessions, and the maintained skill library.</p>
+          </details>
+          <details>
+            <summary>Does registering commit me to anything?</summary>
+            <p>No. Registering your interest puts you on the list and gets you the dates first. You decide whether to take a spot once you know when it runs.</p>
           </details>
           <details>
             <summary>What happens to the skill library after the cohort?</summary>
@@ -896,12 +957,36 @@
     <section class="join" id="join">
       <div class="container">
         <h2>Stop starting every chat from zero.</h2>
-        <p class="join-copy">No dates announced yet. Leave your email and founding cohort details land in your inbox first.</p>
+        <p class="join-copy">The founding cohort is free and the dates are not set yet. Leave your email and the one job you want your brain to take on, and you hear the dates before anyone else.</p>
         <form class="join-form" id="joinForm">
-          <label for="joinEmail">Email address</label>
-          <input id="joinEmail" name="email" type="email" autocomplete="email" placeholder="Email address" required>
-          <button class="btn btn-primary" id="joinButton" type="submit">Register interest</button>
+          <div class="join-field">
+            <label for="joinEmail">Email address</label>
+            <input id="joinEmail" name="email" type="email" autocomplete="email" placeholder="Email address" required>
+          </div>
+          <div class="join-field">
+            <label for="joinJob">The one job you most want your brain to take on</label>
+            <select id="joinJob" name="job" required>
+              <option value="" disabled selected>Pick the job it should take on first</option>
+              <option value="Turning customer or sales calls into insights">Turning customer or sales calls into insights</option>
+              <option value="Positioning and messaging">Positioning and messaging</option>
+              <option value="Content and social posts">Content and social posts</option>
+              <option value="Planning and running a launch">Planning and running a launch</option>
+              <option value="Watching what competitors are doing">Watching what competitors are doing</option>
+              <option value="Something else">Something else</option>
+            </select>
+          </div>
+          <div class="join-field join-other" id="joinOtherWrap">
+            <label for="joinOther">Tell me the job in your own words</label>
+            <input id="joinOther" name="jobOther" type="text" maxlength="140" placeholder="Tell me the job in your own words">
+          </div>
+          <button class="btn btn-primary" id="joinButton" type="submit">Register your interest</button>
         </form>
+        <div class="join-confirm" id="joinConfirm" role="status" aria-live="polite" tabindex="-1" hidden>
+          <div class="join-confirm-title">You are on the list.</div>
+          <p>There are no dates yet. When they are locked I email this list first with the times and how to take a spot. Nothing to pay, and registering does not commit you to anything.</p>
+          <p>This also puts you on the Intelligent Growth list, so a five day email course on building your brain arrives before the dates do. Both come from the same list, and you can unsubscribe whenever you want.</p>
+          <p class="join-confirm-note">If the timing does not suit when the dates land, tell me and I will keep you in mind for the next one. Questions in the meantime go to <a href="mailto:will@intelligentgrowth.app">will@intelligentgrowth.app</a>.</p>
+        </div>
         <p class="join-message" id="joinMessage" role="status" aria-live="polite"></p>
         <p class="starter-link">Or start with the <a href="#starter">free starter</a></p>
       </div>
@@ -1370,24 +1455,64 @@
         var message = document.getElementById(config.messageId);
         var button = document.getElementById(config.buttonId);
         var emailInput = document.getElementById(config.emailId);
+        var jobInput = config.jobId ? document.getElementById(config.jobId) : null;
+        var otherInput = config.otherId ? document.getElementById(config.otherId) : null;
+        var otherWrap = config.otherWrapId ? document.getElementById(config.otherWrapId) : null;
+        var confirmPanel = config.confirmId ? document.getElementById(config.confirmId) : null;
         if (!form || !message || !button || !emailInput) return;
+
+        // "Something else" on its own tells us nothing, so it opens a text field
+        // and that field becomes required.
+        if (jobInput && otherWrap && otherInput) {
+          jobInput.addEventListener('change', function () {
+            var isOther = jobInput.value === 'Something else';
+            otherWrap.classList.toggle('is-shown', isOther);
+            otherInput.required = isOther;
+            if (isOther) otherInput.focus();
+          });
+        }
 
         form.addEventListener('submit', function (event) {
           event.preventDefault();
           var email = (emailInput.value || '').trim();
           if (!email) return;
+          var job = jobInput ? (jobInput.value || '').trim() : '';
+          if (jobInput && !job) return;
+          if (job === 'Something else' && otherInput) {
+            var other = (otherInput.value || '').trim();
+            if (!other) { otherInput.focus(); return; }
+            job = 'Something else: ' + other;
+          }
           var originalLabel = button.textContent;
           button.disabled = true;
           button.textContent = 'Sending...';
           message.textContent = '';
 
+          // An explicit form source (the cohort tag) must win over a ?src=
+          // campaign, otherwise /brain?src=anything drops the registration out
+          // of the cohort segment. The campaign is not lost, it rides along as
+          // utm_campaign instead of overwriting the lead source.
+          var campaign = campaignSource().source;
+          var payload = Object.assign(
+            { email: email, utm_medium: config.medium },
+            campaign ? { utm_campaign: campaign } : {},
+            job ? { job: job } : {},
+            { source: config.source || campaign || '' }
+          );
+          if (!payload.source) delete payload.source;
+          if (config.reactivate) payload.reactivate = true;
+
           fetch('/api/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.assign({ email: email, utm_medium: config.medium }, campaignSource()))
+            body: JSON.stringify(payload)
           }).then(function (response) {
             if (!response.ok) throw new Error('Subscribe failed');
             form.style.display = 'none';
+            if (confirmPanel) {
+              confirmPanel.hidden = false;
+              if (typeof confirmPanel.focus === 'function') confirmPanel.focus();
+            }
             if (config.download) {
               var downloadLink = document.createElement('a');
               downloadLink.href = '/downloads/' + 'marketing-brain-starter.zip';
@@ -1396,9 +1521,11 @@
               downloadLink.click();
               downloadLink.remove();
             }
-            message.textContent = (campaignSource().source && config.successCampaign)
-              ? config.successCampaign
-              : config.success;
+            if (!confirmPanel) {
+              message.textContent = (campaignSource().source && config.successCampaign)
+                ? config.successCampaign
+                : config.success;
+            }
           }).catch(function () {
             button.disabled = false;
             button.textContent = originalLabel;
@@ -1423,9 +1550,18 @@
         messageId: 'joinMessage',
         buttonId: 'joinButton',
         emailId: 'joinEmail',
+        jobId: 'joinJob',
+        otherId: 'joinOther',
+        otherWrapId: 'joinOtherWrap',
+        confirmId: 'joinConfirm',
         medium: 'brain-cohort-interest',
+        source: 'brain_founding_cohort',
+        // Submitting this form is a fresh, explicit ask to be emailed the dates,
+        // so someone who previously unsubscribed is genuinely opting back in.
+        // Without this they are told "you are on the list" while staying off it.
+        reactivate: true,
         download: false,
-        success: 'You are on the list. Founding details land in your inbox first.'
+        success: 'You are on the list. Cohort dates land in your inbox first.'
       });
     })();
   </script>
