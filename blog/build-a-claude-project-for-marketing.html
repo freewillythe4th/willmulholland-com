@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build a Claude Project for marketing (start with this one) | Intelligent Growth</title>
+    <meta name="description" content="Most marketers re-explain their brand in every chat window. A Claude Project fixes that. Here is exactly what to put in yours, from custom instructions to which files to upload.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://intelligentgrowth.app/blog/build-a-claude-project-for-marketing">
+    <meta property="og:title" content="Build a Claude Project for marketing (start with this one)">
+    <meta property="og:description" content="Most marketers re-explain their brand in every chat window. A Claude Project fixes that. Here is exactly what to put in yours.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://intelligentgrowth.app/blog/build-a-claude-project-for-marketing">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #1F1511;
+            --ink: #1F1511;
+            --cream: #F2EDE3;
+            --cream-soft: #EBE5D8;
+            --white: #FFFFFF;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            line-height: 1.65;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::selection { background: var(--accent); color: var(--white); }
+
+        nav {
+            position: sticky; top: 0; z-index: 100; padding: 20px 48px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(242,237,227,0.88); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(31,21,17,0.06);
+        }
+        .nav-logo img { height: 30px; width: auto; display: block; }
+        .nav-back {
+            font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-mid); text-decoration: none; transition: color 0.4s var(--ease-smooth);
+        }
+        .nav-back:hover { color: var(--ink); }
+
+        article { max-width: 720px; margin: 0 auto; padding: 72px 24px 48px; }
+
+        .kicker {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--accent); font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+        }
+        .kicker::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+
+        article h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(36px, 6vw, 60px);
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+        .lead { font-size: clamp(18px, 2.4vw, 22px); color: var(--gray-mid); line-height: 1.5; margin-bottom: 28px; }
+        .meta {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;
+            color: var(--gray-light); padding-bottom: 32px; border-bottom: 1px solid rgba(31,21,17,0.1); margin-bottom: 40px;
+        }
+
+        .tldr {
+            background: var(--cream-soft);
+            border: 1px solid rgba(31,21,17,0.12);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 48px;
+        }
+        .tldr h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(20px, 2.8vw, 26px);
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .tldr ul { list-style: none; padding: 0; margin: 0; }
+        .tldr li {
+            font-size: 17px; color: var(--gray-mid); margin-bottom: 13px; line-height: 1.6;
+            padding-left: 22px; position: relative;
+        }
+        .tldr li:last-child { margin-bottom: 0; }
+        .tldr li::before { content: ''; position: absolute; left: 0; top: 10px; width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
+
+        article h2.sec {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(24px, 3.4vw, 32px);
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+            margin: 52px 0 18px;
+            color: var(--ink);
+        }
+        article h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(22px, 2.9vw, 27px);
+            letter-spacing: -0.01em;
+            line-height: 1.2;
+            margin: 36px 0 14px;
+            color: var(--ink);
+        }
+
+        article p { font-size: 18px; color: var(--gray-mid); margin-bottom: 20px; line-height: 1.65; }
+        article p strong { font-weight: 700; color: var(--ink); }
+        article a { color: var(--accent); text-decoration: underline; text-decoration-color: rgba(37,99,235,0.3); text-underline-offset: 3px; transition: text-decoration-color 0.2s; }
+        article a:hover { text-decoration-color: var(--accent); }
+
+        article ul.body-list { list-style: none; padding: 0; margin: 0 0 22px; }
+        article ul.body-list li {
+            font-size: 18px; color: var(--gray-mid); line-height: 1.6; margin-bottom: 10px;
+            padding-left: 22px; position: relative;
+        }
+        article ul.body-list li::before { content: ''; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+
+        pre {
+            background: var(--ink); color: var(--cream); border-radius: 14px;
+            padding: 22px 24px; margin: 8px 0 22px; overflow-x: auto;
+            font-family: 'SF Mono', ui-monospace, 'Menlo', monospace; font-size: 13.5px; line-height: 1.6; letter-spacing: 0;
+        }
+        pre code { background: none; padding: 0; color: inherit; font-size: inherit; white-space: pre; }
+        code {
+            font-family: ui-monospace, 'SF Mono', 'Menlo', monospace; font-size: 0.92em;
+            background: var(--cream-soft); padding: 2px 6px; border-radius: 6px; color: var(--accent-deep);
+        }
+
+        table { width: 100%; border-collapse: collapse; margin: 14px 0 28px; font-size: 16px; }
+        th, td { text-align: left; padding: 14px 16px; border-bottom: 1px solid rgba(31,21,17,0.12); vertical-align: top; }
+        th { font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink); background: var(--cream-soft); }
+        td { color: var(--gray-mid); line-height: 1.55; }
+        td strong { color: var(--ink); font-weight: 700; }
+
+        .end-cta {
+            margin-top: 56px; padding: 40px 32px; background: var(--ink); color: var(--white);
+            border-radius: 24px; text-align: center;
+        }
+        .end-cta h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: 28px;
+            letter-spacing: -0.01em;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        .end-cta p { font-size: 16px; color: rgba(242,237,227,0.8); margin-bottom: 24px; }
+        .end-cta .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .end-cta a {
+            padding: 14px 26px; border-radius: 999px; font-size: 13px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none;
+            transition: all 0.5s var(--ease-smooth);
+        }
+        .end-cta a.primary { background: var(--white); color: var(--ink); }
+        .end-cta a.primary:hover { background: var(--accent); color: var(--white); border-radius: 12px; }
+        .end-cta a.ghost { border: 1px solid rgba(242,237,227,0.3); color: var(--white); }
+        .end-cta a.ghost:hover { border-radius: 12px; background: rgba(242,237,227,0.1); }
+
+        footer {
+            max-width: 720px; margin: 64px auto 0; padding: 32px 24px 48px;
+            border-top: 1px solid rgba(31,21,17,0.10); display: flex; justify-content: space-between;
+            font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-light); flex-wrap: wrap; gap: 12px;
+        }
+        footer a { color: var(--gray-light); text-decoration: none; }
+        footer a:hover { color: var(--ink); }
+
+        @media (max-width: 600px) {
+            nav { padding: 16px 24px; }
+            article { padding: 48px 24px 40px; }
+            pre { font-size: 12.5px; padding: 18px 18px; }
+            th, td { padding: 11px 12px; font-size: 14px; }
+        }
+    </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+        <a href="/blog" class="nav-back">&larr; Blog</a>
+    </nav>
+
+    <article>
+        <div class="kicker">Guide</div>
+        <h1>Build a Claude Project for marketing (start with this one)</h1>
+        <p class="lead">Most marketers re-explain their brand in every chat window. A Claude Project for marketing fixes that. Here is exactly what to put in yours, from custom instructions to which files to upload.</p>
+        <div class="meta">Will Mulholland &middot; 10 min read</div>
+
+        <div class="tldr">
+            <h2>Key points</h2>
+            <ul>
+                <li>A Claude Project is a persistent workspace where Claude already knows your product, your audience, and how you write before you type a word. No re-briefing required.</li>
+                <li>The one Project to build first is a Marketing Brain: custom instructions that encode your brand voice, your ICP, and your positioning, plus three to five uploaded documents.</li>
+                <li>The custom instructions field is the most valuable part. Most people write two lines. The template below takes 30 minutes and changes every output after.</li>
+                <li>For privacy: never paste unannounced pricing, customer PII, or internal financials. Your brand guide, best-performing copy samples, and customer research with names removed are all safe.</li>
+                <li>You will know it is working when Claude writes in your brand voice without you asking for it.</li>
+            </ul>
+        </div>
+
+        <p>If you use Claude for marketing work, you probably know the friction. Open a new chat, spend five minutes re-explaining your product, paste in your positioning doc, remind Claude what your brand voice is, then finally get something 70% right that takes another ten minutes to fix. Close the tab. Repeat tomorrow.</p>
+        <p>A Claude Project for marketing stops that. It is a persistent workspace where Claude already knows your product, your audience, and how you write before you type a word. This guide covers the one Project to build first, the exact custom instructions to use, and which files to upload.</p>
+
+        <h2 class="sec">What a Claude Project is, and what it is not</h2>
+        <p>Think of the difference this way. A regular Claude chat is like briefing a new freelancer every session. They are sharp, they follow instructions well, but they start from zero each time. You give them the brief, they deliver the work, the context vanishes when the conversation ends.</p>
+        <p>A Claude Project is like working with someone who has read every brief you have ever written. They know your competitors, your customer, and your voice. When you open a new chat inside the Project, that context is already loaded. You ask the question and get on with it.</p>
+        <p>Specifically, a Project ties together three things: custom instructions that apply to every conversation, a knowledge base of files Claude can reference, and your conversation history kept in one place. The custom instructions field holds around 8,000 characters. The knowledge base accepts up to 200,000 tokens of uploaded files, which is roughly 150,000 words.</p>
+        <p>What it is not: a magic fix for vague prompts. Claude still needs direction. The Project means the direction starts from a much higher floor because the background is already there, not because the prompts themselves change.</p>
+
+        <h2 class="sec">The Marketing Brain: the one Project to build first</h2>
+        <p>There is advice in circulation suggesting you build five Projects from the start: brand, content, email, paid, and social. That is probably the right system once you are using Claude daily across all of those. If you are just starting, five Projects means five setups before you get any value. Most people set up one, use it twice, then decide it was more effort than it was worth.</p>
+        <p>Build one first. Call it your Marketing Brain.</p>
+        <p>The goal is simple: encode everything Claude needs to write on-brand, for your actual audience, about your actual product, in one place. Once that is done, every prompt you run inside it starts from a much higher floor. The SEO content, the launch emails, the sales one-pager, the competitive teardown, all of it inherits the context you built once.</p>
+        <p>For context on how this works in practice, my version of this for Intelligent Growth is a single Project. It knows who the reader is (a senior PMM, time-poor, worried about being left behind), what Intelligent Growth does, how I write, and which words are banned from anything I publish. When I sit down to write, I open the Project and start. I do not re-brief the model on any of that.</p>
+
+        <h2 class="sec">Step 1: The custom instructions (with a template)</h2>
+        <p>The custom instructions field is where most people underinvest. It is the standing brief Claude receives at the start of every conversation inside the Project. Get it right and you stop doing the same setup work every session.</p>
+        <p>Here is the template I use. Replace the brackets with your actual specifics:</p>
+
+        <pre><code>ABOUT THE PRODUCT
+[Product name] is a [brief category description, one to two sentences].
+Our target customer: [name their job title, company size, their situation right now].
+What they are trying to do: [the job to be done, written in customer language].
+What they are worried about: [the fear that makes them engage with us].
+
+POSITIONING
+We are the [category] for [target customer] who [situation].
+The thing we do that competitors don't: [one specific differentiator, not a generic claim].
+Competitors: [name two to three, one line each on what they lead with and where they are weak].
+
+BRAND VOICE
+Write like a smart, direct marketer who respects the reader's intelligence.
+Tone: [e.g. confident and slightly irreverent / warm and practical / sharp and data-led].
+Sentences: short to medium, varied. No strings of three short sentences in a row.
+Never use: em dashes, "leverage," "seamless," "robust," "game-changer," or any phrase
+that sounds like a vendor landing page.
+Examples of copy I like: [paste two to three of your best-performing subject lines,
+headlines, or opening paragraphs].
+
+FORMATTING DEFAULTS
+Write in plain prose unless I ask for bullets.
+Never start a response with "Sure," "Certainly," or a summary of what I just asked.
+Lead with the answer, then the rationale.
+
+WHAT TO PUSH BACK ON
+If I ask for copy that makes an unverifiable claim, flag it.
+If my brief is thin, ask one clarifying question before writing.</code></pre>
+
+        <p>The examples of copy you paste in the Voice section matter more than anything else. Descriptions of tone are vague. Actual samples are not. Paste two or three of the best emails you have ever written, or the headline from your highest-converting landing page. Claude learns your register from real examples faster than from any description you write about it.</p>
+        <p>Fill this template once, properly. It takes 30 to 60 minutes. The return starts in the first session.</p>
+
+        <h2 class="sec">Step 2: What to upload (and what to leave out)</h2>
+        <p>The knowledge base is where you put files Claude can draw on across conversations. Upload what makes your marketing distinctive. Here is what works:</p>
+        <p><strong>Your brand guide.</strong> Even a one-page version covering tone, naming conventions, and banned words makes a difference.</p>
+        <p><strong>Three to five samples of your best-performing copy.</strong> Subject lines and emails with good open rates, landing page sections that converted, positioning documents your sales team uses. Claude picks up your voice from examples much faster than from written descriptions of your voice.</p>
+        <p><strong>Your ICP document or customer research.</strong> Interview notes, survey responses, job-to-be-done research. The exact phrases your customers use to describe their problems should be in your Project. When those phrases are available, Claude produces messaging that sounds like your customers, not like your internal docs.</p>
+        <p><strong>One or two competitor teardowns.</strong> The text from two or three competitor landing pages, with a note on what each one does well and where you think they are weak.</p>
+        <p>What to leave out:</p>
+        <p>Customer names, email addresses, and company-identifying details should not go in unless you have confirmed your plan does not train on your inputs. Anthropic's Pro and Team plans state they do not train on user inputs by default. Free accounts work differently. Check before you upload.</p>
+        <p>Unannounced pricing, roadmap commitments, or internal financial data should not go in. The test: if this content leaked, would it hurt you or your company? If yes, it stays out.</p>
+        <p>Here is the thing that keeps most marketers stuck: they treat confidentiality as an all-or-nothing question. It is not. Most of what makes your marketing good is your voice, your positioning, and the customer language you have collected. None of that is a trade secret. Upload it. The internal strategy documents and pricing models that are sensitive, leave those out and summarise the implications instead. "We price above the market median and compete on depth of features, not on cost" is useful context that does not expose your spreadsheet.</p>
+
+        <h2 class="sec">How to know it is working</h2>
+        <p>Run this test after setup. Open a new conversation in your Marketing Brain Project. Paste in a single customer quote or support ticket, nothing else. Ask Claude to write a one-paragraph follow-up email based on the theme in that quote. Do not say anything about your brand voice or product, the instructions carry that.</p>
+        <p>Read the output. If it sounds like you and references your product correctly, the Project is working. If it sounds like a generic SaaS company, your custom instructions need more examples. Paste in two more real samples of your writing and try again.</p>
+        <p>The second test is one most people miss. Ask Claude to draft something, then ask it to flag any claim in the draft that is not backed by the context you provided. A well-set-up Project gives Claude enough to tell you when it is operating beyond its evidence. That is a useful output: a draft plus a short list of the places you need to plug in real proof. Much better than confident-sounding sentences with nothing behind them.</p>
+
+        <h2 class="sec">Common mistakes</h2>
+        <p><strong>Treating the Project as a one-time setup.</strong> The best Projects are updated as your product evolves. When your positioning changes, when you win a marquee customer, when a competitor makes a move, update the instructions. Ten minutes every month keeps it calibrated. Skip this and the Project starts producing outputs that are accurate about who you were six months ago.</p>
+        <p><strong>Going too broad in the ICP description.</strong> "Our audience is marketers" is less useful than "Senior PMMs at B2B SaaS companies with a team of two to four, where the bottleneck is going from approved positioning to consistent channel assets." Specificity makes every prompt work harder.</p>
+        <p><strong>Uploading too much.</strong> The quality of what you upload matters more than the volume. Five pages of sharp customer research beats fifty pages of quarterly business review slides. Upload what you would hand to a sharp new hire in their first week to get them up to speed. Skip the rest.</p>
+        <p><strong>Expecting Claude to know things you did not put in.</strong> The Project only knows what you gave it. If you want Claude to write about a new feature, paste in the spec. The Marketing Brain Project is not reading your Notion docs or your CRM.</p>
+
+        <h2 class="sec">Project vs. no Project: what changes</h2>
+        <table>
+            <thead>
+                <tr><th>What</th><th>Regular Claude chat</th><th>Marketing Brain Project</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Brand voice</strong></td>
+                    <td>Re-explained every session</td>
+                    <td>Loaded in every conversation</td>
+                </tr>
+                <tr>
+                    <td><strong>Product context</strong></td>
+                    <td>Pasted in or guessed at</td>
+                    <td>Uploaded once, always available</td>
+                </tr>
+                <tr>
+                    <td><strong>Customer language</strong></td>
+                    <td>Provided in the prompt</td>
+                    <td>Pulled from uploaded research</td>
+                </tr>
+                <tr>
+                    <td><strong>Output consistency</strong></td>
+                    <td>Varies by session</td>
+                    <td>Consistent across every chat</td>
+                </tr>
+                <tr>
+                    <td><strong>Setup time</strong></td>
+                    <td>None</td>
+                    <td>30 to 60 minutes once</td>
+                </tr>
+                <tr>
+                    <td><strong>Time saved per prompt</strong></td>
+                    <td>None</td>
+                    <td>5 to 15 minutes</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="sec">FAQ</h2>
+
+        <h3>Do I need a paid Claude account?</h3>
+        <p>Yes. Projects are available on Claude.ai Pro (around $20/month) and Claude Team. They are not available on the free tier. Worth knowing: the marketers paying for access themselves, rather than waiting for company approval, get several weeks of practice before their peers who needed sign-off. That gap compounds.</p>
+
+        <h3>How is this different from writing a long system prompt?</h3>
+        <p>The concept is the same but Projects persist the context. In a regular chat, a long system prompt lives in that one tab. When you close it, it is gone. In a Project, the instructions are always there. Every new conversation you open inside the Project gets them automatically.</p>
+
+        <h3>Should I have one Project or many?</h3>
+        <p>Start with one and let the need for more emerge naturally. Most marketers who use Claude consistently settle on two to four Projects. More than that tends to mean the system has become overhead rather than a time-saver. A second Project makes sense when the context requirements are genuinely different, for example, a separate Project for a major product launch where the framing, target buyer, and competitor set are completely different from your day-to-day work.</p>
+
+        <h3>Can I share a Project with my team?</h3>
+        <p>Yes, on Claude Team plans. This is one of the strongest reasons to move a marketing team onto a shared plan: one Marketing Brain Project that everyone opens, already loaded with the brand voice and positioning. No more "can you send me the latest messaging doc" messages. The shared context is the Project.</p>
+
+        <h3>What happens when I fill up the knowledge base?</h3>
+        <p>The limit is 200,000 tokens across all uploaded files. That is a lot, but it is reachable if you are uploading long transcripts. When you hit it, audit what is there. Delete campaign assets from two years ago and replace with current ones. The knowledge base should reflect where you are now, not your full archive.</p>
+
+        <h3>How long does the initial setup take?</h3>
+        <p>The custom instructions take 30 to 60 minutes done properly. Uploading and organising files takes another 20 to 30 minutes. Call it 90 minutes total the first time. Run one test prompt at the end and you will know immediately whether the setup landed.</p>
+
+        <h2 class="sec">Key resources</h2>
+        <ul class="body-list">
+            <li><a href="https://support.anthropic.com/en/articles/9517075-what-are-projects">Claude Projects documentation</a> from Anthropic, which covers the full technical spec and file limits.</li>
+            <li><a href="/blog/claude-prompts-for-product-marketers">Claude prompts for product marketers</a>, a guide to the six prompts worth running once your Project is set up.</li>
+            <li><a href="/blog/how-to-write-positioning-with-ai">How to write positioning with AI</a>, if you want to use your new Project to run a proper positioning process.</li>
+        </ul>
+
+        <div class="end-cta">
+            <h3>Build this during the workshop</h3>
+            <p>The Intelligent Growth workshop walks through building your Marketing Brain Project in a live session, with time to actually build it, not just plan to.</p>
+            <div class="btns">
+                <a class="primary" href="/workshop">See the workshop</a>
+                <a class="ghost" href="/#subscribe">Get the newsletter</a>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <span>&copy; 2026 Will Mulholland</span>
+        <span><a href="/blog">Blog</a> &middot; <a href="/">Home</a> &middot; <a href="/work.html">Case studies</a> &middot; <a href="/podcast">Podcast</a></span>
+    </footer>
+</body>
+</html>

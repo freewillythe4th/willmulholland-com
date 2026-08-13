@@ -94,6 +94,10 @@
       "dest": "/blog/how-to-use-ai-for-a-product-launch.html"
     },
     {
+      "src": "/blog/build-a-claude-project-for-marketing",
+      "dest": "/blog/build-a-claude-project-for-marketing.html"
+    },
+    {
       "src": "/system",
       "dest": "/system.html"
     },
