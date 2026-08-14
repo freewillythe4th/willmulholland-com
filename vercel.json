@@ -19,6 +19,15 @@
       "headers": { "Location": "/resources?src=pma_summit" }
     },
     {
+      "src": "/install",
+      "dest": "/install.sh",
+      "headers": {
+        "Cache-Control": "public, max-age=300",
+        "Content-Type": "text/x-shellscript; charset=utf-8",
+        "X-Content-Type-Options": "nosniff"
+      }
+    },
+    {
       "src": "/preview-superpower",
       "dest": "/preview-superpower.html"
     },
