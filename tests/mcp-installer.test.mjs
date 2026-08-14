@@ -92,4 +92,5 @@ test('JSON configuration is backed up and unrelated servers are preserved', () =
   assert.equal(updated.mcpServers.existing.url, 'https://example.com/mcp');
   assert.equal(updated.mcpServers['intelligent-growth'].url, 'https://mcp.intelligentgrowth.app/mcp');
   assert.deepEqual(backup, { mcpServers: { existing: { url: 'https://example.com/mcp' } } });
+  assert.match(result.stdout, /Installed Intelligent Growth for 1 agent\./);
 });

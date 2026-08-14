@@ -268,6 +268,7 @@ if [ "$failed" -gt 0 ]; then
   exit 1
 fi
 
-printf '\n%bInstalled Intelligent Growth for %s agents.%b\n' "$BOLD" "$configured" "$RESET"
+if [ "$configured" -eq 1 ]; then agent_word='agent'; else agent_word='agents'; fi
+printf '\n%bInstalled Intelligent Growth for %s %s.%b\n' "$BOLD" "$configured" "$agent_word" "$RESET"
 printf 'Open your agent, use Intelligent Growth, and sign in when your agent opens the browser.\n'
 printf 'Setup help: https://intelligentgrowth.app/mcp/start\n\n'
