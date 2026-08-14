@@ -3,6 +3,7 @@ set -u
 
 MCP_NAME="intelligent-growth"
 MCP_URL="https://mcp.intelligentgrowth.app/mcp"
+MCP_REMOTE_PACKAGE="mcp-remote@0.1.38"
 
 if [ -t 1 ]; then
   BOLD='\033[1m'
@@ -83,7 +84,7 @@ configure_claude_desktop() {
     return 1
   fi
 
-  IG_CONFIG_PATH="$config_path" IG_NPX_PATH="$npx_path" IG_MCP_URL="$MCP_URL" node <<'JS'
+  IG_CONFIG_PATH="$config_path" IG_NPX_PATH="$npx_path" IG_MCP_URL="$MCP_URL" IG_MCP_REMOTE_PACKAGE="$MCP_REMOTE_PACKAGE" node <<'JS'
 const fs = require('fs');
 const path = require('path');
 
@@ -105,7 +106,7 @@ try {
   }
   config.mcpServers['intelligent-growth'] = {
     command: process.env.IG_NPX_PATH,
-    args: ['-y', 'mcp-remote', process.env.IG_MCP_URL],
+    args: ['-y', process.env.IG_MCP_REMOTE_PACKAGE, process.env.IG_MCP_URL],
   };
   fs.writeFileSync(temporaryPath, `${JSON.stringify(config, null, 2)}\n`, { mode: originalMode });
   fs.renameSync(temporaryPath, configPath);
@@ -269,9 +270,27 @@ PY
 
 print_banner
 
+interactive=0
+if [ -t 1 ] && [ -r /dev/tty ] && [ -z "${IG_INSTALL_CLIENTS:-}" ] && [ "${IG_NONINTERACTIVE:-0}" != '1' ]; then
+  interactive=1
+  printf '%bStep 1 of 4%b: Press Enter to continue.' "$BOLD" "$RESET"
+  IFS= read -r continue_reply </dev/tty || exit 1
+  printf '\n%bStep 2 of 4%b: Choose where to install Intelligent Growth.\n\n' "$BOLD" "$RESET"
+  printf '  1. Claude Desktop\n\n'
+  printf 'Choose [1]: '
+  IFS= read -r desktop_choice </dev/tty || exit 1
+  case "$desktop_choice" in
+    ''|1) requested='desktop' ;;
+    *)
+      say_error 'Choose 1 for Claude Desktop.'
+      exit 1
+      ;;
+  esac
+fi
+
 if [ -n "${IG_INSTALL_CLIENTS:-}" ]; then
   requested=$IG_INSTALL_CLIENTS
-else
+elif [ "$interactive" -eq 0 ]; then
   requested='desktop'
 fi
 
@@ -311,8 +330,21 @@ if [ "$failed" -gt 0 ]; then
 fi
 
 if [ "$clients" = 'desktop' ]; then
-  printf '\n%bIntelligent Growth is configured for Claude Desktop.%b\n' "$BOLD" "$RESET"
-  printf 'Fully quit and reopen Claude Desktop. Your browser will open so you can sign in.\n'
+  if [ "$interactive" -eq 1 ] || [ "${IG_RUN_AUTH:-0}" = '1' ]; then
+    printf '\n%bStep 3 of 4%b: Sign in through the browser.\n' "$BOLD" "$RESET"
+    printf 'A sign-in page will open. When it is finished, return here.\n\n'
+    npx_path=$(command -v npx)
+    if ! "$npx_path" -y -p "$MCP_REMOTE_PACKAGE" mcp-remote-client "$MCP_URL"; then
+      say_error 'Sign-in did not finish. The Connector is configured, so you can restart Claude Desktop to try again.'
+      exit 1
+    fi
+    printf '\n%bStep 4 of 4: Done.%b\n' "$GREEN$BOLD" "$RESET"
+    printf 'Intelligent Growth is connected to Claude Desktop.\n'
+    printf 'Fully quit and reopen Claude Desktop, then start a new chat.\n'
+  else
+    printf '\n%bIntelligent Growth is configured for Claude Desktop.%b\n' "$BOLD" "$RESET"
+    printf 'Fully quit and reopen Claude Desktop. Your browser will open so you can sign in.\n'
+  fi
 else
   if [ "$configured" -eq 1 ]; then agent_word='agent'; else agent_word='agents'; fi
   printf '\n%bInstalled Intelligent Growth for %s %s.%b\n' "$BOLD" "$configured" "$agent_word" "$RESET"

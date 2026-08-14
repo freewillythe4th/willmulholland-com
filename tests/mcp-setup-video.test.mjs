@@ -15,6 +15,9 @@ test('Claude Desktop setup uses direct config installers before the starter prom
   assert.match(setupPage, /curl -sL https:\/\/intelligentgrowth\.app\/install \| sh/);
   assert.match(setupPage, /irm https:\/\/intelligentgrowth\.app\/install\.ps1 \| iex/);
   assert.match(setupPage, /claude_desktop_config\.json/);
+  assert.match(setupPage, /four steps/i);
+  assert.match(setupPage, /browser sign-in opens during installation/i);
+  assert.match(setupPage, /return to Terminal or PowerShell/i);
   assert.doesNotMatch(setupPage, /Add custom connector/);
 });
 

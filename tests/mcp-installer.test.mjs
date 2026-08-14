@@ -28,8 +28,15 @@ test('the installer is valid POSIX shell and points only at the production Conne
   const source = fs.readFileSync(installer, 'utf8');
 
   assert.match(source, /https:\/\/mcp\.intelligentgrowth\.app\/mcp/);
+  assert.match(source, /mcp-remote@0\.1\.38/);
+  assert.doesNotMatch(source, /mcp-remote@latest/);
   assert.doesNotMatch(source, /YOUR_KEY|api[_-]?key|access_token/i);
   assert.doesNotMatch(source, /[\u2013\u2014]/);
+  assert.match(source, /Step 1 of 4/);
+  assert.match(source, /Step 2 of 4/);
+  assert.match(source, /Step 3 of 4/);
+  assert.match(source, /Step 4 of 4/);
+  assert.match(source, /mcp-remote-client/);
 });
 
 test('the PowerShell installer writes the Claude Desktop config without invoking sh', () => {
@@ -42,8 +49,72 @@ test('the PowerShell installer writes the Claude Desktop config without invoking
   assert.match(source, /https:\/\/mcp\.intelligentgrowth\.app\/mcp/);
   assert.match(source, /Get-Command\s+node\.exe/);
   assert.match(source, /Get-Command\s+npx\.cmd/);
+  assert.match(source, /Read-Host/);
+  assert.match(source, /mcp-remote-client/);
+  assert.match(source, /mcp-remote@0\.1\.38/);
+  assert.doesNotMatch(source, /mcp-remote@latest/);
   assert.doesNotMatch(source, /\|\s*sh\b/);
   assert.doesNotMatch(source, /[\u2013\u2014]/);
+});
+
+test('the Desktop installer verifies OAuth with mcp-remote-client before reporting done', () => {
+  const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), 'ig-desktop-auth-'));
+  const home = path.join(sandbox, 'home');
+  const bin = path.join(sandbox, 'bin');
+  const log = path.join(sandbox, 'npx.log');
+  const configPath = path.join(home, 'claude_desktop_config.json');
+  fs.mkdirSync(home, { recursive: true });
+  fs.mkdirSync(bin, { recursive: true });
+
+  const npx = path.join(bin, 'npx');
+  fs.writeFileSync(npx, '#!/bin/sh\nprintf \'%s\\n\' "$*" >> "$IG_TEST_LOG"\nexit 0\n');
+  fs.chmodSync(npx, 0o755);
+
+  const result = spawnSync('sh', [installer.pathname], {
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      HOME: home,
+      PATH: `${bin}:${process.env.PATH}`,
+      IG_CLAUDE_DESKTOP_CONFIG: configPath,
+      IG_RUN_AUTH: '1',
+      IG_TEST_LOG: log,
+    },
+  });
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  assert.match(fs.readFileSync(log, 'utf8'), /-y -p mcp-remote@0\.1\.38 mcp-remote-client https:\/\/mcp\.intelligentgrowth\.app\/mcp/);
+  assert.match(result.stdout, /Step 3 of 4.*sign in/is);
+  assert.match(result.stdout, /Step 4 of 4.*Done/s);
+});
+
+test('a failed OAuth check keeps the config but never reports Done', () => {
+  const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), 'ig-desktop-auth-failure-'));
+  const home = path.join(sandbox, 'home');
+  const bin = path.join(sandbox, 'bin');
+  const configPath = path.join(home, 'claude_desktop_config.json');
+  fs.mkdirSync(home, { recursive: true });
+  fs.mkdirSync(bin, { recursive: true });
+
+  const npx = path.join(bin, 'npx');
+  fs.writeFileSync(npx, '#!/bin/sh\nexit 7\n');
+  fs.chmodSync(npx, 0o755);
+
+  const result = spawnSync('sh', [installer.pathname], {
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      HOME: home,
+      PATH: `${bin}:${process.env.PATH}`,
+      IG_CLAUDE_DESKTOP_CONFIG: configPath,
+      IG_RUN_AUTH: '1',
+    },
+  });
+
+  assert.equal(result.status, 1, result.stdout);
+  assert.equal(fs.existsSync(configPath), true);
+  assert.doesNotMatch(result.stdout, /Step 4 of 4/);
+  assert.match(result.stderr, /Sign-in did not finish/);
 });
 
 test('the shell one-liner configures Claude Desktop by default', () => {
@@ -76,7 +147,7 @@ test('the shell one-liner configures Claude Desktop by default', () => {
   const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
   assert.deepEqual(config.mcpServers['intelligent-growth'], {
     command: npx,
-    args: ['-y', 'mcp-remote', 'https://mcp.intelligentgrowth.app/mcp'],
+    args: ['-y', 'mcp-remote@0.1.38', 'https://mcp.intelligentgrowth.app/mcp'],
   });
   assert.match(result.stdout, /Claude Desktop/);
   assert.match(result.stdout, /fully quit and reopen Claude Desktop/i);
