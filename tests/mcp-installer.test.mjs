@@ -7,6 +7,7 @@ import test from 'node:test';
 
 const root = new URL('..', import.meta.url);
 const installer = new URL('../install.sh', import.meta.url);
+const windowsInstaller = new URL('../install.ps1', import.meta.url);
 
 test('the public install route serves the shell installer with a safe content type', () => {
   const config = JSON.parse(fs.readFileSync(new URL('../vercel.json', import.meta.url), 'utf8'));
@@ -15,6 +16,11 @@ test('the public install route serves the shell installer with a safe content ty
   assert.equal(route?.dest, '/install.sh');
   assert.match(route?.headers?.['Content-Type'] ?? '', /text\/x-shellscript/);
   assert.equal(route?.headers?.['X-Content-Type-Options'], 'nosniff');
+
+  const windowsRoute = config.routes.find((entry) => entry.src === '/install.ps1');
+  assert.equal(windowsRoute?.dest, '/install.ps1');
+  assert.match(windowsRoute?.headers?.['Content-Type'] ?? '', /text\/plain/);
+  assert.equal(windowsRoute?.headers?.['X-Content-Type-Options'], 'nosniff');
 });
 
 test('the installer is valid POSIX shell and points only at the production Connector', () => {
@@ -24,6 +30,87 @@ test('the installer is valid POSIX shell and points only at the production Conne
   assert.match(source, /https:\/\/mcp\.intelligentgrowth\.app\/mcp/);
   assert.doesNotMatch(source, /YOUR_KEY|api[_-]?key|access_token/i);
   assert.doesNotMatch(source, /[\u2013\u2014]/);
+});
+
+test('the PowerShell installer writes the Claude Desktop config without invoking sh', () => {
+  const source = fs.readFileSync(windowsInstaller, 'utf8');
+
+  assert.match(source, /\$env:APPDATA/);
+  assert.match(source, /claude_desktop_config\.json/);
+  assert.match(source, /mcpServers/);
+  assert.match(source, /mcp-remote/);
+  assert.match(source, /https:\/\/mcp\.intelligentgrowth\.app\/mcp/);
+  assert.match(source, /Get-Command\s+node\.exe/);
+  assert.match(source, /Get-Command\s+npx\.cmd/);
+  assert.doesNotMatch(source, /\|\s*sh\b/);
+  assert.doesNotMatch(source, /[\u2013\u2014]/);
+});
+
+test('the shell one-liner configures Claude Desktop by default', () => {
+  const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), 'ig-desktop-install-'));
+  const home = path.join(sandbox, 'home');
+  const bin = path.join(sandbox, 'bin');
+  const configPath = path.join(home, 'Library', 'Application Support', 'Claude', 'claude_desktop_config.json');
+  fs.mkdirSync(home, { recursive: true });
+  fs.mkdirSync(bin, { recursive: true });
+
+  const npx = path.join(bin, 'npx');
+  fs.writeFileSync(npx, '#!/bin/sh\nexit 0\n');
+  fs.chmodSync(npx, 0o755);
+  const blockedPython = path.join(bin, 'python3');
+  fs.writeFileSync(blockedPython, '#!/bin/sh\nexit 99\n');
+  fs.chmodSync(blockedPython, 0o755);
+
+  const result = spawnSync('sh', [installer.pathname], {
+    cwd: root.pathname,
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      HOME: home,
+      PATH: `${bin}:${process.env.PATH}`,
+      IG_CLAUDE_DESKTOP_CONFIG: configPath,
+    },
+  });
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  assert.deepEqual(config.mcpServers['intelligent-growth'], {
+    command: npx,
+    args: ['-y', 'mcp-remote', 'https://mcp.intelligentgrowth.app/mcp'],
+  });
+  assert.match(result.stdout, /Claude Desktop/);
+  assert.match(result.stdout, /fully quit and reopen Claude Desktop/i);
+});
+
+test('Claude Desktop configuration is backed up and preserves existing servers', () => {
+  const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), 'ig-desktop-existing-'));
+  const home = path.join(sandbox, 'home');
+  const bin = path.join(sandbox, 'bin');
+  const configPath = path.join(home, 'claude_desktop_config.json');
+  fs.mkdirSync(home, { recursive: true });
+  fs.mkdirSync(bin, { recursive: true });
+  fs.writeFileSync(configPath, JSON.stringify({ mcpServers: { existing: { command: 'existing-server' } } }));
+
+  const npx = path.join(bin, 'npx');
+  fs.writeFileSync(npx, '#!/bin/sh\nexit 0\n');
+  fs.chmodSync(npx, 0o755);
+
+  const result = spawnSync('sh', [installer.pathname], {
+    encoding: 'utf8',
+    env: {
+      ...process.env,
+      HOME: home,
+      PATH: `${bin}:${process.env.PATH}`,
+      IG_CLAUDE_DESKTOP_CONFIG: configPath,
+    },
+  });
+
+  assert.equal(result.status, 0, result.stderr || result.stdout);
+  const updated = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  const backup = JSON.parse(fs.readFileSync(`${configPath}.intelligent-growth-backup`, 'utf8'));
+  assert.equal(updated.mcpServers.existing.command, 'existing-server');
+  assert.equal(updated.mcpServers['intelligent-growth'].command, npx);
+  assert.deepEqual(backup, { mcpServers: { existing: { command: 'existing-server' } } });
 });
 
 test('non-interactive installs configure selected CLI and JSON clients without touching the real home', () => {

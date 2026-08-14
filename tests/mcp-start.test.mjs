@@ -17,6 +17,7 @@ test('setup accepts only supported clients and safe job slugs', () => {
 });
 
 test('connection values contain only the public hosted endpoint', () => {
+  assert.equal(connectionValueFor('claude_desktop'), 'curl -sL https://intelligentgrowth.app/install | sh');
   assert.equal(connectionValueFor('claude_code'), 'claude mcp add intelligent-growth --transport http https://mcp.intelligentgrowth.app/mcp');
   assert.equal(connectionValueFor('chatgpt'), 'https://mcp.intelligentgrowth.app/mcp');
   assert.equal(connectionValueFor('other'), 'https://mcp.intelligentgrowth.app/mcp');

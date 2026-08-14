@@ -29,9 +29,6 @@ const jobLabel = document.getElementById('job-label');
 const heading = document.getElementById('setup-heading');
 const intro = document.getElementById('setup-intro');
 const unavailableNotice = document.getElementById('setup-unavailable');
-const setupVideo = document.getElementById('claude-desktop-setup-video');
-let setupVideoStarted = false;
-let setupVideoCompleted = false;
 
 function capture(eventName, properties) {
   if (window.igAnalytics) window.igAnalytics.captureFunnel(eventName, properties);
@@ -66,7 +63,7 @@ function selectClient(value) {
   });
   document.querySelectorAll('.copy-button').forEach((button) => {
     button.classList.remove('is-copied');
-    button.textContent = button.dataset.copy === 'prompt' ? 'Copy prompt' : (client === 'claude_code' ? 'Copy command' : 'Copy URL');
+    button.textContent = button.dataset.copy === 'prompt' ? 'Copy prompt' : (['claude_desktop', 'claude_code'].includes(client) ? 'Copy command' : 'Copy URL');
   });
 
   promptValue.textContent = starterPromptFor(job);
@@ -105,7 +102,9 @@ document.addEventListener('click', async (event) => {
   if (!button || !client) return;
 
   const kind = button.dataset.copy;
-  const value = kind === 'connection' ? connectionValueFor(client) : starterPromptFor(job);
+  const value = kind === 'connection'
+    ? (button.dataset.copyValue || connectionValueFor(client))
+    : starterPromptFor(job);
   try {
     await copyText(value);
     button.classList.add('is-copied');
@@ -138,20 +137,6 @@ readyButton.addEventListener('click', () => {
   readyButton.textContent = 'Ready';
   readyButton.disabled = true;
 });
-
-if (setupVideo) {
-  setupVideo.addEventListener('play', () => {
-    if (setupVideoStarted) return;
-    setupVideoStarted = true;
-    capture('mcp_setup_step_completed', { step: 'setup_video_started', client: 'claude_desktop' });
-  });
-
-  setupVideo.addEventListener('ended', () => {
-    if (setupVideoCompleted) return;
-    setupVideoCompleted = true;
-    capture('mcp_setup_step_completed', { step: 'setup_video_completed', client: 'claude_desktop' });
-  });
-}
 
 document.querySelectorAll('[data-troubleshooting]').forEach((details) => {
   details.addEventListener('toggle', () => {

@@ -30,16 +30,6 @@ print_banner() {
   printf "%b60 product marketing skills inside your AI agent%b\n\n" "$DIM" "$RESET"
 }
 
-print_clients() {
-  printf 'Choose one or more agents, separated by commas:\n\n'
-  printf '  1. Claude Code\n'
-  printf '  2. Codex\n'
-  printf '  3. Cursor\n'
-  printf '  4. VS Code\n'
-  printf '  5. Gemini CLI\n'
-  printf '  6. OpenCode\n\n'
-}
-
 selection_to_clients() {
   old_ifs=$IFS
   IFS=','
@@ -49,6 +39,7 @@ selection_to_clients() {
   for choice in "$@"; do
     choice=$(printf '%s' "$choice" | tr -d ' ')
     case "$choice" in
+      0|desktop|claude-desktop) client='desktop' ;;
       1|claude) client='claude' ;;
       2|codex) client='codex' ;;
       3|cursor) client='cursor' ;;
@@ -68,6 +59,62 @@ selection_to_clients() {
     esac
   done
   printf '%s' "$result"
+}
+
+configure_claude_desktop() {
+  if ! command -v node >/dev/null 2>&1 || ! command -v npx >/dev/null 2>&1; then
+    say_error 'Node.js 18 or newer is required. Install it from https://nodejs.org and run this command again.'
+    return 1
+  fi
+
+  node_major=$(node -p "Number(process.versions.node.split('.')[0])" 2>/dev/null || printf '0')
+  if [ "$node_major" -lt 18 ] 2>/dev/null; then
+    say_error 'Node.js 18 or newer is required. Update it from https://nodejs.org and run this command again.'
+    return 1
+  fi
+
+  npx_path=$(command -v npx)
+  if [ -n "${IG_CLAUDE_DESKTOP_CONFIG:-}" ]; then
+    config_path=$IG_CLAUDE_DESKTOP_CONFIG
+  elif [ "$(uname -s)" = 'Darwin' ]; then
+    config_path="$HOME/Library/Application Support/Claude/claude_desktop_config.json"
+  else
+    say_error 'This shell installer supports Claude Desktop on macOS. On Windows, run: irm https://intelligentgrowth.app/install.ps1 | iex'
+    return 1
+  fi
+
+  IG_CONFIG_PATH="$config_path" IG_NPX_PATH="$npx_path" IG_MCP_URL="$MCP_URL" node <<'JS'
+const fs = require('fs');
+const path = require('path');
+
+const configPath = process.env.IG_CONFIG_PATH;
+const backupPath = `${configPath}.intelligent-growth-backup`;
+const temporaryPath = `${configPath}.intelligent-growth-tmp`;
+
+try {
+  fs.mkdirSync(path.dirname(configPath), { recursive: true });
+  const exists = fs.existsSync(configPath) && fs.statSync(configPath).size > 0;
+  const originalMode = exists ? fs.statSync(configPath).mode : 0o600;
+  if (exists && !fs.existsSync(backupPath)) fs.copyFileSync(configPath, backupPath);
+  const config = exists ? JSON.parse(fs.readFileSync(configPath, 'utf8')) : {};
+  if (!config || Array.isArray(config) || typeof config !== 'object') {
+    throw new Error('configuration root must be a JSON object');
+  }
+  if (!config.mcpServers || Array.isArray(config.mcpServers) || typeof config.mcpServers !== 'object') {
+    config.mcpServers = {};
+  }
+  config.mcpServers['intelligent-growth'] = {
+    command: process.env.IG_NPX_PATH,
+    args: ['-y', 'mcp-remote', process.env.IG_MCP_URL],
+  };
+  fs.writeFileSync(temporaryPath, `${JSON.stringify(config, null, 2)}\n`, { mode: originalMode });
+  fs.renameSync(temporaryPath, configPath);
+} catch (error) {
+  if (fs.existsSync(temporaryPath)) fs.unlinkSync(temporaryPath);
+  console.error(`${error.name}: ${error.message}`);
+  process.exit(1);
+}
+JS
 }
 
 configure_claude() {
@@ -225,13 +272,7 @@ print_banner
 if [ -n "${IG_INSTALL_CLIENTS:-}" ]; then
   requested=$IG_INSTALL_CLIENTS
 else
-  if [ ! -r /dev/tty ]; then
-    say_error 'No interactive terminal found. Set IG_INSTALL_CLIENTS to a comma-separated list.'
-    exit 1
-  fi
-  print_clients
-  printf 'Agents: '
-  IFS= read -r requested </dev/tty
+  requested='desktop'
 fi
 
 clients=$(selection_to_clients "$requested") || exit 1
@@ -250,6 +291,7 @@ IFS=$old_ifs
 for client in "$@"; do
   printf 'Configuring %s... ' "$client"
   case "$client" in
+    desktop) configure_claude_desktop ;;
     claude) configure_claude ;;
     codex) configure_codex ;;
     *) configure_json "$client" ;;
@@ -268,7 +310,12 @@ if [ "$failed" -gt 0 ]; then
   exit 1
 fi
 
-if [ "$configured" -eq 1 ]; then agent_word='agent'; else agent_word='agents'; fi
-printf '\n%bInstalled Intelligent Growth for %s %s.%b\n' "$BOLD" "$configured" "$agent_word" "$RESET"
-printf 'Open your agent, use Intelligent Growth, and sign in when your agent opens the browser.\n'
+if [ "$clients" = 'desktop' ]; then
+  printf '\n%bIntelligent Growth is configured for Claude Desktop.%b\n' "$BOLD" "$RESET"
+  printf 'Fully quit and reopen Claude Desktop. Your browser will open so you can sign in.\n'
+else
+  if [ "$configured" -eq 1 ]; then agent_word='agent'; else agent_word='agents'; fi
+  printf '\n%bInstalled Intelligent Growth for %s %s.%b\n' "$BOLD" "$configured" "$agent_word" "$RESET"
+  printf 'Open your agent, use Intelligent Growth, and sign in when your agent opens the browser.\n'
+fi
 printf 'Setup help: https://intelligentgrowth.app/mcp/start\n\n'

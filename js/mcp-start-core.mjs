@@ -30,9 +30,10 @@ export function normalizeJob(value) {
 }
 
 export function connectionValueFor(client) {
-  return normalizeClient(client) === 'claude_code'
-    ? `claude mcp add intelligent-growth --transport http ${ENDPOINT}`
-    : ENDPOINT;
+  const normalized = normalizeClient(client);
+  if (normalized === 'claude_desktop') return 'curl -sL https://intelligentgrowth.app/install | sh';
+  if (normalized === 'claude_code') return `claude mcp add intelligent-growth --transport http ${ENDPOINT}`;
+  return ENDPOINT;
 }
 
 export function starterPromptFor(job) {
