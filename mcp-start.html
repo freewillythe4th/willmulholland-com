@@ -57,13 +57,20 @@
 
           <div class="instruction" data-instruction="claude_desktop">
             <div class="instruction-box">
-              <h3>Install it directly in Claude Desktop</h3>
-              <p>The installer safely adds Intelligent Growth to <code>claude_desktop_config.json</code> and keeps your existing connectors. You need Node.js 18 or newer.</p>
+              <h3>Use this first if Add custom connector is available</h3>
+              <p>In Claude Desktop, go to Customize &gt; Connectors, click the + button and choose Add custom connector. Name it <strong>Intelligent Growth</strong>, paste the URL below, then connect and sign in.</p>
+              <div class="copy-row"><code class="copy-value">https://mcp.intelligentgrowth.app/mcp</code><button class="copy-button" type="button" data-copy="connection" data-copy-value="https://mcp.intelligentgrowth.app/mcp" data-copy-label="Copy URL">Copy URL</button></div>
+            </div>
+            <div class="instruction-box instruction-box--fallback">
+              <h3>Can't add a custom connector?</h3>
+              <p>If the option is missing and you use a Team or Enterprise workspace, only an Owner or Primary Owner can add custom connectors for the organisation. An organisation policy may also hide or disable the option.</p>
+              <p>If your organisation allows connectors configured on your computer, install Intelligent Growth directly in Claude Desktop instead. The installer adds it to <code>claude_desktop_config.json</code> and keeps your existing connectors. You need Node.js 18 or newer. If this is blocked too, ask your workspace admin to allow it.</p>
               <p>Mac: open Terminal and run:</p>
-              <div class="copy-row"><code class="copy-value" data-connection-value>curl -sL https://intelligentgrowth.app/install | sh</code><button class="copy-button" type="button" data-copy="connection" data-copy-value="curl -sL https://intelligentgrowth.app/install | sh">Copy command</button></div>
+              <div class="copy-row"><code class="copy-value">curl -sL https://intelligentgrowth.app/install | sh</code><button class="copy-button" type="button" data-copy="connection" data-copy-value="curl -sL https://intelligentgrowth.app/install | sh" data-copy-label="Copy command">Copy command</button></div>
               <p>Windows: open PowerShell and run:</p>
-              <div class="copy-row"><code class="copy-value">irm https://intelligentgrowth.app/install.ps1 | iex</code><button class="copy-button" type="button" data-copy="connection" data-copy-value="irm https://intelligentgrowth.app/install.ps1 | iex">Copy command</button></div>
-              <p>The installer takes you through four steps: press Enter, choose Claude Desktop, sign in, then wait for Done. The browser sign-in opens during installation. When it finishes, return to Terminal or PowerShell, wait for Done, then fully quit and reopen Claude Desktop. There is no manual connector flow.</p>
+              <div class="copy-row"><code class="copy-value">irm https://intelligentgrowth.app/install.ps1 | iex</code><button class="copy-button" type="button" data-copy="connection" data-copy-value="irm https://intelligentgrowth.app/install.ps1 | iex" data-copy-label="Copy command">Copy command</button></div>
+              <p>The installer guides you through four steps: press Enter, choose Claude Desktop, complete the browser sign-in, then return to Terminal or PowerShell and wait for Done. Fully quit and reopen Claude Desktop afterwards.</p>
+              <p>Still blocked? <a class="text-link whatsapp-link" href="/api/setup-help?placement=desktop_fallback" data-ig-event="mcp_help_clicked" data-ig-channel="whatsapp" data-ig-placement="desktop_fallback"><img class="channel-icon" src="/images/icons/whatsapp.svg" alt="" aria-hidden="true">Message Will on WhatsApp</a> or jump on a short onboarding call. Do not send access tokens or private company content.</p>
             </div>
           </div>
 

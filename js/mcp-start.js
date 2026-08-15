@@ -63,7 +63,9 @@ function selectClient(value) {
   });
   document.querySelectorAll('.copy-button').forEach((button) => {
     button.classList.remove('is-copied');
-    button.textContent = button.dataset.copy === 'prompt' ? 'Copy prompt' : (['claude_desktop', 'claude_code'].includes(client) ? 'Copy command' : 'Copy URL');
+    button.textContent = button.dataset.copy === 'prompt'
+      ? 'Copy prompt'
+      : (button.dataset.copyLabel || (['claude_desktop', 'claude_code'].includes(client) ? 'Copy command' : 'Copy URL'));
   });
 
   promptValue.textContent = starterPromptFor(job);
