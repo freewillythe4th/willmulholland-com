@@ -92,6 +92,10 @@
       "dest": "/blog.html"
     },
     {
+      "src": "/blog/ai-for-product-marketers",
+      "dest": "/blog/ai-for-product-marketers.html"
+    },
+    {
       "src": "/blog/marketing-is-the-bottleneck",
       "dest": "/blog/marketing-is-the-bottleneck.html"
     },
