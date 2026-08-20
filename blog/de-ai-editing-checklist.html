@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to edit AI writing: a checklist for marketers</title>
+    <meta name="description" content="A 7-pass editing checklist for marketers using AI first drafts. Covers claims, voice, specificity, and the tells that cost you credibility.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://www.willmulholland.com/blog/de-ai-editing-checklist">
+    <meta property="og:title" content="How to edit AI writing: a checklist for marketers">
+    <meta property="og:description" content="A 7-pass editing checklist for marketers using AI first drafts. Covers claims, voice, specificity, and the tells that cost you credibility.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.willmulholland.com/blog/de-ai-editing-checklist">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #1F1511;
+            --ink: #1F1511;
+            --cream: #F2EDE3;
+            --cream-soft: #EBE5D8;
+            --white: #FFFFFF;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            line-height: 1.65;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::selection { background: var(--accent); color: var(--white); }
+
+        nav {
+            position: sticky; top: 0; z-index: 100; padding: 20px 48px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(242,237,227,0.88); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(31,21,17,0.06);
+        }
+        .nav-logo img { height: 30px; width: auto; display: block; }
+        .nav-back {
+            font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-mid); text-decoration: none; transition: color 0.4s var(--ease-smooth);
+        }
+        .nav-back:hover { color: var(--ink); }
+
+        article { max-width: 720px; margin: 0 auto; padding: 72px 24px 48px; }
+
+        .kicker {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--accent); font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+        }
+        .kicker::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+
+        article h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(36px, 6vw, 60px);
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+        .lead { font-size: clamp(18px, 2.4vw, 22px); color: var(--gray-mid); line-height: 1.5; margin-bottom: 28px; }
+        .meta {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;
+            color: var(--gray-light); padding-bottom: 32px; border-bottom: 1px solid rgba(31,21,17,0.1); margin-bottom: 40px;
+        }
+
+        .tldr {
+            background: var(--cream-soft);
+            border: 1px solid rgba(31,21,17,0.12);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 48px;
+        }
+        .tldr h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(20px, 2.8vw, 26px);
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .tldr ul { padding-left: 20px; }
+        .tldr li { font-size: 17px; color: var(--gray-mid); margin-bottom: 10px; line-height: 1.65; }
+        .tldr li:last-child { margin-bottom: 0; }
+
+        article h2.sec {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(24px, 3.4vw, 32px);
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+            margin: 48px 0 18px;
+            display: flex;
+            gap: 16px;
+            align-items: baseline;
+            color: var(--ink);
+        }
+        article h2.sec .num {
+            font-family: monospace; font-size: 16px; color: var(--accent); font-weight: 700; flex-shrink: 0;
+        }
+        article h3 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--ink);
+            margin: 32px 0 12px;
+            letter-spacing: -0.01em;
+        }
+        article p { font-size: 18px; color: var(--gray-mid); margin-bottom: 20px; line-height: 1.65; }
+        article p strong { font-weight: 700; color: var(--ink); }
+        article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+        article a:hover { color: var(--accent-deep); }
+        .accent-text { color: var(--accent-deep); }
+
+        article ul, article ol {
+            padding-left: 24px;
+            margin-bottom: 20px;
+        }
+        article li {
+            font-size: 18px;
+            color: var(--gray-mid);
+            margin-bottom: 10px;
+            line-height: 1.65;
+        }
+
+        .checklist-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0 32px;
+            font-size: 15px;
+        }
+        .checklist-table th {
+            background: var(--ink);
+            color: var(--white);
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+        }
+        .checklist-table td {
+            padding: 11px 14px;
+            border-bottom: 1px solid rgba(31,21,17,0.08);
+            color: var(--gray-mid);
+            vertical-align: top;
+        }
+        .checklist-table tr:last-child td { border-bottom: none; }
+        .checklist-table tr:nth-child(even) td { background: var(--cream-soft); }
+        .checklist-table td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+        .checklist-table td:last-child { text-align: right; font-family: monospace; font-size: 13px; color: var(--accent); }
+
+        .example-block {
+            background: var(--cream-soft);
+            border-left: 3px solid var(--accent);
+            border-radius: 0 12px 12px 0;
+            padding: 20px 24px;
+            margin: 20px 0;
+        }
+        .example-block p { font-size: 16px; margin-bottom: 10px; }
+        .example-block p:last-child { margin-bottom: 0; }
+        .example-block .label {
+            font-family: monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .faq-item { margin-bottom: 32px; }
+        .faq-item h3 { margin-bottom: 10px; }
+
+        .resources-list { list-style: none; padding: 0; }
+        .resources-list li { margin-bottom: 12px; }
+        .resources-list li a { font-size: 16px; }
+
+        hr { border: none; border-top: 1px solid rgba(31,21,17,0.1); margin: 48px 0; }
+
+        .end-cta {
+            margin-top: 56px; padding: 40px 32px; background: var(--ink); color: var(--white);
+            border-radius: 24px; text-align: center;
+        }
+        .end-cta h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: 28px;
+            letter-spacing: -0.01em;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        .end-cta p { font-size: 16px; color: rgba(242,237,227,0.8); margin-bottom: 24px; }
+        .end-cta .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .end-cta a {
+            padding: 14px 26px; border-radius: 999px; font-size: 13px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none;
+            transition: all 0.5s var(--ease-smooth);
+        }
+        .end-cta a.primary { background: var(--white); color: var(--ink); }
+        .end-cta a.primary:hover { background: var(--accent); color: var(--white); border-radius: 12px; }
+        .end-cta a.ghost { border: 1px solid rgba(242,237,227,0.3); color: var(--white); }
+        .end-cta a.ghost:hover { border-radius: 12px; background: rgba(242,237,227,0.1); }
+
+        footer {
+            max-width: 720px; margin: 64px auto 0; padding: 32px 24px 48px;
+            border-top: 1px solid rgba(31,21,17,0.10); display: flex; justify-content: space-between;
+            font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-light); flex-wrap: wrap; gap: 12px;
+        }
+        footer a { color: var(--gray-light); text-decoration: none; }
+        footer a:hover { color: var(--ink); }
+
+        @media (max-width: 600px) {
+            nav { padding: 16px 24px; }
+            article { padding: 48px 24px 40px; }
+            .checklist-table { font-size: 13px; }
+            .checklist-table th, .checklist-table td { padding: 8px 10px; }
+        }
+    </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+        <a href="/blog" class="nav-back">&larr; Blog</a>
+    </nav>
+
+    <article>
+        <div class="kicker">Checklist</div>
+        <h1>How to edit AI writing: a checklist for marketers</h1>
+        <p class="lead">Most editing passes catch the obvious stuff and miss what actually costs you credibility. Here's the seven-pass system that fixes both.</p>
+        <div class="meta">Will Mulholland &middot; 7 min read &middot; August 2026</div>
+
+        <div class="tldr">
+            <h2>Key points</h2>
+            <ul>
+                <li>AI first drafts have seven consistent failure modes, and most editing guides only address two of them.</li>
+                <li>This checklist is built for marketers using Claude or ChatGPT to draft under deadline.</li>
+                <li>Fact-checking and voice are the two passes most people skip, and they're the two that cost you credibility.</li>
+                <li>A thorough edit of a 500-word AI draft takes about 25 minutes. If yours takes 5, you're missing things.</li>
+                <li>The order matters. Run claim check before voice pass, or you'll polish sentences that should have been cut.</li>
+            </ul>
+        </div>
+
+        <p>If you're using Claude or ChatGPT to draft marketing copy, the question isn't whether to edit. It's whether your editing pass is actually catching what matters.</p>
+        <p>Most marketers have a loose version of this: read it back, swap out the obvious AI words, tighten a few sentences. That catches some things. It misses what actually erodes trust: the vague claims, the hedge-heavy structure, the way an AI draft sounds confident while saying almost nothing specific.</p>
+        <p>The checklist below is seven passes. Each one targets a specific class of failure. The order matters, and doing all seven on a 500-word piece takes under 30 minutes.</p>
+
+        <h2 class="sec">What this checklist is for</h2>
+        <p>This is for marketers who use AI to write first drafts, then edit before publishing. It is not about spotting AI writing in other people's content (that's covered in <a href="/blog/how-to-spot-ai-writing">how to spot AI writing</a>). It is not about passing a detector.</p>
+        <p>It is for the person who has a Claude draft open and needs to decide: is this actually ready to go out under my name?</p>
+
+        <table class="checklist-table">
+            <thead>
+                <tr>
+                    <th>Pass</th>
+                    <th>What you're checking</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1 &mdash; Claim check</td><td>Statistics, comparisons, sourced facts</td><td>5 min</td></tr>
+                <tr><td>2 &mdash; Specificity</td><td>Generic sentences that need real detail</td><td>5 min</td></tr>
+                <tr><td>3 &mdash; Hedge hunt</td><td>"May", "might", "could", hedge language</td><td>3 min</td></tr>
+                <tr><td>4 &mdash; Transition clean</td><td>"Furthermore", "Moreover", AI connectors</td><td>2 min</td></tr>
+                <tr><td>5 &mdash; Voice pass</td><td>Sounds like anyone, not you</td><td>5 min</td></tr>
+                <tr><td>6 &mdash; Structure check</td><td>Front-loaded context, buried point</td><td>3 min</td></tr>
+                <tr><td>7 &mdash; Mate test</td><td>Reader's time, length, overall tone</td><td>2 min</td></tr>
+            </tbody>
+        </table>
+
+        <h2 class="sec"><span class="num">01</span> The claim check</h2>
+        <p>Read through once and underline every claim that needs evidence.</p>
+        <p>These are: statistics, percentages, comparisons ("the fastest", "most marketers"), time-based assertions ("in 2026", "since the pandemic"), and anything that starts with "research shows" or "studies suggest."</p>
+        <p>For each underlined claim, either source it with an inline link or delete it. If you cannot verify it in two minutes, cut it. A vague claim that sounds confident is worse than no claim at all, because it will get checked by whoever reads this.</p>
+        <p>Common ones to watch: market size figures, conversion rate benchmarks, stats about AI adoption, anything about "most companies" or "the majority of marketers." AI drafts generate plausible-sounding numbers. They're often wrong.</p>
+
+        <h2 class="sec"><span class="num">02</span> The specificity pass</h2>
+        <p>AI drafts default to the general when the specific is what sells.</p>
+        <p>Read through and find every sentence that could describe any company, any product, any campaign. For each one, ask: what's the specific version that actually applies here? Rewrite it with that detail.</p>
+        <div class="example-block">
+            <span class="label">Generic (AI default)</span>
+            <p>"We help marketing teams move faster."</p>
+            <span class="label">Specific (yours)</span>
+            <p>"We get a positioning brief reviewed and signed off in a week, not a quarter."</p>
+        </div>
+        <p>If you don't have the specific detail, flag it for someone who does. Don't leave the general version in.</p>
+
+        <h2 class="sec"><span class="num">03</span> The hedge hunt</h2>
+        <p>AI hedges constantly, because hedging is safer for a general-purpose model. You need to undo that for marketing copy.</p>
+        <p>Look for: "may", "might", "could", "in many cases", "often", "for some users", "it depends on your situation", "your mileage may vary."</p>
+        <p>For each hedge, make a decision. Either make the claim definite ("this saves time" not "this may save you time"), or cut the sentence if you can't make it definite. Marketing copy that hedges reads as copy that doesn't believe itself.</p>
+        <p>One legitimate use: when you're describing a scenario that genuinely varies by context, be specific about which context, not general about the variation. "For teams under 10 people, this usually isn't worth the setup time" is a real hedge with a real boundary. "Results may vary" is noise.</p>
+
+        <h2 class="sec"><span class="num">04</span> The transition clean</h2>
+        <p>AI uses "Furthermore", "Moreover", "Additionally", "In conclusion", and "To summarize" to connect paragraphs. Cut all of them.</p>
+        <p>Real connecting tissue is either a short sentence that carries the logic from one paragraph to the next, or nothing at all, because the flow is implied by the structure.</p>
+        <p>Also in this pass: cut "It's worth noting that", "It is important to understand", and "In today's landscape." Delete on sight.</p>
+
+        <h2 class="sec"><span class="num">05</span> The voice pass</h2>
+        <p>Read it aloud. Anything that sounds like a press release, a LinkedIn thought piece, or a white paper has probably come from the model's training data, not from you.</p>
+        <p>Listen for: sentences that are technically correct but feel like they could have been written by anyone. That's the problem. If the copy could ship on a competitor's site with the brand name swapped, it needs more of your actual perspective in it.</p>
+        <p>Adding voice is not about making it casual or adding jokes. It's about specificity of perspective. Where do you have an opinion that differs from the generic version? Where does your experience with this product or this market show up? Put that in. One specific observation from direct experience beats five generic claims every time.</p>
+
+        <h2 class="sec"><span class="num">06</span> The structure check</h2>
+        <p>AI tends to front-load context and bury the point. Marketing copy needs to do the opposite.</p>
+        <p>Check that:</p>
+        <ul>
+            <li>The first paragraph leads with the point, not the backstory.</li>
+            <li>Each section does one thing and stops.</li>
+            <li>The call to action is clear and specific, not "learn more" or "explore our solutions."</li>
+            <li>Nothing important is buried in paragraph four of a four-paragraph section.</li>
+        </ul>
+        <p>If you find buried points, move them up. If sections are trying to do two things at once, split them or cut one.</p>
+
+        <h2 class="sec"><span class="num">07</span> The mate test</h2>
+        <p>Read it one more time as a friend of your reader, not as the writer.</p>
+        <p>Ask: does this person need to read all of this? Does it waste their time anywhere? Is there anything that sounds like the brand talking at them rather than with them?</p>
+        <p>Cut anything that fails that test. Most AI drafts are 20-30% longer than they need to be.</p>
+
+        <hr>
+
+        <h2 class="sec">A worked example</h2>
+        <p>Here's what passes 2 and 3 look like on a real AI sentence.</p>
+        <div class="example-block">
+            <span class="label">Original (AI draft)</span>
+            <p>"Many companies are seeing significant improvements in their marketing output when they incorporate AI tools into their existing workflows."</p>
+            <span class="label">After pass 2 (specificity)</span>
+            <p>"Companies using Claude for first-draft copy are cutting their review rounds from three to one."</p>
+            <span class="label">After pass 3 (with a real source or attribution)</span>
+            <p>"The fastest teams I've seen run one review cycle, not three." That's a claim from direct observation. It's specific, it's attributable, and it's not manufactured.</p>
+        </div>
+        <p>The difference matters. A specific claim from experience is something you stand behind. A made-up benchmark that sounds credible is a liability.</p>
+
+        <hr>
+
+        <h2 class="sec">How to customise for different formats</h2>
+        <p>For a 100-word social caption: skip passes 1 and 6. Do the rest in five minutes.</p>
+        <p>For a 2,000-word sales page: passes 1 and 2 deserve twice the time. You may want a colleague to do pass 5, because after reading it four times you can no longer hear it clearly.</p>
+        <p>For email copy: pass 3 is the most important. Email hedges faster than any other format because the stakes feel lower.</p>
+        <p>The order is always the same. If you do the voice pass before the claim check, you'll end up polishing sentences that should have been cut. For more on the humanising side of this process, <a href="/blog/make-ai-writing-sound-human">making AI writing sound human</a> covers how to put your voice back into a draft once the structural issues are resolved.</p>
+
+        <hr>
+
+        <h2 class="sec">Frequently asked questions</h2>
+
+        <div class="faq-item">
+            <h3>How long should editing an AI draft take?</h3>
+            <p>For a 500-word piece, 20-30 minutes across all seven passes. If you're doing it in under 10 minutes, you're skipping at least two passes without knowing it.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can I use AI to do the editing?</h3>
+            <p>Yes, for passes 3 and 4 specifically. A prompt like "find every hedge word in this copy and flag it" works well. Passes 1, 2, and 5 need human judgment, because they require you to know what's true and what sounds like you. For a full AI-assisted editing workflow, <a href="/blog/claude-prompts-for-product-marketers">Claude prompts for product marketers</a> includes a de-AI pass you can run straight from Claude.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What's the biggest mistake people make when editing AI writing?</h3>
+            <p>Polishing the surface and missing the structure. Swapping one word for another doesn't fix a piece that buries the point in paragraph three. Work from structure down, not vocabulary up.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How do I know if AI writing is hurting my credibility?</h3>
+            <p>The first sign is usually that content starts getting fewer replies and shares than what you wrote yourself. The second is feedback like "this feels a bit generic" from someone on your team. Both are worth taking seriously.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Should I tell people when I used AI?</h3>
+            <p>That depends on your company's policy and your own stance on transparency. What isn't optional: anything you put your name on should be actually good, regardless of how it was produced. This checklist is about making sure it is.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Does this work for ChatGPT output as well as Claude?</h3>
+            <p>Yes. The failure modes are consistent across models. Pass 4 matters more for GPT-4 output, which uses "Furthermore" and "Moreover" more often. Pass 2 matters more for Claude output, which sounds polished but can still be generic.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>What about AI detection tools?</h3>
+            <p>Don't edit for detectors. Edit for your reader. A piece that passes a detector but reads flat to a human hasn't solved the problem.</p>
+        </div>
+
+        <hr>
+
+        <h2 class="sec">Key resources</h2>
+        <ul class="resources-list">
+            <li><a href="https://www.content-technologist.com/editing-ai-text-content/">Content Technologist: editing AI-generated text content</a></li>
+            <li><a href="https://www.atomwriter.com/blog/ai-writing-checklist-quality-control/">Atom Writer: AI writing quality control workflow</a></li>
+            <li><a href="/blog/how-to-spot-ai-writing">How to spot AI writing (willmulholland.com)</a></li>
+            <li><a href="/blog/make-ai-writing-sound-human">How to make AI writing sound human (willmulholland.com)</a></li>
+        </ul>
+
+        <div class="end-cta">
+            <h3>More on AI workflows for marketing</h3>
+            <p>The Intelligent Growth newsletter covers what's working for product marketers using AI in their actual jobs. One practical piece per week.</p>
+            <div class="btns">
+                <a class="primary" href="https://intelligentgrowth.co">Subscribe free</a>
+                <a class="ghost" href="/blog">Read more</a>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <span>&copy; 2026 Will Mulholland</span>
+        <span><a href="/blog">Blog</a> &middot; <a href="/">Home</a> &middot; <a href="/work.html">Case studies</a> &middot; <a href="/podcast">Podcast</a></span>
+    </footer>
+</body>
+</html>
