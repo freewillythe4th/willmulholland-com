@@ -92,6 +92,10 @@
       "dest": "/blog.html"
     },
     {
+      "src": "/blog/train-ai-on-your-brand-voice",
+      "dest": "/blog/train-ai-on-your-brand-voice.html"
+    },
+    {
       "src": "/blog/marketing-is-the-bottleneck",
       "dest": "/blog/marketing-is-the-bottleneck.html"
     },

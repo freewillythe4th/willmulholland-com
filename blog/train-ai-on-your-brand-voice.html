@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- wm-meta -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16.png">
+    <link rel="icon" href="/images/favicon/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <meta name="twitter:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Brand Voice Prompt: How to Actually Train AI on Your Voice (Template)</title>
+    <meta name="description" content="Most AI brand voice prompts fail because they describe the voice instead of showing it. Here is a copy-paste template and testing protocol that makes it stick.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://intelligentgrowth.app/blog/train-ai-on-your-brand-voice">
+    <meta property="og:title" content="AI Brand Voice Prompt: How to Actually Train AI on Your Voice (Template)">
+    <meta property="og:description" content="Most AI brand voice prompts fail because they describe the voice instead of showing it. Here is a copy-paste template and testing protocol that makes it stick.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://intelligentgrowth.app/blog/train-ai-on-your-brand-voice">
+    <meta property="og:image" content="https://intelligentgrowth.app/images/og/og-card.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --black: #1F1511;
+            --ink: #1F1511;
+            --cream: #F2EDE3;
+            --cream-soft: #EBE5D8;
+            --white: #FFFFFF;
+            --gray-mid: #5C4F47;
+            --gray-light: #8B7E73;
+            --accent: #2563EB;
+            --accent-soft: #DBEAFE;
+            --accent-deep: #1E3A8A;
+            --warm-shadow: 0 12px 32px rgba(31,21,17,0.10), 0 2px 8px rgba(31,21,17,0.06);
+            --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--cream);
+            color: var(--ink);
+            line-height: 1.65;
+            letter-spacing: -0.01em;
+            -webkit-font-smoothing: antialiased;
+        }
+        ::selection { background: var(--accent); color: var(--white); }
+
+        nav {
+            position: sticky; top: 0; z-index: 100; padding: 20px 48px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(242,237,227,0.88); backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(31,21,17,0.06);
+        }
+        .nav-logo img { height: 30px; width: auto; display: block; }
+        .nav-back {
+            font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-mid); text-decoration: none; transition: color 0.4s var(--ease-smooth);
+        }
+        .nav-back:hover { color: var(--ink); }
+
+        article { max-width: 720px; margin: 0 auto; padding: 72px 24px 48px; }
+
+        .kicker {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.12em;
+            color: var(--accent); font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+        }
+        .kicker::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+
+        article h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(36px, 6vw, 60px);
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+        .lead { font-size: clamp(18px, 2.4vw, 22px); color: var(--gray-mid); line-height: 1.5; margin-bottom: 28px; }
+        .meta {
+            font-family: monospace; font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;
+            color: var(--gray-light); padding-bottom: 32px; border-bottom: 1px solid rgba(31,21,17,0.1); margin-bottom: 40px;
+        }
+
+        .tldr {
+            background: var(--cream-soft);
+            border: 1px solid rgba(31,21,17,0.12);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 48px;
+        }
+        .tldr h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(20px, 2.8vw, 26px);
+            letter-spacing: -0.01em;
+            color: var(--ink);
+            margin-bottom: 18px;
+        }
+        .tldr ul { padding-left: 20px; margin: 0; }
+        .tldr ul li { font-size: 17px; color: var(--gray-mid); margin-bottom: 10px; line-height: 1.65; }
+        .tldr ul li:last-child { margin-bottom: 0; }
+
+        article h2.sec {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: clamp(24px, 3.4vw, 32px);
+            letter-spacing: -0.01em;
+            line-height: 1.15;
+            margin: 48px 0 18px;
+            display: flex;
+            gap: 16px;
+            align-items: baseline;
+            color: var(--ink);
+        }
+        article h2.sec .num {
+            font-family: monospace; font-size: 16px; color: var(--accent); font-weight: 700; flex-shrink: 0;
+        }
+        article h3 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--ink);
+            margin: 32px 0 12px;
+            letter-spacing: -0.01em;
+        }
+        article p { font-size: 18px; color: var(--gray-mid); margin-bottom: 20px; line-height: 1.65; }
+        article p strong { font-weight: 700; color: var(--ink); }
+        article ul, article ol { padding-left: 24px; margin-bottom: 20px; }
+        article ul li, article ol li { font-size: 18px; color: var(--gray-mid); margin-bottom: 8px; line-height: 1.65; }
+        article a { color: var(--accent-deep); text-decoration: underline; text-underline-offset: 3px; }
+        article a:hover { color: var(--accent); }
+
+        .code-block {
+            background: var(--ink);
+            color: #F2EDE3;
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin: 28px 0 32px;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.7;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .faq-item { border-top: 1px solid rgba(31,21,17,0.1); padding: 28px 0; }
+        .faq-item h3 { margin-top: 0; margin-bottom: 12px; font-size: 19px; }
+        .faq-item p { margin-bottom: 0; }
+
+        .end-cta {
+            margin-top: 56px; padding: 40px 32px; background: var(--ink); color: var(--white);
+            border-radius: 24px; text-align: center;
+        }
+        .end-cta h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-weight: 400;
+            font-size: 28px;
+            letter-spacing: -0.01em;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        .end-cta p { font-size: 16px; color: rgba(242,237,227,0.8); margin-bottom: 24px; }
+        .end-cta .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .end-cta a {
+            padding: 14px 26px; border-radius: 999px; font-size: 13px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none;
+            transition: all 0.5s var(--ease-smooth);
+        }
+        .end-cta a.primary { background: var(--white); color: var(--ink); }
+        .end-cta a.primary:hover { background: var(--accent); color: var(--white); border-radius: 12px; }
+        .end-cta a.ghost { border: 1px solid rgba(242,237,227,0.3); color: var(--white); }
+        .end-cta a.ghost:hover { border-radius: 12px; background: rgba(242,237,227,0.1); }
+
+        footer {
+            max-width: 720px; margin: 64px auto 0; padding: 32px 24px 48px;
+            border-top: 1px solid rgba(31,21,17,0.10); display: flex; justify-content: space-between;
+            font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-light); flex-wrap: wrap; gap: 12px;
+        }
+        footer a { color: var(--gray-light); text-decoration: none; }
+        footer a:hover { color: var(--ink); }
+
+        @media (max-width: 600px) {
+            nav { padding: 16px 24px; }
+            article { padding: 48px 24px 40px; }
+            .code-block { padding: 20px; font-size: 13px; }
+        }
+    </style>
+    <script type="module" src="/js/analytics.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="/" class="nav-logo"><img src="/images/ig-logo/ig-logo-full.png" alt="Intelligent Growth" style="height:46px;width:auto;display:block;"></a>
+        <a href="/blog" class="nav-back">&larr; Blog</a>
+    </nav>
+
+    <article>
+        <div class="kicker">Guide</div>
+        <h1>AI brand voice prompt: how to actually train AI on your voice</h1>
+        <p class="lead">Most brand voice prompts fail because they describe the voice instead of showing it. Here is the four-part template and the testing protocol that makes the difference.</p>
+        <div class="meta">Will Mulholland &middot; 10 min read</div>
+
+        <div class="tldr">
+            <h2>Key points</h2>
+            <ul>
+                <li>Most AI brand voice prompts fail because they describe the voice in adjectives instead of showing it with examples and rules.</li>
+                <li>A working AI brand voice prompt has four components: tone rules, vocabulary lists, sentence structure guidelines, and real examples of on-brand writing.</li>
+                <li>Claude Projects and ChatGPT Custom Instructions let you store your brand voice prompt once so it loads automatically in every conversation.</li>
+                <li>The test is simple: paste in a raw customer quote and ask the AI to write a response without reminding it of your voice. If it needs zero editing, the prompt is working.</li>
+                <li>Vague phrases like "bold but warm" contribute almost nothing. Behavioural rules like "opens with the answer, not context" change the output.</li>
+            </ul>
+        </div>
+
+        <h2 class="sec"><span class="num">01</span> The real problem with AI brand voice</h2>
+        <p>Most AI content sounds like everyone else's AI content because most brand voice prompts are written the same way: a list of adjectives the marketing team agreed on in a workshop three years ago.</p>
+        <p>"We're bold, authentic, and approachable."</p>
+        <p>Every brand says something like that. The model has no idea what it means in practice, so it writes whatever "approachable" looks like in the average of its training data. Which is a particular kind of corporate-friendly, inoffensive, slightly hollow writing you have probably seen a thousand times.</p>
+        <p>The problem is not the AI. The problem is that adjectives are not instructions. They describe a feeling, not a behaviour.</p>
+        <p>When I built a brand voice system for my own content, the shift that made everything click was moving from describing the voice to showing and specifying it. Once the model has concrete examples and explicit behavioural rules, the gap between first draft and final copy shrinks significantly. The voice holds across a 2,000-word article in a way it never did when I just said "write like a smart, direct marketing practitioner."</p>
+
+        <h2 class="sec"><span class="num">02</span> Why adjectives fail</h2>
+        <p>Language models predict the next word based on patterns in their training data. When you say "bold but professional," the model maps that to the statistical average of everything that has ever been described that way, which is a lot of content. It cannot infer your specific rhythm, your preferred sentence length, your tendency to open with a data point before making the argument.</p>
+        <p>The gap between "tell it your voice" and "show it your voice" in output quality is not subtle. Research on AI brand voice systems finds roughly 90 to 95 percent compliance with explicit vocabulary rules, compared to 50 to 60 percent compliance when you give vague style guidance like "avoid corporate jargon."</p>
+        <p>Concrete beats abstract, every time.</p>
+
+        <h2 class="sec"><span class="num">03</span> The four components of a working AI brand voice prompt</h2>
+        <p>A working AI brand voice prompt has four distinct sections. Each one does a different job.</p>
+
+        <h3>Tone rules (as behaviours, not adjectives)</h3>
+        <p>Instead of "we're conversational and direct," write the observable behaviours. Opens sentences with the main point, not context or caveats. Uses contractions. Asks a question when the reader would be asking one. Does not hedge with "arguably" or "perhaps."</p>
+        <p>The test for a tone rule: can you look at a sentence and say yes or no to whether it follows the rule? If the answer is "it depends," the rule is too vague.</p>
+
+        <h3>Vocabulary lists</h3>
+        <p>Three lists work best.</p>
+        <p>Words we use: the terms your audience says out loud. For a product marketing audience, this might include "positioning," "ICP," "messaging house," "sales motion," "category." Use their language, not internal jargon.</p>
+        <p>Words we never use: banned words. These can be generic AI slop words ("delve," "landscape"), competitor product names used favourably, or phrases that feel off-brand ("synergise," "disruptive").</p>
+        <p>Neutral words to substitute: common filler phrases you want replaced with something more specific. "Very" becomes "significantly" or gets cut. "Leverage" becomes "use."</p>
+
+        <h3>Sentence structure guidelines</h3>
+        <p>Rhythm is harder to teach than vocabulary, but a few rules go a long way. Target sentence length (for example, average 15 to 20 words in body copy, shorter for intro sentences). Paragraph length, such as a maximum of three sentences. Whether you use parenthetical asides or prefer separate sentences. How you handle lists (when to use bullets versus when to write in prose).</p>
+
+        <h3>On-brand examples</h3>
+        <p>This is the single most effective part of the prompt. Include two to four examples of writing you would consider perfectly on-brand, pulled from your actual content. Ideally, pick examples that illustrate the rules above. If you ban hedging, pick an example that shows the direct version. Label each one: "This is on-brand. Notice how it opens with the finding before explaining the context."</p>
+
+        <h2 class="sec"><span class="num">04</span> How to build yours</h2>
+        <p><strong>Step 1. Pull 10 pieces of your best content.</strong> Blog posts, email sequences, LinkedIn posts, whatever you produce. Look for the pieces that got the most positive response or that you re-read and thought "yes, that's exactly right."</p>
+        <p><strong>Step 2. Read them out loud and write down what they have in common.</strong> Not adjectives. Patterns. Do they open with a provocative question or a finding? Do the sentences tend to be short and declarative or longer and layered? Is there sarcasm? How do they end?</p>
+        <p><strong>Step 3. Write the four sections.</strong> Tone rules, vocabulary lists, sentence structure guidelines, and examples. Keep each section under 150 words. The prompt does not need to be exhaustive, it needs to be accurate. A 600-word prompt that captures the real patterns beats a 2,000-word one padded with aspirational language.</p>
+        <p><strong>Step 4. Test it on three pieces.</strong> Take three recent content tasks and run them through Claude or ChatGPT with just the prompt, no extra context. For each output, note every edit you make. After three rounds, look at the edits: if you are making the same correction repeatedly, that correction needs to become a rule in the prompt.</p>
+        <p><strong>Step 5. Iterate once.</strong> Add the missing rules based on the edits from step 4. Do not over-engineer it. You are looking for the handful of rules that catch 80 percent of the issues, not a spec that covers every edge case.</p>
+
+        <h2 class="sec"><span class="num">05</span> The copy-paste template</h2>
+        <p>Fill in the bracketed sections with your specifics. This is the starting structure, not a finished document. Adapt it based on what your actual content does.</p>
+
+        <div class="code-block">BRAND VOICE INSTRUCTIONS
+
+You are writing in the voice of [brand/person name]. Follow these rules precisely.
+
+TONE
+- [Rule 1, written as a behaviour, e.g. "Opens paragraphs with the main claim, not setup or context"]
+- [Rule 2]
+- [Rule 3]
+- [Rule 4]
+- Never: [specific thing to avoid, e.g. "hedges like 'it could be argued' or 'perhaps'"]
+
+VOCABULARY
+Use these terms: [comma-separated list]
+Never use these: [comma-separated list, e.g. "leverage, synergy, delve, ecosystem, landscape"]
+Replace these: ["very" -&gt; cut or use "significantly" | "utilise" -&gt; "use" | "leverage" -&gt; "use"]
+
+SENTENCE STRUCTURE
+- Sentences: average [15-20] words in body copy, [8-12] words in introductions
+- Paragraphs: maximum [3] sentences
+- [Any other structure rule]
+- Lists: use bullets for [e.g. "steps and comparisons"], prose for [e.g. "everything else"]
+
+EXAMPLES OF ON-BRAND WRITING
+
+Example 1 (on-brand):
+"[Paste 2-4 sentences from your actual content]"
+What makes it work: [Brief note on why this is on-brand]
+
+Example 2 (on-brand):
+"[Paste 2-4 sentences from your actual content]"
+What makes it work: [Brief note]
+
+Example 3 (off-brand, so the model knows what to avoid):
+"[Generic version of the same content]"
+What's wrong: [Brief note on what violates the voice]</div>
+
+        <h2 class="sec"><span class="num">06</span> Where to store it</h2>
+        <p>A brand voice prompt pasted into a single conversation disappears when you close the tab. The whole point is to load it automatically without thinking about it.</p>
+        <p>For Claude: <a href="/blog/build-a-claude-project-for-marketing">set up a Claude Project</a> and paste your brand voice prompt into the Project Instructions. Every conversation you start inside that project loads the instructions automatically.</p>
+        <p>For ChatGPT: use Custom GPTs (saved instructions plus a name) or the Custom Instructions section in Settings. Custom GPTs are better for shared team use because you can give teammates access.</p>
+        <p>For teams: whoever owns brand standards should own the brand voice prompt and update it quarterly. Treat it like a style guide, a living document, not a one-time setup.</p>
+
+        <h2 class="sec"><span class="num">07</span> How to test whether your prompt is working</h2>
+        <p>The real test is a blank-slate task. Open a fresh conversation in your branded project. Paste in a single customer support ticket or a one-line brief. Ask the model to write a response. Add nothing else. No extra context, no "remember to write in our brand voice."</p>
+        <p>Then read the output. How many edits does it need?</p>
+        <p>If you are correcting more than two or three things per draft, the prompt is missing something. Go back to your edit log from the build process and add the pattern. If you are correcting nothing, the prompt is working.</p>
+        <p>The target is roughly 70 percent of first drafts usable with minor or no editing. That is a realistic ceiling for AI-assisted writing. The model will not catch every nuance, and the remaining 30 percent is where a human editor adds the quality that matters.</p>
+
+        <h2 class="sec"><span class="num">08</span> Common mistakes</h2>
+        <p><strong>Writing brand voice in adjectives only.</strong> "Warm, bold, human" gives the model almost nothing to work with. Translate every adjective into a behaviour: what does "warm" look like in a sentence opener? What does "bold" look like in how you handle a counterargument?</p>
+        <p><strong>Using the same prompt for every channel.</strong> Your brand voice does not change, but the register does. A LinkedIn post and a product one-pager both need to sound like you, but the sentence length, the formality, and the call-to-action structure will differ. Consider channel-specific addenda to the core prompt.</p>
+        <p><strong>Not including an off-brand example.</strong> Showing the model what to avoid is as important as showing it what to do. Find a generic version of content in your category and include it as an explicit negative example.</p>
+        <p><strong>Treating it as a one-time task.</strong> Your brand voice will evolve, your product language will change, and you will find gaps as you use the prompt in real work. Review and update it every quarter. A stale prompt is almost as bad as no prompt.</p>
+        <p><strong>Going too long.</strong> A 3,000-word brand voice prompt with every possible scenario covered will not outperform a tight 600-word one. The model has a fixed context window and your actual task content competes for that space. Shorter and accurate beats longer and exhaustive.</p>
+
+        <h2 class="sec"><span class="num">09</span> FAQ</h2>
+
+        <div class="faq-item">
+            <h3>How many examples should I include in my brand voice prompt?</h3>
+            <p>Two to four is the right range for most prompts. You want enough examples to establish a clear pattern, but not so many that the model is confused by variation within them. Pick examples that each demonstrate a different rule from your tone section.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Does this work for a personal brand or just companies?</h3>
+            <p>It works better for personal brands, actually. If you have an existing body of content, your voice is already in there. You are extracting patterns from what you have already written and turning them into rules. Companies often struggle because their "brand voice" was designed by committee and has never quite landed in practice.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Should my whole team use the same brand voice prompt?</h3>
+            <p>Yes, and sharing it is one of the strongest arguments for a Claude Team or Pro plan where you can build shared Projects. One Marketing Brain with a shared brand voice prompt means everyone on the team generates from the same baseline without emailing the style guide around.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Do I need to fine-tune the model to get consistent brand voice?</h3>
+            <p>No. Fine-tuning is an engineering solution for an instruction problem. Most brand voice issues are solved by better prompts: more specific rules, actual examples, and correct placement in a system prompt rather than a one-off message. Solve the prompt problem first. Fine-tuning costs real money and time, and the maintenance overhead is significant.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>My AI writing still sounds generic after I added my brand voice prompt. What am I missing?</h3>
+            <p>Usually one of three things. The instructions are still adjective-heavy rather than behavioural. The model is not loading the instructions correctly (in some setups, custom instructions are not loaded by default). Or the task prompt is so specific that it overrides the system instructions. Check all three. Paste the instructions directly into the conversation as a test to rule out the loading issue.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How often should I update my brand voice prompt?</h3>
+            <p>Quarterly is a reasonable default. Update it immediately if your brand goes through a meaningful shift: a repositioning, a new product category, a change in audience. Also update it whenever you notice yourself making the same edit to AI output repeatedly. That edit belongs in the prompt, not in your head.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>How is this different from using Jasper or a dedicated brand voice tool?</h3>
+            <p>Those tools bake a similar idea into a product wrapper. The advantage of building it yourself is portability: your brand voice prompt works in Claude, in ChatGPT, in any API call, in any context. You are not locked to one tool. For teams already paying for an AI writing platform, the built-in brand voice features are worth using. For everyone else, a well-built system prompt is the faster, cheaper starting point.</p>
+        </div>
+
+        <h2 class="sec"><span class="num">10</span> Your brand voice is the context</h2>
+        <p>The models are not differentiated. Every marketer on your team has access to the same Claude or ChatGPT. What they do not have is your context: the specific patterns, vocabulary, and examples that make your output sound like you rather than like a generic AI tool.</p>
+        <p>The AI brand voice prompt is how you encode that context once and load it automatically in every piece of work. Done well, it is one of the highest-return things you can build in your marketing workflow. And it takes an afternoon to get right, not a quarter.</p>
+        <p>For related reading: <a href="/blog/build-a-claude-project-for-marketing">how to build a Claude Project for marketing</a> covers setting up the persistent context layer that makes this stick, and <a href="/blog/claude-prompts-for-product-marketers">Claude prompts for product marketers</a> goes deeper on prompts for positioning, messaging, and GTM work.</p>
+
+        <div class="end-cta">
+            <h3>Build a marketing practice that compounds</h3>
+            <p>Intelligent Growth covers AI marketing workflows, applied in practice. Real methods, not prompt packs. Free in your inbox each week.</p>
+            <div class="btns">
+                <a class="primary" href="/#newsletter">Subscribe free</a>
+                <a class="ghost" href="/workshop">See the workshop</a>
+            </div>
+        </div>
+    </article>
+
+    <footer>
+        <span>&copy; 2026 Will Mulholland</span>
+        <span><a href="/blog">Blog</a> &middot; <a href="/">Home</a> &middot; <a href="/work.html">Case studies</a> &middot; <a href="/podcast">Podcast</a></span>
+    </footer>
+</body>
+</html>
