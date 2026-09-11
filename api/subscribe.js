@@ -1,16 +1,17 @@
 import { safeAttribution } from './_attribution.js';
 
-// Practical ASCII mailbox syntax for the public email form. This does
-// not prove mailbox ownership or distinguish a bot from a person.
+// Bounded syntax checks preserve the previous Unicode/quoted local-part
+// acceptance. Syntax does not prove ownership or distinguish bots from people.
 function validEmail(email) {
-  if (!email || email.length > 254) return false;
+  if (!email || email.length > 254 || /[\u0000-\u001F\u007F]/.test(email)) return false;
   const parts = email.split('@');
   if (parts.length !== 2) return false;
   const [local, domain] = parts;
-  if (local.length > 64 || !/^[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*$/i.test(local)) return false;
+  if (!local || local.length > 64 || /[\s<>]/.test(local)) return false;
+  if (local.startsWith('.') || local.endsWith('.') || local.includes('..')) return false;
   const labels = domain.split('.');
   return labels.length > 1 && labels.every(label =>
-    label.length <= 63 && /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(label));
+    label.length <= 63 && /^[\p{L}\p{N}](?:[\p{L}\p{N}-]*[\p{L}\p{N}])?$/u.test(label));
 }
 
 export default async function handler(req, res) {

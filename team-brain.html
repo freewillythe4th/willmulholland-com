@@ -283,6 +283,7 @@
               <label class="visually-hidden" for="starterEmail">Email address</label>
               <input id="starterEmail" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
               <button class="button button-primary" type="submit" data-ig-event="team_starter_submitted" data-ig-placement="pricing">Send me the starter</button>
+              <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
             <p class="capture-msg" data-state="" role="status"></p>
             <p class="capture-note">One email with the starter and the setup guide. No spam, unsubscribe any time.</p>
@@ -296,6 +297,7 @@
               <label class="visually-hidden" for="teamEmail">Email address</label>
               <input id="teamEmail" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
               <button class="button" type="submit" data-ig-event="team_waitlist_submitted" data-ig-placement="pricing">Get early access</button>
+              <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
             <p class="capture-msg" data-state="" role="status"></p>
             <p class="capture-note">Founding teams hear first, with setup help included.</p>
@@ -349,6 +351,7 @@
           <label class="visually-hidden" for="finalEmail">Email address</label>
           <input id="finalEmail" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
           <button class="button" type="submit" data-ig-event="team_final_submitted" data-ig-placement="footer">Get early access</button>
+          <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
         </form>
         <p class="capture-msg" data-state="" role="status"></p>
       </div>
@@ -383,7 +386,7 @@
           fetch('/api/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email, source: source })
+            body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value, source: source })
           }).then(function (res) {
             if (!res.ok) { throw new Error('bad status'); }
             if (msg) { msg.textContent = 'Done. Check your inbox for the starter.'; msg.setAttribute('data-state', 'ok'); }

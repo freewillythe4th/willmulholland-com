@@ -947,6 +947,7 @@
             <label for="starterEmail">Email address</label>
             <input id="starterEmail" name="email" type="email" autocomplete="email" placeholder="Email address" required>
             <button class="btn btn-primary" id="starterButton" type="submit">Send me the starter</button>
+            <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
           </form>
           <p class="starter-message" id="starterMessage" role="status" aria-live="polite"></p>
           <p class="workshop-link">Want to see one built live first? Join the <a href="/workshop">free workshop</a>.</p>
@@ -980,6 +981,7 @@
             <input id="joinOther" name="jobOther" type="text" maxlength="140" placeholder="Tell me the job in your own words">
           </div>
           <button class="btn btn-primary" id="joinButton" type="submit">Register your interest</button>
+          <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
         </form>
         <div class="join-confirm" id="joinConfirm" role="status" aria-live="polite" tabindex="-1" hidden>
           <div class="join-confirm-title">You are on the list.</div>
@@ -1494,7 +1496,7 @@
           // utm_campaign instead of overwriting the lead source.
           var campaign = campaignSource().source;
           var payload = Object.assign(
-            { email: email, utm_medium: config.medium },
+            { email: email, honeypot: form.querySelector('[name="honeypot"]').value, utm_medium: config.medium },
             campaign ? { utm_campaign: campaign } : {},
             job ? { job: job } : {},
             { source: config.source || campaign || '' }

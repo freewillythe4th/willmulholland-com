@@ -205,6 +205,7 @@
             <form class="sub-form" id="ig-subscribe-form">
                 <input type="email" name="email" placeholder="Your email" required>
                 <button type="submit">Subscribe</button>
+              <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
             <p class="sub-meta" id="ig-subscribe-meta">Join 101+ marketing leaders &middot; Unsubscribe anytime</p>
         </div>
@@ -230,7 +231,7 @@
                 btn.disabled = true; btn.textContent = 'Subscribing...';
                 fetch('/api/subscribe', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email })
+                    body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value })
                 }).then(function (r) {
                     if (r.ok) { form.style.display = 'none'; meta.textContent = 'Subscribed. Check your inbox to confirm.'; }
                     else { btn.disabled = false; btn.textContent = original; meta.textContent = 'Something went wrong. Try again.'; }

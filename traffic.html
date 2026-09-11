@@ -113,6 +113,7 @@
                 <form id="captureForm">
                     <input type="email" id="email" name="email" placeholder="Enter your email" required>
                     <button type="submit" id="submitBtn">Send it to me</button>
+                  <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
                 </form>
                 <p class="err" id="err"></p>
                 <p class="fine">You'll also join my weekly newsletter on the AI and growth moves marketers can actually use. Unsubscribe any time, I never sell or share your details.</p>
@@ -147,7 +148,7 @@
                 btn.disabled = true; btn.textContent = 'Sending...';
                 fetch('/api/subscribe', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email, utm_medium: 'lead-magnet-traffic' })
+                    body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value, utm_medium: 'lead-magnet-traffic' })
                 }).then(function (r) {
                     if (r.ok) {
                         window.location.href = '/traffic-thanks?email=' + encodeURIComponent(email);

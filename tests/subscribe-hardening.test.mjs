@@ -128,10 +128,11 @@ test('common valid mailbox variants and maximum length remain accepted', async (
   const maximumEmail = 'a'.repeat(64) + '@' + ['a'.repeat(63), 'b'.repeat(63), 'c'.repeat(61)].join('.');
   assert.equal(maximumEmail.length, 254);
   for (const email of ["o'connor@example.com", 'first.last+tag@sub.example.com',
+    'person@bücher.example', 'josé@example.com', '"person"@example.com',
     'person@xn--bcher-kva.example', maximumEmail]) {
     assert.equal((await ctx.request({ email })).statusCode, 200);
   }
-  assert.equal(ctx.calls.length, 4);
+  assert.equal(ctx.calls.length, 7);
 });
 
 test('completed request cancels its timeout', async (t) => {

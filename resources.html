@@ -75,6 +75,7 @@
                 <label for="everythingEmail" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Email address</label>
                 <input type="email" id="everythingEmail" name="email" placeholder="Email address" autocomplete="email" required>
                 <button type="submit" id="everythingButton">Send it over</button>
+              <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
 
             <p class="note" id="everythingNote">Free, and it works with whatever AI plan you're already on.<br>You'll also get my weekly newsletter, where I share what I'm building and what's working. Unsubscribe any time.</p>
@@ -124,7 +125,7 @@
           fetch('/api/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(Object.assign({ email: email, utm_medium: 'post-session' }, campaignSource()))
+            body: JSON.stringify(Object.assign({ email: email, honeypot: form.querySelector('[name="honeypot"]').value, utm_medium: 'post-session' }, campaignSource()))
           }).then(function (response) {
             if (!response.ok) throw new Error('Subscribe failed');
             form.style.display = 'none';

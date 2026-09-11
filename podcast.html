@@ -394,6 +394,7 @@
       <input type="text" name="guest" placeholder="Who should I build with?" required>
       <input type="email" name="email" placeholder="Your email" required>
       <button type="submit">Suggest a guest</button>
+      <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
     </form>
     <p class="green-msg" id="guestMsg">Drop a name and I'll let you know who lands the next slot.</p>
   </div>
@@ -440,6 +441,7 @@
     <form class="nl-form" id="nlForm">
       <input type="email" name="email" placeholder="Your email" required>
       <button type="submit">Subscribe</button>
+      <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
     </form>
     <p class="nl-meta" id="nlMeta">Join 100+ growth leaders &middot; unsubscribe anytime</p>
   </div>
@@ -496,7 +498,7 @@
       var btn=f.querySelector('button'),inp=f.querySelector('input'),email=(inp.value||'').trim();
       if(!email)return;
       var label=btn.textContent;btn.disabled=true;btn.textContent='Subscribing...';
-      fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,utm_medium:'podcast-page'})})
+      fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email, honeypot: f.querySelector('[name="honeypot"]').value,utm_medium:'podcast-page'})})
       .then(function(r){
         if(r.ok){f.style.display='none';m.textContent='Subscribed. Check your inbox to confirm.';}
         else{btn.disabled=false;btn.textContent=label;m.textContent='Something went wrong. Try again or email will@intelligentgrowth.app.';}
@@ -512,7 +514,7 @@
       var btn=f.querySelector('button'),g=(f.guest.value||'').trim(),email=(f.email.value||'').trim();
       if(!g||!email)return;
       var label=btn.textContent;btn.disabled=true;btn.textContent='Sending...';
-      fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,utm_medium:('guest: '+g).slice(0,100)})})
+      fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email, honeypot: f.querySelector('[name="honeypot"]').value,utm_medium:('guest: '+g).slice(0,100)})})
       .then(function(r){
         if(r.ok){f.style.display='none';m.textContent='Got it. '+g+' is on the list, and I\'ll let you know who lands the next slot.';m.style.color='#A3E635';}
         else{btn.disabled=false;btn.textContent=label;m.textContent='Something went wrong. Try again or email will@intelligentgrowth.app.';}

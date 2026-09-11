@@ -1592,6 +1592,7 @@
           <form id="heroSubscribe" class="hero-sp-form">
             <input type="email" id="heroEmail" name="email" placeholder="Enter your email" required>
             <button type="submit" id="heroSubscribeBtn" class="btn-primary">Get the playbooks</button>
+            <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
           </form>
           <p id="heroSubscribeMsg" class="hero-sp-micro">Free when you join: the 5-day Build Your Marketing Brain email course. 160+ marketers are already building theirs. <a href="/workshop">Or join the free workshop &rarr;</a></p>
         </div>
@@ -2225,6 +2226,7 @@
         <form class="newsletter-form" id="ig-subscribe-form">
             <input type="email" name="email" placeholder="Your email" required>
             <button type="submit">Subscribe</button>
+          <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
         </form>
         <p class="newsletter-meta" id="ig-subscribe-meta">Free when you join: the 5-day Build Your Marketing Brain course • 160+ marketers • Unsubscribe anytime</p>
         <script>
@@ -2244,7 +2246,7 @@
                     fetch('/api/subscribe', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email: email })
+                        body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value })
                     }).then(function (r) {
                         if (r.ok) {
                             form.style.display = 'none';
@@ -2276,7 +2278,7 @@
                     btn.disabled = true; btn.textContent = 'Sending...';
                     fetch('/api/subscribe', {
                         method: 'POST', headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email: email })
+                        body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value })
                     }).then(function (r) {
                         if (r.ok) { form.style.display = 'none'; msg.textContent = 'You’re in. Check your inbox to confirm.'; }
                         else { btn.disabled = false; btn.textContent = original; msg.textContent = 'Something went wrong. Try again or email will@intelligentgrowth.app.'; }
