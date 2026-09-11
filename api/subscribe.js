@@ -1,5 +1,18 @@
 import { safeAttribution } from './_attribution.js';
 
+// Practical ASCII mailbox syntax for the public email form. This does
+// not prove mailbox ownership or distinguish a bot from a person.
+function validEmail(email) {
+  if (!email || email.length > 254) return false;
+  const parts = email.split('@');
+  if (parts.length !== 2) return false;
+  const [local, domain] = parts;
+  if (local.length > 64 || !/^[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*$/i.test(local)) return false;
+  const labels = domain.split('.');
+  return labels.length > 1 && labels.every(label =>
+    label.length <= 63 && /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(label));
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -22,7 +35,16 @@ export default async function handler(req, res) {
   if (!body || typeof body !== 'object' || Array.isArray(body)) {
     return res.status(400).json({ error: 'Invalid request body' });
   }
-  const email = typeof body.email === 'string' ? body.email.trim() : '';
+  // Optional trap for form clients. Direct API callers can simply omit it.
+  if (body.honeypot !== undefined && body.honeypot !== '') {
+    return res.status(400).json({ error: 'Invalid request body' });
+  }
+  // Bound input before trimming or validation, while allowing normal padding.
+  const email = typeof body.email === 'string' && body.email.length <= 320
+    ? body.email.trim() : '';
+  if (!validEmail(email)) {
+    return res.status(400).json({ error: 'Valid email required' });
+  }
 
   // Optional lead source, e.g. "team-brain-starter" or "team-brain-waitlist".
   // Normalised to a safe slug so it can drive a segmented beehiiv welcome series.
@@ -61,10 +83,6 @@ export default async function handler(req, res) {
     utm_campaign: source || 'always_on',
   });
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return res.status(400).json({ error: 'Valid email required' });
-  }
-
   const apiKey = process.env.BEEHIIV_API_KEY;
   const publicationId = process.env.BEEHIIV_PUBLICATION_ID || 'pub_493c9454-ead1-40c6-b28b-81d4d81a63aa';
 
@@ -78,9 +96,12 @@ export default async function handler(req, res) {
     ...(job ? [{ name: 'ig_focus', value: job }] : []),
   ];
 
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
   try {
     const bhRes = await fetch(`https://api.beehiiv.com/v2/publications/${publicationId}/subscriptions`, {
       method: 'POST',
+      signal: controller.signal,
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
@@ -98,14 +119,19 @@ export default async function handler(req, res) {
     });
 
     if (!bhRes.ok) {
-      const errText = await bhRes.text();
-      console.error('Beehiiv API error:', bhRes.status, errText);
+      console.error('Beehiiv API error:', bhRes.status);
       return res.status(502).json({ error: 'Subscription failed' });
     }
 
     return res.status(200).json({ ok: true });
-  } catch (err) {
-    console.error('Subscribe handler error:', err);
+  } catch {
+    if (controller.signal.aborted) {
+      console.error('Subscribe upstream timeout');
+      return res.status(504).json({ error: 'Subscription timed out' });
+    }
+    console.error('Subscribe upstream request failed');
     return res.status(500).json({ error: 'Internal error' });
+  } finally {
+    clearTimeout(timeout);
   }
 }
