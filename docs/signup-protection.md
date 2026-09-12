@@ -15,7 +15,7 @@ Create a Managed widget restricted to `intelligentgrowth.app`, `www.intelligentg
 
 Deploy with the pause still set. Verify the public configuration exposes no secret, each POST returns 503 without downstream work, and all 21 protected forms load the helper. Remove the pause (`SIGNUPS_PAUSED=0`) only for an explicitly authorised validation/reopening window with real matching keys configured. Missing keys fail closed regardless of the pause setting. Environment changes require a new deployment when using Vercel environment configuration.
 
-During that approved window, verify each hostname and all three actions with controlled test identities authorised by Will. A successful Beehiiv call can send confirmation email, and workshop/community submissions can notify Will through Telegram. Mocks do not verify live email delivery, automation timing, widget host configuration, or the actual subscriber status. Check the new subscriber remains `validating` until confirming, and that course automations do not bypass confirmation. Keep the pause active if any of those checks fail.
+During that approved window, verify each hostname and all three actions with controlled test identities authorised by Will. A successful Beehiiv call can send confirmation email, and workshop/community submissions can notify Will through Telegram. Mocks do not verify live email delivery, automation timing, widget host configuration, or the actual subscriber status. Check the new subscriber is pending confirmation and that course automations do not bypass confirmation. Record the actual API status and native account state; do not assume the API label `validating` is equivalent to double opt-in Pending. Keep the pause active if any of those checks fail.
 
 ## Enforcement
 
@@ -42,7 +42,7 @@ The inherited full repository suite has seven unrelated MCP copy failures and on
 
 ## Monitoring and rollback
 
-Monitor Vercel response counts for 400/403/503/5xx, Cloudflare verification failures versus successes, legitimate completion rates and Beehiiv validating-to-active conversion. Do not log emails, tokens or IP addresses in this patch. New bot-like volume is investigated from aggregate data before subscriber cleanup.
+Monitor Vercel response counts for 400/403/503/5xx, Cloudflare verification failures versus successes, legitimate completion rates and Beehiiv confirmation-to-active conversion. Do not log emails, tokens or IP addresses in this patch. New bot-like volume is investigated from aggregate data before subscriber cleanup.
 
 Emergency rollback is to deploy with `SIGNUPS_PAUSED=1`, or restore the already verified pause deployment. Do not roll back to the unprotected handler just to restore conversion. No subscriber deletion, suppression, billing change or credential rotation belongs to this patch.
 
