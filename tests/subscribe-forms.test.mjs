@@ -20,7 +20,7 @@ const root = new URL('../', import.meta.url);
 const read = file => readFileSync(new URL(file, root), 'utf8');
 
 test('all HTML subscribe callers are included in the audited inventory', () => {
-  const callers = readdirSync(root).filter(f => f.endsWith('.html') && read(f).includes("fetch('/api/subscribe'"));
+  const callers = readdirSync(root).filter(f => f.endsWith('.html') && read(f).includes("'/api/subscribe'"));
   assert.deepEqual(callers.sort(), Object.keys(formsByFile).sort());
 });
 
@@ -40,7 +40,7 @@ for (const [file, ids] of Object.entries(formsByFile)) {
   });
   test(`${file}: every subscribe payload reads its own form trap without altering email`, () => {
     const source = read(file);
-    const fetchCount = [...source.matchAll(/fetch\('\/api\/subscribe'/g)].length;
+    const fetchCount = [...source.matchAll(/igSignup\.submit\([^,]+, '\/api\/subscribe'/g)].length;
     const payloads = [...source.matchAll(/\{\s*email:\s*email,\s*honeypot:\s*([^,}]+)[,}]/g)];
     assert.equal(payloads.length, fetchCount);
     for (const [, expression] of payloads) {

@@ -64,6 +64,7 @@
   </style>
   <script type="module" src="/js/analytics.js"></script>
   <script type="module" src="/js/mcp-nav.js"></script>
+    <script src="/js/signup-security.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -279,12 +280,13 @@
             <p class="price-card__price">A$0</p>
             <p class="price-card__description">The free folder to stand up your own brain, plus the guide to connect it. Build it solo, then bring the team.</p>
             <ul><li>The starter brain, files you own</li><li>Setup guide for Claude and ChatGPT</li><li>Cited recall over your own notes</li><li>Upgrade to the team layer any time</li></ul>
-            <form class="capture-form" data-ig-source="team-brain-starter" novalidate>
+            <form data-signup-action="subscribe" class="capture-form" data-ig-source="team-brain-starter" novalidate>
               <label class="visually-hidden" for="starterEmail">Email address</label>
               <input id="starterEmail" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
               <button class="button button-primary" type="submit" data-ig-event="team_starter_submitted" data-ig-placement="pricing">Send me the starter</button>
               <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
             <p class="capture-msg" data-state="" role="status"></p>
             <p class="capture-note">One email with the starter and the setup guide. No spam, unsubscribe any time.</p>
           </article>
@@ -293,12 +295,13 @@
             <p class="price-card__price">Early access</p>
             <p class="price-card__description">Your brain, served to the whole team with per-person scopes, cited answers and an audit trail. Set up with you, priced per team.</p>
             <ul><li>One shared memory across the team</li><li>Per-person default-deny access</li><li>Check-ins, capture and weekly roll-ups</li><li>Set up in about fifteen minutes with you</li></ul>
-            <form class="capture-form" data-ig-source="team-brain-waitlist" novalidate>
+            <form data-signup-action="subscribe" class="capture-form" data-ig-source="team-brain-waitlist" novalidate>
               <label class="visually-hidden" for="teamEmail">Email address</label>
               <input id="teamEmail" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
               <button class="button" type="submit" data-ig-event="team_waitlist_submitted" data-ig-placement="pricing">Get early access</button>
               <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
             <p class="capture-msg" data-state="" role="status"></p>
             <p class="capture-note">Founding teams hear first, with setup help included.</p>
           </article>
@@ -347,12 +350,13 @@
         <p class="eyebrow">See it in action</p>
         <h2>Watch it refuse to leak, live.</h2>
         <p class="lead">That refusal is the whole product. Leave your email and I will send the starter and set up a look.</p>
-        <form class="capture-form" data-ig-source="team-brain-final" novalidate>
+        <form data-signup-action="subscribe" class="capture-form" data-ig-source="team-brain-final" novalidate>
           <label class="visually-hidden" for="finalEmail">Email address</label>
           <input id="finalEmail" name="email" type="email" placeholder="you@company.com" autocomplete="email" required>
           <button class="button" type="submit" data-ig-event="team_final_submitted" data-ig-placement="footer">Get early access</button>
           <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
         </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
         <p class="capture-msg" data-state="" role="status"></p>
       </div>
     </section>
@@ -383,13 +387,13 @@
           var btn = form.querySelector('button');
           if (btn) { btn.disabled = true; }
           if (msg) { msg.textContent = 'Sending...'; msg.setAttribute('data-state', ''); }
-          fetch('/api/subscribe', {
+          window.igSignup.submit(form, '/api/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value, source: source })
           }).then(function (res) {
             if (!res.ok) { throw new Error('bad status'); }
-            if (msg) { msg.textContent = 'Done. Check your inbox for the starter.'; msg.setAttribute('data-state', 'ok'); }
+            if (msg) { msg.textContent = 'Request received. If you are new, check your inbox to confirm your email.'; msg.setAttribute('data-state', 'ok'); }
             if (input) { input.value = ''; }
           }).catch(function () {
             if (msg) { msg.textContent = 'Something went wrong. Try again or message Will.'; msg.setAttribute('data-state', 'err'); }

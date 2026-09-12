@@ -231,6 +231,7 @@
   }
 </style>
     <script type="module" src="/js/analytics.js"></script>
+    <script src="/js/signup-security.js"></script>
 </head>
 <body>
 
@@ -390,12 +391,13 @@
       <span>Will build it live on screen</span>
       <span>Has the receipts, not the theory</span>
     </div>
-    <form class="green-form" id="guestForm">
+    <form data-signup-action="subscribe" class="green-form" id="guestForm">
       <input type="text" name="guest" placeholder="Who should I build with?" required>
       <input type="email" name="email" placeholder="Your email" required>
       <button type="submit">Suggest a guest</button>
       <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
     </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
     <p class="green-msg" id="guestMsg">Drop a name and I'll let you know who lands the next slot.</p>
   </div>
 </section>
@@ -438,11 +440,12 @@
     <div class="eyebrow" style="color:var(--accent-deep)">Never miss a build</div>
     <h2 class="serif" style="font-size:clamp(30px,4vw,46px);line-height:1.02;letter-spacing:-0.02em;margin-top:14px;">Get every episode, and the system to steal.</h2>
     <p style="font-size:17px;color:var(--gray-mid);margin-top:16px;">Each drop comes with the workflow broken down step by step. Join the marketers building instead of just reading about it.</p>
-    <form class="nl-form" id="nlForm">
+    <form data-signup-action="subscribe" class="nl-form" id="nlForm">
       <input type="email" name="email" placeholder="Your email" required>
       <button type="submit">Subscribe</button>
       <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
     </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
     <p class="nl-meta" id="nlMeta">Join 100+ growth leaders &middot; unsubscribe anytime</p>
   </div>
 </section>
@@ -498,9 +501,9 @@
       var btn=f.querySelector('button'),inp=f.querySelector('input'),email=(inp.value||'').trim();
       if(!email)return;
       var label=btn.textContent;btn.disabled=true;btn.textContent='Subscribing...';
-      fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email, honeypot: f.querySelector('[name="honeypot"]').value,utm_medium:'podcast-page'})})
+      window.igSignup.submit(f, '/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email, honeypot: f.querySelector('[name="honeypot"]').value,utm_medium:'podcast-page'})})
       .then(function(r){
-        if(r.ok){f.style.display='none';m.textContent='Subscribed. Check your inbox to confirm.';}
+        if(r.ok){f.style.display='none';m.textContent='Request received. If you are new, check your inbox to confirm.';}
         else{btn.disabled=false;btn.textContent=label;m.textContent='Something went wrong. Try again or email will@intelligentgrowth.app.';}
       }).catch(function(){btn.disabled=false;btn.textContent=label;m.textContent='Network error. Try again in a moment.';});
     });
@@ -514,9 +517,9 @@
       var btn=f.querySelector('button'),g=(f.guest.value||'').trim(),email=(f.email.value||'').trim();
       if(!g||!email)return;
       var label=btn.textContent;btn.disabled=true;btn.textContent='Sending...';
-      fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email, honeypot: f.querySelector('[name="honeypot"]').value,utm_medium:('guest: '+g).slice(0,100)})})
+      window.igSignup.submit(f, '/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email, honeypot: f.querySelector('[name="honeypot"]').value,utm_medium:('guest: '+g).slice(0,100)})})
       .then(function(r){
-        if(r.ok){f.style.display='none';m.textContent='Got it. '+g+' is on the list, and I\'ll let you know who lands the next slot.';m.style.color='#A3E635';}
+        if(r.ok){f.style.display='none';m.textContent='Request received for '+g+'. If you are new, confirm your email to receive updates.';m.style.color='#A3E635';}
         else{btn.disabled=false;btn.textContent=label;m.textContent='Something went wrong. Try again or email will@intelligentgrowth.app.';}
       }).catch(function(){btn.disabled=false;btn.textContent=label;m.textContent='Network error. Try again in a moment.';});
     });

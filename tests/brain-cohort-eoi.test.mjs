@@ -90,7 +90,7 @@ test('interest is open ended, with no seat cap and no announced dates', () => {
 });
 
 test('the form collects an email plus one high signal question', () => {
-  assert.match(brain, /<form class="join-form" id="joinForm">/);
+  assert.match(brain, /<form data-signup-action="subscribe" class="join-form" id="joinForm">/);
   assert.match(brain, /<input id="joinEmail" name="email" type="email"[^>]*required>/);
   assert.match(brain, /<select id="joinJob" name="job" required>/);
   assert.match(brain, /Turning customer or sales calls into insights/);
@@ -125,14 +125,10 @@ test('choosing "Something else" has to collect the actual job', () => {
   assert.match(brain, /otherInput\.required = isOther;/);
 });
 
-test('registering re-subscribes an unsubscribed person, a passive signup does not', () => {
-  // Otherwise the confirmation says "You are on the list" to someone who is not.
-  assert.match(brain, /reactivate: true,/);
-  assert.match(subscribeApi, /const reactivate = body\.reactivate === true;/);
-  assert.match(subscribeApi, /reactivate_existing: reactivate,/);
-  // The starter form must not opt in.
-  const starterConfig = brain.slice(brain.indexOf("formId: 'starterForm'"), brain.indexOf("formId: 'joinForm'"));
-  assert.doesNotMatch(starterConfig, /reactivate/);
+test('signup cannot reactivate an unsubscribed address without confirmed consent', () => {
+  assert.doesNotMatch(brain, /reactivate: true/);
+  assert.match(subscribeApi, /const reactivate = false;/);
+  assert.match(subscribeApi, /double_opt_override: 'on'/);
 });
 
 test('the confirmation discloses the email course the signup also triggers', () => {
@@ -150,7 +146,7 @@ test('no banned word reaches the copy this work added', () => {
 
 test('the confirmation state sets honest expectations', () => {
   assert.match(brain, /id="joinConfirm"[^>]*hidden/);
-  assert.match(brain, /You are on the list\./);
+  assert.match(brain, /Check your inbox to confirm\./);
   assert.match(brain, /There are no dates yet\./);
   assert.match(brain, /registering does not commit you to anything/);
 });

@@ -1,3 +1,4 @@
+import { verifiedSignup, fetchWithTimeout } from './_signup-security.js';
 // Community application receiver. Captures a vetted application for the free
 // marketing-with-AI community ("the room") and notifies Will via Telegram so he
 // can approve and send the WhatsApp invite manually. No instant access: the
@@ -26,7 +27,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
+  const body = await verifiedSignup(req, res, 'community_apply');
+  if (!body) return;
   const firstName = (body.firstName || '').trim().slice(0, 80);
   const lastName = (body.lastName || '').trim().slice(0, 80);
   const email = (body.email || '').trim();
@@ -55,7 +57,7 @@ export default async function handler(req, res) {
   const publicationId = process.env.BEEHIIV_PUBLICATION_ID || 'pub_493c9454-ead1-40c6-b28b-81d4d81a63aa';
   if (beehiivKey) {
     try {
-      const bhRes = await fetch(`https://api.beehiiv.com/v2/publications/${publicationId}/subscriptions`, {
+      const bhRes = await fetchWithTimeout(`https://api.beehiiv.com/v2/publications/${publicationId}/subscriptions`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${beehiivKey}`,
@@ -63,16 +65,17 @@ export default async function handler(req, res) {
         },
         body: JSON.stringify({
           email,
-          reactivate_existing: true,
+          reactivate_existing: false,
           send_welcome_email: false,
+          double_opt_override: 'on',
           ...attribution,
         }),
       });
       if (!bhRes.ok) {
-        console.error('Beehiiv API error:', bhRes.status, await bhRes.text());
+        console.error('Beehiiv API error:', bhRes.status);
       }
     } catch (err) {
-      console.error('Beehiiv subscribe failed (non-blocking):', err);
+      console.error('Beehiiv subscribe failed (non-blocking)');
     }
   } else {
     console.error('Missing BEEHIIV_API_KEY env var (skipping list add)');
@@ -109,7 +112,7 @@ export default async function handler(req, res) {
   ].join('\n');
 
   try {
-    const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    const tgRes = await fetchWithTimeout(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -126,13 +129,13 @@ export default async function handler(req, res) {
     });
 
     if (!tgRes.ok) {
-      console.error('Telegram API error:', await tgRes.text());
+      console.error('Telegram API error:', tgRes.status);
       return res.status(502).json({ error: 'Notification failed' });
     }
 
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('Community apply handler error:', err);
+    console.error('Community apply request failed');
     return res.status(500).json({ error: 'Internal error' });
   }
 }

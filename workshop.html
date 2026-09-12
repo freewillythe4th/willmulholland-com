@@ -248,6 +248,7 @@
         }
     </style>
     <script type="module" src="/js/analytics.js"></script>
+    <script src="/js/signup-security.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -410,11 +411,12 @@
             <div class="section-tag" style="justify-content:center;">Next workshop</div>
             <h2 class="section-title" style="margin-bottom:14px;">The next date is not locked in yet.<br><span class="muted">Get first dibs when it is.</span></h2>
             <p style="font-size:17px; color:var(--gray-mid); max-width:560px; margin:0 auto 26px;">Drop your email and you'll be first to know when the next free workshop is set, before it goes out anywhere else.</p>
-            <form id="waitlistForm" style="display:flex; gap:12px; flex-wrap:wrap; max-width:520px; margin:0 auto; justify-content:center;">
+            <form data-signup-action="subscribe" id="waitlistForm" style="display:flex; gap:12px; flex-wrap:wrap; max-width:520px; margin:0 auto; justify-content:center;">
                 <input type="email" id="waitlistEmail" name="email" placeholder="Enter your email" required style="flex:1; min-width:240px; padding:15px 18px; border:1px solid rgba(31,21,17,0.25); border-radius:999px; font-size:16px; font-family:inherit; outline:none; background:var(--white); color:var(--ink);">
                 <button type="submit" class="btn-primary" id="waitlistBtn">Notify me</button>
               <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
             <p id="waitlistMsg" style="font-family:monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--gray-light); margin-top:14px;">No spam. Just the next workshop date, plus the weekly Intelligent Growth newsletter. Unsubscribe any time.</p>
         </section>
     </div>
@@ -430,13 +432,13 @@
                 if (!email) return;
                 var original = btn.textContent;
                 btn.disabled = true; btn.textContent = 'Adding you...';
-                fetch('/api/subscribe', {
+                window.igSignup.submit(form, '/api/subscribe', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value, utm_medium: 'next-workshop-waitlist' })
                 }).then(function (r) {
                     if (r.ok) {
                         form.style.display = 'none';
-                        msg.textContent = "You're on the list. I'll email you the moment the next one is set.";
+                        msg.textContent = "Request received. If you are new, confirm your email to receive the next workshop date.";
                         msg.style.color = 'var(--accent-deep)';
                     } else { btn.disabled = false; btn.textContent = original; msg.textContent = 'Something went wrong. Try again or email will@intelligentgrowth.app.'; }
                 }).catch(function () { btn.disabled = false; btn.textContent = original; msg.textContent = 'Network error. Try again in a moment.'; });
@@ -594,11 +596,12 @@
             <div class="section-tag">See a real one</div>
             <h2 class="section-title">Want a taste first?<br><span class="muted">I'll send you a full workshop from 2024.</span></h2>
             <p style="font-size: 17px; color: var(--gray-mid); max-width: 600px; margin: 10px 0 24px;">Drop your email and I'll send you the recording of a full live AI marketing workshop, start to finish. The whole thing, exactly as it ran.</p>
-            <form id="recordingForm" style="display: flex; gap: 12px; flex-wrap: wrap; max-width: 520px;">
+            <form data-signup-action="subscribe" id="recordingForm" style="display: flex; gap: 12px; flex-wrap: wrap; max-width: 520px;">
                 <input type="email" id="recordingEmail" name="email" placeholder="Enter your email" required style="flex: 1; min-width: 220px; padding: 15px 18px; border: 1px solid rgba(31,21,17,0.25); border-radius: 999px; font-size: 16px; font-family: inherit; outline: none; background: var(--white); color: var(--ink);">
                 <button type="submit" class="btn-primary" id="recordingBtn">Send me the recording</button>
               <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
             <p id="recordingMsg" style="font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-light); margin-top: 14px;">No spam. You'll also get my weekly AI marketing newsletter, unsubscribe any time.</p>
         </section>
     </div>
@@ -614,7 +617,7 @@
                 if (!email) return;
                 var original = btn.textContent;
                 btn.disabled = true; btn.textContent = 'Sending...';
-                fetch('/api/subscribe', {
+                window.igSignup.submit(form, '/api/subscribe', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value, utm_medium: 'workshop-recording-2024' })
                 }).then(function (r) {

@@ -129,6 +129,7 @@
         .nl-meta { font-family: monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-light); margin-top: 12px; }
     </style>
     <script type="module" src="/js/analytics.js"></script>
+    <script src="/js/signup-security.js"></script>
 </head>
 <body>
     <div class="logo"><img src="images/ig-logo/ig-logo-full.png" alt="Intelligent Growth"></div>
@@ -155,11 +156,12 @@
             <h3>Intelligent Growth</h3>
             <p>My newsletter and podcast. Real AI marketing workflows from people building in public, in your inbox each week.</p>
             <div class="nl">
-                <form class="nl-form" id="ig-subscribe-form">
+                <form data-signup-action="subscribe" class="nl-form" id="ig-subscribe-form">
                     <input type="email" name="email" placeholder="Your email" required>
                     <button type="submit">Subscribe</button>
                   <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
                 </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
                 <p class="nl-meta" id="ig-subscribe-meta">Join 101+ marketing leaders &middot; Unsubscribe anytime</p>
             </div>
         </div>
@@ -180,12 +182,12 @@
                 if (!email) return;
                 var original = btn.textContent;
                 btn.disabled = true; btn.textContent = 'Subscribing...';
-                fetch('/api/subscribe', {
+                window.igSignup.submit(form, '/api/subscribe', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value })
                 }).then(function (r) {
-                    if (r.ok) { form.style.display = 'none'; meta.textContent = 'Subscribed. Check your inbox to confirm.'; }
+                    if (r.ok) { form.style.display = 'none'; meta.textContent = 'Request received. If you are new, check your inbox to confirm.'; }
                     else { btn.disabled = false; btn.textContent = original; meta.textContent = 'Something went wrong. Try again.'; }
                 }).catch(function () { btn.disabled = false; btn.textContent = original; meta.textContent = 'Network error. Try again.'; });
             });

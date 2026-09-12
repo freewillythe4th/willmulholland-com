@@ -1477,6 +1477,7 @@
         }
     </style>
     <script type="module" src="/js/analytics.js"></script>
+    <script src="/js/signup-security.js"></script>
 </head>
 <body>
     <!-- Custom Cursor -->
@@ -1589,11 +1590,12 @@
         <h1>Ship marketing as fast as you ship product.</h1>
         <p class="hero-sp-sub">I build you a <b>Marketing Brain</b>: one AI system that turns every release into positioning, messaging and launch-ready assets, so marketing never holds up the launch.</p>
         <div class="hero-cta" id="subscribe" style="scroll-margin-top: 90px;">
-          <form id="heroSubscribe" class="hero-sp-form">
+          <form data-signup-action="subscribe" id="heroSubscribe" class="hero-sp-form">
             <input type="email" id="heroEmail" name="email" placeholder="Enter your email" required>
             <button type="submit" id="heroSubscribeBtn" class="btn-primary">Get the playbooks</button>
             <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
           </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
           <p id="heroSubscribeMsg" class="hero-sp-micro">Free when you join: the 5-day Build Your Marketing Brain email course. 160+ marketers are already building theirs. <a href="/workshop">Or join the free workshop &rarr;</a></p>
         </div>
       </div>
@@ -2223,11 +2225,12 @@
 
         <h3 style="font-size: 24px; font-weight: 700; margin: 18px 0 8px;">Subscribe to Intelligent Growth</h3>
         <p class="newsletter-desc" style="margin-bottom: 18px;">My weekly newsletter and podcast on the AI workflows marketing teams actually use to offload the grunt work and put their taste back at the centre, with the actual prompts and systems behind them.</p>
-        <form class="newsletter-form" id="ig-subscribe-form">
+        <form data-signup-action="subscribe" class="newsletter-form" id="ig-subscribe-form">
             <input type="email" name="email" placeholder="Your email" required>
             <button type="submit">Subscribe</button>
           <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
         </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
         <p class="newsletter-meta" id="ig-subscribe-meta">Free when you join: the 5-day Build Your Marketing Brain course • 160+ marketers • Unsubscribe anytime</p>
         <script>
             (function () {
@@ -2243,14 +2246,14 @@
                     var originalLabel = btn.textContent;
                     btn.disabled = true;
                     btn.textContent = 'Subscribing...';
-                    fetch('/api/subscribe', {
+                    window.igSignup.submit(form, '/api/subscribe', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value })
                     }).then(function (r) {
                         if (r.ok) {
                             form.style.display = 'none';
-                            meta.textContent = 'Subscribed. Check your inbox to confirm.';
+                            meta.textContent = 'Request received. If you are new, check your inbox to confirm.';
                         } else {
                             btn.disabled = false;
                             btn.textContent = originalLabel;
@@ -2276,11 +2279,11 @@
                     if (!email) return;
                     var original = btn.textContent;
                     btn.disabled = true; btn.textContent = 'Sending...';
-                    fetch('/api/subscribe', {
+                    window.igSignup.submit(form, '/api/subscribe', {
                         method: 'POST', headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value })
                     }).then(function (r) {
-                        if (r.ok) { form.style.display = 'none'; msg.textContent = 'You’re in. Check your inbox to confirm.'; }
+                        if (r.ok) { form.style.display = 'none'; msg.textContent = 'Request received. If you are new, check your inbox to confirm.'; }
                         else { btn.disabled = false; btn.textContent = original; msg.textContent = 'Something went wrong. Try again or email will@intelligentgrowth.app.'; }
                     }).catch(function () { btn.disabled = false; btn.textContent = original; msg.textContent = 'Network error. Try again in a moment.'; });
                 });

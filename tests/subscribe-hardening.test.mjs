@@ -7,10 +7,15 @@ function setup(t, upstream = async () => ({ ok: true })) {
   const calls = [];
   const logs = [];
   t.mock.method(globalThis, 'fetch', async (...args) => {
+    if (args[0].includes('/siteverify')) return { ok: true, json: async () => ({ success: true, action: 'subscribe', hostname: 'intelligentgrowth.app', challenge_ts: new Date().toISOString() }) };
     calls.push(args);
     return upstream(...args);
   });
   t.mock.method(console, 'error', (...args) => logs.push(args));
+  for (const [key, value] of Object.entries({ TURNSTILE_SITE_KEY: 'local-site', TURNSTILE_SECRET_KEY: 'local-secret', SIGNUPS_PAUSED: '0' })) {
+    const previous = process.env[key]; process.env[key] = value;
+    t.after(() => { if (previous === undefined) delete process.env[key]; else process.env[key] = previous; });
+  }
   const oldKey = process.env.BEEHIIV_API_KEY;
   process.env.BEEHIIV_API_KEY = 'test-only-key';
   t.after(() => {
@@ -26,13 +31,14 @@ function setup(t, upstream = async () => ({ ok: true })) {
         json(value) { this.body = value; return this; },
         end() { return this; },
       };
+      if (body && typeof body === 'object' && !Array.isArray(body)) body = { turnstileToken: 'local-token', ...body };
       await handler({ method, body }, res);
       return res;
     },
   };
 }
 
-test('valid signup preserves attribution, job, source, and explicit reactivation', async (t) => {
+test('valid signup preserves attribution, job and source with mandatory confirmation', async (t) => {
   const ctx = setup(t);
   const response = await ctx.request({
     email: '  Person+course@example.com  ', source: 'Brain Founding Cohort',
@@ -43,8 +49,8 @@ test('valid signup preserves attribution, job, source, and explicit reactivation
   assert.deepEqual(response.body, { ok: true });
   assert.equal(ctx.calls.length, 1);
   assert.deepEqual(JSON.parse(ctx.calls[0][1].body), {
-    email: 'Person+course@example.com', reactivate_existing: true,
-    send_welcome_email: false, utm_source: 'linkedin', utm_medium: 'organic_social',
+    email: 'Person+course@example.com', reactivate_existing: false,
+    send_welcome_email: false, double_opt_override: 'on', utm_source: 'linkedin', utm_medium: 'organic_social',
     utm_campaign: 'workshop', custom_fields: [
       { name: 'Lead Source', value: 'brain_founding_cohort' },
       { name: 'ig_focus', value: 'Customer insights' },
@@ -118,6 +124,7 @@ test('stalled upstream is aborted after eight seconds and returns a safe failure
     signal.addEventListener('abort', () => reject(signal.reason), { once: true });
   }));
   const response = ctx.request({ email: 'person@example.com' });
+  await new Promise(resolve => setImmediate(resolve));
   t.mock.timers.tick(8000);
   assert.equal((await response).statusCode, 504);
   assert.equal(ctx.calls[0][1].signal.aborted, true);

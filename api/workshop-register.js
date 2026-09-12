@@ -1,3 +1,4 @@
+import { verifiedSignup, fetchWithTimeout } from './_signup-security.js';
 import { safeAttribution } from './_attribution.js';
 
 export default async function handler(req, res) {
@@ -13,7 +14,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
+  const body = await verifiedSignup(req, res, 'workshop_register');
+  if (!body) return;
   const email = (body.email || '').trim();
   const fullName = (body.fullName || '').trim().slice(0, 160);
   const firstName = ((body.firstName || '').trim() || fullName.split(/\s+/)[0] || '').slice(0, 80);
@@ -62,7 +64,7 @@ export default async function handler(req, res) {
         { name: 'lead_source', value: session || 'training bonus (post-signup)' },
       ].filter((f) => f.value);
 
-      const bhRes = await fetch(`https://api.beehiiv.com/v2/publications/${publicationId}/subscriptions`, {
+      const bhRes = await fetchWithTimeout(`https://api.beehiiv.com/v2/publications/${publicationId}/subscriptions`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${beehiivKey}`,
@@ -70,17 +72,18 @@ export default async function handler(req, res) {
         },
         body: JSON.stringify({
           email,
-          reactivate_existing: true,
+          reactivate_existing: false,
           send_welcome_email: false,
+          double_opt_override: 'on',
           ...attribution,
           custom_fields: customFields,
         }),
       });
       if (!bhRes.ok) {
-        console.error('Beehiiv API error:', bhRes.status, await bhRes.text());
+        console.error('Beehiiv API error:', bhRes.status);
       }
     } catch (err) {
-      console.error('Beehiiv subscribe failed (non-blocking):', err);
+      console.error('Beehiiv subscribe failed (non-blocking)');
     }
   } else {
     console.error('Missing BEEHIIV_API_KEY env var (skipping list add)');
@@ -120,7 +123,7 @@ export default async function handler(req, res) {
   ].join('\n');
 
   try {
-    const tgRes = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    const tgRes = await fetchWithTimeout(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -137,13 +140,13 @@ export default async function handler(req, res) {
     });
 
     if (!tgRes.ok) {
-      console.error('Telegram API error:', await tgRes.text());
+      console.error('Telegram API error:', tgRes.status);
       return res.status(502).json({ error: 'Notification failed' });
     }
 
     return res.status(200).json({ ok: true });
   } catch (err) {
-    console.error('Workshop register handler error:', err);
+    console.error('Workshop register request failed');
     return res.status(500).json({ error: 'Internal error' });
   }
 }

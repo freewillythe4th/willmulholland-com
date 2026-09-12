@@ -196,6 +196,7 @@
         }
     </style>
     <script type="module" src="/js/analytics.js"></script>
+    <script src="/js/signup-security.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -244,7 +245,7 @@
     <div class="band">
         <section class="wrap" style="padding-top: 40px;">
             <div class="gate-card" id="gateCard">
-                <form id="gateForm" class="gate-form">
+                <form data-signup-action="workshop_register" id="gateForm" class="gate-form">
                     <span class="gate-badge">Why I'm asking</span>
                     <p class="gate-sub" style="margin-bottom: 28px;">I read every one of these before we go live and use them to tailor the session, so your hour is actually useful to you.</p>
                     <div class="field">
@@ -324,6 +325,7 @@
                     <p class="gate-error" id="gateError"></p>
                     <p class="gate-fine">No spam. You'll also get my weekly AI marketing newsletter, unsubscribe any time.</p>
                 </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
                 <div class="gate-done" id="gateDone">
                     <span class="gate-badge">You're in</span>
                     <h2>You're in, enjoy.</h2>
@@ -338,7 +340,7 @@
         <section class="wrap wrap--tight">
             <div class="reserve-band">
                 <h2>You're all set.</h2>
-                <p>Enjoy the recording. I'll see you live, the join link and reminders are in your inbox.</p>
+                <p>Enjoy the recording. If you are new to the newsletter, check your inbox to confirm your email.</p>
             </div>
         </section>
     </div>
@@ -428,7 +430,7 @@
                 submitBtn.disabled = true;
                 submitBtn.textContent = 'Unlocking...';
 
-                fetch('/api/workshop-register', {
+                window.igSignup.submit(form, '/api/workshop-register', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ firstName: firstName, fullName: fullName, email: email, linkedin: linkedin, website: website, segment: segment, whoWhat: whoWhat, goal: goal, job: job, aiUse: aiUse, spend: spend, session: 'training bonus (post-signup)' })

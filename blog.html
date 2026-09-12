@@ -144,6 +144,7 @@
         @media (max-width: 600px) { nav { padding: 16px 24px; } .wrap { padding: 56px 24px 48px; } .post-card { padding: 24px; } }
     </style>
     <script type="module" src="/js/analytics.js"></script>
+    <script src="/js/signup-security.js"></script>
 </head>
 <body>
     <nav>
@@ -202,11 +203,12 @@
         <div class="subscribe">
             <h3>Get the next one</h3>
             <p>Intelligent Growth. Real AI marketing workflows, in your inbox each week.</p>
-            <form class="sub-form" id="ig-subscribe-form">
+            <form data-signup-action="subscribe" class="sub-form" id="ig-subscribe-form">
                 <input type="email" name="email" placeholder="Your email" required>
                 <button type="submit">Subscribe</button>
               <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
             <p class="sub-meta" id="ig-subscribe-meta">Join 101+ marketing leaders &middot; Unsubscribe anytime</p>
         </div>
     </div>
@@ -229,11 +231,11 @@
                 if (!email) return;
                 var original = btn.textContent;
                 btn.disabled = true; btn.textContent = 'Subscribing...';
-                fetch('/api/subscribe', {
+                window.igSignup.submit(form, '/api/subscribe', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value })
                 }).then(function (r) {
-                    if (r.ok) { form.style.display = 'none'; meta.textContent = 'Subscribed. Check your inbox to confirm.'; }
+                    if (r.ok) { form.style.display = 'none'; meta.textContent = 'Request received. If you are new, check your inbox to confirm.'; }
                     else { btn.disabled = false; btn.textContent = original; meta.textContent = 'Something went wrong. Try again.'; }
                 }).catch(function () { btn.disabled = false; btn.textContent = original; meta.textContent = 'Network error. Try again.'; });
             });

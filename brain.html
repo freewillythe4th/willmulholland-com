@@ -407,6 +407,7 @@
     }
   </style>
     <script type="module" src="/js/analytics.js"></script>
+    <script src="/js/signup-security.js"></script>
 </head>
 <body>
   <nav aria-label="Primary navigation">
@@ -943,12 +944,13 @@
           <div class="section-tag">The free starter</div>
           <h2>Start with the free version.</h2>
           <p class="starter-copy">The starter folder: the structure and setup prompt to build a basic brain yourself. Free, emailed to your inbox.</p>
-          <form class="starter-form" id="starterForm">
+          <form data-signup-action="subscribe" class="starter-form" id="starterForm">
             <label for="starterEmail">Email address</label>
             <input id="starterEmail" name="email" type="email" autocomplete="email" placeholder="Email address" required>
             <button class="btn btn-primary" id="starterButton" type="submit">Send me the starter</button>
             <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
           </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
           <p class="starter-message" id="starterMessage" role="status" aria-live="polite"></p>
           <p class="workshop-link">Want to see one built live first? Join the <a href="/workshop">free workshop</a>.</p>
         </div>
@@ -959,7 +961,7 @@
       <div class="container">
         <h2>Stop starting every chat from zero.</h2>
         <p class="join-copy">The founding cohort is free and the dates are not set yet. Leave your email and the one job you want your brain to take on, and you hear the dates before anyone else.</p>
-        <form class="join-form" id="joinForm">
+        <form data-signup-action="subscribe" class="join-form" id="joinForm">
           <div class="join-field">
             <label for="joinEmail">Email address</label>
             <input id="joinEmail" name="email" type="email" autocomplete="email" placeholder="Email address" required>
@@ -983,8 +985,9 @@
           <button class="btn btn-primary" id="joinButton" type="submit">Register your interest</button>
           <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
         </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
         <div class="join-confirm" id="joinConfirm" role="status" aria-live="polite" tabindex="-1" hidden>
-          <div class="join-confirm-title">You are on the list.</div>
+          <div class="join-confirm-title">Check your inbox to confirm.</div>
           <p>There are no dates yet. When they are locked I email this list first with the times and how to take a spot. Nothing to pay, and registering does not commit you to anything.</p>
           <p>This also puts you on the Intelligent Growth list, so a five day email course on building your brain arrives before the dates do. Both come from the same list, and you can unsubscribe whenever you want.</p>
           <p class="join-confirm-note">If the timing does not suit when the dates land, tell me and I will keep you in mind for the next one. Questions in the meantime go to <a href="mailto:will@intelligentgrowth.app">will@intelligentgrowth.app</a>.</p>
@@ -1502,9 +1505,8 @@
             { source: config.source || campaign || '' }
           );
           if (!payload.source) delete payload.source;
-          if (config.reactivate) payload.reactivate = true;
 
-          fetch('/api/subscribe', {
+          window.igSignup.submit(form, '/api/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
@@ -1543,8 +1545,8 @@
         emailId: 'starterEmail',
         medium: 'brain-starter',
         download: true,
-        success: 'Downloading now. It is also in your inbox shortly, along with the 5 day course.',
-        successCampaign: 'Downloading now. Check your inbox for the starter folder, the setup prompt and the Connector link.'
+        success: 'Downloading now. If you are new, confirm your email to receive the 5 day course.',
+        successCampaign: 'Downloading now. If you are new, check your inbox to confirm your email before receiving further resources.'
       });
 
       subscribe({
@@ -1558,12 +1560,8 @@
         confirmId: 'joinConfirm',
         medium: 'brain-cohort-interest',
         source: 'brain_founding_cohort',
-        // Submitting this form is a fresh, explicit ask to be emailed the dates,
-        // so someone who previously unsubscribed is genuinely opting back in.
-        // Without this they are told "you are on the list" while staying off it.
-        reactivate: true,
         download: false,
-        success: 'You are on the list. Cohort dates land in your inbox first.'
+        success: 'Check your inbox to confirm. Cohort dates land in your inbox first.'
       });
     })();
   </script>

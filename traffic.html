@@ -77,6 +77,7 @@
         @media (max-width: 760px) { nav { padding: 14px 20px; } nav .nav-links { display: none; } }
     </style>
     <script type="module" src="/js/analytics.js"></script>
+    <script src="/js/signup-security.js"></script>
 </head>
 <body>
     <nav>
@@ -110,11 +111,12 @@
             <div>
                 <span class="eyebrow">Free guide</span>
                 <h1>See <span class="hl">any company's</span> web traffic in seconds.</h1>
-                <form id="captureForm">
+                <form data-signup-action="subscribe" id="captureForm">
                     <input type="email" id="email" name="email" placeholder="Enter your email" required>
                     <button type="submit" id="submitBtn">Send it to me</button>
                   <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
                 </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
                 <p class="err" id="err"></p>
                 <p class="fine">You'll also join my weekly newsletter on the AI and growth moves marketers can actually use. Unsubscribe any time, I never sell or share your details.</p>
             </div>
@@ -146,7 +148,7 @@
                 if (!email) return;
                 var original = btn.textContent;
                 btn.disabled = true; btn.textContent = 'Sending...';
-                fetch('/api/subscribe', {
+                window.igSignup.submit(form, '/api/subscribe', {
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value, utm_medium: 'lead-magnet-traffic' })
                 }).then(function (r) {

@@ -1,3 +1,4 @@
+import { verifiedSignup } from './_signup-security.js';
 import { safeAttribution } from './_attribution.js';
 
 // Bounded syntax checks preserve the previous Unicode/quoted local-part
@@ -27,15 +28,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  let body;
-  try {
-    body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
-  } catch {
-    return res.status(400).json({ error: 'Invalid JSON body' });
-  }
-  if (!body || typeof body !== 'object' || Array.isArray(body)) {
-    return res.status(400).json({ error: 'Invalid request body' });
-  }
+  const body = await verifiedSignup(req, res, 'subscribe');
+  if (!body) return;
   // Optional trap for form clients. Direct API callers can simply omit it.
   if (body.honeypot !== undefined && body.honeypot !== '') {
     return res.status(400).json({ error: 'Invalid request body' });
@@ -74,9 +68,9 @@ export default async function handler(req, res) {
       .slice(0, 200)
     : '';
 
-  // Only an explicit interest form asks for this. A passive newsletter signup
-  // must never silently resurrect someone who unsubscribed.
-  const reactivate = body.reactivate === true;
+  // Do not reactivate unsubscribed addresses: the API does not guarantee
+  // that reactivation requires a fresh confirmation. Ignore client requests.
+  const reactivate = false;
 
   const attribution = safeAttribution(body, {
     utm_source: 'intelligentgrowth_app',
@@ -114,6 +108,7 @@ export default async function handler(req, res) {
         // trigger) is the welcome now, and beehiiv's built-in welcome email on
         // top of it would double-send.
         send_welcome_email: false,
+        double_opt_override: 'on',
         ...attribution,
         ...(customFields.length ? { custom_fields: customFields } : {}),
       }),

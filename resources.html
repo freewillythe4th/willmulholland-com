@@ -60,6 +60,7 @@
         .message.error { color: #B91C1C; font-size: 15px; margin-top: 18px; }
     </style>
     <script type="module" src="/js/analytics.js"></script>
+    <script src="/js/signup-security.js"></script>
 </head>
 <body>
     <nav>
@@ -71,12 +72,13 @@
             <h1>Everything I just showed you.</h1>
             <p class="sub">Put your email in and I'll send the lot: the starter folder, the setup prompt, and the connectors I ran the demo on.</p>
 
-            <form id="everythingForm" novalidate>
+            <form data-signup-action="subscribe" id="everythingForm" novalidate>
                 <label for="everythingEmail" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Email address</label>
                 <input type="email" id="everythingEmail" name="email" placeholder="Email address" autocomplete="email" required>
                 <button type="submit" id="everythingButton">Send it over</button>
               <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
 
             <p class="note" id="everythingNote">Free, and it works with whatever AI plan you're already on.<br>You'll also get my weekly newsletter, where I share what I'm building and what's working. Unsubscribe any time.</p>
             <p class="message" id="everythingMessage" role="status" aria-live="polite"></p>
@@ -122,7 +124,7 @@
           button.textContent = 'Sending...';
           message.textContent = '';
 
-          fetch('/api/subscribe', {
+          window.igSignup.submit(form, '/api/subscribe', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(Object.assign({ email: email, honeypot: form.querySelector('[name="honeypot"]').value, utm_medium: 'post-session' }, campaignSource()))
@@ -133,7 +135,7 @@
             message.className = 'message';
             // Announce the move rather than making it. A silent jump off a page
             // that looks finished reads as a bug; a stated one reads as a step.
-            message.textContent = "Thanks. It's on its way to your inbox. Taking you to one quick question.";
+            message.textContent = "Request received. If you are new, check your inbox to confirm. One quick question next.";
             // The survey knows the reader when beehiiv can identify them, so the
             // address goes with it. Falls back to the plain form either way.
             var next = SURVEY_URL + '?email=' + encodeURIComponent(email);
