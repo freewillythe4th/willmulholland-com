@@ -208,7 +208,7 @@
                 <button type="submit">Subscribe</button>
               <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
-            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">One confirmation email first, then you're in. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Email Will to rejoin</a>.</p>
             <p class="sub-meta" id="ig-subscribe-meta">Join 101+ marketing leaders &middot; Unsubscribe anytime</p>
         </div>
     </div>
@@ -235,7 +235,7 @@
                     method: 'POST', headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value })
                 }).then(function (r) {
-                    if (r.ok) { form.style.display = 'none'; meta.textContent = 'Request received. If you are new, check your inbox to confirm.'; }
+                    if (r.ok) { form.style.display = 'none'; meta.textContent = 'Almost there. Check your inbox for an email from Intelligent Growth and hit Confirm.'; }
                     else { btn.disabled = false; btn.textContent = original; meta.textContent = 'Something went wrong. Try again.'; }
                 }).catch(function () { btn.disabled = false; btn.textContent = original; meta.textContent = 'Network error. Try again.'; });
             });

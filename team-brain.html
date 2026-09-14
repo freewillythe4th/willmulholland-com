@@ -286,7 +286,7 @@
               <button class="button button-primary" type="submit" data-ig-event="team_starter_submitted" data-ig-placement="pricing">Send me the starter</button>
               <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
-            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">One confirmation email first, then you're in. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Email Will to rejoin</a>.</p>
             <p class="capture-msg" data-state="" role="status"></p>
             <p class="capture-note">One email with the starter and the setup guide. No spam, unsubscribe any time.</p>
           </article>
@@ -301,7 +301,7 @@
               <button class="button" type="submit" data-ig-event="team_waitlist_submitted" data-ig-placement="pricing">Get early access</button>
               <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
-            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">One confirmation email first, then you're in. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Email Will to rejoin</a>.</p>
             <p class="capture-msg" data-state="" role="status"></p>
             <p class="capture-note">Founding teams hear first, with setup help included.</p>
           </article>
@@ -356,7 +356,7 @@
           <button class="button" type="submit" data-ig-event="team_final_submitted" data-ig-placement="footer">Get early access</button>
           <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
         </form>
-            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">One confirmation email first, then you're in. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Email Will to rejoin</a>.</p>
         <p class="capture-msg" data-state="" role="status"></p>
       </div>
     </section>
@@ -393,7 +393,7 @@
             body: JSON.stringify({ email: email, honeypot: form.querySelector('[name="honeypot"]').value, source: source })
           }).then(function (res) {
             if (!res.ok) { throw new Error('bad status'); }
-            if (msg) { msg.textContent = 'Request received. If you are new, check your inbox to confirm your email.'; msg.setAttribute('data-state', 'ok'); }
+            if (msg) { msg.textContent = 'Almost there. Check your inbox for an email from Intelligent Growth and hit Confirm.'; msg.setAttribute('data-state', 'ok'); }
             if (input) { input.value = ''; }
           }).catch(function () {
             if (msg) { msg.textContent = 'Something went wrong. Try again or message Will.'; msg.setAttribute('data-state', 'err'); }

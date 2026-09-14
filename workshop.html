@@ -416,7 +416,7 @@
                 <button type="submit" class="btn-primary" id="waitlistBtn">Notify me</button>
               <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
-            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">One confirmation email first, then you're in. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Email Will to rejoin</a>.</p>
             <p id="waitlistMsg" style="font-family:monospace; font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--gray-light); margin-top:14px;">No spam. Just the next workshop date, plus the weekly Intelligent Growth newsletter. Unsubscribe any time.</p>
         </section>
     </div>
@@ -438,7 +438,7 @@
                 }).then(function (r) {
                     if (r.ok) {
                         form.style.display = 'none';
-                        msg.textContent = "Request received. If you are new, confirm your email to receive the next workshop date.";
+                        msg.textContent = "Almost there. Check your inbox for an email from Intelligent Growth and hit Confirm to get the next workshop date.";
                         msg.style.color = 'var(--accent-deep)';
                     } else { btn.disabled = false; btn.textContent = original; msg.textContent = 'Something went wrong. Try again or email will@intelligentgrowth.app.'; }
                 }).catch(function () { btn.disabled = false; btn.textContent = original; msg.textContent = 'Network error. Try again in a moment.'; });
@@ -601,7 +601,7 @@
                 <button type="submit" class="btn-primary" id="recordingBtn">Send me the recording</button>
               <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
-            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">One confirmation email first, then you're in. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Email Will to rejoin</a>.</p>
             <p id="recordingMsg" style="font-family: monospace; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--gray-light); margin-top: 14px;">No spam. You'll also get my weekly AI marketing newsletter, unsubscribe any time.</p>
         </section>
     </div>

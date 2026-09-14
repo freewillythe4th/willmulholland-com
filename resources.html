@@ -78,7 +78,7 @@
                 <button type="submit" id="everythingButton">Send it over</button>
               <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
             </form>
-            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">One confirmation email first, then you're in. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Email Will to rejoin</a>.</p>
 
             <p class="note" id="everythingNote">Free, and it works with whatever AI plan you're already on.<br>You'll also get my weekly newsletter, where I share what I'm building and what's working. Unsubscribe any time.</p>
             <p class="message" id="everythingMessage" role="status" aria-live="polite"></p>
@@ -135,7 +135,7 @@
             message.className = 'message';
             // Announce the move rather than making it. A silent jump off a page
             // that looks finished reads as a bug; a stated one reads as a step.
-            message.textContent = "Request received. If you are new, check your inbox to confirm. One quick question next.";
+            message.textContent = "Almost there. Check your inbox for an email from Intelligent Growth and hit Confirm. One quick question next.";
             // The survey knows the reader when beehiiv can identify them, so the
             // address goes with it. Falls back to the plain form either way.
             var next = SURVEY_URL + '?email=' + encodeURIComponent(email);

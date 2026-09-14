@@ -397,7 +397,7 @@
       <button type="submit">Suggest a guest</button>
       <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
     </form>
-            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">One confirmation email first, then you're in. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Email Will to rejoin</a>.</p>
     <p class="green-msg" id="guestMsg">Drop a name and I'll let you know who lands the next slot.</p>
   </div>
 </section>
@@ -445,7 +445,7 @@
       <button type="submit">Subscribe</button>
       <input type="text" name="honeypot" value="" hidden style="display:none" tabindex="-1" aria-hidden="true" autocomplete="off" data-lpignore="true" data-1p-ignore>
     </form>
-            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">New signups require email confirmation. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Contact Will to rejoin</a>.</p>
+            <p data-signup-confirmation-note style="font-size:12px;line-height:1.5;margin:8px 0;width:100%">One confirmation email first, then you're in. Previously unsubscribed? <a href="mailto:will@intelligentgrowth.app">Email Will to rejoin</a>.</p>
     <p class="nl-meta" id="nlMeta">Join 100+ growth leaders &middot; unsubscribe anytime</p>
   </div>
 </section>
@@ -503,7 +503,7 @@
       var label=btn.textContent;btn.disabled=true;btn.textContent='Subscribing...';
       window.igSignup.submit(f, '/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email, honeypot: f.querySelector('[name="honeypot"]').value,utm_medium:'podcast-page'})})
       .then(function(r){
-        if(r.ok){f.style.display='none';m.textContent='Request received. If you are new, check your inbox to confirm.';}
+        if(r.ok){f.style.display='none';m.textContent='Almost there. Check your inbox for an email from Intelligent Growth and hit Confirm.';}
         else{btn.disabled=false;btn.textContent=label;m.textContent='Something went wrong. Try again or email will@intelligentgrowth.app.';}
       }).catch(function(){btn.disabled=false;btn.textContent=label;m.textContent='Network error. Try again in a moment.';});
     });
@@ -519,7 +519,7 @@
       var label=btn.textContent;btn.disabled=true;btn.textContent='Sending...';
       window.igSignup.submit(f, '/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email, honeypot: f.querySelector('[name="honeypot"]').value,utm_medium:('guest: '+g).slice(0,100)})})
       .then(function(r){
-        if(r.ok){f.style.display='none';m.textContent='Request received for '+g+'. If you are new, confirm your email to receive updates.';m.style.color='#A3E635';}
+        if(r.ok){f.style.display='none';m.textContent='Almost there. Check your inbox for an email from Intelligent Growth and hit Confirm to get '+g+' updates.';m.style.color='#A3E635';}
         else{btn.disabled=false;btn.textContent=label;m.textContent='Something went wrong. Try again or email will@intelligentgrowth.app.';}
       }).catch(function(){btn.disabled=false;btn.textContent=label;m.textContent='Network error. Try again in a moment.';});
     });
