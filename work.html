@@ -1075,55 +1075,12 @@
             text-align: center;
             box-shadow: 0 24px 80px rgba(0,0,0,0.18);
         ">
-            <!-- Request access view -->
             <div id="gate-request">
                 <div style="font-size: 28px; margin-bottom: 16px;">🔒</div>
                 <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 8px;">Work samples are private</h2>
-                <p style="color: #525252; font-size: 15px; line-height: 1.6; margin-bottom: 32px;">
-                    Leave your email and I'll send you the password.
+                <p style="color: #525252; font-size: 15px; line-height: 1.6; margin-bottom: 24px;">
+                    Enter the password Will gave you. If you don't have one, email <a href="mailto:will@intelligentgrowth.app" style="color:#2563EB;">will@intelligentgrowth.app</a>.
                 </p>
-                <form id="request-form" style="display: flex; flex-direction: column; gap: 12px;">
-                    <input
-                        type="email"
-                        id="gate-email"
-                        placeholder="your@email.com"
-                        required
-                        style="
-                            border: 1.5px solid #e5e7eb;
-                            border-radius: 8px;
-                            padding: 12px 16px;
-                            font-size: 15px;
-                            outline: none;
-                            transition: border-color 0.2s;
-                            font-family: inherit;
-                        "
-                        onfocus="this.style.borderColor='#2563EB'"
-                        onblur="this.style.borderColor='#e5e7eb'"
-                    />
-                    <button
-                        type="submit"
-                        style="
-                            background: #000;
-                            color: #fff;
-                            border: none;
-                            border-radius: 8px;
-                            padding: 13px 24px;
-                            font-size: 15px;
-                            font-weight: 600;
-                            cursor: pointer;
-                            font-family: inherit;
-                            letter-spacing: -0.01em;
-                            transition: background 0.2s;
-                        "
-                        onmouseover="this.style.background='#2563EB'"
-                        onmouseout="this.style.background='#000'"
-                    >Request access</button>
-                </form>
-                <div style="margin-top: 20px; display: flex; align-items: center; gap: 12px;">
-                    <div style="flex: 1; height: 1px; background: #e5e7eb;"></div>
-                    <span style="color: #9ca3af; font-size: 13px;">already have it?</span>
-                    <div style="flex: 1; height: 1px; background: #e5e7eb;"></div>
-                </div>
                 <form id="password-form" style="display: flex; gap: 8px; margin-top: 16px;">
                     <input
                         type="password"
@@ -1161,15 +1118,7 @@
                         onmouseout="this.style.background='#f3f4f6'"
                     >Unlock</button>
                 </form>
-                <p id="gate-error" style="color: #ef4444; font-size: 13px; margin-top: 8px; display: none;">Incorrect password. Request access above.</p>
-            </div>
-            <!-- Success / sent view -->
-            <div id="gate-sent" style="display: none;">
-                <div style="font-size: 28px; margin-bottom: 16px;">✉️</div>
-                <h2 style="font-size: 22px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 8px;">Request sent</h2>
-                <p style="color: #525252; font-size: 15px; line-height: 1.6;">
-                    I'll send the password to <strong id="sent-email"></strong> shortly.
-                </p>
+                <p id="gate-error" style="color: #ef4444; font-size: 13px; margin-top: 8px; display: none;">Incorrect password.</p>
             </div>
         </div>
     </div>
@@ -1177,7 +1126,6 @@
     <script>
         // --- Password gate ---
         const CORRECT_PASSWORD = 'Access';
-        const REQUEST_ENDPOINT = '/api/request-access';
         const SESSION_KEY = 'wm_work_unlocked';
 
         function unlockGate() {
@@ -1209,22 +1157,6 @@
                 document.getElementById('gate-error').style.display = 'block';
                 document.getElementById('gate-password').value = '';
             }
-        });
-
-        // Email request - posts to serverless function which pings Will on Telegram
-        document.getElementById('request-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('gate-email').value.trim();
-            document.getElementById('sent-email').textContent = email;
-
-            fetch(REQUEST_ENDPOINT, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: email })
-            }).catch(function(err) { console.error('Request access error:', err); });
-
-            document.getElementById('gate-request').style.display = 'none';
-            document.getElementById('gate-sent').style.display = 'block';
         });
 
         // --- Existing site JS ---
