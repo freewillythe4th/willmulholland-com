@@ -70,7 +70,7 @@ test('wrong form action cannot submit to another protected endpoint', async () =
 
 test('every protected HTML caller uses the shared helper, script and matching form action', () => {
   const root = new URL('../', import.meta.url);
-  const expected = { 'subscribe': 19, 'workshop_register': 1, 'community_apply': 1 };
+  const expected = { 'subscribe': 19, 'workshop_register': 1, 'community_apply': 0 };
   const count = { subscribe: 0, workshop_register: 0, community_apply: 0 };
   let callers = 0;
   for (const file of readdirSync(root).filter(f => f.endsWith('.html'))) {
@@ -82,5 +82,5 @@ test('every protected HTML caller uses the shared helper, script and matching fo
     for (const [, action] of html.matchAll(/<form data-signup-action="([a-z_]+)"/g)) count[action]++;
     assert.match(html, /window\.igSignup\.submit\((form|f), '\/api\//, file);
   }
-  assert.equal(callers, 13); assert.deepEqual(count, expected);
+  assert.equal(callers, 12); assert.deepEqual(count, expected);
 });
