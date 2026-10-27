@@ -42,7 +42,9 @@
             line-height: 1.02; letter-spacing: -0.02em; margin-bottom: 18px; }
         .sub { font-size: clamp(17px, 2.1vw, 20px); color: var(--gray-mid); max-width: 30em; margin: 0 auto 32px; }
 
-        form { display: flex; gap: 10px; justify-content: center; max-width: 480px; margin: 0 auto; }
+        form { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 480px; margin: 0 auto; }
+        /* The signup script adds the security check and its message inside the form; keep them on their own line. */
+        form > div, form > p { flex-basis: 100%; display: flex; justify-content: center; text-align: center; }
         input[type="email"] { flex: 1; min-width: 0; padding: 16px 20px; font-family: inherit; font-size: 16px; color: var(--ink);
             background: var(--white); border: 1px solid rgba(31,21,17,0.18); border-radius: 999px; outline: none;
             transition: border-color 0.3s var(--ease-smooth); }
