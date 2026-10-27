@@ -455,3 +455,14 @@ h3 { margin-bottom: 14px; font-size: 21px; }
 .run-shot { margin: 2rem 0 2.5rem; }
 .run-shot img { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid rgba(0,0,0,0.12); box-shadow: 0 18px 50px rgba(20,16,12,0.18); background: #1a1a1a; }
 .run-shot figcaption { margin-top: 0.75rem; font-size: 0.95rem; color: rgba(31,26,23,0.7); max-width: 60ch; }
+
+/* Hero headline: "Turn [Claude][ChatGPT] into" then a typed role line.
+   The role line reserves two lines so cycling never shifts the page. */
+.role-h1 > span:first-child { display: block; color: var(--ink-soft); }
+.role-h1__logos { display: inline-flex; gap: 0.12em; vertical-align: -0.06em; margin: 0 0.06em; }
+.role-h1__logos img { width: 0.62em; height: 0.62em; padding: 0.07em; border: 1px solid var(--line); border-radius: 0.14em; background: var(--paper-strong); }
+.role-h1__role { display: block; min-height: 1.76em; }
+.role-h1__caret { display: inline-block; width: 0.05em; height: 0.78em; margin-left: 0.04em; vertical-align: -0.04em; background: var(--blue); animation: roleCaret 1s steps(1) infinite; }
+@keyframes roleCaret { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .role-h1__caret { animation: none; } }
+@media (min-width: 900px) { .role-h1__role { min-height: 1.1em; } }
