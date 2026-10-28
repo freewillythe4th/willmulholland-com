@@ -1530,10 +1530,10 @@
                 ? config.successCampaign
                 : config.success;
             }
-          }).catch(function () {
+          }).catch(function (error) {
             button.disabled = false;
             button.textContent = originalLabel;
-            message.textContent = 'Something went wrong. Try again or email will@intelligentgrowth.app.';
+            message.textContent = error.message || 'Something went wrong. Try again or email will@intelligentgrowth.app.';
           });
         });
       }

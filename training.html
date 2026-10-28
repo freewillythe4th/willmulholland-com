@@ -447,10 +447,10 @@
                         errEl.textContent = 'Something went wrong. Try again or email will@intelligentgrowth.app.';
                         errEl.style.display = 'block';
                     }
-                }).catch(function () {
+                }).catch(function (error) {
                     submitBtn.disabled = false;
                     submitBtn.textContent = original;
-                    errEl.textContent = 'Network error. Try again in a moment.';
+                    errEl.textContent = error.message || 'Network error. Try again in a moment.';
                     errEl.style.display = 'block';
                 });
             });

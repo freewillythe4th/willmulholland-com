@@ -189,7 +189,7 @@
                 }).then(function (r) {
                     if (r.ok) { form.style.display = 'none'; meta.textContent = 'Almost there. Check your inbox for an email from Intelligent Growth and hit Confirm.'; }
                     else { btn.disabled = false; btn.textContent = original; meta.textContent = 'Something went wrong. Try again.'; }
-                }).catch(function () { btn.disabled = false; btn.textContent = original; meta.textContent = 'Network error. Try again.'; });
+                }).catch(function (error) { btn.disabled = false; btn.textContent = original; meta.textContent = error.message || 'Network error. Try again.'; });
             });
         })();
 

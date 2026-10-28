@@ -145,11 +145,11 @@
             // enough that it never feels like waiting. The survey page repeats the
             // confirmation, so this line does not need reading time.
             window.setTimeout(function () { window.location.href = next; }, 700);
-          }).catch(function () {
+          }).catch(function (error) {
             button.disabled = false;
             button.textContent = label;
             message.className = 'message error';
-            message.textContent = 'Something went wrong. Try again, or email will@intelligentgrowth.app and I will send it manually.';
+            message.textContent = error.message || 'Something went wrong. Try again, or email will@intelligentgrowth.app and I will send it manually.';
           });
         });
       })();

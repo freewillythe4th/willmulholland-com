@@ -505,7 +505,7 @@
       .then(function(r){
         if(r.ok){f.style.display='none';m.textContent='Almost there. Check your inbox for an email from Intelligent Growth and hit Confirm.';}
         else{btn.disabled=false;btn.textContent=label;m.textContent='Something went wrong. Try again or email will@intelligentgrowth.app.';}
-      }).catch(function(){btn.disabled=false;btn.textContent=label;m.textContent='Network error. Try again in a moment.';});
+      }).catch(function (error) {btn.disabled=false;btn.textContent=label;m.textContent=error.message || 'Network error. Try again in a moment.';});
     });
   })();
   // guest suggestion (captures email + stores the name in Beehiiv via utm)
@@ -521,7 +521,7 @@
       .then(function(r){
         if(r.ok){f.style.display='none';m.textContent='Almost there. Check your inbox for an email from Intelligent Growth and hit Confirm to get '+g+' updates.';m.style.color='#A3E635';}
         else{btn.disabled=false;btn.textContent=label;m.textContent='Something went wrong. Try again or email will@intelligentgrowth.app.';}
-      }).catch(function(){btn.disabled=false;btn.textContent=label;m.textContent='Network error. Try again in a moment.';});
+      }).catch(function (error) {btn.disabled=false;btn.textContent=label;m.textContent=error.message || 'Network error. Try again in a moment.';});
     });
   })();
 </script>

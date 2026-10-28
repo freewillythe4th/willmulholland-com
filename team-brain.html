@@ -395,8 +395,8 @@
             if (!res.ok) { throw new Error('bad status'); }
             if (msg) { msg.textContent = 'Almost there. Check your inbox for an email from Intelligent Growth and hit Confirm.'; msg.setAttribute('data-state', 'ok'); }
             if (input) { input.value = ''; }
-          }).catch(function () {
-            if (msg) { msg.textContent = 'Something went wrong. Try again or message Will.'; msg.setAttribute('data-state', 'err'); }
+          }).catch(function (error) {
+            if (msg) { msg.textContent = error.message || 'Something went wrong. Try again or message Will.'; msg.setAttribute('data-state', 'err'); }
           }).finally(function () {
             if (btn) { btn.disabled = false; }
           });

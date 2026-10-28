@@ -441,7 +441,7 @@
                         msg.textContent = "Almost there. Check your inbox for an email from Intelligent Growth and hit Confirm to get the next workshop date.";
                         msg.style.color = 'var(--accent-deep)';
                     } else { btn.disabled = false; btn.textContent = original; msg.textContent = 'Something went wrong. Try again or email will@intelligentgrowth.app.'; }
-                }).catch(function () { btn.disabled = false; btn.textContent = original; msg.textContent = 'Network error. Try again in a moment.'; });
+                }).catch(function (error) { btn.disabled = false; btn.textContent = original; msg.textContent = error.message || 'Network error. Try again in a moment.'; });
             });
         })();
     </script>
@@ -623,7 +623,7 @@
                 }).then(function (r) {
                     if (r.ok) { window.location.href = '/workshop-recording'; }
                     else { btn.disabled = false; btn.textContent = original; msg.textContent = 'Something went wrong. Try again or email will@intelligentgrowth.app.'; }
-                }).catch(function () { btn.disabled = false; btn.textContent = original; msg.textContent = 'Network error. Try again in a moment.'; });
+                }).catch(function (error) { btn.disabled = false; btn.textContent = original; msg.textContent = error.message || 'Network error. Try again in a moment.'; });
             });
         })();
     </script>
