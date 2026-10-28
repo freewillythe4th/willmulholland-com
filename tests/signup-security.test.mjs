@@ -140,3 +140,22 @@ test('each verified production hostname is accepted, with no header or client ho
   }
   assert.doesNotMatch(inspect(ctx.logs), /private-person/);
 });
+
+
+test('403 diagnostics contain only verification booleans and recognised error codes', async t => {
+  const ctx = setup(t, 'subscribe', { success: false, action: 'other', hostname: 'private-person@example.com',
+    'error-codes': ['timeout-or-duplicate', 'private-person@example.com', 'local-token', { token: 'local-token' }] });
+  assert.equal((await request(subscribe, input)).statusCode, 403);
+  assert.deepEqual(ctx.logs, [['Signup verification rejected', {
+    success: false, action: false, hostname: false, error_codes: ['timeout-or-duplicate']
+  }]]);
+  assert.doesNotMatch(inspect(ctx.logs), /private-person|local-token|private-secret|evil\.example/);
+});
+
+test('403 diagnostics distinguish hostname failure from successful action and verification', async t => {
+  const ctx = setup(t, 'subscribe', { hostname: 'evil.example' });
+  assert.equal((await request(subscribe, input)).statusCode, 403);
+  assert.deepEqual(ctx.logs, [['Signup verification rejected', {
+    success: true, action: true, hostname: false, error_codes: []
+  }]]);
+});

@@ -6,6 +6,12 @@ const HOSTNAMES = new Set([
   'willmulholland.com', 'www.willmulholland.com',
 ]);
 const ACTIONS = new Set(['subscribe', 'workshop_register', 'community_apply']);
+// Only documented Siteverify codes may enter logs. Never log provider strings
+// outside this fixed vocabulary, or a full response, email, token or hostname.
+const SITEVERIFY_ERROR_CODES = new Set([
+  'missing-input-secret', 'invalid-input-secret', 'missing-input-response',
+  'invalid-input-response', 'bad-request', 'timeout-or-duplicate', 'internal-error',
+]);
 
 export function signupConfiguration() {
   const siteKey = process.env.TURNSTILE_SITE_KEY?.trim();
@@ -72,6 +78,14 @@ export async function verifiedSignup(req, res, action) {
     if (result?.success !== true || result.action !== action || !HOSTNAMES.has(result.hostname) ||
         !Number.isFinite(age) || age < -30000 || age > 300000 ||
         (result['error-codes'] !== undefined && (!Array.isArray(result['error-codes']) || result['error-codes'].length > 0))) {
+      console.error('Signup verification rejected', {
+        success: result?.success === true,
+        action: result?.action === action,
+        hostname: HOSTNAMES.has(result?.hostname),
+        error_codes: Array.isArray(result?.['error-codes'])
+          ? result['error-codes'].filter(code => SITEVERIFY_ERROR_CODES.has(code)).slice(0, 10)
+          : [],
+      });
       res.status(403).json({ error: 'Security check failed. Please try again.' });
       return null;
     }

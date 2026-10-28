@@ -128,6 +128,9 @@
         payload.turnstileToken = token;
         var response = await timedFetch(url, Object.assign({}, options, { body: JSON.stringify(payload) }), 30000);
         if (!response.ok) {
+          if (response.status === 403) {
+            throw new Error("Security check didn't go through. Tap Send it over again.");
+          }
           var detail;
           try { detail = await response.json(); } catch (_) {}
           throw new Error(detail && typeof detail.error === 'string' ? detail.error :

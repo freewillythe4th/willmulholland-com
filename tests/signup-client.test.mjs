@@ -126,10 +126,10 @@ test('concurrent taps cannot send two requests while waiting for a token', async
   assert.equal(ctx.calls.length, 1);
 });
 
-test('the server security reason reaches the caller', async () => {
-  const ctx = environment(undefined, async () => ({ ok: false, status: 403, json: async () => ({ error: 'Security check failed. Please try again.' }) }));
+test('non-security server errors reach the caller', async () => {
+  const ctx = environment(undefined, async () => ({ ok: false, status: 503, json: async () => ({ error: 'Signups are temporarily paused. Please try again later.' }) }));
   await tick(); ctx.renders[0].callback('rejected-token');
-  await assert.rejects(ctx.window.igSignup.submit(ctx.forms[0], '/api/subscribe', options), /Security check failed/);
+  await assert.rejects(ctx.window.igSignup.submit(ctx.forms[0], '/api/subscribe', options), /Signups are temporarily paused/);
 });
 
 
@@ -155,4 +155,20 @@ test('failed configuration can be retried without duplicating widgets or status 
   assert.equal((await retry).status, 200);
   assert.equal(ctx.forms[0].children.length, 2);
   assert.equal(ctx.renders.length, 3);
+});
+
+
+test('a 403 resets the widget, gives the exact retry message and accepts a fresh token', async () => {
+  let attempts = 0;
+  const ctx = environment(undefined, async () => ++attempts === 1
+    ? { ok: false, status: 403, json: async () => ({ error: 'Security check failed. Please try again.' }) }
+    : { ok: true, status: 200 });
+  await tick(); ctx.renders[0].callback('rejected-token');
+  await assert.rejects(ctx.window.igSignup.submit(ctx.forms[0], '/api/subscribe', options),
+    { message: "Security check didn't go through. Tap Send it over again." });
+  assert.deepEqual(ctx.resets, [0]);
+  assert.equal(ctx.forms[0].children[1].textContent, "Security check didn't go through. Tap Send it over again.");
+  ctx.renders[0].callback('fresh-retry-token');
+  assert.equal((await ctx.window.igSignup.submit(ctx.forms[0], '/api/subscribe', options)).status, 200);
+  assert.equal(JSON.parse(ctx.calls[1].options.body).turnstileToken, 'fresh-retry-token');
 });
